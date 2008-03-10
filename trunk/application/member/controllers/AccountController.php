@@ -4,7 +4,7 @@
  * [member] (C)2008 zjuhz.com
  * 
  * $File : AccountController.php $
- * $Author : wangyumin $fasdfa
+ * $Author : wangyumin $fasdfa1
  */
 
 
