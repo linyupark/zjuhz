@@ -23,7 +23,7 @@ class AccountController extends Zend_Controller_Action
     public function init()
     {
     	//载入对应MODEL
-    	//Zend_Loader::loadClass('UserModel', '../../application/member/models/');
+    	Zend_Loader::loadClass('User', '../../application/member/models/');
     	
     	//禁用自动渲染视图
     	$this->_helper->viewRenderer->setNoRender();    	
