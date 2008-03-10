@@ -1,0 +1,17 @@
+*{
+	padding:0;
+	margin:0;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	line-height:150%;
+	font-size:12px;
+}
+
+body{
+	background:url(../images/home/db_line_bg.gif) repeat-x left 80px;
+}
+
+#wrap{
+	width:790px;
+	margin:0 auto;
+	position:relative;
+}
