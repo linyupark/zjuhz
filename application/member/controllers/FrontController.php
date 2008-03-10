@@ -16,8 +16,11 @@ class FrontController extends Zend_Controller_Action
 {
     /**
      * 初始化
+     * 
+     * @return null
      */
     public function init()
     {
+    	return null;
     }
 }
