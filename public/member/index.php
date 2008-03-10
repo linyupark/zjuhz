@@ -8,12 +8,12 @@
  */
 
 
-/** zjuhz common */
+/** set_include_path */
+set_include_path(get_include_path().PATH_SEPARATOR.'../../common/Custom/'.PATH_SEPARATOR.'../../application/member/models/');
 
+/** Zend_Controller_Front */
 require_once 'Zend/Controller/Front.php';
 
-/** Zend_Loder */
-//require_once('Zend/Loader.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
@@ -25,11 +25,10 @@ $db = Zend_Db::factory('Pdo_Mysql',array(
     'dbname'   => 'zjuhz_user'
 ));
 
-//register db
+/** registry db */
 Zend_Registry::set('db', $db);
 
-//
-Zend_Db_Table::setDefaultAdapter($db);
+//Zend_Db_Table::setDefaultAdapter($db);
 
 /** run */
 Zend_Controller_Front::run('../../application/member/controllers/');
