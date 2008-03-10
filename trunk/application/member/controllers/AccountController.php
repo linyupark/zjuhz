@@ -20,7 +20,7 @@ class AccountController extends Zend_Controller_Action
      */
     public function init()
     {
-    	Zend_Loader::loadClass('UserModel', '../../application/member/models/');
+    	//Zend_Loader::loadClass('UserModel', '../../application/member/models/');
     }
 
     /**
@@ -31,9 +31,7 @@ class AccountController extends Zend_Controller_Action
     	//禁用自动渲染视图
     	$this->_helper->viewRenderer->setNoRender();
 
-
-    	$user = new UserModel();
-    	$user->register($this->_getAllParams());
+		print_r($this->_getAllParams());
     	
     }
 }
