@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" charset="utf-8" src="/static/scripts/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/scripts/jquery.form.js"></script>
+<script language="javascript" charset="utf-8" src="/static/scripts/register.js"></script>
+<link href="/static/styles/member.css" rel="stylesheet" type="text/css" media="all" />
+
+<div style="width:600px;margin:10px;padding:10px;border:1px solid;text-align:center;line-height:20px;">
+<form id="frmRegister" name="frmRegister" method="post">
+  <p align="left">登录帐号：
+    <input name="username" class="ctrl_inp" type="text" id="username" maxlength="16" value="" />
+    * 字母数字下划线3-16位，以字母开头，注册后不可更改</p>
+  <p align="left">&nbsp;</p>
+  <p align="left">登录密码：
+    <input name="passwd" class="ctrl_inp" type="password" id="passwd" maxlength="16" /> 
+    * 6-16位，为提高强度请以字母数字等混合</p>
+  <p align="left">&nbsp;</p>
+  <p align="left">密码重复：
+    <input name="repasswd" class="ctrl_inp" type="password" id="repasswd" maxlength="16" />
+  * 请再输入一次密码</p>
+  <p align="left">&nbsp;</p>
+  <p align="left">真实姓名：
+    <input name="realname" class="ctrl_inp" type="text" id="realname" maxlength="20" />
+  * 用于实名认证，一旦提交，不可更改  </p>
+  <p align="left">&nbsp;</p>
+  <p align="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+    <input name="sex" type="radio" value="M" checked="checked" />
+    男
+    <input type="radio" name="sex" value="F" />
+  女 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 用于实名认证，一旦提交，不可更改</p>
+  <p align="left">&nbsp;</p>
+  <p align="left">E-mail：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="email" class="ctrl_inp" type="text" id="email" maxlength="50" />
+  * 用于取回密码、联络等必要用途，我们负责保密 </p>
+  <p align="left">&nbsp;</p>
+  <p align="left">
+    <input name="btnSubmit" type="submit" id="btnSubmit" value=" 注 册 " />
+  </p>
+  <input type="hidden" name="ikey" id="ikey" value="<?php echo $this->ikey; ?>" />
+  <input type="hidden" name="iuid" id="iuid" value="<?php echo $this->iuid; ?>" />  
+</form>
+<div id="loading"></div>
+</div>
