@@ -1,4 +1,4 @@
-@import url("../global.css");
+@import url("global.css");
 
 #header{
 
@@ -13,7 +13,7 @@
 #logo{
 	padding:25px 0 5px 0;
 	width:220px;
-	background:url(../../images/home/logo.jpg) no-repeat 10px center;
+	background:url(/static/images/logo.jpg) no-repeat 10px center;
 	display:block;
 	text-decoration:none;
 }
@@ -32,7 +32,7 @@
 	font-size:12px;
 	padding-left:22px;
 	line-height:22px;
-	background:url(../../images/home/members_icon.gif) no-repeat left top;
+	background:url(/static/images/icon/members.gif) no-repeat left top;
 }
 
 /* 顶部搜索框 + 提示文字 -------------------------------------------------------------------------------- */
@@ -45,10 +45,10 @@
 	border-collapse:collapse;
 }
 
-#mini_search .tips{ color:#666; padding:5px 22px; background:url(../../images/home/info_icon.gif) no-repeat left center;  }
+#mini_search .tips{ color:#666; padding:5px 22px; background:url(/static/images/icon/info.gif) no-repeat left center;  }
 
 #mini_search .lbg{
-	background:#fff url(../../images/home/search_left_bg.gif) no-repeat;
+	background:#fff url(/static/images/bg/search_left.gif) no-repeat;
 	width:5px;
 	height:30px;
 }
@@ -58,10 +58,10 @@
 }
 
 #mini_search .mbg input{ border:1px solid #ccc; padding:3px 4px; font-size:12px; line-height:normal; color:#ccc; }
-#mini_search .mbg a{ background:url(../../images/home/search_btn.jpg); width:28px; height:28px; display:block; }
+#mini_search .mbg a{ background:url(/static/images/btn/search.jpg); width:28px; height:28px; display:block; }
 
 #mini_search .rbg{
-	background:#fff url(../../images/home/search_right_bg.gif) no-repeat;
+	background:#fff url(/static/images/bg/search_right.gif) no-repeat;
 	width:5px;
 	height:30px;
 }
@@ -71,7 +71,7 @@
 
 
 #login_form{
-	background:#f5f5f5 url(../../images/home/login_form_bg.gif) no-repeat left 160px;
+	background:#f5f5f5 url(/static/images/bg/login_form.gif) no-repeat left 160px;
 	border:1px solid #BDC7D8;
 	margin-top:13px;
 	padding:18px;
@@ -96,7 +96,7 @@
 	border:1px solid #ccc;
 }
 
-.registry{ font-size:14px; color:#3F7D30; padding-left:20px; background:url(../../images/home/reg_icon.gif) no-repeat left center; margin-left:15px; font-weight:bold; }
+.registry{ font-size:14px; color:#3F7D30; padding-left:20px; background:url(/static/images/icon/registry.gif) no-repeat left center; margin-left:15px; font-weight:bold; }
 
 /* 信息列表按钮 ----------------------------------------------------------------------------- */
 
@@ -108,7 +108,7 @@
 	color:444;
 	font-size:14px;
 	color:#3B5888;
-	background:url(../../images/home/news_list_bg.gif) repeat-x left bottom;
+	background:url(/static/images/bg/news_list.gif) repeat-x left bottom;
 	border-bottom:1px solid #BDC7D8;
 	clear:left;
 }
@@ -126,7 +126,7 @@
 
 #news_list a img{ border:0; margin-right:8px; }
 
-#news_list a.focus{ background:url(../../images/home/list_hover_bg.jpg) repeat-y left; border-left:2px solid #243E5C }
+#news_list a.focus{ background:url(/static/images/bg/list_hover.jpg) repeat-y left; border-left:2px solid #243E5C }
 
 /* 新闻内容显示块 ---------------------------------------------------------------------------------- */
 
@@ -135,9 +135,9 @@
 	display:none;
 }
 .news_page td{ padding:8px 8px 0 8px; }
-.news_page a{ display:block; padding:8px 0 3px 20px; color:#333; text-decoration:none; font-size:13px; background:url(../../images/home/bullet_toggle_minus.gif) no-repeat left center; }
+.news_page a{ display:block; padding:8px 0 3px 20px; color:#333; text-decoration:none; font-size:13px; background:url(/static/images/bullet/toggle_min.gif) no-repeat left center; }
 .news_page a:hover{ text-decoration:underline; }
-.news_page a.more{ margin-top:8px; background:url(../../images/home/more_btn.gif) no-repeat; width:51px; height:15px; padding:0; margin-left:220px; }
+.news_page a.more{ margin-top:8px; background:url(/static/images/btn/more.gif) no-repeat; width:51px; height:15px; padding:0; margin-left:220px; }
 .news_page img{ padding:5px; border:1px solid #999; background:#fff; display:none; }
 
 /* 脚底 -------------------------------------------------------------------------------------------- */
