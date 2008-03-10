@@ -4,7 +4,7 @@
  * [member] (C)2008 zjuhz.com
  * 
  * $File : AccountController.php $
- * $Author : wangyumin $fasdfa1
+ * $Author : wangyumin $
  */
 
 
@@ -41,8 +41,15 @@ class AccountController extends Zend_Controller_Action
 	public function registerAction()
     {
     	if ($this->_request->isXmlHttpRequest())
-    	{
-    		print_r($this->_getAllParams());
+    	{    		
+    		//print_r($this->_getAllParams());
+    		//echo $this->_getParam('username');
+    		$username = $this->_getParam('username');
+    		
+    		if (!Valid::isAlNumUline($username) || !Valid::lenBetwAlNum($username,3,6))
+    		{
+    			echo '用户名格式不正确。';
+    		}
     	}
     }
 }
