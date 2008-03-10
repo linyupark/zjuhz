@@ -7,7 +7,7 @@
 }
 
 body{
-	background:url(../images/home/db_line_bg.gif) repeat-x left 80px;
+	background:url(/static/images/bg/body_line.gif) repeat-x left 80px;
 }
 
 #wrap{
