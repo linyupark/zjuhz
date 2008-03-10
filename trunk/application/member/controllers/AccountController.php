@@ -17,21 +17,32 @@ class AccountController extends Zend_Controller_Action
 {
     /**
      * 初始化
+     * 
+     * @return null
      */
     public function init()
     {
+    	//载入对应MODEL
     	//Zend_Loader::loadClass('UserModel', '../../application/member/models/');
+    	
+    	//禁用自动渲染视图
+    	$this->_helper->viewRenderer->setNoRender();    	
+    	
+    	return null;
     }
 
     /**
      * 注册提交
+     * 
+     * 点击提交按钮后数据验证及写库操作
+     * 
+     * @return string to ajax
      */
 	public function registerAction()
-    {
-    	//禁用自动渲染视图
-    	$this->_helper->viewRenderer->setNoRender();
-
-		print_r($this->_getAllParams());
-    	
+    {	
+    	if ($this->_request->isXmlHttpRequest())
+    	{
+    		print_r($this->_getAllParams());
+    	}
     }
 }

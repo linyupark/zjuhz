@@ -15,15 +15,21 @@ class IndexController extends Zend_Controller_Action
 {
     /**
      * 初始化
+     * 
+     * @return null
      */
     public function init()
     {
+    	return null;
     }
 
     /**
      * 前端首页
+     * 
+     * @return null
      */
 	public function indexAction()
-    {    	
+    {
+    	return null;
     }
 }

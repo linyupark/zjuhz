@@ -15,9 +15,13 @@ class ErrorController extends Zend_Controller_Action
 {
     /**
      * 异常输出
+     * 
+     * @return null
      */	
     public function errorAction()
     {
     	print_r($this->_getAllParams());
+    	
+    	return null;
     }
 }
