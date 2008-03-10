@@ -23,11 +23,11 @@ class AccountController extends Zend_Controller_Action
     public function init()
     {
     	//载入对应MODEL
-    	Zend_Loader::loadClass('User', '../../application/member/models/');
-    	
+    	Zend_Loader::loadClass('User');
+
     	//禁用自动渲染视图
-    	$this->_helper->viewRenderer->setNoRender();    	
-    	
+    	$this->_helper->viewRenderer->setNoRender();
+
     	return null;
     }
 
@@ -39,7 +39,7 @@ class AccountController extends Zend_Controller_Action
      * @return string to ajax
      */
 	public function registerAction()
-    {	
+    {
     	if ($this->_request->isXmlHttpRequest())
     	{
     		print_r($this->_getAllParams());
