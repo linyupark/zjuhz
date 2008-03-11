@@ -21,6 +21,20 @@ class FrontController extends Zend_Controller_Action
      */
     public function init()
     {
-    	return null;
+    	//return null;
+    }
+
+    /**
+     * member验证码
+     * 
+     * @return null
+     */
+    public function verifyAction()
+    {
+		//禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender();
+
+		//将验证码写入公共SESSION
+		ImageHandle::verify('common');
     }
 }
