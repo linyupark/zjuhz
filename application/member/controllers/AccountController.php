@@ -16,12 +16,22 @@
 class AccountController extends Zend_Controller_Action
 {
     /**
+     * 配置参数
+     *
+     * @var array
+     */
+	private $config = null;
+	
+    /**
      * 初始化
      * 
      * @return null
      */
     public function init()
     {
+    	//载入配置文档
+		$this->config = Zend_Registry::get('config');
+
     	//载入对应MODEL
     	Zend_Loader::loadClass('User');
 
@@ -45,10 +55,15 @@ class AccountController extends Zend_Controller_Action
     		//print_r($this->_getAllParams());
     		//echo $this->_getParam('username');
     		$username = $this->_getParam('username');
+    		$passwd   = $this->_getParam('passwd');
     		
     		if (!Valid::isAlNumUline($username) || !Valid::lenBetwAlNum($username,3,6))
     		{
-    			echo '用户名格式不正确。';
+    			echo $this->config->username->formaterror;
+    		}
+    		elseif (!Valid::lenBetwAlNum($passwd,6,16))
+    		{
+    			echo $this->config->passwd->formaterror;
     		}
     	}
     }
