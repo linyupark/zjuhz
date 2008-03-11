@@ -54,17 +54,22 @@ class AccountController extends Zend_Controller_Action
     	{    		
     		//print_r($this->_getAllParams());
     		//echo $this->_getParam('username');
-    		$username = $this->_getParam('username');
-    		$passwd   = $this->_getParam('passwd');
+    		$username = trim(strtolower($this->_getParam('username')));
+    		$passwd   = trim(strtolower($this->_getParam('passwd')));
+    		$repasswd = trim(strtolower($this->_getParam('repasswd')));
     		
-    		if (!Valid::isAlNumUline($username) || !Valid::lenBetwAlNum($username,3,6))
+    		if (!Valid::alNumUline($username) || !Valid::alNumLen($username,3,6))
     		{
-    			echo $this->config->username->formaterror;
+    			echo $this->config->username->formatError;
     		}
-    		elseif (!Valid::lenBetwAlNum($passwd,6,16))
+    		elseif (!Valid::alNumLen($passwd,6,16) || !Valid::notIncluding($passwd,' '))
     		{
-    			echo $this->config->passwd->formaterror;
+    			echo $this->config->passwd->formatError;
     		}
+    		elseif (!Valid::equal($passwd,$repasswd))
+    		{
+    			echo $this->config->passwd->notEqual;
+    		}    		
     	}
     }
 }
