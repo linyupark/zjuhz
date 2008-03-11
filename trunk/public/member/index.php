@@ -9,16 +9,15 @@
 
 
 /** set_include_path */
-set_include_path(get_include_path().PATH_SEPARATOR.'../../common/Custom/'.PATH_SEPARATOR.'../../application/member/models/');
+set_include_path(get_include_path().PATH_SEPARATOR.
+                 '../../common/Custom/'.PATH_SEPARATOR.
+                 '../../application/member/models/');
 
 /** Zend_Controller_Front */
-require_once 'Zend/Controller/Front.php';
+require_once('Zend/Controller/Front.php');
 
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
-
-/** Zend_Registry */
-//$registry = Zend_Registry::getInstance();
 
 /** Zend_Config_Ini */
 $config = new Zend_Config_Ini('../../common/Ini/Member.ini', 'language');
