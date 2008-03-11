@@ -21,3 +21,11 @@ function copyToClipBoard(obj,msg)
 	window.clipboardData.setData("Text",getObject(obj).value);
 	alert(msg);
 }
+
+//验证码不重复
+function verify(img_id,url)
+{
+   var t = new Date();
+   t = t.getTime();
+   $('#'+img_id).attr('src',url+'?'+t);
+}
