@@ -1,0 +1,20 @@
+<h2>添加信息</h2>
+
+<div id='man'>
+  <form method="POST">
+  <p>
+  <?php if(!$this->categories): ?>
+  <p class="tips">您目前没有权限增加信息</p>
+  <?php else: ?>
+  <select name="category">
+  <?php foreach ($this->categories as $row): ?>
+  	<option value="<?php echo $row->category_id ?>"><?php echo $row->category_name ?></option>
+  <?php endforeach; ?>
+  </select>
+  <?php endif; ?>
+  </p>
+  <textarea name="content" id="content" style="display:none;"><?php echo $this->content ?></textarea>
+  <iframe src="/editor/info/Edit/editor.htm?id=content&ReadCookie=0" frameBorder="0" marginHeight="0" marginWidth="0" scrolling="No" width="650" height="480"></iframe>
+  <input type="submit" value="提交新信息" />
+  </form>
+</div>

@@ -1,0 +1,20 @@
+<div id='login_form'>
+
+  <h2>杭州浙江大学校友会信息平台</h2>
+  
+  <?php if($this->error_tips){ echo '<small>'.$this->error_tips.'</small>'; } ?>
+  
+  <form method="post">
+	<p>帐号 <input name="username" type="text" class="input" /></p>
+	<p>密码 <input name="password" type="password" class="input" /></p>
+	<p>验证 <input name="verify" type="text" class="input" style="width:180px;" />
+  	<a href="javascript:verify('verify','/info/console/verify/')">
+    <img border="0" align="absmiddle" id="verify" src="/info/console/verify/" />
+  </a>
+</p>
+
+<p>
+  <input class="btn" type="submit" value="Login 登陆 &raquo;" />
+</p>
+</form>
+</div>
