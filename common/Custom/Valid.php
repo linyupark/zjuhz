@@ -57,7 +57,7 @@ class Valid
 	}
 
 	/**
-     * 字母al 数字Num 下划线Uline
+     * 字母Alpha 数字Num 下划线Uline
      * Alpha-numeric with underline
      * 
      * @param string $input
