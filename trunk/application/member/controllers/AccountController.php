@@ -51,12 +51,12 @@ class AccountController extends Zend_Controller_Action
 	public function registerAction()
     {
     	if ($this->_request->isXmlHttpRequest())
-    	{    		
+    	{
     		//print_r($this->_getAllParams());
     		//echo $this->_getParam('username');
-    		$username = trim(strtolower($this->_getParam('username')));
-    		$passwd   = trim(strtolower($this->_getParam('passwd')));
-    		$repasswd = trim(strtolower($this->_getParam('repasswd')));
+    		$username = $this->_getParam('username');
+    		$passwd   = $this->_getParam('passwd');
+    		$repasswd = $this->_getParam('repasswd');
     		
     		if (!Valid::alNumUline($username) || !Valid::alNumLen($username,3,6))
     		{
@@ -69,7 +69,7 @@ class AccountController extends Zend_Controller_Action
     		elseif (!Valid::equal($passwd,$repasswd))
     		{
     			echo $this->config->passwd->notEqual;
-    		}    		
+    		}  		
     	}
     }
 }
