@@ -49,7 +49,7 @@ h2{ float:left; margin:10px 0 auto 10px; width:72%; }
   text-decoration:none;
 }
 
-.tips{ font-size:12px; padding:5px; background:#FFFFCC; border:1px solid #FFCC99; margin-top:0; color:#666699}
+.tips{ font-size:12px; padding:2px 8px; background:#FFFFCC; border:1px solid #FFCC99; margin-top:0; color:#666699}
 .tips a{ color:#333;  }
 
 .pagination{ padding:10px 0; font-size:12px; }
