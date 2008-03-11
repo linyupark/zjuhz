@@ -15,33 +15,33 @@
  */
 class AccountController extends Zend_Controller_Action
 {
-    /**
+	/**
      * 配置参数
      *
      * @var array
      */
 	private $config = null;
-	
-    /**
+
+	/**
      * 初始化
      * 
      * @return null
      */
-    public function init()
-    {
-    	//载入配置文档
+	public function init()
+	{
+		//载入配置文档
 		$this->config = Zend_Registry::get('config');
 
-    	//载入对应MODEL
-    	Zend_Loader::loadClass('User');
+		//载入对应MODEL
+		Zend_Loader::loadClass('User');
 
-    	//禁用自动渲染视图
-    	$this->_helper->viewRenderer->setNoRender();
+		//禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender();
 
-    	return null;
-    }
+		return null;
+	}
 
-    /**
+	/**
      * 注册提交
      * 
      * 点击提交按钮后数据验证及写库操作
@@ -49,27 +49,39 @@ class AccountController extends Zend_Controller_Action
      * @return string to ajax
      */
 	public function registerAction()
-    {
-    	if ($this->_request->isXmlHttpRequest())
-    	{
-    		//print_r($this->_getAllParams());
-    		//echo $this->_getParam('username');
-    		$username = $this->_getParam('username');
-    		$passwd   = $this->_getParam('passwd');
-    		$repasswd = $this->_getParam('repasswd');
-    		
-    		if (!Valid::alNumUline($username) || !Valid::alNumLen($username,3,6))
-    		{
-    			echo $this->config->username->formatError;
-    		}
-    		elseif (!Valid::alNumLen($passwd,6,16) || !Valid::notIncluding($passwd,' '))
-    		{
-    			echo $this->config->passwd->formatError;
-    		}
-    		elseif (!Valid::equal($passwd,$repasswd))
-    		{
-    			echo $this->config->passwd->notEqual;
-    		}  		
-    	}
-    }
+	{
+		if ($this->_request->isXmlHttpRequest())
+		{
+			//print_r($this->_getAllParams());
+			//echo $this->_getParam('username');
+			$username = $this->_getParam('username');
+			$passwd   = $this->_getParam('passwd');
+			$repasswd = $this->_getParam('repasswd');
+			$realname = $this->_getParam('realname');
+			$sex      = $this->_getParam('sex');
+			$email    = $this->_getParam('email');
+			$verify   = $this->_getParam('verify');
+
+			if (!Valid::chkUsername($username))
+			{
+				echo $this->config->username->formatError;
+			}
+			elseif (!Valid::chkPasswd($passwd))
+			{
+				echo $this->config->passwd->formatError;
+			}
+			elseif (!Valid::equal($passwd,$repasswd))
+			{
+				echo $this->config->passwd->notEqual;
+			}
+			elseif (!Valid::chkRealname($realname))
+			{
+				echo $this->config->realname->formatError;
+			}
+			elseif (!Valid::chkEmail($email))
+			{
+				echo $this->config->email->formatError;
+			}
+		}
+	}
 }

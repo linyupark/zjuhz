@@ -1,6 +1,12 @@
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" charset="utf-8" src="/static/scripts/jquery.js"></script>
-<script language="javascript" charset="utf-8" src="/static/scripts/member/register.js"></script>
+<script language="javascript" type="text/javascript" charset="utf-8" src="/static/scripts/jquery.js"></script>
+<script language="javascript" type="text/javascript" charset="utf-8" src="/static/scripts/common.js"></script>
+<script language="javascript" type="text/javascript" charset="utf-8" src="/static/scripts/member/register.js"></script>
+</head>
+
+<body>
 <link href="/static/styles/member.css" rel="stylesheet" type="text/css" media="all" />
 
 <div style="width:600px;margin:10px;padding:10px;border:1px solid;text-align:center;line-height:20px;">
@@ -30,6 +36,9 @@
   <p align="left">E-mail：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="email" class="ctrl_inp" type="text" id="email" maxlength="50" />
   * 用于取回密码、联络等必要用途，我们负责保密 </p>
   <p align="left">&nbsp;</p>
+  <p align="left">附加码：&nbsp;&nbsp;&nbsp;&nbsp;<input name="verifycode" size="4" type="text" id="verifycode" maxlength="4" />&nbsp;&nbsp;&nbsp;<a href="javascript:verify('verify','/member/index.php/front/verify/')"><img id="verify" src="/member/index.php/front/verify/" /></a>
+  * 请输入 </p>
+  <p align="left">&nbsp;</p>
   <p align="left">
     <input name="btnSubmit" type="submit" id="btnSubmit" value=" 注 册 " />
   </p>
@@ -38,3 +47,5 @@
 </form>
 <div id="loading"></div>
 </div>
+</body>
+</html>
