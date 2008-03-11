@@ -2,13 +2,11 @@
 
 	class PostController extends Zend_Controller_Action 
 	{
-		protected  $sess; //全局SESSION
 		protected  $sess_info;
 		protected  $acl_info;
 		
 		function init()
 		{
-			$this->sess = Zend_Registry::get('sess');
 			$this->sess_info = Zend_Registry::get('sess_info');
 			$this->acl_info = Zend_Registry::get('acl_info');
 			$this->view->header_title = '信息管理!';

@@ -1,0 +1,32 @@
+<h2>信息分类管理</h2>
+
+<div id='man'>
+  <table class="tb">
+  	<tr>
+  		<th>ID</th>
+  		<th>类别名称</th>
+  		<th>操作</th>
+  	</tr>
+  	<?php if(!$this->categories): ?>
+  	<tr>
+  		<td colspan="2">没有分类</td>
+  	</tr>
+  	<?php else: foreach ($this->categories as $row): ?>
+  	<tr id="cate_<?php echo $row->category_id ?>">
+  		<td width="2%">
+  			<?php echo $row->category_id ?>
+  			<input type="hidden" name="category_id" value="<?php echo $row->category_id ?>" />
+  		</td>
+  		<td><input name="category_name" type="text" value="<?php echo $row->category_name ?>" size="40" /></td>
+  		<td width="16%">
+  			<input onclick="cate_del(<?php echo $row->category_id ?>)" type="button" value="删除" /> 
+  			<input onclick="cate_mod(<?php echo $row->category_id ?>)" type="button" value="更新" />
+  		</td>
+  	</tr>
+  	<?php endforeach; endif; ?>
+  	<tr id="cate_add">
+  		<td colspan="2"><input name="category_name" type="text" value="" size="40" /></td>
+  		<td><input onclick="cate_add()" type="button" value="创建" /> </td>
+  	</tr>
+  </table>
+</div>
