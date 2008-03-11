@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: zjuhz_info
 Target Host: localhost
 Target Database: zjuhz_info
-Date: 2008-3-11 17:08:44
+Date: 2008-3-11 22:23:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -14,9 +14,9 @@ SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE `tbl_category` (
   `category_id` int(10) unsigned NOT NULL auto_increment,
   `category_name` char(100) NOT NULL,
-  `parent_id` int(11) default NULL,
-  PRIMARY KEY  (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY  (`category_id`),
+  UNIQUE KEY `cate_name` (`category_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_comment
@@ -58,7 +58,7 @@ CREATE TABLE `tbl_user` (
 -- ----------------------------
 -- Records 
 -- ----------------------------
-INSERT INTO `tbl_category` VALUES ('1', 'c1', null);
-INSERT INTO `tbl_category` VALUES ('2', 'c2', null);
+INSERT INTO `tbl_category` VALUES ('1', '浙大动态');
+INSERT INTO `tbl_category` VALUES ('2', '校友动态');
 INSERT INTO `tbl_user` VALUES ('1', 'admin', '4297f44b13955235245b2497399d7a93', 'admin', null);
 INSERT INTO `tbl_user` VALUES ('2', 'test_editor', '4297f44b13955235245b2497399d7a93', 'editor', '1|2');
