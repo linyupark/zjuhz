@@ -58,7 +58,7 @@ class AccountController extends Zend_Controller_Action
 			$passwd   = $this->_getParam('passwd');
 			$repasswd = $this->_getParam('repasswd');
 			$realname = $this->_getParam('realname');
-			$sex      = $this->_getParam('sex');
+			$sex      = $this->_getParam('sex','S');
 			$email    = $this->_getParam('email');
 			$verify   = $this->_getParam('verify');
 
@@ -84,4 +84,5 @@ class AccountController extends Zend_Controller_Action
 			}
 		}
 	}
+	
 }
