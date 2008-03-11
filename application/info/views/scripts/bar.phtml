@@ -1,0 +1,16 @@
+<div id='toper'>
+  杭州浙江大校友会信息平台管理 [<a href='/info/console/logout/'>安全退出</a>]
+
+</div><div id='panel'>
+  <dl>
+  	<dt>内容管理</dt>
+  	<dd><a href='/info/post/'>信息管理</a></dd>
+  	<dd><a href='/info/post/add/'>信息添加</a></dd>
+  	<?php if(Zend_Registry::get('sess_info')->role == 'admin'): ?>
+    <dt>系统管理</dt>
+	<dd><a href='/info/role/'>系统成员管理</a></dd>
+    <dd><a href='/info/category/'>信息分类管理</a></dd>
+    <dd><a href='/info/comment/'>评论管理</a></dd>
+    <?php endif; ?>
+  </dl>
+</div>
