@@ -16,11 +16,18 @@
 class AccountController extends Zend_Controller_Action
 {
 	/**
-     * 配置参数
+     * 配置文档对象
+     *
+     * @var object
+     */
+	private $_ini = null;
+
+	/**
+     * 公共SESSION对象
      *
      * @var array
      */
-	private $config = null;
+	private $_sessCommon = null;
 
 	/**
      * 初始化
@@ -30,10 +37,13 @@ class AccountController extends Zend_Controller_Action
 	public function init()
 	{
 		//载入配置文档
-		$this->config = Zend_Registry::get('config');
-
-		//载入对应MODEL
-		Zend_Loader::loadClass('User');
+		$this->_ini        = Zend_Registry::get('ini');
+		
+		//载入公共SESSINO
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		
+		//载入对应MODEL类
+		Zend_Loader::loadClass('UserModel');
 
 		//禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
@@ -53,34 +63,43 @@ class AccountController extends Zend_Controller_Action
 		if ($this->_request->isXmlHttpRequest())
 		{
 			//print_r($this->_getAllParams());
-			//echo $this->_getParam('username');
-			$username = $this->_getParam('username');
-			$passwd   = $this->_getParam('passwd');
-			$repasswd = $this->_getParam('repasswd');
-			$realname = $this->_getParam('realname');
-			$sex      = $this->_getParam('sex','S');
-			$email    = $this->_getParam('email');
-			$verify   = $this->_getParam('verify');
+			$username = $this->_request->getPost('username');
+			$passwd   = $this->_request->getPost('passwd');
+			$repasswd = $this->_request->getPost('repasswd');
+			$realname = $this->_request->getPost('realname');
+			$sex      = $this->_request->getPost('sex','S');
+			$email    = $this->_request->getPost('email');
 
-			if (!Valid::chkUsername($username))
+			if (!Valid::chkVerify($this->_sessCommon->verify,$this->_request->getPost('verifycode')))
 			{
-				echo $this->config->username->formatError;
+				echo $this->_ini->hint->verifycode->checkError;
+			}
+			elseif (!Valid::chkUsername($username))
+			{
+				echo $this->_ini->hint->username->formatError;
 			}
 			elseif (!Valid::chkPasswd($passwd))
 			{
-				echo $this->config->passwd->formatError;
+				echo $this->_ini->hint->passwd->formatError;
 			}
 			elseif (!Valid::equal($passwd,$repasswd))
 			{
-				echo $this->config->passwd->notEqual;
+				echo $this->_ini->hint->passwd->notEqual;
 			}
 			elseif (!Valid::chkRealname($realname))
 			{
-				echo $this->config->realname->formatError;
+				echo $this->_ini->hint->realname->formatError;
 			}
 			elseif (!Valid::chkEmail($email))
 			{
-				echo $this->config->email->formatError;
+				echo $this->_ini->hint->email->formatError;
+			}
+			else
+			{
+				$user = new UserModel();
+				$user->register(Filter::request($this->_getAllParams()));
+				
+				//Filter::request($this->_getAllParams())
 			}
 		}
 	}

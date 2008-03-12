@@ -3,7 +3,7 @@
 /**
  * [member] (C)2008 zjuhz.com
  * 
- * $File : User.php $
+ * $File : UserModel.php $
  * $Author : wangyumin $
  */
 
@@ -11,7 +11,7 @@
 /**
  * 会员中心-会员主表
  */
-class User extends Zend_Db_Table_Abstract
+class UserModel extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
@@ -29,7 +29,7 @@ class User extends Zend_Db_Table_Abstract
      * 数据库操作类
      * @var object
      */    
-    private $db = null;
+    protected $_db = null;
 
     /**
      * 初始化
@@ -39,19 +39,34 @@ class User extends Zend_Db_Table_Abstract
     public function __construct()
     {
     	parent::__construct();
-    	
-        $this->db = Zend_Registry::get('db');        
-        
+
+    	//载入数据库操作类
+        $this->_db = Zend_Registry::get('db');
+
         return null;
     }
-    
+
     /**
      * 会员注册
+     * 判断登录帐号是否已存在
+     * 判断邀请码是否可用
+     * 
      * 
      * @return string
      */
 	public function register($array)
     {
     	print_r($array);
+    	
+    	$this->_isExist();
+    }
+
+    /**
+     * 是否已存在
+     * 
+     * @return string
+     */
+	private function _isExist()
+    {
     }
 }

@@ -31,7 +31,7 @@ class Valid
      */
 	public static function chkPasswd($input)
 	{
-		return ((!self::alphaNumLenRange($input,6,16) || !self::isIncluding($input,' ')) ? false : true);
+		return ((!self::alphaNumLenRange($input,6,16) || !self::isFullIncluding($input,' ')) ? false : true);
 	}
 
 	/**
@@ -54,6 +54,18 @@ class Valid
 	public static function chkEmail($input)
 	{
 		return ((!self::isEmail($input) || !self::alphaNumLenRange($input,6,50)) ? false : true);
+	}
+
+	/**
+     * 检查附加码 4位
+     * 
+     * @param string $input1 SESSION内已加解的
+     * @param string $input2 用户输入的原始数据
+     * @return boolean
+     */
+	public static function chkVerify($input1,$input2)
+	{
+		return ((!self::equal($input1,md5($input2)) || !self::alphaNumLenRange($input2,4,4)) ? false : true);
 	}
 
 	/**
@@ -83,14 +95,14 @@ class Valid
 	}
 
 	/**
-     * 是否包括某字符
+     * 是否全部包括 一个不包括即返回false
      * 包括返回false 不包括返回true
      * 
      * @param string $input
      * @param array|string $findme
      * @return boolean
      */
-	public static function isIncluding($input,$findme)
+	public static function isFullIncluding($input,$findme)
 	{
 		if (is_array($findme))
 		{
