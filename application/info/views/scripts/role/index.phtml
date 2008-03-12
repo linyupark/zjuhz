@@ -1,0 +1,74 @@
+<h2>系统成员(角色)管理</h2>
+<div id='man'>
+	<table class="tb">
+		<tr>
+			<th width="10%">帐号</th>
+			<th width="35%">密码</th>
+			<th width="10%">角色</th>
+			<th width="35%">权限</th>
+			<th width="10%">操作</th>
+		</tr>
+		<?php foreach ($this->users as $user): ?>
+		<tr>
+			<td><?php echo $user->user_name ?></td>
+			<td>
+				密码 <input name="password" type="password" value="" /> <br />
+				确认 <input name="password2" type="password" value="" />
+			</td>
+			<td>
+				<select name="user_role">
+					<?php foreach ($this->roles as $role): ?>
+					<option value="<?php echo $role->user_role ?>"<?php if($role->user_role == $user->user_role) echo 'selected="selected"' ?>>
+					<?php echo $role->user_role ?>
+					</option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+			<td>
+				<?php 
+				//当前用户的权限数组
+				$power_arr = explode('|',$user->user_power);
+				//所有权限(信息分类)罗列
+				foreach ($this->categories as $cate): ?>
+				 <label for="power_<?php echo $user->user_id.'_'.$cate->category_id ?>">
+				 <input <?php if(in_array($cate->category_id, $power_arr)) echo 'checked="checked"' ?> id="power_<?php echo $user->user_id.'_'.$cate->category_id ?>" name="user_power" type="checkbox" />
+				 <?php echo $cate->category_name ?></label>
+				<?php endforeach; ?>
+			</td>
+			<td>
+				<input type="button" value="修改" />
+				<input type="button" value="删除" />
+			</td>
+		</tr>
+		<?php endforeach; ?>
+		<!-- 创建新的角色 -->
+		<tr id="new_role">
+			<td><input name="user_name" type="text" value="" size="8" /></td>
+			<td>
+				密码 <input name="password" type="password" value="" /> <br />
+				确认 <input name="password2" type="password" value="" />
+			</td>
+			<td>
+				<select name="user_role">
+					<?php foreach ($this->roles as $role): ?>
+					<option value="<?php echo $role->user_role ?>">
+					<?php echo $role->user_role ?>
+					</option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+			<td>
+				<?php 
+				//所有权限(信息分类)罗列
+				foreach ($this->categories as $cate): ?>
+				 <label for="power_<?php echo $cate->category_id ?>">
+				 <input id="power_<?php echo $cate->category_id ?>" name="user_power" type="checkbox" />
+				 <?php echo $cate->category_name ?></label>
+				<?php endforeach; ?>
+			</td>
+			<td>
+				<input type="button" value="创建" />
+			</td>
+		</tr>
+	</table>
+</div>

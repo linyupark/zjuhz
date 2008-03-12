@@ -54,7 +54,7 @@
 					else 
 					{
 						$this->sess_info->role = $row->user_role; //角色输入session
-						$this->sess_info->user = $row->user_name; //用户名输入session
+						$this->sess_info->user_id = $row->user_id; //用户名输入session
 						$this->sess_info->power = $row->user_power; //权利输入
 						Zend_Session::rememberMe(3600*24);
 						$this->view->error_tips = '* 登陆成功~2秒后自动转向控制页';
