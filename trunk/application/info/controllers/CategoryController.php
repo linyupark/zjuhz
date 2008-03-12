@@ -74,7 +74,7 @@
 		function delAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
-			$category_id = trim($this->getRequest()->getPost('category_id'));
+			$category_id = (int)$this->getRequest()->getPost('category_id');
 			
 			$where = $this->tbl_category->getAdapter()->quoteInto('category_id = ?',$category_id);
 			if($this->tbl_category->delete($where))
