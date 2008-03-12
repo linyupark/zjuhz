@@ -21,7 +21,8 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
     	print_r($this->_getAllParams());
-    	
+    	//$this->getResponse()
+    	       //->setHttpResponseCode(404);
     	return null;
     }
 }

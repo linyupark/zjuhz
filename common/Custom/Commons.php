@@ -57,4 +57,9 @@ class Commons
 		$timestamp = time();
 		return date('y-m-d H:i',$timestamp);
 	}
+	
+    static function getIp()
+	{
+		return $_SERVER['REMOTE_ADDR'];
+    }
 }
