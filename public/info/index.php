@@ -4,6 +4,8 @@
 	 * 描述: zjuhz 信息发布系统
 	 */
 	
+	date_default_timezone_set('Asia/Shanghai');
+	
 	/** set_include_path */
 	set_include_path(get_include_path().PATH_SEPARATOR.'../../common/Custom/'.
 										PATH_SEPARATOR.'../../application/info/models/');
@@ -16,7 +18,10 @@
 	
 	/** Registry database connection */
 	$db_info = new Zend_Config_Ini('../../common/Ini/Info.ini','dbconn');
-	Zend_Registry::set('db_info',Zend_Db::factory($db_info->adapter,$db_info->params->toArray()));
+	$db = Zend_Db::factory($db_info->adapter,$db_info->params->toArray());
+	$db->setFetchMode(Zend_Db::FETCH_OBJ);
+	Zend_Registry::set('db_info',$db);
+	
 	
 	/** Registry session */
 	Zend_Registry::set('sess_info',new Zend_Session_Namespace('info'));
