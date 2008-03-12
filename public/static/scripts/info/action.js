@@ -39,3 +39,21 @@ function cate_del(cate_id)
 		);	
 	}
 }
+
+//删除信息
+function post_del(post_id)
+{
+	var del_flag = confirm('是否真的要删除该信息？');
+	if(del_flag == true)
+	{
+		$('.tb').before('<p class="tips">尝试删除中...</p>');
+		$.post('/info/post/del/',$('#post_'+post_id).fastSerialize(),
+			function(data){
+				$('.tips').html(data);
+				if(data == '该信息已成功删除')
+					$('#post_'+post_id).fadeOut();
+				$('.tips').fadeOut(1000);
+			}
+		);	
+	}
+}
