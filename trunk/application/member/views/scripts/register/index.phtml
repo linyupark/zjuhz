@@ -12,19 +12,19 @@
 <div style="width:600px;margin:10px;padding:10px;border:1px solid;text-align:center;line-height:20px;">
 <form id="frmRegister" name="frmRegister" method="post">
   <p align="left">登录帐号：
-    <input name="username" class="ctrl_inp" type="text" id="username" maxlength="16" value="" />
+    <input name="uname" class="ctrl_inp" type="text" maxlength="16" value="" />
     * 字母数字下划线3-16位，注册后不可更改</p>
   <p align="left">&nbsp;</p>
   <p align="left">登录密码：
-    <input name="passwd" class="ctrl_inp" type="password" id="passwd" maxlength="16" /> 
+    <input name="pswd" class="ctrl_inp" type="password" maxlength="16" /> 
     * 6-16位，且不能包括空格，建议字母数字符号混合。</p>
   <p align="left">&nbsp;</p>
   <p align="left">密码确认：
-    <input name="repasswd" class="ctrl_inp" type="password" id="repasswd" maxlength="16" />
+    <input name="repswd" class="ctrl_inp" type="password" maxlength="16" />
   * 请再输入一次密码</p>
   <p align="left">&nbsp;</p>
   <p align="left">真实姓名：
-    <input name="realname" class="ctrl_inp" type="text" id="realname" maxlength="20" />
+    <input name="rname" class="ctrl_inp" type="text" maxlength="20" />
   * 用于实名认证，注册后不可更改  </p>
   <p align="left">&nbsp;</p>
   <p align="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
@@ -36,7 +36,7 @@
   <p align="left">E-mail：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="email" class="ctrl_inp" type="text" id="email" maxlength="50" />
   * 用于取回密码、联络等必要用途，我们负责保密 </p>
   <p align="left">&nbsp;</p>
-  <p align="left">附加码：&nbsp;&nbsp;&nbsp;&nbsp;<input name="verifycode" size="4" type="text" id="verifycode" maxlength="4" />&nbsp;&nbsp;&nbsp;<a href="javascript:verify('verify','/member/front/verify/')"><img id="verify" src="/member/front/verify/" border="0" /></a>
+  <p align="left">附加码：&nbsp;&nbsp;&nbsp;&nbsp;<input name="vcode" size="4" type="text" maxlength="4" />&nbsp;&nbsp;&nbsp;<a href="javascript:verify('verify','/member/front/verify/')"><img id="verify" src="/member/front/verify/" border="0" /></a>
   * 请输入 </p>
   <p align="left">&nbsp;</p>
   <p align="left">

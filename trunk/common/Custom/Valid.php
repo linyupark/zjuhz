@@ -13,62 +13,6 @@
 class Valid
 {
 	/**
-     * 检查登录帐号3-16位字母数字下划线
-     * 
-     * @param string $input
-     * @return boolean
-     */
-	public static function chkUsername($input)
-	{
-		return ((!self::isAlphaNumUline($input) || !self::alphaNumLenRange($input,3,16)) ? false : true);
-	}
-
-	/**
-     * 检查登录密码6-16位不含空格
-     * 
-     * @param string $input
-     * @return boolean
-     */
-	public static function chkPasswd($input)
-	{
-		return ((!self::alphaNumLenRange($input,6,16) || !self::isFullIncluding($input,' ')) ? false : true);
-	}
-
-	/**
-     * 检查真实姓名 2-16位，且不能含有数字和符号 中日英韩且不能混合
-     * 
-     * @param string $input
-     * @return boolean
-     */
-	public static function chkRealname($input)
-	{
-		return ((!self::utf8NotMixed($input) || !self::utf8LenRange($input,2,16)) ? false : true);
-	}
-
-	/**
-     * 检查EMAIL 6-50位
-     * 
-     * @param string $input
-     * @return boolean
-     */
-	public static function chkEmail($input)
-	{
-		return ((!self::isEmail($input) || !self::alphaNumLenRange($input,6,50)) ? false : true);
-	}
-
-	/**
-     * 检查附加码 4位
-     * 
-     * @param string $input1 SESSION内已加解的
-     * @param string $input2 用户输入的原始数据
-     * @return boolean
-     */
-	public static function chkVerify($input1,$input2)
-	{
-		return ((!self::equal($input1,md5($input2)) || !self::alphaNumLenRange($input2,4,4)) ? false : true);
-	}
-
-	/**
      * 字母Alpha 数字Num 下划线Uline
      * Alpha-numeric with underline
      * 
