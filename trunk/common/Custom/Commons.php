@@ -50,4 +50,11 @@ class Commons
 		}
 		return $str;
 	}
+	
+	static function date($timestamp = null)
+	{
+		if($timestamp == null)
+		$timestamp = time();
+		return date('y-m-d H:i',$timestamp);
+	}
 }
