@@ -42,7 +42,7 @@
 	.entity_list{
 		margin:20px 0 0 15px;
 		width:600px;
-		padding-right:2px;
+		padding-right:1px;
 		background:#f5f5f5;
 	}
 	
@@ -50,14 +50,23 @@
 		font-size:13px;
 		text-align:left;
 		padding:4px 0 3px 10px;
-		border-left:2px solid #f5f5f5;
-		border-top:2px solid #f5f5f5;
+		border-left:1px solid #f5f5f5;
+		border-top:1px solid #f5f5f5;
+		border-bottom:1px solid #444;
 		background:#999;
 	}
 	.entity_list td{
-		padding:10px 0 3px 10px;
+		padding:8px 0 3px 5px;
 		border-bottom:1px dashed #ccc;
-		background:#f5f5f5;
+		background:#eee;
+	}
+	.entity_row a{
+		font-size:13px;
+		text-decoration:none;
+		color:#333;
+	}
+	.entity_row a:hover{
+		color:#CC3300
 	}
 </style>
 <div id="main" style="height:500px;">
@@ -86,7 +95,10 @@
 		<tr><td colspan="3">该类尚未发布任何信息</td></tr>
 		<?php else: foreach ($this->rows as $row): ?>
 		<tr class="entity_row">
-			<td style="font-size:14px"><?php echo $row->entity_title ?></td>
+			<td style="font-size:14px">
+				<img src="/static/images/bullet/green.gif" align="absmiddle" /> 
+				<a href="/info/index/view/id/"><?php echo $row->entity_title ?></a>
+			</td>
 			<td style="font-size:10px"><?php echo Commons::date($row->entity_pub_time) ?></td>
 			<td style="font-size:10px"><?php echo $row->entity_view_num ?></td>
 		</tr>
@@ -97,6 +109,6 @@
 <div id="news_list_tt">&nbsp;</div>
 
 <script>
-$('.entity_row').mouseover(function(){ $('td',this).css('background','#EFF7FF') });
-$('.entity_row').mouseout(function(){ $('td',this).css('background','#f5f5f5') });
+$('.entity_row').mouseover(function(){ $('td',this).css('background','#f5f5f5') });
+$('.entity_row').mouseout(function(){ $('td',this).css('background','#eee') });
 </script>
