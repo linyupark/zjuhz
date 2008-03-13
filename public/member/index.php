@@ -24,11 +24,13 @@ $ini = new Zend_Config_Ini('../../common/Ini/Member.ini');
 
 /** Registry 配置文档对象 */
 Zend_Registry::set('ini',$ini);
+
 /** Registry 数据库 */
 $db = Zend_Db::factory($ini->db->default->adapter,$ini->db->default->params->toArray());
 $db->query('SET NAMES utf8');
 Zend_Db_Table::setDefaultAdapter($db);
 Zend_Registry::set('db',$db);
+
 
 /** 公共SESSION,包含如验证码,用户基本资料等 */
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
