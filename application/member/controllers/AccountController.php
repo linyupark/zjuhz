@@ -118,13 +118,13 @@ class AccountController extends Zend_Controller_Action
 				else
 				{
 					$regInfo = array('userName' => $userName, 'passWord' => $passWord, 'realName' => $realName, 
-									 'nickName' => "zjuhz_$userName", 'sex' => $sex, 'regIp' => Commons::getIp(),
+									 'nickName' => $realName, 'sex' => $sex, 'regIp' => Commons::getIp(),
 									 'iuid' => $iuid);
 					$user->register($regInfo);
 					
 					//判断注册人填写的真实姓名与邀请人填写的是否相等
 					//若不等状态为2(已注册待核实) 反之为可自由通行
-					$regStatus = (($invite['realName'] != $realName) ? 2 : 1);
+					//$regStatus = (($invite['realName'] != $realName) ? 2 : 1);
 				}
 				//Filter::request($this->_getAllParams())
 			}
