@@ -7,7 +7,7 @@
 class Commons
 {
 	#用JS方式进行到 $url 的跳转, 可停顿 $sec 秒后执行
-	static function lp_jump($url, $sec = 0)
+	static function js_jump($url, $sec = 0)
 	{
 		$sec = $sec * 1000;
 		if ($sec == 0)
