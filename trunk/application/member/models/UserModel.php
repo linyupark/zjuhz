@@ -59,7 +59,6 @@ class UserModel extends Zend_Db_Table_Abstract
 			$uid = $this->_db->lastInsertId();
 			if ($uid > 0)
 			{
-				
 				$this->_db->commit();
 				echo 'ok';
 			}
