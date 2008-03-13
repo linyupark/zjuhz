@@ -4,18 +4,22 @@
   <table class="tb">
   	<tr>
   		<th>ID</th>
+  		<th>Icon</th>
   		<th>类别名称</th>
   		<th>操作</th>
   	</tr>
   	<?php if(!$this->categories): ?>
   	<tr>
-  		<td colspan="2">没有分类</td>
+  		<td colspan="4">没有分类</td>
   	</tr>
   	<?php else: foreach ($this->categories as $row): ?>
   	<tr id="cate_<?php echo $row->category_id ?>">
   		<td width="2%">
   			<?php echo $row->category_id ?>
   			<input type="hidden" name="category_id" value="<?php echo $row->category_id ?>" />
+  		</td>
+  		<td width="20%">
+  			<input type="text" name="category_icon" value="<?php echo $row->category_icon ?>" />
   		</td>
   		<td><input name="category_name" type="text" value="<?php echo $row->category_name ?>" size="40" /></td>
   		<td width="16%">
@@ -25,7 +29,8 @@
   	</tr>
   	<?php endforeach; endif; ?>
   	<tr id="cate_add">
-  		<td colspan="2"><input name="category_name" type="text" value="" size="40" /></td>
+  		<td colspan="2"><input name="category_icon" type="text" value="" /></td>
+  		<td><input name="category_name" type="text" value="" size="40" /></td>
   		<td><input onclick="cate_add()" type="button" value="创建" /> </td>
   	</tr>
   </table>
