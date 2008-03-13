@@ -25,8 +25,22 @@ class UserModel extends Zend_Db_Table_Abstract
      */    
     protected $_primary = 'uid';
 
+	/**
+     * 配置文档对象
+     *
+     * @var object
+     */
+	private $_ini = null;
+
+	/**
+     * 公共SESSION对象
+     *
+     * @var array
+     */
+	private $_sessCommon = null;
+
     /**
-     * 初始化
+     * 构造方法
      * 
      * @return null
      */
@@ -41,6 +55,17 @@ class UserModel extends Zend_Db_Table_Abstract
     }
 
     /**
+     * 析构方法
+     * 
+     * @return null
+     */
+	public function __destruct()
+    {
+    	$this->_db->closeConnection();
+    	return null;
+    }
+
+    /**
      * 会员注册
      * 判断登录帐号是否已存在
      * 判断邀请码是否可用
@@ -49,7 +74,33 @@ class UserModel extends Zend_Db_Table_Abstract
      * @return string
      */
 	public function register($regInfo)
-    {
+    {			
+
+		if (!self::chkVerifyCode($this->_sessCommon->verify,
+		    $this->_request->getPost('vcode')))
+		{
+			echo $this->_ini->hint->verifyCode->checkError;
+		}
+		elseif (!self::chkUserName($userName))
+		{
+			echo $this->_ini->hint->userName->formatError;
+		}
+		elseif (!self::chkPasswd($passWord))
+		{
+			echo $this->_ini->hint->passWord->formatError;
+		}
+		elseif (!Valid::equal($passWord,$rePasswd))
+		{
+			echo $this->_ini->hint->rePasswd->notEqual;
+		}
+		elseif (!self::chkRealName($realName))
+		{
+			echo $this->_ini->hint->realName->formatError;
+		}
+		elseif (!self::chkEmail($eMail))
+		{
+			echo $this->_ini->hint->eMail->formatError;
+		}    	
     	// Start a transaction explicitly.
 		$this->_db->beginTransaction();
 
@@ -103,14 +154,48 @@ class UserModel extends Zend_Db_Table_Abstract
     	return (($rows == null) ? false : $rows);
     }
 
-    /**
-     * 析构方法
+	/**
+     * 检查登录帐号3-16位字母数字下划线
      * 
-     * @return null
+     * @param string $input
+     * @return boolean
      */
-	public function __destruct()
-    {
-    	$this->_db->closeConnection();
-    	return null;
-    }
+	public static function chkUserName($input)
+	{
+		return ((!Valid::isAlphaNumUline($input) || !Valid::alphaNumLenRange($input,3,16)) ? false : true);
+	}
+
+	/**
+     * 检查登录密码6-16位不含空格
+     * 
+     * @param string $input
+     * @return boolean
+     */
+	public static function chkPasswd($input)
+	{
+		return ((!Valid::alphaNumLenRange($input,6,16) || !Valid::isFullIncluding($input,' ')) ? false : true);
+	}
+
+	/**
+     * 检查真实姓名 2-16位，且不能含有数字和符号 中日英韩且不能混合
+     * 
+     * @param string $input
+     * @return boolean
+     */
+	public static function chkRealName($input)
+	{
+		return ((!Valid::utf8NotMixed($input) || !Valid::utf8LenRange($input,2,16)) ? false : true);
+	}
+
+	/**
+     * 检查附加码 4位
+     * 
+     * @param string $input1 SESSION内已加解的
+     * @param string $input2 用户输入的原始数据
+     * @return boolean
+     */
+	public static function chkVerifyCode($input1,$input2)
+	{
+		return ((!Valid::equal($input1,md5($input2)) || !Valid::alphaNumLenRange($input2,4,4)) ? false : true);
+	}
 }

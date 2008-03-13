@@ -30,12 +30,9 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	$iuid = $this->_getParam('iuid');
     	$ikey = $this->_getParam('ikey');
-    	
-    	$this->view->iuid = $iuid;
     	$this->view->ikey = $ikey;
-    	
+
     	return null;
     }
 }
