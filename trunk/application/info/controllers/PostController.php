@@ -46,7 +46,15 @@ class PostController extends Zend_Controller_Action
 		//判断是否需要进行筛选
 		if($category_id != 0) //选择了分类
 		$where = 'category_id = '.$category_id;
-		else $where = null;
+		else //在权限范围内搜索
+		{
+			$where = '';
+			foreach ($this->view->categories as $cate)
+			{
+				$where .= "category_id = {$cate->category_id} OR ";
+			}
+			$where = substr($where,0,-3);
+		}
 		
 		$row_set = $this->tbl_entity->fetchAll($where);
 		
@@ -170,8 +178,9 @@ class PostController extends Zend_Controller_Action
 	function delAction()
 	{
 		$this->_helper->ViewRenderer->setNoRender(true);
-		$entity_id = (int)$this->getRequest()->getPost('entity_id');
-			
+		if(!$this->getRequest()->isPost())
+		exit();
+		$entity_id = (int)$this->getRequest()->getPost('entity_id');	
 		$where = $this->tbl_entity->getAdapter()->quoteInto('entity_id = ?',$entity_id);
 		if($this->tbl_entity->delete($where))
 		echo '该信息已成功删除';

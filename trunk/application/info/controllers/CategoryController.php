@@ -35,7 +35,12 @@
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
 			$category_name = trim($this->getRequest()->getPost('category_name'));
-			
+			$category_icon = trim($this->getRequest()->getPost('category_icon'));
+			if(!Zend_Validate::is($category_icon, 'NotEmpty'))
+			{
+				echo '选择使用的icon名称不能为空';
+				exit();
+			}
 			if(!Zend_Validate::is($category_name, 'NotEmpty'))
 			{
 				echo '类别名称不能为空！';
@@ -46,15 +51,19 @@
 				echo '该分类已经存在！';
 				exit();
 			}
-			if($this->tbl_category->insert(array('category_name'=>$category_name)))
+			if($this->tbl_category->insert(array(
+			'category_name'=>$category_name,
+			'category_icon'=>$category_icon
+			)))
 			echo '创建成功';
-			echo Commons::lp_jump('/info/category/',2);
+			echo Commons::js_jump('/info/category/',1);
 		}
 		
 		#修改类别
 		function modAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
+			$category_icon = trim($this->getRequest()->getPost('category_icon'));
 			$category_name = trim($this->getRequest()->getPost('category_name'));
 			$category_id = trim($this->getRequest()->getPost('category_id'));
 			
@@ -64,8 +73,17 @@
 				exit();
 			}
 			
+			if(!Zend_Validate::is($category_icon, 'NotEmpty'))
+			{
+				echo '选择使用的icon名称不能为空';
+				exit();
+			}
+			
 			$where = $this->tbl_category->getAdapter()->quoteInto('category_id = ?',$category_id);
-			if(!$this->tbl_category->update(array('category_name'=>$category_name),$where))
+			if(!$this->tbl_category->update(array(
+				'category_name'=>$category_name,
+				'category_icon'=>$category_icon
+				),$where))
 			echo '没有做任何修改';
 			else echo '修改成功';
 		}

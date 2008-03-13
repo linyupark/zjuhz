@@ -58,7 +58,7 @@
 						$this->sess_info->power = $row->user_power; //权利输入
 						Zend_Session::rememberMe(3600*24);
 						$this->view->error_tips = '* 登陆成功~2秒后自动转向控制页';
-						echo Commons::lp_jump('/info/console/',2);
+						echo Commons::js_jump('/info/console/',2);
 					}
 				}
 			}
