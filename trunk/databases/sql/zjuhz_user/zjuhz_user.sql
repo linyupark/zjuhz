@@ -22,7 +22,7 @@ create table zjuhz_user.tbl_user
    userName             char(16) not null,
    passWord             char(41) not null,
    realName             char(16) not null,
-   nickName             char(22) not null,
+   nickName             char(16) not null,
    sex                  enum('M','F','S') not null default 'S',
    regIp                char(15) default NULL,
    regTime              timestamp not null default CURRENT_TIMESTAMP,

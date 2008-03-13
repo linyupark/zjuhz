@@ -1880,10 +1880,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>nickname</a:Code>
 <a:CreationDate>1204853599</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1205303639</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DataType>char(22)</a:DataType>
-<a:Length>22</a:Length>
+<a:ModificationDate>1205327127</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DataType>char(16)</a:DataType>
+<a:Length>16</a:Length>
 <a:Mandatory>1</a:Mandatory>
 </o:PhysicalDomain>
 <o:PhysicalDomain Id="o43">
@@ -2050,10 +2050,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>nickName</a:Code>
 <a:CreationDate>1204982072</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303639</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DataType>char(22)</a:DataType>
-<a:Length>22</a:Length>
+<a:ModificationDate>1205327127</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DataType>char(16)</a:DataType>
+<a:Length>16</a:Length>
 <a:Mandatory>1</a:Mandatory>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,171={4EC131E7-C7D4-4E04-B6F6-A6BF9CCF838C},ZeroFill,5=false
 {4A2BD2F3-4A8A-4421-8A48-A8029BDA28E8},Unsigned,5=false
