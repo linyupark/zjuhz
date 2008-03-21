@@ -1,6 +1,93 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<p>会员中心</p>
-<p></p>
-<p><a href="/member/register/">注册</a></p>
-<p><a href="/member/login/">登录</a></p>
-<p><a href="/member/getpasswd/">找回密码</a></p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta http-equiv="Content-Language" content="zh-CN" >
+<title>会员中心首页</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="/static/styles/member.css">
+</head>
+
+<body>
+
+<DIV id=container>
+  <DIV id=header>
+    <br /><div><a href="/" id="logo"><b>zjuhz.com</b><p>杭州浙江大学校友会</p></a></div>
+  </DIV>
+
+  <DIV id=left>
+    <DIV class=ad>
+      <DIV class=img_box><IMG height=172 src="/static/images/pic0.jpg"></DIV>
+      <DIV class=ad_info>
+        <H4 class=user_h4>为什么注册校友会账号？</H4>
+        <P class=user_h4>注册账号后，您有任何问题都可以向校友提问,<BR>并能贡献您的知识和经验，帮助校友们解决生活和<BR>工作中的问题</P>
+	  </DIV>
+	</DIV>
+	<DIV class=info>
+      <DIV class=userinfo_box>
+        <DIV class=info_img><A href="#" target=_blank><IMG src="/static/images/group.gif"></A></DIV>
+        <DIV class=info_r>
+          <H4><A href="#" target=_blank>班级群组</A></H4>&nbsp; 随时随地，和校友沟通，建立通讯录，组织线下活动 
+        </DIV>
+	  </DIV>
+
+	  <DIV class=userinfo_box>
+        <DIV class=info_img>&nbsp;&nbsp; <A href="#" target=_blank><IMG src="/static/images/qiandai.gif"></A></DIV>
+        <DIV class=info_r><H4>&nbsp;<A href="#" target=_blank>你问我答</A></H4>  有问题？问校友！一定不会让你失望，相信校友的力量 </DIV>
+	  </DIV>
+	</DIV>
+  </DIV>
+		
+  <DIV id=right>
+    <DIV class=login_box>
+      <H4>已经有校友会账号？请直接登录</H4>
+      <H4 id=err></H4>
+      <form name="frmLogin" id="frmLogin" method="post">
+      <TABLE class=login>
+        <TBODY>
+        <TR>
+          <TD>账&nbsp; 号:</TD>
+          <TD><INPUT class="logininput" id="uname" maxLength="30" name="uname"></TD>
+		</TR>
+        <TR>
+          <TD>密&nbsp; 码:</TD>
+          <TD><INPUT class="logininput" id="pswd" type="password" name="pswd"></TD>
+		</TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD class=cookie><INPUT id="alive" type="checkbox" CHECKED value="1" name="alive"><LABEL for=rememberme>记住我的账号</LABEL></TD>
+		</TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><INPUT class="s_button" type="submit" value="登 录" name="btnSubmit"> <A style="FONT-SIZE: 12px" href="#">忘记密码？</A></TD>
+		</TR>
+	    </TBODY>
+	  </TABLE>
+      <HR>
+	  </FORM>
+      <P style="MARGIN-TOP: 0px; FONT-WEIGHT: bold; FONT-SIZE: 13px">还没有校友会账号？</> 
+      <P class=goreg style="FONT-WEIGHT: bold; FONT-SIZE: 14px; TEXT-ALIGN: right"><A href="/member/register/">立即注册账号</A></P>
+      <BR>
+	</DIV>
+    <DIV class=login_box style="PADDING-RIGHT: 10px; MARGIN-TOP: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px">
+      <P style="MARGIN-TOP: 0px; FONT-WEIGHT: bold; FONT-SIZE: 13px">常见问题：</P> 
+      <UL style="MARGIN-TOP: 4px; PADDING-LEFT: 15px; LINE-HEIGHT: 22px; LIST-STYLE-TYPE: disc">
+      <LI><A href="#" target=_blank>怎样才能通过校友实名认证？</A> </LI>
+      <LI><A href="#" target=_blank>怎样获取账号注册邀请码？</A> </LI>
+      <LI><A href="#" target=_blank>忘记密码我应该怎么办？</A> </LI>
+	  </UL>
+	</DIV>
+  </DIV>
+
+</DIV>
+<br /><br />
+<div id="footer">
+  <p><a href="">帮助</a> | <a href="">关于</a> | <a href="">客服</a> | <a href="">隐私声明</a></p>
+  <p><span style="float:right; margin-top:-23px;">杭州浙江大学校友会(筹) &copy; 2008 
+  <a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备06052510号</a></span></p>
+</div>
+
+</body>
+
+</html>
