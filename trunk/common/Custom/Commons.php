@@ -83,4 +83,17 @@ class Commons
 
    		return($ip);
     }
+
+	static function checkVerify($input,$sess,$echo=false)
+	{
+		if (md5($input) !== $sess || !isset($input) || !isset($sess))
+		{
+			exit('验证码输入错误，请点击图片刷新后再试。');
+			//if ($echo) { echo '验证码输入错误，请点击图片刷新后再试。'; }
+			//
+			//return false;
+		}
+		
+		return true;
+	}
 }
