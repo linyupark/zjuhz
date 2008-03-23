@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-3-12 14:35:22                           */
+/* Created on:     2008-3-18 10:27:22                           */
 /*==============================================================*/
 
 
@@ -20,14 +20,14 @@ create table zjuhz_user.tbl_user
 (
    uid                  int(10) unsigned not null auto_increment,
    userName             char(16) not null,
-   passWord             char(41) not null,
+   passWord             char(32) not null,
    realName             char(16) not null,
    nickName             char(16) not null,
    sex                  enum('M','F','S') not null default 'S',
    regIp                char(15) default NULL,
    regTime              timestamp not null default CURRENT_TIMESTAMP,
-   iuid                 int(10) unsigned not null default 0,
    ikey                 char(10) default NULL,
+   iuid                 int(10) not null default 0,
    primary key (uid)
 )
 type = MYISAM;
@@ -41,11 +41,11 @@ create unique index idx_userName on tbl_user
 );
 
 /*==============================================================*/
-/* Index: idx_iuid                                              */
+/* Index: idx_nickName                                          */
 /*==============================================================*/
-create index idx_iuid on tbl_user
+create index idx_nickName on tbl_user
 (
-   iuid
+   nickName
 );
 
 /*==============================================================*/
@@ -57,7 +57,7 @@ create table zjuhz_user.tbl_user_extInfo
    status               tinyint(1) unsigned not null default 0,
    lastIp               char(15) default NULL,
    lastLogin            int(10) unsigned not null default 0,
-   editNick             enum('Y','N') not null default 'Y',
+   editNick             enum('Y','N') not null default 'N',
    initAsk              enum('Y','N') not null default 'N',
    primary key (uid)
 )
@@ -86,16 +86,16 @@ create table zjuhz_user.tbl_user_invite_detail
    inviteTime           int unsigned not null default 0,
    regTime              int unsigned not null default 0,
    uid                  int unsigned not null default 0,
-   status               tinyint(1) unsigned not null default 0
+   status               tinyint(1) unsigned not null default 0,
+   primary key (ikey)
 )
 type = MYISAM;
 
 /*==============================================================*/
-/* Index: idx_invite                                            */
+/* Index: idx_iuid                                              */
 /*==============================================================*/
-create unique index idx_invite on tbl_user_invite_detail
+create index idx_iuid on tbl_user_invite_detail
 (
-   ikey,
    iuid
 );
 
@@ -114,7 +114,7 @@ create table zjuhz_user.tbl_user_moreInfo
 (
    uid                  int(10) unsigned not null,
    everName             varchar(51) default NULL,
-   email                varchar(51) not null,
+   eMail                varchar(51) default NULL,
    primary key (uid)
 )
 type = MYISAM;

@@ -12,8 +12,8 @@
 <a:Code>zjuhz</a:Code>
 <a:CreationDate>1204122137</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303722</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1206196586</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
 [FolderOptions\Physical Objects]
@@ -83,7 +83,7 @@ GenScriptName6=
 GenScriptName7=
 GenScriptName8=
 GenScriptName9=
-GenPathName=D:\Program Files\PHPnow-1.4.2\vhosts\zjuhz\databases\sql\zjuhz_user\
+GenPathName=D:\Webpages\PHPnow\vhosts\zjuhz\databases\sql\zjuhz_ask\
 GenSingleFile=Yes
 GenODBC=No
 GenCheckModel=No
@@ -1843,7 +1843,7 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>uid</a:Code>
 <a:CreationDate>1204853307</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1204997684</a:ModificationDate>
+<a:ModificationDate>1205683053</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <a:Comment>user id</a:Comment>
 <a:DataType>int(10)</a:DataType>
@@ -1880,10 +1880,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>nickname</a:Code>
 <a:CreationDate>1204853599</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1205303639</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DataType>char(22)</a:DataType>
-<a:Length>22</a:Length>
+<a:ModificationDate>1205327127</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DataType>char(16)</a:DataType>
+<a:Length>16</a:Length>
 <a:Mandatory>1</a:Mandatory>
 </o:PhysicalDomain>
 <o:PhysicalDomain Id="o43">
@@ -1957,8 +1957,8 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>tbl_user</a:Code>
 <a:CreationDate>1204122605</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205312440</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1205772601</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <a:PhysicalOptions>type = MYISAM
 </a:PhysicalOptions>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,61={811818B1-0FD6-4FA0-843C-C06C679470C6},Schema,10=zjuhz_user
@@ -2013,10 +2013,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>passWord</a:Code>
 <a:CreationDate>1204123384</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303167</a:ModificationDate>
+<a:ModificationDate>1206001647</a:ModificationDate>
 <a:Modifier>wangyumin</a:Modifier>
-<a:DataType>char(41)</a:DataType>
-<a:Length>41</a:Length>
+<a:DataType>char(32)</a:DataType>
+<a:Length>32</a:Length>
 <a:Mandatory>1</a:Mandatory>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,171={4EC131E7-C7D4-4E04-B6F6-A6BF9CCF838C},ZeroFill,5=false
 {4A2BD2F3-4A8A-4421-8A48-A8029BDA28E8},Unsigned,5=false
@@ -2050,10 +2050,10 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>nickName</a:Code>
 <a:CreationDate>1204982072</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303639</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DataType>char(22)</a:DataType>
-<a:Length>22</a:Length>
+<a:ModificationDate>1205772612</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DataType>char(16)</a:DataType>
+<a:Length>16</a:Length>
 <a:Mandatory>1</a:Mandatory>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,171={4EC131E7-C7D4-4E04-B6F6-A6BF9CCF838C},ZeroFill,5=false
 {4A2BD2F3-4A8A-4421-8A48-A8029BDA28E8},Unsigned,5=false
@@ -2117,34 +2117,13 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </c:Domain>
 </o:Column>
 <o:Column Id="o56">
-<a:ObjectID>7CDF09BE-31AC-454F-BFCB-4EC91F178E29</a:ObjectID>
-<a:Name>iuid</a:Name>
-<a:Code>iuid</a:Code>
-<a:CreationDate>1204184633</a:CreationDate>
-<a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1205312477</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DefaultValue>0</a:DefaultValue>
-<a:DataType>int(10)</a:DataType>
-<a:Length>10</a:Length>
-<a:Mandatory>1</a:Mandatory>
-<a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,170={4A2BD2F3-4A8A-4421-8A48-A8029BDA28E8},Unsigned,4=true
-{4EC131E7-C7D4-4E04-B6F6-A6BF9CCF838C},ZeroFill,5=false
-{9C949EAB-FF87-446D-938C-8F03A4ABDC8E},National,5=false
-
-</a:ExtendedAttributesText>
-<c:Domain>
-<o:PhysicalDomain Ref="o39"/>
-</c:Domain>
-</o:Column>
-<o:Column Id="o57">
 <a:ObjectID>177A5C69-CD99-476B-8D29-18B57733F71A</a:ObjectID>
 <a:Name>ikey</a:Name>
 <a:Code>ikey</a:Code>
 <a:CreationDate>1205312440</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1205312466</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1205772393</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>char(10)</a:DataType>
 <a:Length>10</a:Length>
@@ -2153,6 +2132,22 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 {9C949EAB-FF87-446D-938C-8F03A4ABDC8E},National,5=false
 
 </a:ExtendedAttributesText>
+</o:Column>
+<o:Column Id="o57">
+<a:ObjectID>AC1A614D-8227-457E-864A-305C03D92780</a:ObjectID>
+<a:Name>iuid</a:Name>
+<a:Code>iuid</a:Code>
+<a:CreationDate>1205683053</a:CreationDate>
+<a:Creator>wangym</a:Creator>
+<a:ModificationDate>1205683078</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DefaultValue>0</a:DefaultValue>
+<a:DataType>int(10)</a:DataType>
+<a:Length>10</a:Length>
+<a:Mandatory>1</a:Mandatory>
+<c:Domain>
+<o:PhysicalDomain Ref="o39"/>
+</c:Domain>
 </o:Column>
 </c:Columns>
 <c:Keys>
@@ -2193,22 +2188,22 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </c:IndexColumns>
 </o:Index>
 <o:Index Id="o61">
-<a:ObjectID>94CCA66A-79CC-4B53-9BD2-4B02C9DBB83B</a:ObjectID>
-<a:Name>idx_iuid</a:Name>
-<a:Code>idx_iuid</a:Code>
-<a:CreationDate>1204982268</a:CreationDate>
+<a:ObjectID>1F23C6AC-7851-4D53-B972-DCA01BAACFA5</a:ObjectID>
+<a:Name>idx_nickName</a:Name>
+<a:Code>idx_nickName</a:Code>
+<a:CreationDate>1205772601</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303246</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1205772643</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <c:IndexColumns>
 <o:IndexColumn Id="o62">
-<a:ObjectID>E71F33A1-25DE-4F21-AF0C-7087164FCD6B</a:ObjectID>
-<a:CreationDate>1204982282</a:CreationDate>
+<a:ObjectID>B815A29C-12BB-43CF-9EFB-BD7654693C26</a:ObjectID>
+<a:CreationDate>1205772612</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1204982282</a:ModificationDate>
+<a:ModificationDate>1205772612</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <c:Column>
-<o:Column Ref="o56"/>
+<o:Column Ref="o52"/>
 </c:Column>
 </o:IndexColumn>
 </c:IndexColumns>
@@ -2224,8 +2219,8 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>tbl_user_invite_detail</a:Code>
 <a:CreationDate>1204127782</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1204184848</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1205772203</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <a:PhysicalOptions>type = MYISAM
 </a:PhysicalOptions>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,61={811818B1-0FD6-4FA0-843C-C06C679470C6},Schema,10=zjuhz_user
@@ -2238,8 +2233,8 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>ikey</a:Code>
 <a:CreationDate>1204128054</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205303325</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
+<a:ModificationDate>1205772217</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
 <a:DataType>char(10)</a:DataType>
 <a:Length>10</a:Length>
 <a:Mandatory>1</a:Mandatory>
@@ -2362,27 +2357,30 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </c:Domain>
 </o:Column>
 </c:Columns>
-<c:Indexes>
-<o:Index Id="o70">
-<a:ObjectID>ECBB6366-08D2-4221-BF25-CB601A5CE3F2</a:ObjectID>
-<a:Name>idx_invite</a:Name>
-<a:Code>idx_invite</a:Code>
-<a:CreationDate>1204177550</a:CreationDate>
-<a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1204184857</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:Unique>1</a:Unique>
-<c:IndexColumns>
-<o:IndexColumn Id="o71">
-<a:ObjectID>1B8D9856-0311-49C4-A9B5-4A0395E8050E</a:ObjectID>
-<a:CreationDate>1204177550</a:CreationDate>
-<a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1204177550</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<c:Column>
+<c:Keys>
+<o:Key Id="o70">
+<a:ObjectID>2009FDA4-0E25-428E-BF8D-2F36415C3423</a:ObjectID>
+<a:Name>pk_ikey</a:Name>
+<a:Code>pk_ikey</a:Code>
+<a:CreationDate>1205772203</a:CreationDate>
+<a:Creator>wangym</a:Creator>
+<a:ModificationDate>1205772208</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<c:Key.Columns>
 <o:Column Ref="o63"/>
-</c:Column>
-</o:IndexColumn>
+</c:Key.Columns>
+</o:Key>
+</c:Keys>
+<c:Indexes>
+<o:Index Id="o71">
+<a:ObjectID>ECBB6366-08D2-4221-BF25-CB601A5CE3F2</a:ObjectID>
+<a:Name>idx_iuid</a:Name>
+<a:Code>idx_iuid</a:Code>
+<a:CreationDate>1204177550</a:CreationDate>
+<a:Creator>wangyumin</a:Creator>
+<a:ModificationDate>1205772217</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<c:IndexColumns>
 <o:IndexColumn Id="o72">
 <a:ObjectID>029492D3-6CA2-40D4-A1AE-108E07506E8F</a:ObjectID>
 <a:CreationDate>1204184857</a:CreationDate>
@@ -2417,6 +2415,9 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </c:IndexColumns>
 </o:Index>
 </c:Indexes>
+<c:PrimaryKey>
+<o:Key Ref="o70"/>
+</c:PrimaryKey>
 </o:Table>
 <o:Table Id="o10">
 <a:ObjectID>4C268C9D-97A3-48A9-A625-ABBD64433E95</a:ObjectID>
@@ -2607,9 +2608,9 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 <a:Code>editNick</a:Code>
 <a:CreationDate>1204185918</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1205303278</a:ModificationDate>
-<a:Modifier>wangyumin</a:Modifier>
-<a:DefaultValue>&#39;Y&#39;</a:DefaultValue>
+<a:ModificationDate>1205682770</a:ModificationDate>
+<a:Modifier>wangym</a:Modifier>
+<a:DefaultValue>&#39;N&#39;</a:DefaultValue>
 <a:DataType>enum(&#39;Y&#39;,&#39;N&#39;)</a:DataType>
 <a:Mandatory>1</a:Mandatory>
 </o:Column>
@@ -2692,15 +2693,15 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o88">
 <a:ObjectID>7D5E14DE-7F26-4F7A-822C-B52D080F87C9</a:ObjectID>
-<a:Name>email</a:Name>
-<a:Code>email</a:Code>
+<a:Name>eMail</a:Name>
+<a:Code>eMail</a:Code>
 <a:CreationDate>1204184274</a:CreationDate>
 <a:Creator>wangyumin</a:Creator>
-<a:ModificationDate>1204184274</a:ModificationDate>
+<a:ModificationDate>1206002292</a:ModificationDate>
 <a:Modifier>wangyumin</a:Modifier>
+<a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>varchar(51)</a:DataType>
 <a:Length>51</a:Length>
-<a:Mandatory>1</a:Mandatory>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,171={4EC131E7-C7D4-4E04-B6F6-A6BF9CCF838C},ZeroFill,5=false
 {4A2BD2F3-4A8A-4421-8A48-A8029BDA28E8},Unsigned,5=false
 {9C949EAB-FF87-446D-938C-8F03A4ABDC8E},National,5=false
@@ -3032,11 +3033,11 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o106">
 <a:ObjectID>A4F9BE67-AE52-43F5-AE94-DD757BFAF1B6</a:ObjectID>
-<a:Name>added</a:Name>
-<a:Code>added</a:Code>
+<a:Name>append</a:Name>
+<a:Code>append</a:Code>
 <a:CreationDate>1205080166</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205080166</a:ModificationDate>
+<a:ModificationDate>1206198872</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>varchar(101)</a:DataType>
@@ -3558,11 +3559,11 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o139">
 <a:ObjectID>A132D460-7C41-42C3-90EC-7EE5707C0316</a:ObjectID>
-<a:Name>added</a:Name>
-<a:Code>added</a:Code>
+<a:Name>append</a:Name>
+<a:Code>append</a:Code>
 <a:CreationDate>1205080182</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205080182</a:ModificationDate>
+<a:ModificationDate>1206198884</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>varchar(101)</a:DataType>
@@ -3815,11 +3816,11 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o155">
 <a:ObjectID>F35C4492-9F9A-4BE1-88F5-CAF0A5D26C82</a:ObjectID>
-<a:Name>added</a:Name>
-<a:Code>added</a:Code>
+<a:Name>append</a:Name>
+<a:Code>append</a:Code>
 <a:CreationDate>1205080196</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205080196</a:ModificationDate>
+<a:ModificationDate>1206198843</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>varchar(101)</a:DataType>
@@ -4072,11 +4073,11 @@ TableComment 0 Microsoft Sans Serif,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o171">
 <a:ObjectID>EC30F867-760A-47F6-97BF-4C8A96C34FC8</a:ObjectID>
-<a:Name>added</a:Name>
-<a:Code>added</a:Code>
+<a:Name>append</a:Name>
+<a:Code>append</a:Code>
 <a:CreationDate>1205080210</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1205080210</a:ModificationDate>
+<a:ModificationDate>1206198854</a:ModificationDate>
 <a:Modifier>wangym</a:Modifier>
 <a:DefaultValue>NULL</a:DefaultValue>
 <a:DataType>varchar(101)</a:DataType>
