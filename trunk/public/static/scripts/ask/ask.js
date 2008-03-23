@@ -1,4 +1,4 @@
-// Ğ´Èëimg¿Õ±êÇ©
+ï»¿// å†™å…¥imgç©ºæ ‡ç­¾
 function putVerifyImg() {
 	var isPutVerifyImg = $("#isPutVerifyImg").val();
 	if(isPutVerifyImg == 'show')
@@ -10,8 +10,8 @@ function putVerifyImg() {
 	}
 }
 
-// »ñÈ¡ÑéÖ¤Âë
+// è·å–éªŒè¯ç 
 function getVerifyCode() {
-	verify('verify','/member/index/verify/');
+	verify('verify','/ask/index/verify/');
 	$("#vcode").val("");
 }
