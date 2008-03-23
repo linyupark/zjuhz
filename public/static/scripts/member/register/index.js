@@ -1,4 +1,4 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
     $("#btnSubmit").click( function() {
 		register();
     });
@@ -20,12 +20,20 @@ function register() {
 	var formdata = $("#frmRegister").fastSerialize();
 	$.ajax( {
 		type   : "POST",
-        url    : "/member/register/register/",
+        url    : "/member/register/doregister/",
         data   : formdata,
 	    success: function(msg) {
-			$("#btnSubmit").attr("disabled", false);
-			ajaxhint(true,msg);
-			ajaxloading();
+			if (!msg)
+			{
+				window.location.href="/member/index/message/";
+			}
+			else
+			{
+				$("#btnSubmit").attr("disabled", false);
+				getVerifyCode();
+				ajaxhint(true,msg);
+				ajaxloading();
+			}
 		}
 	});
 
@@ -42,7 +50,7 @@ function check() {
 
 		$.ajax( {
 			type   : "POST",
-	        url    : "/member/register/check/",
+	        url    : "/member/register/docheck/",
 		    data   : 'uname='+uname,
 			success: function(msg) {
 				$("#btnChkUserName").attr("disabled", false);

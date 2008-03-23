@@ -1,17 +1,20 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
     $("#btnSubmit").click( function() {
-		login();
+		question_add();
+    });
+    $("#vcode").focus( function() {
+		putVerifyImg();
     });
 });
 
-// ��¼�ύ
-function login() {
+// 提交问题
+function question_add() {
 	ajaxloading(true);
 	$("#btnSubmit").attr("disabled", true);
-	var formdata = $("#frmLogin").fastSerialize();
+	var formdata = $("#frmQuestion").fastSerialize();
 	$.ajax( {
 		type   : "POST",
-        url    : "/member/login/dologin/",
+        url    : "/ask/question/doadd/",
         data   : formdata,
 	    success: function(msg) {
 			$("#btnSubmit").attr("disabled", false);
