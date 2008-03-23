@@ -1,23 +1,16 @@
-$(document).ready(function() {
-    $("#btnSubmit").click( function() {
-		register();
-    });
-});
+// 写入img空标签
+function putVerifyImg() {
+	var isPutVerifyImg = $("#isPutVerifyImg").val();
+	if(isPutVerifyImg == 'show')
+	{
+		$("#putVerifyImg").html("<a href=javascript:getVerifyCode();><img id='verify'></a>");
+		$("#isPutVerifyImg").remove();
+		//$("#isPutVerifyImg").val("none");
+		getVerifyCode();		
+	}
+}
 
-// 注册提交
-function register() {
-	$("#btnSubmit").attr("disabled", true);
-	var formdata = $("#frmRegister").fastSerialize();
-	
-	$.ajax( {
-		type   : "POST",
-        url    : "/member/index.php/account/register/",
-        data   : formdata,
-	    success: function(msg) {
-			$("#loading").text(msg);
-			$("#btnSubmit").attr("disabled", false);
-		}
-	});
-
-	return false;
+// 获取验证码
+function getVerifyCode() {
+	verify('verify','/member/index/verify/');
 }

@@ -1,4 +1,4 @@
-*{
+* {
 	padding:0;
 	margin:0;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
@@ -6,11 +6,11 @@
 	font-size:12px;
 }
 
-body{
+body {
 	background:url(/static/images/bg/body_line.gif) repeat-x left 80px;
 }
 
-#wrap{
+#wrap {
 	width:790px;
 	margin:0 auto;
 	position:relative;
