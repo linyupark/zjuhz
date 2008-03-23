@@ -22,18 +22,15 @@ require_once('Zend/Controller/Front.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-/** Registry 配置文档对象 */
+/** 公用配置文档对象 */
+Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));
+/** 项目配置文档对象 */
 Zend_Registry::set('iniAsk',new Zend_Config_Ini('../../common/Ini/Ask.ini'));
 
 Zend_Session::rememberMe(3600);
 /** 公用SESSION,包含如验证码,用户基本资料等 */
-/*$sessCommon = new Zend_Session_Namespace('common');
-if (!isset($sessCommon->initialized))
-{
-    Zend_Session::regenerateId();
-    $sessCommon->initialized = true;
-}*/
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
+/** 项目SESSION */
 Zend_Registry::set('sessAsk',new Zend_Session_Namespace('ask'));
 
 /** run */
