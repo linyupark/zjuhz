@@ -23,7 +23,7 @@ function register() {
         url    : "/member/register/doregister/",
         data   : formdata,
 	    success: function(msg) {
-			if (!msg)
+			if (msg == 'redirect')
 			{
 				window.location.href="/member/index/message/";
 			}
