@@ -1,306 +1,120 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-3-23 21:42:05                           */
+/* Created on:     2008-3-24 11:10:23                           */
 /*==============================================================*/
 
 
-drop database if exists zjuhz_ask;
+drop database if exists zjuhz_user;
 
 /*==============================================================*/
-/* Database: zjuhz_ask                                          */
+/* Database: zjuhz_user                                         */
 /*==============================================================*/
-create database zjuhz_ask;
+create database zjuhz_user;
 
-use zjuhz_ask;
+use zjuhz_user;
 
 /*==============================================================*/
-/* Table: tbl_ask                                               */
+/* Table: tbl_user                                              */
 /*==============================================================*/
-create table zjuhz_ask.tbl_ask
+create table zjuhz_user.tbl_user
 (
-   uid                  int(10) unsigned not null,
+   uid                  int(10) unsigned not null auto_increment,
+   userName             char(16) not null,
+   passWord             char(32) not null,
    realName             char(16) not null,
-   point                int unsigned not null default 0,
-   question             int unsigned not null default 0,
-   unsolved             int unsigned not null default 0,
-   solved               int unsigned not null default 0,
-   closed               int unsigned not null default 0,
-   overTime             int unsigned not null default 0,
-   reply                int unsigned not null default 0,
-   answer               int unsigned not null default 0,
-   collection           int unsigned not null default 0,
+   nickName             char(16) not null,
+   sex                  enum('M','F','S') not null default 'S',
+   regIp                char(15) default NULL,
+   regTime              timestamp not null default CURRENT_TIMESTAMP,
+   ikey                 char(10) default NULL,
+   iuid                 int(10) not null default 0,
    primary key (uid)
 )
 type = MYISAM;
 
 /*==============================================================*/
-/* Table: tbl_ask_answer                                        */
+/* Index: idx_userName                                          */
 /*==============================================================*/
-create table zjuhz_ask.tbl_ask_answer
+create unique index idx_userName on tbl_user
 (
-   rid                  int unsigned not null auto_increment,
-   qid                  int(10) unsigned not null,
-   uid                  int(10) unsigned not null,
-   content              text not null,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   support              smallint unsigned not null default 0,
-   opposition           smallint unsigned not null default 0,
-   primary key (rid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_qid                                               */
-/*==============================================================*/
-create index idx_qid on tbl_ask_answer
-(
-   qid
+   userName
 );
 
 /*==============================================================*/
-/* Index: idx_uid                                               */
+/* Index: idx_nickName                                          */
 /*==============================================================*/
-create index idx_uid on tbl_ask_answer
+create index idx_nickName on tbl_user
 (
-   uid
+   nickName
 );
 
 /*==============================================================*/
-/* Table: tbl_ask_closed                                        */
+/* Table: tbl_user_extInfo                                      */
 /*==============================================================*/
-create table zjuhz_ask.tbl_ask_closed
-(
-   qid                  int(10) unsigned not null auto_increment,
-   uid                  int(10) unsigned not null,
-   title                char(30) not null,
-   content              text not null,
-   append               varchar(101) default NULL,
-   sortId               smallint unsigned not null default 0,
-   offer                smallint unsigned not null default 0,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   passTime             int(10) unsigned not null default 0,
-   reply                smallint unsigned not null default 0,
-   primary key (qid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_uid                                               */
-/*==============================================================*/
-create index idx_uid on tbl_ask_closed
-(
-   uid
-);
-
-/*==============================================================*/
-/* Index: idx_sortid                                            */
-/*==============================================================*/
-create index idx_sortid on tbl_ask_closed
-(
-   sortId
-);
-
-/*==============================================================*/
-/* Table: tbl_ask_collection                                    */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_collection
-(
-   cid                  int unsigned not null auto_increment,
-   qid                  int unsigned not null default 0,
-   uid                  int unsigned not null default 0,
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   primary key (cid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Table: tbl_ask_overtime                                      */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_overtime
-(
-   qid                  int(10) unsigned not null auto_increment,
-   uid                  int(10) unsigned not null,
-   title                char(30) not null,
-   content              text not null,
-   append               varchar(101) default NULL,
-   sortId               smallint unsigned not null default 0,
-   offer                smallint unsigned not null default 0,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   passTime             int(10) unsigned not null default 0,
-   reply                smallint unsigned not null default 0,
-   primary key (qid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_uid                                               */
-/*==============================================================*/
-create index idx_uid on tbl_ask_overtime
-(
-   uid
-);
-
-/*==============================================================*/
-/* Index: idx_sortid                                            */
-/*==============================================================*/
-create index idx_sortid on tbl_ask_overtime
-(
-   sortId
-);
-
-/*==============================================================*/
-/* Table: tbl_ask_point_log                                     */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_point_log
+create table zjuhz_user.tbl_user_extInfo
 (
    uid                  int(10) unsigned not null,
-   point                int unsigned not null default 0,
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   primary key (uid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_addtime                                           */
-/*==============================================================*/
-create index idx_addtime on tbl_ask_point_log
-(
-   addTime
-);
-
-/*==============================================================*/
-/* Table: tbl_ask_point_week                                    */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_point_week
-(
-   uid                  int(10) unsigned not null,
-   point                int unsigned not null default 0,
-   primary key (uid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_point                                             */
-/*==============================================================*/
-create index idx_point on tbl_ask_point_week
-(
-   point
-);
-
-/*==============================================================*/
-/* Table: tbl_ask_question                                      */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_question
-(
-   qid                  int(10) unsigned not null auto_increment,
-   uid                  int(10) unsigned not null,
-   title                char(30) not null,
-   content              text not null,
-   append               varchar(101) default NULL,
-   sortId               smallint unsigned not null default 0,
-   offer                smallint unsigned not null default 0,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   passTime             int(10) unsigned not null default 0,
    status               tinyint(1) unsigned not null default 0,
-   reply                smallint unsigned not null default 0,
-   primary key (qid)
+   lastIp               char(15) default NULL,
+   lastLogin            int(10) unsigned not null default 0,
+   editNick             enum('Y','N') not null default 'N',
+   initAsk              enum('Y','N') not null default 'N',
+   primary key (uid)
 )
 type = MYISAM;
 
 /*==============================================================*/
-/* Index: idx_uid                                               */
+/* Table: tbl_user_invite                                       */
 /*==============================================================*/
-create index idx_uid on tbl_ask_question
+create table zjuhz_user.tbl_user_invite
 (
-   uid
-);
+   iuid                 int(10) unsigned not null,
+   sum                  smallint unsigned not null default 0,
+   success              smallint unsigned not null default 0,
+   primary key (iuid)
+)
+type = MYISAM;
 
 /*==============================================================*/
-/* Index: idx_sortid                                            */
+/* Table: tbl_user_invite_detail                                */
 /*==============================================================*/
-create index idx_sortid on tbl_ask_question
+create table zjuhz_user.tbl_user_invite_detail
 (
-   sortId
+   ikey                 char(10) not null,
+   iuid                 int(10) unsigned not null,
+   realName             char(16) not null,
+   inviteTime           int unsigned not null default 0,
+   regTime              int unsigned not null default 0,
+   uid                  int unsigned not null default 0,
+   status               tinyint(1) unsigned not null default 0,
+   primary key (ikey)
+)
+type = MYISAM;
+
+/*==============================================================*/
+/* Index: idx_iuid                                              */
+/*==============================================================*/
+create index idx_iuid on tbl_user_invite_detail
+(
+   iuid
 );
 
 /*==============================================================*/
 /* Index: idx_status                                            */
 /*==============================================================*/
-create index idx_status on tbl_ask_question
+create index idx_status on tbl_user_invite_detail
 (
    status
 );
 
 /*==============================================================*/
-/* Table: tbl_ask_reply                                         */
+/* Table: tbl_user_moreInfo                                     */
 /*==============================================================*/
-create table zjuhz_ask.tbl_ask_reply
+create table zjuhz_user.tbl_user_moreInfo
 (
-   rid                  int unsigned not null auto_increment,
-   qid                  int(10) unsigned not null,
    uid                  int(10) unsigned not null,
-   content              text not null,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   status               tinyint(1) unsigned not null default 0,
-   support              smallint unsigned not null default 0,
-   opposition           smallint unsigned not null default 0,
-   primary key (rid)
+   everName             varchar(51) default NULL,
+   eMail                varchar(51) default NULL,
+   primary key (uid)
 )
 type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_qid                                               */
-/*==============================================================*/
-create index idx_qid on tbl_ask_reply
-(
-   qid
-);
-
-/*==============================================================*/
-/* Index: idx_uid                                               */
-/*==============================================================*/
-create index idx_uid on tbl_ask_reply
-(
-   uid
-);
-
-/*==============================================================*/
-/* Table: tbl_ask_solved                                        */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_solved
-(
-   qid                  int(10) unsigned not null auto_increment,
-   uid                  int(10) unsigned not null,
-   title                char(30) not null,
-   content              text not null,
-   append               varchar(101) default NULL,
-   sortId               smallint unsigned not null default 0,
-   offer                smallint unsigned not null default 0,
-   anonym               enum('Y','N') not null default 'N',
-   addTime              timestamp not null default CURRENT_TIMESTAMP,
-   passTime             int(10) unsigned not null default 0,
-   reply                smallint unsigned not null default 0,
-   primary key (qid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_uid                                               */
-/*==============================================================*/
-create index idx_uid on tbl_ask_solved
-(
-   uid
-);
-
-/*==============================================================*/
-/* Index: idx_sortid                                            */
-/*==============================================================*/
-create index idx_sortid on tbl_ask_solved
-(
-   sortId
-);

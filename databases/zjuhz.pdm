@@ -12,8 +12,8 @@
 <a:Code>zjuhz</a:Code>
 <a:CreationDate>1204122137</a:CreationDate>
 <a:Creator>wangym</a:Creator>
-<a:ModificationDate>1206279725</a:ModificationDate>
-<a:Modifier>wangym</a:Modifier>
+<a:ModificationDate>1206328315</a:ModificationDate>
+<a:Modifier>wangyumin</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
 [FolderOptions\Physical Objects]
@@ -72,7 +72,7 @@ TrgrC12Upd=Yes
 TrgrC13=Yes
 
 [FolderOptions\Physical Objects\Database Generation]
-GenScriptName=zjuhz_user.sql
+GenScriptName=zjuhz_ask.sql
 GenScriptName0=crebas.sql
 GenScriptName1=
 GenScriptName2=
@@ -83,7 +83,7 @@ GenScriptName6=
 GenScriptName7=
 GenScriptName8=
 GenScriptName9=
-GenPathName=D:\Webpages\PHPnow\vhosts\zjuhz\databases\sql\zjuhz_user\
+GenPathName=D:\Program Files\PHPnow-1.4.2\vhosts\zjuhz\databases\sql\zjuhz_ask\
 GenSingleFile=Yes
 GenODBC=No
 GenCheckModel=No
