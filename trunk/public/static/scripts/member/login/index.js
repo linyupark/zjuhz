@@ -14,9 +14,16 @@ function login() {
         url    : "/member/login/dologin/",
         data   : formdata,
 	    success: function(msg) {
-			$("#btnSubmit").attr("disabled", false);
-			ajaxhint(true,msg);
-			ajaxloading();
+			if (msg == 'redirect')
+			{
+				window.location.href="/ask/question/add/";
+			}
+			else
+			{
+				$("#btnSubmit").attr("disabled", false);
+				ajaxhint(true,msg);
+				ajaxloading();
+			}
 		}
 	});
 
