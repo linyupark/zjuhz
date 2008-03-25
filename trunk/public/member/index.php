@@ -12,7 +12,7 @@
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../common/Custom/'.PATH_SEPARATOR.
-                 '../../application/member/strap/'.PATH_SEPARATOR.
+                 '../../application/member/interlayers/'.PATH_SEPARATOR.
                  '../../application/member/models/');
 //echo get_include_path();exit;
 
