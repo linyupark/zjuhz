@@ -14,7 +14,7 @@ function question_add() {
 	var formdata = $("#frmQuestion").fastSerialize();
 	$.ajax( {
 		type   : "POST",
-        url    : "/ask/question/doadd/",
+        url    : "/qa/question/doadd/",
         data   : formdata,
 	    success: function(msg) {
 			$("#btnSubmit").attr("disabled", false);
