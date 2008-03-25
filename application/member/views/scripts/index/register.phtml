@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta http-equiv="Content-Language" content="zh-CN" >
+<title>会员注册 - 杭州浙江大学校友会 - zjuhz.com</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<script language="javascript" type="text/javascript" src="/static/scripts/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/common.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/passwdcheck.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/member/member.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/member/register/index.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/styles/common.css">
+<link rel="stylesheet" type="text/css" href="/static/styles/member.css">
+<link rel="stylesheet" type="text/css" href="/static/styles/passwdcheck.css">
+</head>
+
+<body>
+<div id="ajaxloading"></div>
+<div id="login">
+    <div><a href="/" id="logo"><b>zjuhz.com</b><p>杭州浙江大学校友会</p></a></div>
+
+    <form name="frmRegister" id="frmRegister" method="post" autocomplete="off">
+    <div class="reg_tit"><a href="/member/">会员中心</a> >> 会员注册</div>	
+	<div class="zc">
+	<ul>	
+      <li class="msg" style="margin-top:10px;">如果您已经是本站会员，可以使用已有的账号直接 <a href="/member/login/">登录</a></li>
+	
+	  <li><span class="reg_tda">登录账号：</span><input style="margin-left:48px;" name="uname" id="uname" tabindex="1" class="user_txt" type="text" maxlength="16" value="" /><input type="button" id="btnChkUserName" name="btnChkUserName" value="检查账号是否可用"><li class="ligray">3-16位的字母、数字、下划线</li><div id="chkmsg" class="lired"></div>
+	
+      <li><span class="reg_tda">设置密码：</span><input style="margin-left:48px;" name="pswd" tabindex="2" class="user_txt" type="password" maxlength="16" value="" onkeyup=EvalPwdStrength(document.forms[0],this.value);  /></li><li class="ligray">6-16位的任意字符，不区分大小写。强度检测：</li>
+
+<TABLE class=pwdChkTbl2 cellSpacing=0 cellPadding=0>
+  <TBODY>
+    <TR>
+      <TD class=pwdChkCon0 id=idSM1 align=middle width="25%">
+	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
+	  <SPAN id=idSMT1 style="DISPLAY: none">不安全</SPAN>
+	  </TD>
+      <TD class=pwdChkCon0 id=idSM2 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
+	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
+	  <SPAN id=idSMT0 style="DISPLAY: inline; FONT-WEIGHT: normal; COLOR: #666">未评级</SPAN>
+	  <SPAN id=idSMT2 style="DISPLAY: none">普通</SPAN>
+	  </TD>
+      <TD class=pwdChkCon0 id=idSM3 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
+	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
+	  <SPAN id=idSMT3 style="DISPLAY: none">安全</SPAN>
+	  </TD>
+      <TD class=pwdChkCon0 id=idSM4 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
+	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
+	  <SPAN id=idSMT4 style="DISPLAY: none">最佳</SPAN>
+	  </TD>
+	</TR>
+  </TBODY>
+</TABLE>
+								
+      <li><span class="reg_tda">密码确认：</span><input style="margin-left:48px;" name="repswd" tabindex="3" class="user_txt" type="password" maxlength="16" value="" /></li><li class="ligray">请再次输入密码以确认</li>	
+	
+      <li><span class="reg_tda">真实姓名：</span><input style="margin-left:48px;" name="rname" tabindex="4" class="user_txt" type="text" maxlength="20" /></li><li class="ligray">至少2位以上，且不能含有数字和符号</li>
+	
+      <li><span class="reg_tda">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span><input  style="margin-left:48px;" name="sex" tabindex="5" type="radio" value="M" checked="checked" /> 男 <input type="radio" name="sex" value="F" /> 女</li>	
+	
+	  <li><span class="reg_tda">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</span><input  style="margin-left:46px;width:102px;" type="text" class="user_txt" name="vcode" id="vcode" tabindex="6" maxlength="4"><span id="putVerifyImg"></span></li><li class="ligray" style="padding-bottom:0px;">请输入上图中的数字，点击图片可刷新</li>
+	
+      <li><span class="reg_tda"><p></p></span><input style="width:280px;height:40px;" type="submit" id="btnSubmit" name="btnSubmit" tabindex="7" value="同意以下服务条款，提交注册信息" /></li>
+	  
+      <li style="width:500px"><span class="reg_tda"><p></p></span><div id="ajaxhint"></div></li>
+	</ul>
+	</div>
+	<input type="hidden" name="ikey" value="<?php echo $this->ikey; ?>" />
+	<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
+	</form>
+</div>
+<br /><br />
+<div id="footer">
+  <p><a href="">帮助</a> | <a href="">关于</a> | <a href="">客服</a> | <a href="">隐私声明</a></p>
+  <p><span style="float:right; margin-top:-23px;">杭州浙江大学校友会(筹) &copy; 2008 
+  <a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备06052510号</a></span></p>
+</div>
+</body>
+
+</html>
