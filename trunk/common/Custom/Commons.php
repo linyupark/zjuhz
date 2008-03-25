@@ -58,6 +58,7 @@ class Commons
 		return date('y-m-d H:i',$timestamp);
 	}
 	
+	#获取客户端IP
     static function getIp()
 	{
 		if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
@@ -84,6 +85,7 @@ class Commons
    		return($ip);
     }
 
+	#验证码校验
 	static function checkVerify($input,$sess)
 	{
 		if (md5($input) !== $sess || !isset($input) || !isset($sess))

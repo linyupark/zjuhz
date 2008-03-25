@@ -4,7 +4,6 @@
  * [Custom] (C)2008 zjuhz.com
  * 
  * $File : Zend_Validate_utf8Length.php $
- * $Author : wangyumin $
  */
 
 

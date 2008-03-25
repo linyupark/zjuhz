@@ -4,7 +4,6 @@
  * [Custom] (C)2008 zjuhz.com
  * 
  * $File : Zend_Validate_StringEquals.php $
- * $Author : wangyumin $
  */
 
 /**
