@@ -1,18 +1,30 @@
 <?php
 
 /**
- * [member] (C)2008 zjuhz.com
- * 
- * $File : ErrorController.php $
- * $Author : wangyumin $
+ * @category   zjuhz.com
+ * @package    member
+ * @copyright  Copyright(c)2008 zjuhz.com
+ * @author     wangyumin
+ * @version    Id:ErrorController.php
  */
 
 
 /**
- * 会员中心-异常处理
+ * 错误处理
  */
 class ErrorController extends Zend_Controller_Action
 {
+    /**
+     * 初始化
+     * 
+     * @return void
+     */
+    public function init()
+    {    	
+		//禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender();
+    }
+
     /**
      * This action handles  
      *    - Application errors
@@ -21,23 +33,7 @@ class ErrorController extends Zend_Controller_Action
      */
     public function errorAction()
     {
-        /*$errors = $this->_getParam('error_handler');
-        switch ($errors->type) {
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 error -- controller or action not found                
-                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
-                $this->view->title = 'HTTP/1.1 404 Not Found';
-                break;
-            default:
-                // application error; display error page, but don't change                
-                // status code
-                $this->view->title = 'Application Error';
-                break;
-        }
-        
-        $this->view->message = $errors->exception;*/
-        
-        print_r($this->_request->getParams());
+    	//$this->_forward('index','Index');
+        print_r($this->getRequest()->getParams());
     }
 }

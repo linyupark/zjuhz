@@ -9,7 +9,8 @@
 <script language="javascript" type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="/static/scripts/common.js"></script>
 <script language="javascript" type="text/javascript" src="/static/scripts/member/member.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/member/login.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/member/login/index.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/styles/common.css">
 <link rel="stylesheet" type="text/css" href="/static/styles/member.css">
 </head>
 
@@ -38,7 +39,7 @@
 
 	  <DIV class=userinfo_box>
         <DIV class=info_img>&nbsp;&nbsp; <A href="#" target=_blank><IMG src="/static/images/qiandai.gif"></A></DIV>
-        <DIV class=info_r><H4>&nbsp;<A href="#" target=_blank>你问我答</A></H4>  有问题？问校友！一定不会让你失望，相信校友的力量 </DIV>
+        <DIV class=info_r><H4>&nbsp;<A href="/ask/">你问我答</A></H4>  有问题？问校友！一定不会让你失望，相信校友的力量 </DIV>
 	  </DIV>
 	</DIV>
   </DIV>
@@ -46,13 +47,13 @@
   <DIV id=right>
     <DIV class=login_box>
       <H4>已经有校友会账号？请直接登录</H4>
-      <div id="ajaxhint"></div>
+      <div id="ajaxhint" style="width:190px"></div>
       <form name="frmLogin" id="frmLogin" method="post">
         <table class="login">
-          <tbody>
+          <tbody>	  
             <tr>
               <td>账&nbsp; 号:</td>
-              <td><input class="logininput" id="uname" maxlength="16" name="uname" /></td>
+              <td><input class="logininput" id="uname" maxlength="16" name="uname" value="<?php echo $this->uname; ?>" /></td>
             </tr>
             <tr>
               <td>密&nbsp; 码:</td>
@@ -60,16 +61,17 @@
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td class="cookie"><input id="alive" type="checkbox" checked="checked" value="1" name="alive" />
+              <td class="cookie"><input id="alive" type="checkbox" checked="checked" value="0" name="alive" />
                   <label for="rememberme">记住我的账号</label></td>
             </tr>
             <tr>
               <td>&nbsp;</td>
               <td><input class="s_button" type="submit" value=" 登 录 " id="btnSubmit" name="btnSubmit" />
                 <a style="FONT-SIZE: 12px" href="#">忘记密码？</a></td>
-            </tr>
+            </tr>			
           </tbody>
         </table>
+		
         <HR>
 	  </FORM>
       <P style="MARGIN-TOP: 0px; FONT-WEIGHT: bold; FONT-SIZE: 13px">还没有校友会账号？</> 
