@@ -1,0 +1,60 @@
+.pwdChkTbl1 {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 15px; BORDER-LEFT: 0px; WIDTH: 100%; PADDING-TOP: 0px; BORDER-BOTTOM: 0px
+}
+.pwdChkTbl1 SPAN {
+	FONT-SIZE: 100%
+}
+.pwdChkTbl2 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BORDER-LEFT: 0px; WIDTH: 210px; BORDER-BOTTOM: 0px; FONT-FAMILY: Tahoma,sans-serif; HEIGHT: 19px; BACKGROUND-COLOR: #fff
+}
+.pwdChkTbl2 SPAN {
+	FONT-SIZE: 100%
+}
+.pwdChkTbl3 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; MARGIN: 3px 15px 15px 0px; BORDER-LEFT: 0px; WIDTH: 70px; BORDER-BOTTOM: 0px; FONT-FAMILY: Tahoma,sans-serif; HEIGHT: 19px; BACKGROUND-COLOR: #fff
+}
+.pwdChkTbl3 SPAN {
+	FONT-SIZE: 100%
+}
+.pwdChkTbl4 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: normal; MARGIN: 0px 20px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #fff
+}
+.pwdChkTd1 {
+	PADDING-RIGHT: 7px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: 100%; PADDING-BOTTOM: 13px; VERTICAL-ALIGN: top; WIDTH: 180px; COLOR: #000; PADDING-TOP: 5px; TEXT-ALIGN: right
+}
+.pwdChkTd2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 13px; VERTICAL-ALIGN: top; WIDTH: 420px; PADDING-TOP: 0px
+}
+.pwdChkTd3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 13px; VERTICAL-ALIGN: top; WIDTH: 420px; PADDING-TOP: 0px
+}
+.pwdChkTd4 {
+	FONT-SIZE: 100%; PADDING-BOTTOM: 15px; VERTICAL-ALIGN: top; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.pwdChkTd4 H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 130%; PADDING-BOTTOM: 8px; MARGIN: 8px 0px 0px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.pwdChkTd5 {
+	VERTICAL-ALIGN: top; WIDTH: 98px
+}
+.pwdChkCon0 {
+	BORDER-RIGHT: #bebebe 1px solid; BORDER-BOTTOM: #bebebe 1px solid; BACKGROUND-COLOR: #ebebeb; TEXT-ALIGN: center
+}
+.pwdChkCon1 {
+	BORDER-RIGHT: #bb2b2b 1px solid; BORDER-BOTTOM: #bb2b2b 1px solid; BACKGROUND-COLOR: #ff4545; TEXT-ALIGN: center
+}
+.pwdChkCon2 {
+	BORDER-RIGHT: #e9ae10 1px solid; BORDER-BOTTOM: #e9ae10 1px solid; BACKGROUND-COLOR: #ffd35e; TEXT-ALIGN: center
+}
+.pwdChkCon3 {
+	BORDER-RIGHT: #267a12 1px solid; BORDER-BOTTOM: #267a12 1px solid; BACKGROUND-COLOR: #3abb1c; TEXT-ALIGN: center
+}
+.pwdChkCon4 {
+	BORDER-RIGHT: #267a12 1px solid; BORDER-BOTTOM: #267a12 1px solid; BACKGROUND-COLOR: #3abb1c; TEXT-ALIGN: center
+}
+#inputPC {
+	BORDER-RIGHT: #aaa 1px solid; BORDER-TOP: #aaa 1px solid; FONT-SIZE: 100%; BORDER-LEFT: #aaa 1px solid; WIDTH: 210px; BORDER-BOTTOM: #aaa 1px solid; HEIGHT: 19px
+}
+HR.divider {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BACKGROUND: #b8b8b8; MARGIN: 15px 0px 0px 20px; BORDER-LEFT: 0px; WIDTH: 95%; COLOR: #b8b8b8; BORDER-BOTTOM: 0px; HEIGHT: 2px
+}
