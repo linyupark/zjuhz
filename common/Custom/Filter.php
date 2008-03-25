@@ -1,5 +1,5 @@
 <?php
-
+exit(__FILE__);
 /**
  * [Custom] (C)2008 zjuhz.com
  * 
