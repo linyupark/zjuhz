@@ -12,6 +12,6 @@ function putVerifyImg() {
 
 // 获取验证码
 function getVerifyCode() {
-	verify('verify','/qa/index/verify/');
+	verify('verify','/help/index/verify/');
 	$("#vcode").val("");
 }
