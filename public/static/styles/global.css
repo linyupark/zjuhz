@@ -15,3 +15,66 @@ body {
 	margin:0 auto;
 	position:relative;
 }
+
+/* LOGO部分 -------------------------------------------------------------------------------- */
+
+#logo{
+	padding:25px 0 5px 0;
+	width:220px;
+	background:url(/static/images/logo.jpg) no-repeat 10px center;
+	display:block;
+	text-decoration:none;
+}
+
+#logo b{
+	color:#333;
+	margin-left:80px;
+	font-size:16px;
+	letter-spacing:1px;
+	font-family:Arial, Helvetica, sans-serif
+}
+
+#logo p{
+	color:#666;
+	margin-left:70px;
+	font-size:12px;
+	padding-left:22px;
+	line-height:22px;
+	background:url(/static/images/icon/members.gif) no-repeat left top;
+}
+
+/* 脚底 -------------------------------------------------------------------------------------------- */
+
+#footer{
+	color:#999;
+	clear:both;
+}
+
+#footer p{
+	padding:8px 8px 0 8px;
+}
+
+.sub_nav{ font-size:9px; }
+#footer a{ color:#3B5888; font-size:12px; text-decoration:none; padding:0 5px; }
+#footer a:hover{ text-decoration:underline }
+
+/* 全局导航 -------------------------------------------------------------- */
+
+#global_nav{
+	border-collapse:collapse;
+	position:absolute; right:0; top:0;
+}
+
+#global_nav a{ font-size:13px; color:#004BCA;  }
+
+#global_nav td{ padding-right:10px; padding:5px;}
+
+#global_nav_btn{
+	cursor:pointer;
+	font-size:12px;
+	position:relative;
+}
+
+#global_nav_list{ display:none; position:absolute; left:0; background:#fff; top:17px; border:1px solid #D9E6F7; padding:5px; background:#EFF7FF; width:65px; }
+#global_nav_list a{ text-decoration:none; font-size:13px; color:#314973;  padding:4px; }
+#global_nav_list a:hover{ text-decoration:underline }
