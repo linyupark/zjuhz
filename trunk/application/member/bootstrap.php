@@ -22,15 +22,15 @@ require_once('Zend/Controller/Front.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-/** ¹«ÓÃÅäÖÃÎÄµµ¶ÔÏó */
+/** å…¬ç”¨é…ç½®æ–‡æ¡£å¯¹è±¡ */
 Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));
-/** ÏîÄ¿ÅäÖÃÎÄµµ¶ÔÏó */
+/** é¡¹ç›®é…ç½®æ–‡æ¡£å¯¹è±¡ */
 Zend_Registry::set('iniMember',new Zend_Config_Ini('../../common/Ini/Member.ini'));
 
 Zend_Session::rememberMe(3600);
-/** ¹«ÓÃSESSION,°üº¬ÈçÑéÖ¤Âë,ÓÃ»§»ù±¾×ÊÁÏµÈ */
+/** å…¬ç”¨SESSION,åŒ…å«å¦‚éªŒè¯ç ,ç”¨æˆ·åŸºæœ¬èµ„æ–™ç­‰ */
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
-/** ÏîÄ¿SESSION */
+/** é¡¹ç›®SESSION */
 Zend_Registry::set('sessMember',new Zend_Session_Namespace('member'));
 
 /** run */
