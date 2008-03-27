@@ -6,4 +6,4 @@
  * @copyright  Copyright(c)2008 zjuhz.com
  */
  
-require_once('../../application/info/bootstrap.php');
+require_once('../../application/home/bootstrap.php');

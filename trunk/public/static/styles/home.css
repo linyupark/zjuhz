@@ -8,39 +8,12 @@
 	float:left;
 }
 
-/* LOGO部分 -------------------------------------------------------------------------------- */
-
-#logo{
-	padding:25px 0 5px 0;
-	width:220px;
-	background:url(/static/images/logo.jpg) no-repeat 10px center;
-	display:block;
-	text-decoration:none;
-}
-
-#logo b{
-	color:#333;
-	margin-left:80px;
-	font-size:16px;
-	letter-spacing:1px;
-	font-family:Arial, Helvetica, sans-serif
-}
-
-#logo p{
-	color:#666;
-	margin-left:70px;
-	font-size:12px;
-	padding-left:22px;
-	line-height:22px;
-	background:url(/static/images/icon/members.gif) no-repeat left top;
-}
-
 /* 顶部搜索框 + 提示文字 -------------------------------------------------------------------------------- */
 
 #mini_search{
 	position:absolute;
 	right:0;
-	top:-3px;
+	top:0;
 	height:30px;
 	border-collapse:collapse;
 }
@@ -140,17 +113,3 @@
 .news_page a.more{ margin-top:8px; background:url(/static/images/btn/more.gif) no-repeat; width:51px; height:15px; padding:0; margin-left:220px; }
 .news_page img{ padding:5px; border:1px solid #999; background:#fff; display:none; }
 
-/* 脚底 -------------------------------------------------------------------------------------------- */
-
-#footer{
-	color:#999;
-	clear:both;
-}
-
-#footer p{
-	padding:8px 8px 0 8px;
-}
-
-.sub_nav{ font-size:9px; }
-#footer a{ color:#3B5888; font-size:12px; text-decoration:none; padding:0 5px; }
-#footer a:hover{ text-decoration:underline }

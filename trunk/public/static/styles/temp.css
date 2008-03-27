@@ -1,0 +1,19 @@
+@import url("global.css");
+
+#help_search{
+	position:absolute;
+	left:220px;
+	top:35px;
+}
+
+.help_key{
+	font-size:14px;
+	padding:3px;
+	line-height:normal;
+}
+
+.help_btn{
+	font-size:14px;
+	padding:3px;
+	cursor:pointer;
+}
