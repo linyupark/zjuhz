@@ -5,7 +5,7 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:Member.php
+ * @version    Id:MemberModel.php
  */
 
 
@@ -13,7 +13,7 @@
  * 会员中心
  * 库级操作类,含存储过程/多表操作/跨库操作等
  */
-class Member
+class MemberModel
 {
     /**
      * dao
@@ -53,12 +53,11 @@ class Member
     {
 		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey)');
 		$stmt->execute($input);
-		
+
 		//$rowCount = $stmt->rowCount();
 		//$row = $stmt->fetchAll();//print_r($row);
 		//$stmt->closeCursor();
-    	//echo $rowCount;
-    	
+    	//echo $rowCount;    	
 
     	/*$stmt = $this->_dao->prepare($this->_dao->select()->from('tbl_user','userName')->where('uid = 1'));
     	$stmt->execute();$stmt->closeCursor();
@@ -70,7 +69,7 @@ class Member
      * 会员登录
      * 
      * @param array $input
-     * @return array | false
+     * @return array|boolean
      */
 	public function login($input)
     {

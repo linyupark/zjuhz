@@ -5,7 +5,7 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:User.php
+ * @version    Id:UserModel.php
  */
 
 
@@ -13,24 +13,24 @@
  * 会员中心-tbl_user
  * 表级操作类,含单表读/写/更新等方法
  */
-class User extends Zend_Db_Table_Abstract
+class UserModel extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
      * @var string
-     */	
+     */
     protected $_name = 'tbl_user';
 
     /**
      * 数据表主键
      * @var string
-     */    
+     */
     protected $_primary = 'uid';
 
     /**
      * 数据表访问对象
      * @var object
-     */    
+     */
     protected $_dao = null;
 
     /**
