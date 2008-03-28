@@ -7,54 +7,51 @@
 }
 
 body {
-	background:url(/static/images/bg/body_line.gif) repeat-x left 80px;
+	background:#E5E5E5;
 }
+
+table{ border-collapse:collapse;  }
 
 #wrap {
 	width:790px;
 	margin:0 auto;
 	position:relative;
+	background:#fff ;
+	margin-top:8px;
 }
+.rc {
+	width:100%
+}
+.rc_tl { background:url(/static/images/bg/rc_t.gif) no-repeat left top; height:10px;   }
+.rc_tr { background:url(/static/images/bg/rc_t.gif) no-repeat right top; height:10px;   }
+.rc_bl { background:url(/static/images/bg/rc_b.gif) no-repeat left top; height:12px;  }
+.rc_br { background:url(/static/images/bg/rc_b.gif) no-repeat right top; height:12px;  }
 
 /* LOGO部分 -------------------------------------------------------------------------------- */
 
 #logo{
-	padding:25px 0 5px 0;
-	width:220px;
+	padding-left:80px;
+	height:63px;
 	background:url(/static/images/logo.jpg) no-repeat 10px center;
-	display:block;
-	text-decoration:none;
+	cursor:pointer;
+	color:#444;
 }
 
-#logo b{
-	color:#333;
-	margin-left:80px;
-	font-size:16px;
-	letter-spacing:1px;
-	font-family:Arial, Helvetica, sans-serif
-}
-
-#logo p{
-	color:#666;
-	margin-left:70px;
-	font-size:12px;
-	padding-left:22px;
-	line-height:22px;
-	background:url(/static/images/icon/members.gif) no-repeat left top;
-}
+#logo i{ font-size:16px; font-weight:bold; }
+#logo p{ font-size:12px; }
 
 /* 脚底 -------------------------------------------------------------------------------------------- */
 
 #footer{
 	color:#999;
 	clear:both;
+	margin:0 auto;
+	width:100%;
+	background:url(/static/images/bg/dashed.gif) repeat-x left top;
 }
-
-#footer p{
-	padding:8px 8px 0 8px;
-}
-
-.sub_nav{ font-size:9px; }
+#footer td{ padding:10px 15px 0 15px; }
+#footer .sub_nav{ font-size:9px;  }
+#footer .sub_info{ text-align:right;  }
 #footer a{ color:#3B5888; font-size:12px; text-decoration:none; padding:0 5px; }
 #footer a:hover{ text-decoration:underline }
 

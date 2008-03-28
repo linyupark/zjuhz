@@ -1,9 +1,5 @@
 @import url("global.css");
 
-#header{
-
-}
-
 .sub_bar{
 	float:left;
 }
@@ -46,8 +42,9 @@
 #login_form{
 	background:#f5f5f5 url(/static/images/bg/login_form.gif) no-repeat left 160px;
 	border:1px solid #BDC7D8;
-	margin-top:13px;
+	margin:13px;
 	padding:18px;
+	width:200px
 }
 
 #login_form p{
