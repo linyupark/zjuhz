@@ -1,0 +1,49 @@
+<?php echo "{$this->docType('XHTML1_TRANSITIONAL')}\n"; //HTML文档类型 ?>
+<html>
+<head>
+<?php 
+//HEAD区域附加信息 <title> <meta> <script> <style> <link>
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+                 ->appendHttpEquiv('Content-Language', 'zh-CN');
+$this->headTitle('杭州浙江大学校友会 [ zjuhz.com ]','append'); $this->headTitle()->setSeparator(' - ');
+echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle().$this->headLink();
+?>
+</head>
+<body>
+<div id="wrap">
+
+<table class="rc">
+<tr><td class="rc_tl"></td><td class="rc_tr"></td></tr>
+</table>
+
+<table id="header">
+<tr>
+<td id="logo" title="杭州浙江大学校友会欢迎您 - zjuhz.com" onclick="location.href='/'">
+	<i>zjuhz.com</i>
+	<p>杭州浙江大学校友会</p>
+</td>
+<td>
+<?php
+if(!$this->header)
+$this->header = 'header.phtml';
+echo $this->render($this->header);
+?>
+</td>
+</tr>
+</table>
+<?php 
+//Script内容
+echo $this->layout()->content;
+
+//分配顶部内容
+if(!$this->footer)
+$this->footer = 'global-footer.phtml';
+echo $this->partial("partial/{$this->footer}");
+?>
+
+<table class="rc">
+<tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
+</table>
+</div>
+</body>
+</html>
