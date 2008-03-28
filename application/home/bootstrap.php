@@ -17,6 +17,8 @@ Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'
 /** 公用SESSION,包含如验证码,用户基本资料等 */
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
 
+Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
+
 /** run */
 	$info_front = Zend_Controller_Front::getInstance();
 	$info_front->throwExceptions(true);
