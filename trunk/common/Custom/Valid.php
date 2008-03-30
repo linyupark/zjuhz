@@ -21,7 +21,7 @@ class Valid
      */
 	public static function chkUsername($input)
 	{
-		return (isAlphaNumUline($input) && alphaNumLenRange($input,3,16)) ? true : false);
+		return ((self::isAlphaNumUline($input) && self::alphaNumLenRange($input,3,16)) ? true : false);
 	}
 
 	/**
@@ -33,7 +33,7 @@ class Valid
      */
 	public static function chkPasswd($input)
 	{
-		return (isFullIncluding($input,' ') && alphaNumLenRange($input,6,16)) ? true : false);
+		return ((self::isFullIncluding($input,' ') && self::alphaNumLenRange($input,6,16)) ? true : false);
 	}
 
 	/**
