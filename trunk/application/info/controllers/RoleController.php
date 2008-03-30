@@ -4,21 +4,16 @@
 	{
 		function init()
 		{
-			$this->view->header_title = '角色管理!';
-			if(!Zend_Registry::get('acl_info')
-				->isAllowed(Zend_Registry::get('sess_info')->role, null, 'role'))
-			{
-				Zend_Session::destroy();
-				$this->_redirect('/console/login/');
-			}
-			
-			$this->tbl_user = new UserModel(array('db'=>'db_info'));
+			$this->_helper->layout->setLayout('info-console');
+			$this->view->headTitle('角色管理模块');
+			Acl::roleCheck('role');
 		}
 		
 		#角色控制面版 ------------------------------------------
 		function indexAction()
 		{
-			$this->view->users = $this->tbl_user->fetchAll();
+			$User = new UserModel(array('db'=>'db_info'));
+			$this->view->users = $User->fetchAll();
 			
 			$db = Zend_Registry::get('db_info');
 			$select = $db->select()->from('tbl_user',array('user_role'))
@@ -29,16 +24,15 @@
 			$Categories = new CategoryModel(array('db'=>'db_info'));
 			$this->view->categories = $Categories->fetchAll();
 			
-			$this->render('header', null, true);
 			$this->render('bar', null, true);
 			$this->render('index');
-			$this->render('footer', null, true);
 		}
 		
 		#增加新角色 --------------------------------------------
 		function addAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
+			$this->_helper->layout->disableLayout();
 			if(!$this->getRequest()->isPost())
 			exit();
 			//获取数值
@@ -50,9 +44,9 @@
 			
 			$tips = '';
 			if(!Valid::chkUsername($user_name)) 
-				$tips .= '* 登录帐号3-16位字母数字下划线<br />';
+				$tips .= '* 登录帐号必须为3-16位字母数字下划线<br />';
 			if(!Valid::chkPasswd($password) || $password != $password2)
-				$tips .= '* 登录密码6-16位不含空格,并确认密码一致性';
+				$tips .= '* 登录密码必须为6-16位不含空格,并确认密码一致性';
 			if($tips != '')
 			{
 				echo $tips;
@@ -75,7 +69,7 @@
 		function modAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
-			
+			$this->_helper->layout->disableLayout();
 			if(!$this->getRequest()->isPost())
 			exit();
 			//获取数值
@@ -108,6 +102,7 @@
 		function delAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
+			$this->_helper->layout->disableLayout();
 			if(!$this->getRequest()->isPost())
 			exit();
 			$user_id = (int)$this->getRequest()->getPost('user_id');

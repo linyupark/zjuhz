@@ -1,16 +1,13 @@
 <?php
 
 	class ConsoleController extends Zend_Controller_Action 
-	{
-		protected  $sess;
-		protected  $sess_info;
-		protected  $acl_info;
-		
+	{	
 		function init()
 		{
 			$this->sess = Zend_Registry::get('sess');
 			$this->sess_info = Zend_Registry::get('sess_info');
 			$this->acl_info = Zend_Registry::get('acl_info');
+			$this->_helper->layout->setLayout('info-console');
 		}
 		
 		#后台登陆入口 --------------------------------
@@ -63,9 +60,6 @@
 				}
 			}
 			$this->view->header_title = '登陆';
-			$this->render('header', null, true);
-			$this->render('login');
-			$this->render('footer', null, true);
 		}
 		
 		#登出 ----------------------------------------
@@ -79,21 +73,17 @@
 		#默认显示页,登陆成功或转向登陆入口 -------------------
 		function indexAction()
 		{
-			if(!$this->acl_info->isAllowed($this->sess_info->role, null, 'login'))
-			{
-				Zend_Session::destroy();
-				$this->_redirect('/console/login/');
-			}
-			$this->view->header_title = '登陆成功!';
-			$this->render('header', null, true);
+			$User = new UserModel(array('db'=>'db_info'));
+			Acl::roleCheck('login');
+			$this->view->headTitle('登陆成功!');
 			$this->render('bar', null, true);
 			$this->render('index');
-			$this->render('footer', null, true);
 		}
 		
 		#验证图片
 		function verifyAction()
 		{
+			$this->_helper->layout->disableLayout();
 			$this->_helper->ViewRenderer->setNoRender();
 			ImageHandle::verify('common');
 		}
