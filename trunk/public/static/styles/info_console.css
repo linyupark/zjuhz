@@ -56,9 +56,9 @@ h2{ float:left; margin:10px 0 auto 10px; width:72%; }
 .pagination a{  padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
 .pagination a:hover{ border:1px solid #ccc; }
 
-table.tb{ width:100%; border:1px solid #ccc; }
+table.tb{ width:100%; border:1px solid #ccc; font-size:12px;  }
 table.tb th{ background:#ccc; color:#333; border-right:1px solid #999; border-bottom:1px solid #999 }
-table.tb td{ border-right:1px solid #eee; border-bottom:1px solid #eee; padding:5px 0 3px 10px; }
+table.tb td{border-right:1px solid #eee; border-bottom:1px solid #eee; padding:5px 0 3px 10px; }
 table.tb a{ color:#039; text-decoration:none; }
 table.tb a:hover { background:#ffc; text-decoration:underline }
 
