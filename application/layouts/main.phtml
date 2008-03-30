@@ -5,6 +5,7 @@
 //HEAD区域附加信息 <title> <meta> <script> <style> <link>
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'zh-CN');
+$this->headScript()->appendFile('/static/scripts/jquery.js');
 $this->headTitle('杭州浙江大学校友会 [ zjuhz.com ]','append'); $this->headTitle()->setSeparator(' - ');
 echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle().$this->headLink();
 ?>

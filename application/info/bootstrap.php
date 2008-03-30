@@ -22,7 +22,6 @@
 	$db->setFetchMode(Zend_Db::FETCH_OBJ);
 	Zend_Registry::set('db_info',$db);
 	
-	
 	/** Registry session */
 	Zend_Registry::set('sess_info',new Zend_Session_Namespace('info'));
 	Zend_Registry::set('sess',new Zend_Session_Namespace('common'));
@@ -34,6 +33,9 @@
 	$info_acl->allow('editor', null, array('post','login'));
 	$info_acl->allow('admin');
 	Zend_Registry::set('acl_info',$info_acl);
+	
+	/* Layout */
+	Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
 	
 	/** run */
 	$info_front = Zend_Controller_Front::getInstance();

@@ -1,0 +1,30 @@
+<?php echo "{$this->docType('XHTML1_TRANSITIONAL')}\n"; //HTML文档类型 ?>
+<html>
+<head>
+<?php 
+//HEAD区域附加信息 <title> <meta> <script> <style> <link>
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8');
+$this->headScript()->appendFile('/static/scripts/jquery.js')
+				   ->appendFile('/static/scripts/common.js')
+			       ->appendFile('/static/scripts/info/action.js');
+$this->headLink()->appendStylesheet('/static/styles/info_console.css','screen');
+$this->headTitle('杭州浙江大学校友会信息管理后台','append'); 
+$this->headTitle()->setSeparator(' - ');
+echo $this->headMeta().
+     $this->headScript().
+     $this->headStyle().
+     $this->headLink().
+     $this->headTitle();
+?>
+</head>
+<body>
+<?php echo $this->layout()->content ?>
+<div id='footer'>
+  <p><a href='/'>zjuhz.com</a> ·
+        浙ICP备06052510号 · 
+        Copyright © 2008 ·
+        Powered By Zend Framework ·
+        Created By 杭州浙江大学校友会(筹)</p>
+</div>
+</body>
+</html>

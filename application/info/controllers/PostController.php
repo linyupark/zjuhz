@@ -2,39 +2,16 @@
 
 class PostController extends Zend_Controller_Action
 {
-	protected  $sess_info;
-	protected  $acl_info;
-	protected  $tbl_entity;
-	protected  $tbl_category;
-
 	function init()
 	{
-		$this->sess_info = Zend_Registry::get('sess_info');
-		$this->acl_info = Zend_Registry::get('acl_info');
-		$this->view->header_title = '信息管理!';
-		if(!$this->acl_info->isAllowed($this->sess_info->role, null, 'post'))
-		{
-			Zend_Session::destroy();
-			$this->_redirect('/console/login/');
-		}
-		$this->tbl_entity = $Entity = new EntityModel(array('db'=>'db_info'));
-		$this->tbl_category = new CategoryModel(array('db'=>'db_info'));
-		
-		//获取相应的可操作的分类 - admin
-		if($this->sess_info->role == 'admin')
-		{
-			$row_set = $this->tbl_category->fetchAll();
-		}
-		else //根据acl判断
-		{
-			if($this->acl_info->isAllowed($this->sess_info->role, null, 'post'))
-			{
-				$power_arr = explode('|', $this->sess_info->power); //权力数组
-				$row_set = $this->tbl_category->find($power_arr);
-			}
-		}
+		$this->_helper->layout->setLayout('info-console');
+		$this->view->headTitle('信息管理模块');
 
-		$this->view->categories = $row_set;
+		$this->Entity = new EntityModel(array('db'=>'db_info'));
+		$this->Category = new CategoryModel(array('db'=>'db_info'));
+		$this->sess_info = Zend_Registry::get('sess_info');
+		Acl::roleCheck('post');
+		$this->view->categories = $this->Category->fetchByPower();
 	}
 
 	#讯息主版 -----------------------------------------
@@ -56,7 +33,7 @@ class PostController extends Zend_Controller_Action
 			$where = substr($where,0,-3);
 		}
 		
-		$row_set = $this->tbl_entity->fetchAll($where);
+		$row_set = $this->Entity->fetchAll($where);
 		
 		//按页获取信息列表
 		Page::create(array(
@@ -77,10 +54,8 @@ class PostController extends Zend_Controller_Action
 		if($where != null) $select->where($where);
 		$this->view->rows = $db->fetchAll($select);
 		
-		$this->render('header', null, true);
 		$this->render('bar', null, true);
 		$this->render('index');
-		$this->render('footer', null, true);
 	}
 
 	#添加新的讯息 -------------------------------------
@@ -111,7 +86,7 @@ class PostController extends Zend_Controller_Action
 				'entity_pub_time' => strtotime($pub_time),
 				'entity_content' => $content
 				);
-				if($this->tbl_entity->insert($data))
+				if($this->Entity->insert($data))
 				$this->view->tips = "信息添加成功";
 			}
 			echo '<script>$(".tips").fadeOut(1800);</script>';
@@ -121,11 +96,8 @@ class PostController extends Zend_Controller_Action
 		$this->view->content = stripslashes($content);
 		$this->view->cate_id = $cate_id;
 		$this->view->pub_time = $pub_time;
-		
-		$this->render('header', null, true);
 		$this->render('bar', null, true);
 		$this->render('add');
-		$this->render('footer', null, true);
 	}
 
 	#修改讯息 ------------------------------------------
@@ -158,31 +130,30 @@ class PostController extends Zend_Controller_Action
 				'entity_mod_time' => strtotime($pub_time),
 				'entity_content' => $content
 				);
-				$where = $this->tbl_entity->getAdapter()->quoteInto('entity_id = ?', $entity_id);
-				if($this->tbl_entity->update($data, $where))
+				$where = $this->Entity->getAdapter()->quoteInto('entity_id = ?', $entity_id);
+				if($this->Entity->update($data, $where))
 				$this->view->tips = "信息修改成功";
 				else $this->view->tips = "没有做任何修改";
 			}
 			echo '<script>$(".tips").fadeOut(1800);</script>';
 		}
 		
-		$this->view->row = $this->tbl_entity->fetchRow(array('entity_id = ?'=>$entity_id));
+		$this->view->row = $this->Entity->fetchRow(array('entity_id = ?'=>$entity_id));
 		
-		$this->render('header', null, true);
 		$this->render('bar', null, true);
 		$this->render('mod');
-		$this->render('footer', null, true);
 	}
 
 	#删除讯息 ------------------------------------------
 	function delAction()
 	{
 		$this->_helper->ViewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
 		if(!$this->getRequest()->isPost())
 		exit();
 		$entity_id = (int)$this->getRequest()->getPost('entity_id');	
-		$where = $this->tbl_entity->getAdapter()->quoteInto('entity_id = ?',$entity_id);
-		if($this->tbl_entity->delete($where))
+		$where = $this->Entity->getAdapter()->quoteInto('entity_id = ?',$entity_id);
+		if($this->Entity->delete($where))
 		echo '该信息已成功删除';
 	}
 }
