@@ -55,23 +55,55 @@ table{ border-collapse:collapse;  }
 #footer a{ color:#3B5888; font-size:12px; text-decoration:none; padding:0 5px; }
 #footer a:hover{ text-decoration:underline }
 
-/* 全局导航 -------------------------------------------------------------- */
-
-#global_nav{
-	border-collapse:collapse;
-	position:absolute; right:0; top:0;
+/* 脚顶修饰 ----------------------------------------------- */
+#footer_decoration{
+	height:26px;
+	color:444;
+	font-size:14px;
+	color:#3B5888;
+	background:url(/static/images/bg/news_list.gif) repeat-x left bottom;
+	border-bottom:1px solid #BDC7D8;
+	clear:left;
+}
+/* 头顶模块列表 + 帐号信息 + 主搜索 */
+#global_search{
+	width:520px;
+	margin-left:70px;
 }
 
-#global_nav a{ font-size:13px; color:#004BCA;  }
+#global_search .models{
+	font-size:9px;
+}
+#global_search a{ font-size:14px; color:#014CC9; margin:0 5px; }
+#global_search a.on{
+	text-decoration:none;
+	color:#333;
+	font-weight:bold;
+}
 
-#global_nav td{ padding-right:10px; padding:5px;}
-
-#global_nav_btn{
-	cursor:pointer;
+#global_search .nav{
+	text-align:right;
+	color:#666;
 	font-size:12px;
-	position:relative;
 }
 
-#global_nav_list{ display:none; position:absolute; left:0; background:#fff; top:17px; border:1px solid #D9E6F7; padding:5px; background:#EFF7FF; width:65px; }
-#global_nav_list a{ text-decoration:none; font-size:13px; color:#314973;  padding:4px; }
-#global_nav_list a:hover{ text-decoration:underline }
+#global_search .nav a{ font-size:12px; margin:0 2px; }
+
+#global_search .search_form{
+	
+}
+
+#global_search .search_form .input{
+	width:300px;
+	border:1px solid #ccc;
+	font-size:14px;
+	padding:2px;
+	line-height:normal;
+	color:#999
+}
+#global_search .search_form .btn{
+	height:25px;
+	width:60px;
+	font-size:14px;
+	cursor:pointer
+}

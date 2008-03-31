@@ -1,18 +1,3 @@
-function search_focus(class_name)
-{
-	$('.'+class_name+' input').attr('value','');
-	$('.'+class_name+' input').css('background','#ffc');
-	$('.'+class_name+' input').css('color','#333');
-}
-
-function search_blur(class_name,input_value)
-{
-	$('.'+class_name+' input').attr('value',input_value);
-	$('.'+class_name+' input').css('background','#fff');
-	$('.'+class_name+' input').css('color','#aaa');
-}
-
-
 //显示新闻TAB
 function show_news(num)
 {

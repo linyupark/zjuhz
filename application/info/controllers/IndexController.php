@@ -4,7 +4,10 @@
 	{
 		function init()
 		{
-			$this->view->header_title = '信息中心';
+			$this->_helper->layout->setLayout('main');
+			$this->view->headTitle('信息中心');
+			$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen')
+								   ->appendStylesheet('/static/styles/info_front.css','screen');
 		}
 		
 		#每个栏目的详细列表
@@ -38,8 +41,5 @@
 			//分类列表
 			$this->view->categories = $Category->fetchAll();
 			
-			$this->render('front_header', null, true);
-			$this->render('index');
-			$this->render('front_footer', null, true);
 		}
 	}

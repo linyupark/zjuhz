@@ -7,16 +7,14 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout()->setLayout('main');
 		$this->view->headScript()->appendFile('/static/scripts/home.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
+		
+		//当前所属模块分配
+		$this->view->header = array('model_name'=>'info');
 	}
 	
     function indexAction()
     {
-    	$flag = $this->getRequest()->getParam('f');
-    	$this->view->status = '您目前尚未登陆';
-    	if($flag == 'in')
-    	{
-    		$this->view->status = 'xxx';
-    		$this->render('index2');
-    	}
+    	// Layout 分配
+    	$this->view->role = 'guest';
     }
 }

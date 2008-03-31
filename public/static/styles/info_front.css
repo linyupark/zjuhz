@@ -4,52 +4,20 @@
 	float:left;
 }
 
-/* 顶部搜索框 + 提示文字 -------------------------------------------------------------------------------- */
-
-#mini_search{
-	position:absolute;
-	right:0;
-	top:0;
-	height:30px;
-	border-collapse:collapse;
-}
-
-#mini_search .tips{ color:#666; padding:5px 22px; background:url(/static/images/icon/info.gif) no-repeat left center;  }
-
-#mini_search .lbg{
-	background:#fff url(/static/images/bg/search_left.gif) no-repeat;
-	width:5px;
-	height:30px;
-}
-
-#mini_search .mbg{
-	border-bottom:1px solid #ccc; height:30px; background:#ddd; padding-left:5px;
-}
-
-#mini_search .mbg input{ border:1px solid #ccc; padding:3px 4px; font-size:12px; line-height:normal; color:#ccc; }
-#mini_search .mbg a{ background:url(/static/images/btn/search.jpg); width:28px; height:28px; display:block; }
-
-#mini_search .rbg{
-	background:#fff url(/static/images/bg/search_right.gif) no-repeat;
-	width:5px;
-	height:30px;
-}
-
 
 /* 信息分类+列表 ------------------------------------------ */
 	.info_category{
-		width:150px;
-		background: url(/static/images/bg/category.jpg) no-repeat left top;
-		margin-top:18px;
+		margin:18px 0 0 10px;
+		background:#5D748F url(/static/images/bg/rc_tl.png) no-repeat left top;
 	}
 	.info_category h2{
-		padding:8px 0 3px 40px;
+		padding:5px 0 5px 38px;
 		font-size:14px;
-		background:url(/static/images/icon/book_open.gif) no-repeat 15px 8px;
-		color:#263F5B;
+		background: url(/static/images/icon/book_open.gif) no-repeat 12px 8px;
+		color:#fff;
+		width:100px;
 	}
 	.info_category dl{
-		margin:5px 5px 0 5px;
 		background:#EFF7FF;
 		border-left:1px solid #D9E6F7;
 		border-right:1px solid #D9E6F7;
@@ -107,13 +75,5 @@
 		color:#CC3300
 	}
 	
-	/* 脚顶修饰 ----------------------------------------------- */
-	#news_list_tt{
-	height:26px;
-	color:444;
-	font-size:14px;
-	color:#3B5888;
-	background:url(/static/images/bg/news_list.gif) repeat-x left bottom;
-	border-bottom:1px solid #BDC7D8;
-	clear:left;
+	
 }
