@@ -1,2 +1,2 @@
-RewriteEngine on
-RewriteRule !\.(js|ico|gif|jpg|png|css)$ /home/index.php
+RewriteEngine On
+RewriteRule ^([^/]?)$ /home/index.php

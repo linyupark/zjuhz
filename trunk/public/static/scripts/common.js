@@ -37,3 +37,17 @@ function ajaxhint(show,msg,id){
 	$("#"+id).text(msg);
 }
 
+function input_focus(class_name)
+{
+	$('.'+class_name).attr('value','');
+	$('.'+class_name).css('background','#ffc');
+	$('.'+class_name).css('color','#333');
+}
+
+function input_blur(class_name,input_value)
+{
+	$('.'+class_name).attr('value',input_value);
+	$('.'+class_name).css('background','#fff');
+	$('.'+class_name).css('color','#aaa');
+}
+

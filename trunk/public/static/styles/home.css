@@ -4,37 +4,6 @@
 	float:left;
 }
 
-/* 顶部搜索框 + 提示文字 -------------------------------------------------------------------------------- */
-
-#mini_search{
-	position:absolute;
-	right:0;
-	top:0;
-	height:30px;
-	border-collapse:collapse;
-}
-
-#mini_search .tips{ color:#666; padding:5px 22px; background:url(/static/images/icon/info.gif) no-repeat left center;  }
-
-#mini_search .lbg{
-	background:#fff url(/static/images/bg/search_left.gif) no-repeat;
-	width:5px;
-	height:30px;
-}
-
-#mini_search .mbg{
-	border-bottom:1px solid #ccc; height:30px; background:#ddd; padding-left:5px;
-}
-
-#mini_search .mbg input{ border:1px solid #ccc; padding:3px 4px; font-size:12px; line-height:normal; color:#ccc; }
-#mini_search .mbg a{ background:url(/static/images/btn/search.jpg); width:28px; height:28px; display:block; }
-
-#mini_search .rbg{
-	background:#fff url(/static/images/bg/search_right.gif) no-repeat;
-	width:5px;
-	height:30px;
-}
-
 
 /* 登陆框 -------------------------------------------------------------------------------- */
 
@@ -67,6 +36,19 @@
 }
 
 .registry{ font-size:14px; color:#3F7D30; padding-left:20px; background:url(/static/images/icon/registry.gif) no-repeat left center; margin-left:15px; font-weight:bold; }
+
+/* 介绍宣传区 ----------------------------------------- */
+.intro{  padding:20px; }
+.intro li{ font-size:14px; line-height:220%; background:url(/static/images/bullet/blue.gif) no-repeat left center; padding-left:20px; }
+.intro li a{ font-size:9px; font-weight:bold; color:#014CC9; text-decoration:none; }
+.intro h2{ font-size:16px; color:#3B5888;  }
+.intro ul{ padding:10px 0; color:#333; list-style:none; }
+
+/* 专题介绍区 ------------------------------------------- */
+.subject{ padding:10px 20px; }
+.subject img{ border:none; margin:2px; }
+.subject a{  border:1px solid #ccc; display:block; }
+.subject a:hover{ border:1px solid #666 }
 
 /* 信息列表按钮 ----------------------------------------------------------------------------- */
 

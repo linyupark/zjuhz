@@ -7,8 +7,9 @@
 	date_default_timezone_set('Asia/Shanghai');
 	
 	/** set_include_path */
-	set_include_path(get_include_path().PATH_SEPARATOR.'../../common/Custom/'.
-										PATH_SEPARATOR.'../../application/info/models/');
+	set_include_path(get_include_path().
+					 PATH_SEPARATOR.'../../common/Custom/'.
+					 PATH_SEPARATOR.'../../application/info/models/');
 
 	/** Zend_Controller_Front */
 	require_once 'Zend/Controller/Front.php';

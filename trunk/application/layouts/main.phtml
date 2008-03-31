@@ -5,7 +5,7 @@
 //HEAD区域附加信息 <title> <meta> <script> <style> <link>
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'zh-CN');
-$this->headScript()->appendFile('/static/scripts/jquery.js');
+$this->headScript()->appendFile('/static/scripts/jquery.js')->appendFile('/static/scripts/common.js');
 $this->headTitle('杭州浙江大学校友会 [ zjuhz.com ]','append'); $this->headTitle()->setSeparator(' - ');
 echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle().$this->headLink();
 ?>
@@ -24,22 +24,38 @@ echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle()
 	<p>杭州浙江大学校友会</p>
 </td>
 <td>
-<?php
-if(!$this->header)
-$this->header = 'header.phtml';
-echo $this->render($this->header);
-?>
+<table id="global_search">
+	<tr>
+	<td class="models">
+		<?php 
+		// 根据用户是否登陆来判断显示的模块连接
+		echo $this->partial("partial/{$this->role}-model.phtml", $this->header) ?>
+	</td>
+	<td class="nav">
+		<?php 
+		// 显示用户当前的状态(登陆/登出/各便捷连接)
+		echo $this->partial("partial/{$this->role}-nav.phtml", $this->account_info) ?>
+	</td>
+	</tr>
+	<tr>
+	<td class="search_form" colspan="2">
+		<form method="POST">
+		<input class="input" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input','在zjuhz.com中查找')" value="在zjuhz.com中查找" />
+		<input class="btn" type="submit" value="搜索" />
+		</form>
+	</td>
+	</tr>
+</table>
 </td>
 </tr>
 </table>
 <?php 
-//Script内容
+//Script主体内容
 echo $this->layout()->content;
 
-//分配顶部内容
 if(!$this->footer)
-$this->footer = 'global-footer.phtml';
-echo $this->partial("partial/{$this->footer}");
+$this->footer = 'global';
+echo $this->partial("partial/{$this->footer}-footer.phtml");
 ?>
 
 <table class="rc">
