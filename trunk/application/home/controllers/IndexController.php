@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
 	
     function indexAction()
     {
-    	// Layout 分配
     	$this->view->role = 'guest';
+    	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/info/api/');
     }
 }

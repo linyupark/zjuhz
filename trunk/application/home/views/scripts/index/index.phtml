@@ -1,33 +1,37 @@
 <div id="main">
-			<div class="sub_bar" style="width:250px;">
-				<form method="post">
-				<div id="login_form">
-					<p class="account">
-						登陆帐号:<br />
-						<input type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
-					</p>
-					<p class="password">
-						密码: (<a href="">忘记了?</a>)<br />
-						<input type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
-					</p>
-					<p>
-						<input name="rememberme" type="hidden" value="0" />
-						<label for="auto_login"><input name="rememberme" id="auto_login" type="checkbox" value="1" /> 请记住我,下次自动登陆</label>
-					</p>
-					<p>
-						<table>
-							<tr>
-								<td><input type="image" src="/static/images/btn/login.gif" /></td>
-								<td valign="middle"><a href="/member/register/" class="registry">我要注册</a></td>
-							</tr>
-						</table>
-					</p>
-				</div>
-				</form>
-			</div>
-			
+
+
+<div class="sidebar" style="width:250px;">
+<form method="post">
+<div id="login_form">
+<p class="account">
+登陆帐号:<br />
+<input type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+</p>
+<p class="password">
+密码: (<a href="">忘记了?</a>)<br />
+<input type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+</p>
+<p>
+<input name="rememberme" type="hidden" value="0" />
+<label for="auto_login"><input name="rememberme" id="auto_login" type="checkbox" value="1" /> 请记住我,下次自动登陆</label>
+</p>
+<p>
+<table>
+<tr>
+<td><input type="image" src="/static/images/btn/login.gif" /></td>
+<td valign="middle"><a href="/member/register/" class="registry">我要注册</a></td>
+</tr>
+</table>
+</p>
+</div>
+</form>
+</div>
+
+
+
 <!-- 宣传+快捷连接 -->
-<div class="sub_bar intro">
+<div class="sidebar intro">
 <h2>浙大校友在这里可以:</h2>
 <ul>
 <li>拥有只属于浙大校友的互动空间 <a href="">..</a></li>
@@ -38,101 +42,49 @@
 </ul>
 </div>
 
+
+			
+
+
 <!-- 专题区 -->
-<div class="sub_bar subject">
+<div class="sidebar subject">
 <h2>活动预告</h2>
-<p><a href="">08/3/28 金融讲座</a></p>
+<a href="">08/3/28 金融讲座</a>
 <h2>近期专题</h2>
-<p><a href="">校友毕业10周年返校活动</a></p>
+<a href="">校友毕业10周年返校活动</a>
+<a href="">“大学之声”2008浙江大学新年音乐会</a>
 </div>
-		
-			<div class="sub_bar" style="clear:left; width:172px;">
-				<div id="news_list">
-					<a href="" onmouseover="show_news(1)"><img src="/static/images/icon/radio.gif" />浙大动态</a>
-					<a href="" onmouseover="show_news(2)"><img src="/static/images/icon/page_white_world.gif" />各地校友动态</a>
-					<a href="" onmouseover="show_news(3)"><img src="/static/images/icon/anchor.gif" />杭州校友会动态</a>
-					<a href="" onmouseover="show_news(4)"><img src="/static/images/icon/group.gif" />校友互助信息</a>
-					<a href="" onmouseover="show_news(5)"><img src="/static/images/icon/rainbow.gif" />校友企业展示</a>
-					<a href="" onmouseover="show_news(6)"><img src="/static/images/icon/talk.gif" />校友访谈</a>
-				</div>
-			</div>
-			
-			<div class="sub_bar" style="width:617px; height:210px; margin-top:15px;">
-				<table class="news_page" id="num_1">
-					<tr>
-						<td valign="top">
-							<a href="">浙大图书馆推出个性化服务</a>
-							<a href="">浙大两项目分获NSFC/RS和NSFC/RSE..</a>
-							<a href="">《大运河（杭州段）旅游规划》通过专..</a>
-							<a href="">浙大“物理学基础科学研究和教学人才..</a>
-							<a href="">浙大陈骝获Hannes Alfven 奖</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/1.jpg" /></td>
-					</tr>
-				</table>
-				<table class="news_page" id="num_2">
-					<tr>
-						<td valign="top">
-							<a href="">朱敏校友荣获2007年度“风云浙商”称号</a>
-							<a href="">奥运史上首位中国裁判</a>
-							<a href="">从马家台门到三峡工程</a>
-							<a href="">海军潜艇学院教授胡均川为潜艇铸“魂”</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/2.jpg" /></td>
-					</tr>
-				</table>
-				<table class="news_page" id="num_3">
-					<tr>
-						<td valign="top">
-							<a href="">杭州浙江大学校友会（筹）校友资料..</a>
-							<a href="">致杭州浙大校友</a>
-							<a href="">征集筹备组成员QQ..</a>
-							<a href="">让校友间、校友和浙大间更多地切身..</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/3.jpg" /></td>
-					</tr>
-				</table>
-				<table class="news_page" id="num_4">
-					<tr>
-						<td valign="top">
-							<a href="">杭州浙江大学校友会（筹）校友资料..</a>
-							<a href="">致杭州浙大校友</a>
-							<a href="">征集筹备组成员QQ..</a>
-							<a href="">让校友间、校友和浙大间更多地切身..</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/4.jpg" /></td>
-					</tr>
-				</table>
-				<table class="news_page" id="num_5">
-					<tr>
-						<td valign="top">
-							<a href="">杭州浙江大学校友会（筹）校友资料..</a>
-							<a href="">致杭州浙大校友</a>
-							<a href="">征集筹备组成员QQ..</a>
-							<a href="">让校友间、校友和浙大间更多地切身..</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/5.jpg" /></td>
-					</tr>
-				</table>
-				<table class="news_page" id="num_6">
-					<tr>
-						<td valign="top">
-							<a href="">杭州浙江大学校友会（筹）校友资料..</a>
-							<a href="">致杭州浙大校友</a>
-							<a href="">征集筹备组成员QQ..</a>
-							<a href="">让校友间、校友和浙大间更多地切身..</a>
-							<a href="" class="more"></a>
-						</td>
-						<td width="253"><img src="/static/images/pics/1.jpg" /></td>
-					</tr>
-				</table>
-			</div>
-			
-		</div>
+
+<!-- 显示在首页的信息目录列 -->
+<div class="sidebar" style="clear:left; width:172px;">
+<div id="news_list">
+<?php 
+$cat_rows = $this->info_xmlrpc->call('info.get_public_categories');
+foreach ($cat_rows as $k => $v): ?>
+<a href="" onmouseover="show_news(<?= $k+1 ?>)"><img src="/static/images/icon/<?= $v['category_icon'] ?>.gif" /><?= $v['category_name'] ?></a>
+<?php endforeach; ?>
+</div>
+</div>
+
+<!-- 相应的内容快照 -->
+<div class="sidebar" style="width:617px; height:210px; margin-top:15px;">
+<?php 
+foreach ($cat_rows as $k => $v):
+//获取相应文章快照
+$art_rows = $this->info_xmlrpc->call('info.get_arts_snapshot', array($v['category_id']));
+?>			
+<table class="news_page" id="num_<?= $k+1 ?>">
+<tr>
+<td valign="top">							
+<?php foreach ($art_rows as $k2 => $v): ?>
+<a href="/info/view/id/<?= $v['entity_id'] ?>"><?= $v['entity_title'] ?></a>
+<?php endforeach; ?>
+<a href="/info/?category=<?= $v['category_id'] ?>" class="more"></a>
+</td>
+<td width="253"><img src="/static/images/pics/<?= $k+1 ?>.jpg" /></td>
+</tr>
+</table>
+<?php endforeach; ?>
+</div>
 
 <script type="text/javascript">show_news(1)</script>

@@ -14,7 +14,6 @@ class WelcomeController extends Zend_Controller_Action
 	
     function indexAction()
     {
-    	// Layout 分配
     	$this->view->role = 'member';
     	
     	$this->view->account_info = array(
