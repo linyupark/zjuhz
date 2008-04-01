@@ -1,19 +1,31 @@
 @import url("global.css");
 
-#help_search{
-	position:absolute;
-	left:220px;
-	top:35px;
-}
+/* 互助分类 --------------------------------------------------- */
+.help_category{ margin:18px 0 0 10px; background:#EFF7FF; }
+.help_category h2{ padding:5px 10px; background:#5D748F url(/static/images/bg/rc_tl.png) no-repeat left top; }
+.help_category p{ padding:8px;  border:1px solid #D9E6F7; border-top:none; }
+.help_category p a{ font-size:12px; text-decoration:none; }
+.help_category p a.M{ font-size:13px; font-weight:bold; }
+.help_category p a:hover{ text-decoration:underline; }
 
-.help_key{
-	font-size:14px;
-	padding:3px;
-	line-height:normal;
-}
+/* 互助广播 --------------------------------------------------- */
+.help_notice{ float:left; margin:0 0 0 15px; height:20px; width:370px  }
+.help_notice strong{ float:left; color:#7D5D27; font-size:13px }
+.help_notice .nt{ display:none; float:left; color:#166E8B; text-decoration:none; }
 
-.help_btn{
-	font-size:14px;
-	padding:3px;
-	cursor:pointer;
-}
+/* 求助集合 ---------------------------------------------------- */
+.help_set{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 15px; width:400px; }
+.help_set th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px;  }
+.help_set td{ padding:5px; }
+.help_set td a{ text-decoration:none; color:#004BCA }
+.help_set td a:hover{ text-decoration:underline; }
+.help_set td.cat { padding:5px 0 5px 10px; width:65px; }
+.help_set td.cat a{ color:#666; }
+.help_set td.coin{ font-size:9px; color:#537E01; text-align:center }
+
+/* 积分排行 ---------------------------------------------------------- */
+.help_rank{ width:165px; border:1px solid #E7DAC5; margin:18px 0 0 10px; }
+.help_rank th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5;}
+.help_rank td{ padding:5px; color:#666; font-size:9px; }
+.help_rank td a{ text-decoration:none; }
+.help_rank td a:hover{ text-decoration:underline; }

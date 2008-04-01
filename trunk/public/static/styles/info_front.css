@@ -1,14 +1,10 @@
 @import url("global.css");
 
-.sub_bar{
-	float:left;
-}
-
-
 /* 信息分类+列表 ------------------------------------------ */
 	.info_category{
 		margin:18px 0 0 10px;
 		background:#5D748F url(/static/images/bg/rc_tl.png) no-repeat left top;
+		width:140px;
 	}
 	.info_category h2{
 		padding:5px 0 5px 38px;

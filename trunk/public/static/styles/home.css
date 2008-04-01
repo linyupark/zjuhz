@@ -1,9 +1,5 @@
 @import url("global.css");
 
-.sub_bar{
-	float:left;
-}
-
 
 /* 登陆框 -------------------------------------------------------------------------------- */
 
@@ -40,15 +36,15 @@
 /* 介绍宣传区 ----------------------------------------- */
 .intro{  padding:20px; }
 .intro li{ font-size:14px; line-height:220%; background:url(/static/images/bullet/blue.gif) no-repeat left center; padding-left:20px; }
-.intro li a{ font-size:9px; font-weight:bold; color:#014CC9; text-decoration:none; }
+.intro li a{ font-weight:bold; color:#014CC9; text-decoration:none; }
 .intro h2{ font-size:16px; color:#3B5888;  }
 .intro ul{ padding:10px 0; color:#333; list-style:none; }
 
 /* 专题介绍区 ------------------------------------------- */
-.subject{ padding:10px 20px; }
-.subject img{ border:none; margin:2px; }
-.subject a{  border:1px solid #ccc; display:block; }
-.subject a:hover{ border:1px solid #666 }
+.subject{ margin:10px 20px 10px 0px; float:right }
+.subject h2{ background:#E3EAED url(/static/images/bg/rc_tl2.png) no-repeat left top; padding:5px 15px; color:#222; font-size:14px; margin-top:8px;  border-bottom:1px solid #C3D2D9 }
+.subject a{ color:#3B5888; display:block; background:url(/static/images/bullet/red.gif) no-repeat left center; padding: 5px 5px 5px 20px; font-size:13px; }
+.subject a:hover{ text-decoration:none; color:#D32A2D  }
 
 /* 信息列表按钮 ----------------------------------------------------------------------------- */
 

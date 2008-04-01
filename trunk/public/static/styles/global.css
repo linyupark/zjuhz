@@ -8,9 +8,20 @@
 
 body {
 	background:#E5E5E5;
+	padding-bottom:5px;
 }
 
 table{ border-collapse:collapse;  }
+
+.sidebar{ float:left; }
+
+a{ color:#314973 }
+
+/* 常用字 --------------------------------------------- */
+.fw14{ font-size:14px; color:#fff; }
+.f9{ font-size:9px; }
+.txtr{ text-align:right; }
+.txtl{ text-align:left; }
 
 #wrap {
 	width:790px;
@@ -58,7 +69,7 @@ table{ border-collapse:collapse;  }
 /* 脚顶修饰 ----------------------------------------------- */
 #footer_decoration{
 	height:26px;
-	color:444;
+	color:#444;
 	font-size:14px;
 	color:#3B5888;
 	background:url(/static/images/bg/news_list.gif) repeat-x left bottom;
