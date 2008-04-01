@@ -8,6 +8,16 @@
 			$this->view->headTitle('信息中心');
 			$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen')
 								   ->appendStylesheet('/static/styles/info_front.css','screen');
+								   
+			//当前所属模块分配
+			$this->view->header = array('model_name'=>'info');
+			
+			//用户登陆状态(SESSION)
+			$this->view->role = 'member';
+			$this->view->account_info = array(
+    			'name'=>'小王',
+    			'letter'=>'2'
+    		);
 		}
 		
 		#每个栏目的详细列表
