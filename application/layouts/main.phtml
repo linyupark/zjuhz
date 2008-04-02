@@ -39,10 +39,9 @@ echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle()
 	</tr>
 	<tr>
 	<td class="search_form" colspan="2">
-		<form method="POST">
-		<input class="input" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input','在zjuhz.com中查找')" value="在zjuhz.com中查找" />
-		<input class="btn" type="submit" value="搜索" />
-		</form>
+		<?php 
+		// 不同模块显示不通的搜索条
+		echo $this->partial("partial/global-search.phtml", $this->header) ?>
 	</td>
 	</tr>
 </table>
