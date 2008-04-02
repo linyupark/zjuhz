@@ -24,11 +24,12 @@ a{ color:#314973 }
 .txtl{ text-align:left; }
 
 #wrap {
-	width:790px;
+	width:860px;
 	margin:0 auto;
 	position:relative;
 	background:#fff ;
 	margin-top:8px;
+	overflow:hidden;
 }
 .rc {
 	width:100%
@@ -78,8 +79,8 @@ a{ color:#314973 }
 }
 /* 头顶模块列表 + 帐号信息 + 主搜索 */
 #global_search{
-	width:520px;
-	margin-left:70px;
+	width:580px;
+	margin-left:40px;
 }
 
 #global_search .models{
