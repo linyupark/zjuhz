@@ -11,9 +11,9 @@
 
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.
-                 '../common/Custom/'.PATH_SEPARATOR.
-                 '../application/member/interlayers/'.PATH_SEPARATOR.
-                 '../application/member/models/');
+                 '../../common/Custom/'.PATH_SEPARATOR.
+                 '../../application/member/interlayers/'.PATH_SEPARATOR.
+                 '../../application/member/models/');
 //echo get_include_path();exit;
 
 /** Zend_Controller_Front */
@@ -23,7 +23,7 @@ require_once('Zend/Loader.php');
 Zend_Loader::registerAutoload();
 
 /** 项目配置文档对象 */
-Zend_Registry::set('iniMember',new Zend_Config_Ini('../common/Ini/Member.ini'));
+Zend_Registry::set('iniMember',new Zend_Config_Ini('../../common/Ini/Member.ini'));
 
 
 /** Set cache file */
