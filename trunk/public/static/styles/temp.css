@@ -43,3 +43,37 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 /* 互助位置 ----------------------------------------------------------- */
 #help_position{ background:url(/static/images/bullet/arrow_blue.gif) no-repeat left center; margin:18px 0 0 18px; padding-left:18px; }
 
+/* 求助话题 ----------------------------------------------------------- */
+#topic,#reply{ width:650px; margin:10px 0 0 15px;}
+.help_on{ border:1px solid #D9E6F7; }
+.help_on h2{ background:#EFF7FF url(/static/images/icon/help.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; }
+#topic td{ padding:5px 0; }
+#topic .coin{ background:url(/static/images/icon/coin.gif) no-repeat 8px center; padding-left:25px; color:#C56D09; font-size:9px; }
+#topic .tt{ font-size:16px; font-weight:bold; }
+#topic .info{  padding:5px 10px; }
+#topic .txt { padding:3px; background:#EFF7FF }
+#topic .content,#reply .content{ background:#fff; border:1px solid #ccc; padding:10px; font-size:14px; }
+.topic_btn{ margin:8px; padding:3px; cursor:pointer }
+
+#reply{ border:1px solid #D9E6F7; }
+#reply h2{ background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; border-top:1px solid #D9E6F7;}
+#reply .content{ color:#444; border:none; }
+#reply .info{ padding:10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom }
+
+.info span{ color:#666; }
+.memo{ padding:8px; font-size:14px; }
+.memo p{ color:#666; }
+.memo small{ color:#666 }
+
+/* 工具条 --------------------------------------------------------------- */
+.toolbar{ float:right; margin-top:-22px; padding-right:10px; }
+.toolbar a{text-decoration:none;}
+.collection{  background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
+.report{  background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
+
+/* 提交答案表 ------------------------------------------------------------- */
+
+#reply_form{ padding:20px; color:#666 }
+#reply_form textarea{ width:500px; padding:2px; height:100px; border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
+.verify{  margin-top:10px; padding:2px; height:20px; font-size:14px;line-height:normal; border:1px solid #999; }
+.reply_btn{ padding:4px; margin-top:10px; margin-left:30px; }
