@@ -89,8 +89,8 @@
 	<th class="txtr" colspan="2">更多&raquo;</th>
 	</tr>
 	<tr>
-	<td class="cat"><a href="">[反病毒]</a></td>
-	<td><a href="">个人电脑装什么防火墙和杀毒软件好啊</a></td>
+	<td class="cat"><a href="/temp/index/sub/">[反病毒]</a></td>
+	<td><a href="/temp/index/detail/">个人电脑装什么防火墙和杀毒软件好啊</a></td>
 	</tr>
 	<tr>
 	<td class="cat"><a href="">[人际交往]</a></td>
@@ -192,65 +192,72 @@
 </div>
 
 <div class="sidebar">
+
+<!-- 帮助+公告 ///////////////////////////////////////////// -->
+<div class="box">
+<a href="" class="help_link">帮助</a>
+<a href="" class="help_rule">规则</a>
+</div>
+<a href="" class="need_help">需要帮助</a>
+
 <!-- 积分排行 ////////////////////////////////////////////// -->
 <table class="help_rank">
 <tr>
-<th class="txtl">总积分榜</th>
-<th class="txtr">更多»</th>
+<th class="txtl" colspan="2">总积分榜</th>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
-
+</table>
 <!-- 踊跃 ///////////////////////////////// -->
+<table class="help_rank">
 <tr>
-<th class="txtl">热情指数排行</th>
-<th class="txtr">更多»</th>
+<th class="txtl" colspan="2">活跃排行</th>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 <tr>
-<td><a href="">求职上boleme</a></td>
-<td>562053</td>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td>100</td>
 </tr>
 </table>
 </div>
@@ -270,5 +277,13 @@ function show_notice()
 	$('.help_notice').attr('start',show_num);
 }
 var t = setInterval("show_notice()",4000);
+
+$('.help_rank').each(function(i)
+{ 
+	$('.help_rank:eq('+i+') a.rank').each(function(j)
+	{ 
+		$(this).css('background','url(/static/images/icon/rank/n'+(j+1)+'.jpg) no-repeat left center');
+	}); 
+});
 </script>
 

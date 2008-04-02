@@ -1,6 +1,5 @@
 <div id="main">
 
-
 <div class="sidebar" style="width:250px;">
 <form method="post">
 <div id="login_form">
@@ -28,8 +27,6 @@
 </form>
 </div>
 
-
-
 <!-- 宣传+快捷连接 -->
 <div class="sidebar intro">
 <h2>浙大校友在这里可以:</h2>
@@ -42,19 +39,18 @@
 </ul>
 </div>
 
-
-			
-
-
 <!-- 专题区 -->
 <div class="sidebar subject">
 <h2>活动预告</h2>
 <a href="">08/3/28 金融讲座</a>
 <h2>近期专题</h2>
 <a href="">校友毕业10周年返校活动</a>
-<a href="">“大学之声”2008浙江大学新年音乐会</a>
+<a href="">大学之声2008浙江大学新年音乐会</a>
 </div>
 
+<?php 
+if(!$this->cache->start('homepage')):
+?>
 <!-- 显示在首页的信息目录列 -->
 <div class="sidebar" style="clear:left; width:172px;">
 <div id="news_list">
@@ -67,7 +63,7 @@ foreach ($cat_rows as $k => $v): ?>
 </div>
 
 <!-- 相应的内容快照 -->
-<div class="sidebar" style="width:617px; height:210px; margin-top:15px;">
+<div class="sidebar" style="width:667px; height:210px; margin-top:15px;">
 <?php 
 foreach ($cat_rows as $k => $v):
 //获取相应文章快照
@@ -84,7 +80,7 @@ $art_rows = $this->info_xmlrpc->call('info.get_arts_snapshot', array($v['categor
 <td width="253"><img src="/static/images/pics/<?= $k+1 ?>.jpg" /></td>
 </tr>
 </table>
-<?php endforeach; ?>
+<?php endforeach; $this->cache->end(); endif; ?>
 </div>
 
 <script type="text/javascript">show_news(1)</script>

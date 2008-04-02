@@ -19,7 +19,20 @@ class IndexController extends Zend_Controller_Action
     	);
 	}
 	
+	// 首页
     function indexAction()
+    {
+    	
+    }
+    
+    //问题详细页
+    function detailAction()
+    {
+    	
+    }
+    
+    // 子目录主页
+    function subAction()
     {
     	
     }
