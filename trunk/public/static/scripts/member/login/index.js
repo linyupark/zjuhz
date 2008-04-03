@@ -16,7 +16,7 @@ function login() {
 	    success: function(msg) {
 			if (msg == 'redirect')
 			{
-				window.location.href="/help/question/add/";
+				window.location.href="/help/";
 			}
 			else
 			{
