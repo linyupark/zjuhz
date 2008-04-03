@@ -25,6 +25,12 @@ class IndexController extends Zend_Controller_Action
     	
     }
     
+    // 管理首页
+    function homeAction()
+    {
+    	
+    }
+    
     //问题详细页
     function detailAction()
     {
