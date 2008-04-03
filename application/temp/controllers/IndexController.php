@@ -31,9 +31,12 @@ class IndexController extends Zend_Controller_Action
     	
     }
     
+    function detailokAction()
+    {
+    }
+    
     // 子目录主页
     function subAction()
     {
-    	
     }
 }
