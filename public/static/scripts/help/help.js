@@ -1,4 +1,24 @@
-﻿// 写入img空标签
+﻿function show_tab(num) {
+	$('#help_tab_btn a').css({borderColor:'#C4DBBF',backgroundColor:'#fff',color:'#5C7B23',borderBottomColor:'#fff'});
+	$('#help_tab_btn a:eq('+num+')').css({borderColor:'#FAD1A5',backgroundColor:'#FFFCF0',color:'#C26400',borderBottomColor:'#fff'});
+	$('.tab_content').hide();
+	$('.tab_content:eq('+num+')').show();
+}
+
+function show_notice() {
+	var notice_num = parseInt($('.help_notice a').length);
+	var show_num = parseInt($('.help_notice').attr('start'));
+	$('.help_notice a').hide();
+	$('.help_notice a:eq('+(show_num-1)+')').show('slow');
+	show_num++;
+	if(show_num > notice_num) 
+	{
+		show_num = 1;
+	}
+	$('.help_notice').attr('start',show_num);
+}
+
+// 写入img空标签
 function putVerifyImg() {
 	var isPutVerifyImg = $("#isPutVerifyImg").val();
 	if(isPutVerifyImg == 'show')
