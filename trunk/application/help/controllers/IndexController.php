@@ -43,10 +43,14 @@ class IndexController extends Zend_Controller_Action
 
 		if (!isset($this->_sessCommon->login)) { $this->_redirect('../member/',array('exit'=>true)); }
 
-		//页面配置
+		//----- 页面配置 -----
+		//载入JS文件
     	$this->view->headScript()->appendFile('/static/scripts/help/help.js');
+    	//载入CSS文件
 		$this->view->headLink()->appendStylesheet('/static/styles/help.css','screen');
+		//载入标题
 		$this->view->headTitle('校友互助');
+		//载入模板框架
 		$this->_helper->layout->setLayout('main');
 
 		//当前模块
@@ -55,7 +59,7 @@ class IndexController extends Zend_Controller_Action
 		$this->view->role = 'member';
 		$this->view->account_info = array(
     	    'name'=>$this->_sessCommon->login['realName'],
-    	    'letter'=>'2',
+    	    'letter'=>'0',
     	);
     }
 
@@ -71,17 +75,6 @@ class IndexController extends Zend_Controller_Action
 
 		//将验证码写入公共SESSION
 		ImageHandle::verify('common');
-    }
-
-    /**
-     * 你问我答退出
-     * 
-     * @return void
-     */
-	public function logoutAction()
-    {
-    	Zend_Session::destroy(true);
-    	$this->_redirect('../member/');
     }
 
     /**
