@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>提问</title>
+<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_gzip.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_gz_init.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_help_init.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/common.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/help/help.js"></script>
+<script language="javascript" type="text/javascript" src="/static/scripts/help/question/add.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/styles/common.css">
+<link rel="stylesheet" type="text/css" href="/static/styles/help.css">
+</head>
+
+<body text="#7C7C7C" alink="#CC0033" link="#014CC9" bgcolor="#ffffff" vlink="#CC0033">
+<div id="ajaxloading"></div>
+<center>
+<table width="910" cellpadding="0" cellspacing="0" style="margin-top:6px;">
+  <td nowrap valign="top"></td>
+  <td width="100%" nowrap valign="top"><div class="font14 blue" style="margin-top:3px !important;margin-top:0;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+</table>
+<table>
+  <form name="frmSearch" id="frmSearch" method="post" autocomplete="off">
+  <td nowrap><input maxlength="100" name="keywords" class="s bor pdt2" type="text"></input>&nbsp;</td>
+  <td nowrap><input type="submit" id="btnQuestionSearch" name="btnQuestionSearch" value="搜 索" class="bt pdt2" />&nbsp;&nbsp;<input type="submit" id="btnQuestionAdd" name="btnQuestionAdd" value="提 问" class="bt pdt2" /></td>
+  </form>
+</table>
+
+
+<div id=T>
+<table style="float:left;margin-top:2px;" cellspacing=0 cellpadding=0><tr><td><a href="/help/">首页</a>&nbsp;＞提问</td></tr></table>
+<div class="tools">
+<table style="float:right;" ch="s.k.m">
+<td>你好，XX&nbsp;&nbsp;|&nbsp;
+<td style="line-height:150%">
+<div style="position:relative;"><a href="#" target="_blank" class="info" onMouseOut="document.getElementById('DetailTools').style.display ='none';" onMouseOver="document.getElementById('DetailTools').style.display ='block';"><div style="margin-top:0px !important;margin-top:2px;">我的<img src="/static/images/help/ico_by.gif" align="absmiddle"></div></a>
+<div id="DetailTools" style="display:none;left:-5px;top:18px !important;top:14px;position:absolute;background:#fff;border:1px solid #E0E0E0;width:50px !important;width:66px;padding:8px;" onMouseOver="document.getElementById('DetailTools').style.display ='block';" onMouseOut="document.getElementById('DetailTools').style.display ='none';">
+<a href="#" target="_blank" class="info">我的提问</a><br /><a href="#" target="_blank" class="info">我的回答</a><br /><a href="#" target="_blank" class="info">我的收藏</a><br />
+</div>
+</div></td>
+<td>&nbsp;|&nbsp;&nbsp;<a href="/help/" class="info">问答首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/help/index/logout/" class="info" onClick="return window.confirm('确定要退出吗？');">退出</a></td>
+</table>
+</div>
+</div>
+<div class=K style="height:1px;"></div>
+<center>
+
+<table cellspacing="4" cellpadding="0" style="border:1px solid #B2D0EA;" id="B" bgcolor="#EFF8FF">
+<tr><td class="fn01 font14" style="padding-left:10px"><strong>提问</strong></td></tr>
+<tr><td bgcolor="#ffffff">
+<div class="expression" id="expressionFaces" onClick="toggleExpressions();"></div>
+<form method="post" name="frmQuestion" id="frmQuestion" autocomplete="off">
+<table cellspacing="0" cellpadding="6" style="color:#424242;margin:10px 0 0 82px !important;margin:10px 0 0 41px;" align="left">
+<tr><td width="60" valign="top" style="font-size:14px;">问题标题</td>
+<td width="550"><input type="text" name="title" id="title" value="" maxlength="30" style="width:552px !important;width:550px;padding:3px 0 0 2px;" class="s bor" /></td></tr>
+<tr><td width="60" valign="top" style="font-size:14px;">详细描述</td>
+<td><textarea name="content" id="content" style="width:550px;height:200px;padding:2px;" class="s bor"></textarea>
+</table>
+<div class="K"></div>
+<table cellspacing="0" cellpadding="0"  style="color:#424242;margin:10px 0 0 85px !important;margin:10px 0 0 43px;" align="left">
+
+<tr><td width="60" valign="top" style="font-size:14px;">是否匿名</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="anonym" value="Y">
+  是
+    <input name="anonym" type="radio" value="N" checked>
+  否</td>
+</tr>
+
+<tr><td colspan="2" height="13"></td></tr>
+
+<tr><td width="60" valign="top" style="font-size:14px;">悬赏积分</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="offer" id="offer" value="" maxlength="5" style="width:552px !important;width:50px;padding:3px 0 0 2px;" class="s bor" /> 我当前的积分是<span style="font-weight:bold;" class="y2">0</span>分</td></tr>
+
+<tr><td colspan="2" height="13"></td></tr>
+
+<tr><td width="60" valign="top" style="font-size:14px;">验证码</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vcode" id="vcode" value="" maxlength="4" style="width:552px !important;width:50px;padding:3px 0 0 2px;" class="s bor" />&nbsp;<span id="putVerifyImg"></span></td></tr>
+
+<tr><td colspan="2" height="13"></td></tr>
+
+<tr><td></td><td><input onClick="tinyMCE.triggerSave(false,false);" type="submit" name="btnSubmit" id="btnSubmit" value="提交问题" style="padding:4px 0 0 0;margin:10px 0 10px 3px;"/></td></tr>
+<tr><td></td><td><div id="ajaxhint"></div></td></tr>
+</table>
+<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
+</form>
+</td></tr></table>
+</center>
+</center>
+
+</body>
+</html>
