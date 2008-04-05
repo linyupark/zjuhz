@@ -9,9 +9,13 @@ BEGIN
     SELECT uid INTO mylUid FROM tbl_user WHERE userName = param_userName AND passWord = md5(param_passWord);
     IF mylUid > 0 THEN
 
-        SELECT user.uid,user.userName,user.passWord,user.realName,user.nickName,user.sex,extinfo.status,extinfo.editNick,extinfo.initAsk FROM tbl_user AS user,tbl_user_extinfo AS extinfo WHERE user.uid = mylUid AND user.uid = extinfo.uid;
+        SELECT user.uid,user.userName,user.passWord,user.realName,user.nickName,user.sex,extInfo.status,extInfo.editNick,extInfo.initAsk FROM tbl_user AS user,tbl_user_extInfo AS extInfo WHERE user.uid = mylUid AND user.uid = extInfo.uid;
 
-        UPDATE tbl_user_extinfo SET lastIp = param_lastIp,lastLogin = UNIX_TIMESTAMP() WHERE uid = mylUid LIMIT 1;
+        UPDATE tbl_user_extInfo SET lastIp = param_lastIp,lastLogin = UNIX_TIMESTAMP() WHERE uid = mylUid LIMIT 1;
+
+    ELSE
+
+        SELECT mylUid AS uid;
 
     END IF;
 

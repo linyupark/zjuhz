@@ -51,12 +51,13 @@ class LoginLogic extends MemberInterlayer
      * 会员登录
      * 
      * @param array $input
-     * @return array|boolean
+     * @return array or false
      */
 	public static function login($input)
 	{
 		$member = parent::_getInstance('MemberModel');
+		$row    = $member->login($input);
 
-		return $member->login($input);
+		return ($row['uid'] ? $row : false);
 	}
 }

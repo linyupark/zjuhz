@@ -47,7 +47,7 @@ class MemberModel
      * 会员注册
      * 
      * @param array $input
-     * @return numeric
+     * @return string
      */
 	public function register($input)
     {
@@ -62,20 +62,20 @@ class MemberModel
     	/*$stmt = $this->_dao->prepare($this->_dao->select()->from('tbl_user','userName')->where('uid = 1'));
     	$stmt->execute();$stmt->closeCursor();
     	print_r($stmt->fetch());/**/
-		return $stmt->rowCount();
+		return $stmt->fetchColumn(); // return uid or 0
     }
 
     /**
      * 会员登录
      * 
      * @param array $input
-     * @return array|boolean
+     * @return array
      */
 	public function login($input)
     {
 		$stmt = $this->_dao->prepare('CALL sp_login(:userName,:passWord,:lastIp)');
 		$stmt->execute($input);
 
-		return (($stmt->rowCount()) ? $stmt->fetch() : false );
+		return $stmt->fetch();
     }
 }
