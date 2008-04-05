@@ -58,7 +58,7 @@ class UserModel extends Zend_Db_Table_Abstract
      * 判断用户登录帐号是否已存在
      * 
      * @param string $userName
-     * @return boolean
+     * @return string
      */
 	public function checkUserName($userName)
     {
@@ -66,6 +66,6 @@ class UserModel extends Zend_Db_Table_Abstract
         $stmt->bindValue('userName', $userName);
         $stmt->execute();
 
-    	return (($stmt->rowCount()) ? true : false);
+    	return $stmt->fetchColumn();
     }
 }

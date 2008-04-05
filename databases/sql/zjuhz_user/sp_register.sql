@@ -30,8 +30,8 @@ BEGIN
 
         IF myrUid > myiUid THEN
 
-            INSERT INTO tbl_user_extinfo (uid,status,lastIp,lastLogin) VALUES (myrUid,myrStatus,param_regIp,myTime);
-            INSERT INTO tbl_user_moreinfo (uid) VALUES (myrUid);
+            INSERT INTO tbl_user_extInfo (uid,status,lastIp,lastLogin) VALUES (myrUid,myrStatus,param_regIp,myTime);
+            INSERT INTO tbl_user_moreInfo (uid) VALUES (myrUid);
 
             IF myiUid > 0 THEN
               UPDATE tbl_user_invite_detail SET regTime = mytime,uid = myrUid,status = myrStatus WHERE status = 0 AND ikey = param_ikey LIMIT 1;
@@ -40,15 +40,11 @@ BEGIN
               UPDATE tbl_user_invite SET success = success + 1 WHERE iuid = myiUid LIMIT 1;
             END IF;
 
-            IF @@error_count = 0 THEN
-
-                SELECT myrUid AS uid;
-
-            END IF;
-
         END IF;
 
     END IF;
+
+    SELECT myrUid AS uid;
 
 
 END $$

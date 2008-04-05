@@ -51,13 +51,13 @@ class RegisterLogic extends MemberInterlayer
      * 会员注册
      * 
      * @param array $input
-     * @return numeric
+     * @return boolean
      */
 	public static function register($input)
 	{
 		$member = parent::_getInstance('MemberModel');
 
-		return $member->register($input);
+		return ($member->register($input) ? true : false);
 	}
 
 	/**
@@ -70,6 +70,6 @@ class RegisterLogic extends MemberInterlayer
 	{
 		$user = parent::_getInstance('UserModel');
 
-		return $user->checkUserName($userName);
+		return ($user->checkUserName($userName) ? true : false);
 	}
 }
