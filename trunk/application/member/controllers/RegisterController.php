@@ -88,7 +88,7 @@ class RegisterController extends Zend_Controller_Action
 			$vcode = $input['vcode'];
 			$scode = $this->_sessCommon->verify;
 			//此处可注入数据将用与判断
-
+			//
 			//此处注销无用数据
 			unset($this->_sessCommon->verify);
 
@@ -124,12 +124,12 @@ class RegisterController extends Zend_Controller_Action
 			//此处接收传递的数据数组
 			$input = $this->getRequest()->getPost(); //print_r($posts);exit;
 			//此处单独处理的数据单独取出
-
+			//
 			//此处可注入数据将用与判断
-
+			//
 			//此处注销无用数据			
+			//
 
-			
 			$filter = RegisterFilter::init();
 			if ($userName = $filter->check($input))
 			{
