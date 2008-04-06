@@ -26,7 +26,7 @@ class WelcomeController extends Zend_Controller_Action
     	$this->view->role = 'member';
     	
     	$this->view->account_info = array(
-    		'name'=>'小王',
+    		'userName'=>'小王',
     		'letter'=>'2'
     	);
     }

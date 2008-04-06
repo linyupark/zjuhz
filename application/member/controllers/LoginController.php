@@ -78,7 +78,7 @@ class LoginController extends Zend_Controller_Action
 			//此处单独处理的数据单独取出
 			$alive = $input['alive'];
 			//此处可注入数据将用与判断
-
+			//
 			//此处注销无用数据				
 			unset($input['alive']);
 
