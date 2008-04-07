@@ -10,11 +10,11 @@
 								   ->appendStylesheet('/static/styles/info_front.css','screen');
 								   
 			//当前所属模块分配
-			$this->view->header = array('model_name'=>'info');
+			$this->view->header = array('modelName'=>'info');
 			
 			//用户登陆状态(SESSION)
 			$this->view->role = 'member';
-			$this->view->account_info = array(
+			$this->view->accountInfo = array(
     			'userName'=>'小王',
     			'letter'=>'2'
     		);

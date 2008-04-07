@@ -34,7 +34,7 @@ echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle()
 	<td class="nav">
 		<?php 
 		// 显示用户当前的状态(登陆/登出/各便捷连接)
-		echo $this->partial("partial/{$this->role}-nav.phtml", $this->account_info) ?>
+		echo $this->partial("partial/{$this->role}-nav.phtml", $this->accountInfo) ?>
 	</td>
 	</tr>
 	<tr>

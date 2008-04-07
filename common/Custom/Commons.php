@@ -37,6 +37,7 @@ class Commons
 		return base64_encode($x_str);
 	}
 
+	#简单数据解密 $int 数字密钥
 	static function decrypt($x_str, $int = 1)
 	{
 		$str = '';
@@ -95,5 +96,14 @@ class Commons
 
 		return true;
 	}
-}
 
+	#判断会员有否登录
+	static function checkMemberLogin()
+	{
+		if ($_SESSION['common']['role'] != 'member' || !isset($_SESSION['common']['login']))
+		{
+			header('LOCATION:../member/');
+			exit;
+		}
+	}
+}

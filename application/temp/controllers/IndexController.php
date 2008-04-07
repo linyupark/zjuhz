@@ -10,10 +10,10 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout->setLayout('main');
 		
 		//当前所属模块分配
-		$this->view->header = array('model_name'=>'help');
+		$this->view->header = array('modelName'=>'help');
 		
 		$this->view->role = 'member';
-		$this->view->account_info = array(
+		$this->view->accountInfo = array(
     		'userName'=>'小王',
     		'letter'=>'2'
     	);
