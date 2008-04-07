@@ -84,6 +84,16 @@ abstract class MemberInterlayer
     }
 
     /**
+     * for Service
+     * 
+     * @return void
+     */
+    protected function _initService()
+    {
+    	self::_setDao();
+    }
+
+    /**
      * 初始化数据库访问类并注册
      * 
      * @return void
@@ -95,7 +105,7 @@ abstract class MemberInterlayer
     		/** Registry 数据库 */
 			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter,
 			                        $this->_iniMember->db->default->params->toArray());
-			$dao->query('SET NAMES utf8');
+			$dao->query('set names utf8');
 			Zend_Db_Table::setDefaultAdapter($dao);
 			Zend_Registry::set('dao',$dao);
     	}
