@@ -89,6 +89,7 @@ class LoginController extends Zend_Controller_Action
 				if ($login = $logic->login($input))
 				{
 					//登录成功
+					$this->_sessCommon->role  = 'member';
 					$this->_sessCommon->login = $login;
 					//记住账号
 					((null === $alive) ? 

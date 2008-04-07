@@ -9,7 +9,7 @@ class WelcomeController extends Zend_Controller_Action
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
 		
 		//当前所属模块分配
-		$this->view->header = array('model_name'=>'info');
+		$this->view->header = array('modelName'=>'info');
 	}
 	
     function indexAction()
@@ -25,7 +25,7 @@ class WelcomeController extends Zend_Controller_Action
 		$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/info/api/');
     	$this->view->role = 'member';
     	
-    	$this->view->account_info = array(
+    	$this->view->accountInfo = array(
     		'userName'=>'小王',
     		'letter'=>'2'
     	);

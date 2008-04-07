@@ -42,8 +42,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function init()
     {
-		//判断是否已登录
-		(!isset(Zend_Registry::get('sessCommon')->login) ? self::_redirect('../member/',array('exit'=>true)) : '');
+    	Commons::checkMemberLogin();
 
 		//载入项目配置
 		$this->_iniHelp    = Zend_Registry::get('iniHelp');
@@ -53,7 +52,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
 		//当前模块
-		$this->view->header = array('model_name'=>'help');
+		$this->view->header = array('modelName'=>'help');
 		//载入JS文件
     	$this->view->headScript()->appendFile('/static/scripts/help/help.js');
     	//载入CSS文件
@@ -64,7 +63,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout->setLayout('main');
 
 		$this->view->role = 'member';
-		$this->view->account_info = array(
+		$this->view->accountInfo = array(
     	    'userName'=>$this->_sessCommon->login['realName'],
     	    'letter'=>'0',
     	);
