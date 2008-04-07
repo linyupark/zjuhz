@@ -15,7 +15,7 @@
 			//用户登陆状态(SESSION)
 			$this->view->role = 'member';
 			$this->view->accountInfo = array(
-    			'userName'=>'小王',
+    			'realName'=>'小王',
     			'letter'=>'2'
     		);
 		}

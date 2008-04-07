@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
 		
 		$this->view->role = 'member';
 		$this->view->accountInfo = array(
-    		'userName'=>'小王',
+    		'realName'=>'小王',
     		'letter'=>'2'
     	);
 	}
