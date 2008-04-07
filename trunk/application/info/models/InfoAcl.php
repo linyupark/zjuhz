@@ -6,7 +6,7 @@
 	 */
 	class InfoAcl extends Zend_Controller_Plugin_Abstract
 	{
-		private $_sessInfo;
+		private $_sessCommon;
 		private $_acl;
 		
 		/**
@@ -15,9 +15,9 @@
 		 * @param object $auth 给予SESSION注册对象
 		 * @param object $iniAcl 给予INI相应区域
 		 */
-		function __construct($_sessInfo)
+		function __construct($_sessCommon)
 		{
-			$this->_sessInfo = $_sessInfo;
+			$this->_sessCommon = $_sessCommon;
 			// 没有设置 acl ?
 			if(!Zend_Registry::isRegistered('acl'))
 			{
@@ -27,18 +27,22 @@
 				    ->addRole(new Zend_Acl_Role('staff', 'guest'))
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 增加所要控制的资源(Controller)
-				$acl->add(new Zend_Acl_Resource('news'))
+				$acl->add(new Zend_Acl_Resource('view'))
+				    ->add(new Zend_Acl_Resource('index'))
 				    ->add(new Zend_Acl_Resource('support'))
 				    ->add(new Zend_Acl_Resource('login'))
 				    ->add(new Zend_Acl_Resource('logout'))
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
-				$acl->allow('guest', array('news','login','support'))
+				$acl->allow('guest', array('view','login','support','index'))
 				    ->allow('staff', 'admin')
 				    ->deny('staff', 'admin', array('category','cache','delete','public','manager'))
 				    ->allow('admin');
+				// 寄存
+				Zend_Registry::set('acl', $acl);
+				$this->_acl = $acl;
 			}
-			else $this->_acl = Zend_Registry::isRegistered('acl');
+			else $this->_acl = Zend_Registry::get('acl');
 		}
 		
 		/**
@@ -49,7 +53,7 @@
 		public function preDispatch($request)
 		{
 			// 根据SESSION确定当前的角色
-			if(!$sessRole = $this->_sessInfo->role)
+			if(!$sessRole = $this->_sessCommon->role)
 				$sessRole = 'guest';
 				
 			// 默认分配的CA
