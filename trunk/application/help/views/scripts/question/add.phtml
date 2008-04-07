@@ -1,92 +1,149 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<title>提问</title>
-<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_gzip.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_gz_init.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/tinymce/tiny_mce_help_init.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/common.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/help/help.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/help/question/add.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/styles/common.css">
-<link rel="stylesheet" type="text/css" href="/static/styles/help.css">
-</head>
-
-<body text="#7C7C7C" alink="#CC0033" link="#014CC9" bgcolor="#ffffff" vlink="#CC0033">
-<div id="ajaxloading"></div>
-<center>
-<table width="910" cellpadding="0" cellspacing="0" style="margin-top:6px;">
-  <td nowrap valign="top"></td>
-  <td width="100%" nowrap valign="top"><div class="font14 blue" style="margin-top:3px !important;margin-top:0;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-</table>
-<table>
-  <form name="frmSearch" id="frmSearch" method="post" autocomplete="off">
-  <td nowrap><input maxlength="100" name="keywords" class="s bor pdt2" type="text"></input>&nbsp;</td>
-  <td nowrap><input type="submit" id="btnQuestionSearch" name="btnQuestionSearch" value="搜 索" class="bt pdt2" />&nbsp;&nbsp;<input type="submit" id="btnQuestionAdd" name="btnQuestionAdd" value="提 问" class="bt pdt2" /></td>
-  </form>
-</table>
-
-
-<div id=T>
-<table style="float:left;margin-top:2px;" cellspacing=0 cellpadding=0><tr><td><a href="/help/">首页</a>&nbsp;＞提问</td></tr></table>
-<div class="tools">
-<table style="float:right;" ch="s.k.m">
-<td>你好，XX&nbsp;&nbsp;|&nbsp;
-<td style="line-height:150%">
-<div style="position:relative;"><a href="#" target="_blank" class="info" onMouseOut="document.getElementById('DetailTools').style.display ='none';" onMouseOver="document.getElementById('DetailTools').style.display ='block';"><div style="margin-top:0px !important;margin-top:2px;">我的<img src="/static/images/help/ico_by.gif" align="absmiddle"></div></a>
-<div id="DetailTools" style="display:none;left:-5px;top:18px !important;top:14px;position:absolute;background:#fff;border:1px solid #E0E0E0;width:50px !important;width:66px;padding:8px;" onMouseOver="document.getElementById('DetailTools').style.display ='block';" onMouseOut="document.getElementById('DetailTools').style.display ='none';">
-<a href="#" target="_blank" class="info">我的提问</a><br /><a href="#" target="_blank" class="info">我的回答</a><br /><a href="#" target="_blank" class="info">我的收藏</a><br />
+﻿<!-- 互助所在分类 /////////////////////////////////// -->
+<div id="help_position">
+<a href="">校友互助</a> / <a href="">电脑网络</a> / <a href="">反病毒</a>
 </div>
-</div></td>
-<td>&nbsp;|&nbsp;&nbsp;<a href="/help/" class="info">问答首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/help/index/logout/" class="info" onClick="return window.confirm('确定要退出吗？');">退出</a></td>
-</table>
-</div>
-</div>
-<div class=K style="height:1px;"></div>
-<center>
 
-<table cellspacing="4" cellpadding="0" style="border:1px solid #B2D0EA;" id="B" bgcolor="#EFF8FF">
-<tr><td class="fn01 font14" style="padding-left:10px"><strong>提问</strong></td></tr>
-<tr><td bgcolor="#ffffff">
-<div class="expression" id="expressionFaces" onClick="toggleExpressions();"></div>
-<form method="post" name="frmQuestion" id="frmQuestion" autocomplete="off">
-<table cellspacing="0" cellpadding="6" style="color:#424242;margin:10px 0 0 82px !important;margin:10px 0 0 41px;" align="left">
-<tr><td width="60" valign="top" style="font-size:14px;">问题标题</td>
-<td width="550"><input type="text" name="title" id="title" value="" maxlength="30" style="width:552px !important;width:550px;padding:3px 0 0 2px;" class="s bor" /></td></tr>
-<tr><td width="60" valign="top" style="font-size:14px;">详细描述</td>
-<td><textarea name="content" id="content" style="width:550px;height:200px;padding:2px;" class="s bor"></textarea>
-</table>
-<div class="K"></div>
-<table cellspacing="0" cellpadding="0"  style="color:#424242;margin:10px 0 0 85px !important;margin:10px 0 0 43px;" align="left">
+<div class="sidebar">
 
-<tr><td width="60" valign="top" style="font-size:14px;">是否匿名</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="anonym" value="Y">
-  是
-    <input name="anonym" type="radio" value="N" checked>
-  否</td>
+<!-- 求助话题 ///////////////////////////////////// -->
+<div id="topic" class="help_on">
+<h2>待解决的问题 </h2>
+<p class="toolbar">
+<a href="../index/1" class="collection">收藏</a>
+<a href="../index/2" class="report">检举</a>
+</p>
+<table width="100%">
+<tr>
+<td class="coin">150</td>
+<td class="tt">都说金山不好，那什么杀软好？</td>
 </tr>
+<tr>
+<td colspan="2" class="info">
+	匿名&nbsp;&nbsp;&nbsp;&nbsp;
+	<span>
+	人气(179)&nbsp;&nbsp;&nbsp;&nbsp;
+	回答(55)&nbsp;&nbsp;&nbsp;&nbsp;
+	提问时间(2008-04-01 20:44)
+	</span>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="info">
+	标签:
+	<span>
+	<a href="">病毒</a> ,
+	<a href="">杀毒</a> ,
+	<a href="">软件</a> 
+	</span>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="txt">
+<form>
+<div class="content">
+我用了好几年金山
+但是现在好多人说金山不好
 
-<tr><td colspan="2" height="13"></td></tr>
-
-<tr><td width="60" valign="top" style="font-size:14px;">悬赏积分</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="offer" id="offer" value="" maxlength="5" style="width:552px !important;width:50px;padding:3px 0 0 2px;" class="s bor" /> 我当前的积分是<span style="font-weight:bold;" class="y2">0</span>分</td></tr>
-
-<tr><td colspan="2" height="13"></td></tr>
-
-<tr><td width="60" valign="top" style="font-size:14px;">验证码</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vcode" id="vcode" value="" maxlength="4" style="width:552px !important;width:50px;padding:3px 0 0 2px;" class="s bor" />&nbsp;<span id="putVerifyImg"></span></td></tr>
-
-<tr><td colspan="2" height="13"></td></tr>
-
-<tr><td></td><td><input onClick="tinyMCE.triggerSave(false,false);" type="submit" name="btnSubmit" id="btnSubmit" value="提交问题" style="padding:4px 0 0 0;margin:10px 0 10px 3px;"/></td></tr>
-<tr><td></td><td><div id="ajaxhint"></div></td></tr>
-</table>
-<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
+那大家说什么杀软好。
+<div class="memo">
+<p>问题补充:</p>
+请给出理由啊! <small>2008-04-01 11:10</small><br>
+可是腾讯的网站全部都看不到后缀名啊！ <small>2008-04-02 12:58</small><br>
+能举出具体的例子？ <small>2008-04-02 15:00</small>
+</div>
+</div>
+<input type="button" value="我来回答" class="topic_btn" />
+<input type="button" value="补充说明" class="topic_btn" />
 </form>
-</td></tr></table>
-</center>
-</center>
+</td>
+</tr>
+</table>
+</div>
 
-</body>
-</html>
+<!-- 答案集合 //////////////////////////////////////////// -->
+<div id="reply">
+<h2>回应</h2>
+<div class="r1 content">
+最近排行：<br>1 BitDefender 没有官方中文名 <br>2 Kaspersky 官方中文名：卡巴斯基 <br>3 ESET Nod32 没有官方中文名 <br>4 PC-cillin 没有官方中文名，但大家都叫他的公司名，叫趋势 <br>5 F-Secure Anti-Virus 没有官方中文名 <br>6 McAfee VirusScan 没有官方中文名，但都叫麦咖啡 <br>7 Norton AntiVirus 官方中文名：诺顿 <br>8 AVG Anti-Virus Pro 没有官方中文名 <br>9 CA Antivirus 没有官方中文名 <br>10 Norman Virus Control 没有官方中文名，有人叫诺盟 <br>11 AntiVirusKit 没有官方中文名 <br>12 AVAST! 没有官方中文名 <br>13 Panda Titanium 没有官方中文名 <br>14 F-Prot 没有官方中文名 <br>15 PC Tools AntiVirus 没有官方中文名 <br>16 ViRobot 没有官方中文名 <br>17 WinAntiVirus 没有官方中文名 <br>N/A CyberScrub AntiVirus 没有官方中文名 <br>N/A The Shield Antivirus 没有官方中文名 <br>N/A Windows OneCare Live 没有官方中文名
+<p class="info"><a href="">水过无痕</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>回答时间(2008-04-01 21:30)</span></p>
+<p class="toolbar">
+<a href="../index/2" class="report">检举</a>
+</p>
+</div>
+
+<div class="r2 content">
+我用过好多种了，什么江民杀毒、卡巴、诺顿、东方卫士、瑞星、金山毒霸等，卡巴占用内存大，卡巴开了其他的程序就受影响，很卡，其他的软件有的杀毒起不了什么作用，有的是能查毒，但杀不了。感觉瑞星好些，杀毒比较干净，其他程序运行基本不受影响，我现在用的是完全免费版的瑞星杀毒软件和瑞星个人防火墙，可以自动升级，定时查杀，配合360安全卫士更好。还有定期用windows清理助手杀木马很拿手的，特别是那种中毒后网页一直弹个不停的情况相当有效。恶意软件清理助手也不错，查杀流氓软件特别好。这样基本没什么问题。
+<p class="info"><a href="">水过无痕</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>回答时间(2008-04-01 21:30)</span></p>
+<p class="toolbar">
+<a href="../index/2" class="report">检举</a>
+</p>
+</div>
+
+<!-- 内容分页 //////////////////////////////////////////// -->
+<div class="pagination"><a href="">上一页</a> <a href="">1</a> <a href="">2</a>  <b>3</b> <a href="">下一页</a></div>
+
+<!-- 回答面板 ///////////////////////////////////////////// -->
+<form>
+<h2>我的回答</h2>
+<div id="reply_form">
+	
+	<textarea name="content" class="reply_c" onfocus="input_focus('reply_c')" onblur="input_blur('reply_c','回答的内容写在这里..(要求:字数???)')">回答的内容写在这里..</textarea>
+	<input type="text" name="verify" class="verify" /> (验证码)
+	<input type="submit" class="reply_btn" value="提交答案" />
+</div>
+</form>
+</div>
+
+</div>
+
+
+
+<!-- 积分排行 ////////////////////////////////////////////// -->
+<div class="sidebar">
+<table class="help_rank">
+<tr>
+<th class="txtl" colspan="2">反病毒行家</th>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="" class="rank">求职上boleme</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<script>
+$('.help_rank').each(function(i)
+{ 
+	$('.help_rank:eq('+i+') a.rank').each(function(j)
+	{ 
+		$(this).css('background','url(/static/images/icon/rank/n'+(j+1)+'.jpg) no-repeat left center');
+	}); 
+});
+</script>
