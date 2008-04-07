@@ -1,22 +1,15 @@
 <?php echo "{$this->Doctype('XHTML1_TRANSITIONAL')}\n"; //HTML文档类型 ?>
 <html>
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="Content-Language" content="zh-CN" />
-<?php
-	echo $this->headMeta();
-?>
-<script type="text/javascript" src="/static/scripts/jquery.js"></script>
-<script type="text/javascript" src="/static/scripts/common.js"></script>
-<?php
-	echo $this->headScript();
-	echo $this->headLink();
-	echo $this->headStyle();
-	echo $this->render("{$this->header['modelName']}_head.phtml");
+<?php 
+//HEAD区域附加信息 <title> <meta> <script> <style> <link>
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+                 ->appendHttpEquiv('Content-Language', 'zh-CN');
+$this->headScript()->appendFile('/static/scripts/jquery.js')->appendFile('/static/scripts/common.js');
+$this->headTitle('杭州浙江大学校友会 [ zjuhz.com ]','append'); $this->headTitle()->setSeparator(' - ');
+echo $this->headTitle().$this->headMeta().$this->headScript().$this->headStyle().$this->headLink();
 ?>
 </head>
-
 <body>
 <div id="wrap">
 
@@ -63,10 +56,10 @@ if(!$this->footer)
 $this->footer = 'global';
 echo $this->partial("partial/{$this->footer}-footer.phtml");
 ?>
+
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
 </table>
 </div>
 </body>
-
 </html>

@@ -54,15 +54,10 @@ class IndexController extends Zend_Controller_Action
 		//载入主模板
 		$this->_helper->layout->setLayout('main');
 		//当前模块
-		$this->view->header = array('modelName'=>'help');
-		//载入标题
-		$this->view->headTitle($this->_iniHelp->head->title);
-		//载入JS文件
-    	$this->view->headScript()->appendFile('/static/scripts/help/help.js');
-    	//载入CSS文件
-		$this->view->headLink()->appendStylesheet('/static/styles/help.css','screen');
-
-		$this->view->role = 'member';
+		$this->view->header  = array('modelName'=>'help');
+		$this->view->request = $this->getRequest();
+		//权限及资料
+		$this->view->role = $this->_sessCommon->role;
 		$this->view->accountInfo = array(
     	    'userName' => $this->_sessCommon->login['realName'],
     	    'letter' => '0',
@@ -90,6 +85,7 @@ class IndexController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	
+    	//载入标题
+		//$this->view->headTitle($this->_iniHelp->head->title->index->index);    	
     }
 }
