@@ -1,6 +1,6 @@
 @import url("global.css");
 
-/* »¥Öú·ÖÀà --------------------------------------------------- */
+/* äº’åŠ©åˆ†ç±» --------------------------------------------------- */
 .help_category{ margin:10px 0 0 10px; background:#EFF7FF; }
 .help_category h2{ padding:5px 10px; background:#5D748F url(/static/images/bg/rc_tl.png) no-repeat left top; }
 .help_category p{ padding:8px;  border:1px solid #D9E6F7; border-top:none; }
@@ -8,12 +8,12 @@
 .help_category p a.M{ font-size:13px; font-weight:bold; }
 .help_category p a:hover{ text-decoration:underline; }
 
-/* »¥Öú¹ã²¥ --------------------------------------------------- */
+/* äº’åŠ©å¹¿æ’­ --------------------------------------------------- */
 .help_notice{  margin:0 0 0 15px; height:20px; width:370px  }
 .help_notice strong{ float:left; color:#7D5D27; font-size:13px }
 .help_notice .nt{ display:none; float:left; color:#166E8B; text-decoration:none; }
 
-/* ÇóÖú¼¯ºÏ ---------------------------------------------------- */
+/* æ±‚åŠ©é›†åˆ ---------------------------------------------------- */
 .help_set{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 10px; width:475px; }
 .help_set th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px;  }
 .help_set td{ padding:5px; }
@@ -25,7 +25,7 @@
 .help_set td.cat a:visited{ color:#666; }
 .help_set td.coin{ font-size:9px; color:#537E01; text-align:center }
 
-/* »ı·ÖÅÅĞĞ ---------------------------------------------------------- */
+/* ç§¯åˆ†æ’è¡Œ ---------------------------------------------------------- */
 .help_rank{ width:165px; border:1px solid #E7DAC5; margin:10px 0 0 10px; }
 .help_rank th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5;}
 .help_rank td{ padding:5px; color:#666; font-size:9px; }
@@ -33,17 +33,17 @@
 .help_rank td a:hover{ text-decoration:underline; }
 .help_rank .txtr a{ font-size:12px; }
 
-/* »ı·Ö°ïÖú ----------------------------------------------------------- */
+/* ç§¯åˆ†å¸®åŠ© ----------------------------------------------------------- */
 .box{ padding:10px 0 10px 10px;  }
 a.help_link,a.help_rule{ border:1px solid #fff; background:#fff url(/static/images/icon/blue_help.gif) no-repeat 5px center; padding:12px 14px 12px 40px; margin-top:5px; text-decoration:none; }
 a.help_rule{ background:#fff url(/static/images/icon/rule.gif) no-repeat 5px center; }
 a.need_help{ width:166px; height:36px; background:url(/static/images/btn/help.gif) no-repeat; display:block; margin:5px 0 0 10px; font-size:18px; text-align:center; line-height:220%; font-weight:bold; text-decoration:none; color:#fff }
 a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid #D9E6F7; }
 
-/* »¥ÖúÎ»ÖÃ ----------------------------------------------------------- */
-#help_position{ background:url(/static/images/bullet/arrow_blue.gif) no-repeat left center; margin:10px 0 0 18px; padding-left:18px; }
+/* äº’åŠ©ä½ç½® ----------------------------------------------------------- */
+#help_position{ background:url(/static/images/bullet/arrow_blue.gif) no-repeat left center; margin:10px 0 0 18px; padding-left:18px; color:#666; }
 
-/* ÇóÖú»°Ìâ ----------------------------------------------------------- */
+/* æ±‚åŠ©è¯é¢˜ ----------------------------------------------------------- */
 #topic,#reply,#accept{ width:650px; margin:10px 0 0 15px;}
 .help_on,.help_ok{ border:1px solid #D9E6F7; }
 .help_on h2{ background:#EFF7FF url(/static/images/icon/help.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; }
@@ -72,20 +72,20 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .memo p{ color:#666; }
 .memo small{ color:#666 }
 
-/* ¹¤¾ßÌõ --------------------------------------------------------------- */
+/* å·¥å…·æ¡ --------------------------------------------------------------- */
 .toolbar{ float:right; margin-top:-22px; padding-right:10px; }
 .toolbar a{text-decoration:none;}
 .collection{  background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
 .report{  background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
 
-/* Ìá½»´ğ°¸±í ------------------------------------------------------------- */
+/* æäº¤ç­”æ¡ˆè¡¨ ------------------------------------------------------------- */
 
 #reply_form{ padding:20px; color:#666 }
 #reply_form textarea{ width:500px; padding:2px; height:100px; border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
 .verify{  margin-top:10px; padding:2px; height:20px; font-size:14px;line-height:normal; border:1px solid #999; }
 .reply_btn{ padding:4px; margin-top:10px; margin-left:30px; }
 
-/* ×Ó·ÖÀà¿é --------------------------------------------------------------- */
+/* å­åˆ†ç±»å— --------------------------------------------------------------- */
 .sub_category { border:1px solid #D9E6F7; margin:8px 0 0 10px; width:475px; }
 .sub_category h2{ color:#3E628A; background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; border-bottom:1px solid #D9E6F7; padding:5px 0 5px 20px; }
 .sub_category table{ }
@@ -93,7 +93,7 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .sub_category a{ text-decoration:none; color:#004BCA }
 .sub_category small{ font-size:9px; }
 
-/* ÎÊÌâ×´Ì¬tab°´Å¥ ----------------------------------------------------------- */
+/* é—®é¢˜çŠ¶æ€tabæŒ‰é’® ----------------------------------------------------------- */
 #help_tab_btn{  margin-left:10px; padding-top:5px; }
 #help_tab_btn a { border:1px solid #C4DBBF; float:left; display:block; margin:0 5px; text-decoration:none; font-weight:bold; color:#5C7B23; padding:5px 10px; border-bottom:1px solid #fff; }
 
