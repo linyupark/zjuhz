@@ -51,21 +51,21 @@ class IndexController extends Zend_Controller_Action
 		//载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
+		//载入主模板
+		$this->_helper->layout->setLayout('main');
 		//当前模块
 		$this->view->header = array('modelName'=>'help');
+		//载入标题
+		$this->view->headTitle($this->_iniHelp->head->title);
 		//载入JS文件
     	$this->view->headScript()->appendFile('/static/scripts/help/help.js');
     	//载入CSS文件
 		$this->view->headLink()->appendStylesheet('/static/styles/help.css','screen');
-		//载入标题
-		$this->view->headTitle($this->_iniHelp->head->title);
-		//载入主模板
-		$this->_helper->layout->setLayout('main');
 
 		$this->view->role = 'member';
 		$this->view->accountInfo = array(
-    	    'userName'=>$this->_sessCommon->login['realName'],
-    	    'letter'=>'0',
+    	    'userName' => $this->_sessCommon->login['realName'],
+    	    'letter' => '0',
     	);
     }
 
