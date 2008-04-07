@@ -35,13 +35,14 @@
 	<tr>
 	<td class="models">
 		<?php 
+		if($this->role != 'member') $this->role = 'guest';
 		// 根据用户是否登陆来判断显示的模块连接
 		echo $this->partial("partial/{$this->role}-model.phtml", $this->header) ?>
 	</td>
 	<td class="nav">
 		<?php 
 		// 显示用户当前的状态(登陆/登出/各便捷连接)
-		echo $this->partial("partial/{$this->role}-nav.phtml", $this->accountInfo) ?>
+		echo $this->partial("partial/{$this->role}-nav.phtml", $this->account_info) ?>
 	</td>
 	</tr>
 	<tr>
@@ -63,10 +64,10 @@ if(!$this->footer)
 $this->footer = 'global';
 echo $this->partial("partial/{$this->footer}-footer.phtml");
 ?>
+
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
 </table>
 </div>
 </body>
-
 </html>
