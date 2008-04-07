@@ -37,8 +37,22 @@ function getVerifyCode() {
 }
 
 // 跳转到提问页
-function redirectAsk()
+function goQuestion()
 {
 	var url = '/help/question/add/title/' + encodeURIComponent($("#keywords").val());
 	window.location.href = url;
+}
+
+//开户广播
+function helpNotice() {
+	var t = setInterval("showNotice()",4000);
+}
+
+//排行榜
+function helpRank() {
+	$('.help_rank').each(function(i) {
+		$('.help_rank:eq('+i+') a.rank').each(function(j) {
+		    $(this).css('background','url(/static/images/icon/rank/n'+(j+1)+'.jpg) no-repeat left center');
+	    }); 
+	});
 }
