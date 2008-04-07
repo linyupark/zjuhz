@@ -12,18 +12,23 @@
 	Zend_Loader::registerAutoload();
 	
 	// 全局注册
-    Zend_Registry::set('iniInfo', new Zend_Config_Ini('Ini/Info.ini'));
-	Zend_Registry::set('sessInfo',new Zend_Session_Namespace('info'));
-	Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
+	$iniInfo = new Zend_Config_Ini('Ini/Info.ini');
+	$dbInfo = Zend_Db::factory($iniInfo->db->adapter, $iniInfo->db->params->toArray());
+	Zend_Registry::set('dbInfo', $dbInfo);
+    Zend_Registry::set('iniInfo', $iniInfo);
+	Zend_Registry::set('sessInfo', new Zend_Session_Namespace('info'));
+	Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
+	
+	Zend_Db_Table::setDefaultAdapter($dbInfo);
 	
 	/* Layout */
-	Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
+	Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layout' => 'main'));
 	
 	/** run */
 	$front = Zend_Controller_Front::getInstance();
-	$front->setDefaultModule('info');
-	$front->throwExceptions(true);
-	$front->registerPlugin(new InfoAcl(Zend_Registry::get('iniInfo')));
-	$front->setControllerDirectory('../../application/info/controller');
-	$front->dispatch();
+	$front->setDefaultModule('info')
+	      ->throwExceptions(true)
+	      ->registerPlugin(new InfoAcl(Zend_Registry::get('sessCommon')))
+	      ->setControllerDirectory('../../application/info/controllers/')
+	      ->dispatch();
         
