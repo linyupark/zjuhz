@@ -54,15 +54,7 @@ class MemberModel
 		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey)');
 		$stmt->execute($input);
 
-		//$rowCount = $stmt->rowCount();
-		//$row = $stmt->fetchAll();//print_r($row);
-		//$stmt->closeCursor();
-    	//echo $rowCount;    	
-
-    	/*$stmt = $this->_dao->prepare($this->_dao->select()->from('tbl_user','userName')->where('uid = 1'));
-    	$stmt->execute();$stmt->closeCursor();
-    	print_r($stmt->fetch());/**/
-		return $stmt->fetchColumn(); // return uid or 0
+		return $stmt->fetchColumn();
     }
 
     /**

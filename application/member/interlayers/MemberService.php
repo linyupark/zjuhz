@@ -24,8 +24,7 @@ class MemberService extends MemberInterlayer
 	public function __construct()
 	{
 		parent::__construct();
-		parent::_initLogic();
-		self::__destruct();
+		parent::_initService();
 	}
 
 	/**
@@ -53,7 +52,7 @@ class MemberService extends MemberInterlayer
      * $input = array('userName'=>'','passWord'=>'','lastIp'=>'');
      * 
      * @param struct $input
-     * @return array|boolean
+     * @return array or false
      */
 	public function login($input)
 	{

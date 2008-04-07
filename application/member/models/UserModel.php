@@ -11,9 +11,9 @@
 
 /**
  * 会员中心-tbl_user
- * 表级操作类,含单表读/写/更新等方法
+ * 表级操作类,含单表读/写/改等方法
  */
-class UserModel extends Zend_Db_Table_Abstract
+class UserModel //extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
