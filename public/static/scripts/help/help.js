@@ -1,11 +1,11 @@
-﻿function show_tab(num) {
+﻿function showTab(num) {
 	$('#help_tab_btn a').css({borderColor:'#C4DBBF',backgroundColor:'#fff',color:'#5C7B23',borderBottomColor:'#fff'});
 	$('#help_tab_btn a:eq('+num+')').css({borderColor:'#FAD1A5',backgroundColor:'#FFFCF0',color:'#C26400',borderBottomColor:'#fff'});
 	$('.tab_content').hide();
 	$('.tab_content:eq('+num+')').show();
 }
 
-function show_notice() {
+function showNotice() {
 	var notice_num = parseInt($('.help_notice a').length);
 	var show_num = parseInt($('.help_notice').attr('start'));
 	$('.help_notice a').hide();
@@ -34,4 +34,11 @@ function putVerifyImg() {
 function getVerifyCode() {
 	verify('verify','/help/index/verify/');
 	$("#vcode").val("");
+}
+
+// 跳转到提问页
+function redirectAsk()
+{
+	var url = '/help/question/add/title/' + encodeURIComponent($("#keywords").val());
+	window.location.href = url;
 }

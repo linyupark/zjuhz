@@ -197,7 +197,7 @@
 </div>
 
 <script>
-function show_notice()
+function showNotice()
 {
 	var notice_num = parseInt($('.help_notice a').length);
 	var show_num = parseInt($('.help_notice').attr('start'));
@@ -210,7 +210,7 @@ function show_notice()
 	}
 	$('.help_notice').attr('start',show_num);
 }
-var t = setInterval("show_notice()",4000);
+var t = setInterval("showNotice()",4000);
 
 $('.help_rank').each(function(i)
 { 
