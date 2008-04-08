@@ -32,6 +32,8 @@ Zend_Session::rememberMe(3600);
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
 /** 项目SESSION */
 Zend_Registry::set('sessHelp',new Zend_Session_Namespace('help'));
+/** 项目ACL */
+Zend_Registry::set('aclHelp', new Zend_Acl());
 
 /** Zend_Layout */
 Zend_Layout::startMvc(array(
@@ -39,7 +41,8 @@ Zend_Layout::startMvc(array(
     'layout' => 'main'));
 
 /** run */
-Zend_Controller_Front::getInstance()->setDefaultModule('help')
+Zend_Controller_Front::getInstance()->registerPlugin(new AclModel(Zend_Registry::get('sessCommon')->role))
+									->setDefaultModule('help')
                                     ->setControllerDirectory('../../application/help/controllers/')
                                     ->throwExceptions(true)
                                     ->dispatch();
