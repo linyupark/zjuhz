@@ -26,10 +26,14 @@
 			$this->view->categories = $this->Category->fetchByPower();
 		}
 		
+		function preDispatch()
+		{
+			$this->getResponse()->insert('bar', $this->view->render('bar.phtml'));
+		}
+		
 		function indexAction()
 		{
-			// 渲染控制连接条
-			$this->render('bar', null, true);
+			
 		}
 		
 		# 信息列表
@@ -114,17 +118,12 @@
 			$this->view->pub_time = Commons::date($pub_time);
 			$this->view->tag = $tag;
 			
-			// 渲染控制连接条
-			$this->render('bar', null, true);
 			$this->render('entity-add');
 		}
 		
 		# 修改信息
 		function entitymodAction()
 		{
-			// 渲染控制连接条
-			$this->render('bar', null, true);
-			
 			// 没有指定修改的信息id就显示列表
 			if(!$entity_id = $this->_getParam('id'))
 			$this->_forward('entity_list');
@@ -162,7 +161,7 @@
 						else $this->view->tips = "没有做任何修改";
 					}
 				}
-				
+				$this->view->row = $this->Entity->fetchRow(array('entity_id = ?'=>$entity_id));
 				$this->render('entity-mod');
 			}
 		}

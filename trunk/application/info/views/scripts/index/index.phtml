@@ -16,7 +16,7 @@
 	
 	<table class="sidebar entity_list" cellspacing="0">
 		<tr>
-			<th width="70%">标题</th>
+			<th width="70%">标题 <small> <?= $this->numrows ?>篇 , <?= $this->numpages ?>页</small></th>
 			<th width="20%">发布时间</th>
 			<th width="10%">浏览</th>
 		</tr>
@@ -32,8 +32,15 @@
 			<td style="font-size:10px"><?= $row->entity_view_num ?></td>
 		</tr>
 		<?php endforeach; endif; ?>
+		<tr>
+		<td colspan="3"><div class="pagination"><?= $this->pagination ?></div></td>
+		</tr>
 	</table>
+	
+	
 </div>
+
+
 
 <script>
 $('.entity_row').mouseover(function(){ $('td',this).css('background','#fff') });

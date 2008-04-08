@@ -19,6 +19,7 @@
 			
 			// 分配角色详细信息
 			$this->view->login = $this->_sessCommon->login;
+			
 		}
 		
 		#每个栏目的详细列表
@@ -42,6 +43,11 @@
 			"href_close" => "</a>", 
 			"num_rows" => count($rowSet),
 			"cur_page" => $this->_getParam('p',1)));
+			
+			// 一些统计
+			$this->view->numrows = count($rowSet);
+			$this->view->numpages = Page::$num_pages;
+			$this->view->curPage = Page::$_set['cur_page'];
 			
 			$this->view->pagination = Page::$page_str;
 			

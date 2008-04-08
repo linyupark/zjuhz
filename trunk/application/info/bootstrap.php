@@ -29,6 +29,9 @@
 	$front->setDefaultModule('info')
 	      ->throwExceptions(true)
 	      ->registerPlugin(new InfoAcl(Zend_Registry::get('sessCommon')))
-	      ->setControllerDirectory('../../application/info/controllers/')
+	      ->setControllerDirectory(array(
+	      	'info' => '../../application/info/controllers/',
+	      	'home' => '../../application/home/controllers/'
+	      ))
 	      ->dispatch();
         

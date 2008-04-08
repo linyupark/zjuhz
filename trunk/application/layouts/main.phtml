@@ -37,15 +37,13 @@
 	<tr>
 	<td class="models">
 	<?php
-		if($this->role != 'member') $this->role = 'guest';
-		// 根据用户是否登陆来判断显示的模块连接
-		echo $this->partial("partial/{$this->role}-model.phtml", Zend_Controller_Front::getInstance()->getParams());
+		echo $this->partial("partial/global-model.phtml", $this->request->getParams());
 	?>
 	</td>
 	<td class="nav">
 	<?php 
 		// 显示用户当前的状态(登陆/登出/各便捷连接)
-		echo $this->partial("partial/{$this->role}-nav.phtml", $this->login);
+		echo $this->partial("partial/global-nav.phtml", $this->login);
 	?>
 	</td>
 	</tr>
@@ -53,7 +51,7 @@
 	<td class="search_form" colspan="2">
 	<?php 
 		// 不同模块显示不通的搜索条
-		echo $this->partial("partial/global-search.phtml", Zend_Controller_Front::getInstance()->getParams());
+		echo $this->render("search.phtml");
 	?>
 	</td>
 	</tr>
@@ -64,10 +62,8 @@
 <?php 
 	//Script主体内容
 	echo $this->layout()->content;
-
-	if(!$this->footer) $this->footer = 'global';
-	//
-	echo $this->partial("partial/{$this->footer}-footer.phtml");
+	
+	echo $this->partial("partial/global-footer.phtml");
 ?>
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>

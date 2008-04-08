@@ -2,7 +2,7 @@
 
 <div id='man'>
 <p>
-	信息筛选 <select name="cate_id" onchange="location.href='/info/post/?cate_id='+this.value">
+	信息筛选 <select name="cate_id" onchange="location.href='/info/admin/entity_list/?cate_id='+this.value">
 		<option value="0">所有分类</option>
 		<?php foreach ($this->categories as $row): ?>
   		<option value="<?php echo $row->category_id ?>"<?php if($this->cate_id == $row->category_id) echo 'selected="selected"' ?>>

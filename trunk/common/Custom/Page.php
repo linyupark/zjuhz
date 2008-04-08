@@ -16,10 +16,10 @@ class Page
   public static $pagesize = 10; #分页大小
   public static $text_open = "<b>"; #当前页头
   public static $text_close = "</b>"; #当前页尾
-  public static $first = "First";
-  public static $prev = "Previous";
-  public static $next = "Next";
-  public static $last = "Last";
+  public static $first = "第一页";
+  public static $prev = "上页";
+  public static $next = "下页";
+  public static $last = "最后页";
 
   static function init($_set)
   {
