@@ -1,7 +1,7 @@
 <form method="POST">
 <input class="input" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input')" value="" name="keywords" id="keywords" />
 <input class="btn" type="submit" value="搜索" /> 
-<?php if($this->modelName == 'help'): ?>
+<?php if($this->module == 'help'): ?>
 <input class="btn" type="button" value="提问" onclick="goQuestion();return false;" />
 <?php endif ?>
 </form>

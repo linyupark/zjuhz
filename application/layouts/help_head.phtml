@@ -1,11 +1,14 @@
 <script type="text/javascript" src="/static/scripts/help/help.js"></script>
 <?php
+
 if (!$this->disableCtrlScript) {
-	echo $this->headScript()->appendFile("/static/scripts/{$this->header['modelName']}/{$this->request->getControllerName()}/{$this->request->getActionName()}.js");
+	echo $this->headScript()->appendFile("/static/scripts/{$this->request->getModuleName()}/{$this->request->getControllerName()}/{$this->request->getActionName()}.js");
+	echo "\n";
 }
 ?>
 <link href="/static/styles/help.css" media="screen" rel="stylesheet" type="text/css" />
 <?php
 	$this->headTitle()->setSeparator(' - ');
 	echo $this->headTitle('校友互助 - 杭州浙江大学校友会 [ zjuhz.com ]','append');
+	echo "\n";
 ?>

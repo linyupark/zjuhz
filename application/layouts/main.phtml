@@ -1,4 +1,6 @@
-<?php echo "{$this->Doctype('XHTML1_TRANSITIONAL')}\n"; //HTML文档类型 ?>
+<?php
+	echo "{$this->Doctype('XHTML1_TRANSITIONAL')}\n";
+?>
 <html>
 
 <head>
@@ -13,7 +15,7 @@
 	echo $this->headScript();
 	echo $this->headLink();
 	echo $this->headStyle();
-	echo $this->render("{$this->header['modelName']}_head.phtml");
+	echo $this->render("{$this->request->getModuleName()}_head.phtml");
 ?>
 </head>
 
@@ -26,7 +28,7 @@
 
 <table id="header">
 <tr>
-<td id="logo" title="杭州浙江大学校友会欢迎您 - zjuhz.com" onclick="location.href='/'">
+<td id="logo" title="杭州浙江大学校友会欢迎您 - zjuhz.com" onClick="location.href='/'">
 	<i>zjuhz.com</i>
 	<p>杭州浙江大学校友会</p>
 </td>
@@ -34,22 +36,25 @@
 <table id="global_search">
 	<tr>
 	<td class="models">
-		<?php 
+	<?php
 		if($this->role != 'member') $this->role = 'guest';
 		// 根据用户是否登陆来判断显示的模块连接
-		echo $this->partial("partial/{$this->role}-model.phtml", $this->header) ?>
+		echo $this->partial("partial/{$this->role}-model.phtml", $this->request->getParams());
+	?>
 	</td>
 	<td class="nav">
-		<?php 
+	<?php 
 		// 显示用户当前的状态(登陆/登出/各便捷连接)
-		echo $this->partial("partial/{$this->role}-nav.phtml", $this->account_info) ?>
+		echo $this->partial("partial/{$this->role}-nav.phtml", $this->accountInfo);
+	?>
 	</td>
 	</tr>
 	<tr>
 	<td class="search_form" colspan="2">
-		<?php 
+	<?php 
 		// 不同模块显示不通的搜索条
-		echo $this->partial("partial/global-search.phtml", $this->header) ?>
+		echo $this->partial("partial/global-search.phtml", $this->request->getParams());
+	?>
 	</td>
 	</tr>
 </table>
@@ -57,14 +62,13 @@
 </tr>
 </table>
 <?php 
-//Script主体内容
-echo $this->layout()->content;
+	//Script主体内容
+	echo $this->layout()->content;
 
-if(!$this->footer)
-$this->footer = 'global';
-echo $this->partial("partial/{$this->footer}-footer.phtml");
+	if(!$this->footer) $this->footer = 'global';
+	//
+	echo $this->partial("partial/{$this->footer}-footer.phtml");
 ?>
-
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
 </table>

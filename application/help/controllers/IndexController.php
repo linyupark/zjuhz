@@ -51,18 +51,14 @@ class IndexController extends Zend_Controller_Action
 		//载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
-		//载入主模板
-		$this->_helper->layout->setLayout('main');
-		//关闭控制器脚本自动载入
-		//$this->view->disableCtrlScript = true;	
 		//当前模块设置
-		$this->view->header  = array('modelName'=>'help');
 		$this->view->request = $this->getRequest();
+
 		//权限及资料
 		$this->view->role = $this->_sessCommon->role;
 		$this->view->accountInfo = array(
     	    'realName' => $this->_sessCommon->login['realName'],
-    	    'letter' => '0',
+    	    'unRead' => '0',
     	);
     }
 

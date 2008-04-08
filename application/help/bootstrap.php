@@ -33,7 +33,13 @@ Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
 /** 项目SESSION */
 Zend_Registry::set('sessHelp',new Zend_Session_Namespace('help'));
 
-Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
+/** Zend_Layout */
+Zend_Layout::startMvc(array(
+    'layoutPath' => '../../application/layouts/',
+    'layout' => 'main'));
 
 /** run */
-Zend_Controller_Front::run('../../application/help/controllers/');
+Zend_Controller_Front::getInstance()->setDefaultModule('help')
+                                    ->setControllerDirectory('../../application/help/controllers/')
+                                    ->throwExceptions(true)
+                                    ->dispatch();
