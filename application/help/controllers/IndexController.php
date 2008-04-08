@@ -42,8 +42,6 @@ class IndexController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		Commons::checkMemberLogin();
-
 		//载入项目配置
 		$this->_iniHelp    = Zend_Registry::get('iniHelp');
 		//载入公共SESSION
@@ -72,6 +70,16 @@ class IndexController extends Zend_Controller_Action
 
 		//将验证码写入公共SESSION
 		ImageHandle::verify('common');
+	}
+
+	/**
+     * 返回登录入口
+     * 
+     * @return void
+     */
+	public function loginAction()
+	{
+		$this->_redirect('../member/');
 	}
 
 	/**
