@@ -23,15 +23,15 @@ require_once('Zend/Controller/Front.php');
 Zend_Loader::registerAutoload();
 
 /** 公用配置文档对象 */
-Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));
+Zend_Registry::set('iniConfig', new Zend_Config_Ini('../../common/Ini/Config.ini'));
 /** 项目配置文档对象 */
-Zend_Registry::set('iniHelp',new Zend_Config_Ini('../../common/Ini/Help.ini'));
+Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
 Zend_Session::rememberMe(3600);
 /** 公用SESSION,包含如验证码,用户基本资料等 */
-Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
+Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
 /** 项目SESSION */
-Zend_Registry::set('sessHelp',new Zend_Session_Namespace('help'));
+Zend_Registry::set('sessHelp', new Zend_Session_Namespace('help'));
 /** 项目ACL */
 Zend_Registry::set('aclHelp', new Zend_Acl());
 
@@ -41,8 +41,9 @@ Zend_Layout::startMvc(array(
     'layout' => 'main'));
 
 /** run */
-Zend_Controller_Front::getInstance()->registerPlugin(new AclModel(Zend_Registry::get('sessCommon')->role))
-									->setDefaultModule('help')
-                                    ->setControllerDirectory('../../application/help/controllers/')
-                                    ->throwExceptions(true)
-                                    ->dispatch();
+Zend_Controller_Front::getInstance()
+    ->registerPlugin(new AclModel(Zend_Registry::get('sessCommon')->role))
+	->setDefaultModule('help')
+    ->setControllerDirectory('../../application/help/controllers/')
+    ->throwExceptions(true)
+    ->dispatch();
