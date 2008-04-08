@@ -21,6 +21,7 @@ Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
 
 /** run */
 	$info_front = Zend_Controller_Front::getInstance();
+	$info_front->setDefaultModule('home');
 	$info_front->throwExceptions(true);
 	$info_front->setControllerDirectory('../../application/home/controllers/');
 	$info_front->dispatch();

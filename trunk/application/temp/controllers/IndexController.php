@@ -6,16 +6,14 @@ class IndexController extends Zend_Controller_Action
 	{
 		$this->view->headScript()->appendFile('/static/scripts/temp.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/temp.css','screen');
-		$this->view->headTitle('浙大校友互助');
-		$this->_helper->layout->setLayout('main');
-		
-		//当前所属模块分配
-		$this->view->header = array('modelName'=>'help');
-		
-		$this->view->role = 'member';
+
+		//选择页面模块
+		$this->view->request = $this->getRequest();
+		//权限资料注入
+		$this->view->role = $this->_sessCommon->role;
 		$this->view->accountInfo = array(
-    		'realName'=>'小王',
-    		'letter'=>'2'
+    	    'realName' => $this->_sessCommon->login['realName'],
+    	    'unRead' => '0',
     	);
 	}
 	

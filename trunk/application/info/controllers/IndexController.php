@@ -12,15 +12,15 @@
 			$this->_sessCommon = Zend_Registry::get('sessCommon');
 								   
 			// 当前所属模块分配
-			$this->view->header = array('modelName'=>'info');
+			$this->view->request = $this->getRequest();
 			
 			// 分配当前角色信息
 			$this->view->role = $this->_sessCommon->role;
 			
 			// 分配角色详细信息
-			$this->view->account_info = array(
+			$this->view->accountInfo = array(
     	    	'realName'=>$this->_sessCommon->login['realName'],
-    	    	'letter'=>'0',
+    	    	'unRead'=>'0',
     		);
 		}
 		

@@ -9,7 +9,7 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
 		
 		//当前所属模块分配
-		$this->view->header = array('modelName'=>'info');
+		$this->view->request = $this->getRequest();
 	}
 	
     function indexAction()
