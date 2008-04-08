@@ -51,10 +51,9 @@ class IndexController extends Zend_Controller_Action
 		//载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
-		//当前模块设置
+		//选择页面模块
 		$this->view->request = $this->getRequest();
-
-		//权限及资料
+		//权限资料注入
 		$this->view->role = $this->_sessCommon->role;
 		$this->view->accountInfo = array(
     	    'realName' => $this->_sessCommon->login['realName'],

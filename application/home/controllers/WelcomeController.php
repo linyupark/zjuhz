@@ -9,7 +9,7 @@ class WelcomeController extends Zend_Controller_Action
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
 		
 		//当前所属模块分配
-		$this->view->header = array('modelName'=>'info');
+		$this->view->request = $this->getRequest();
 	}
 	
     function indexAction()
@@ -26,8 +26,8 @@ class WelcomeController extends Zend_Controller_Action
     	$this->view->role = 'member';
     	
     	$this->view->accountInfo = array(
-    		'userName'=>'小王',
-    		'letter'=>'2'
+    		'realName'=>'小王',
+    		'unRead'=>'2'
     	);
     }
 }
