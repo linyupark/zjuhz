@@ -8,7 +8,7 @@
 		#根据当前的角色权限获取相应目录
 		function fetchByPower()
 		{
-			$sess = Zend_Registry::get('sess_info');
+			$sess = Zend_Registry::get('sessCommon');
 			if($sess->role == 'admin')
 			{
 				return $this->fetchAll();

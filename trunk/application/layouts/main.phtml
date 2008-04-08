@@ -39,7 +39,7 @@
 	<?php
 		if($this->role != 'member') $this->role = 'guest';
 		// 根据用户是否登陆来判断显示的模块连接
-		echo $this->partial("partial/{$this->role}-model.phtml", $this->request->getParams());
+		echo $this->partial("partial/{$this->role}-model.phtml", Zend_Controller_Front::getInstance()->getParams());
 	?>
 	</td>
 	<td class="nav">
@@ -53,7 +53,7 @@
 	<td class="search_form" colspan="2">
 	<?php 
 		// 不同模块显示不通的搜索条
-		echo $this->partial("partial/global-search.phtml", $this->request->getParams());
+		echo $this->partial("partial/global-search.phtml", Zend_Controller_Front::getInstance()->getParams());
 	?>
 	</td>
 	</tr>

@@ -12,11 +12,15 @@
 		# 根据指定的id获取所有相关的信息
 		function getDetailInfo($id)
 		{
-			return $this->_db->fetchRow('SELECT `tbl_entity`.*,`tbl_user`.`user_name`,`tbl_category`.`category_name` 
+			$row = $this->_db->fetchRow('SELECT `tbl_entity`.*,`tbl_user`.`user_name`,`tbl_category`.`category_name` 
 								         FROM `tbl_entity`,`tbl_user`,`tbl_category` 
 			                             WHERE `tbl_entity`.`user_id` = `tbl_user`.`user_id` 
 			                             AND `tbl_entity`.`entity_id` = ? 
 			                             AND `tbl_category`.`category_id` = `tbl_entity`.`category_id`', array($id));
+			// 调用增加阅读数函数
+			$this->increaseViewNum($id, $row['entity_view_num']);
+			
+			return $row;
 		}
 		
 		# 根据发布时间显示同分类上一篇和下一篇必要信息
@@ -42,7 +46,6 @@
 		function getSimilarity($id, $tag = null)
 		{
 			if(!$tag) return false;
-			//随机抽一个标签
 			$tagArr = explode(',', $tag);
 			$likeStr = ''; // LIKE语句
 			foreach ($tagArr as $k => $v)
@@ -60,6 +63,13 @@
 			                      		 LIMIT 10', array($id));
 		}
 		
+		# 根据entity id 增加查看次数
+		private function increaseViewNum($id, $num)
+		{
+			$this->_db->update('tbl_entity', array('entity_view_num' => $num+1), '`entity_id` = '.$id);
+		}
+		
+		# 获得一些数据库处理信息
 		static function getProfile()
 		{
 			$profiler = Zend_Registry::get('dbInfo')->getProfiler();

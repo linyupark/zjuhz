@@ -24,6 +24,7 @@
 				$acl = new Zend_Acl();
 				// 增加所有控制角色,决定继承关系
 				$acl->addRole(new Zend_Acl_Role('guest'))
+				    ->addRole(new Zend_Acl_Role('member', 'guest'))
 				    ->addRole(new Zend_Acl_Role('staff', 'guest'))
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 增加所要控制的资源(Controller)
@@ -35,8 +36,8 @@
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
 				$acl->allow('guest', array('view','login','support','index'))
-				    ->allow('staff', 'admin')
-				    ->deny('staff', 'admin', array('category','cache','delete','public','manager'))
+				    ->allow('staff', null)
+				    ->deny('staff', 'admin', array('entity_del', 'entity_pub'))
 				    ->allow('admin');
 				// 寄存
 				Zend_Registry::set('acl', $acl);
@@ -64,8 +65,9 @@
 			// 无权限的请求,重新分配CA
 			if (!$this->_acl->isAllowed($sessRole, $resource, $action))
 			{
-				$request->setControllerName('index');
-				$request->setActionName('index');
+				$request->setControllerName('error');
+				$request->setActionName('error');
+				$request->setParam('message','deny');
 			}
 		}
 	}

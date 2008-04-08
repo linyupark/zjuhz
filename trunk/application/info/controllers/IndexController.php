@@ -53,4 +53,12 @@
 			$this->view->categories = $Category->fetchAll();
 			
 		}
+		
+		#验证图片
+		function verifyAction()
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->ViewRenderer->setNoRender();
+			ImageHandle::verify('common');
+		}
 	}
