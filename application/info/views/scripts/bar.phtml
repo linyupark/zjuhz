@@ -1,16 +1,16 @@
+<?php 
+$bar = Zend_Registry::get('iniInfo')->bar; 
+?>
+
 <div id='toper'>
-  杭州浙江大学校友会信息管理后台 [<a href='/info/console/logout/'>安全退出</a>]
+  杭州浙江大学校友会信息管理后台 [<a href='/info/logout/'>安全退出</a>]
 
 </div><div id='panel'>
   <dl>
-  	<dt>内容管理</dt>
-  	<dd><a href='/info/post/'>信息管理</a></dd>
-  	<dd><a href='/info/post/add/'>信息添加</a></dd>
-  	<?php if(Zend_Registry::get('sess_info')->role == 'admin'): ?>
-    <dt>系统管理</dt>
-	<dd><a href='/info/role/'>系统成员管理</a></dd>
-    <dd><a href='/info/category/'>信息分类管理</a></dd>
-    <dd><a href='/info/comment/'>评论管理</a></dd>
-    <?php endif; ?>
+  	<dt>新闻资讯管理</dt>
+  	<?php foreach ($bar->entity->toArray() as $k => $v): ?>
+  	<?php if($this->acl->isAllowed($this->role, 'admin', 'entity_'.$k)): ?>
+  	<dd><a href="/info/admin/entity_<?= $k ?>"><?= $v ?></a></dd>
+  	<?php endif;endforeach; ?>
   </dl>
 </div>

@@ -1,3 +1,9 @@
+//增加TAG
+function add_tag()
+{
+	$('.tag_inner').append('<input type="text" name="tag[]" size="6" />');
+}
+
 //修改权限
 function role_mod(user_id)
 {

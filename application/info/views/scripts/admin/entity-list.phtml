@@ -1,0 +1,42 @@
+<h2>信息列表</h2>
+
+<div id='man'>
+<p>
+	信息筛选 <select name="cate_id" onchange="location.href='/info/post/?cate_id='+this.value">
+		<option value="0">所有分类</option>
+		<?php foreach ($this->categories as $row): ?>
+  		<option value="<?php echo $row->category_id ?>"<?php if($this->cate_id == $row->category_id) echo 'selected="selected"' ?>>
+  		<?php echo $row->category_name ?>
+  		</option>
+  		<?php endforeach; ?>
+	</select>
+</p>
+  <table class="tb">
+  	<tr>
+  		<th>信息标题</th>
+  		<th>发布人</th>
+  		<th>时间</th>
+  		<th width="15%">操作</th>
+  	</tr>
+  	<?php if(!$this->rows): ?>
+  	<tr>
+  		<td colspan="4">目前没有任何信息</td>
+  	</tr>
+  	<?php else: foreach ($this->rows as $row): ?>
+  	<tr id="post_<?= $row['entity_id'] ?>">
+  		<td><a href="/info/view/detail/id/<?= $row['entity_id'] ?>"><?= stripslashes($row['entity_title']) ?></a></td>
+  		<td><?= $row['user_name'] ?></td>
+  		<td><?= Commons::date($row['entity_pub_time']) ?></td>
+  		<td>
+  		<input type="hidden" name="entity_id" value="<?= $row['entity_id'] ?>" />
+  		<?php if($this->acl->isAllowed($this->role, 'admin', 'entity_del')): ?>
+  		<input onclick="post_del(<?= $row['entity_id'] ?>)" type="button" value="删除" />
+  		<?php endif; if($this->acl->isAllowed($this->role, 'admin', 'entity_mod')): ?>
+  		<input onclick="location.href='/info/admin/entity_mod/?id=<?= $row['entity_id'] ?>'" type="button" value="修改" />
+  		<?php endif; ?>
+  		</td>
+  	</tr>
+  	<?php endforeach; endif; ?>
+  </table>
+  <p class="pagination"><?= $this->pagination ?></p>
+</div>
