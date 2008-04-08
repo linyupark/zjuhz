@@ -11,10 +11,7 @@ class IndexController extends Zend_Controller_Action
 		$this->view->request = $this->getRequest();
 		//权限资料注入
 		$this->view->role = $this->_sessCommon->role;
-		$this->view->accountInfo = array(
-    	    'realName' => $this->_sessCommon->login['realName'],
-    	    'unRead' => '0',
-    	);
+		$this->view->login = $this->_sessCommon->login;
 	}
 	
 	// 首页

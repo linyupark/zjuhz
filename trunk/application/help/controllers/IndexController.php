@@ -35,14 +35,14 @@ class IndexController extends Zend_Controller_Action
      */
 	private $_sessHelp = null;
 
-    /**
+	/**
      * 初始化
      * 
      * @return void
      */
-    public function init()
-    {
-    	Commons::checkMemberLogin();
+	public function init()
+	{
+		Commons::checkMemberLogin();
 
 		//载入项目配置
 		$this->_iniHelp    = Zend_Registry::get('iniHelp');
@@ -54,35 +54,32 @@ class IndexController extends Zend_Controller_Action
 		//选择页面模块
 		$this->view->request = $this->getRequest();
 		//权限资料注入
-		$this->view->role = $this->_sessCommon->role;
-		$this->view->accountInfo = array(
-    	    'realName' => $this->_sessCommon->login['realName'],
-    	    'unRead' => '0',
-    	);
-    }
+		$this->view->role    = $this->_sessCommon->role;
+		$this->view->login   = $this->_sessCommon->login;
+	}
 
-    /**
+	/**
      * help验证码
      * 
      * @return void
      */
-    public function verifyAction()
-    {
+	public function verifyAction()
+	{
 		//禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
 
 		//将验证码写入公共SESSION
 		ImageHandle::verify('common');
-    }
+	}
 
-    /**
+	/**
      * 你问我答首页
      * 
      * @return void
      */
 	public function indexAction()
-    {
-    	//载入标题
-		//$this->view->headTitle($this->_iniHelp->head->title->index->index);    	
-    }
+	{
+		//载入标题
+		//$this->view->headTitle($this->_iniHelp->head->title->index->index);
+	}
 }
