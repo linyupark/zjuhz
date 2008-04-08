@@ -15,7 +15,7 @@
 			}
 			else 
 			{
-				$power_arr = explode('|', $sess->power); //权力数组
+				$power_arr = explode('|', Zend_Registry::get('sessInfo')->power); //权力数组
 				return $this->find($power_arr);
 			}
 		}
