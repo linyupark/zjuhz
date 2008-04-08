@@ -18,10 +18,7 @@
 			$this->view->role = $this->_sessCommon->role;
 			
 			// 分配角色详细信息
-			$this->view->accountInfo = array(
-    	    	'realName'=>$this->_sessCommon->login['realName'],
-    	    	'unRead'=>'0',
-    		);
+			$this->view->login = $this->_sessCommon->login;
 		}
 		
 		#每个栏目的详细列表

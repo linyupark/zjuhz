@@ -25,9 +25,6 @@ class WelcomeController extends Zend_Controller_Action
 		$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/info/api/');
     	$this->view->role = 'member';
     	
-    	$this->view->accountInfo = array(
-    		'realName'=>'小王',
-    		'unRead'=>'2'
-    	);
+    	$this->view->login = $this->_sessCommon->login;
     }
 }
