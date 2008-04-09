@@ -49,3 +49,14 @@ function input_blur(class_name)
 	$('.'+class_name).css('color','#aaa');
 }
 
+// 写入img空标签
+function putVerifyImg() {
+	var isPutVerifyImg = $("#isPutVerifyImg").val();
+	if(isPutVerifyImg == 'show')
+	{
+		$("#putVerifyImg").html("<a href=javascript:getVerifyCode();><img id='verify'></a>");
+		$("#isPutVerifyImg").remove();
+		//$("#isPutVerifyImg").val("none");
+		getVerifyCode();		
+	}
+}
