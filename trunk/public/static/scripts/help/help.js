@@ -36,19 +36,25 @@ function getVerifyCode() {
 	$("#vcode").val("");
 }
 
-// 跳转到提问页
-function goQuestion()
+// 跳转
+function goUrl(name)
 {
-	var url = '/help/question/add/title/' + encodeURIComponent($("#keywords").val());
+	var url = '/help/';
+
+	if (name == 'question_add')
+	{
+		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val());
+	}
+
 	window.location.href = url;
 }
 
-//开户广播
+// 广播延时
 function helpNotice() {
 	var t = setInterval("showNotice()",4000);
 }
 
-//排行榜
+// 排行榜
 function helpRank() {
 	$('.help_rank').each(function(i) {
 		$('.help_rank:eq('+i+') a.rank').each(function(j) {
