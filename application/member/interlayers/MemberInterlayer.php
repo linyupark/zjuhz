@@ -103,11 +103,11 @@ abstract class MemberInterlayer
     	if (!Zend_Registry::isRegistered('dao'))
     	{
     		/** Registry 数据库 */
-			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter,
+			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter, 
 			                        $this->_iniMember->db->default->params->toArray());
 			$dao->query('set names utf8');
 			Zend_Db_Table::setDefaultAdapter($dao);
-			Zend_Registry::set('dao',$dao);
+			Zend_Registry::set('dao', $dao);
     	}
     }
 }

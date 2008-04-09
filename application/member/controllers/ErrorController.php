@@ -21,7 +21,7 @@ class ErrorController extends Zend_Controller_Action
      */
     public function init()
     {    	
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
     }
 
@@ -33,7 +33,7 @@ class ErrorController extends Zend_Controller_Action
      */
     public function errorAction()
     {
-    	//$this->_forward('index','Index');
+    	//$this->_forward('index', 'Index');
         print_r($this->getRequest()->getParams());
     }
 }

@@ -1,22 +1,12 @@
-<?php
-	echo "{$this->Doctype('XHTML1_TRANSITIONAL')}\n";
-?>
-<html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="zh-CN" />
-<?php
-	echo $this->headMeta();
-?>
+<?= $this->headMeta(); ?>
 <script type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script type="text/javascript" src="/static/scripts/common.js"></script>
-<?php
-	echo $this->headScript();
-	echo $this->headLink();
-	echo $this->headStyle();
-	echo $this->render("head.phtml");
-?>
+<?= $this->headScript(),$this->render("head.phtml"),$this->headLink(),$this->headStyle(); ?>
 </head>
 
 <body>
@@ -29,20 +19,15 @@
 <table id="header">
 <tr>
 <td id="logo" title="杭州浙江大学校友会欢迎您 - zjuhz.com" onClick="location.href='/'">
-	<i>zjuhz.com</i>
-	<p>杭州浙江大学校友会</p>
+<i>zjuhz.com</i>
+<p>杭州浙江大学校友会</p>
 </td>
 <td>
-<?= $this->render("top.phtml") ?>
+<?= $this->render("top.phtml"); ?>
 </td>
 </tr>
 </table>
-<?php 
-	//Script主体内容
-	echo $this->layout()->content;
-	
-	echo $this->partial("partial/global-footer.phtml");
-?>
+<?= $this->layout()->content,$this->partial("partial/global-footer.phtml"); ?>
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
 </table>

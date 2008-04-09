@@ -16,14 +16,11 @@ set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../application/help/models/');
 //echo get_include_path();exit;
 
-/** Zend_Controller_Front */
-require_once('Zend/Controller/Front.php');
-
+/** Zend_Loader */
+require_once('Zend/Loader.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-/** 公用配置文档对象 */
-Zend_Registry::set('iniConfig', new Zend_Config_Ini('../../common/Ini/Config.ini'));
 /** 项目配置文档对象 */
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 

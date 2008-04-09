@@ -35,9 +35,9 @@ class LoginController extends Zend_Controller_Action
      */
     public function init()
     {
-		//载入项目配置
+		// 载入项目配置
 		$this->_iniMember  = Zend_Registry::get('iniMember');
-		//载入公共SESSION
+		// 载入公共SESSION
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
     }
 
@@ -48,7 +48,7 @@ class LoginController extends Zend_Controller_Action
      */
 	public function indexAction()
 	{
-		$this->_forward('login','Index');
+		$this->_forward('index', 'Index');
 	}
 
 	/**
@@ -58,7 +58,7 @@ class LoginController extends Zend_Controller_Action
      */
 	public function loginAction()
 	{
-		$this->_forward('login','Index');
+		$this->_forward('index', 'Index');
 	}
 
 	/**
@@ -68,18 +68,18 @@ class LoginController extends Zend_Controller_Action
      */
 	public function dologinAction()
 	{
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			//此处接收传递的数据数组
+			// 此处接收传递的数据数组
 			$input = $this->getRequest()->getPost(); //print_r($input);exit;
-			//此处单独处理的数据单独取出
+			// 此处单独处理的数据单独取出
 			$alive = $input['alive'];
-			//此处可注入数据将用与判断
-			//
-			//此处注销无用数据				
+			// 此处可注入数据将用与判断
+			// 
+			// 此处注销无用数据				
 			unset($input['alive']);
 
 			$filter = LoginFilter::init();
@@ -93,8 +93,8 @@ class LoginController extends Zend_Controller_Action
 					$this->_sessCommon->login = $login;
 					//记住账号
 					((null === $alive) ? 
-					    setcookie('zjuhz_member[alive]',$input['userName'],time()-2592000,'/') : 
-					        setcookie('zjuhz_member[alive]',$input['userName'],time()+2592000,'/'));
+					    setcookie('zjuhz_member[alive]', $input['userName'], time()-2592000, '/') : 
+					        setcookie('zjuhz_member[alive]', $input['userName'], time()+2592000, '/'));
 
 					//成功跳转
 					echo 'redirect';
@@ -116,7 +116,6 @@ class LoginController extends Zend_Controller_Action
      */
 	public function dologoutAction()
     {
-    	Zend_Session::destroy(true);
-    	$this->_redirect('../member/');
+    	$this->_forward('index', 'Logout');
     }
 }

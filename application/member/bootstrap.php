@@ -16,14 +16,11 @@ set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../application/member/models/');
 //echo get_include_path();exit;
 
-/** Zend_Controller_Front */
-require_once('Zend/Controller/Front.php');
-
+/** Zend_Loader */
+require_once('Zend/Loader.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-/** 公用配置文档对象 */
-Zend_Registry::set('iniConfig', new Zend_Config_Ini('../../common/Ini/Config.ini'));
 /** 项目配置文档对象 */
 Zend_Registry::set('iniMember', new Zend_Config_Ini('../../common/Ini/Member.ini'));
 
@@ -32,6 +29,8 @@ Zend_Session::rememberMe(3600);
 Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
 /** 项目SESSION */
 Zend_Registry::set('sessMember', new Zend_Session_Namespace('member'));
+/** 项目ACL */
+Zend_Registry::set('aclMember', new Zend_Acl());
 
 /** run */
 Zend_Controller_Front::run('../../application/member/controllers/');

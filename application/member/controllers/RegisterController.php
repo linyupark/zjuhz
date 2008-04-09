@@ -42,12 +42,12 @@ class RegisterController extends Zend_Controller_Action
      */
     public function init()
     {
-		//载入项目配置
+		// 载入项目配置
 		$this->_iniMember  = Zend_Registry::get('iniMember');
-		//载入公共SESSION
+		// 载入公共SESSION
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
-		//载入项目SESSION
-		$this->_sessMember = Zend_Registry::get('sessMember');	
+		// 载入项目SESSION
+		$this->_sessMember = Zend_Registry::get('sessMember');
     }
 
     /**
@@ -57,7 +57,8 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	$this->_forward('register','Index');
+    	// 获取注册邀请码
+    	$this->view->ikey = $this->getRequest()->getParam('ikey');
     }
 
     /**
@@ -67,35 +68,35 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function registerAction()
     {
-    	$this->_forward('register','Index');
+		$this->_forward('index');
     }
 
 	/**
      * 会员注册-数据提交
-     * 
+     *
      * @return string to ajax
      */
 	public function doregisterAction()
 	{
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			//此处接收传递的数据数组
+			// 此处接收传递的数据数组
 			$input = $this->getRequest()->getPost(); //print_r($input);exit;
-			//此处单独处理的数据单独取出
+			// 此处单独处理的数据单独取出
 			$vcode = $input['vcode'];
 			$scode = $this->_sessCommon->verify;
-			//此处可注入数据将用与判断
-			//
-			//此处注销无用数据
+			// 此处可注入数据将用与判断
+			// 
+			// 此处注销无用数据
 			unset($this->_sessCommon->verify);
 
 			$filter = RegisterFilter::init();
 			if ($input = $filter->register($input))
 			{
-				if (Commons::checkVerify($vcode,$scode))
+				if (Commons::checkVerify($vcode, $scode))
 				{
 					$logic = RegisterLogic::init();	
 				
@@ -116,19 +117,19 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function docheckAction()
 	{
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			//此处接收传递的数据数组
+			// 此处接收传递的数据数组
 			$input = $this->getRequest()->getPost(); //print_r($posts);exit;
-			//此处单独处理的数据单独取出
-			//
-			//此处可注入数据将用与判断
-			//
-			//此处注销无用数据			
-			//
+			// 此处单独处理的数据单独取出
+			// 
+			// 此处可注入数据将用与判断
+			// 
+			// 此处注销无用数据
+			// 
 
 			$filter = RegisterFilter::init();
 			if ($userName = $filter->check($input))

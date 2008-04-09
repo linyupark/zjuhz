@@ -49,10 +49,8 @@ class IndexController extends Zend_Controller_Action
 		//载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
-		//选择页面模块
-		$this->view->request = $this->getRequest();
 		//会员资料注入
-		$this->view->login   = $this->_sessCommon->login;
+		$this->view->login = $this->_sessCommon->login;
 	}
 
 	/**
@@ -90,5 +88,7 @@ class IndexController extends Zend_Controller_Action
 	{
 		//载入标题
 		$this->view->headTitle($this->_iniHelp->head->title->index->index);
+		//载入JS脚本
+		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
 	}
 }

@@ -49,7 +49,7 @@ class MemberService extends MemberInterlayer
 
 	/**
      * 会员登录
-     * $input = array('userName'=>'','passWord'=>'','lastIp'=>'');
+     * $input = array('userName'=>'', 'passWord'=>'', 'lastIp'=>'');
      * 
      * @param struct $input
      * @return array or false

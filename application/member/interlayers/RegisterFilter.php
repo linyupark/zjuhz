@@ -56,49 +56,49 @@ class RegisterFilter extends MemberInterlayer
      */
 	public function register($input)
 	{
-		//载入相关ZEND扩展 - ZF1.5版本需此
-		//Zend_Validate_Utf8Length
+		// 载入相关ZEND扩展 - ZF1.5版本需此
+		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
 
-		//设置过滤规则
+		// 设置过滤规则
 		$filters = array(
 		    '*' => array(
 		        'StringTrim', 'StringToLower'), 
-	    	'rname' => 'StripTags',
-	    	'ikey' => 'Alnum',
+	    	'rname' => 'StripTags', 
+	    	'ikey' => 'Alnum', 
     	);
 
-    	//*设置验证规则
+    	// 设置验证规则
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'),'breakChainOnFailure' => true,'presence' => 'required','messages' => array(
+		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError)), 
           	'pswd' => array(
-       	        array('StringLength', '6','16'),'breakChainOnFailure' => true,'presence' => 'required','messages' => array(
-              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError,
-              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError)),
+       	        array('StringLength', '6','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError, 
+              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError)), 
 			'repswd' => array(
-			    array('InArray', array($input['pswd']),true),'breakChainOnFailure' => true,'presence' => 'required','messages' => array(
-               	    Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->rePasswd->notEqual)),
+			    array('InArray', array($input['pswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->rePasswd->notEqual)), 
             'rname' => array(
-                array('Utf8Length', '2','16'),'breakChainOnFailure' => true,'presence' => 'required','messages' => array(
-                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realName->formatError,
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realName->formatError)),
-            'sex' => array('presence' => 'required'),
-            'vcode' => array('Digits','breakChainOnFailure' => true,'presence' => 'required','messages' => array(
-                    Zend_Validate_Digits::NOT_DIGITS => $this->_iniMember->hint->verifyCode->stringEmpty,
-                    Zend_Validate_Digits::STRING_EMPTY => $this->_iniMember->hint->verifyCode->notDigits)),
-            'ikey' => array('allowEmpty' => true),
+                array('Utf8Length', '2','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realName->formatError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realName->formatError)), 
+            'sex' => array('presence' => 'required'), 
+            'vcode' => array('Digits','breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Digits::NOT_DIGITS => $this->_iniMember->hint->verifyCode->stringEmpty, 
+                    Zend_Validate_Digits::STRING_EMPTY => $this->_iniMember->hint->verifyCode->notDigits)), 
+            'ikey' => array('allowEmpty' => true), 
         );
 
         $options = array(
-            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage,
-            'missingMessage' => $this->_iniMember->hint->missingMessage,
+            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
+            'missingMessage' => $this->_iniMember->hint->missingMessage, 
         );         	
 
-		$input = new Zend_Filter_Input($filters,$validators,$input,$options);
+		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
 
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown()) //
+		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
@@ -106,9 +106,9 @@ class RegisterFilter extends MemberInterlayer
 		else
 		{
 			$input = array(
-		    	'userName' => $input->getUnescaped('uname'),'passWord' => $input->getUnescaped('pswd'),
-		  		'realName' => $input->getUnescaped('rname'),'sex' => $input->getUnescaped('sex'),
-		  		'regIp' => Commons::getIp(),'ikey' => $input->getUnescaped('ikey'),
+		    	'userName' => $input->getUnescaped('uname'), 'passWord' => $input->getUnescaped('pswd'), 
+		  		'realName' => $input->getUnescaped('rname'), 'sex' => $input->getUnescaped('sex'), 
+		  		'regIp' => Commons::getIp(), 'ikey' => $input->getUnescaped('ikey'), 
 			);
 
 			return $input;
@@ -125,27 +125,27 @@ class RegisterFilter extends MemberInterlayer
      */
 	public function check($input)
 	{
-		//设置过滤规则
+		// 设置过滤规则
 		$filters = array(
 		    'uname' => array(
 		        'StringTrim', 'StringToLower'), 
     	);
 
-    	//*设置验证规则
+    	// 设置验证规则
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'),'breakChainOnFailure' => true,'messages' => array(
-		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError,)),
+		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'), 'breakChainOnFailure' => true, 'messages' => array(
+		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError, )), 
         );
 
         $options = array(
-            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage,
-			'missingMessage' => $this->_iniMember->hint->missingMessage,
+            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
+			'missingMessage' => $this->_iniMember->hint->missingMessage, 
         );         	
 
-		$input = new Zend_Filter_Input($filters,$validators,$input,$options);
+		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
 
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown()) //
+		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
