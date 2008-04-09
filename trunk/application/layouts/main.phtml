@@ -33,29 +33,7 @@
 	<p>杭州浙江大学校友会</p>
 </td>
 <td>
-<table id="global_search">
-	<tr>
-	<td class="models">
-	<?php
-		echo $this->partial("partial/global-model.phtml", $this->request->getParams());
-	?>
-	</td>
-	<td class="nav">
-	<?php 
-		// 显示用户当前的状态(登陆/登出/各便捷连接)
-		echo $this->partial("partial/global-nav.phtml", $this->login);
-	?>
-	</td>
-	</tr>
-	<tr>
-	<td class="search_form" colspan="2">
-	<?php 
-		// 不同模块显示不通的搜索条
-		echo $this->render("search.phtml");
-	?>
-	</td>
-	</tr>
-</table>
+<?= $this->render("top.phtml") ?>
 </td>
 </tr>
 </table>
