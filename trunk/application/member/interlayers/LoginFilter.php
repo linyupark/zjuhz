@@ -56,31 +56,31 @@ class LoginFilter extends MemberInterlayer
      */
 	public function login($input)
 	{
-		//设置过滤规则
+		// 设置过滤规则
 		$filters = array(
 		    '*' => array(
-		        'StringTrim', 'StringToLower'),
+		        'StringTrim', 'StringToLower'), 
     	);
 
-    	//*设置验证规则
+    	// 设置验证规则
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'),'breakChainOnFailure' => true,'messages' => array(
-		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError,)), 
+		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'), 'breakChainOnFailure' => true, 'messages' => array(
+		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError, )),  
           	'pswd' => array(
-       	        array('StringLength', '6','16'),'breakChainOnFailure' => true,'messages' => array(
-              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError,
-              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError,)),
+       	        array('StringLength', '6', '16'), 'breakChainOnFailure' => true, 'messages' => array(
+              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError, 
+              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError, )), 
         );
 
         $options = array(
-            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage,
-			'missingMessage' => $this->_iniMember->hint->missingMessage,
-        );         	
+            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
+			'missingMessage' => $this->_iniMember->hint->missingMessage, 
+        );
 
-		$input = new Zend_Filter_Input($filters,$validators,$input,$options);
-		
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown()) //
+		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
+
+		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
@@ -88,8 +88,8 @@ class LoginFilter extends MemberInterlayer
 		else
 		{
 			$input = array(
-		    	'userName' => $input->getUnescaped('uname'),'passWord' => $input->getUnescaped('pswd'),
-		  		'lastIp' => Commons::getIp(),
+		    	'userName' => $input->getUnescaped('uname'), 'passWord' => $input->getUnescaped('pswd'), 
+		  		'lastIp' => Commons::getIp(), 
 			);
 
 			return $input;

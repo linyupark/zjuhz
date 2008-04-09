@@ -28,7 +28,7 @@ class MemberModel
      */
     public function __construct()
     {
-    	//载入数据库类
+    	// 载入数据库类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -39,7 +39,7 @@ class MemberModel
      */
 	public function __destruct()
     {
-    	//断开数据库连接
+    	// 断开数据库连接
     	$this->_dao->closeConnection();
     }
 

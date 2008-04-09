@@ -40,7 +40,7 @@ class UserModel //extends Zend_Db_Table_Abstract
      */
     public function __construct()
     {
-    	//载入数据库操作类
+    	// 载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
