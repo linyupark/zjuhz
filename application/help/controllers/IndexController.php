@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
 
 	/**
      * 初始化
-     * 
+     *
      * @return void
      */
 	public function init()
@@ -51,8 +51,7 @@ class IndexController extends Zend_Controller_Action
 
 		//选择页面模块
 		$this->view->request = $this->getRequest();
-		//权限资料注入
-		$this->view->role    = $this->_sessCommon->role;
+		//会员资料注入
 		$this->view->login   = $this->_sessCommon->login;
 	}
 
