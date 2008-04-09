@@ -5,16 +5,23 @@
 	<a href="/info/" class="on">资讯</a>
 	<a href="/help/">互助</a>
 	<a href="/class/">班级</a>
-	<a href="/group/">群组</a>
-	<a href="/blog/">博客</a>
-	<a href="/photo/">相册</a>
+	<a href="/member/">校友</a>
+	<a href="/blog/">日志</a>
+	<a href="/play/">活动</a>
 	</td>
-	<!-- 状态信息 /////////////////////////////////////////// -->
+	<?php if($this->role != 'member'): ?>
+	<!-- 未登陆 /////////////////////////////////////////// -->
 	<td class="nav">
-	欢迎：<a href=""><?php echo $this->realName ?></a>
-<a href="">站内信<?php echo ($this->unRead > 0) ? "({$this->unRead})" : ''; ?></a>
+	尚未登陆,<a href="">登陆</a>
+	</td>
+	<?php else: ?>
+	<!-- 登陆后 /////////////////////////////////////////// -->
+	<td class="nav">
+	欢迎：<a href=""><?= $this->login['realName'] ?></a>
+<a href="">站内信<?= ($this->login['unRead'] > 0) ? "({$this->login['unRead']})" : ''; ?></a>
 <a href="/member/login/dologout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 	</td>
+	<?php endif; ?>
 	</tr>
 	<tr>
 	<td class="search_form" colspan="2">
