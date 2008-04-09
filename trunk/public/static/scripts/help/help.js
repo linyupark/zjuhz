@@ -31,7 +31,7 @@ function goUrl(name)
 
 	if (name == 'question_add')
 	{
-		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val());
+		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val()) + '/';
 	}
 
 	window.location.href = url;

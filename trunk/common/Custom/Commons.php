@@ -96,14 +96,4 @@ class Commons
 
 		return true;
 	}
-
-	#判断会员有否登录
-	static function checkMemberLogin()
-	{
-		if ($_SESSION['common']['role'] != 'member' || !isset($_SESSION['common']['login']))
-		{
-			header('LOCATION:../member/');
-			exit;
-		}
-	}
 }

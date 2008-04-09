@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+﻿$(function() {
     $("#btnSubmit").click( function() {
 		question_add();
     });
