@@ -9,6 +9,34 @@
 			$this->_db = Zend_Registry::get('dbInfo');
 		}
 		
+		# 返回所有未发布的文章
+		function getEntityNoPub()
+		{
+			return $this->_db->fetchAll('SELECT `e`.`entity_id`,`e`.`entity_title`,`e`.`entity_pub_time`,`u`.`user_name`,`c`.`category_name`  
+			                      		FROM `tbl_entity` AS `e`,`tbl_user` AS `u`,`tbl_category` AS `c` 
+			                      		WHERE `e`.`user_id` = `u`.`user_id` 
+			                      		AND `e`.`category_id` = `c`.`category_id` 
+			                      		AND `e`.`entity_pub` = 0');
+		}
+		
+		# 返回总文章数(根据user_id,role)
+		function getEntityNum($category_id)
+		{
+			$where = '';
+			if($category_id != 0) $where = 'WHERE `category_id` = '.(int)$category_id;
+			
+			if(Zend_Registry::get('sessCommon')->role == 'admin')
+			{
+				$row = $this->_db->fetchRow('SELECT COUNT(`entity_id`) AS `numrows` FROM `tbl_entity`'.$where);
+			}
+			else 
+			{
+				if($category_id != 0) $where = ' AND `category_id` = '.(int)$category_id;
+				$row = $this->_db->fetchRow('SELECT COUNT(`entity_id`) AS `numrows` FROM `tbl_entity` WHERE `user_id` = '.Zend_Registry::get('sessInfo')->user_id.$where);
+			}
+			return $row['numrows'];
+		}
+		
 		# 根据指定的id获取所有相关的信息
 		function getDetailInfo($id)
 		{

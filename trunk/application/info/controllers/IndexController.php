@@ -35,7 +35,7 @@
 			
 			$this->view->categoryId = $categoryId;
 			
-			$rowSet = $Entity->fetchAll('category_id = '.$categoryId);
+			$rowSet = $Entity->fetchAll('category_id = '.$categoryId.' AND entity_pub = 1');
 			
 			//按页获取信息列表
 			Page::create(array(
@@ -52,7 +52,7 @@
 			$this->view->pagination = Page::$page_str;
 			
 			//根据分页获取相关信息
-			$this->view->rows = $Entity->fetchAll('category_id = '.$categoryId, 
+			$this->view->rows = $Entity->fetchAll('category_id = '.$categoryId.' AND entity_pub = 1', 
 												  'entity_pub_time DESC', Page::$pagesize, Page::$offset);
 												  
 			//分类列表

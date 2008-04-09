@@ -1,0 +1,34 @@
+<h2>管理成员变动</h2>
+<div id="man">
+	<table class="tb">
+		<tr>
+			<th>帐号</th>
+			<th>密码</th>
+			<th>角色</th>
+			<th width="15%">操作</th>
+		</tr>
+		<?php foreach ($this->users as $user): ?>
+		<tr id="role_<?= $user->user_id ?>">
+			<td><input name="user_name" type="text" value="<?= $user->user_name ?>" size="12" /></td>
+			<td>
+				密码 <input name="user_password" type="password" value="" />
+				确认 <input name="user_password2" type="password" value="" />
+				<input type="hidden" name="user_id" value="<?= $user->user_id ?>" />
+			</td>
+			<td>
+				<select name="user_role">
+					<?php foreach ($this->roles as $k => $v): ?>
+					<option value="<?= $v['role_name'] ?>"<?php if($v['role_name'] == $user->user_role) echo 'selected="selected"' ?>>
+					<?= $v['role_nickname'] ?>
+					</option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+			<td>
+				<input type="button" onclick="manager_mod(<?= $user->user_id ?>)" value="更新" />
+				<input type="button" onclick="manager_del(<?= $user->user_id ?>)" value="删除" />
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+</div>

@@ -1,0 +1,44 @@
+<h2>修改分类</h2>
+<div id="man">
+<table class="tb">
+  	<tr>
+  		<th>ID</th>
+  		<th><span id="iconinner"></span></th>
+  		<th>类别名称</th>
+  		<th>操作</th>
+  	</tr>
+  	<?php if(!$this->categories): ?>
+  	<tr>
+  		<td colspan="4">没有分类</td>
+  	</tr>
+  	<?php else: foreach ($this->categories as $row): ?>
+  	<tr id="cate_<?= $row->category_id ?>">
+  		<td width="2%">
+  			<?php echo $row->category_id ?>
+  			<input type="hidden" name="category_id" value="<?= $row->category_id ?>" />
+  		</td>
+  		<td width="20%">
+  			<select name="category_icon" onchange="icon_show(this.value)" class="iconset">
+		<?php 
+			$iconDir = dir('../../public/static/images/icon/');
+			while (false !== ($entry = $iconDir->read())): if(strstr($entry,'.gif')): 
+		?>
+			<option class="icon" value="<?= substr($entry,0,-4) ?>"<?php if($row->category_icon == substr($entry,0,-4)): ?> selected="selected"<?php endif; ?>><?= substr($entry,0,-4) ?></option>
+		<?php
+			endif; endwhile;
+   		?>
+		</select>
+  		</td>
+  		<td>
+  			<input name="category_name" type="text" value="<?php echo $row->category_name ?>" size="40" />
+  			<input type="hidden" name="category_pub" value="0" />
+  			<label for="pub<?= $row->category_id ?>"><input type="checkbox" name="category_pub" value="1" id="pub<?= $row->category_id ?>"<?php if($row->category_pub == '1'): ?> checked="checked"<?php endif; ?> />首页显示</label>
+  		</td>
+  		<td width="16%">
+  			<input onclick="cate_mod(<?php echo $row->category_id ?>)" type="button" value="更新" />
+  			<input onclick="cate_del(<?php echo $row->category_id ?>)" type="button" value="删除" />
+  		</td>
+  	</tr>
+  	<?php endforeach; endif; ?>
+  </table>
+</div>

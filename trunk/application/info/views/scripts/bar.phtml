@@ -12,5 +12,17 @@ $bar = Zend_Registry::get('iniInfo')->bar;
   	<?php if($this->acl->isAllowed($this->role, 'admin', 'entity_'.$k)): ?>
   	<dd><a href="/info/admin/entity_<?= $k ?>"><?= $v ?></a></dd>
   	<?php endif;endforeach; ?>
+  	
+  	<dt>资讯分类管理</dt>
+  	<?php foreach ($bar->category->toArray() as $k => $v): ?>
+  	<?php if($this->acl->isAllowed($this->role, 'admin', 'category_'.$k)): ?>
+  	<dd><a href="/info/admin/category_<?= $k ?>"><?= $v ?></a></dd>
+  	<?php endif;endforeach; ?>
+  	
+  	<dt>后台成员管理</dt>
+  	<?php foreach ($bar->manager->toArray() as $k => $v): ?>
+  	<?php if($this->acl->isAllowed($this->role, 'admin', 'manager_'.$k)): ?>
+  	<dd><a href="/info/admin/manager_<?= $k ?>"><?= $v ?></a></dd>
+  	<?php endif;endforeach; ?>
   </dl>
 </div>
