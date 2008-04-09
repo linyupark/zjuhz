@@ -42,14 +42,14 @@ class IndexController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		//载入项目配置
+		// 载入项目配置
 		$this->_iniHelp    = Zend_Registry::get('iniHelp');
-		//载入公共SESSION
+		// 载入公共SESSION
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
-		//载入项目SESSION
+		// 载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
-		//会员资料注入
+		// 会员资料注入
 		$this->view->login = $this->_sessCommon->login;
 	}
 
@@ -60,12 +60,12 @@ class IndexController extends Zend_Controller_Action
      */
 	public function verifyAction()
 	{
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
 		//禁用layout
 		$this->_helper->layout->disableLayout();
 
-		//将验证码写入公共SESSION
+		// 将验证码写入公共SESSION
 		ImageHandle::verify('common');
 	}
 
@@ -86,9 +86,9 @@ class IndexController extends Zend_Controller_Action
      */
 	public function indexAction()
 	{
-		//载入标题
+		// 载入标题
 		$this->view->headTitle($this->_iniHelp->head->title->index->index);
-		//载入JS脚本
+		// 载入JS脚本
 		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
 	}
 }

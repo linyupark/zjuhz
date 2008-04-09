@@ -127,3 +127,32 @@ a{ color:#314973 }
 .pagination b{ display:blcok; float:left; padding:2px 5px; }
 
 #global_pos{ margin:10px 0 0 18px; color:#666; }
+
+#ajaxloading {
+	position: absolute;
+	display: none;
+	z-index: 100;
+	width: 100px;
+	height: 1.6em;
+	top: 0px;
+	right: 0px;
+	line-height: 1.6em;
+	overflow: hidden;
+	background: #dd0000;
+	color: #ffffff;
+	text-align:center;
+}
+#ajaxhint {
+	display: none;
+	margin: 0px;
+	padding: 10px;
+	border: 1px solid;
+	text-align: center;
+	line-height: 20px;
+	border-color: #dd3c10;
+	background: #ffebe8;
+	width: 100%;
+}
+IMG {
+	BORDER-STYLE: none;
+}
