@@ -37,7 +37,7 @@
 				// 权限设置
 				$acl->allow('guest', array('view','login','support','index'))
 				    ->allow('staff', null)
-				    ->deny('staff', 'admin', array('entity_del', 'entity_pub'))
+				    ->allow('staff', 'admin', array('entity_add', 'entity_mod'))
 				    ->allow('admin');
 				// 寄存
 				Zend_Registry::set('acl', $acl);

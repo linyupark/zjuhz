@@ -53,9 +53,9 @@ h2{ float:left; margin:10px 0 auto 10px; width:72%; }
 .tips a{ color:#333;  }
 
 .pagination{ padding:10px 0; font-size:12px; }
-.pagination a{  display:blcok; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
+.pagination a{  display:block; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
 .pagination a:hover{ border:1px solid #ccc; }
-.pagination b{ display:blcok; float:left; padding:2px 5px; }
+.pagination b{ display:block; float:left; padding:2px 5px; }
 
 table.tb{ width:100%; border:1px solid #ccc; font-size:12px;  }
 table.tb th{ background:#ccc; color:#333; border-right:1px solid #999; border-bottom:1px solid #999 }

@@ -1,0 +1,26 @@
+<h2>添加管理成员</h2>
+<div id="man">
+	<?php if($this->tips): ?>
+	<p class="tips"><?= $this->tips ?></p>
+	<?php endif; ?>
+	<form method="POST">
+	<p>
+		帐号 <input type="text" name="user_name" />
+	</p>
+	<p>
+		密码 <input type="password" name="user_password" />
+	</p>
+	<p>
+		确认 <input type="password" name="user_password2" />
+	</p>
+	<p>权限
+	<select name="user_role">
+	<?php foreach ($this->roles as $k =>$v ): ?>
+	<option value="<?= $v['role_name'] ?>"><?= $v['role_nickname'] ?></option>
+	<?php endforeach; ?>
+	</select> 
+	
+	<input type="submit" value="创建" />
+	</p>
+	</form>
+</div>

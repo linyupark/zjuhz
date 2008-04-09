@@ -1,16 +1,16 @@
 <?php 
-	
+
 	/**
-	 * 资讯信息对外的接口控制器
+	 * info数据库接口类
 	 *
 	 */
-	class Info_Xml_Rpc
+	class InfoService
 	{
-		protected $_db;
+		private $_db;
 		
 		function __construct()
 		{
-			$this->_db = Zend_Registry::get('db_info');
+			$this->_db = Zend_Registry::get('dbInfo');
 		}
 		
 		/**
@@ -34,23 +34,5 @@
 			return $this->_db->fetchAll('SELECT `entity_id`,`entity_title`,`category_id`,`entity_pub_time` 
 												FROM `tbl_entity` 
 												WHERE `category_id` = '.$cat_id.' ORDER BY `entity_pub_time` DESC');
-		}
-	}
-
-	class ApiController extends Zend_Controller_Action 
-	{
-		function init()
-		{
-			//没有VIEW渲染
-			$this->_helper->ViewRenderer->setNoRender(true);
-			//没有布局
-			$this->_helper->layout->disableLayout();
-		}
-		
-		function indexAction()
-		{
-			$server = new Zend_XmlRpc_Server();
-			$server->setClass('Info_Xml_Rpc','info');
-			echo $server->handle();
 		}
 	}

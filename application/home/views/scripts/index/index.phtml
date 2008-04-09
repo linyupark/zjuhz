@@ -55,7 +55,7 @@ if(!$this->cache->start('homepage')):
 <div class="sidebar" style="clear:left; width:172px;">
 <div id="news_list">
 <?php 
-$cat_rows = $this->info_xmlrpc->call('info.get_public_categories');
+$cat_rows = $this->info_xmlrpc->call('rpcInfo.get_public_categories');
 foreach ($cat_rows as $k => $v): ?>
 <a href="" onmouseover="show_news(<?= $k+1 ?>)"><img src="/static/images/icon/<?= $v['category_icon'] ?>.gif" /><?= $v['category_name'] ?></a>
 <?php endforeach; ?>
@@ -67,7 +67,7 @@ foreach ($cat_rows as $k => $v): ?>
 <?php 
 foreach ($cat_rows as $k => $v):
 //获取相应文章快照
-$art_rows = $this->info_xmlrpc->call('info.get_arts_snapshot', array($v['category_id']));
+$art_rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array($v['category_id']));
 ?>			
 <table class="news_page" id="num_<?= $k+1 ?>">
 <tr>
