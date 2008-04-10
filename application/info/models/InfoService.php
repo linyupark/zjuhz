@@ -33,6 +33,6 @@
 		{
 			return $this->_db->fetchAll('SELECT `entity_id`,`entity_title`,`category_id`,`entity_pub_time` 
 												FROM `tbl_entity` 
-												WHERE `category_id` = '.$cat_id.' ORDER BY `entity_pub_time` DESC');
+												WHERE `category_id` = '.$cat_id.' AND `entity_pub` = 1 ORDER BY `entity_pub_time` DESC');
 		}
 	}

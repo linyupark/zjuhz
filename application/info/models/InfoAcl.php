@@ -33,9 +33,10 @@
 				    ->add(new Zend_Acl_Resource('support'))
 				    ->add(new Zend_Acl_Resource('login'))
 				    ->add(new Zend_Acl_Resource('logout'))
+				    ->add(new Zend_Acl_Resource('search'))
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
-				$acl->allow('guest', array('view','login','support','index'))
+				$acl->allow('guest', array('view','login','support','index','search'))
 				    ->allow('staff', null)
 				    ->allow('staff', 'admin', array('entity_add', 'entity_mod'))
 				    ->allow('admin');
@@ -68,6 +69,7 @@
 				$request->setControllerName('error');
 				$request->setActionName('error');
 				$request->setParam('message','deny');
+				echo $sessRole.':'.$resource.':'.$action;
 			}
 		}
 	}

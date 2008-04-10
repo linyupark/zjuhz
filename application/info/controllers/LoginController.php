@@ -34,7 +34,7 @@
 				$this->view->error_tips = null;
 				
 				//各项校验
-				if(!Zend_Validate::is($username,'StringLength',array(3,12)))
+				if(!Zend_Validate::is($username,'StringLength',array(3,50)))
 				$this->view->error_tips = '* 帐号长度必须在3-12位之间,不能包含中文以及下划线<br />';
 				
 				if(!Zend_Validate::is($password,'NotEmpty'))
@@ -58,7 +58,6 @@
 					{
 						$this->_sessCommon->role = $row->user_role; //角色输入session
 						$this->_sessInfo->user_id = $row->user_id; //用户名输入session
-						$this->_sessInfo->power = $row->user_power; //权利输入
 						Zend_Session::rememberMe(3600*24);
 						$this->view->error_tips = '* 登陆成功~2秒后自动转向<a href="/info/admin/">控制页</a>';
 						echo Commons::js_jump('/info/admin/',2);

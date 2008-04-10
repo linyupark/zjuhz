@@ -11,15 +11,20 @@ class IndexController extends Zend_Controller_Action
 	
     function indexAction()
     {
+    	$needClear = $this->getRequest()->getParam('do');
+    	
     	$frontendOptions = array(
-   			'lifetime' => 5,                  // cache lifetime of half a minute
+   			'lifetime' => 999999,                  // cache lifetime of half a minute
    			'automatic_serialization' => false  // this is default anyway
 		);
 
 		$backendOptions = array('cache_dir' => '../../cache/');
 
-		$this->view->cache = Zend_Cache::factory('Output', 'File', $frontendOptions, $backendOptions);
-
+		$cache = Zend_Cache::factory('Output', 'File', $frontendOptions, $backendOptions);
+		
+		if($needClear == 1) $cache->remove('homepage');
+		
+		$this->view->cache = $cache;
     	$this->view->role = 'guest';
     	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/xmlrpc/InfoServer.php');
     }

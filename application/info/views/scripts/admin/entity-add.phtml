@@ -16,9 +16,11 @@
   <?php endforeach; ?>
   </select>
   发布时间 <input type="text" name="pub_time" value="<?php if(!$this->pub_time) echo Commons::date(); else echo $this->pub_time; ?>" size="40" />
+  <input type="hidden" name="top" value="0" />
+  <input type="checkbox" name="top" value="1"<?php if($this->row->entity_top == 1): ?> checked="checked"<?php endif;?> /> 顶置
   </p>
   <p>
-  标题 <input type="text" name="title" value="<?= $this->title ?>" size="80" />
+  标题 <input type="text" name="title" value="<?= $this->title ?>" size="80" /> 
   </p>
   <p>
   标签 <input type="text" name="tag[]" size="6" value="<?= $this->tag ?>" /><span class="tag_inner"></span>
