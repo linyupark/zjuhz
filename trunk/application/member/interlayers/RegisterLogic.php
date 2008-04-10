@@ -53,11 +53,11 @@ class RegisterLogic extends MemberInterlayer
      * @param array $input
      * @return boolean
      */
-	public static function register($input)
+	public function register($input)
 	{
-		$member = parent::_getInstance('MemberModel');
+		$this->_loadMdl('Member');
 
-		return ($member->register($input) ? true : false);
+		return ($this->_mdlMember->register($input) ? true : false);
 	}
 
 	/**
@@ -66,10 +66,10 @@ class RegisterLogic extends MemberInterlayer
      * @param string $userName
      * @return boolean
      */
-	public static function check($userName)
+	public function check($userName)
 	{
-		$user = parent::_getInstance('UserModel');
+		$this->_loadMdl('User');
 
-		return ($user->checkUserName($userName) ? true : false);
+		return ($this->_mdlUser->checkUserName($userName) ? true : false);
 	}
 }

@@ -53,10 +53,11 @@ class LoginLogic extends MemberInterlayer
      * @param array $input
      * @return array or false
      */
-	public static function login($input)
+	public function login($input)
 	{
-		$member = parent::_getInstance('MemberModel');
-		$row    = $member->login($input);
+		$this->_loadMdl('Member');
+
+		$row = $this->_mdlMember->login($input);
 
 		return ($row['uid'] ? $row : false);
 	}

@@ -62,8 +62,8 @@ class UserModel //extends Zend_Db_Table_Abstract
      */
 	public function checkUserName($userName)
     {
-        $stmt = $this->_dao->prepare('SELECT uid FROM tbl_user WHERE userName = :userName');
-        $stmt->bindValue('userName', $userName);
+        $stmt = $this->_dao->prepare('SELECT uid FROM tbl_user WHERE userName = :userName;');
+        $stmt->bindValue(':userName', $userName);
         $stmt->execute();
 
     	return $stmt->fetchColumn();

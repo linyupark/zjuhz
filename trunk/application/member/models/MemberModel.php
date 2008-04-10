@@ -51,7 +51,7 @@ class MemberModel
      */
 	public function register($input)
     {
-		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey)');
+		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey);');
 		$stmt->execute($input);
 
 		return $stmt->fetchColumn();
@@ -65,7 +65,7 @@ class MemberModel
      */
 	public function login($input)
     {
-		$stmt = $this->_dao->prepare('CALL sp_login(:userName,:passWord,:lastIp)');
+		$stmt = $this->_dao->prepare('CALL sp_login(:userName,:passWord,:lastIp);');
 		$stmt->execute($input);
 
 		return $stmt->fetch();

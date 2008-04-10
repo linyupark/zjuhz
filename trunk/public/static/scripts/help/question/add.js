@@ -1,9 +1,23 @@
 ﻿$(function() {
-    $("#btnSubmit").click( function() {
-		question_add();
+	// sort
+	sort_init();
+
+	$("#sortParent").change( function() {
+		sort_list('sortParent','sortChild');
     });
+
+	$("#sortChild").change( function() {
+		sort_list('sortChild','sortGrandSon');
+    });
+
+
+	// form
     $("#vcode").focus( function() {
 		putVerifyImg();
+    });
+
+    $("#btnSubmit").click( function() {
+		question_add();
     });
 });
 

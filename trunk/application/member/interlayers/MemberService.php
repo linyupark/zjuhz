@@ -56,6 +56,6 @@ class MemberService extends MemberInterlayer
      */
 	public function login($input)
 	{
-		return LoginLogic::login($input);
+		return LoginLogic::init()->login($input);
 	}
 }

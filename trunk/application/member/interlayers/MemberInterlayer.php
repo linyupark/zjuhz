@@ -22,6 +22,20 @@ abstract class MemberInterlayer
      */
 	protected $_iniMember = null;
 
+	/**
+     * MemberModel对象
+     *
+     * @var object
+     */
+	protected $_mdlMember = null;
+
+	/**
+     * UserModel对象
+     *
+     * @var object
+     */
+	protected $_mdlUser = null;
+
     /**
      * 构造方法
      * 
@@ -80,7 +94,6 @@ abstract class MemberInterlayer
      */
     protected function _initFilter()
     {
-    	
     }
 
     /**
@@ -90,7 +103,23 @@ abstract class MemberInterlayer
      */
     protected function _initService()
     {
-    	self::_setDao();
+    }
+
+    /**
+     * Model类实例
+     * 
+     * @param string $name
+     * @return void
+     */
+	protected function _loadMdl($name)
+    {
+    	$thisName = "_mdl{$name}";
+    	$objName  = "{$name}Model";
+
+    	if (!isset($this->$thisName))
+    	{
+    		$this->$thisName = $this->_getInstance($objName);
+    	}
     }
 
     /**
