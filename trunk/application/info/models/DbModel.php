@@ -12,11 +12,15 @@
 		# 返回所有未发布的文章
 		function getEntityNoPub()
 		{
+			/* 无视图
 			return $this->_db->fetchAll('SELECT `e`.`entity_id`,`e`.`entity_title`,`e`.`entity_pub_time`,`u`.`user_name`,`c`.`category_name`  
 			                      		FROM `tbl_entity` AS `e`,`tbl_user` AS `u`,`tbl_category` AS `c` 
 			                      		WHERE `e`.`user_id` = `u`.`user_id` 
 			                      		AND `e`.`category_id` = `c`.`category_id` 
 			                      		AND `e`.`entity_pub` = 0');
+			                      		*/
+			return $this->_db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`user_name`,`category_name` 
+										 FROM `vi_entity` WHERE `entity_pub` = 0');
 		}
 		
 		# 返回总文章数(根据user_id,role)
@@ -40,11 +44,15 @@
 		# 根据指定的id获取所有相关的信息
 		function getDetailInfo($id)
 		{
+			/* 无视图
 			$row = $this->_db->fetchRow('SELECT `tbl_entity`.*,`tbl_user`.`user_name`,`tbl_category`.`category_name` 
 								         FROM `tbl_entity`,`tbl_user`,`tbl_category` 
 			                             WHERE `tbl_entity`.`user_id` = `tbl_user`.`user_id` 
 			                             AND `tbl_entity`.`entity_id` = ? 
 			                             AND `tbl_category`.`category_id` = `tbl_entity`.`category_id`', array($id));
+			                             */
+			$row = $this->_db->fetchRow('SELECT * FROM `vi_entity` WHERE `entity_id` = ?',array($id));
+			
 			// 调用增加阅读数函数
 			$this->increaseViewNum($id, $row['entity_view_num']);
 			

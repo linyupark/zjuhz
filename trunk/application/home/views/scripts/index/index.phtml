@@ -73,7 +73,7 @@ $art_rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array($v['cate
 <tr>
 <td valign="top">							
 <?php foreach ($art_rows as $k2 => $v): ?>
-<a href="/info/view/id/<?= $v['entity_id'] ?>"><?= $v['entity_title'] ?></a>
+<a href="/info/view/detail/id/<?= $v['entity_id'] ?>" title="[<?= Commons::date($v['entity_pub_time']) ?>] <?= $v['entity_title'] ?>"><?= substr($v['entity_title'],0,40).'..' ?></a>
 <?php endforeach; ?>
 <a href="/info/?category=<?= $v['category_id'] ?>" class="more"></a>
 </td>

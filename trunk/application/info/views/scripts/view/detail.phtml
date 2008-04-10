@@ -27,6 +27,13 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <!-- 主体 ////////////////////////////////////////////// -->
 <div class="print entity">
 <?= stripslashes($this->entity['entity_content']) ?>
+<p id="maker">
+发布人:<?= $this->entity['user_name'] ?>(<?= $this->entity['role_nickname'] ?>)<br />
+发布于:<?= Commons::date($this->entity['entity_pub_time']) ?>
+<?php if($this->entity['entity_mod_time']): ?>
+<br />最后修改于:<?= Commons::date($this->entity['entity_mod_time']) ?>
+<?php endif; ?>
+</p>
 </div>
 
 <!-- 同类上下篇 ////////////////////////////////////////////// -->
@@ -56,7 +63,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <?php foreach ($this->tag as $k => $v): ?>
 <a href="/info/search/key/<?= urlencode($this->escape($v)) ?>"><?= $this->escape($v) ?></a>
 <?php endforeach; endif; ?>&nbsp;&nbsp;&nbsp;
-<a href="/info/comment/">发表评论(23)</a>&nbsp;&nbsp;&nbsp;
+<a href="/info/comment/">发表评论(尚未开放)</a>&nbsp;&nbsp;&nbsp;
 <img src="/static/images/icon/top.gif" style="cursor:pointer" onclick="javascript:scroll(0,0)" align="absmiddle" />&nbsp;&nbsp;&nbsp;
 <img style="cursor: pointer;" src="/static/images/icon/printer.gif" alt="打印" onclick="window.print()" align="absmiddle">
 </p>

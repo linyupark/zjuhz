@@ -1,5 +1,9 @@
 <?php 
 
+	/**
+	 * 管理员控制器
+	 *
+	 */
 	class AdminController extends Zend_Controller_Action 
 	{
 		function init()
@@ -36,7 +40,7 @@
 			
 		}
 		
-		#删除成员 ------------------------------------------
+		# 删除成员 ------------------------------------------
 		function managerdelAction()
 		{
 			$this->_helper->ViewRenderer->setNoRender(true);
@@ -319,6 +323,7 @@
 				$pub_time = $inputChains->entityDate($this->getRequest()->getPost('pub_time'));
 				$tag = $inputChains->entityTag($this->getRequest()->getPost('tag'));
 				$cate_id = $this->getRequest()->getPost('cate_id');
+				$top = $this->getRequest()->getPost('top');
 				
 				// 校验信息结果
 				if(count($inputChains->getMessages()) > 0)
@@ -332,7 +337,8 @@
 						'user_id' => $this->_sessInfo->user_id,
 						'entity_pub_time' => $pub_time,
 						'entity_content' => $content,
-						'entity_tag' => $tag
+						'entity_tag' => $tag,
+						'entity_top' => $top
 					);
 					if($this->Entity->insert($data))
 					$this->view->tips = "信息添加成功";
@@ -344,6 +350,7 @@
 			$this->view->cate_id = $cate_id;
 			$this->view->pub_time = Commons::date($pub_time);
 			$this->view->tag = $tag;
+			$this->view->top = $top;
 			
 			$this->render('entity-add');
 		}
@@ -366,11 +373,12 @@
 					// 过滤校验类加载
 					$inputChains = new InputChains();
 					
-					$title = $inputChains->entityTitle($this->getRequest()->getPost('title'),'title');
-					$content = $inputChains->entityContent($this->getRequest()->getPost('content'),'content');
-					$pub_time = $inputChains->entityDate($this->getRequest()->getPost('pub_time'),'pub_time');
-					$tag = $inputChains->entityTag($this->getRequest()->getPost('tag'),'tag');
+					$title = $inputChains->entityTitle($this->getRequest()->getPost('title'));
+					$content = $inputChains->entityContent($this->getRequest()->getPost('content'));
+					$pub_time = $inputChains->entityDate($this->getRequest()->getPost('pub_time'));
+					$tag = $inputChains->entityTag($this->getRequest()->getPost('tag'));
 					$cate_id = $this->getRequest()->getPost('cate_id');
+					$top = $this->getRequest()->getPost('top');
 				
 					// 校验信息结果
 					if(count($inputChains->getMessages()) > 0)
@@ -383,7 +391,8 @@
 							'category_id' => $cate_id,
 							'entity_mod_time' => $pub_time,
 							'entity_content' => $content,
-							'entity_tag' => $tag
+							'entity_tag' => $tag,
+							'entity_top' => $top
 						);
 						$where = $this->Entity->getAdapter()->quoteInto('entity_id = ?', $entity_id);
 						if($this->Entity->update($data, $where))
