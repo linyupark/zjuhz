@@ -62,7 +62,7 @@ class IndexController extends Zend_Controller_Action
 	{
 		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
-		//禁用layout
+		// 禁用layout
 		$this->_helper->layout->disableLayout();
 
 		// 将验证码写入公共SESSION

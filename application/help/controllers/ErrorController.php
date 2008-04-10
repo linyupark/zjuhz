@@ -21,7 +21,7 @@ class ErrorController extends Zend_Controller_Action
      */
     public function init()
     {
-		//禁用自动渲染视图
+		// 禁用自动渲染视图
 		$this->_helper->viewRenderer->setNoRender();
     }
 
