@@ -61,7 +61,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 已被阅读(<?= $this->entity['entity_view_num'] ?>)&nbsp;&nbsp;&nbsp;
 <?php if($this->tag): ?>本文标签: 
 <?php foreach ($this->tag as $k => $v): ?>
-<a href="/info/search/key/<?= urlencode($this->escape($v)) ?>"><?= $this->escape($v) ?></a>
+<a href="/info/search/look/for/<?= urlencode($this->escape($v)) ?>"><?= $this->escape($v) ?></a>
 <?php endforeach; endif; ?>&nbsp;&nbsp;&nbsp;
 <a href="/info/comment/">发表评论(尚未开放)</a>&nbsp;&nbsp;&nbsp;
 <img src="/static/images/icon/top.gif" style="cursor:pointer" onclick="javascript:scroll(0,0)" align="absmiddle" />&nbsp;&nbsp;&nbsp;
