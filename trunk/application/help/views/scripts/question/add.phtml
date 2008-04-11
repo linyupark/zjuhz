@@ -1,8 +1,6 @@
-﻿<?= $this->headTitle('校友互助 - 杭州浙江大学校友会 [ zjuhz.com ]','append');$this->headTitle()->setSeparator(' - '); ?>
-<div id="ajaxloading"></div>
+﻿<div id="ajaxloading"></div>
 <!-- 当前位置 /////////////////////////////////// -->
-<div id="help_position">
-    <a href="/help/">校友互助</a> > <a href="/help/question/add/">我要提问</a></div>
+<div id="help_position"><a href="/help/">校友互助</a> > <a href="/help/question/add/">我要提问</a></div>
 
 <!-- 我要提问 //////////////////////////////////////////// -->
 <div class="sidebar">
@@ -14,7 +12,7 @@
 
 		    <table width="100%" border="0">
               <tr>
-                <td>标题概要：</td>
+                <td>问题概要：</td>
                 <td><input type="text" name="title" id="title" class="help_input_kuang" value="<?= $this->title; ?>" maxlength="30" style="width:350px" /></td>
                 <td>&nbsp;</td>
               </tr>
@@ -35,17 +33,11 @@
 					<TABLE cellSpacing=0 cellPadding=0 border=0>
 					    <TBODY>
 					        <TR>
-					            <TD>
-									<?= $this->formSelect('sortParent', '', null, $this->sortParent); ?>
-								</TD>
+					            <TD><?= $this->formSelect('sort0', '', null, $this->sortParent); ?></TD>
 					            <TD width=10></TD>
-					            <TD>
-									<select name="sortChild" id="sortChild"></select>
-								</TD>
+					            <TD><select name="sort1" id="sort1"></select></TD>
 					            <TD width=10></TD>
-					            <TD>
-									<select name="sortGrandSon" id="sortGrandSon"></select>
-								</TD>
+					            <TD><select name="sort2" id="sort2"></select></TD>
 							</TR>
 						</TBODY>
 					</TABLE>
@@ -60,7 +52,7 @@
               </tr>			  
               <tr>
                 <td>匿名提问：</td>
-                <td><input type="checkbox" name="anonym" id="anonym" value="checkbox" /> 匿名提问将隐藏提问人的真实姓名</td>
+                <td><input type="checkbox" name="anonym" id="anonym" value="checkbox" /> 勾选后将隐藏您的真实姓名</td>
                 <td>&nbsp;</td>
               </tr>			  
               <tr>
@@ -79,9 +71,9 @@
                 <td></td>
               </tr>			  
             </table>
-        <INPUT type="hidden" name="cid">
-		<INPUT type="hidden" name="cname">
-		<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />			
+            <INPUT type="hidden" name="sid">
+		    <INPUT type="hidden" name="name">
+		    <input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />			
         </form>        
 	    </div>
     </div>
@@ -99,3 +91,4 @@
         </tr>
     </table>
 </div>
+

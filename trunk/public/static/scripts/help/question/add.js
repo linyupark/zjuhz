@@ -2,12 +2,12 @@
 	// sort
 	sort_init();
 
-	$("#sortParent").change( function() {
-		sort_list('sortParent','sortChild');
+	$("#sort0").change( function() {
+		sort_list('sort0');
     });
 
-	$("#sortChild").change( function() {
-		sort_list('sortChild','sortGrandSon');
+	$("#sort1").change( function() {
+		sort_list('sort1');
     });
 
 

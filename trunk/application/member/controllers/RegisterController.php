@@ -99,7 +99,7 @@ class RegisterController extends Zend_Controller_Action
 				if (Commons::checkVerify($vcode, $scode))
 				{
 					$logic = RegisterLogic::init();	
-				
+
 					$this->_sessMember->message = (($logic->register($input)) ? 
 					    $this->_iniMember->hint->register->success : 
 					        $this->_iniMember->hint->register->failure);
