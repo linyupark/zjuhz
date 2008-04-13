@@ -14,6 +14,8 @@ class SplitWord
 	var $TwoNameDic = Array();
 	var $SourceString = '';
 	var $ResultString = '';
+	var $searchCN = array( "：", "）", "（", "．", "。", "，", "！", "；", "“", "”", "‘", "’", "［", "］", "、", "—", "　", "《", "》", "－", "…", "【", "】");
+	var $searchEN = array(",","/","\\",".", ";", ":", "\"", "!", "~", "`", "^", "(", ")", "?", "-", "\t", "\n", "'", "<", ">", "\r", "\r\n", "$", "&", "%", "#", "@", "+", "=", "{", "}", "[", "]");
 	var $SplitChar = ' '; //分隔符
 	var $SplitLen = 4; //保留词长度
 	var $EspecialChar = "和|的|是";
@@ -267,7 +269,9 @@ class SplitWord
   //------------------------------
   function ReviseString($str)
   {
-  	$spc = $this->SplitChar;
+    $str = str_replace($searchCN,'',$str);
+    $str = str_replace($searchEN,'',$str);
+    $spc = $this->SplitChar;
     $slen = strlen($str);
     if($slen==0) return '';
     $okstr = '';

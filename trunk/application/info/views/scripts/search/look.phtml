@@ -1,4 +1,27 @@
-<form method="GET">
-<input type="text" name="for" />
-<input type="submit" />
-</form>
+<div id="global_pos">
+<?php if($this->keywords): ?>
+<img src="/static/images/icon/newspaper.gif" />
+搜索关键字 <b>&quot; <?= $this->escape($this->keywords) ?> &quot;</b>
+<?php if($this->rows): ?>
+<span style="text-align:right">
+共找到 <b>&quot; <?= $this->numrows ?> &quot;</b> 条记录，
+以下是第<b>&quot; <?= ($this->p*10-9).'-'.($this->p*10) ?> &quot;</b>条
+</span>
+<?php else: ?>
+没有找到任何记录
+<?php endif; ?>
+<?php else: ?>
+请输入要查找资讯的关键字
+<?php endif; ?>
+</div>
+
+<div class="sidebar" style="width:600px; margin:10px 0 0 10px">
+<?php if($this->rows): foreach ($this->rows as $k => $v): ?>
+<div class="search_result_box">
+<a href="/info/view/detail/id/<?= $v['entity_id']?>"><?= $v['entity_title']?></a>
+<p><?= strip_tags($v['entity_snapshot']) ?></p>
+</div>
+<?php endforeach; endif; ?>
+</div>
+
+<div class="pagination"><?= $this->pagination ?></div>
