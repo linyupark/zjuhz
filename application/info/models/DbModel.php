@@ -51,7 +51,7 @@
 			                             AND `tbl_entity`.`entity_id` = ? 
 			                             AND `tbl_category`.`category_id` = `tbl_entity`.`category_id`', array($id));
 			                             */
-			$row = $this->_db->fetchRow('SELECT * FROM `vi_entity` WHERE `entity_id` = ?',array($id));
+			$row = $this->_db->fetchRow('SELECT * FROM `vi_entity` WHERE `entity_id` = ?', $id);
 			
 			// 调用增加阅读数函数
 			$this->increaseViewNum($id, $row['entity_view_num']);
@@ -78,6 +78,37 @@
 			return $rows;
 		}
 		
+		# 根据KEY获取相关的信息
+		function getSearchResult($keywords,$offset)
+		{
+			$keywords = urldecode($keywords);
+			if(!is_string($keywords) || empty($keywords))
+			{
+				return false;
+			}
+			$keyArr = explode(' ', $keywords);
+			foreach ($keyArr as $k => $v)
+			{
+				$likeStr .= " CONCAT(`entity_title`,`entity_tag`) LIKE '%{$v}%' OR";
+			}
+			$likeStr = substr($likeStr, 0, -2);
+			
+			$row = $this->_db->fetchRow('SELECT COUNT(`entity_id`) AS `numrows` FROM `tbl_entity` WHERE '.$likeStr);
+			
+			$return['numrows'] = $row['numrows'];
+			
+			if($row['numrows'] > 0)
+			//开始进行数据匹配
+			$return['results'] = $this->_db->fetchAll('SELECT SUBSTRING(`entity_content`,1,332) AS `entity_snapshot`,
+			                                    `category_name`,`category_id`,
+			                                    `entity_id`,`entity_title`,`entity_pub_time` 
+			                      		 FROM `vi_entity` 
+			                      		 WHERE '.$likeStr.' 
+			                      		 ORDER BY `entity_pub_time` DESC
+			                      		 LIMIT '.(int)$offset.',10');
+			return $return;
+		}
+		
 		# 根据 string $tag 获取相关信息, 分隔号','
 		function getSimilarity($id, $tag = null)
 		{
@@ -96,7 +127,7 @@
 			                      		 WHERE '.$likeStr.' 
 			                      		 HAVING `entity_id` != ? 
 			                      		 ORDER BY rand() 
-			                      		 LIMIT 10', array($id));
+			                      		 LIMIT 10', $id);
 		}
 		
 		# 根据entity id 增加查看次数
