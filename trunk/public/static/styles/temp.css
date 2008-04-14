@@ -109,26 +109,31 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 
 /* 控制连接 -------------------------------------------------------------- */
 .control_link{ width:150px; margin:10px 0 0 12px; }
-.control_link a{ display:block; padding:2px 5px; font-size:14px; text-decoration:none; }
+.control_link a{ display:block; padding:5px 5px; font-size:14px; text-decoration:none; }
 .control_link a:hover{ text-decoration:underline; }
 .control_link a.focus{ color:#333; background:#D9E6F7 url(/static/images/bg/rc_tl3.png) no-repeat left top; font-weight:bold }
 
 h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.png) no-repeat left top; margin-top:10px; padding:4px 8px;  }
 .control_content { border-left:4px solid #D9E6F7; border-bottom:4px solid #D9E6F7; width:685px; background:#EFF7FF }
 
-.control_tab a{ padding:5px; margin-top:10px; display:block; float:left; border:1px solid #B2D0EA; border-bottom:none; margin-left:10px; }
-.control_tab a.focus{ background:#fff; text-decoration:none; font-weight:bold }
+.control_tab { padding:0 10px; }
+.control_tab a{ padding:5px; margin:10px 5px 0 0; display:block; float:left; }
+.control_tab a.focus{ background:#D9E6F7; text-decoration:none; font-weight:bold; color:#000; }
 
-.help_list{ width:680px; background:#fff; border-top:1px solid #B2D0EA; border-bottom:1px solid #B2D0EA;  }
-.help_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA; }
-.help_list td{ padding:8px; }
-.help_list td a{ font-size:14px; color:#004BCA }
-.help_list td a.cat{ color:#666; }
+.control_action{ background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
+
+.control_list{ width:100%; }
+.control_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA; }
+.control_list th .txt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; font-weight:normal }
+.control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:2px 8px }
+.control_list td{ padding:8px; }
+.control_list td a{ font-size:14px; color:#004BCA }
+.control_list td a.cat{ color:#666; }
 
 /* 个人后台通用表单样式 ---------------------------------------------------- */
 .home_form{ padding:20px; }
-.home_form p{ font-size:14px; padding:10px 0 0 10px; }
-.home_form p b{ color:#444;  }
+.home_form td{ font-size:14px; padding:10px 0 5px 10px; }
+.home_form td b{ color:#444;  }
 .home_form .txt,.home_form .bigtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
-.home_form .btn{ margin-left:220px; border:3px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:3px 8px }
+.home_form .btn{  border:3px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:3px 8px }
 .home_form .bigtxt{ width:400px; height:100px; }

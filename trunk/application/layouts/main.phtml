@@ -6,7 +6,7 @@
 <?= $this->headMeta(); ?>
 <script type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script type="text/javascript" src="/static/scripts/common.js"></script>
-<?= $this->headLink(),$this->headStyle(),$this->render("head.phtml"),$this->headScript(); ?>
+<?= $this->headLink().$this->headStyle().$this->render("head.phtml").$this->headScript(); ?>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 </td>
 </tr>
 </table>
-<?= $this->layout()->content,$this->partial("partial/global-footer.phtml"); ?>
+<?= $this->layout()->content.$this->partial("partial/global-footer.phtml"); ?>
 <table class="rc">
 <tr><td class="rc_bl"></td><td class="rc_br"></td></tr>
 </table>

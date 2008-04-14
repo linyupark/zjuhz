@@ -1,3 +1,5 @@
+
+
 <!-- 左侧栏 //////////////////////////////////////// -->
 <div class="sidebar">
 <div class="member_card">
@@ -13,24 +15,22 @@
 </div>
 
 <div class="control_link">
-<a href="?sub=base" class="focus">基本信息</a>
-<a href="?sub=contact">联系方式</a>
-<a href="?sub=personal">个人信息</a>
-<a href="?sub=job">工作信息</a>
-<a href="?sub=portrait">我的头像</a>
-<a href="?sub=privacy">隐私控制</a>
+<a href="?sub=personal&tab=account"><img src="/static/images/icon/vcard.gif" /> 个人信息</a>
+<a href="?sub=addressbook&tab=list"><img src="/static/images/icon/book.gif" /> 通讯录</a>
+<a href="?sub=portrait&tab=account"><img src="/static/images/icon/page_white_camera.gif" /> 我的形象</a>
+<a href="?sub=privacy&tab=account"><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
 </div>
 </div>
 
 <script>
 $('.control_link a').removeClass('focus');
-$('.control_link a[href="?sub=<?= $this->sub ?>"]').addClass('focus');
+$('.control_link a[href^="?sub=<?= $this->sub ?>"]').addClass('focus');
 </script>
 
 <!-- 中间部分 ////////////////////////////////////////// -->
 <div class="sidebar">
 <h2 class="control_nav">
-资料 - <a href="/temp/index/home/">互助</a> - <a href="/temp/index/home/of/class">班级</a> - <a href="/temp/index/home/of/address_list">通讯录</a> - <a href="">相册</a> - <a href="">日志</a> - <a href="">活动</a>
+资料 - <a href="/temp/index/home/">互助</a> - <a href="/temp/index/home/of/class">班级</a> - <a href="">相册</a> - <a href="">日志</a> - <a href="">活动</a>
 </h2>
 <div class="control_content">
 <?php echo $this->render('index/home-data-'.$this->sub.'.phtml'); ?>
