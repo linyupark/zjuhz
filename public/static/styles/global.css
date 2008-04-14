@@ -3,12 +3,12 @@
 	margin:0;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	line-height:150%;
-	font-size:12px;
 }
 
 body {
 	background:#E5E5E5;
 	padding-bottom:5px;
+	font-size:12px;
 }
 
 table{ border-collapse:collapse;  }
@@ -156,3 +156,5 @@ a{ color:#314973 }
 IMG {
 	BORDER-STYLE: none;
 }
+
+.search_highlight{ font-size:14px; color:#c03; }
