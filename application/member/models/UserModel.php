@@ -61,7 +61,7 @@ class UserModel //extends Zend_Db_Table_Abstract
      * @return string
      */
 	public function checkUserName($userName)
-    {echo $userName;exit;
+    {
     	return $this->_dao->fetchOne(
     	    "SELECT uid FROM {$this->_name} WHERE userName = :userName;",
             array('userName' => $userName)
