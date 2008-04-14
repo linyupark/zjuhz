@@ -61,6 +61,26 @@ class LoginController extends Zend_Controller_Action
 		$this->_forward('index', 'Index');
 	}
 
+    /**
+     * 会员登录-退出登录
+     * 
+     * @return void
+     */
+	public function logoutAction()
+    {
+    	$this->_forward('index', 'Logout');
+    }
+
+    /**
+     * 会员登录-退出登录
+     * 
+     * @return void
+     */
+	public function dologoutAction()
+    {
+    	$this->_forward('index', 'Logout');
+    }
+
 	/**
      * 会员登录-账密检测
      * 
@@ -101,14 +121,4 @@ class LoginController extends Zend_Controller_Action
 			}
 		}
 	}
-
-    /**
-     * 会员登录-退出登录
-     * 
-     * @return void
-     */
-	public function dologoutAction()
-    {
-    	$this->_forward('index', 'Logout');
-    }
 }
