@@ -1,0 +1,12 @@
+<div class="control_tab">
+<a href="?sub=addressbook&tab=list">通讯录列表</a>
+<a href="?sub=addressbook&tab=contact">添加</a>
+</div>
+
+<div class="control_action">
+<?= $this->render('index/home-data-addressbook-'.$this->tab.'.phtml'); ?>
+</div>
+<script>
+$('.control_tab a').removeClass('focus');
+$('.control_tab a[href="?sub=addressbook&tab=<?= $this->tab ?>"]').addClass('focus');
+</script>

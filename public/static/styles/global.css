@@ -121,7 +121,7 @@ a{ color:#314973 }
 }
 
 /* 全局分页 --------------------------------------------- */
-.pagination{ padding:8px 10px; }
+.pagination{ padding:8px 10px; overflow:hidden; clear:left; }
 .pagination a{  display:blcok; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
 .pagination a:hover{ border:1px solid #ccc; }
 .pagination b{ display:blcok; float:left; padding:2px 5px; }
@@ -153,7 +153,7 @@ a{ color:#314973 }
 	background: #ffebe8;
 	width: 100%;
 }
-IMG {
+img {
 	BORDER-STYLE: none;
 }
 

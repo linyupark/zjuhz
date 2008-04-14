@@ -1,8 +1,18 @@
 <form class="home_form">
+<table>
+<tr>
+<td align="right"><b>*姓名</b></td>
+<td><input type="text" class="txt" name="name" /></td>
+</tr>
 
-	<p><b>*姓名</b> <input type="text" class="txt" name="name" /></p>
-	<p><b>*性别</b> <label for="sexRadio"><input type="radio" name="sex" value="1" id="sexRadio" />男</label> <label for="sexRadio2"><input type="radio" name="sex" value="0" id="sexRadio2" />女</label></p>
-	<p><b>*家乡</b> <select class="txt"><option value="">省份</option>
+<tr>
+<td align="right"><b>*性别</b></td>
+<td><label for="sexRadio"><input type="radio" name="sex" value="1" id="sexRadio" />男</label> <label for="sexRadio2"><input type="radio" name="sex" value="0" id="sexRadio2" />女</label></td>
+</tr>
+
+<tr>
+<td align="right"><b>*家乡</b></td>
+<td><select class="txt"><option value="">省份</option>
 	<option value="北京">北京市</option>
 <option value="上海">上海市</option>
 <option value="天津">天津市</option>
@@ -44,10 +54,12 @@
 
 <select class="txt">
 <option value="">选择城市：</option>
-</select>
-</p>
+</select></td>
+</tr>
 
-<p><b>生日</b> <select class="select" class="txt"><option value="">选择年：</option>
+<tr>
+<td align="right"><b>生日</b></td>
+<td><select class="select" class="txt"><option value="">选择年：</option>
 								
 								
 								
@@ -339,8 +351,12 @@
 <option value="28">28</option>
 <option value="29">29</option>
 <option value="30">30</option>
-<option value="31">31</option></select> 日</p>
-<p>
-        					<input type="submit" value="保存修改" class="btn" />
-        				</p>
+<option value="31">31</option></select> 日
+</td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="保存修改" class="btn" /></td>
+</tr>
+</table>
 </form>
