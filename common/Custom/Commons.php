@@ -96,4 +96,15 @@ class Commons
 
 		return true;
 	}
+	
+	# 关键字加亮 string $keys(空格为分隔)
+	function highlight($keys, $str, $sp = ' ', $class = 'search_highlight')
+	{
+		$keyArr = explode($sp, $keys);
+		foreach ($keyArr as $key => $val)
+		{
+			$str = str_replace($val, '<span class="search_highlight">'.$val.'</span>', $str);
+		}
+		return $str;
+	}
 }
