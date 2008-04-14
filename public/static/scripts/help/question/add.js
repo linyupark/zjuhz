@@ -2,22 +2,13 @@
 	// sort
 	sort_init();
 
-	$("#sort0").change( function() {
-		sort_list('sort0');
-    });
-
-	$("#sort1").change( function() {
-		sort_list('sort1');
-    });
-
-
 	// form
     $("#vcode").focus( function() {
 		putVerifyImg();
     });
 
     $("#btnSubmit").click( function() {
-		question_add();
+		question_add();		
     });
 });
 
@@ -25,13 +16,15 @@
 function question_add() {
 	ajaxloading(true);
 	$("#btnSubmit").attr("disabled", true);
-	var formdata = $("#frmQuestion").fastSerialize();
+	var formdata = $("#myform").fastSerialize();
+
 	$.ajax( {
 		type   : "POST",
         url    : "/help/question/doadd/",
         data   : formdata,
 	    success: function(msg) {
 			$("#btnSubmit").attr("disabled", false);
+			getVerifyCode();
 			ajaxhint(true,msg);
 			ajaxloading();
 		}
