@@ -49,7 +49,7 @@ class IndexController extends Zend_Controller_Action
 		// 载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 
-		// 会员资料注入
+		// 登录资料注入
 		$this->view->login = $this->_sessCommon->login;
 	}
 
@@ -80,6 +80,56 @@ class IndexController extends Zend_Controller_Action
 	}
 
 	/**
+     * 注册会员使用时需先激活
+     * 
+     * @return void
+     */
+	public function activateAction()
+	{
+		// 注册会员使用时需先激活
+		if ('member' == $this->_sessCommon->role && 'N' === $this->_sessCommon->login['initAsk'])
+		{
+			// 此处接收传递的数据数组 // next, see standard
+			$input = $this->_sessCommon->login;
+			// 此处可注入数据将用与判断 // next, see standard
+			$input['point'] = $this->_iniHelp->point->init;
+
+			if ($input = IndexFilter::init()->activate($input))
+			{
+				if (IndexLogic::init()->activate($input))
+				{
+               		$this->_sessCommon->login['initAsk'] = 'Y';
+               		HelpClient::init()->activate($this->_sessCommon->login['uid']);
+				}
+			}
+		}
+	}
+
+	/**
+     * 注册会员给予子系统SESS
+     * 
+     * @return void
+     */
+	public function entryAction()
+	{
+		// 注册会员给予子系统SESS
+		if ('member' == $this->_sessCommon->role && !$this->_sessHelp->login)
+		{
+			// 此处接收传递的数据数组
+			$input = $this->_sessCommon->login;
+			// next, see standard
+
+			if ($uid = IndexFilter::init()->entry($input))
+			{
+				if ($entry = IndexLogic::init()->entry($uid))
+				{
+               		$this->_sessHelp->login = $entry;
+				}
+			}
+		}
+	}
+
+	/**
      * 你问我答首页
      * 
      * @return void
@@ -90,5 +140,10 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headTitle($this->_iniHelp->head->title->index->index);
 		// 载入JS脚本
 		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
+
+		// 首次使用激活
+		$this->activateAction();
+		// 子系统SESSION
+		$this->entryAction();
 	}
 }
