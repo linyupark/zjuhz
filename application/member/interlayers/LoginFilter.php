@@ -52,7 +52,7 @@ class LoginFilter extends MemberInterlayer
      * 会员登录数据过滤
      * 
      * @param array $input
-     * @return string to ajax | false
+     * @return string to ajax or false or array
      */
 	public function login($input)
 	{
@@ -80,19 +80,17 @@ class LoginFilter extends MemberInterlayer
 
 		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
 
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
+		if ($input->hasInvalid() || $input->hasMissing())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
 		}
 		else
 		{
-			$input = array(
+			return array(
 		    	'userName' => $input->getUnescaped('uname'), 'passWord' => $input->getUnescaped('pswd'), 
 		  		'lastIp' => Commons::getIp(), 
 			);
-
-			return $input;
 		}
 
 		return false;

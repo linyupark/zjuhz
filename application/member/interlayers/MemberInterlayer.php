@@ -36,6 +36,13 @@ abstract class MemberInterlayer
      */
 	protected $_mdlUser = null;
 
+	/**
+     * ExtModel对象
+     *
+     * @var object
+     */
+	protected $_mdlExt = null;
+
     /**
      * 构造方法
      * 
@@ -112,7 +119,7 @@ abstract class MemberInterlayer
      * @return void
      */
 	protected function _loadMdl($name)
-    {
+    {echo 'test123';exit;
     	$thisName = "_mdl{$name}";
     	$objName  = "{$name}Model";
 
