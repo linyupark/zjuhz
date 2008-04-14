@@ -72,9 +72,4 @@ class RegisterLogic extends MemberInterlayer
 
 		return ($this->_mdlUser->checkUserName($userName) ? true : false);
 	}
-
-	public function test()
-	{
-		echo 'test';
-	}
 }
