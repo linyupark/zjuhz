@@ -28,8 +28,8 @@ function goUrl(name)
 {
 	var url = '/help/';
 
-	if (name == 'question_add') {
-		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val());
+	if (name == 'question_insert') {
+		url = url + 'question/insert/title/' + encodeURIComponent($("#keywords").val());
 	}
 
 	window.location.href = url;

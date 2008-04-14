@@ -113,6 +113,6 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .rightside_dot .txtr a{ font-size:12px; }
 
 /* 我要提问 ------------------------------------------------------------- */
-#question_add_form{ padding:20px; color:#666 }
+#question_insert_form{ padding:20px; color:#666 }
 #tinymce_textarea td{ padding:1px; }
-.question_add_textarea{margin-top:10px;padding:2px;height:180px;border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
+.question_insert_textarea{margin-top:10px;padding:2px;height:180px;border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
