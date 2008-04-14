@@ -84,27 +84,22 @@ class RegisterController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组
-			$input = $this->getRequest()->getPost(); //print_r($input);exit;
-			// 此处单独处理的数据单独取出
+			$input = $this->getRequest()->getPost();
+			// 此处单独处理的数据单独取出 // next, see standard
 			$vcode = $input['vcode'];
 			$scode = $this->_sessCommon->verify;
-			// 此处可注入数据将用与判断
-			// 
 			// 此处注销无用数据
 			unset($this->_sessCommon->verify);
 
-			$filter = RegisterFilter::init();
-			if ($input = $filter->register($input))
+			if ($input = RegisterFilter::init()->register($input))
 			{
 				if (Commons::checkVerify($vcode, $scode))
 				{
-					$logic = RegisterLogic::init();	
+					$this->_sessMember->message = ((RegisterLogic::init()->register($input)) ? 
+				        $this->_iniMember->hint->register->success : 
+				            $this->_iniMember->hint->register->failure);
 
-					$this->_sessMember->message = (($logic->register($input)) ? 
-					    $this->_iniMember->hint->register->success : 
-					        $this->_iniMember->hint->register->failure);
-
-					echo 'redirect'; // 请求ajax跳转
+				    echo 'redirect'; // 请求ajax跳转
 				}
 			}
 		}
@@ -123,15 +118,12 @@ class RegisterController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组
-			$input = $this->getRequest()->getPost(); //print_r($posts);exit;
-			// to do something, see standard docs
+			$input = $this->getRequest()->getPost();
+			// next, see standard
 
-			$filter = RegisterFilter::init();
-			if ($userName = $filter->check($input))
+			if ($userName = RegisterFilter::init()->check($input))
 			{
-				$logic = RegisterLogic::init();
-
-				echo (($logic->check($userName)) ? 
+				echo ((RegisterLogic::init()->check($userName)) ? 
 				    $this->_iniMember->hint->userName->isExist : 
 				        $this->_iniMember->hint->userName->notExist);
 			}

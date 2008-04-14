@@ -74,27 +74,20 @@ class LoginController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组
-			$input = $this->getRequest()->getPost(); //print_r($input);exit;
-			// 此处单独处理的数据单独取出
-			$alive = $input['alive'];
-			// 此处可注入数据将用与判断
-			// 
-			// 此处注销无用数据				
-			unset($input['alive']);
+			$input = $this->getRequest()->getPost();
+			// next, see standard
 
-			$filter = LoginFilter::init();
-			if ($input = $filter->login($input))
+			if ($input = LoginFilter::init()->login($input))
 			{
-				$logic = LoginLogic::init();			
-				if ($login = $logic->login($input))
+				if ($login = LoginLogic::init()->login($input))
 				{
 					//登录成功
 					$this->_sessCommon->role  = 'member';
 					$this->_sessCommon->login = $login;
 					//记住账号
-					((null === $alive) ? 
-					    setcookie('zjuhz_member[alive]', $input['userName'], time()-2592000, '/') : 
-					        setcookie('zjuhz_member[alive]', $input['userName'], time()+2592000, '/'));
+					((null === $input['alive']) ? 
+					    setcookie('zjuhz_member[alive]', $input['userName'], time() - 2592000, '/') : 
+					        setcookie('zjuhz_member[alive]', $input['userName'], time() + 2592000, '/'));
 
 					//成功跳转
 					echo 'redirect';

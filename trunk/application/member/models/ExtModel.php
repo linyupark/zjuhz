@@ -5,21 +5,21 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:UserModel.php
+ * @version    Id:ExtModel.php
  */
 
 
 /**
- * 会员中心-tbl_user
+ * 会员中心-tbl_user_ext
  * 表级操作类,含单表读/写/改等方法
  */
-class UserModel //extends Zend_Db_Table_Abstract
+class ExtModel //extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
      * @var string
      */
-    protected $_name = 'tbl_user';
+    protected $_name = 'tbl_user_ext';
 
     /**
      * 数据表主键
@@ -55,16 +55,18 @@ class UserModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 判断用户登录帐号是否已存在
+     * 更新表数据
      * 
-     * @param string $userName
-     * @return string
+     * @param array $input
+     * @param integer $uid
+     * @return integer
      */
-	public function checkUserName($userName)
-    {echo $userName;exit;
-    	return $this->_dao->fetchOne(
-    	    "SELECT uid FROM {$this->_name} WHERE userName = :userName;",
-            array('userName' => $userName)
-        );
+	public function update($input, $uid)
+    {
+    	// where语句
+		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
+
+		// 更新表数据,返回更新的行数
+		return $this->_dao->update($this->_name, $input, $where);
     }
 }

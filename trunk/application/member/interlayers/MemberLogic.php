@@ -5,7 +5,7 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:RegisterLogic.php
+ * @version    Id:MemberLogic.php
  */
 
 
@@ -14,7 +14,7 @@
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class RegisterLogic extends MemberInterlayer
+class MemberLogic extends MemberInterlayer
 {
     /**
      * 构造方法
@@ -48,33 +48,17 @@ class RegisterLogic extends MemberInterlayer
     }
 
 	/**
-     * 会员注册
+     * 更新表数据
+     * $set = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
      * 
      * @param array $input
-     * @return boolean
+     * @param string $uid
+     * @return integer
      */
-	public function register($input)
+	public function extUpdate($input, $uid)
 	{
-		$this->_loadMdl('Member');
+		$this->_loadMdl('Ext');
 
-		return ($this->_mdlMember->register($input) ? true : false);
-	}
-
-	/**
-     * 帐号检测
-     * 
-     * @param string $userName
-     * @return boolean
-     */
-	public function check($userName)
-	{
-		$this->_loadMdl('User');
-
-		return ($this->_mdlUser->checkUserName($userName) ? true : false);
-	}
-
-	public function test()
-	{
-		echo 'test';
+		return $this->_mdlExt->update($input, $uid);
 	}
 }

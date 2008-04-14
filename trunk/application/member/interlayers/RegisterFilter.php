@@ -52,7 +52,7 @@ class RegisterFilter extends MemberInterlayer
      * 会员注册数据过滤
      * 
      * @param array $input
-     * @return string to ajax | false
+     * @return string to ajax or false or array
      */
 	public function register($input)
 	{
@@ -84,34 +84,29 @@ class RegisterFilter extends MemberInterlayer
                 array('Utf8Length', '2','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realName->formatError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realName->formatError)), 
-            'sex' => array('presence' => 'required'), 
-            'vcode' => array('Digits','breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-                    Zend_Validate_Digits::NOT_DIGITS => $this->_iniMember->hint->verifyCode->stringEmpty, 
-                    Zend_Validate_Digits::STRING_EMPTY => $this->_iniMember->hint->verifyCode->notDigits)), 
+            'sex' => array('presence' => 'required'),
             'ikey' => array('allowEmpty' => true), 
         );
 
         $options = array(
             'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
             'missingMessage' => $this->_iniMember->hint->missingMessage, 
-        );         	
+        );
 
 		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
 
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
+		if ($input->hasInvalid() || $input->hasMissing())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
 		}
 		else
 		{
-			$input = array(
+			return array(
 		    	'userName' => $input->getUnescaped('uname'), 'passWord' => $input->getUnescaped('pswd'), 
 		  		'realName' => $input->getUnescaped('rname'), 'sex' => $input->getUnescaped('sex'), 
 		  		'regIp' => Commons::getIp(), 'ikey' => $input->getUnescaped('ikey'), 
 			);
-
-			return $input;
 		}
 
 		return false;
@@ -121,7 +116,7 @@ class RegisterFilter extends MemberInterlayer
      * 帐号检测数据过滤
      * 
      * @param array $input
-     * @return string to ajax | false
+     * @return string to ajax or false or array
      */
 	public function check($input)
 	{
@@ -145,7 +140,7 @@ class RegisterFilter extends MemberInterlayer
 
 		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
 
-		if ($input->hasInvalid() || $input->hasMissing() || $input->hasUnknown())
+		if ($input->hasInvalid() || $input->hasMissing())
 		{
 			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
