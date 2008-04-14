@@ -23,7 +23,12 @@ class IndexController extends Zend_Controller_Action
     // 管理首页
     function homeAction()
     {
-    	
+    	$this->view->sub = $this->getRequest()->getParam('sub');
+    	switch ($this->getRequest()->getParam('of'))
+    	{
+    		case 'data' : $this->render('home-data'); break;
+    		default: $this->render('home');
+    	}
     }
     
     //问题详细页
