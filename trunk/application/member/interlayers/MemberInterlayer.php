@@ -119,7 +119,7 @@ abstract class MemberInterlayer
      * @return void
      */
 	protected function _loadMdl($name)
-    {echo 'test123';exit;
+    {
     	$thisName = "_mdl{$name}";
     	$objName  = "{$name}Model";
 
