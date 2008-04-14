@@ -51,25 +51,25 @@ class RegisterLogic extends MemberInterlayer
      * 会员注册
      * 
      * @param array $input
-     * @return boolean
+     * @return string
      */
 	public function register($input)
 	{
 		$this->_loadMdl('Member');
 
-		return ($this->_mdlMember->register($input) ? true : false);
+		return $this->_mdlMember->register($input);
 	}
 
 	/**
      * 帐号检测
      * 
      * @param string $userName
-     * @return boolean
+     * @return string
      */
 	public function check($userName)
 	{
 		$this->_loadMdl('User');
 
-		return ($this->_mdlUser->checkUserName($userName) ? true : false);
+		return $this->_mdlUser->checkUserName($userName);
 	}
 }
