@@ -11,8 +11,7 @@ function showNotice() {
 	$('.help_notice a').hide();
 	$('.help_notice a:eq('+(show_num-1)+')').show('slow');
 	show_num++;
-	if(show_num > notice_num) 
-	{
+	if(show_num > notice_num) {
 		show_num = 1;
 	}
 	$('.help_notice').attr('start',show_num);
@@ -29,9 +28,8 @@ function goUrl(name)
 {
 	var url = '/help/';
 
-	if (name == 'question_add')
-	{
-		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val()) + '/';
+	if (name == 'question_add') {
+		url = url + 'question/add/title/' + encodeURIComponent($("#keywords").val());
 	}
 
 	window.location.href = url;
