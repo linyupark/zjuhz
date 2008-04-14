@@ -8,19 +8,19 @@
     });
 
     $("#btnSubmit").click( function() {
-		question_add();		
+		question_insert();		
     });
 });
 
 // 提交问题
-function question_add() {
+function question_insert() {
 	ajaxloading(true);
 	$("#btnSubmit").attr("disabled", true);
 	var formdata = $("#myform").fastSerialize();
 
 	$.ajax( {
 		type   : "POST",
-        url    : "/help/question/doadd/",
+        url    : "/help/question/doinsert/",
         data   : formdata,
 	    success: function(msg) {
 			$("#btnSubmit").attr("disabled", false);
