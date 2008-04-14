@@ -49,9 +49,9 @@ create index idx_nickName on tbl_user
 );
 
 /*==============================================================*/
-/* Table: tbl_user_extInfo                                      */
+/* Table: tbl_user_ext                                          */
 /*==============================================================*/
-create table zjuhz_user.tbl_user_extInfo
+create table zjuhz_user.tbl_user_ext
 (
    uid                  int(10) unsigned not null,
    status               tinyint(1) unsigned not null default 0,
@@ -108,9 +108,9 @@ create index idx_status on tbl_user_invite_detail
 );
 
 /*==============================================================*/
-/* Table: tbl_user_moreInfo                                     */
+/* Table: tbl_user_more                                         */
 /*==============================================================*/
-create table zjuhz_user.tbl_user_moreInfo
+create table zjuhz_user.tbl_user_more
 (
    uid                  int(10) unsigned not null,
    everName             varchar(51) default NULL,
