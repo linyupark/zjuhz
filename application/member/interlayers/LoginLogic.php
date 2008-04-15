@@ -50,14 +50,14 @@ class LoginLogic extends MemberInterlayer
 	/**
      * 会员登录
      * 
-     * @param array $input
+     * @param array $args
      * @return array or false
      */
-	public function login($input)
+	public function login($args)
 	{
 		$this->_loadMdl('Member');
 
-		$row = $this->_mdlMember->login($input);
+		$row = $this->_mdlMember->login($args);
 
 		return ($row['uid'] ? $row : false);
 	}

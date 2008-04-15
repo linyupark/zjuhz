@@ -49,26 +49,26 @@ class MemberService extends MemberInterlayer
 
 	/**
      * 会员登录
-     * $input = array('userName' => '', 'passWord' => '', 'lastIp' => '');
+     * $args = array('userName' => '', 'passWord' => '', 'lastIp' => '');
      * 
-     * @param struct $input
+     * @param struct $args
      * @return array or false
      */
-	public function memberLogin($input)
+	public function memberLogin($args)
 	{
-		return LoginLogic::init()->login($input);
+		return LoginLogic::init()->login($args);
 	}
 
 	/**
      * 更新表数据
-     * $set = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
+     * $args = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
      * 
-     * @param struct $input
+     * @param struct $args
      * @param integer $uid
      * @return integer
      */
-	public function extUpdate($input, $uid)
+	public function extUpdate($args, $uid)
 	{
-		return MemberLogic::init()->extUpdate($input, $uid);
+		return MemberLogic::init()->extUpdate($args, $uid);
 	}
 }

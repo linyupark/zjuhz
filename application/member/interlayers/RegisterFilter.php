@@ -51,10 +51,10 @@ class RegisterFilter extends MemberInterlayer
 	/**
      * 会员注册数据过滤
      * 
-     * @param array $input
+     * @param array $args
      * @return string to ajax or false or array
      */
-	public function register($input)
+	public function register($args)
 	{
 		// 载入相关ZEND扩展 - ZF1.5版本需此
 		// Zend_Validate_Utf8Length
@@ -78,7 +78,7 @@ class RegisterFilter extends MemberInterlayer
               	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError, 
               	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError)), 
 			'repswd' => array(
-			    array('InArray', array($input['pswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+			    array('InArray', array($args['pswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->rePasswd->notEqual)), 
             'rname' => array(
                 array('Utf8Length', '2','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
@@ -88,12 +88,12 @@ class RegisterFilter extends MemberInterlayer
             'ikey' => array('allowEmpty' => true), 
         );
 
-        $options = array(
+        /*$options = array(
             'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
             'missingMessage' => $this->_iniMember->hint->missingMessage, 
-        );
+        );*/
 
-		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
+		$input = new Zend_Filter_Input($filters, $validators, $args); //, $options
 
 		if ($input->hasInvalid() || $input->hasMissing())
 		{
@@ -115,10 +115,10 @@ class RegisterFilter extends MemberInterlayer
 	/**
      * 帐号检测数据过滤
      * 
-     * @param array $input
-     * @return string to ajax or false or array
+     * @param array $args
+     * @return string to ajax or false
      */
-	public function check($input)
+	public function check($args)
 	{
 		// 设置过滤规则
 		$filters = array(
@@ -138,7 +138,7 @@ class RegisterFilter extends MemberInterlayer
 			'missingMessage' => $this->_iniMember->hint->missingMessage, 
         );         	
 
-		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
+		$input = new Zend_Filter_Input($filters, $validators, $args, $options);
 
 		if ($input->hasInvalid() || $input->hasMissing())
 		{

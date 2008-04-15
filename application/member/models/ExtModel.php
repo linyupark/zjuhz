@@ -57,16 +57,16 @@ class ExtModel //extends Zend_Db_Table_Abstract
     /**
      * 更新表数据
      * 
-     * @param array $input
+     * @param array $args
      * @param integer $uid
      * @return integer
      */
-	public function update($input, $uid)
+	public function update($args, $uid)
     {
     	// where语句
 		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
 
 		// 更新表数据,返回更新的行数
-		return $this->_dao->update($this->_name, $input, $where);
+		return $this->_dao->update($this->_name, $args, $where);
     }
 }

@@ -49,16 +49,16 @@ class MemberLogic extends MemberInterlayer
 
 	/**
      * 更新表数据
-     * $set = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
+     * $args = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
      * 
-     * @param array $input
+     * @param array $args
      * @param string $uid
      * @return integer
      */
-	public function extUpdate($input, $uid)
+	public function extUpdate($args, $uid)
 	{
 		$this->_loadMdl('Ext');
 
-		return $this->_mdlExt->update($input, $uid);
+		return $this->_mdlExt->update($args, $uid);
 	}
 }

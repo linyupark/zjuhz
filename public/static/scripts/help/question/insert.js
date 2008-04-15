@@ -23,10 +23,16 @@ function question_insert() {
         url    : "/help/question/doinsert/",
         data   : formdata,
 	    success: function(msg) {
-			$("#btnSubmit").attr("disabled", false);
-			getVerifyCode();
-			ajaxhint(true,msg);
-			ajaxloading();
+			if (msg == 'redirect') {
+				window.location.href="/help/index/message/";
+			}
+			else {
+				$("#btnSubmit").attr("disabled", false);
+				getVerifyCode();
+				ajaxhint(true,msg);
+				ajaxloading();
+			}
+
 		}
 	});
 

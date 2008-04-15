@@ -36,7 +36,7 @@ function sort_list(getname)
 	$("#" + name + 'Id').val(sid);
 
 	if (sid > 1 && next < cnt) {
-		$.getJSON("/help/sort/json/", { parent: sid }, function(msg) {
+		$.getJSON("/help/sort/json/", { sid: sid }, function(msg) {
 				if (msg != "") {
 					$("#" + name + next).addOption(msg, false);
 				}

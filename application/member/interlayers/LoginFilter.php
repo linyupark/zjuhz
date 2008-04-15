@@ -51,10 +51,10 @@ class LoginFilter extends MemberInterlayer
 	/**
      * 会员登录数据过滤
      * 
-     * @param array $input
+     * @param array $args
      * @return string to ajax or false or array
      */
-	public function login($input)
+	public function login($args)
 	{
 		// 设置过滤规则
 		$filters = array(
@@ -73,12 +73,7 @@ class LoginFilter extends MemberInterlayer
               	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError, )), 
         );
 
-        $options = array(
-            'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
-			'missingMessage' => $this->_iniMember->hint->missingMessage, 
-        );
-
-		$input = new Zend_Filter_Input($filters, $validators, $input, $options);
+		$input = new Zend_Filter_Input($filters, $validators, $args);
 
 		if ($input->hasInvalid() || $input->hasMissing())
 		{
