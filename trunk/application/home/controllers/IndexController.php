@@ -7,6 +7,10 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->layout()->setLayout('main');
 		$this->view->headScript()->appendFile('/static/scripts/home.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
+		
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		// 分配角色详细信息
+		$this->view->login = $this->_sessCommon->login;
 	}
 	
     function indexAction()

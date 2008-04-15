@@ -1,0 +1,21 @@
+<div class="sidebar">
+
+<div>
+<p>每个人只能创建一个班级，为了保证班级的唯一性，请在创建前确定没有相同班级存在。</p>
+
+<h2>班级入学年份：</h2>
+<select>
+<option value="" selected="selected">选择年份：</option>
+<?php for ($i=1970;$i<=2008;$i++): ?>
+<option value="<?= $i ?>"><?= $i ?></option>
+<?php endfor; ?>
+</select>
+			
+<h2>班级名称</h2>
+<input type="text" name="classname" class="inputtxt" />
+
+<h2>班级网址</h2>
+<p>作为直接访问班级主页地址。<br />
+如果班级的隐私设置为游客可见，则该地址可被外网游客访问(隐私控制范围内的内容)</p>
+</div>
+</div>

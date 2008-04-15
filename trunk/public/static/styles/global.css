@@ -156,5 +156,7 @@ a{ color:#314973 }
 img {
 	BORDER-STYLE: none;
 }
-
+/* 高亮字 */
 .search_highlight{ font-size:14px; color:#c03; }
+/* 一般输入框样式 */
+.inputtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
