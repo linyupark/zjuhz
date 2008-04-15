@@ -50,14 +50,14 @@ class RegisterLogic extends MemberInterlayer
 	/**
      * 会员注册
      * 
-     * @param array $input
+     * @param array $args
      * @return string
      */
-	public function register($input)
+	public function register($args)
 	{
 		$this->_loadMdl('Member');
 
-		return $this->_mdlMember->register($input);
+		return $this->_mdlMember->register($args);
 	}
 
 	/**

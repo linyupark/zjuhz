@@ -36,6 +36,13 @@ class IndexController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
+     * sess内的会员编号
+     *
+     * @var integer
+     */
+	private $_sessUid = 0;
+
+	/**
      * 初始化
      *
      * @return void
@@ -48,6 +55,8 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		// 载入项目SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+		// sessionUid
+		$this->_sessUid    = $this->_sessCommon->login['uid'];		
 
 		// 登录资料注入
 		$this->view->login = $this->_sessCommon->login;
@@ -87,19 +96,19 @@ class IndexController extends Zend_Controller_Action
 	public function activateAction()
 	{
 		// 注册会员使用时需先激活
-		if ('member' == $this->_sessCommon->role && 'N' === $this->_sessCommon->login['initAsk'])
+		if ('member' === $this->_sessCommon->role && 'N' === $this->_sessCommon->login['initAsk'])
 		{
 			// 此处接收传递的数据数组 // next, see standard
-			$input = $this->_sessCommon->login;
+			$loginArgs = $this->_sessCommon->login;
 			// 此处可注入数据将用与判断 // next, see standard
-			$input['point'] = $this->_iniHelp->point->init;
+			$loginArgs['point'] = $this->_iniHelp->point->init; // 积分初始值
 
-			if ($input = IndexFilter::init()->activate($input))
+			if ($actArgs = IndexFilter::init()->activate($loginArgs))
 			{
-				if (IndexLogic::init()->activate($input))
+				if (IndexLogic::init()->activate($actArgs))
 				{
                		$this->_sessCommon->login['initAsk'] = 'Y';
-               		HelpClient::init()->activate($this->_sessCommon->login['uid']);
+               		HelpClient::init()->activate($this->_sessUid); // 通知更新
 				}
 			}
 		}
@@ -113,21 +122,40 @@ class IndexController extends Zend_Controller_Action
 	public function entryAction()
 	{
 		// 注册会员给予子系统SESS
-		if ('member' == $this->_sessCommon->role && !$this->_sessHelp->login)
+		if ('member' === $this->_sessCommon->role && !$this->_sessHelp->login)
 		{
-			// 此处接收传递的数据数组
-			$input = $this->_sessCommon->login;
-			// next, see standard
-
-			if ($uid = IndexFilter::init()->entry($input))
+			if ($result = IndexLogic::init()->entry($this->_sessUid))
 			{
-				if ($entry = IndexLogic::init()->entry($uid))
-				{
-               		$this->_sessHelp->login = $entry;
-				}
+				$this->_sessHelp->login = $result; //exit('module entry!');
 			}
 		}
 	}
+
+    /**
+     * 测试
+     * 
+     * @return void
+     */
+    public function testAction()
+    {
+		// 禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender();
+		// 禁用layout
+		$this->_helper->layout->disableLayout();
+
+        print_r($_SESSION);
+        exit;
+    }
+
+    /**
+     * 模块统一消息提示页
+     * 
+     * @return void
+     */
+    public function messageAction()
+    {
+		$this->view->message = $this->_sessHelp->message;
+    }
 
 	/**
      * 你问我答首页
@@ -143,7 +171,7 @@ class IndexController extends Zend_Controller_Action
 
 		// 首次使用激活
 		$this->activateAction();
-		// 子系统SESSION
+		// 子系统登录
 		$this->entryAction();
 	}
 }

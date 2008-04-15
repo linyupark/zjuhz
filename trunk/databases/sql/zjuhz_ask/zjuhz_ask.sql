@@ -166,21 +166,15 @@ create index idx_sortId on tbl_ask_overtime
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_point_log
 (
+   id                   int unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
    point                smallint not null default 0,
+   after                int unsigned not null default 0,
    time                 timestamp not null default CURRENT_TIMESTAMP,
    type                 tinyint unsigned not null default 0,
-   primary key (uid)
+   primary key (id)
 )
 type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_time                                              */
-/*==============================================================*/
-create index idx_time on tbl_ask_point_log
-(
-   time
-);
 
 /*==============================================================*/
 /* Table: tbl_ask_point_week                                    */

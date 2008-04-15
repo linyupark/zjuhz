@@ -46,13 +46,13 @@ class MemberModel
     /**
      * 会员注册
      * 
-     * @param array $input
+     * @param array $args
      * @return string
      */
-	public function register($input)
+	public function register($args)
     {
 		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey);');
-		$stmt->execute($input);
+		$stmt->execute($args);
 
 		return $stmt->fetchColumn();
     }
@@ -60,13 +60,13 @@ class MemberModel
     /**
      * 会员登录
      * 
-     * @param array $input
+     * @param array $args
      * @return array
      */
-	public function login($input)
+	public function login($args)
     {
 		$stmt = $this->_dao->prepare('CALL sp_login(:userName,:passWord,:lastIp);');
-		$stmt->execute($input);
+		$stmt->execute($args);
 
 		return $stmt->fetch();
     }

@@ -115,13 +115,13 @@ abstract class MemberInterlayer
     /**
      * Model类实例
      * 
-     * @param string $name
+     * @param string $mdlName
      * @return void
      */
-	protected function _loadMdl($name)
+	protected function _loadMdl($mdlName)
     {
-    	$thisName = "_mdl{$name}";
-    	$objName  = "{$name}Model";
+    	$thisName = "_mdl{$mdlName}";
+    	$objName  = "{$mdlName}Model";
 
     	if (!isset($this->$thisName))
     	{

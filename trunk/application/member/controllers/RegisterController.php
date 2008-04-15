@@ -84,18 +84,18 @@ class RegisterController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组
-			$input = $this->getRequest()->getPost();
+			$postArgs = $this->getRequest()->getPost();
 			// 此处单独处理的数据单独取出 // next, see standard
-			$vcode = $input['vcode'];
-			$scode = $this->_sessCommon->verify;
+			$vCode    = $postArgs['vcode'];
+			$sCode    = $this->_sessCommon->verify;
 			// 此处注销无用数据
 			unset($this->_sessCommon->verify);
 
-			if ($input = RegisterFilter::init()->register($input))
+			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				if (Commons::checkVerify($vcode, $scode))
+				if (Commons::checkVerify($vCode, $sCode))
 				{
-					$this->_sessMember->message = ((RegisterLogic::init()->register($input)) ? 
+					$this->_sessMember->message = ((RegisterLogic::init()->register($regArgs)) ? 
 				        $this->_iniMember->hint->register->success : 
 				            $this->_iniMember->hint->register->failure);
 
@@ -118,10 +118,10 @@ class RegisterController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组
-			$input = $this->getRequest()->getPost();
+			$postArgs = $this->getRequest()->getPost();
 			// next, see standard
 
-			if ($userName = RegisterFilter::init()->check($input))
+			if ($userName = RegisterFilter::init()->check($postArgs))
 			{
 				echo ((RegisterLogic::init()->check($userName)) ? 
 				    $this->_iniMember->hint->userName->isExist : 
