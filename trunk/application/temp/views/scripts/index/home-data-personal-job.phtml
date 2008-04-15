@@ -1,5 +1,5 @@
 <form class="home_form">
-<table>
+<table id="job_tbl">
 <tr>
 <td><b>公司名称：</b></td>
 <td><input type="text" class="txt" /></td>
@@ -186,13 +186,24 @@
 <option value="11">11</option>
 <option value="12">12</option></select></td>
 </tr>
+</table>
+
+<table id="expand"></table>
+
+<table>
 <tr>
-<td></td>
+<td><b>附加内容：</b></td>
 <td><a href="javascript:new_job()">添加公司</a></td>
 </tr>
 <tr>
-<td></td>
+<td>&nbsp;</td>
 <td><input type="submit" class="btn" value="保存修改" /></td>
 </tr>
 </table>
 </form>
+<script>
+function new_job()
+{
+	$('#expand').append($('#job_tbl').html());
+}
+</script>

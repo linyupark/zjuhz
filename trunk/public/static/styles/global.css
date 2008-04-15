@@ -121,10 +121,10 @@ a{ color:#314973 }
 }
 
 /* 全局分页 --------------------------------------------- */
-.pagination{ padding:8px 10px; overflow:hidden; clear:left; }
-.pagination a{  display:blcok; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
+.pagination{ padding:8px 10px; overflow:hidden; clear:left; height:20px; }
+.pagination a{  display:block; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
 .pagination a:hover{ border:1px solid #ccc; }
-.pagination b{ display:blcok; float:left; padding:2px 5px; }
+.pagination b{ display:block; float:left; padding:2px 5px; }
 
 #global_pos{ margin:10px 0 0 18px; color:#666; }
 

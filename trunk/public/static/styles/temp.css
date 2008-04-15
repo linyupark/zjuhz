@@ -120,7 +120,7 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_tab a{ padding:5px; margin:10px 5px 0 0; display:block; float:left; }
 .control_tab a.focus{ background:#D9E6F7; text-decoration:none; font-weight:bold; color:#000; }
 
-.control_action{ background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
+.control_action{background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
 
 .control_list{ width:100%; }
 .control_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA; }
@@ -137,3 +137,7 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .home_form .txt,.home_form .bigtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
 .home_form .btn{  border:3px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:3px 8px }
 .home_form .bigtxt{ width:400px; height:100px; }
+
+/* 通讯录详细信息表格样式 ------------------------------------------------- */
+.address_detail{ display:none; width:480px; }
+.address_detail td{ padding:2px; border-bottom:1px solid #eee; }
