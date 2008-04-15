@@ -10,7 +10,6 @@
 
 	// 自动加载必要模块
 	Zend_Loader::registerAutoload();
-	
 	// 全局注册
 	$iniInfo = new Zend_Config_Ini('Ini/Info.ini');
 	$dbInfo = Zend_Db::factory($iniInfo->db->adapter, $iniInfo->db->params->toArray());

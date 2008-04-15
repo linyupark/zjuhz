@@ -1,10 +1,10 @@
 <?php
 	
 	/**
-	 * INFO模块的权限管理类,并根据不同情况在分配前进行ACTION调配
+	 * CLASS模块的权限管理类,并根据不同情况在分配前进行ACTION调配
 	 *
 	 */
-	class InfoAcl extends Zend_Controller_Plugin_Abstract
+	class ClassAcl extends Zend_Controller_Plugin_Abstract
 	{
 		private $_sessCommon;
 		private $_acl;
@@ -24,22 +24,16 @@
 				$acl = new Zend_Acl();
 				// 增加所有控制角色,决定继承关系
 				$acl->addRole(new Zend_Acl_Role('guest'))
-				    ->addRole(new Zend_Acl_Role('member', 'guest'))
-				    ->addRole(new Zend_Acl_Role('staff', 'guest'))
+				    ->addRole(new Zend_Acl_Role('member'))
+				    ->addRole(new Zend_Acl_Role('staff'))
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 增加所要控制的资源(Controller)
-				$acl->add(new Zend_Acl_Resource('view'))
-				    ->add(new Zend_Acl_Resource('index'))
-				    ->add(new Zend_Acl_Resource('support'))
-				    ->add(new Zend_Acl_Resource('login'))
-				    ->add(new Zend_Acl_Resource('logout'))
-				    ->add(new Zend_Acl_Resource('search'))
-				    ->add(new Zend_Acl_Resource('admin'));
+				$acl->add(new Zend_Acl_Resource('index'))
+				    ->add(new Zend_Acl_Resource('new'));
 				// 权限设置
-				$acl->allow('guest', array('view','login','support','index','search'))
-					->allow('member', null)
+				$acl->allow('guest', 'index', 'home')
+					->allow('member', array('index','new'))
 				    ->allow('staff', null)
-				    ->allow('staff', 'admin', array('entity_add', 'entity_mod'))
 				    ->allow('admin');
 				// 寄存
 				Zend_Registry::set('acl', $acl);
