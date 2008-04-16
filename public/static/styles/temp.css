@@ -125,7 +125,7 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_list{ width:100%; }
 .control_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA; }
 .control_list th .txt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; font-weight:normal }
-.control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:2px 8px }
+.control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
 .control_list td{ padding:8px; }
 .control_list td a{ font-size:14px; color:#004BCA }
 .control_list td a.cat{ color:#666; }
