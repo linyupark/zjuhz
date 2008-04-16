@@ -109,6 +109,11 @@ class IndexController extends Zend_Controller_Action
 				{
                		$this->_sessCommon->login['initAsk'] = 'Y';
                		HelpClient::init()->activate($this->_sessUid); // 通知更新
+
+					// 数据已过滤可直接生成
+					LogLogic::init()->insert(array(
+					    'uid' => $this->_sessUid, 'point' => $loginArgs['point'], 'after' => $loginArgs['point'], 'type' => 1, 
+					));
 				}
 			}
 		}

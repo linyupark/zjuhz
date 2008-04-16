@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `zjuhz_user`.`sp_register` $$
-CREATE PROCEDURE `zjuhz_user`.`sp_register` (IN param_userName CHAR(16),IN param_passWord CHAR(16),IN param_realName CHAR(16),IN param_sex ENUM('M','F','S'),IN param_regIp CHAR(15),IN param_ikey CHAR(10))
+CREATE PROCEDURE `zjuhz_user`.`sp_register` (IN param_userName CHAR(16),IN param_passWord CHAR(16),IN param_realName CHAR(16),IN param_sex ENUM('M','F','S'),IN param_regIp CHAR(15),IN param_ikey CHAR(10),OUT out_uid INT(10))
 BEGIN
 
 
@@ -44,7 +44,7 @@ BEGIN
 
     END IF;
 
-    SELECT myrUid AS uid;
+    SET out_uid = myrUid;
 
 
 END $$
