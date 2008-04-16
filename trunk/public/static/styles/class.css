@@ -1,1 +1,9 @@
 @import url("global.css");
+
+.box{ padding:20px; margin:10px; width:600px; background:#f7f7f7 }
+.box h2{ font-size:14px; padding:8px 0; color:#666; }
+.box h2 small{ font-weight:normal; font-size:12px; }
+
+.tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
+.err_tip{ color:#DD3C10; padding:5px; }
+.suc_tip{ color:#2D8934; padding:5px; }
