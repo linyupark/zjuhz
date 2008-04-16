@@ -29,10 +29,11 @@
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 增加所要控制的资源(Controller)
 				$acl->add(new Zend_Acl_Resource('index'))
+					->add(new Zend_Acl_Resource('home'))
 				    ->add(new Zend_Acl_Resource('new'));
 				// 权限设置
-				$acl->allow('guest', 'index', 'home')
-					->allow('member', array('index','new'))
+				$acl->deny('guest', null)
+					->allow('member', array('index','new','home'))
 				    ->allow('staff', null)
 				    ->allow('admin');
 				// 寄存
@@ -62,9 +63,9 @@
 			if (!$this->_acl->isAllowed($sessRole, $resource, $action))
 			{
 				$request->setControllerName('error');
-				$request->setActionName('error');
-				$request->setParam('message','deny');
-				echo $sessRole.':'.$resource.':'.$action;
+				$request->setActionName('relogin');
+				//$request->setParam('resource',$resource);
+				//$request->setParam('action',$action);
 			}
 		}
 	}
