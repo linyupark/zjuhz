@@ -62,6 +62,22 @@ class IndexController extends Zend_Controller_Action
 		$this->view->login = $this->_sessCommon->login;
 	}
 
+    /**
+     * 测试
+     * 
+     * @return void
+     */
+    public function testAction()
+    {
+		// 禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender();
+		// 禁用layout
+		$this->_helper->layout->disableLayout();
+
+        print_r($_SESSION);
+        exit;
+    }
+
 	/**
      * help验证码
      * 
@@ -87,6 +103,16 @@ class IndexController extends Zend_Controller_Action
 	{
 		$this->_redirect('../member/');
 	}
+
+    /**
+     * 模块统一消息提示页
+     * 
+     * @return void
+     */
+    public function messageAction()
+    {
+		$this->view->message = $this->_sessHelp->message;
+    }
 
 	/**
      * 注册会员使用时需先激活
@@ -136,32 +162,6 @@ class IndexController extends Zend_Controller_Action
 		}
 	}
 
-    /**
-     * 测试
-     * 
-     * @return void
-     */
-    public function testAction()
-    {
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
-		// 禁用layout
-		$this->_helper->layout->disableLayout();
-
-        print_r($_SESSION);
-        exit;
-    }
-
-    /**
-     * 模块统一消息提示页
-     * 
-     * @return void
-     */
-    public function messageAction()
-    {
-		$this->view->message = $this->_sessHelp->message;
-    }
-
 	/**
      * 你问我答首页
      * 
@@ -178,5 +178,7 @@ class IndexController extends Zend_Controller_Action
 		$this->activateAction();
 		// 子系统登录
 		$this->entryAction();
+
+		
 	}
 }

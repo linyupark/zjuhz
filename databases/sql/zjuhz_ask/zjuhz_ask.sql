@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-4-14 11:55:37                           */
+/* Created on:     2008-4-16 15:59:52                           */
 /*==============================================================*/
 
 
@@ -81,11 +81,11 @@ create table zjuhz_ask.tbl_ask_closed
 (
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    title                char(30) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
-   sortId               smallint unsigned not null default 0,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
    addTime              datetime not null,
@@ -104,11 +104,11 @@ create index idx_uid on tbl_ask_closed
 );
 
 /*==============================================================*/
-/* Index: idx_sortId                                            */
+/* Index: idx_sid                                               */
 /*==============================================================*/
-create index idx_sortId on tbl_ask_closed
+create index idx_sid on tbl_ask_closed
 (
-   sortId
+   sid
 );
 
 /*==============================================================*/
@@ -131,11 +131,11 @@ create table zjuhz_ask.tbl_ask_overtime
 (
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    title                char(30) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
-   sortId               smallint unsigned not null default 0,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
    addTime              datetime not null,
@@ -154,11 +154,11 @@ create index idx_uid on tbl_ask_overtime
 );
 
 /*==============================================================*/
-/* Index: idx_sortId                                            */
+/* Index: idx_sid                                               */
 /*==============================================================*/
-create index idx_sortId on tbl_ask_overtime
+create index idx_sid on tbl_ask_overtime
 (
-   sortId
+   sid
 );
 
 /*==============================================================*/
@@ -202,11 +202,11 @@ create table zjuhz_ask.tbl_ask_question
 (
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    title                char(30) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
-   sortId               smallint unsigned not null default 0,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
    addTime              timestamp not null default CURRENT_TIMESTAMP,
@@ -226,11 +226,11 @@ create index idx_uid on tbl_ask_question
 );
 
 /*==============================================================*/
-/* Index: idx_sortId                                            */
+/* Index: idx_sid                                               */
 /*==============================================================*/
-create index idx_sortId on tbl_ask_question
+create index idx_sid on tbl_ask_question
 (
-   sortId
+   sid
 );
 
 /*==============================================================*/
@@ -282,11 +282,11 @@ create table zjuhz_ask.tbl_ask_solved
 (
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    title                char(30) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
-   sortId               smallint unsigned not null default 0,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
    addTime              datetime not null,
@@ -305,11 +305,11 @@ create index idx_uid on tbl_ask_solved
 );
 
 /*==============================================================*/
-/* Index: idx_sortId                                            */
+/* Index: idx_sid                                               */
 /*==============================================================*/
-create index idx_sortId on tbl_ask_solved
+create index idx_sid on tbl_ask_solved
 (
-   sortId
+   sid
 );
 
 /*==============================================================*/
@@ -320,6 +320,7 @@ create table zjuhz_ask.tbl_ask_sort
    sid                  smallint unsigned not null auto_increment,
    name                 char(20) not null,
    parent               smallint unsigned not null default 0,
+   pName                char(20) not null,
    child                tinyint not null default 0,
    primary key (sid)
 )

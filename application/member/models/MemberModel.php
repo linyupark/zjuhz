@@ -53,9 +53,8 @@ class MemberModel
     {
 		$stmt = $this->_dao->prepare('CALL sp_register(:userName,:passWord,:realName,:sex,:regIp,:ikey,@uid);');
 		$stmt->execute($args);
-		$stmt = $this->_dao->query('SELECT @uid');
 
-		return $stmt->fetchColumn();
+		return $this->_dao->query('SELECT @uid AS uid')->fetchColumn();
     }
 
     /**
