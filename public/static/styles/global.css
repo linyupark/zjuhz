@@ -157,7 +157,89 @@ a{ color:#314973 }
 img {
 	BORDER-STYLE: none;
 }
+
+/* 全局适用按钮样式-------------- */
+.btn{ border-top:1px solid #ABB5C6;border-left:1px solid #ABB5C6; border-bottom:1px solid #444C64;border-right:1px solid #444C64; 
+background:#627091; color:#fff; cursor:pointer; height:25px; padding:0 5px; overflow:hidden }
+
 /* 高亮字 */
 .search_highlight{ font-size:14px; color:#c03; }
 /* 一般输入框样式 */
 .inputtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
+
+/* 全局错误样式 ------------------------- */
+.err_message{ text-align:center; background:#FFFFCC; border:1px solid #FFCC33; padding:10px; margin:10px 20px; font-size:14px; }
+#relogin_form{ text-align:center }
+#relogin_form p{ padding:10px 0 0 0; }
+.err_submessage{ color:#666; }
+
+/* facebox ------------- */
+#facebox .b {
+  background:url(/static/images/facebox/b.png);
+}
+
+#facebox .tl {
+  background:url(/static/images/facebox/tl.png);
+}
+
+#facebox .tr {
+  background:url(/static/images/facebox/tr.png);
+}
+
+#facebox .bl {
+  background:url(/static/images/facebox/bl.png);
+}
+
+#facebox .br {
+  background:url(/static/images/facebox/br.png);
+}
+
+#facebox {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  text-align: left;
+}
+
+#facebox .popup {
+  position: relative;
+}
+
+#facebox table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+#facebox .body {
+  padding: 10px;
+  background: #fff;
+  width: 370px;
+}
+
+#facebox .loading {
+  text-align: center;
+}
+
+#facebox .image {
+  text-align: center;
+}
+
+#facebox img {
+  border: 0;
+}
+
+#facebox .footer {
+  border-top: 1px solid #DDDDDD;
+  padding-top: 5px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+#facebox .tl, #facebox .tr, #facebox .bl, #facebox .br {
+  height: 10px;
+  width: 10px;
+  overflow: hidden;
+  padding: 0;
+}
