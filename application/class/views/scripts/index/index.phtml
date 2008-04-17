@@ -1,11 +1,48 @@
+<!-- 一些操作 //////////////////////////////////////// -->
 <div class="sidebar">
-<div>你还没有加入任何班级。</div>
+<form method="GET" id="class_choice">
+<p><b>入学年份：</b><br />
+<select name="year" class="inputtxt">
+<option value="">不限制</option>
+<?php for ($i=1970;$i<=2008;$i++): ?>
+<option value="<?= $i ?>"<?php if($this->year == $i):?>selected="selected"<?php endif; ?>><?= $i ?></option>
+<?php endfor; ?>
+</select>
+</p>
 
-<div>
-<h2>您可以..</h2>
-<p><a href="">完善个人资料</a>后回来查看有没有同学已经创建了班级</p>
-<p>逛逛那些对校友<a href="">开放的班级</a></p>
-<p>如果实在找不到自己的班级, 请您 <button onclick="location.href='/class/new'">创建班级</button></p>
+<p><b>院系名称：</b><br />
+<select name="college" class="inputtxt">
+<option value="">所有学院</option>
+<?php foreach (Zend_Registry::get('iniClass')->college->name->toArray() as $k => $v): ?>
+<option value="<?= $v ?>"<?php if($this->college == $v):?>selected="selected"<?php endif; ?>><?= $v ?></option>
+<?php endforeach; ?>
+</select>
+</p>
+<p><input type="submit" value="查找班级" class="btn" /></p>
+<?= $this->render('index/myclass.phtml'); ?>
+</form>
 </div>
 
+<!-- 网站内所有班级列表 /////////////////////////////////// -->
+<div class="sidebar">
+<table class="class_list">
+<tr>
+<th>入学年</th>
+<th>学院</th>
+<th>班级</th>
+<th>创建人</th>
+<th>&nbsp;</th>
+</tr>
+<?php foreach ($this->class_rows as $k => $v): ?>
+<tr>
+<td><?= $v['class_year'] ?></td>
+<td><?= $v['class_college'] ?></td>
+<td><?= $v['class_name'] ?></td>
+<td><?= $v['class_charge'] ?></td>
+<td><a href="">加入</a></td>
+</tr>
+<?php endforeach; ?>
+</table>
+<div class="pagination"><?= $this->pagination ?></div>
 </div>
+

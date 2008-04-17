@@ -1,0 +1,16 @@
+<?php 
+$data = Zend_Registry::get('sessClass')->data;
+if($data == null): ?>
+<div>
+<h2 class="tip">你目前还没自己的班级</h2>
+<p><a href="">完善个人资料</a>后回来查看有没有同学已经创建了班级</p>
+<p>如果实在找不到自己的班级, 请您 <button onclick="location.href='/class/new'">创建班级</button></p>
+</div>
+</div>
+<?php else: ?>
+<ul><b>我的班级：</b><br />
+<?php foreach ($data as $k => $v): ?>
+<li><a href="/class/home?c=<?= $v['class_id'] ?>"><?= $v['class_name'] ?></a></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>

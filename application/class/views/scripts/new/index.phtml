@@ -7,9 +7,9 @@
 <h2>*班级入学年份：</h2>
 <p>
 <select class="inputtxt" name="year">
-<option value="" selected="selected">选择年份：</option>
+<option value="">选择年份：</option>
 <?php for ($i=1970;$i<=2008;$i++): ?>
-<option value="<?= $i ?>"><?= $i ?></option>
+<option value="<?= $i ?>"<?php if($this->year == $i):?>selected="selected"<?php endif; ?>><?= $i ?></option>
 <?php endfor; ?>
 </select>
 <span class="err_tip"><?= $this->err_tip['入学年份'] ?></span>
@@ -18,32 +18,10 @@
 <h2>*学院名称：</h2>
 <p>
 <select class="inputtxt" name="college">
-<option value="" selected="selected">选择学院：</option>
-<option value="软件学院">软件学院</option>
-<option value="管理学院">管理学院</option>
-<option value="成人教育学院">成人教育学院</option>
-<option value="人文学院">人文学院</option>
-<option value="药学院">药学院</option>
-<option value="经济学院">经济学院</option>
-<option value="管理学院">管理学院</option>
-<option value="电气学院">电气学院</option>
-<option value="教育学院">教育学院</option>
-<option value="材料与化学工程学院">材料与化学工程学院</option>
-<option value="机械与能源工程学院">机械与能源工程学院</option>
-<option value="光华法学院">光华法学院</option>
-<option value="理学院">理学院</option>
-<option value="传媒与国际文化学院">传媒与国际文化学院</option>
-<option value="计算机科学与技术学院">计算机科学与技术学院</option>
-<option value="公共管理学院">公共管理学院</option>
-<option value="生物系统工程与食品科学学院">生物系统工程与食品科学学院</option>
-<option value="农业与生物技术学院">农业与生物技术学院</option>
-<option value="建筑工程学院">建筑工程学院</option>
-<option value="动物科学学院">动物科学学院</option>
-<option value="信息科学与工程学院">信息科学与工程学院</option>
-<option value="外国语言文化与国际交流学院">外国语言文化与国际交流学院</option>
-<option value="生物医学工程与仪器科学学院">生物医学工程与仪器科学学院</option>
-<option value="城市学院">城市学院</option>
-<option value="外国语言文化与国际交流学院">外国语言文化与国际交流学院</option>
+<option value="">选择学院：</option>
+<?php foreach (Zend_Registry::get('iniClass')->college->name->toArray() as $k => $v): ?>
+<option value="<?= $v ?>"<?php if($this->college == $v):?>selected="selected"<?php endif; ?>><?= $v ?></option>
+<?php endforeach; ?>
 </select>
 <span class="err_tip"><?= $this->err_tip['学院名称'] ?></span>
 </p>
@@ -52,6 +30,7 @@
 <p>
 <input type="text" name="name" class="inputtxt" size="40" maxlength="25" />
 <input type="submit" class="btn" value="创建" />
+<input type="button" class="btn" onclick="history.back()" value="取消" />
 </p>
 
 <p>

@@ -30,10 +30,11 @@
 				// 增加所要控制的资源(Controller)
 				$acl->add(new Zend_Acl_Resource('index'))
 					->add(new Zend_Acl_Resource('home'))
+					->add(new Zend_Acl_Resource('list'))
 				    ->add(new Zend_Acl_Resource('new'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow('member', array('index','new','home'))
+					->allow('member', array('index','new','home','list'))
 				    ->allow('staff', null)
 				    ->allow('admin');
 				// 寄存

@@ -1,5 +1,5 @@
 <p class="err_message">您目前的身份无法访问该资源</p>
-<form method="post" id="relogin_form" onsubmit="relogin()">
+<form method="post" id="relogin_form" onsubmit="return relogin()">
 <p>
 帐号 <input class="inputtxt" id="uname" maxlength="16" name="uname" value="" />
 </p>
@@ -20,8 +20,9 @@ function relogin()
 			$("#relogin_form").fastSerialize(),
 			function(data){
 				if(data == 'redirect')
-				window.location.href="";
+				location.href="";
 			}
 		);
+	return false;
 }
 </script>

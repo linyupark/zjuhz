@@ -19,6 +19,9 @@ class NewController extends Zend_Controller_Action
 			$name = $inputChains->className($request->getPost('name'));
 			$year = $inputChains->noEmpty($request->getPost('year'), '入学年份');
 			$college = $inputChains->noEmpty($request->getPost('college'), '学院名称');
+			
+			$this->view->year = $year;
+			$this->view->college = $college;
 				
 			if(count($inputChains->getMessages()) > 0) //数据有问题
 			{
@@ -33,14 +36,14 @@ class NewController extends Zend_Controller_Action
 					'class_college' => $college,
 					'class_charge' => $this->view->login['uid'],
 				);
-				if(false == DbModel::initClass($data))
+				if(!$class_id = DbModel::initClass($data))
 					$this->view->err_tip['class_name'] = '班级数据初始化失败';
 				else 
 				{
 					// 将sessClass清除,重新分配
 					$this->_sessClass->data = null;
-					$this->view->suc_tip = '班级建立成功,2秒后转向<a href="/class/">班级主页</a>';
-					echo Commons::js_jump('/class/',2);
+					$this->view->suc_tip = '班级建立成功,2秒后转向<a href="/class/home?c='.$class_id.'">班级主页</a>';
+					echo Commons::js_jump('/class/home?c='.$class_id,2);
 				}
 			}
 		}

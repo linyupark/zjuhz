@@ -1,7 +1,23 @@
 <div class="sidebar">
-<p>
+<!-- 班级切换 /////////////////////////////////////////// -->
+<p class="class_tab">
 <?php foreach ($this->class as $k => $v): ?>
-<a href="/class/"><?=$v['class_name']?>(<?=$v['class_college']?>)</a>
+<a href="/class/home?c=<?=$v['class_id']?>"><?=$v['class_name']?></a>
 <?php endforeach; ?>
+<a href="/class/new/" style="border-left:1px solid #AFCAEF">创建新班级</a>
 </p>
+<script>$('.class_tab a[href="/class/home?c=<?=$this->class_id?>"]').addClass('on')</script>
 </div>
+
+<!-- 功能导航 /////////////////////////////////////////// -->
+<div class="sidebar class_nav">
+<?= $this->render('nav.phtml'); ?>
+</div>
+
+<!-- 班级公告载入 ////////////////////////////////////// -->
+
+<!-- 最新相册快照 //////////////////////////////////////// -->
+
+<!-- 班级话题列表 ///////////////////////////////////// -->
+
+<!-- 发表新话题的输入框 /////////////////////////////// -->

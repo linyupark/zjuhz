@@ -3,6 +3,28 @@
 	class DbModel
 	{
 		/**
+		 * 根据不同的条件获取每20条记录
+		 *
+		 * @param int $year
+		 * @param string $college
+		 * @param int $offset
+		 * @return int['numrows']/array['rows']
+		 */
+		static function getClasses($year = '', $college = '', $offset = 0, $pagesize = 20)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$select = $db->select();
+			$select->from('tbl_class',array('class_year','class_charge','class_college','class_name'));
+			if((int)$year != 0) $select->where('class_year = ?',$year);
+			if(!empty($college)) $select->where('class_college = ?',$college);
+			$stmt = $db->query($select);
+			$rows = $stmt->fetchAll();
+			$return['numrows'] = count($rows);
+			$return['rows'] = array_slice($rows, $offset, $pagesize);
+			return $return;
+		}
+		
+		/**
 		 * 创建班级,并对其他表进行初始化
 		 *
 		 * @param array $data 基本班级建立数据
@@ -21,7 +43,7 @@
 					'class_member_last_access' => time()
 				));
 				$db->insert('tbl_class_privacy',array('class_id' => $class_id));
-				return true;
+				return $class_id;
 			}
 			catch (Exception $e)
 			{
@@ -38,7 +60,7 @@
 		static function hasClass($uid)
 		{
 			$db = Zend_Registry::get('dbClass');
-			return $db->fetchAll('SELECT `class_id`,`class_name`,`class_college`,`class_year` 
+			return $db->fetchAll('SELECT `class_id`,`class_name`,`class_college`,`class_year`,`class_charge`,`class_member_charge` 
 			                      FROM `vi_class_member` 
 			                      WHERE `class_member_id` = ?', (int)$uid);
 		}

@@ -7,3 +7,26 @@
 .tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
 .err_tip{ color:#DD3C10; padding:5px; }
 .suc_tip{ color:#2D8934; padding:5px; }
+
+/* 班级列表TABLE -------------------------------------------- */
+.class_list{ width:600px; margin:10px; }
+.class_list th{ text-align:left; background:#D9E6F7; padding:5px; }
+
+#class_choice{ margin-left:10px;  }
+#class_choice p{ padding:10px 0 0 0; }
+#class_choice p b{ color:#666; }
+#class_choice ul { list-style-position:inside; color:#666; padding:10px 0 0 0; margin-top:10px;  border-top:1px solid #ccc; }
+#class_choice ul a{ text-decoration:none; }
+#class_choice ul a:hover{ text-decoration:underline; }
+
+/* 班级主页各班级切换 --------------------------------------- */
+.class_tab{ padding:10px 0 0 0; border-bottom:2px solid #D9E6F7; overflow:hidden; width:840px; margin-left:10px;}
+.class_tab a{ display:block; float:left; border:1px solid #AFCAEF;  border-bottom:1px solid #D9E6F7; 
+padding:5px; text-decoration:none; margin-left:5px; }
+.class_tab a:hover{ text-decoration:underline; }
+.class_tab a.on{ background:#D9E6F7; }
+
+/* 班级功能导航 ------------------------------------------  */
+.class_nav{ width:120px; background:#EEF4FB; margin-left:10px; border:1px solid #fff; }
+.class_nav a{ display:block; text-decoration:none; padding:5px; border:1px solid #fff; }
+.class_nav a:hover{ background:#eee; border:1px solid #ccc; }
