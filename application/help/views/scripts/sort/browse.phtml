@@ -1,0 +1,50 @@
+<!-- 互助分类 -->
+<div class="sidebar">
+<?= $this->render('sort.phtml'); ?>
+</div>
+
+
+<div class="sidebar">
+<!-- 互助广播 -->
+<?= $this->render('broadcast.phtml'); ?>
+
+<!-- 问题集合 -->
+<table class="help_set_big">
+
+    <!-- 分类////////////////////////////////////////// -->
+	<tr>
+	<th colspan="4" class="txtl">大分类名</th>
+	</tr>
+
+	<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	</tr>
+		
+</table>
+
+<!-- 问题集合 -->
+<table class="help_set_big">
+
+    <!-- 分类////////////////////////////////////////// -->
+	<tr>
+	<th class="txtl">小分类名</th>
+	<th class="txtr" colspan="6"></th>
+	</tr>
+    <?php foreach ($this->browse as $value) { ?>
+	<tr>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td>
+	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span></td>
+	<td><?= $value['reply']; ?></td>
+	<td><img src="/static/images/icon/icn_status_<?= $value['status']; ?>.gif"></td>
+	<td><?= date('m-d H:m', strtotime($value['addTime'])); ?></td>
+	</tr>
+	</tr>
+    <?php } ?>
+
+</table>
+</div>
