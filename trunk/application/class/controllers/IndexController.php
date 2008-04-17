@@ -7,26 +7,36 @@ class IndexController extends Zend_Controller_Action
 		// 注册全局SESSION
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessClass = Zend_Registry::get('sessClass');
-		$this->view->login = Zend_Registry::get('sessCommon')->login;
+		$this->view->login = $this->_sessCommon->login;
+		// 需要重新写入session
+		if($this->_sessClass->data == null)
+		{
+			$rows = DbModel::hasClass($this->view->login['uid']);
+			if(false != $rows)
+			$this->_sessClass->data = $rows;
+		}
 	}
 	
 	function indexAction()
 	{
-		if($this->_sessClass->data == null)
-		{
-			$rows = DbModel::hasClass($this->view->login['uid']);
-			// 没有班级的会员
-			if(!$rows)
-				$this->render('index');
-			else // 重新加载一遍会员的班级信息->sessClass
-			{
-				$this->_sessClass->data = $rows;
-				$this->_redirect('/home/');
-			}
-		}
-		else // 跳转到HOME
-		{
-			$this->_redirect('/home/');
-		}
+		// 获取班级列表
+		$year = $this->_getParam('year');
+		$college = $this->_getParam('college');
+		$page = $this->_getParam('p',1);
+			
+		//按页获取信息列表
+		Page::$pagesize = 20;
+		$rows = DbModel::getClasses($year,$college,($page-1)*Page::$pagesize,Page::$pagesize);
+		Page::create(array(
+		"href_open" => "<a href='/class/?year={$year}&college={$college}&p=%d'>", 
+		"href_close" => "</a>", 
+		"num_rows" => $rows['numrows'],
+		"cur_page" => $page));
+		
+		// 分配班级数据
+		$this->view->year = $year;
+		$this->view->college = $college;
+		$this->view->class_rows = $rows['rows'];
+		$this->view->pagination = Page::$page_str;
 	}
 }
