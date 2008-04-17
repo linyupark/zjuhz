@@ -29,6 +29,17 @@
 .help_set td.cat a:visited{ color:#666; }
 .help_set td.coin{ font-size:9px; color:#537E01; text-align:center }
 
+.help_set_big{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 10px; width:650px; }
+.help_set_big th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px;  }
+.help_set_big td{ padding:5px; }
+.help_set_big td a{ text-decoration:none; color:#004BCA }
+.help_set_big td a:hover{ text-decoration:underline; }
+.help_set_big td a:visited{ color:#800080; }
+.help_set_big td.cat { padding:5px 0 5px 10px; width:65px; }
+.help_set_big td.cat a{ color:#666; }
+.help_set_big td.cat a:visited{ color:#666; }
+.help_set_big td.coin{ font-size:9px; color:#537E01; text-align:center }
+
 /* 积分排行 ---------------------------------------------------------- */
 .help_rank{ width:165px; border:1px solid #E7DAC5; margin:10px 0 0 10px; }
 .help_rank th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5;}

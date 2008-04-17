@@ -1,138 +1,81 @@
 <!-- 互助分类 -->
 <div class="sidebar">
-<?= $this->render('sort.phtml') ?>
+<?= $this->render('sort.phtml'); ?>
 </div>
 
 
 <div class="sidebar">
 <!-- 互助广播 -->
-<div class="help_notice" start="2">
-<strong><img src="/static/images/icon/sound_none.gif" /></strong>
-<a href="" class="nt" style="display:block">* 最近有什么好看的电视剧吗?</a>
-<a href="" class="nt">* 在公司做Pro/E设计师该注意什么？</a>
-<a href="" class="nt">* 夏利车是7101电喷的发动机的带速乎高乎低怎么办？</a>
-<a href="" class="nt">* 凡高的代表作是什么?</a>
-<a href="" class="nt">* 去法国旅游，最值得去的景点有哪些？</a>
-<a href="" class="nt">* 天上为什么会有太阳</a>
-</div>
+<?= $this->render('broadcast.phtml'); ?>
 
 <!-- 问题集合 -->
 <table class="help_set">
+
+    <!-- 最新////////////////////////////////////////// -->
 	<tr>
-	<th class="txtl">最新求助</th>
-	<th class="txtr" colspan="2">更多&raquo;</th>
+	<th class="txtl">最新问题</th>
+	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/latest/">更多&raquo;</a></th>
 	</tr>
+    <?php foreach ($this->latest as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/temp/index/sub/">[反病毒]</a></td>
-	<td><a href="/temp/index/detail/">个人电脑装什么防火墙和杀毒软件好啊</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td>
+	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	</td>
 	</tr>
-	<tr>
-	<td class="cat"><a href="">[人际交往]</a></td>
-	<td><a href="">如何处理好人际关系？</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[节日假期]</a></td>
-	<td><a href="">如何提倡国人文明扫墓？</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[留学移民]</a></td>
-	<td><a href="">办日本的学生需要什么证件和流程?</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[奥运]</a></td>
-	<td><a href="">	2008奥运会跳水项目在哪进行？</a></td>
-	</tr>
+    <?php } ?>
+
 	<!-- 高分////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">高分求助</th>
-	<th class="txtr" colspan="2">更多&raquo;</th>
+	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/offer/">更多&raquo;</a></th>
 	</tr>
+    <?php foreach ($this->offer as $value) { ?>
 	<tr>
-	<td class="cat"><a href="">[反病毒]</a></td>
-	<td><a href="">个人电脑装什么防火墙和杀毒软件好啊</a></td>
-	<td class="coin">40</td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td>
+	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	</td>
 	</tr>
-	<tr>
-	<td class="cat"><a href="">[人际交往]</a></td>
-	<td><a href="">如何处理好人际关系？</a></td>
-	<td class="coin">30</td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[节日假期]</a></td>
-	<td><a href="">如何提倡国人文明扫墓？</a></td>
-	<td class="coin">20</td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[留学移民]</a></td>
-	<td><a href="">办日本的学生需要什么证件和流程?</a></td>
-	<td class="coin">10</td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[奥运]</a></td>
-	<td><a href="">	2008奥运会跳水项目在哪进行？</a></td>
-	<td class="coin">5</td>
-	</tr>
-	<!-- 被遗忘////////////////////////////////////////// -->
+    <?php } ?>
+
+	<!-- 遗忘////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">被遗忘的</th>
-	<th class="txtr" colspan="2">更多&raquo;</th>
+	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/reply/">更多&raquo;</a></th>
 	</tr>
+    <?php foreach ($this->reply as $value) { ?>
 	<tr>
-	<td class="cat"><a href="">[反病毒]</a></td>
-	<td><a href="">个人电脑装什么防火墙和杀毒软件好啊</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td>
+	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	</td>
 	</tr>
+    <?php } ?>
+	<!-- 解决////////////////////////////////////////// -->
 	<tr>
-	<td class="cat"><a href="">[人际交往]</a></td>
-	<td><a href="">如何处理好人际关系？</a></td>
+	<th class="txtl">最近解决</th>
+	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/solved/">更多&raquo;</a></th>
 	</tr>
+    <?php foreach ($this->solved as $value) { ?>
 	<tr>
-	<td class="cat"><a href="">[节日假期]</a></td>
-	<td><a href="">如何提倡国人文明扫墓？</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td>
+	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	</td>
 	</tr>
-	<tr>
-	<td class="cat"><a href="">[留学移民]</a></td>
-	<td><a href="">办日本的学生需要什么证件和流程?</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[奥运]</a></td>
-	<td><a href="">	2008奥运会跳水项目在哪进行？</a></td>
-	</tr>
-	<!-- 结帖////////////////////////////////////////// -->
-	<tr>
-	<th class="txtl">最近结束</th>
-	<th class="txtr" colspan="2">更多&raquo;</th>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[反病毒]</a></td>
-	<td><a href="">个人电脑装什么防火墙和杀毒软件好啊</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[人际交往]</a></td>
-	<td><a href="">如何处理好人际关系？</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[节日假期]</a></td>
-	<td><a href="">如何提倡国人文明扫墓？</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[留学移民]</a></td>
-	<td><a href="">办日本的学生需要什么证件和流程?</a></td>
-	</tr>
-	<tr>
-	<td class="cat"><a href="">[奥运]</a></td>
-	<td><a href="">	2008奥运会跳水项目在哪进行？</a></td>
-	</tr>
+    <?php } ?>
 </table>
 </div>
 
 <div class="sidebar">
 
 <!-- 帮助+公告 ///////////////////////////////////////////// -->
-<div class="box">
-<a href="" class="help_link">帮助</a>
-<a href="" class="help_rule">规则</a>
-</div>
-<a href="" class="need_help">需要帮助</a>
+<?= $this->render('help.phtml'); ?>
 
 <!-- 积分排行 ////////////////////////////////////////////// -->
 <table class="help_rank">

@@ -82,7 +82,7 @@ create table zjuhz_ask.tbl_ask_closed
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
    sid                  smallint unsigned not null default 0,
-   title                char(30) not null,
+   title                char(25) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
@@ -132,7 +132,7 @@ create table zjuhz_ask.tbl_ask_overtime
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
    sid                  smallint unsigned not null default 0,
-   title                char(30) not null,
+   title                char(25) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
@@ -203,7 +203,7 @@ create table zjuhz_ask.tbl_ask_question
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
    sid                  smallint unsigned not null default 0,
-   title                char(30) not null,
+   title                char(25) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
@@ -239,6 +239,22 @@ create index idx_sid on tbl_ask_question
 create index idx_status on tbl_ask_question
 (
    status
+);
+
+/*==============================================================*/
+/* Index: idx_offer                                             */
+/*==============================================================*/
+create index idx_offer on tbl_ask_question
+(
+   offer
+);
+
+/*==============================================================*/
+/* Index: idx_reply                                             */
+/*==============================================================*/
+create index idx_reply on tbl_ask_question
+(
+   reply
 );
 
 /*==============================================================*/
@@ -283,7 +299,7 @@ create table zjuhz_ask.tbl_ask_solved
    qid                  int(10) unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
    sid                  smallint unsigned not null default 0,
-   title                char(30) not null,
+   title                char(25) not null,
    content              text not null,
    append               varchar(101) default NULL,
    tags                 char(30) default NULL,
@@ -320,6 +336,7 @@ create table zjuhz_ask.tbl_ask_sort
    sid                  smallint unsigned not null auto_increment,
    name                 char(20) not null,
    parent               smallint unsigned not null default 0,
+   pid                  smallint unsigned not null default 0,
    pName                char(20) not null,
    child                tinyint not null default 0,
    primary key (sid)
@@ -333,3 +350,4 @@ create index idx_parent on tbl_ask_sort
 (
    parent
 );
+

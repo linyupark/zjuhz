@@ -179,6 +179,13 @@ class IndexController extends Zend_Controller_Action
 		// 子系统登录
 		$this->entryAction();
 
-		
+		// 最新问题
+		$this->view->latest = IndexLogic::init()->latest(10);
+		// 高分问题
+		$this->view->offer  = IndexLogic::init()->offer(10);
+		// 被遗忘的
+		$this->view->reply  = IndexLogic::init()->reply(10);
+		// 最近解决
+		$this->view->solved = IndexLogic::init()->solved(10);
 	}
 }
