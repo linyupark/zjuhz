@@ -14,11 +14,11 @@
     <!-- 最新////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">最新问题</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/latest/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"><a href="/help/sort/latest/">更多&raquo;</a></th>
 	</tr>
     <?php foreach ($this->latest as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
@@ -29,11 +29,11 @@
 	<!-- 高分////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">高分求助</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/offer/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"><a href="/help/sort/offer/">更多&raquo;</a></th>
 	</tr>
     <?php foreach ($this->offer as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
@@ -44,11 +44,11 @@
 	<!-- 遗忘////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">被遗忘的</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/reply/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"><a href="/help/sort/forget/">更多&raquo;</a></th>
 	</tr>
-    <?php foreach ($this->reply as $value) { ?>
+    <?php foreach ($this->forget as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
@@ -58,11 +58,11 @@
 	<!-- 解决////////////////////////////////////////// -->
 	<tr>
 	<th class="txtl">最近解决</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/browse/type/solved/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"><a href="/help/sort/solved/">更多&raquo;</a></th>
 	</tr>
     <?php foreach ($this->solved as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['sid']; ?>/pid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
