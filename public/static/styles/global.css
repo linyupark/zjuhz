@@ -15,7 +15,8 @@ table{ border-collapse:collapse;  }
 
 .sidebar{ float:left; }
 
-a{ color:#314973 }
+a{ color:#314973; text-decoration:none; }
+a:hover{ text-decoration:underline; }
 
 /* 常用字 --------------------------------------------- */
 .fw14{ font-size:14px; color:#fff; }
