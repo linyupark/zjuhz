@@ -48,15 +48,12 @@ class IndexController extends Zend_Controller_Action
      * @return void
      */
 	public function init()
-	{
-		// 载入项目配置
-		$this->_iniHelp    = Zend_Registry::get('iniHelp');
-		// 载入公共SESSION
-		$this->_sessCommon = Zend_Registry::get('sessCommon');
-		// 载入项目SESSION
-		$this->_sessHelp   = Zend_Registry::get('sessHelp');
-		// sessionUid
-		$this->_sessUid    = $this->_sessCommon->login['uid'];		
+	{		
+		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
+		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
+		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
+
+		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
 
 		// 登录资料注入
 		$this->view->login = $this->_sessCommon->login;
@@ -74,8 +71,7 @@ class IndexController extends Zend_Controller_Action
 		// 禁用layout
 		$this->_helper->layout->disableLayout();
 
-        print_r($_SESSION);
-        exit;
+        print_r($_SESSION);exit;
     }
 
 	/**
@@ -157,7 +153,7 @@ class IndexController extends Zend_Controller_Action
 		{
 			if ($result = IndexLogic::init()->entry($this->_sessUid))
 			{
-				$this->_sessHelp->login = $result; //exit('module entry!');
+				$this->_sessHelp->login = $result;
 			}
 		}
 	}
@@ -174,18 +170,12 @@ class IndexController extends Zend_Controller_Action
 		// 载入JS脚本
 		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
 
-		// 首次使用激活
-		$this->activateAction();
-		// 子系统登录
-		$this->entryAction();
+		$this->activateAction(); // 首次使用激活
+		$this->entryAction(); // 子系统登录
 
-		// 最新问题
-		$this->view->latest = IndexLogic::init()->latest(10);
-		// 高分问题
-		$this->view->offer  = IndexLogic::init()->offer(10);
-		// 被遗忘的
-		$this->view->reply  = IndexLogic::init()->reply(10);
-		// 最近解决
-		$this->view->solved = IndexLogic::init()->solved(10);
+		$this->view->latest = IndexLogic::init()->latest(10); // 最新问题
+		$this->view->offer  = IndexLogic::init()->offer(10); // 高分问题
+		$this->view->forget = IndexLogic::init()->forget(10); // 被遗忘的
+		$this->view->solved = IndexLogic::init()->solved(10); // 最近解决
 	}
 }
