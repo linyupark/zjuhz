@@ -33,6 +33,7 @@ class NewController extends Zend_Controller_Action
 				$data = array(
 					'class_name' => $name,
 					'class_year' => $year,
+					'class_create_time' => time(),
 					'class_college' => $college,
 					'class_charge' => $this->view->login['uid'],
 				);

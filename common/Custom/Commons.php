@@ -98,7 +98,7 @@ class Commons
 	}
 	
 	# 关键字加亮 string $keys(空格为分隔)
-	function highlight($keys, $str, $sp = ' ', $class = 'search_highlight')
+	static function highlight($keys, $str, $sp = ' ', $class = 'search_highlight')
 	{
 		$keyArr = explode($sp, $keys);
 		foreach ($keyArr as $key => $val)

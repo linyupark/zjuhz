@@ -30,11 +30,11 @@
 				// 增加所要控制的资源(Controller)
 				$acl->add(new Zend_Acl_Resource('index'))
 					->add(new Zend_Acl_Resource('home'))
-					->add(new Zend_Acl_Resource('list'))
+					->add(new Zend_Acl_Resource('ajax'))
 				    ->add(new Zend_Acl_Resource('new'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow('member', array('index','new','home','list'))
+					->allow('member', null)
 				    ->allow('staff', null)
 				    ->allow('admin');
 				// 寄存
@@ -67,6 +67,57 @@
 				$request->setActionName('relogin');
 				//$request->setParam('resource',$resource);
 				//$request->setParam('action',$action);
+			}
+			
+			// 一些分配前的动作 ----------------------------------------------------
+			else 
+			{
+				$sessClass = Zend_Registry::get('sessClass');
+				$uid = $this->_sessCommon->login['uid'];
+				
+				// 每个页面都要进行的session处理[班级信息]
+				if($sessClass->data == null)
+				{
+					$classes = DbModel::hasClass($uid);
+					if(false != $classes)
+					{
+						foreach ($classes as $k => $v)
+						{
+							$sessClass->data[$v['class_id']]['class_name'] = $v['class_name'];
+							$sessClass->data[$v['class_id']]['class_college'] = $v['class_college'];
+							$sessClass->data[$v['class_id']]['class_year'] = $v['class_year'];
+							$sessClass->data[$v['class_id']]['class_charge'] = $v['class_charge'];
+							$sessClass->data[$v['class_id']]['class_member_charge'] = $v['class_member_charge'];
+						}
+					}
+				}
+				
+				// 用户信息初始化
+				if($sessClass->userInit == null)
+				{
+					// 初始化过的用户
+					if(DbModel::isUserInit($uid))
+					{
+						$sessClass->userInit = 'Y';
+						//可加入一些session写入操作.
+					}
+					else 
+					{
+						$data = array(
+							'uid' => $uid,
+							'realName' => $this->_sessCommon->login['realName']
+						);
+						if(!DbModel::userInit($data))
+						{
+							$sessClass->userInit = 'N';
+						}
+						else 
+						{
+							$sessClass->userInit = 'Y';
+							//可加入一些session写入操作.
+						}
+					}
+				}
 			}
 		}
 	}

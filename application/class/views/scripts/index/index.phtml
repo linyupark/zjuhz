@@ -1,6 +1,6 @@
 <!-- 一些操作 //////////////////////////////////////// -->
-<div class="sidebar">
-<form method="GET" id="class_choice">
+<div class="sidebar class_sub_bar">
+<form method="GET">
 <p><b>入学年份：</b><br />
 <select name="year" class="inputtxt">
 <option value="">不限制</option>
@@ -19,8 +19,8 @@
 </select>
 </p>
 <p><input type="submit" value="查找班级" class="btn" /></p>
-<?= $this->render('index/myclass.phtml'); ?>
 </form>
+<?= $this->render('index/myclass.phtml'); ?>
 </div>
 
 <!-- 网站内所有班级列表 /////////////////////////////////// -->
@@ -35,11 +35,11 @@
 </tr>
 <?php foreach ($this->class_rows as $k => $v): ?>
 <tr>
-<td><?= $v['class_year'] ?></td>
-<td><?= $v['class_college'] ?></td>
-<td><?= $v['class_name'] ?></td>
-<td><?= $v['class_charge'] ?></td>
-<td><a href="">加入</a></td>
+<td><a href="?year=<?= $v['class_year'] ?>"><?= $v['class_year'] ?></a></td>
+<td><a href="?college=<?= urlencode($v['class_college']) ?>"><?= $v['class_college'] ?></a></td>
+<td><a href="/class/home?c=<?= urlencode($v['class_id']) ?>"><?= $v['class_name'] ?></a></td>
+<td><a href="/member/home?uid=<?= $v['class_charge'] ?>"><?= $v['realName'] ?></a></td>
+<td><a href="javascript:classJoin(<?= $v['class_id'] ?>)">加入</a></td>
 </tr>
 <?php endforeach; ?>
 </table>

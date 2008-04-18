@@ -2,6 +2,77 @@
 
 	class DbModel
 	{
+		static function getClassInfo($class_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT * FROM `vi_class_base` WHERE `class_id` = ?',$class_id);
+		}
+		
+		/**
+		 * 初始化用户在class模块的必要信息
+		 *
+		 * @param array $data
+		 * @return int
+		 */
+		static function userInit($data)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->insert('tbl_class_user', $data);
+		}
+		
+		/**
+		 * 判断是否将指定id的用户数据影射到class库中
+		 *
+		 * @param int $uid
+		 * @return array
+		 */
+		static function isUserInit($uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT `uid`,`realName` FROM `tbl_class_user` 
+								  WHERE `uid` = ?',$uid);
+		}
+		
+		/**
+		 * 插入新的班级加入申请
+		 *
+		 * @param array $data
+		 * @return int
+		 */
+		static function insertApply($data)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->insert('tbl_class_apply', $data);
+		}
+		
+		/**
+		 * 查看指定的uid是否已经申请了加入
+		 *
+		 * @param int $class_id
+		 * @param int $uid
+		 * @return array
+		 */
+		static function isApplied($class_id,$uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT `class_id` FROM `tbl_class_apply` 
+								  WHERE `class_id` = ? AND `class_member_id` = ?',array($class_id,$uid));
+		}
+		
+		/**
+		 * 查看指定的uid是否已经加入了classid班级
+		 *
+		 * @param int $class_id
+		 * @param int $uid
+		 * @return array
+		 */
+		static function isJoined($class_id,$uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT `class_id` FROM `tbl_class_member` 
+								  WHERE `class_id` = ? AND `class_member_id` = ?',array($class_id,$uid));
+		}
+		
 		/**
 		 * 根据不同的条件获取每20条记录
 		 *
@@ -14,7 +85,7 @@
 		{
 			$db = Zend_Registry::get('dbClass');
 			$select = $db->select();
-			$select->from('tbl_class',array('class_year','class_charge','class_college','class_name'));
+			$select->from('vi_class_charge',array('class_id','class_year','class_charge','class_college','class_name','realName'));
 			if((int)$year != 0) $select->where('class_year = ?',$year);
 			if(!empty($college)) $select->where('class_college = ?',$college);
 			$stmt = $db->query($select);

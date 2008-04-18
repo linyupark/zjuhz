@@ -1,0 +1,19 @@
+<?= $this->render('home/index.phtml'); ?>
+
+<!-- 管理条目 ///////////////////////////////////// -->
+<p class="toolbar">
+<a href=""><img src="/static/images/icon/user.gif" /> 邀请同学</a>
+<a href=""><img src="/static/images/icon/email.gif" /> 群发邮件</a>
+<a href=""><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
+<a href=""><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
+<a href=""><img src="/static/images/icon/chart_pie.gif" /> 空间管理</a>
+<a href=""><img src="/static/images/icon/group.gif" /> 成员管理</a>
+</p>
+</div>
+
+
+<!-- 信息显示区 //////////////////////////////////////  -->
+<div class="sidebar class_show">
+<h2>班级公告</h2>
+<div id="class_notice"><?= stripcslashes($this->class_base_info['class_notice']) ?></div>
+</div>

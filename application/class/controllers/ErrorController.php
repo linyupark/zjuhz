@@ -12,7 +12,7 @@ class ErrorController extends Zend_Controller_Action
 	
     function errorAction()
     {
-    	
+    	$this->view->message = $this->getRequest()->getParam('message');
     }
     
     function reloginAction()
