@@ -10,23 +10,28 @@
 
 /* 班级列表TABLE -------------------------------------------- */
 .class_list{ width:600px; margin:10px; }
-.class_list th{ text-align:left; background:#D9E6F7; padding:5px; }
+.class_list th{ font-weight:normal;text-align:left; background:#eee; padding:5px; 
+				border-top:1px solid #ccc; border-bottom:1px solid #ccc; }
+.class_list td{ padding:5px; border-bottom:1px solid #eee; }
 
-#class_choice{ margin-left:10px;  }
-#class_choice p{ padding:10px 0 0 0; }
-#class_choice p b{ color:#666; }
-#class_choice ul { list-style-position:inside; color:#666; padding:10px 0 0 0; margin-top:10px;  border-top:1px solid #ccc; }
-#class_choice ul a{ text-decoration:none; }
-#class_choice ul a:hover{ text-decoration:underline; }
+.class_sub_bar{ margin-left:10px; width:200px  }
+.class_sub_bar p{ padding:10px 0 0 0; }
+.class_sub_bar p b{ color:#666; }
+.class_sub_bar ul { list-style-position:inside; color:#666; padding:10px 0 0 0; margin-top:10px;  border-top:1px solid #ccc; }
 
-/* 班级主页各班级切换 --------------------------------------- */
-.class_tab{ padding:10px 0 0 0; border-bottom:2px solid #D9E6F7; overflow:hidden; width:840px; margin-left:10px;}
-.class_tab a{ display:block; float:left; border:1px solid #AFCAEF;  border-bottom:1px solid #D9E6F7; 
-padding:5px; text-decoration:none; margin-left:5px; }
-.class_tab a:hover{ text-decoration:underline; }
-.class_tab a.on{ background:#D9E6F7; }
+/* 我的班级导航 ------------------------------------------  */
+.class_tab{ color:#ccc; width:830px; margin-left:10px; margin-top:10px; background:#eee; padding:5px; border-top:1px solid #ccc; border-bottom:1px solid #ccc; }
+.class_tab a.on{ color:#000; font-weight:bold }
 
-/* 班级功能导航 ------------------------------------------  */
-.class_nav{ width:120px; background:#EEF4FB; margin-left:10px; border:1px solid #fff; }
-.class_nav a{ display:block; text-decoration:none; padding:5px; border:1px solid #fff; }
-.class_nav a:hover{ background:#eee; border:1px solid #ccc; }
+/* 班级基本信息 ------------------------------------------ */
+.class_base_info{ margin-left:10px; }
+.class_base_info th{ text-align:left; border-bottom:1px solid #9ABCEB; padding:8px 0 5px 0; background:#D9E6F7; text-indent:10px;  width:150px; }
+.class_base_info td{ padding:3px 0 3px 5px; border-bottom:1px solid #eee; color:#666; }
+.class_base_info .txtl{ color:#444; }
+.toolbar { padding-left:10px; }
+.toolbar a{ display:block; padding:3px 10px; border:1px solid #fff; background:#EFF7FF; }
+.toolbar a:hover{ background:#D9E6F7; text-decoration:none;  border:1px solid #BCDDFF; }
+
+
+/* 班级展示区域 --------------------------------------------- */
+.class_show{ width:600px; padding:10px; background:#eee; }

@@ -83,8 +83,7 @@
 	display:none;
 }
 .news_page td{ padding:8px 8px 0 8px; }
-.news_page a{ display:block; padding:8px 0 3px 20px; color:#333; text-decoration:none; font-size:13px; background:url(/static/images/bullet/green.gif) no-repeat left center; }
-.news_page a:hover{ text-decoration:underline; }
+.news_page a{ display:block; padding:8px 0 3px 20px; color:#333; font-size:13px; background:url(/static/images/bullet/green.gif) no-repeat left center; }
 .news_page a.more{ margin-top:8px; background:url(/static/images/btn/more.gif) no-repeat; width:51px; height:15px; padding:0; margin-left:220px; }
 .news_page img{ padding:5px; border:1px solid #999; background:#fff; display:none; }
 
