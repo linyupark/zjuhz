@@ -8,13 +8,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessClass = Zend_Registry::get('sessClass');
 		$this->view->login = $this->_sessCommon->login;
-		// 需要重新写入session
-		if($this->_sessClass->data == null)
-		{
-			$rows = DbModel::hasClass($this->view->login['uid']);
-			if(false != $rows)
-			$this->_sessClass->data = $rows;
-		}
+		$this->view->headScript()->appendFile('/static/scripts/class/'.$this->getRequest()->getActionName().'.js');
 	}
 	
 	function indexAction()
