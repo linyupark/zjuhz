@@ -41,6 +41,7 @@ class HomeController extends Zend_Controller_Action
 		
 		else
 		{
+			echo $this->view->headTitle($class['class_name']);
 			// 不是班级成员
 			if($this->_sessClass->data[$this->view->class_id] == null)
 			{
