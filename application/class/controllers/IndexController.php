@@ -8,7 +8,6 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessClass = Zend_Registry::get('sessClass');
 		$this->view->login = $this->_sessCommon->login;
-		$this->view->headScript()->appendFile('/static/scripts/class/'.$this->getRequest()->getActionName().'.js');
 	}
 	
 	function indexAction()

@@ -14,6 +14,12 @@
 
 <!-- 信息显示区 //////////////////////////////////////  -->
 <div class="sidebar class_show">
-<h2>班级公告</h2>
-<div id="class_notice"><?= stripcslashes($this->class_base_info['class_notice']) ?></div>
+<h2>班级公告 
+<span class="indent-10">
+<a href="javascript:modClassNotice(<?= $this->class_base_info['class_id'] ?>,0)">编辑</a>
+</span>
+</h2>
+<div id="class_notice">
+<?= stripcslashes($this->class_base_info['class_notice']) ?>
+</div>
 </div>
