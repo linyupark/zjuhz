@@ -1,10 +1,9 @@
-@import url("global.css");
-
-.verify{  width:60px;margin-top:10px; padding:2px; height:20px; font-size:14px;line-height:normal; border:1px solid #999; color:#999; }
+/* 互助共用 */
+.verify{ width:60px; margin-top:10px; padding:2px; height:20px; font-size:14px; line-height:normal; border:1px solid #999; color:#999; }
 .help_input_kuang{ margin-top:10px; padding:2px; height:20px; font-size:14px;line-height:normal; border:1px solid #999; color:#999;}
 .help_btn_medium{ padding:4px; margin-top:10px; }
 
-/* 互助分类 --------------------------------------------------- */
+/* 互助分类 */
 .help_category{ margin:10px 0 0 10px; background:#EFF7FF; }
 .help_category h2{ padding:5px 10px; background:#5D748F url(/static/images/bg/rc_tl.png) no-repeat left top; }
 .help_category p{ padding:8px;  border:1px solid #D9E6F7; border-top:none; }
@@ -12,14 +11,14 @@
 .help_category p a.M{ font-size:13px; font-weight:bold; }
 .help_category p a:hover{ text-decoration:underline; }
 
-/* 互助广播 --------------------------------------------------- */
-.help_notice{  margin:0 0 0 15px; height:20px; width:370px  }
+/* 互助广播 */
+.help_notice{ margin:0 0 0 15px; height:20px; width:370px }
 .help_notice strong{ float:left; color:#7D5D27; font-size:13px }
 .help_notice .nt{ display:none; float:left; color:#166E8B; text-decoration:none; }
 
-/* 求助集合 ---------------------------------------------------- */
+/* 求助集合 */
 .help_set{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 10px; width:475px; }
-.help_set th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px;  }
+.help_set th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px; }
 .help_set td{ padding:5px; }
 .help_set td a{ text-decoration:none; color:#004BCA }
 .help_set td a:hover{ text-decoration:underline; }
@@ -29,52 +28,41 @@
 .help_set td.cat a:visited{ color:#666; }
 .help_set td.coin{ font-size:9px; color:#537E01; text-align:center }
 
-.help_set_big{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 10px; width:650px; }
-.help_set_big th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px;  }
-.help_set_big td{ padding:5px; }
-.help_set_big td a{ text-decoration:none; color:#004BCA }
-.help_set_big td a:hover{ text-decoration:underline; }
-.help_set_big td a:visited{ color:#800080; }
-.help_set_big td.cat { padding:5px 0 5px 10px; width:65px; }
-.help_set_big td.cat a{ color:#666; }
-.help_set_big td.cat a:visited{ color:#666; }
-.help_set_big td.coin{ font-size:9px; color:#537E01; text-align:center }
-
-/* 积分排行 ---------------------------------------------------------- */
+/* 积分排行 */
 .help_rank{ width:165px; border:1px solid #E7DAC5; margin:10px 0 0 10px; }
-.help_rank th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5;}
-.help_rank td{ padding:5px; color:#666; font-size:9px; }
+.help_rank th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5; }
+.help_rank td{ padding:5px; color:#666; font-size:12px; }
 .help_rank td a{ text-decoration:none; padding-left:25px; }
 .help_rank td a:hover{ text-decoration:underline; }
 .help_rank .txtr a{ font-size:12px; }
 
-/* 积分帮助 ----------------------------------------------------------- */
-.box{ padding:10px 0 10px 10px;  }
+/* 积分帮助 */
+.box{ padding:10px 0 10px 10px; }
 a.help_link,a.help_rule{ border:1px solid #fff; background:#fff url(/static/images/icon/blue_help.gif) no-repeat 5px center; padding:12px 14px 12px 40px; margin-top:5px; text-decoration:none; }
 a.help_rule{ background:#fff url(/static/images/icon/rule.gif) no-repeat 5px center; }
 a.need_help{ width:166px; height:36px; background:url(/static/images/btn/help.gif) no-repeat; display:block; margin:5px 0 0 10px; font-size:18px; text-align:center; line-height:220%; font-weight:bold; text-decoration:none; color:#fff }
 a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid #D9E6F7; }
 
-/* 互助位置 ----------------------------------------------------------- */
+/* 互助位置 */
 #help_position{ background:url(/static/images/bullet/arrow_blue.gif) no-repeat left center; margin:10px 0 0 18px; padding-left:18px; color:#666; }
 
-/* 求助话题 ----------------------------------------------------------- */
+/* 求助话题 */
 #topic,#reply,#accept{ width:650px; margin:10px 0 0 15px;}
 .help_on,.help_ok{ border:1px solid #D9E6F7; }
-.help_on h2{ background:#EFF7FF url(/static/images/icon/help.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; }
+.help_on h2{ background:#EFF7FF url(/static/images/icon/help.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7;font-size:14px; }
 .help_ok h2{background:#EFF7FF url(/static/images/icon/accept.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7;}
 
 #topic td{ padding:5px 0; }
-#topic .coin{ background:url(/static/images/icon/coin.gif) no-repeat 8px center; padding-left:25px; color:#C56D09; font-size:9px; }
+#topic .coin{ background:url(/static/images/icon/icn_offer.gif) no-repeat 10px center; padding-left:25px; color:#C56D09; font-size:9px; }
 #topic .tt{ font-size:16px; font-weight:bold; }
-#topic .info{  padding:5px 10px; }
+#topic .info{ padding:5px 10px; }
 #topic .txt { padding:3px; background:#EFF7FF }
 #topic .content,#reply .content,#accept .content{ background:#fff; border:1px solid #ccc; padding:10px; font-size:14px; }
 .topic_btn{ margin:8px; padding:3px; cursor:pointer }
 
 #reply{ border:1px solid #D9E6F7; }
-#reply h2{ background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; border-top:1px solid #D9E6F7;}
-#reply .content,#accept .content{ color:#444; border:none;  }
+#reply h2{ background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; border-top:1px solid #D9E6F7;font-size:14px;}
+#reply .content,#accept .content{ color:#444; border:none; }
 #reply .info,#accept .info{ padding:10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom }
 
 #accept{ border:1px solid #F8D1A4; }
@@ -87,43 +75,45 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .memo p{ color:#666; }
 .memo small{ color:#666 }
 
-/* 工具条 --------------------------------------------------------------- */
+/* 工具条 */
 .toolbar{ float:right; margin-top:-22px; padding-right:10px; }
 .toolbar a{text-decoration:none;}
-.collection{  background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
-.report{  background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
+.collection{ background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
+.report{ background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
 
-/* 提交答案表 ------------------------------------------------------------- */
+/* 提交答案表 */
 #reply_form{ padding:20px; color:#666 }
-#reply_form textarea{ width:500px; padding:2px; height:100px; border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
+#reply_form textarea{ width:600px; padding:2px; height:100px; border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
 .reply_btn{ padding:4px; margin-top:10px; margin-left:30px; }
 
-/* 子分类块 --------------------------------------------------------------- */
+/* 子分类块 */
 .sub_category { border:1px solid #D9E6F7; margin:8px 0 0 10px; width:475px; }
-.sub_category h2{ color:#3E628A; background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; border-bottom:1px solid #D9E6F7; padding:5px 0 5px 20px; }
+.sub_category h2{ color:#3E628A; background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; border-bottom:1px solid #D9E6F7; padding:5px 0 5px 20px; font-size:14px; }
 .sub_category table{ }
-.sub_category td{ width:25%; padding:3px 0 3px 10px; }
+.sub_category td{ width:25%; padding:5px 5px 5px 10px; }
 .sub_category a{ text-decoration:none; color:#004BCA }
 .sub_category small{ font-size:9px; }
 
-/* 问题状态tab按钮 ----------------------------------------------------------- */
-#help_tab_btn{  margin-left:10px; padding-top:5px; }
-#help_tab_btn a { border:1px solid #C4DBBF; float:left; display:block; margin:0 5px; text-decoration:none; font-weight:bold; color:#5C7B23; padding:5px 10px; border-bottom:1px solid #fff; }
-
+/* 问题状态tab按钮 */
+#help_tab_btn{ margin-left:10px; padding-top:5px; }
+#help_tab_btn a{ border:1px solid #C4DBBF; float:left; display:block; margin:0 5px; text-decoration:none; font-weight:bold; color:#5C7B23; padding:5px 10px; border-bottom:1px solid #fff; }
+#help_tab_btn a.on{ border-top:1px solid #FAD1A5; border-left:1px solid #FAD1A5; border-right:1px solid #FAD1A5; border-bottom:1px solid #fff; background:#FFFCF0; color:#C26400; }
 .tab_content{ background:#fff; clear:left; border:1px solid #FAD1A5; margin-top:0.5px; width:475px; margin-left:10px; }
-.tab_content td{ padding:3px 8px; color:#C56D09 }
-.tab_content td.date{ font-size:12px; color:#666; }
-.tab_content td a{ font-size:14px; padding-left:5px; color:#004BCA;  }
+.tab_content td{ padding:5px 5px; color:#C56D09 }
+.tab_content td.date{ font-size:9px; color:#666;text-align:center }
+.tab_content td.status{ text-align:center }
+.tab_content td.reply{ font-size:9px; color:#666;text-align:center }
+.tab_content td a{ font-size:14px; padding-left:5px; color:#004BCA; }
 
-/* 右则排行表单点号版 ------------------------------------------------------------- */
+/* 右则排行表单点号版 */
 .rightside_dot{ width:165px; border:1px solid #E7DAC5; margin:10px 0 0 10px; }
-.rightside_dot th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5;}
-.rightside_dot td{ padding:5px; color:#666; font-size:9px; }
+.rightside_dot th{ background:#FDF9F1; color:#C26400; padding:5px; border-bottom:1px solid #E7DAC5; border-top:1px solid #E7DAC5; }
+.rightside_dot td{ padding:5px; color:#666; font-size:12px; }
 .rightside_dot td a{ text-decoration:none; }
 .rightside_dot td a:hover{ text-decoration:underline; }
 .rightside_dot .txtr a{ font-size:12px; }
 
-/* 我要提问 ------------------------------------------------------------- */
+/* 我要提问 */
 #question_insert_form{ padding:20px; color:#666 }
 #tinymce_textarea td{ padding:1px; }
-.question_insert_textarea{margin-top:10px;padding:2px;height:180px;border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
+.question_insert_textarea{ margin-top:10px;padding:2px;height:150px;border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
