@@ -93,13 +93,13 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				if (Commons::checkVerify($vCode, $sCode))
+				if (MemberClass::checkVerifyCode($vCode, $sCode))
 				{
 					$this->_sessMember->message = ((RegisterLogic::init()->register($regArgs)) ? 
 				        $this->_iniMember->hint->register->success : 
 				            $this->_iniMember->hint->register->failure);
 
-				    echo 'redirect'; // 请求ajax跳转
+				    echo 'message'; // 请求ajax给出提示
 				}
 			}
 		}
