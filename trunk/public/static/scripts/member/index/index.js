@@ -15,7 +15,7 @@ function login() {
         url    : "/member/login/dologin/",
         data   : formdata,
 	    success: function(msg) {
-			if (msg == 'redirect') {
+			if (msg == 'message') {
 				window.location.href="/help/";
 			}
 			else {

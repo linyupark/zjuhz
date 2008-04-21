@@ -60,3 +60,26 @@ function putVerifyImg() {
 		getVerifyCode();		
 	}
 }
+
+// 信息提示
+function popup_message(url)
+{
+	var pop = new Popup({ contentType:1, isReloadOnClose:true, width:340, height:80 });
+	pop.setContent("title", "提示");
+	pop.setContent("contentUrl", url);
+	pop.build();
+	pop.show();
+	return false;
+}
+
+// 延时跳转
+function goToUrl(url, sec)
+{
+	setTimeout("to('" + url + "')", sec);
+}
+
+// 直接跳转
+function to(url)
+{
+	top.location.href = url;
+}
