@@ -1,0 +1,22 @@
+<table class="class_list" style="width:100%; margin-left:0">
+<tr class="quiet">
+<th width="5%"><a href="javascript:selectAll('apply_id')">全选</a></th>
+<th>申请人</th>
+<th>备注</th>
+<th width="18%">申请时间<input type="hidden" name="class_id" value="<?= $this->class_id ?>" /></th>
+</tr>
+<?php foreach ($this->applies as $k=>$v): ?>
+<tr>
+<td><input type="checkbox" name="apply_id[]" value="<?= $v['class_apply_id'] ?>" /></td>
+<td><a href=""><?= $v['realName'] ?></a></td>
+<td><a href="javascript:applyDetail(<?= $v['class_id'].','.$v['class_apply_id'] ?>)"><?= substr(stripslashes($v['class_apply_content']),0,30) ?></a></td>
+<td class="quiet"><?= Commons::date($v['class_apply_time']) ?>
+<input type="hidden" name="member_id[]" value="<?= $v['class_member_id'] ?>" />
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
+<p class="txtc">
+	<button class="btn" onclick="applyPass(<?= $this->class_id ?>)">批准加入</button> 
+	<button class="btn" onclick="applyDel(<?= $this->class_id ?>)">删除</button>
+</p>

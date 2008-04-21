@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: zjuhz_class
 Target Host: localhost
 Target Database: zjuhz_class
-Date: 2008-4-18 18:05:06
+Date: 2008-4-21 17:02:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -19,10 +19,10 @@ CREATE TABLE `tbl_class` (
   `class_create_time` int(11) NOT NULL,
   `class_charge` int(10) unsigned NOT NULL,
   `class_notice` text,
-  `class_member_num` smallint(6) NOT NULL default '1',
+  `class_member_num` smallint(6) unsigned NOT NULL default '1',
   PRIMARY KEY  (`class_id`),
   UNIQUE KEY `className` (`class_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_apply
@@ -34,7 +34,7 @@ CREATE TABLE `tbl_class_apply` (
   `class_apply_content` tinytext,
   `class_apply_time` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`class_apply_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_member
@@ -46,7 +46,7 @@ CREATE TABLE `tbl_class_member` (
   `class_member_status` tinyint(1) unsigned NOT NULL default '0' COMMENT '0:正常 1:忙碌 2:离开',
   `class_member_nickname` char(50) default '',
   `class_member_intro` text,
-  `class_member_last_access` int(11) NOT NULL,
+  `class_member_last_access` int(11) default NULL,
   `class_member_charge` tinyint(1) unsigned NOT NULL default '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -95,7 +95,12 @@ CREATE TABLE `tbl_class_user` (
   `uid` int(10) unsigned NOT NULL auto_increment,
   `realName` char(16) NOT NULL,
   PRIMARY KEY  (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- View structure for vi_class_apply
+-- ----------------------------
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vi_class_apply` AS select `tbl_class_user`.`realName` AS `realName`,`tbl_class_apply`.`class_member_id` AS `class_member_id`,`tbl_class_apply`.`class_apply_content` AS `class_apply_content`,`tbl_class_apply`.`class_apply_time` AS `class_apply_time`,`tbl_class_apply`.`class_id` AS `class_id`,`tbl_class_apply`.`class_apply_id` AS `class_apply_id` from (`tbl_class_apply` join `tbl_class_user` on((`tbl_class_user`.`uid` = `tbl_class_apply`.`class_member_id`)));
 
 -- ----------------------------
 -- View structure for vi_class_base
@@ -113,14 +118,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vi_class_member` AS select `tbl_class`.`class_name` AS `class_name`,`tbl_class`.`class_college` AS `class_college`,`tbl_class`.`class_year` AS `class_year`,`tbl_class_member`.`class_member_id` AS `class_member_id`,`tbl_class`.`class_id` AS `class_id`,`tbl_class_member`.`class_member_nickname` AS `class_member_nickname`,`tbl_class_member`.`class_member_charge` AS `class_member_charge`,`tbl_class`.`class_charge` AS `class_charge` from (`tbl_class_member` join `tbl_class` on((`tbl_class_member`.`class_id` = `tbl_class`.`class_id`)));
 
 -- ----------------------------
+-- View structure for vi_class_member_charge
+-- ----------------------------
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vi_class_member_charge` AS select `tbl_class_user`.`realName` AS `realName`,`tbl_class_member`.`class_member_id` AS `class_member_id`,`tbl_class_member`.`class_member_charge` AS `class_member_charge`,`tbl_class_member`.`class_id` AS `class_id` from (`tbl_class_user` join `tbl_class_member` on((`tbl_class_user`.`uid` = `tbl_class_member`.`class_member_id`)));
+
+-- ----------------------------
 -- Records 
 -- ----------------------------
-INSERT INTO `tbl_class` VALUES ('1', '网络2班', '计算机科学与技术学院', '2002', '1208501709', '1', null, '1');
-INSERT INTO `tbl_class` VALUES ('2', 'test班级', '电气学院', '1977', '1208512749', '1', null, '1');
-INSERT INTO `tbl_class_apply` VALUES ('1', '1', '2', '', '1208501880');
-INSERT INTO `tbl_class_member` VALUES ('1', '1', '1208501709', '0', '', null, '1208501709', '0');
-INSERT INTO `tbl_class_member` VALUES ('1', '2', '1208512749', '0', '', null, '1208512749', '0');
+INSERT INTO `tbl_class` VALUES ('1', '国际贸易2', '外国语言文化与国际交流学院', '2002', '1208766681', '1', '我来写点东西~~~哈哈', '3');
+INSERT INTO `tbl_class_member` VALUES ('1', '1', '1208766681', '0', '', null, '1208766681', '0');
+INSERT INTO `tbl_class_member` VALUES ('2', '1', '1208767038', '0', '', null, null, '0');
+INSERT INTO `tbl_class_member` VALUES ('3', '1', '1208768475', '0', '', null, null, '0');
 INSERT INTO `tbl_class_privacy` VALUES ('1', '0', '0', '0', '0');
-INSERT INTO `tbl_class_privacy` VALUES ('2', '0', '0', '0', '0');
 INSERT INTO `tbl_class_user` VALUES ('1', '林宇');
 INSERT INTO `tbl_class_user` VALUES ('2', 'test');
+INSERT INTO `tbl_class_user` VALUES ('3', '测试2');

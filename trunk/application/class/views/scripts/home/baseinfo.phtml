@@ -1,0 +1,45 @@
+<!-- 班级信息 /////////////////////////////////////// -->
+<div class="sidebar">
+<table class="class_base_info">
+<tr>
+<th colspan="2" width="170">班级基本信息</th>
+</tr>
+<tr>
+<td colspan="2">
+<span class="txtl"><?= $this->class_base_info['class_college'] ?></span></td>
+</tr>
+<tr>
+<td width="60">班级名称：</td>
+<td class="txtl"><?= $this->class_base_info['class_name'] ?></td>
+</tr>
+<tr>
+<td width="60">入学年份：</td>
+<td class="txtl"><?= $this->class_base_info['class_year'] ?></td>
+</tr>
+<tr>
+<td>成员人数：</td>
+<td class="txtl"><a href="/class/memberlist?c=<?= $this->class_base_info['class_id'] ?>"><?= $this->class_base_info['class_member_num'] ?></td>
+</tr>
+<tr>
+<td>创建人：</td>
+<td class="txtl"><a href="/member/home?uid=<?= $this->class_base_info['class_charge'] ?>"><?= $this->class_base_info['realName'] ?></a></td>
+</tr>
+<tr>
+<td>管理员：</td>
+<td class="txtl"d>
+<?php if(count($this->class_base_info['class_managers'])>0): foreach ($this->class_base_info['class_managers'] as $k=>$v): ?>
+<a href="/member/home?uid=<?= $v['class_member_id'] ?>"><?= $v['realName'] ?></a> 
+<?php endforeach; endif; ?> 
+<a href="/member/home?uid=<?= $this->class_base_info['class_charge'] ?>"><?= $this->class_base_info['realName'] ?></a>
+</td>
+</tr>
+<tr>
+<td>创建时间：</td>
+<td class="txtl"><?= date('y-m-d',$this->class_base_info['class_create_time']) ?></td>
+</tr>
+<tr>
+<td>加入方式：</td>
+<td class="txtl"><?= $this->class_base_info['class_join'] ?></td>
+</tr>
+</table>
+</div>

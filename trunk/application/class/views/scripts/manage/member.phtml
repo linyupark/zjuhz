@@ -1,0 +1,27 @@
+<?= $this->render('home/index.phtml'); ?>
+<!-- 管理条目 ///////////////////////////////////// -->
+<div class="span-4">
+<p class="toolbar">
+<a href="/class/home?c=<?= $this->class_id ?>"><img src="/static/images/icon/arrow_undo.gif" /> 返回</a>
+<a href=""><img src="/static/images/icon/edit.gif" /> 班级管理</a>
+<a href=""><img src="/static/images/icon/user.gif" /> 邀请加入</a>
+<a href=""><img src="/static/images/icon/email.gif" /> 群发邮件</a>
+<a href=""><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
+<a href=""><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
+</p>
+</div>
+
+<div class="span-13 class_show">
+<h2 class="quiet"><img src="/static/images/icon/group.gif" /> 成员管理</h2>
+<p class="quiet">
+<a href="" onclick="memberList()">成员列表</a> | 
+<a href="" onclick="managerList()">管理员列表</a> | 
+<a href="javascript:applyList(<?= $this->class_id ?>)">申请加入(<?= DbModel::getClassJoinApplyNum($this->class_id) ?>)</a>
+</p>
+<div id="listInner"></div>
+</div>
+
+<script>applyList(<?= $this->class_id ?>);</script>
+
+<!-- 班级基本信息 ///////////////////////////////////////// -->
+<?= $this->render('home/baseinfo.phtml'); ?>

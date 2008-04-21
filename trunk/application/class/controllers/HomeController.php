@@ -27,7 +27,7 @@ class HomeController extends Zend_Controller_Action
 	# 管理员身份访问班级信息
 	function managerAction()
 	{
-		
+		$this->view->apply_num = DbModel::getClassJoinApplyNum($this->view->class_id);
 	}
 	
 	function indexAction()
