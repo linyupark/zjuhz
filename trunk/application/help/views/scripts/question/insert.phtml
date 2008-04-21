@@ -1,12 +1,12 @@
 ﻿<div id="ajaxloading"></div>
-<!-- 当前位置 /////////////////////////////////// -->
+<!-- 当前位置 -->
 <div id="help_position"><a href="/help/">校友互助</a> > <a href="/help/question/insert/">我要提问</a></div>
 
-<!-- 我要提问 //////////////////////////////////////////// -->
+<!-- 我要提问 -->
 <div class="sidebar">
     <div id="topic" class="help_on">
         <h2>我要提问 </h2>
-        <!-- 提问表单 ///////////////////////////////////////////// -->
+        <!-- 提问表单 -->
 	    <div id="question_insert_form">
         <form method="post" name="myform" id="myform" autocomplete="off">
 		    <table width="100%" border="0">
@@ -44,14 +44,14 @@
               </tr>			  
               <tr>
                 <td>积分悬赏：</td>
-                <td><input tabindex="7" type="text" name="offer" id="offer" class="help_input_kuang" value="" maxlength="3" style="width:60px" /> 我的可用分有<strong><?= $this->point; ?></strong>分</td>
+                <td><input tabindex="7" type="text" name="offer" id="offer" class="help_input_kuang" value="" maxlength="3" style="width:60px" /> 我的可用分有<strong><?= $this->sessHelp->login['point']; ?></strong>分</td>
                 <td>&nbsp;</td>
               </tr>			  
               <tr>
                 <td>是否匿名：</td>
                 <td><input tabindex="8" type="radio" name="anonym" value="Y" />
                   是
-                    <input readonly="9" name="anonym" type="radio" value="N" checked="checked" />
+                    <input tabindex="9" name="anonym" type="radio" value="N" checked="checked" />
                     否</td>
                 <td>&nbsp;</td>
               </tr>			  
@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<!-- 类似问题 ////////////////////////////////////////////// -->
+<!-- 类似问题 -->
 <div class="sidebar">
     <table class="rightside_dot">
         <tr>

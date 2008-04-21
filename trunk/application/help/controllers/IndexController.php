@@ -55,24 +55,8 @@ class IndexController extends Zend_Controller_Action
 
 		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
 
-		// 登录资料注入
-		$this->view->login = $this->_sessCommon->login;
+		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
 	}
-
-    /**
-     * 测试
-     * 
-     * @return void
-     */
-    public function testAction()
-    {
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
-		// 禁用layout
-		$this->_helper->layout->disableLayout();
-
-        print_r($_SESSION);exit;
-    }
 
 	/**
      * help验证码
@@ -81,13 +65,10 @@ class IndexController extends Zend_Controller_Action
      */
 	public function verifyAction()
 	{
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
-		// 禁用layout
-		$this->_helper->layout->disableLayout();
-
-		// 将验证码写入公共SESSION
-		ImageHandle::verify('common');
+		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->layout->disableLayout(); // 禁用layout
+		
+		ImageHandle::verify('common'); // 将验证码写入公共SESSION
 	}
 
 	/**
@@ -107,6 +88,8 @@ class IndexController extends Zend_Controller_Action
      */
     public function messageAction()
     {
+		$this->_helper->layout->disableLayout(); // 禁用layout
+
 		$this->view->message = $this->_sessHelp->message;
     }
 
@@ -134,7 +117,7 @@ class IndexController extends Zend_Controller_Action
 
 					// 数据已过滤可直接生成
 					LogLogic::init()->insert(array(
-					    'uid' => $this->_sessUid, 'point' => $loginArgs['point'], 'after' => $loginArgs['point'], 'type' => 1, 
+					    'uid' => $this->_sessUid, 'point' => $loginArgs['point'], 'type' => 1, 
 					));
 				}
 			}
@@ -164,18 +147,16 @@ class IndexController extends Zend_Controller_Action
      * @return void
      */
 	public function indexAction()
-	{
-		// 载入标题
-		$this->view->headTitle($this->_iniHelp->head->title->index->index);
-		// 载入JS脚本
-		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
+	{		
+		$this->view->headTitle($this->_iniHelp->head->title->index->index); // 载入标题
+		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js'); // 载入JS脚本
 
 		$this->activateAction(); // 首次使用激活
 		$this->entryAction(); // 子系统登录
 
-		$this->view->latest = IndexLogic::init()->latest(10); // 最新问题
-		$this->view->offer  = IndexLogic::init()->offer(10); // 高分问题
-		$this->view->forget = IndexLogic::init()->forget(10); // 被遗忘的
-		$this->view->solved = IndexLogic::init()->solved(10); // 最近解决
+		$this->view->latest = IndexLogic::init()->latest(); // 最新问题
+		$this->view->offer  = IndexLogic::init()->offer(); // 高分问题
+		$this->view->forget = IndexLogic::init()->forget(); // 被遗忘的
+		$this->view->solved = IndexLogic::init()->solved(); // 最近解决
 	}
 }
