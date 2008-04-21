@@ -1,6 +1,5 @@
 <!-- 班级切换 /////////////////////////////////////////// -->
 <p class="class_tab">
-<img src="/static/images/icon/flag_blue.gif" align="absmiddle" /> 
 <b style="color:#666;">我的班级</b> &raquo;
 <?php 
 if(count(Zend_Registry::get('sessClass')->data) >0):
@@ -11,42 +10,3 @@ foreach (Zend_Registry::get('sessClass')->data as $k => $v): ?>
 </p>
 <script>$('.class_tab a[href="/class/home?c=<?=$this->class_id?>"]').addClass('on')</script>
 
-<!-- 班级信息 /////////////////////////////////////// -->
-<div class="sidebar">
-<table class="class_base_info">
-<tr>
-<th colspan="2">班级基本信息</th>
-</tr>
-<tr>
-<td colspan="2">
-<span class="txtl"><?= $this->class_base_info['class_college'] ?></span></td>
-</tr>
-<tr>
-<td width="60">班级名称：</td>
-<td class="txtl"><?= $this->class_base_info['class_name'] ?></td>
-</tr>
-<tr>
-<td width="60">入学年份：</td>
-<td class="txtl"><?= $this->class_base_info['class_year'] ?></td>
-</tr>
-<tr>
-<td>成员人数：</td>
-<td class="txtl"><a href="/class/memberlist?c=<?= $this->class_base_info['class_id'] ?>"><?= $this->class_base_info['class_member_num'] ?></td>
-</tr>
-<tr>
-<td>创建人：</td>
-<td class="txtl"><a href="/member/home?uid=<?= $this->class_base_info['class_charge'] ?>"><?= $this->class_base_info['realName'] ?></a></td>
-</tr>
-<tr>
-<td>管理员：</td>
-<td class="txtl"d><?= $this->class_base_info['class_year'] ?></td>
-</tr>
-<tr>
-<td>创建时间：</td>
-<td class="txtl"><?= date('y-m-d',$this->class_base_info['class_create_time']) ?></td>
-</tr>
-<tr>
-<td>加入方式：</td>
-<td class="txtl"><?= $this->class_base_info['class_join'] ?></td>
-</tr>
-</table>

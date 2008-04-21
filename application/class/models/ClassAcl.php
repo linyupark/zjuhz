@@ -27,16 +27,9 @@
 				    ->addRole(new Zend_Acl_Role('member'))
 				    ->addRole(new Zend_Acl_Role('staff'))
 				    ->addRole(new Zend_Acl_Role('admin'));
-				// 增加所要控制的资源(Controller)
-				$acl->add(new Zend_Acl_Resource('index'))
-					->add(new Zend_Acl_Resource('home'))
-					->add(new Zend_Acl_Resource('ajax'))
-				    ->add(new Zend_Acl_Resource('new'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow('member', null)
-				    ->allow('staff', null)
-				    ->allow('admin');
+					->allow(array('member','staff','admin'));
 				// 寄存
 				Zend_Registry::set('acl', $acl);
 				$this->_acl = $acl;
@@ -60,13 +53,21 @@
 			$action = $request->action;
 			$resource = $controller;
 			
+			// 自动转换成资源
+		   if(false == $this->_acl->has($resource))
+		   {
+		    	$this->_acl->add(new Zend_Acl_Resource($resource));
+		    	// 再次注册
+		    	Zend_Registry::set('acl', $this->_acl);
+		   }
+		   
+		   // 权限再定义
+			
 			// 无权限的请求,重新分配CA
 			if (!$this->_acl->isAllowed($sessRole, $resource, $action))
 			{
 				$request->setControllerName('error');
 				$request->setActionName('relogin');
-				//$request->setParam('resource',$resource);
-				//$request->setParam('action',$action);
 			}
 			
 			// 一些分配前的动作 ----------------------------------------------------
@@ -75,10 +76,11 @@
 				$sessClass = Zend_Registry::get('sessClass');
 				$uid = $this->_sessCommon->login['uid'];
 				
-				// 每个页面都要进行的session处理[班级信息]
+				// 每个页面都要进行检查的session处理[班级信息]
 				if($sessClass->data == null)
 				{
 					$classes = DbModel::hasClass($uid);
+					// 该用户有班级,则载入班级信息
 					if(false != $classes)
 					{
 						foreach ($classes as $k => $v)
@@ -95,6 +97,7 @@
 				// 用户信息初始化
 				if($sessClass->userInit == null)
 				{
+					
 					// 初始化过的用户
 					if(DbModel::isUserInit($uid))
 					{
@@ -107,15 +110,8 @@
 							'uid' => $uid,
 							'realName' => $this->_sessCommon->login['realName']
 						);
-						if(!DbModel::userInit($data))
-						{
-							$sessClass->userInit = 'N';
-						}
-						else 
-						{
-							$sessClass->userInit = 'Y';
-							//可加入一些session写入操作.
-						}
+						DbModel::userInit($data);
+						$sessClass->userInit = 'Y';
 					}
 				}
 			}

@@ -1,25 +1,33 @@
 <?= $this->render('home/index.phtml'); ?>
 
+<div class="span-4">
 <!-- 管理条目 ///////////////////////////////////// -->
 <p class="toolbar">
-<a href=""><img src="/static/images/icon/user.gif" /> 邀请同学</a>
+<a href=""><img src="/static/images/icon/edit.gif" /> 班级管理</a>
+<a href=""><img src="/static/images/icon/user.gif" /> 邀请加入</a>
 <a href=""><img src="/static/images/icon/email.gif" /> 群发邮件</a>
 <a href=""><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
 <a href=""><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
-<a href=""><img src="/static/images/icon/chart_pie.gif" /> 空间管理</a>
-<a href=""><img src="/static/images/icon/group.gif" /> 成员管理</a>
+<a href="/class/manage/member?c=<?= $this->class_id ?>"><img src="/static/images/icon/group.gif" /> 成员管理 
+<?= $this->apply_num > 0 ? '<img src="/static/images/icon/new.gif" />' : '' ?></a>
 </p>
 </div>
 
-
 <!-- 信息显示区 //////////////////////////////////////  -->
-<div class="sidebar class_show">
-<h2>班级公告 
-<span class="indent-10">
-<a href="javascript:modClassNotice(<?= $this->class_base_info['class_id'] ?>,0)">编辑</a>
-</span>
-</h2>
-<div id="class_notice">
+<div class="span-13 class_show">
+<h2 class="quiet"><img src="/static/images/icon/layers.gif" /> 班级黑板报</h2>
+<div id="class_notice" style="cursor:pointer" onmouseover="this.style.borderStyle='dashed'" onmouseout="this.style.borderStyle='solid'" onclick="modClassNotice(<?= $this->class_id ?>,0)">
 <?= stripcslashes($this->class_base_info['class_notice']) ?>
 </div>
+
+
+<h2 class="quiet"><img src="/static/images/icon/picture.gif" /> 班级相册</h2>
+<div id="class_picture">尚未开放..</div>
+
+<h2 class="quiet"><img src="/static/images/icon/comments.gif" /> 班级讨论</h2>
+<div id="class_comments"></div>
 </div>
+
+
+<!-- 班级基本信息 ///////////////////////////////////////// -->
+<?= $this->render('home/baseinfo.phtml'); ?>

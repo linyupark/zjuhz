@@ -24,6 +24,76 @@
 			else return true;
 		}
 		
+		# 班级申请删除 -------------------------------------------------
+		function classapplydelAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$apply_id = $request->getPost('apply_id');
+				// 保证有数据
+				if(is_array($apply_id) && count($apply_id) > 0)
+				{
+					foreach ($apply_id as $k=>$v)
+					{
+						DbModel::applyDel($v);
+					}
+				}
+			}
+		}
+		
+		# 班级申请批准 -------------------------------------------------
+		function classapplypassAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$apply_id = $request->getPost('apply_id');
+				$member_id = $request->getPost('member_id');
+				// 保证有数据
+				if(is_array($apply_id) && count($apply_id) > 0)
+				{
+					foreach ($apply_id as $k=>$v)
+					{
+						if(false == DbModel::applyPass($v,$this->_classId,$member_id[$k]))
+						{
+							echo "批准过程中程序发生错误,请联系网站管理人员!";
+							exit();
+						}
+					}
+				}
+			}
+		}
+		
+		# 班级申请加入的详细信息查看 --------------------------------------
+		function classapplydetailAction()
+		{
+			if($this->getRequest()->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$apply_id = $this->getRequest()->getPost('apply_id');
+				$db = Zend_Registry::get('dbClass');
+				$row = $db->fetchRow('SELECT `class_apply_content` FROM `vi_class_apply` WHERE `class_apply_id` = ?', $apply_id);
+				echo stripslashes($row['class_apply_content']);
+			}
+		}
+		
+		# 班级申请加入列表 -----------------------------------------------
+		function classapplylistAction()
+		{
+			if($this->getRequest()->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$db = Zend_Registry::get('dbClass');
+				$rows = $db->fetchAll('SELECT * FROM `vi_class_apply` WHERE `class_id` = ?', $this->_classId);
+				$this->view->class_id = $this->_classId;
+				$this->view->applies = $rows;
+				$this->render('apply-list');
+			}
+		}
+		
 		# 班级公告修改动作 -----------------------------------------------
 		function classnoticemodAction()
 		{
