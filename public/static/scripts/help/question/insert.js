@@ -28,8 +28,9 @@ function question_insert() {
         url    : "/help/question/doinsert/",
         data   : formdata,
 	    success: function(msg) {
-			if (msg == 'redirect') {
-				window.location.href="/help/index/message/";
+			if (msg == "message") {
+				popup_message("/help/index/message/");
+				goToUrl("/help/", 3000);
 			}
 			else {
 				$("#btnSubmit").attr("disabled", false);

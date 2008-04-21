@@ -1,27 +1,27 @@
-// SortÏà¹Ø³õÊ¼
+// Sortç›¸å…³åˆå§‹
 function sort_init()
 {
 	$("#sort0").change( function() {
-		sort_list('sort0');
+		sort_list("sort0");
     });
 
 	$("#sort1").change( function() {
-		sort_list('sort1');
+		sort_list("sort1");
     });
 
 	$("#sort2").change( function() {
-		sort_list('sort2');
+		sort_list("sort2");
     });
 
-	$("select").attr({ size: "10",style: "width:150px" }); // select?
-	sort_add_options('sort0',0);
+	//$("select").attr({ size: "8", style: "width:150px" }); // select?
+	sort_add_options("sort0", 0);
 }
 
-// Sort¶à¼¶²Ëµ¥
+// Sortå¤šçº§èœå•
 function sort_list(getname)
 {
-    var id   = getname.replace(/[^0-9]+/ig,"");
-    var name = getname.replace(/[^a-z]+/ig,"");
+    var id   = getname.replace(/[^0-9]+/ig, "");
+    var name = getname.replace(/[^a-z]+/ig, "");
 	var next = parseInt(id) + 1;
 
 	var cnt  = $("select").length; // select?
@@ -30,14 +30,15 @@ function sort_list(getname)
 		sort_reset(name+i);
 	}
 
-	// »ñÈ¡Ñ¡ÖÐÖµ
+	// èŽ·å–é€‰ä¸­å€¼
 	var sid  = $("#" + getname).val();
-	// Ð´Èë
-	$("#" + name + 'Id').val(sid);
+	// å†™å…¥
+	$("#" + name + "Id").val(sid);
 
 	if (sid > 1 && next < cnt) {
 		$.getJSON("/help/sort/json/", { sid: sid }, function(msg) {
 				if (msg != "") {
+					$("#" + name + next).addOption('', 'è¯·é€‰æ‹©');
 					$("#" + name + next).addOption(msg, false);
 				}
 			}
@@ -45,14 +46,14 @@ function sort_list(getname)
 	}
 }
 
-// Sort²Ëµ¥ÖØÖÃ
+// Sortèœå•é‡ç½®
 function sort_reset(name)
 {
 	document.getElementById(name).options.length = 0;
 }
 
-// SortÑ¡Ïî³õÊ¼
-function sort_add_options(name,sid)
+// Sorté€‰é¡¹åˆå§‹
+function sort_add_options(name, sid)
 {
 	$.getJSON("/help/sort/json/", { parent: sid }, function(msg) { $("#" + name).addOption(msg, false); } );
 }
