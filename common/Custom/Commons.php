@@ -1,9 +1,9 @@
 <?php
 
 /**
-	 * 实用命令,静态调用
-	 *
-	 */
+ * 实用命令,静态调用
+ *
+ */
 class Commons
 {
 	#用JS方式进行到 $url 的跳转, 可停顿 $sec 秒后执行
@@ -51,14 +51,14 @@ class Commons
 		}
 		return $str;
 	}
-	
+
 	static function date($timestamp = null)
 	{
 		if($timestamp == null)
 		$timestamp = time();
 		return date('y-m-d H:i',$timestamp);
 	}
-	
+
 	#获取客户端IP
     static function getIp()
 	{
@@ -86,17 +86,6 @@ class Commons
    		return($ip);
     }
 
-	#验证码校验
-	static function checkVerify($input,$sess)
-	{
-		if (md5($input) !== $sess || !isset($input) || !isset($sess))
-		{
-			exit('请正确输入验证码，应是4位纯数字。');
-		}
-
-		return true;
-	}
-	
 	# 关键字加亮 string $keys(空格为分隔)
 	static function highlight($keys, $str, $sp = ' ', $class = 'search_highlight')
 	{
