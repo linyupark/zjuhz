@@ -61,9 +61,9 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .topic_btn{ margin:8px; padding:3px; cursor:pointer }
 
 #reply{ border:1px solid #D9E6F7; }
-#reply h2{ background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#3E628A; border-bottom:1px solid #D9E6F7; border-top:1px solid #D9E6F7;font-size:14px;}
+#reply h2{ background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; padding:5px 0 5px 20px; color:#3E628A; border-bottom:1px solid #D9E6F7; border-top:1px solid #D9E6F7;font-size:14px;}
 #reply .content,#accept .content{ color:#444; border:none; }
-#reply .info,#accept .info{ padding:10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom }
+#reply .info,#accept .info{ padding:10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom;font-size:12px; }
 
 #accept{ border:1px solid #F8D1A4; }
 #accept h2{ background:#FFFCEF url(/static/images/icon/medal.gif) no-repeat 5px center; padding:5px 0 5px 25px; color:#C26400; border-bottom:1px solid #F8D1A4; border-top:1px solid #F8D1A4;}
@@ -76,13 +76,14 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .memo small{ color:#666 }
 
 /* 工具条 */
-.toolbar{ float:right; margin-top:-22px; padding-right:10px; }
+.toolbar{ float:right; margin-top:-22px; padding-right:10px; font-size:12px; }
 .toolbar a{text-decoration:none;}
 .collection{ background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
 .report{ background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
+.accept{ background:url(/static/images/icon/lightbulb.gif) no-repeat left center; padding-left:20px;cursor:hand; }
 
 /* 提交答案表 */
-#reply_form{ padding:20px; color:#666 }
+#reply_form{ padding:10px; color:#666 }
 #reply_form textarea{ width:600px; padding:2px; height:100px; border:1px solid #999; color:#999; font-size:14px;line-height:normal; }
 .reply_btn{ padding:4px; margin-top:10px; margin-left:30px; }
 
