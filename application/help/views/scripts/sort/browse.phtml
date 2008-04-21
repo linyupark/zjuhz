@@ -1,0 +1,55 @@
+<!-- 当前路径 -->
+<div id="help_position">
+<a href="/help/" title="首页">首页</a> > <?= $this->path; ?>
+</div>
+
+<!-- 互助分类 -->
+<div class="sidebar">
+<?= $this->render('dynamic/sort.phtml'); ?>
+</div>
+
+<div class="sidebar">
+<!-- 问题分类 -->
+<div class="sub_category">
+<h2><?= $this->detail['name']; ?>(<?= $this->total; ?>)</h2>
+<table>
+<?php foreach ($this->map as $key => $value) { $i++ ; if ($i % 4 == 1) { echo '<tr>'; } ?>
+<td>
+<?php if ($this->detail['sid'] != $value['sid']) { ?>
+<a href="/help/sort/browse/sid/<?= $value['sid']; ?>/"><?= $value['name']; ?>(<?= $value['question']-$value['closed']-$value['overtime']; ?>)</a>
+<?php } else { echo $value['name']; } ?>
+</td>
+<?php if ($i % 4 == 0) { echo '</tr>'; } } ?>
+</table>
+</div>
+
+<!-- 状态导航 -->
+<div id="help_tab_btn">
+<a href="/help/sort/browse/sid/<?= $this->detail['sid']; ?>/" class="on">全部问题</a>
+<a href="/help/sort/latest/sid/<?= $this->detail['sid']; ?>/">最新问题</a>
+<a href="/help/sort/offer/sid/<?= $this->detail['sid']; ?>/">高分求助</a>
+<a href="/help/sort/forget/sid/<?= $this->detail['sid']; ?>/">被遗忘的</a>
+<a href="/help/sort/solved/sid/<?= $this->detail['sid']; ?>/">最近解决</a>
+</div>
+
+<?php if ($this->total > 0) { ?>
+<!-- 问题列表 -->
+<table class="tab_content">
+<?php foreach ($this->list as $value) { ?>
+<tr>
+<td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> <?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span> </td>
+<td class="status"><img src="/static/images/icon/icn_status_<?= $value['status']; ?>.gif"></td>
+<td class="reply"><?= $value['reply']; ?></td>
+<td class="date"><?= date('m-d', strtotime($value['addTime'])); ?></td>
+</tr>
+<?php } ?>
+</table>
+<?php echo $this->paging; } else { ?>
+<?= $this->render('nodata.phtml'); ?>
+<?php } ?>
+</div>
+
+<div class="sidebar">
+<!-- 积分排行 -->
+<?= $this->render('dynamic/point.phtml'); ?>
+</div>

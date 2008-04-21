@@ -1,70 +1,70 @@
-<!-- 互助分类 -->
 <div class="sidebar">
-<?= $this->render('sort.phtml'); ?>
+<!-- 互助分类 -->
+<?= $this->render('dynamic/sort.phtml'); ?>
 </div>
-
 
 <div class="sidebar">
 <!-- 互助广播 -->
-<?= $this->render('broadcast.phtml'); ?>
+<?= $this->render('dynamic/notice.phtml'); ?>
 
 <!-- 问题集合 -->
 <table class="help_set">
 
-    <!-- 最新////////////////////////////////////////// -->
+    <!-- 最新 -->
 	<tr>
 	<th class="txtl">最新问题</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/latest/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"></th>
 	</tr>
     <?php foreach ($this->latest as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
-	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
 
-	<!-- 高分////////////////////////////////////////// -->
+	<!-- 高分 -->
 	<tr>
 	<th class="txtl">高分求助</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/offer/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"></th>
 	</tr>
     <?php foreach ($this->offer as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
-	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
 
-	<!-- 遗忘////////////////////////////////////////// -->
+	<!-- 遗忘 -->
 	<tr>
 	<th class="txtl">被遗忘的</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/forget/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"></th>
 	</tr>
     <?php foreach ($this->forget as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
-	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
-	<!-- 解决////////////////////////////////////////// -->
+
+	<!-- 解决 -->
 	<tr>
 	<th class="txtl">最近解决</th>
-	<th class="txtr" colspan="2"><a href="/help/sort/solved/">更多&raquo;</a></th>
+	<th class="txtr" colspan="2"></th>
 	</tr>
     <?php foreach ($this->solved as $value) { ?>
 	<tr>
-	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/sname/<?= urlencode($value['pName']); ?>/">[<?= $value['pName']; ?>]</a></td>
+	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
-	<a href="/help/question/detail/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
+	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
 	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
@@ -73,68 +73,8 @@
 </div>
 
 <div class="sidebar">
-
-<!-- 帮助+公告 ///////////////////////////////////////////// -->
+<!-- 帮助公告 -->
 <?= $this->render('help.phtml'); ?>
-
-<!-- 积分排行 ////////////////////////////////////////////// -->
-<table class="help_rank">
-<tr>
-<th class="txtl" colspan="2">总积分榜</th>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-</table>
-<!-- 踊跃 ///////////////////////////////// -->
-<table class="help_rank">
-<tr>
-<th class="txtl" colspan="2">活跃排行</th>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-<tr>
-<td><a href="" class="rank">求职上boleme</a></td>
-<td>100</td>
-</tr>
-</table>
+<!-- 积分排行 -->
+<?= $this->render('dynamic/point.phtml'); ?>
 </div>
