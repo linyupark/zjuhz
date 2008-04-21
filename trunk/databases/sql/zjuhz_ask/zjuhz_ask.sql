@@ -339,6 +339,10 @@ create table zjuhz_ask.tbl_ask_sort
    pid                  smallint unsigned not null default 0,
    pName                char(20) not null,
    child                tinyint not null default 0,
+   question             int unsigned not null default 0,
+   solved               int unsigned not null default 0,
+   closed               int unsigned not null default 0,
+   overtime             int unsigned not null default 0,
    primary key (sid)
 )
 type = MYISAM;
@@ -350,4 +354,3 @@ create index idx_parent on tbl_ask_sort
 (
    parent
 );
-
