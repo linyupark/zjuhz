@@ -103,8 +103,7 @@ class LoginController extends Zend_Controller_Action
 					    setcookie('zjuhz_member[alive]', $result['userName'], time() - 2592000, '/') : 
 					        setcookie('zjuhz_member[alive]', $result['userName'], time() + 2592000, '/'));
 
-					//成功跳转
-					echo 'redirect';
+					echo 'message'; // 请求ajax给出提示
 				}
 				else
 				{
