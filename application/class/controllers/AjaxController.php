@@ -24,6 +24,102 @@
 			else return true;
 		}
 		
+		# 开除班级管理员 ----------------------------------------------
+		function classmemberlvldownAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$member_id = $request->getPost('member_id');
+				// 保证有数据
+				if(is_array($member_id) && count($member_id) > 0)
+				{
+					$db = Zend_Registry::get('dbClass');
+					foreach ($member_id as $k=>$v)
+					{
+						$db->update('tbl_class_member',array('class_member_charge'=>0),
+							array('class_member_id = '.(int)$v, 'class_id = '.$this->_classId));
+					}
+				}
+			}
+		}
+		
+		# 班级管理员列表 -----------------------------------------------
+		function classmanagerlistAction()
+		{
+			if($this->getRequest()->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$this->_sessClass->default['managerMember'] = "managerList({$this->_classId})";
+				$db = Zend_Registry::get('dbClass');
+				$rows = $db->fetchAll('SELECT `class_member_id`,`class_charge`,`class_member_charge`,`realName`,`class_member_last_access` 
+									   FROM `vi_class_member` 
+									   WHERE `class_id` = ? AND `class_member_charge` = 1', $this->_classId);
+				$this->view->class_id = $this->_classId;
+				$this->view->members = $rows;
+				$this->render('manager-list');
+			}
+		}
+		
+		# 踢出班级 -----------------------------------------------------
+		function classmemberoutAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$member_id = $request->getPost('member_id');
+				// 保证有数据
+				if(is_array($member_id) && count($member_id) > 0)
+				{
+					$db = Zend_Registry::get('dbClass');
+					foreach ($member_id as $k=>$v)
+					{
+						DbModel::classMemberOut($v, $this->_classId);
+					}
+				}
+			}
+		}
+		
+		# 提升为班级管理员 ----------------------------------------------
+		function classmemberlvlupAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$member_id = $request->getPost('member_id');
+				// 保证有数据
+				if(is_array($member_id) && count($member_id) > 0)
+				{
+					$db = Zend_Registry::get('dbClass');
+					foreach ($member_id as $k=>$v)
+					{
+						$db->update('tbl_class_member',array('class_member_charge'=>1),
+							array('class_member_id = '.(int)$v, 'class_id = '.$this->_classId));
+					}
+				}
+			}
+		}
+		
+		# 班级成员列表 ---------------------------------------------------
+		function classmemberlistAction()
+		{
+			if($this->getRequest()->isXmlHttpRequest())
+			{
+				if(false == $this->isManager()) exit();  // 不是管理员
+				$this->_sessClass->default['managerMember'] = "memberList({$this->_classId})";
+				$db = Zend_Registry::get('dbClass');
+				$rows = $db->fetchAll('SELECT `class_member_id`,`class_charge`,`class_member_charge`,`realName`,`class_member_last_access` 
+									   FROM `vi_class_member` 
+									   WHERE `class_id` = ?', $this->_classId);
+				$this->view->class_id = $this->_classId;
+				$this->view->members = $rows;
+				$this->render('member-list');
+			}
+		}
+		
 		# 班级申请删除 -------------------------------------------------
 		function classapplydelAction()
 		{
@@ -86,6 +182,7 @@
 			if($this->getRequest()->isXmlHttpRequest())
 			{
 				if(false == $this->isManager()) exit();  // 不是管理员
+				$this->_sessClass->default['managerMember'] = "applyList({$this->_classId})";
 				$db = Zend_Registry::get('dbClass');
 				$rows = $db->fetchAll('SELECT * FROM `vi_class_apply` WHERE `class_id` = ?', $this->_classId);
 				$this->view->class_id = $this->_classId;

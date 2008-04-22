@@ -15,12 +15,21 @@
 			// 不是管理员就跳转
 			if($this->_sessClass->data[$this->view->class_id]['class_charge'] != $this->view->login['uid'] && 
 			   $this->_sessClass->data[$this->view->class_id]['class_member_charge'] != $this->view->login['uid'])
-			$this->_redirect('/class/home?c='.$this->view->class_id);
+			$this->_redirect('/home?c='.$this->view->class_id);
+		}
+		
+		# 班级通讯录管理 ----------------------------------------------------
+		function addressbookAction()
+		{
+			$this->view->headTitle('班级通讯录管理');
 		}
 		
 		# 成员管理 ----------------------------------------------------------
 		function memberAction()
 		{
 			$this->view->headTitle('成员管理');
+			// 默认显示条目
+			if($this->_sessClass->default['managerMember'] == null)
+			$this->_sessClass->default['managerMember'] = "applyList({$this->view->class_id})";
 		}
 	}

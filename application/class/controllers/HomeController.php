@@ -8,7 +8,6 @@ class HomeController extends Zend_Controller_Action
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessClass = Zend_Registry::get('sessClass');
 		$this->view->login = $this->_sessCommon->login;
-		$this->view->class_id = $this->getRequest()->getParam('c');
 		$this->view->class_base_info = $this->getRequest()->getParam('class');
 	}
 	
@@ -27,12 +26,17 @@ class HomeController extends Zend_Controller_Action
 	# 管理员身份访问班级信息
 	function managerAction()
 	{
-		$this->view->apply_num = DbModel::getClassJoinApplyNum($this->view->class_id);
 	}
 	
 	function indexAction()
 	{	
-		$class_id = $this->view->class_id;
+		$class_id = $this->getRequest()->getParam('c');
+		if(null == $class_id) 
+		{
+			$class_id = array_keys($this->_sessClass->data);
+			$class_id = $class_id[0];
+		}
+		
 		// 没有相关的班级信息
 		if(!$class = DbModel::getClassInfo($class_id))
 		{
@@ -43,13 +47,15 @@ class HomeController extends Zend_Controller_Action
 		{
 			echo $this->view->headTitle($class['class_name']);
 			// 不是班级成员
-			if($this->_sessClass->data[$this->view->class_id] == null)
+			if($this->_sessClass->data[$class_id] == null)
 			{
 				$this->_forward('visitor',null,null,array('class'=>$class));
 			}
 			else // 是成员
-			{
+			{				
 				$uid = $this->view->login['uid'];
+				// 更新最后访问时间
+				DbModel::updateLastAccessTime($uid, $class_id);
 				// 不是管理员
 				if($this->_sessClass->data[$class_id]['class_charge'] != $uid && 
 				   $this->_sessClass->data[$class_id]['class_member_charge'] != $uid)
