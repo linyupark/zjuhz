@@ -145,7 +145,7 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
 .control_list td{ padding:8px; }
 .control_list td a{ font-size:14px; color:#004BCA }
-.control_list td a.cat{ color:#666; }
+.control_list td a.cat{ color:#666; font-size:12px; }
 
 /* 个人后台通用表单样式 */
 .home_form{ padding:20px; }
