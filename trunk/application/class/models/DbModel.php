@@ -2,6 +2,15 @@
 
 	class DbModel
 	{	
+		static function classMemberOut($uid, $class_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			if($db->delete('tbl_class_member', array('class_member_id = '.(int)$uid, 'class_id = '.(int)$class_id)) > 0)
+			{
+				$db->update('tbl_class',array('class_member_num'=>new Zend_Db_Expr('class_member_num-1')),'class_id = '.(int)$class_id);
+			}
+		}
+		
 		/**
 		 * 入班申请删除
 		 *
@@ -35,6 +44,18 @@
 			}
 			return false;
 		}
+		/**
+		 * 更新班级成员最后访问班级时间
+		 *
+		 * @param int $uid
+		 * @param int $class_id
+		 */
+		static function updateLastAccessTime($uid, $class_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$db->update('tbl_class_member', array('class_member_last_access'=>time()), 
+											array('class_id='.$class_id,'class_member_id='.$uid));
+		}
 		
 		/**
 		 * 返回某班级的管理员数据集
@@ -45,7 +66,7 @@
 		static function getManagers($class_id)
 		{
 			$db = Zend_Registry::get('dbClass');
-			return $db->fetchAll('SELECT `class_member_id`,`realName` FROM `vi_class_member_charge` 
+			return $db->fetchAll('SELECT `class_member_id`,`realName` FROM `vi_class_member` 
 						          WHERE `class_id` = ? AND `class_member_charge` = 1',$class_id);
 		}
 		
@@ -71,7 +92,7 @@
 		static function getClassInfo($class_id)
 		{
 			$db = Zend_Registry::get('dbClass');
-			$row = $db->fetchRow('SELECT * FROM `vi_class_base` WHERE `class_id` = ?',$class_id);
+			$row = $db->fetchRow('SELECT * FROM `vi_class` WHERE `class_id` = ?',$class_id);
 			$row['class_managers'] = self::getManagers($class_id);
 			return $row;
 		}
@@ -153,7 +174,7 @@
 		{
 			$db = Zend_Registry::get('dbClass');
 			$select = $db->select();
-			$select->from('vi_class_charge',array('class_id','class_year','class_charge','class_college','class_name','realName'));
+			$select->from('vi_class',array('class_id','class_year','class_charge','class_college','class_name','realName'));
 			if((int)$year != 0) $select->where('class_year = ?',$year);
 			if(!empty($college)) $select->where('class_college = ?',$college);
 			$stmt = $db->query($select);

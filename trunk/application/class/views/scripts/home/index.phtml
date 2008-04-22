@@ -8,5 +8,5 @@ foreach (Zend_Registry::get('sessClass')->data as $k => $v): ?>
 <?php endforeach; endif; ?>
 <a href="/class/new/">创建新班级</a>
 </p>
-<script>$('.class_tab a[href="/class/home?c=<?=$this->class_id?>"]').addClass('on')</script>
+<script>$('.class_tab a[href="/class/home?c=<?= $this->class_base_info['class_id'] ?>"]').addClass('on')</script>
 

@@ -1,0 +1,20 @@
+<table class="class_list" style="width:100%; margin-left:0">
+<tr class="quiet">
+<th><a href="javascript:selectAll('member_id')">全选</a></th>
+<th>班级成员</th>
+<th>身份</th>
+<th>最后登录<input type="hidden" name="class_id" value="<?= $this->class_id ?>" /></th>
+</tr>
+<?php foreach ($this->members as $k=>$v): ?>
+<tr>
+<td><input type="checkbox" name="member_id[]" value="<?= $v['class_member_id'] ?>" /></td>
+<td><a href=""><?= $v['realName'] ?></a></td>
+<td>管理员</td>
+<td class="quiet f9"><?= Commons::date($v['class_member_last_access']) ?>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
+<p class="txtc">
+	<button class="btn" onclick="memberLvldown(<?= $this->class_id ?>)">开除</button> 
+</p>
