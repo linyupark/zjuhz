@@ -1,4 +1,5 @@
 @import url("global.css");
+@import url("facebox.css");
 
 .box{ padding:20px; margin:10px; width:600px; background:#f7f7f7 }
 .box h2{ font-size:14px; padding:8px 0; color:#666; }
@@ -35,5 +36,6 @@
 
 /* 班级展示区域 --------------------------------------------- */
 .class_show h2{ font-size:12px; padding:10px 0 5px 0;  }
+.focus{ font-weight:bold; color:#111; }
 #class_notice{ padding:5px; background:#587964; color:#eee; border:2px solid #8A775F; }
 #class_picture{ padding:5px; border:2px solid #eee; }
