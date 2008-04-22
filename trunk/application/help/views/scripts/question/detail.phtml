@@ -43,7 +43,7 @@
 </div>
 
 <!-- 答案集合 -->
-<div id="reply">
+<div <?php if ($this->sessCommon->login['uid'] != $this->detail['uid']) { ?>id="reply"<?php } ?>>
 <?php if ($this->total > 0) { ?>
 <h2>回答(共<?= $this->detail['reply']; ?>条)</h2>
 <?php foreach ($this->reply as $value) { ?>
