@@ -266,6 +266,14 @@ create index idx_reply on tbl_ask_question
 );
 
 /*==============================================================*/
+/* Index: idx_replyTime                                         */
+/*==============================================================*/
+create index idx_replyTime on tbl_ask_question
+(
+   replyTime
+);
+
+/*==============================================================*/
 /* Table: tbl_ask_reply                                         */
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_reply
