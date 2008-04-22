@@ -1,9 +1,9 @@
-<table id="global_search">
+<table class="global_search">
 	<tr>
 	<!-- 状态信息 -->
 	<td class="nav">
     <?php if ($this->sessCommon->login) { ?>
-		您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/help/panel/">我的互助</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
+		您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/help/my/">我的互助</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 	<?php }	else { ?>
 		<a href="/member/register/">注册</a>|<a href="/member/login/">登录</a>
 	<?php } ?>
@@ -11,7 +11,7 @@
 	</tr>
 </table>
 
-<table id="global_search">
+<table class="global_search">
 	<tr>
 	<!-- 模块选择 -->
 	<td class="models">

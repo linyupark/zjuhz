@@ -81,5 +81,10 @@ function goToUrl(url, sec)
 // 直接跳转
 function to(url)
 {
-	top.location.href = url;
+	if (url == 'reload') {
+		window.location.reload();
+	}
+	else {
+		top.location.href = url;
+	}
 }

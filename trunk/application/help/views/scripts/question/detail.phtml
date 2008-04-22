@@ -2,12 +2,12 @@
 <!-- 当前路径 -->
 <div id="help_position"><a href="/help/" title="首页">首页</a> > <?= $this->path; ?></div>
 <div class="sidebar">
-<div id="topic" class="help_on">
+<div id="topic" <?php switch($this->detail['status']) { case 0: ?>class="help_on"<?php break; case 1: ?>class="help_ok"<?php break; case 2: ?>class="help_on"<?php break; case 3: ?>class="help_on"<?php } ?>>
 <h2>
 <?php switch($this->detail['status']) { case 0: ?>待解决的问题<?php break; case 1: ?>已解决的问题<?php break; case 2: ?>已关闭的问题<?php break; case 3: ?>已超时的问题<?php } ?>
 </h2>
 <p class="toolbar">
-<a href="#" class="collection">收藏</a>
+<a class="collection" id="collection" title="收藏该问题" onclick="javascript:collection_insert(<?= $this->detail['qid']; ?>);">收藏</a>
 <!--<a href="#" class="report">检举</a>-->
 </p>
 <table width="100%">
@@ -42,8 +42,8 @@
 <?php $i++; } ?>
 </div>
 
+<div <?php if ($this->sessCommon->login['uid'] != $this->detail['uid'] || $this->total > 0) { ?>id="reply"<?php } ?>>
 <!-- 答案集合 -->
-<div <?php if ($this->sessCommon->login['uid'] != $this->detail['uid']) { ?>id="reply"<?php } ?>>
 <?php if ($this->total > 0) { ?>
 <h2>回答(共<?= $this->detail['reply']; ?>条)</h2>
 <?php foreach ($this->reply as $value) { ?>
@@ -52,7 +52,7 @@
 <p class="info"><span><?php echo (($value['anonym'] == 'N') ? $value['realName'] : '匿名'); ?>&nbsp;&nbsp;&nbsp;&nbsp;回答时间：<?= date('Y-m-d H:i', strtotime($value['addTime'])); ?></span></p>
 <p class="toolbar">
 <!--<a href="" class="report">检举</a>-->
-<?php if ($this->sessCommon->login['uid'] == $this->detail['uid']) { ?>
+<?php if ($this->sessCommon->login['uid'] == $this->detail['uid'] && $this->detail['status'] == 0 ) { ?>
 <a class="accept" title="采纳为答案" onclick="javascript:question_accept(<?= $value['qid']; ?>, <?= $value['rid']; ?>, <?= $value['uid']; ?>);">采纳</a>
 <?php } ?>
 </p>
@@ -62,10 +62,9 @@
 <br />
 <?php } ?>
 
+<?php if ($this->sessCommon->login['uid'] != $this->detail['uid'] && $this->detail['status'] == 0) { ?>
 <!-- 回答面板 -->
-<?php if ($this->sessCommon->login['uid'] != $this->detail['uid']) { ?>
 <h2>我来回答</h2><a name="reply" id="reply"></a>
-<?php } ?>
 <div id="reply_form">
 <?php if ($this->sessCommon->login['uid'] != $this->detail['uid']) { ?>
 <form method="post" name="myform" id="myform" autocomplete="off">
@@ -80,8 +79,8 @@
 <input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
 <input type="hidden" name="qid" id="qid" value="<?= $this->detail['qid']; ?>" />
 </form>
-<?php } ?>
 </div>
+<? } } ?>
 </div>
 </div>
 <!-- 积分排行 -->
