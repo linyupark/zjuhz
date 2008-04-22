@@ -1,3 +1,59 @@
+// 开除管理员
+function memberLvldown(classid)
+{
+	var d = confirm('开除选中的管理员吗？');
+	if(d == true)
+	$.post('/class/ajax/class_member_lvldown', $('.class_list').fastSerialize(), function(data)
+	{
+		if(data == '') history.go(0);
+		else $.facebox(data);
+	});
+}
+
+// 班级管理员列表
+function managerList(classid)
+{
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('a[href^="javascript:managerList"]').addClass('focus');
+	$.post('/class/ajax/class_manager_list/',{class_id:classid},function(data){
+		$('#listInner').html(data);
+	});
+}
+
+// 踢出班级
+function memberOut(classid)
+{
+	var d = confirm('确定将选中的成员踢出班级吗？');
+	if(d == true)
+	$.post('/class/ajax/class_member_out', $('.class_list').fastSerialize(), function(data)
+	{
+		if(data == '') history.go(0);
+		else $.facebox(data);
+	});
+}
+
+// 升级为班级管理员
+function memberLvlup(classid)
+{
+	$.post('/class/ajax/class_member_lvlup', $('.class_list').fastSerialize(), function(data)
+	{
+		if(data == '') history.go(0);
+		else $.facebox(data);
+	});
+}
+
+// 班级成员列表
+function memberList(classid)
+{
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('a[href^="javascript:memberList"]').addClass('focus');
+	$.post('/class/ajax/class_member_list/',{class_id:classid},function(data){
+		$('#listInner').html(data);
+	});
+}
+
 // 删除申请
 function applyDel(classid)
 {
@@ -14,7 +70,7 @@ function applyPass(classid)
 {
 	$.post('/class/ajax/class_apply_pass', $('.class_list').fastSerialize(), function(data)
 	{
-		if(data == '') applyList(classid);
+		if(data == '') history.go(0);
 		else $.facebox(data);
 	});
 }
@@ -34,7 +90,9 @@ function selectAll(name)
 // 申请列表
 function applyList(classid)
 {
-	$('a[href^="javascript:applyList"]').css({color:'#111',fontWeight:'bold'});
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('a[href^="javascript:applyList"]').addClass('focus');
 	$.post('/class/ajax/class_apply_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
 	});
