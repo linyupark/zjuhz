@@ -125,6 +125,15 @@ create table zjuhz_ask.tbl_ask_collection
 type = MYISAM;
 
 /*==============================================================*/
+/* Index: idx_collect                                           */
+/*==============================================================*/
+create unique index idx_collect on tbl_ask_collection
+(
+   qid,
+   uid
+);
+
+/*==============================================================*/
 /* Table: tbl_ask_overtime                                      */
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_overtime
@@ -288,6 +297,14 @@ create index idx_qid on tbl_ask_reply
 create index idx_uid on tbl_ask_reply
 (
    uid
+);
+
+/*==============================================================*/
+/* Index: idx_status                                            */
+/*==============================================================*/
+create index idx_status on tbl_ask_reply
+(
+   status
 );
 
 /*==============================================================*/

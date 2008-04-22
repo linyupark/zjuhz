@@ -9,7 +9,6 @@ $(function() {
 		putVerifyImg();
     });
 	$("#myform").submit( function() {
-	    reply_insert();
 		return false;
     } );
     $("#btnReply").click( function() {
@@ -44,6 +43,19 @@ function reply_insert() {
 	return false;
 }
 
+// 收藏问题
+function collection_insert(qid) {
+
+	if (qid > 0)
+	{
+		$.post("/help/collection/doinsert/", { qid: qid }, function(msg) {
+			alert('收藏成功！'); $("#collection").hide() }
+		); 
+	}
+
+    return false;
+}
+
 // 采纳
 function question_accept(qid, rid, uid)
 {
@@ -66,5 +78,6 @@ function doaccept(param)
 		qid:param["qid"], rid:param["rid"], ruid:param["uid"], sort0:sort0, sort1:sort1, sort2:sort2}, 
 			function(msg) { //alert(msg);
 				if (msg == 'message') { popup_message("/help/index/message/"); }
+				goToUrl("reload", 3000);
 	});
 }

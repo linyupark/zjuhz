@@ -1,10 +1,7 @@
 <br>
 <div class="help_notice" start="2">
 <strong><img src="/static/images/icon/sound_none.gif" /></strong>
-<a href="" class="nt" style="display:block">* 最近有什么好看的电视剧吗?</a>
-<a href="" class="nt">* 在公司做Pro/E设计师该注意什么？</a>
-<a href="" class="nt">* 夏利车是7101电喷的发动机的带速乎高乎低怎么办？</a>
-<a href="" class="nt">* 凡高的代表作是什么?</a>
-<a href="" class="nt">* 去法国旅游，最值得去的景点有哪些？</a>
-<a href="" class="nt">* 天上为什么会有太阳</a>
+<?php if ($this->rand) { $i=0; foreach ($this->rand as $value) { ?>
+<a href="/help/question/detail/qid/<?= $value['qid']; ?>/" class="nt" <?php if($i==0) { ?>style="display:block"<?php } ?>>* <?= $value['title']; ?></a>
+<?php $i++; }} ?>
 </div>

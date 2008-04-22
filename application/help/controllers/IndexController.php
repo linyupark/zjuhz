@@ -67,7 +67,7 @@ class IndexController extends Zend_Controller_Action
 	{
 		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
 		$this->_helper->layout->disableLayout(); // 禁用layout
-		
+
 		ImageHandle::verify('common'); // 将验证码写入公共SESSION
 	}
 
@@ -108,16 +108,16 @@ class IndexController extends Zend_Controller_Action
 			// 此处可注入数据将用与判断 // next, see standard
 			$loginArgs['point'] = $this->_iniHelp->point->init; // 积分初始值
 
-			if ($actArgs = IndexFilter::init()->activate($loginArgs))
+			if ($actArgs = AskFilter::init()->activate($loginArgs))
 			{
-				if (IndexLogic::init()->activate($actArgs))
+				if (AskLogic::init()->activate($actArgs))
 				{
                		$this->_sessCommon->login['initAsk'] = 'Y';
-               		HelpClient::init()->activate($this->_sessUid); // 通知更新
+               		HelpClient::init()->activate($actArgs['uid']); // 通知更新
 
-					// 数据已过滤可直接生成
+					// 积分日志 数据已过滤可直接生成
 					LogLogic::init()->insert(array(
-					    'uid' => $this->_sessUid, 'point' => $loginArgs['point'], 'type' => 1, 
+					    'uid' => $actArgs['uid'], 'point' => $actArgs['point'], 'type' => 1, 
 					));
 				}
 			}
@@ -134,7 +134,7 @@ class IndexController extends Zend_Controller_Action
 		// 注册会员给予子系统SESS
 		if ('member' === $this->_sessCommon->role && !$this->_sessHelp->login)
 		{
-			if ($result = IndexLogic::init()->entry($this->_sessUid))
+			if ($result = AskLogic::init()->entry($this->_sessUid))
 			{
 				$this->_sessHelp->login = $result;
 			}
@@ -147,16 +147,18 @@ class IndexController extends Zend_Controller_Action
      * @return void
      */
 	public function indexAction()
-	{		
+	{
 		$this->view->headTitle($this->_iniHelp->head->title->index->index); // 载入标题
 		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js'); // 载入JS脚本
 
 		$this->activateAction(); // 首次使用激活
 		$this->entryAction(); // 子系统登录
 
-		$this->view->latest = IndexLogic::init()->latest(); // 最新问题
-		$this->view->offer  = IndexLogic::init()->offer(); // 高分问题
-		$this->view->forget = IndexLogic::init()->forget(); // 被遗忘的
-		$this->view->solved = IndexLogic::init()->solved(); // 最近解决
+		$logic = HelpLogic::init();
+		$this->view->latest = $logic->latest(15); // 最新问题
+		$this->view->offer  = $logic->offer(15); // 高分问题
+		$this->view->forget = $logic->forget(15); // 被遗忘的
+		$this->view->solved = $logic->solved(15); // 最近解决
+		$this->view->rand   = QuestionLogic::init()->rand(10); // 随机
 	}
 }
