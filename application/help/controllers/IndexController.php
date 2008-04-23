@@ -56,6 +56,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
 
 		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
+		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
 	}
 
 	/**
@@ -155,10 +156,10 @@ class IndexController extends Zend_Controller_Action
 		$this->entryAction(); // 子系统登录
 
 		$logic = HelpLogic::init();
-		$this->view->latest = $logic->latest(15); // 最新问题
-		$this->view->offer  = $logic->offer(15); // 高分问题
-		$this->view->forget = $logic->forget(15); // 被遗忘的
-		$this->view->solved = $logic->solved(15); // 最近解决
-		$this->view->rand   = QuestionLogic::init()->rand(10); // 随机
+		$this->view->latest = $logic->latest(10); // 最新问题
+		$this->view->offer  = $logic->offer(10); // 高分问题
+		$this->view->forget = $logic->forget(10); // 被遗忘的
+		$this->view->solved = $logic->solved(10); // 最近解决
+		$this->view->rand   = QuestionLogic::init()->rand(5); // 随机
 	}
 }
