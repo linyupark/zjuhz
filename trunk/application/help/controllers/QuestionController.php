@@ -48,7 +48,7 @@ class QuestionController extends Zend_Controller_Action
      * @return void
      */
 	public function init()
-	{		
+	{
 		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
@@ -78,7 +78,6 @@ class QuestionController extends Zend_Controller_Action
 		$this->view->headTitle($this->_iniHelp->head->title->question->insert); // 载入标题
 		$this->view->headScript()->appendFile('/static/scripts/help/question/insert.js'); // 载入JS脚本
 
-		$this->view->sessHelp = $this->_sessHelp; // Session资料注入
 		$this->view->title    = $this->getRequest()->getParam('title'); // title
 	}
 
@@ -170,6 +169,9 @@ class QuestionController extends Zend_Controller_Action
 					$this->_sessHelp->login['unsolved']--;
 					$this->_sessHelp->login['solved']++;
 
+					// 分类数量更新
+					SortLogic::init()->counter($counter);
+
 					// 积分日志操作?
 					if ($offer > 0)
 					{
@@ -178,9 +180,6 @@ class QuestionController extends Zend_Controller_Action
 						    'point' => $offer, 'type' => 4, 
 						));
 					}
-
-					// 分类数量更新
-					SortLogic::init()->counter($counter);
 
 					// 写入信息提示
 					$this->_sessHelp->message = $this->_iniHelp->hint->reply->acceptSuccess;

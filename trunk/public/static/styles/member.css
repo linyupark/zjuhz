@@ -1,350 +1,41 @@
-BODY {
-	padding:0;
-	margin:0;
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	line-height:150%;
-	font-size:12px;
-}
-#login {
-	width: 760px;
-	margin: auto; 
-}
-.zc {
-	float:left;
-	width:100%;
-	margin:0 0 10px 1px;
-	color:#666;
-}
-.zc ul {
-	list-style:none;
-	margin:0px;
-}
-.zc li {
-	margin:1px 0 8px 0px;
-}
-.user_txt {
-	border: 1px solid #9fd0e7;
-	margin: 0 5px 0 0;
-	width:160px;
-}
-.reg_tit {
-	float: left;
-	width: 745px;
-	margin: 15px 0 0px 0;
-	background: #47a9ed;
-	color: #fff;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 3px 0 0 15px;
-	line-height: 22px;
-}
-.ligray {
-	padding-left:120px;
-	padding-bottom:10px;
-	color: #999;
-}
-.lired {
-	color: #FF0000;
-}
-.msg { 
-	border-bottom:1px solid #cfe9f1; 
-	margin:10px; 
-}
-.reg_tda {
-	font-size:13px;
-	color:#000;
-	font-weight:bold; 
-	margin-right:1px;
-}
-#container {
-	WIDTH: 780px
-}
-#header {
-	MARGIN: auto
-}
-#left {
-	FLOAT: left
-}
-IMG {
-	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
-}
-INPUT {
-	TEXT-INDENT: 3px
-}
-IMG {
-	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
-}
-.login {
-	FONT-SIZE: 14px
-}
-H4 {
-	FONT-SIZE: 14px
-}
-.goreg {
-	MARGIN: 0px
-}
-#header {
-	WIDTH: 780px
-}
-#container {
-	WIDTH: 780px
-}
-#container {
-	MARGIN: auto
-}
-.blue_bg1 {
-	DISPLAY: block
-}
-.user_menu LI A:active {
-	DISPLAY: block
-}
-.gll LI A:hover {
-	DISPLAY: block
-}
-.gll LI A:visited {
-	DISPLAY: block
-}
-.gll LI A {
-	DISPLAY: block
-}
-#top LI {
-	FLOAT: right; MARGIN: 4px
-}
-#footer {BORDER-TOP: #ccc 1px solid;margin:0 auto;width:730px;margin-top:15px;border-top:4px solid #d9e6f9;padding:15px;}
-.help_box {
-	MARGIN: 8px 0px 0px
-}
-.bnt_box {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px
-}
-.select {
-	TEXT-ALIGN: center
-}
-.goreg {
-	TEXT-ALIGN: center
-}
-.scs_btn {
-	TEXT-ALIGN: center
-}
-.info {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; PADDING-TOP: 30px
-}
-.info {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; PADDING-TOP: 30px
-}
-.userinfo_box {
-	WIDTH: 475px
-}
-.info {
-	WIDTH: 475px
-}
-.userinfo_box {
-	WIDTH: 475px
-}
-.info {
-	WIDTH: 475px
-}
-.info P {
-	MARGIN: 20px 0px
-}
-.info P {
-	MARGIN: 20px 0px
-}
-.usertab TD {
-	LINE-HEIGHT: 24px
-}
-.user_h4 {
-	LINE-HEIGHT: 24px
-}
-.user_h4 {
-	COLOR: #ffffff
-}
-.info_r {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 390px; PADDING-TOP: 8px
-}
-.info_r {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 390px; PADDING-TOP: 8px
-}
-.info_r {
-	LINE-HEIGHT: 18px
-}
-.ad_info LI {
-	LINE-HEIGHT: 18px
-}
-.info_r {
-	LINE-HEIGHT: 18px
-}
-.userinfo_box {
-	MARGIN-BOTTOM: 30px
-}
-#right {
-	MARGIN-BOTTOM: 30px
-}
-#left {
-	MARGIN-BOTTOM: 30px
-}
-.ad {
-	BACKGROUND: #47a9ed
-}
-.reg_tit {
-	BACKGROUND: #47a9ed
-}
-BODY {
-	FONT: 12px "|",Verdana,Arial
-}
-.ad {
-	WIDTH: 510px
-}
-.ad {
-	MARGIN-TOP: 20px
-}
-.nav_box {
-	MARGIN-TOP: 10px; WIDTH: 437px; TEXT-ALIGN: right
-}
-.ad {
-	HEIGHT: 172px
-}
-.login_box {
-	BORDER-RIGHT: #adadad 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #adadad 1px solid; PADDING-LEFT: 10px; BACKGROUND: #f4f4f4; PADDING-BOTTOM: 10px; BORDER-LEFT: #adadad 1px solid; WIDTH: 220px; PADDING-TOP: 10px; BORDER-BOTTOM: #adadad 1px solid
-}
-.usertab {
-	MARGIN: 5px 0px 10px
-}
-.usertab TD {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 2px; VERTICAL-ALIGN: top; PADDING-TOP: 2px
-}
-.tda {
-	WIDTH: 520px
-}
-.user_img {
-	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid
-}
-.ad_info {
-	PADDING-RIGHT: 1px; FLOAT: right; WIDTH: 274px; MARGIN-RIGHT: 18px; PADDING-TOP: 15px; POSITION: relative
-}
-.bnt_box {
-	VERTICAL-ALIGN: middle
-}
-.select {
-	VERTICAL-ALIGN: middle
-}
-.usertab INPUT {
-	VERTICAL-ALIGN: middle
-}
-.usertab INPUT {
-	VERTICAL-ALIGN: middle
-}
-.logininput {
-	BORDER-RIGHT: #b4c3cf 1px solid; BORDER-TOP: #b4c3cf 1px solid; BORDER-LEFT: #b4c3cf 1px solid; BORDER-BOTTOM: #b4c3cf 1px solid
-}
-.user_txt {
-	BORDER-RIGHT: #b4c3cf 1px solid; BORDER-TOP: #b4c3cf 1px solid; BORDER-LEFT: #b4c3cf 1px solid; BORDER-BOTTOM: #b4c3cf 1px solid
-}
-.user_txt {
-	MARGIN: 0px 5px 0px 0px
-}
-.inputtxt {
-	WIDTH: 415px; HEIGHT: 80px
-}
-.reg_tda {
-	WIDTH: 70px
-}
-.check_box {
-	WIDTH: 70px
-}
-.reg_tab {
-	WIDTH: 730px
-}
-.reg_box {
-	WIDTH: 730px
-}
-.reg_box {
-	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
-}
-.v_txt {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; PADDING-TOP: 12px
-}
-.logininput {
-	WIDTH: 140px
-}
-.glr_form {
-	FLOAT: left
-}
-.glr {
-	FLOAT: left
-}
-.gll {
-	FLOAT: left
-}
-.mdf {
-	FLOAT: left
-}
-.name_box {
-	FLOAT: left
-}
-.showuser {
-	FLOAT: left
-}
-.v_txt {
-	FLOAT: left
-}
-.reg_box {
-	FLOAT: left
-}
-.reg_tit {
-	FLOAT: left
-}
-.bnt_box {
-	FLOAT: left
-}
-.user_img_r {
-	FLOAT: left
-}
-.check_box {
-	FLOAT: left
-}
-.inputtxt {
-	FLOAT: left
-}
-.user_img {
-	FLOAT: left
-}
-#user_right {
-	FLOAT: left
-}
-#user_left {
-	FLOAT: left
-}
-.userinfo_box {
-	FLOAT: left
-}
-.info_r {
-	FLOAT: left
-}
-.info_img {
-	FLOAT: left
-}
-.info {
-	FLOAT: left
-}
-.img_box {
-	FLOAT: left
-}
-#right {
-	FLOAT: left
-}
-#left {
-	FLOAT: left
-}
-UL {
-	MARGIN: 0px
-}
-A {
-	COLOR: #261cdc
-}
-A {
-	COLOR: #261cdc
-}
-.info H4 {
-	MARGIN: 0px
-}
+@import url("paging.css");
+
+/* 用户个人名片 -------------------------------------------------------------- */
+.member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
+.member_card .head{ padding:2px; border:1px solid #D7EAB2; background:#fff; width:50px; height:50px; }
+.member_card td{ padding:5px; }
+
+/* 控制连接 -------------------------------------------------------------- */
+.control_link{ width:150px; margin:10px 0 0 12px; }
+.control_link a{ display:block; padding:5px 5px; font-size:14px; text-decoration:none; }
+.control_link a:hover{ text-decoration:underline; }
+.control_link a.focus{ color:#333; background:#D9E6F7 url(/static/images/bg/rc_tl3.png) no-repeat left top; font-weight:bold }
+
+h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.png) no-repeat left top; margin-top:10px; padding:4px 8px;  }
+.control_content { border-left:4px solid #D9E6F7; border-bottom:4px solid #D9E6F7; width:685px; background:#EFF7FF }
+
+.control_tab { padding:0 10px; }
+.control_tab a{ padding:5px; margin:10px 5px 0 0; display:block; float:left; }
+.control_tab a.focus{ background:#D9E6F7; text-decoration:none; font-weight:bold; color:#000; }
+
+.control_action{background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
+
+.control_list{ width:100%; }
+.control_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA; }
+.control_list th .txt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; font-weight:normal }
+.control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
+.control_list td{ padding:8px; }
+.control_list td a{ font-size:14px; color:#004BCA }
+.control_list td a.cat{ color:#666; }
+
+/* 个人后台通用表单样式 ---------------------------------------------------- */
+.home_form{ padding:20px; }
+.home_form td{ font-size:14px; padding:10px 0 5px 10px; }
+.home_form td b{ color:#444;  }
+.home_form .txt,.home_form .bigtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
+.home_form .btn{  border:3px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:0px 8px }
+.home_form .bigtxt{ width:400px; height:100px; }
+
+/* 通讯录详细信息表格样式 ------------------------------------------------- */
+.address_detail{ display:none; width:480px; }
+.address_detail td{ padding:2px; border-bottom:1px solid #eee; }

@@ -24,7 +24,6 @@ Zend_Loader::registerAutoload();
 /** 项目配置文档对象 */
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
-//Zend_Session::rememberMe(3600);
 /** 公用SESSION,包含如验证码,用户基本资料等 */
 Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
 /** 项目SESSION */

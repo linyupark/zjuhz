@@ -31,7 +31,6 @@ BEGIN
         IF myrUid > myiUid THEN
 
             INSERT INTO tbl_user_ext (uid,status,lastIp,lastLogin) VALUES (myrUid,myrStatus,param_regIp,myTime);
-            INSERT INTO tbl_user_more (uid) VALUES (myrUid);
 
             IF myiUid > 0 THEN
               UPDATE tbl_user_invite_detail SET regTime = mytime,uid = myrUid,status = myrStatus WHERE status = 0 AND ikey = param_ikey LIMIT 1;

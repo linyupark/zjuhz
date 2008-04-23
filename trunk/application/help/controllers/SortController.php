@@ -56,7 +56,7 @@ class SortController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入公共SESSION
+		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
 
@@ -64,6 +64,7 @@ class SortController extends Zend_Controller_Action
 		$this->_sortId     = (int)$this->getRequest()->getParam('sid'); // sortId
 
 		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
+		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
 	}
 
 	/**

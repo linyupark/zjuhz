@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答 - 我的互助
+ * 你问我答-我的互助
  */
 class MyController extends Zend_Controller_Action
 {
@@ -48,7 +48,7 @@ class MyController extends Zend_Controller_Action
      * @return void
      */
 	public function init()
-	{		
+	{
 		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION

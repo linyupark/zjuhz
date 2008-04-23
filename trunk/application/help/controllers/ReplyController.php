@@ -48,7 +48,7 @@ class ReplyController extends Zend_Controller_Action
      * @return void
      */
 	public function init()
-	{		
+	{
 		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
@@ -56,6 +56,7 @@ class ReplyController extends Zend_Controller_Action
 		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
 
 		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
+		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
 	}
 
 	/**
