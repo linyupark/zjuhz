@@ -59,7 +59,6 @@ class QuestionFilter extends HelpInterlayer
 		// 载入其关ZEND扩展 - ZF1.5版本需此
 		//Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
-		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
 		$filters = array(
