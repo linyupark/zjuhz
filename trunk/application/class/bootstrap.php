@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Asia/Shanghai');
+
 /** set_include_path */
 set_include_path(get_include_path().
 					 PATH_SEPARATOR.'../../common/Custom/'.
@@ -21,6 +23,7 @@ Zend_Registry::set('sessClass', new Zend_Session_Namespace('class'));
 
 /* Layout */
 Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layout' => 'main'));
+
 
 /** run */
 $info_front = Zend_Controller_Front::getInstance();
