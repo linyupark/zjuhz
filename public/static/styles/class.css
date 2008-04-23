@@ -1,7 +1,7 @@
 @import url("global.css");
 @import url("facebox.css");
 
-.box{ padding:20px; margin:10px; width:600px; background:#f7f7f7 }
+.box{ padding:20px 0 0 40px; }
 .box h2{ font-size:14px; padding:8px 0; color:#666; }
 .box h2 small{ font-weight:normal; font-size:12px; }
 
@@ -15,7 +15,7 @@
 				border-top:1px solid #ccc; border-bottom:1px solid #ccc; }
 .class_list td{ padding:5px; border-bottom:1px solid #eee; }
 
-.class_sub_bar{ margin-left:10px; width:200px  }
+.class_sub_bar{ padding-left:10px; width:200px  }
 .class_sub_bar p{ padding:10px 0 0 0; }
 .class_sub_bar p b{ color:#666; }
 .class_sub_bar ul { list-style-position:inside; color:#666; padding:10px 0 0 0; margin-top:10px;  border-top:1px solid #ccc; }
