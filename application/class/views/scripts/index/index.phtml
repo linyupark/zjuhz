@@ -2,7 +2,7 @@
 <div class="sidebar class_sub_bar">
 <form method="GET">
 <p><b>入学年份：</b><br />
-<select name="year" class="inputtxt">
+<select name="year" class="inputtxt" style="width:180px">
 <option value="">不限制</option>
 <?php for ($i=1970;$i<=2008;$i++): ?>
 <option value="<?= $i ?>"<?php if($this->year == $i):?>selected="selected"<?php endif; ?>><?= $i ?></option>
@@ -11,29 +11,32 @@
 </p>
 
 <p><b>院系名称：</b><br />
-<select name="college" class="inputtxt">
+<select name="college" class="inputtxt" style="width:180px">
 <option value="">所有学院</option>
 <?php foreach (Zend_Registry::get('iniClass')->college->name->toArray() as $k => $v): ?>
 <option value="<?= $v ?>"<?php if($this->college == $v):?>selected="selected"<?php endif; ?>><?= $v ?></option>
 <?php endforeach; ?>
 </select>
+<input type="hidden" name="for" value="<?= $this->keywords ?>" />
 </p>
 <p><input type="submit" value="查找班级" class="btn" /></p>
 </form>
 <?= $this->render('index/myclass.phtml'); ?>
+<?= $this->render('index/myapply.phtml'); ?>
 </div>
 
 <!-- 网站内所有班级列表 /////////////////////////////////// -->
 <div class="sidebar">
 <table class="class_list">
-<tr>
+<tr class="quiet">
 <th>入学年</th>
 <th>学院</th>
-<th>班级</th>
+<th>班级 (<?= $this->class_num ?>个)</th>
 <th>创建人</th>
 <th>&nbsp;</th>
 </tr>
-<?php foreach ($this->class_rows as $k => $v): ?>
+<?php if(count($this->class_rows) > 0):
+foreach ($this->class_rows as $k => $v): ?>
 <tr>
 <td><a href="?year=<?= $v['class_year'] ?>"><?= $v['class_year'] ?></a></td>
 <td><a href="?college=<?= urlencode($v['class_college']) ?>"><?= $v['class_college'] ?></a></td>
@@ -41,7 +44,9 @@
 <td><a href="/member/home?uid=<?= $v['class_charge'] ?>"><?= $v['realName'] ?></a></td>
 <td><a href="javascript:classJoin(<?= $v['class_id'] ?>)">加入</a></td>
 </tr>
-<?php endforeach; ?>
+<?php endforeach; else: ?>
+<tr><td colspan="5">没有找到相关班级</td></tr>
+<?php endif; ?>
 </table>
 <div class="pagination"><?= $this->pagination ?></div>
 </div>

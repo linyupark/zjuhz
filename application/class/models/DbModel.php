@@ -2,6 +2,59 @@
 
 	class DbModel
 	{	
+		static function searchClass($query, $year='', $college='', $offset, $pagesize = 20)
+		{
+			$query = urldecode($query);
+			
+			$where = ' WHERE ';
+			if((int)$year != 0) $where .= '`class_year` = '.$year.' AND ';
+			if(!empty($college)) $where .= '`class_college` = "'.$college.'" AND ';
+			if(!empty($query)) // 生成模糊查询
+			{
+				$keyArr = explode(' ', $query);
+				foreach ($keyArr as $k => $v)
+				{
+					$where .= "CONCAT(`realName`,`class_name`,`class_college`) LIKE '%{$v}%' OR";
+				}
+				$where = substr($where, 0, -2);
+			}
+			else $where = substr($where, 0, -4);
+			if($where == ' WHERE ') $where = '';
+			
+			$db = Zend_Registry::get('dbClass');
+			
+			$row = $db->fetchRow('SELECT COUNT(`class_id`) AS `numrows` FROM `vi_class`'.$where);
+			
+			$return['numrows'] = $row['numrows'];
+			
+			if($row['numrows'] > 0)
+			{
+			//开始进行数据匹配
+			$return['rows'] = $db->fetchAll('SELECT `class_id`,`class_charge`,`realName`,`class_year`,`class_name`,`class_college` 
+												FROM `vi_class`'.$where.' LIMIT '.(int)$offset.','.$pagesize);
+			}
+			return $return;
+		}
+		
+		/**
+		 * 获取指定会员id的申请记录
+		 *
+		 * @param int $uid
+		 * @return array
+		 */
+		static function getClassApply($uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchAll('SELECT `class_name`,`class_id` FROM `vi_class_apply` 
+						   		  WHERE `class_member_id` = ?',$uid);
+		}
+		
+		/**
+		 * 将指定班级中的某个成员踢出
+		 *
+		 * @param int $uid
+		 * @param int $class_id
+		 */
 		static function classMemberOut($uid, $class_id)
 		{
 			$db = Zend_Registry::get('dbClass');
@@ -160,28 +213,6 @@
 			$db = Zend_Registry::get('dbClass');
 			return $db->fetchRow('SELECT `class_id` FROM `tbl_class_member` 
 								  WHERE `class_id` = ? AND `class_member_id` = ?',array($class_id,$uid));
-		}
-		
-		/**
-		 * 根据不同的条件获取每20条记录
-		 *
-		 * @param int $year
-		 * @param string $college
-		 * @param int $offset
-		 * @return int['numrows']/array['rows']
-		 */
-		static function getClasses($year = '', $college = '', $offset = 0, $pagesize = 20)
-		{
-			$db = Zend_Registry::get('dbClass');
-			$select = $db->select();
-			$select->from('vi_class',array('class_id','class_year','class_charge','class_college','class_name','realName'));
-			if((int)$year != 0) $select->where('class_year = ?',$year);
-			if(!empty($college)) $select->where('class_college = ?',$college);
-			$stmt = $db->query($select);
-			$rows = $stmt->fetchAll();
-			$return['numrows'] = count($rows);
-			$return['rows'] = array_slice($rows, $offset, $pagesize);
-			return $return;
 		}
 		
 		/**

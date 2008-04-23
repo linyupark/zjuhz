@@ -27,7 +27,9 @@
 	<tr>
 	<td class="search_form" colspan="2">
 	<!-- 搜索框 /////////////////////////////////////////// -->
-	<form method="POST" action="/info/search/look/">
+	<form method="GET" action="/class/search">
+	<input type="hidden" name="year" value="<?= $this->year ?>" />
+	<input type="hidden" name="college" value="<?= $this->college ?>" />
 <input class="input" name="for" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input')" value="<?= $this->keywords ?>" />
 <input class="btn" type="submit" value="搜索" /> 
 </form>

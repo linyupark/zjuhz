@@ -79,7 +79,7 @@
 		}
 		
 		# 根据KEY获取相关的信息
-		function getSearchResult($keywords,$offset)
+		function getSearchResult($keywords,$offset,$pagesize=10)
 		{
 			$keywords = urldecode($keywords);
 			if(!is_string($keywords) || empty($keywords))
@@ -105,7 +105,7 @@
 			                      		 FROM `vi_entity` 
 			                      		 WHERE '.$likeStr.' 
 			                      		 ORDER BY `entity_pub_time` DESC
-			                      		 LIMIT '.(int)$offset.',10');
+			                      		 LIMIT '.(int)$offset.','.$pagesize);
 			return $return;
 		}
 		
