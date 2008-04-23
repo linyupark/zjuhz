@@ -78,8 +78,8 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function doregisterAction()
 	{
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->layout->disableLayout(); // 禁用layout
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
@@ -112,8 +112,8 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function docheckAction()
 	{
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->layout->disableLayout(); // 禁用layout
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{

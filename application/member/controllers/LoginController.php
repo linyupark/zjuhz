@@ -78,8 +78,8 @@ class LoginController extends Zend_Controller_Action
      */
 	public function dologinAction()
 	{
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->layout->disableLayout(); // 禁用layout
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{

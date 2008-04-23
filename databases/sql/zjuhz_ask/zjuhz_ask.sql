@@ -134,6 +134,14 @@ create unique index idx_collect on tbl_ask_collection
 );
 
 /*==============================================================*/
+/* Index: idx_addTime                                           */
+/*==============================================================*/
+create index idx_addTime on tbl_ask_collection
+(
+   addTime
+);
+
+/*==============================================================*/
 /* Table: tbl_ask_overtime                                      */
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_overtime

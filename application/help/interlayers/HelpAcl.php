@@ -109,7 +109,7 @@ class HelpAcl extends Zend_Controller_Plugin_Abstract
 		{
 			// 权限校验未通过则强制修改ctrl和act
 			$request->setControllerName('Index');
-			$request->setActionName('Login'); //要求访问者先(重)登录
+			$request->setActionName('login'); //要求访问者先(重)登录
 			// 获取本次未能打开的ctrl和act告之登录口以求登录后转回
 			// do it
 		}

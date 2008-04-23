@@ -48,7 +48,7 @@ class IndexController extends Zend_Controller_Action
      * @return void
      */
 	public function init()
-	{		
+	{
 		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
@@ -83,7 +83,7 @@ class IndexController extends Zend_Controller_Action
 	}
 
     /**
-     * 模块统一消息提示页
+     * Session消息提示页
      * 
      * @return void
      */
