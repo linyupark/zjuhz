@@ -1,7 +1,5 @@
 ﻿document.write("<script type=\"text/javascript\" src=\"/static/scripts/help/sort.js\"></script>");
 document.write("<script type=\"text/javascript\" src=\"/static/scripts/jquery.selectboxes.js\"></script>");
-document.write("<script type=\"text/javascript\" src=\"/static/scripts/tinymce/tiny_mce_gzip.js\"></script>");
-document.write("<script type=\"text/javascript\" src=\"/static/scripts/tinymce/tiny_mce_help.js\"></script>");
 
 $(function() {
 	// sort

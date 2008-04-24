@@ -72,11 +72,11 @@ class RegisterFilter extends MemberInterlayer
 		$validators = array(
 		    'uname' => array(
 		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError)), 
+		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->username->formatError)), 
           	'pswd' => array(
        	        array('StringLength', '6','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passWord->formatError, 
-              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passWord->formatError)), 
+              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->password->formatError, 
+              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->password->formatError)), 
 			'repswd' => array(
 			    array('InArray', array($args['pswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->rePasswd->notEqual)), 
@@ -103,7 +103,7 @@ class RegisterFilter extends MemberInterlayer
 		else
 		{
 			return array(
-		    	'userName' => $input->getUnescaped('uname'), 'passWord' => $input->getUnescaped('pswd'), 
+		    	'username' => $input->getUnescaped('uname'), 'password' => $input->getUnescaped('pswd'), 
 		  		'realName' => $input->getUnescaped('rname'), 'sex' => $input->getUnescaped('sex'), 
 		  		'regIp' => Commons::getIp(), 'ikey' => $input->getUnescaped('ikey'), 
 			);
@@ -130,7 +130,7 @@ class RegisterFilter extends MemberInterlayer
 		$validators = array(
 		    'uname' => array(
 		   	    array('Regex', '/^([a-z0-9_]){3,16}+$/i'), 'breakChainOnFailure' => true, 'messages' => array(
-		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->userName->formatError, )), 
+		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->username->formatError, )), 
         );
 
         $options = array(

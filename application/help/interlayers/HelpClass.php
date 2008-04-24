@@ -52,7 +52,7 @@ class HelpClass extends HelpInterlayer
      * @param string $sess
      * @return string or true
      */
-	public static function checkVerifyCode($input,$sess)
+	public static function checkVerifyCode($input, $sess)
 	{
 		if ($sess !== md5($input)) { exit('请正确输入验证码，应是四位纯数字。');	}
 

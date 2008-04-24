@@ -100,8 +100,8 @@ class LoginController extends Zend_Controller_Action
 
 					//记住账号
 					((null === $alive) ? 
-					    setcookie('zjuhz_member[alive]', $result['userName'], time() - 2592000, '/') : 
-					        setcookie('zjuhz_member[alive]', $result['userName'], time() + 2592000, '/'));
+					    setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
+					        setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 
 					echo 'message'; // 请求ajax给出提示
 				}

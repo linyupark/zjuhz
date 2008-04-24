@@ -23,6 +23,13 @@ abstract class MemberInterlayer
 	protected $_iniMember = null;
 
 	/**
+     * ExtModel对象
+     *
+     * @var object
+     */
+	protected $_mdlExt = null;
+
+	/**
      * MemberModel对象
      *
      * @var object
@@ -30,18 +37,18 @@ abstract class MemberInterlayer
 	protected $_mdlMember = null;
 
 	/**
+     * MyModel对象
+     *
+     * @var object
+     */
+	protected $_mdlMy = null;
+
+	/**
      * UserModel对象
      *
      * @var object
      */
 	protected $_mdlUser = null;
-
-	/**
-     * ExtModel对象
-     *
-     * @var object
-     */
-	protected $_mdlExt = null;
 
     /**
      * 构造方法

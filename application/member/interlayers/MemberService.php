@@ -49,7 +49,7 @@ class MemberService extends MemberInterlayer
 
 	/**
      * 会员登录
-     * $args = array('userName' => '', 'passWord' => '', 'lastIp' => '');
+     * $args = array('username' => '', 'password' => '', 'lastIp' => '');
      * 
      * @param struct $args
      * @return array or false
