@@ -2,6 +2,23 @@
 
 	class DbModel
 	{	
+		static function getActivityMember($class_id, $time_range= 86400)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchAll('SELECT `realName`,`class_member_id` FROM `vi_class_member` 
+							      WHERE `class_id` = ? AND (`class_member_last_access`+'.$time_range.')> ?',array($class_id,time()));
+		}
+		
+		/**
+		 * 查找符合条件的班级
+		 *
+		 * @param string $query 关键字查询
+		 * @param int $year 入学年份
+		 * @param string $college 学院名称
+		 * @param int $offset 数据偏移
+		 * @param int $pagesize 分页大小
+		 * @return array[numrows]/array[fetchrows]
+		 */
 		static function searchClass($query, $year='', $college='', $offset, $pagesize = 20)
 		{
 			$query = urldecode($query);
@@ -147,6 +164,7 @@
 			$db = Zend_Registry::get('dbClass');
 			$row = $db->fetchRow('SELECT * FROM `vi_class` WHERE `class_id` = ?',$class_id);
 			$row['class_managers'] = self::getManagers($class_id);
+			$row['class_activity_member'] = self::getActivityMember($class_id);
 			return $row;
 		}
 		

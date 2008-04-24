@@ -18,12 +18,6 @@
 			$this->_redirect('/home?c='.$this->view->class_id);
 		}
 		
-		# 班级通讯录管理 ----------------------------------------------------
-		function addressbookAction()
-		{
-			$this->view->headTitle('班级通讯录管理');
-		}
-		
 		# 成员管理 ----------------------------------------------------------
 		function memberAction()
 		{
