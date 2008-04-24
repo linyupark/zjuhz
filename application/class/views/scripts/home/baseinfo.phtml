@@ -42,4 +42,19 @@
 <td class="txtl"><?= $this->class_base_info['class_join'] ?></td>
 </tr>
 </table>
+
+<table class="class_base_info">
+<tr>
+<th colspan="2" width="170">最近来过班级的同学</th>
+</tr>
+<td>
+<?php if(count($this->class_base_info['class_activity_member']) > 0) : 
+foreach ($this->class_base_info['class_activity_member'] as $key => $val): ?>
+<a href=""><?= $val['realName'] ?></a> , 
+<?php endforeach; endif; ?>
+</td>
+<tr>
+
+</tr>
+</table>
 </div>
