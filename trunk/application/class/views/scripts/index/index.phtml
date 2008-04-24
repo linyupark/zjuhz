@@ -28,7 +28,7 @@
 <!-- 网站内所有班级列表 /////////////////////////////////// -->
 <div class="sidebar">
 <table class="class_list">
-<tr class="quiet">
+<tr>
 <th>入学年</th>
 <th>学院</th>
 <th>班级 (<?= $this->class_num ?>个)</th>
@@ -41,7 +41,8 @@ foreach ($this->class_rows as $k => $v): ?>
 <td><a href="?year=<?= $v['class_year'] ?>"><?= $v['class_year'] ?></a></td>
 <td><a href="?college=<?= urlencode($v['class_college']) ?>"><?= $v['class_college'] ?></a></td>
 <td><a href="/class/home?c=<?= urlencode($v['class_id']) ?>"><?= $v['class_name'] ?></a></td>
-<td><a href="/member/home?uid=<?= $v['class_charge'] ?>"><?= $v['realName'] ?></a></td>
+<td><a href="/member/home?uid=<?= $v['class_charge'] ?>"><?= $v['realName'] ?></a> 
+<a href="javascript:sendMessage(<?= $v['class_charge'] ?>)"><img src="/static/images/icon/email-s.gif" /></a></td>
 <td><a href="javascript:classJoin(<?= $v['class_id'] ?>)">加入</a></td>
 </tr>
 <?php endforeach; else: ?>

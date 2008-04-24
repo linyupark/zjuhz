@@ -28,7 +28,7 @@
 <td>管理员：</td>
 <td class="txtl"d>
 <?php if(count($this->class_base_info['class_managers'])>0): foreach ($this->class_base_info['class_managers'] as $k=>$v): ?>
-<a href="/member/home?uid=<?= $v['class_member_id'] ?>"><?= $v['realName'] ?></a> 
+<a href="/member/home?uid=<?= $v['class_member_id'] ?>"><?= $v['realName'] ?></a> &nbsp; 
 <?php endforeach; endif; ?> 
 <a href="/member/home?uid=<?= $this->class_base_info['class_charge'] ?>"><?= $this->class_base_info['realName'] ?></a>
 </td>
@@ -50,7 +50,7 @@
 <td>
 <?php if(count($this->class_base_info['class_activity_member']) > 0) : 
 foreach ($this->class_base_info['class_activity_member'] as $key => $val): ?>
-<a href=""><?= $val['realName'] ?></a> , 
+<a href=""><?= $val['realName'] ?></a> &nbsp; 
 <?php endforeach; endif; ?>
 </td>
 <tr>

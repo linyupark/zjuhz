@@ -47,13 +47,17 @@ class HomeController extends Zend_Controller_Action
 		{
 			echo $this->view->headTitle($class['class_name']);
 			// 不是班级成员
-			if($this->_sessClass->data[$class_id] == null)
+			if(false == DbModel::isJoined($class_id,$this->view->login['uid']))
 			{
+				if($this->_sessClass->data[$class_id] != null) // 刚刚踢出的
+				$this->_sessClass->data = null;
 				$this->_forward('visitor',null,null,array('class'=>$class));
 			}
 			else // 是成员
 			{				
 				$uid = $this->view->login['uid'];
+				if($this->_sessClass->data[$class_id] == null) // 刚刚加入的,没初始化新的班级数据
+				$this->_sessClass->data = null;
 				// 更新最后访问时间
 				DbModel::updateLastAccessTime($uid, $class_id);
 				// 不是管理员
