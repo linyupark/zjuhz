@@ -15,13 +15,6 @@
 class CollectionController extends Zend_Controller_Action
 {
 	/**
-     * 问答模块配置对象
-     *
-     * @var object
-     */
-	private $_iniHelp = null;
-
-	/**
      * 公用SESSION对象
      *
      * @var array
@@ -49,7 +42,6 @@ class CollectionController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
 		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
 		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
 
@@ -65,14 +57,14 @@ class CollectionController extends Zend_Controller_Action
      * @return string to ajax
      */
 	public function doinsertAction()
-	{		
+	{
 		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
 		$this->_helper->layout->disableLayout(); // 禁用layout
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			// 此处接收传递的数据数组 // next, see standard
-			$postArgs = $this->getRequest()->getPost(); //print_r($postArgs);exit;
+			$postArgs = $this->getRequest()->getPost();
 			// 此处可注入数据将用与判断 // next, see standard
 			$postArgs['uid'] = $this->_sessUid;
 

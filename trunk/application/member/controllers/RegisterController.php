@@ -117,15 +117,14 @@ class RegisterController extends Zend_Controller_Action
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组
-			$postArgs = $this->getRequest()->getPost();
-			// next, see standard
+			// 此处接收传递的数据数组 // next, see standard
+			$postArgs = $this->getRequest()->getPost();			
 
-			if ($userName = RegisterFilter::init()->check($postArgs))
+			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((RegisterLogic::init()->check($userName)) ? 
-				    $this->_iniMember->hint->userName->isExist : 
-				        $this->_iniMember->hint->userName->notExist);
+				echo ((RegisterLogic::init()->check($username)) ? 
+				    $this->_iniMember->hint->username->isExist : 
+				        $this->_iniMember->hint->username->notExist);
 			}
 		}
 	}

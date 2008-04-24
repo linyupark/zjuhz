@@ -94,6 +94,23 @@ class Commons
 		{
 			$str = str_replace($val, '<span class="search_highlight">'.$val.'</span>', $str);
 		}
+
 		return $str;
+	}
+
+    /**
+     * 修改session内的值与参数$array对应
+     * 
+     * @param string $nameSpace
+     * @param string $nameId
+     * @param array $array 
+     * @return string or true
+     */
+	public static function modiSess($nameSpace, $nameId, $array)
+	{
+		foreach ($array as $key => $value)
+		{
+			$_SESSION[$nameSpace][$nameId][$key] = $array[$key];
+		}
 	}
 }

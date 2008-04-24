@@ -57,14 +57,30 @@ class UserModel //extends Zend_Db_Table_Abstract
     /**
      * 判断用户登录帐号是否已存在
      * 
-     * @param string $userName
+     * @param string $username
      * @return string
      */
-	public function checkUserName($userName)
+	public function checkUserName($username)
     {
     	return $this->_dao->fetchOne(
-    	    "SELECT uid FROM {$this->_name} WHERE userName = :userName;",
-            array('userName' => $userName)
+    	    "SELECT uid FROM {$this->_name} WHERE username = :username;",
+            array('username' => $username)
         );
+    }
+
+    /**
+     * 更新表数据
+     * 
+     * @param array $args
+     * @param integer $uid
+     * @return integer
+     */
+	public function update($args, $uid)
+    {
+    	// where语句
+		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
+
+		// 更新表数据,返回更新的行数
+		return $this->_dao->update($this->_name, $args, $where);
     }
 }

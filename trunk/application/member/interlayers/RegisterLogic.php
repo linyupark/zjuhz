@@ -63,13 +63,13 @@ class RegisterLogic extends MemberInterlayer
 	/**
      * 帐号检测
      * 
-     * @param string $userName
+     * @param string $username
      * @return string
      */
-	public function check($userName)
+	public function check($username)
 	{
 		$this->_loadMdl('User');
 
-		return $this->_mdlUser->checkUserName($userName);
+		return $this->_mdlUser->checkUserName($username);
 	}
 }

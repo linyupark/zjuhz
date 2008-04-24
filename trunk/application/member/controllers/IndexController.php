@@ -53,6 +53,8 @@ class IndexController extends Zend_Controller_Action
      */
 	public function messageAction()
     {
+    	$this->_helper->layout->disableLayout(); // 禁用layout
+
     	$this->view->message = $this->_sessMember->message;
     }
 

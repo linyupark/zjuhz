@@ -19,15 +19,20 @@ use zjuhz_user;
 create table zjuhz_user.tbl_user
 (
    uid                  int(10) unsigned not null auto_increment,
-   userName             char(16) not null,
-   passWord             char(32) not null,
+   username             char(16) not null,
+   password             char(32) not null,
    realName             char(16) not null,
-   nickName             char(16) not null,
-   everName             varchar(31) default NULL,
-   sex                  enum('M','F','S') not null default 'S',
-   birthday             datetime default NULL,
-   birthplace           char(10),
-   location             char(10),
+   nickname             char(16) not null,
+   everName             varchar(11) default NULL,
+   sex                  char(1) not null,
+   birthday             date default NULL,
+   hometown_p           char(8),
+   hometown_c           char(11),
+   hometown_a           char(16),
+   location_p           char(8),
+   location_c           char(11),
+   location_a           char(16),
+   lastModi             int(10) not null default 0,
    regIp                char(15) default NULL,
    regTime              timestamp not null default CURRENT_TIMESTAMP,
    ikey                 char(10) default NULL,
@@ -37,19 +42,19 @@ create table zjuhz_user.tbl_user
 type = MYISAM;
 
 /*==============================================================*/
-/* Index: idx_userName                                          */
+/* Index: idx_username                                          */
 /*==============================================================*/
-create unique index idx_userName on tbl_user
+create unique index idx_username on tbl_user
 (
-   userName
+   username
 );
 
 /*==============================================================*/
-/* Index: idx_nickName                                          */
+/* Index: idx_nickname                                          */
 /*==============================================================*/
-create index idx_nickName on tbl_user
+create index idx_nickname on tbl_user
 (
-   nickName
+   nickname
 );
 
 /*==============================================================*/
@@ -110,15 +115,3 @@ create index idx_status on tbl_user_invite_detail
 (
    status
 );
-
-/*==============================================================*/
-/* Table: tbl_user_more                                         */
-/*==============================================================*/
-create table zjuhz_user.tbl_user_more
-(
-   uid                  int(10) unsigned not null,
-   everName             varchar(51) default NULL,
-   eMail                varchar(51) default NULL,
-   primary key (uid)
-)
-type = MYISAM;

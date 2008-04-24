@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `zjuhz_user`.`sp_register` $$
-CREATE PROCEDURE `zjuhz_user`.`sp_register` (IN param_userName CHAR(16),IN param_passWord CHAR(16),IN param_realName CHAR(16),IN param_sex ENUM('M','F','S'),IN param_regIp CHAR(15),IN param_ikey CHAR(10),OUT out_uid INT(10))
+CREATE PROCEDURE `zjuhz_user`.`sp_register` (IN param_username CHAR(16),IN param_password CHAR(16),IN param_realName CHAR(16),IN param_sex CHAR(1),IN param_regIp CHAR(15),IN param_ikey CHAR(10),OUT out_uid INT(10))
 BEGIN
 
 
@@ -12,7 +12,7 @@ BEGIN
     DECLARE myrUid INT(10) DEFAULT 0; /* for register */
     DECLARE myTime INT(10) DEFAULT UNIX_TIMESTAMP();
 
-    SELECT uid INTO mycUid FROM tbl_user WHERE userName = param_userName;
+    SELECT uid INTO mycUid FROM tbl_user WHERE username = param_username;
     IF mycUid IS NULL OR mycUid = 0 THEN
 
         SELECT iuid,realName INTO myiUid,myiRealName FROM tbl_user_invite_detail WHERE status = 0 AND ikey = param_ikey;
@@ -25,7 +25,7 @@ BEGIN
             SET myrStatus = 1;
         END IF;
 
-        INSERT INTO tbl_user (userName,passWord,realName,nickName,sex,regIp,ikey,iuid) VALUES (param_userName,md5(param_passWord),param_realName,param_realName,param_sex,param_regIp,param_ikey,myiUid);
+        INSERT INTO tbl_user (username,password,realName,nickname,sex,regIp,ikey,iuid) VALUES (param_username,md5(param_password),param_realName,param_realName,param_sex,param_regIp,param_ikey,myiUid);
         SET myrUid = LAST_INSERT_ID();
 
         IF myrUid > myiUid THEN
