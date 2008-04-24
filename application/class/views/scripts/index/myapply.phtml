@@ -1,9 +1,8 @@
 <?php 
 if(count($this->applies) == 0): ?>
 <p style="border-top:1px solid #ccc; margin-top:10px">
-<b>你目前还没有申请加入任何班级</b></p>
 <?php else: ?>
-<ul><b>我想加入：</b><br />
+<ul><b>我的申请：</b><br />
 <?php foreach ($this->applies as $k => $v): ?>
 <li><a href="/class/home?c=(<?= $v['class_id'] ?>)"><?= $v['class_name'] ?></a></li>
 <?php endforeach; ?>
