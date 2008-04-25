@@ -3,9 +3,9 @@ body { background:#E5E5E5; padding-bottom:5px; font-size:12px; }
 table{ border-collapse:collapse; }
 
 .sidebar{ float:left; }
-#wrap { width:860px; margin:0 auto; position:relative; background:#fff ; margin-top:8px; overflow:hidden; }
+#wrap { width:860px; margin:0 auto; background:#fff ; margin-top:8px; overflow:hidden; }
 #global_pos{ margin:10px 0 0 18px; color:#666; }
-img { BORDER-STYLE: none; }
+img { border: none; }
 
 a{ color:#314973; text-decoration:none; }
 a:hover{ text-decoration:underline; }
