@@ -1,0 +1,41 @@
+<table>
+<tr>
+<td align="right"><b>登录账号：</b></td>
+<td><?= $this->sessCommon->login['username']; ?></td>
+</tr>
+<tr>
+<td align="right"><b>真实姓名：</b></td>
+<td><?= $this->sessCommon->login['realName']; ?></td>
+</tr>
+<tr>
+<td align="right"><b>性别：</b></td>
+<td><?= $this->sessCommon->login['sex']; ?></td>
+</tr>
+<tr>
+<td align="right"><b>曾用名：</b></td>
+<td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /></td>
+</tr>
+<tr>
+<td align="right"><b>出生日期：</b></td>
+<td><input type="text" class="txt" name="birthday" id="birthday" maxlength="10" value="<?= $this->sessCommon->login['birthday']; ?>" /> <a href="#" id="calendar">显示日历</a><br />格式为：年-月-日，如1980-01-01。</td>
+</tr>
+<tr>
+<td align="right"><b>我的家乡：</b></td>
+<td><select name="hometown_p" id="hometown_p"></select>&nbsp;<select name="hometown_c" id="hometown_c"></select>&nbsp;<select name="hometown_a" id="hometown_a"></select></td>
+</tr>
+<tr>
+<td align="right"><b>当前所在地：</b></td>
+<td><select name="location_p" id="location_p"></select>&nbsp;<select name="location_c" id="location_c"></select>&nbsp;<select name="location_a" id="location_a"></select></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="保存修改" class="btn" name="btnSubmit" id="btnSubmit" /></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="ajaxhint" style="width:300px"></div></td>
+</tr>
+</table>
+<script language="javascript" type="text/javascript">Calendar.setup({inputField : "birthday", button : "calendar"});</script>
+<script language="javascript" type="text/javascript">new PCAS("hometown_p","hometown_c","hometown_a","<?= $this->sessCommon->login['hometown_p']; ?>","<?= $this->sessCommon->login['hometown_c']; ?>","<?= $this->sessCommon->login['hometown_a']; ?>");</script>
+<script language="javascript" type="text/javascript">new PCAS("location_p","location_c","location_a","<?= $this->sessCommon->login['location_p']; ?>","<?= $this->sessCommon->login['location_c']; ?>","<?= $this->sessCommon->login['location_a']; ?>");</script>

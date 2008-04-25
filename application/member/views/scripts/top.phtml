@@ -1,0 +1,36 @@
+<table class="global_search">
+	<tr>
+	<!-- 状态信息 -->
+	<td class="nav">
+    <?php if ($this->sessCommon->login) { ?>
+		您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
+	<?php }	else { ?>
+		<a href="/member/register/">注册</a>|<a href="/member/login/">登录</a>
+	<?php } ?>
+	</td>
+	</tr>
+</table>
+
+<table class="global_search">
+	<tr>
+	<!-- 模块选择 -->
+	<td class="models">
+	<a href="/member/" class="on">校友</a>
+	<a href="/info/">资讯</a>
+	<a href="/help/">互助</a>
+	<a href="/class/">班级</a>
+	<a href="/#/">群组</a>
+	<a href="/#/">活动</a>
+	<a href="/#/">相册</a>
+	</td>
+	</tr>
+	<tr>
+	<td class="search_form" colspan="2">
+	<!-- 搜索框 -->
+	<form method="POST">
+        <input class="input" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input')" value="" name="keywords" id="keywords" maxlength="25" />
+        <input class="btn" type="submit" value="搜索" />	
+    </form>
+	</td>
+	</tr>
+</table>
