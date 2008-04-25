@@ -1,3 +1,25 @@
+// 提交新话题
+function topicNew()
+{
+	var data = $('#topic_form').fastSerialize();
+	data.push({name:'content', value:editor.data()});
+	$.post('/class/ajax/class_topic_new', data, function(html)
+	{
+		$.facebox(html);
+	});
+	return false;
+}
+
+//增加TAG
+function strip_tag()
+{
+	$('.tag_inner').html('');
+}
+function add_tag()
+{
+	$('.tag_inner').append(' <input type="text" name="tag[]" size="6" class="inputtxt mu5" />');
+}
+
 /** 以后要删除的 -- 站内信(放到memeber) */
 function sendMessage(uid)
 {
