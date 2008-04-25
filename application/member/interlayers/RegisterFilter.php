@@ -81,7 +81,7 @@ class RegisterFilter extends MemberInterlayer
 			    array('InArray', array($args['pswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->rePasswd->notEqual)), 
             'rname' => array(
-                array('Utf8Length', '2','16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                array('Utf8Length', '2','6'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realName->formatError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realName->formatError)), 
             'sex' => array('presence' => 'required'),
