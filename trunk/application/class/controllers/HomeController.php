@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 我的班级,班级主页
+ *
+ */
 class HomeController extends Zend_Controller_Action
 {
 	function init()
@@ -14,22 +18,30 @@ class HomeController extends Zend_Controller_Action
 	# 游客身份访问班级信息
 	function visitorAction()
 	{
-
+		$this->render('index');
+		$this->render('visitor');
+		$this->render('baseinfo');
 	}
 	
 	# 成员身份访问班级信息
 	function memberAction()
 	{
-
+		$this->render('index');
+		$this->render('member');
+		$this->render('baseinfo');
 	}
 	
 	# 管理员身份访问班级信息
 	function managerAction()
 	{
+		$this->render('index');
+		$this->render('manager');
+		$this->render('baseinfo');
 	}
 	
 	function indexAction()
 	{	
+		// 确认显示的班级ID
 		$class_id = $this->getRequest()->getParam('c');
 		if(null == $class_id) 
 		{
@@ -37,7 +49,7 @@ class HomeController extends Zend_Controller_Action
 			$class_id = $class_id[0];
 		}
 		
-		// 没有相关的班级信息
+		// 没有相关的班级信息显示错误信息
 		if(!$class = DbModel::getClassInfo($class_id))
 		{
 			$this->_forward('error','error','class',array('message'=>'该班级并不存在！'));

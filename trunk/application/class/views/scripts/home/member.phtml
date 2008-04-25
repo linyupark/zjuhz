@@ -1,5 +1,3 @@
-<?= $this->render('home/index.phtml'); ?>
-
 <div class="sidebar" style="width:160px">
 <!-- 管理条目 ///////////////////////////////////// -->
 <p class="toolbar">
@@ -13,7 +11,7 @@
 <div class="sidebar class_show" style="width:500px; margin:0 10px">
 <h2 class="quiet"><img src="/static/images/icon/layers.gif" /> 班级黑板报</h2>
 <div id="class_notice">
-<?= stripcslashes($this->class_base_info['class_notice']) ?>
+<?= stripcslashes($this->class_base_info['class_notice']) == '' ? '这个管理员很懒,黑板报都没出..' : stripcslashes($this->class_base_info['class_notice']); ?>
 </div>
 
 
@@ -23,7 +21,3 @@
 <h2 class="quiet"><img src="/static/images/icon/comments.gif" /> 班级讨论</h2>
 <div id="class_comments"></div>
 </div>
-
-
-<!-- 班级基本信息 ///////////////////////////////////////// -->
-<?= $this->render('home/baseinfo.phtml'); ?>

@@ -1,0 +1,5 @@
+<p class="class_tab">
+<b><a href="/class/home">我的班级</a></b> &raquo; 
+<a href="/class/home?c=<?= $this->class_id ?>"><?= Zend_Registry::get('sessClass')->data[$this->class_id]['class_name'] ?></a> &raquo; 
+<?= $this->title; ?>
+</p>
