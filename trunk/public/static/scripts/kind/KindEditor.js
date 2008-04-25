@@ -658,7 +658,7 @@ function KindPopupMenu(cmd)
 function KindDrawIframe(cmd)
 {
 	switch (cmd)
-	{
+	{	
 		case 'KE_IMAGE':
 			if (KE_BROWSER == 'IE') {
 				KE_IMAGE_DOCUMENT = document.frames("KindImageIframe").document;
@@ -1606,4 +1606,12 @@ function KindEditor(objName)
 		document.getElementsByName(this.hiddenName)[0].value = htmlResult;
 		return htmlResult;
 	}
+}
+
+// 自定义添加内容
+function KE_CUSTOM_STR(html)
+{
+	if(KE_BROWSER == 'IE')
+	KE_EDITFORM_DOCUMENT.body.innerHTML += KindHtmlToXhtml(html);
+	else KindInsertHtml(KindHtmlToXhtml(html));
 }
