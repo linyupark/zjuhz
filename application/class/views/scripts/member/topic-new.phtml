@@ -1,0 +1,33 @@
+<form onsubmit="return topicNew()" id="topic_form">
+<input type="hidden" name="class_id" value="<?= $this->class_id ?>" ?>
+<div class="sidebar" style="width:200px; padding:10px 0 10px 10px;">
+<h3 class="fb14">发布班级话题</h3>
+<div class="options">
+<p><b><img src="/static/images/icon/lock.gif" /> 隐私控制</b><br />
+<select name="topic_public" style="width:150px" class="inputtxt mu5">
+<option value="0">只对班级公开</option>
+<option value="1">完全公开</option>
+</select></p>
+
+<p class="mu10"">
+  <b><img src="/static/images/icon/tag.gif" /> 标签</b><br />
+   <input type="text" name="tag[]" size="6" class="inputtxt mu5" /><span class="tag_inner"></span>
+  <a href="javascript:add_tag()">增加</a> <a href="javascript:strip_tag()">清除</a>
+</p>
+</div>
+</div>
+
+<!-- 发布新话题 /////////////////////////////////////// -->
+<div class="sidebar" style="width:550px; padding:10px;">
+
+<p class="pud5 quiet"><b>标题：</b>
+<input type="text" name="topic_title" class="inputtxt" style="width:400px;" maxlength="100" /></p>
+<p class="mu5"><input type="hidden" name="content" id="content" value="" /></p>
+<?= $this->editor('550px','200px'); ?>
+<p class="mu5">
+	<input type="submit" value="提交新话题" class="btn" /> 
+	<input type="button" value="返回" class="btn" onclick="history.back()" />
+</p>
+
+</div>
+</form>

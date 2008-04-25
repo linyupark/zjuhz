@@ -1,0 +1,21 @@
+<table width=100%>
+<tr>
+	<th><img src="/static/images/icon/stop.gif" align="absmiddle" /></th>
+	<th>你的操作有如下问题</th>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td class="err_tip">
+		<?php 
+			if(is_array($this->err_tip))
+			{
+				foreach ($this->err_tip as $k => $v)
+				{
+					echo '<li>'.$v.'</li>';
+				}
+			}
+			else echo $this->err_tip
+		?>
+	</td>
+</tr>
+</table>

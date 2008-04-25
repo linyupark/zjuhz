@@ -80,9 +80,11 @@
 		# 信息标签 -----------------------------------------------------
 		function entityTag($input, $name='entity_tag')
 		{
-			$input = implode(',',$input);
-			$input = trim(strip_tags($input));
-			
+			if(null != $input && is_array($input))
+			{
+				$input = implode(',',$input);
+				$input = trim(strip_tags($input));
+			}
 			return $input;
 		}
 		

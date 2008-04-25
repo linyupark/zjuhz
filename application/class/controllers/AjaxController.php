@@ -15,6 +15,13 @@
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
+		# 班级会员判断 -------------------------------------------------
+		private function isMember()
+		{
+			if($this->_sessClass->data[$this->_classId] == null) return false;
+			else return true;
+		}
+		
 		# 一些需要管理员身份的操作先进行判断 -------------------------------
 		private function isManager()
 		{
@@ -22,6 +29,55 @@
 			   $this->_sessClass->data[$this->_classId]['class_member_charge'] != $this->_uid)
 			return false;
 			else return true;
+		}
+		
+		# 班级新讨论提交
+		function classtopicnewAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isMember()) exit();  // 不是班级成员
+				$inputChain = new InputChains();
+				$topic_title = $inputChain->topicTitle($request->getPost('topic_title'));
+				$topic_content = $inputChain->noEmpty($request->getPost('content'),'话题内容');
+				$topic_tag = $inputChain->topicTag($request->getPost('tag'));
+				$topic_public = (int)$request->getPost('topic_public');
+				if(null != $inputChain->getMessages())
+				{
+					// 弹出错误
+					$this->view->err_tip = $inputChain->getMessages();
+					$this->render('error');
+				}
+				else 
+				{
+					// 检查在同班有无重复数据
+					$db = Zend_Registry::get('dbClass');
+					$row = $db->fetchRow('SELECT `class_topic_id` FROM `tbl_class_topic` WHERE `class_topic_title` = ?',$topic_title);
+					if(false != $row) 
+					{
+						$this->view->err_tip = '有相同的话题存在于本班级！请更换标题';
+						$this->render('error');
+					}
+					else 
+					{
+						$data = array(
+							'class_id' => $this->_classId,
+							'class_topic_author' => $this->_uid,
+							'class_topic_title' => $topic_title,
+							'class_topic_content' => $topic_content,
+							'class_topic_pub_time' => time(),
+							'class_topic_public' => $topic_public,
+							'class_topic_tag' => $topic_tag
+						);
+						// 开始数据写入
+						if($db->insert('tbl_class_topic',$data) > 0)
+						// 弹出提示
+						$this->view->suc_tip = '话题发表成功！';
+						$this->render('success');
+					}
+				}
+			}
 		}
 		
 		# 开除班级管理员 ----------------------------------------------

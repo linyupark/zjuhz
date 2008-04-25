@@ -14,6 +14,30 @@
 			$this->_valid = new Zend_Validate();
 		}
 		
+		# 班级话题标签
+		function topicTag($input, $name='entity_tag')
+		{
+			if(null != $input && is_array($input))
+			{
+				$input = implode(',',$input);
+				$input = trim(strip_tags($input));
+			}
+			return $input;
+		}
+		
+		# 班级话题标题
+		function topicTitle($input, $name = 'topic_title')
+		{
+			$input = strip_tags(trim($input));
+			$valid = $this->_valid;
+			$valid->addValidator(new Zend_Validate_StringLength(4, 100));
+			if(!$valid->isValid($input))
+			{
+				$this->_messages[$name] = '标题长度范围在4到100之间(中文2到50之间)';
+			}
+			return $input;
+		}
+		
 		# 不能为空
 		function noEmpty($input, $name)
 		{
