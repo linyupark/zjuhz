@@ -1,3 +1,9 @@
+/** 以后要删除的 -- 站内信(放到memeber) */
+function sendMessage(uid)
+{
+	$.facebox('功能尚未开放');
+}
+
 // 开除管理员
 function memberLvldown(classid)
 {
