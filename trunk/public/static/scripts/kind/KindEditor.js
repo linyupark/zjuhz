@@ -566,7 +566,7 @@ function KindPopupMenu(cmd)
 				str += '<td style="padding:2px;border:0;cursor:pointer;" ' + 
 				'onclick="javascript:KindExecute(\'KE_ICON_END\', \'' + iconUrl + '\');">' +
 				'<img src="' + iconUrl + '" style="border:1px solid #EEEEEE;" onmouseover="javascript:this.style.borderColor=\'#AAAAAA\';" ' +
-				'onmouseout="javascript:this.style.borderColor=\'#EEEEEE\';">' + '</td>';
+				'onmouseout="javascript:this.style.borderColor=\'#EEEEEE\';" width="32"; height="32">' + '</td>';
 				if (i >= 5 && i%(i-1) == 0) {
 					str += '</tr>';
 				}
