@@ -1,0 +1,25 @@
+<div id="ajaxloading"></div>
+<div class="sidebar">
+<?= $this->render("card.phtml"); ?>
+
+<?= $this->render("my/menu-left.phtml"); ?>
+</div>
+
+<div class="sidebar">
+<?= $this->render("my/menu-top.phtml"); ?>
+<div class="control_content">
+<div class="control_tab">
+<a href="/member/my/user/type/basic/">基本信息</a>
+<a href="/member/my/user/type/contact/">联系方式</a>
+<a href="/member/my/user/type/edu/">教育背景</a>
+<a href="/member/my/user/type/work/">工作经历</a>
+</div>
+
+<div class="control_action">
+<form class="home_form" name="frmUser" id="frmUser">
+<?php echo $this->render('my/user-'.$this->type.'.phtml'); ?>
+</form>
+</div>
+</div>
+</div>
+<script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>
