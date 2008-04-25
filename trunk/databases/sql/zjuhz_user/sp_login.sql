@@ -9,7 +9,7 @@ BEGIN
     SELECT uid INTO mylUid FROM tbl_user WHERE username = param_username AND password = md5(param_password);
     IF mylUid > 0 THEN
 
-        SELECT user.*,ext.status,ext.editNick,ext.initAsk FROM tbl_user AS user,tbl_user_ext AS ext WHERE user.uid = mylUid AND user.uid = ext.uid;
+        SELECT user.*,ext.* FROM tbl_user AS user,tbl_user_ext AS ext WHERE user.uid = mylUid AND user.uid = ext.uid;
 
         UPDATE tbl_user_ext SET lastIp = param_lastIp,lastLogin = UNIX_TIMESTAMP() WHERE uid = mylUid LIMIT 1;
 
