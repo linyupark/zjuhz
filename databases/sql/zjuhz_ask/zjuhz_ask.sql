@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-4-24 14:41:37                           */
+/* Created on:     2008-4-25 0:09:12                            */
 /*==============================================================*/
 
 
@@ -19,7 +19,7 @@ use zjuhz_ask;
 create table zjuhz_ask.tbl_ask
 (
    uid                  int(10) unsigned not null,
-   realName             char(16) not null,
+   realName             char(6) not null,
    point                int unsigned not null default 0,
    question             int unsigned not null default 0,
    unsolved             int unsigned not null default 0,
@@ -84,7 +84,7 @@ create table zjuhz_ask.tbl_ask_closed
    sid                  smallint unsigned not null default 0,
    title                char(25) not null,
    content              text not null,
-   append               varchar(101) default NULL,
+   append               varchar(100) default NULL,
    tags                 char(30) default NULL,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
@@ -151,7 +151,7 @@ create table zjuhz_ask.tbl_ask_overtime
    sid                  smallint unsigned not null default 0,
    title                char(25) not null,
    content              text not null,
-   append               varchar(101) default NULL,
+   append               varchar(100) default NULL,
    tags                 char(30) default NULL,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
@@ -221,7 +221,7 @@ create table zjuhz_ask.tbl_ask_question
    sid                  smallint unsigned not null default 0,
    title                char(25) not null,
    content              text not null,
-   append               varchar(101) default NULL,
+   append               varchar(100) default NULL,
    tags                 char(30) default NULL,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',
@@ -333,7 +333,7 @@ create table zjuhz_ask.tbl_ask_solved
    sid                  smallint unsigned not null default 0,
    title                char(25) not null,
    content              text not null,
-   append               varchar(101) default NULL,
+   append               varchar(100) default NULL,
    tags                 char(30) default NULL,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',

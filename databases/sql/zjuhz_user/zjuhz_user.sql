@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-4-9 22:47:04                            */
+/* Created on:     2008-4-25 0:04:45                            */
 /*==============================================================*/
 
 
@@ -21,9 +21,9 @@ create table zjuhz_user.tbl_user
    uid                  int(10) unsigned not null auto_increment,
    username             char(16) not null,
    password             char(32) not null,
-   realName             char(16) not null,
-   nickname             char(16) not null,
-   everName             varchar(11) default NULL,
+   realName             char(6) not null,
+   nickname             char(8) not null,
+   everName             varchar(10) default NULL,
    sex                  char(1) not null,
    birthday             date default NULL,
    hometown_p           char(8),
@@ -58,6 +58,19 @@ create index idx_nickname on tbl_user
 );
 
 /*==============================================================*/
+/* Table: tbl_user_contact                                      */
+/*==============================================================*/
+create table zjuhz_user.tbl_user_contact
+(
+   uid                  int(10) unsigned not null,
+   address              varchar(50) default NULL,
+   qq                   varchar(15) default NULL,
+   msn                  varchar(50) default NULL,
+   primary key (uid)
+)
+type = MYISAM;
+
+/*==============================================================*/
 /* Table: tbl_user_ext                                          */
 /*==============================================================*/
 create table zjuhz_user.tbl_user_ext
@@ -68,6 +81,7 @@ create table zjuhz_user.tbl_user_ext
    lastLogin            int(10) unsigned not null default 0,
    editNick             enum('Y','N') not null default 'N',
    initAsk              enum('Y','N') not null default 'N',
+   initClass            enum('Y','N') not null default 'N',
    primary key (uid)
 )
 type = MYISAM;
@@ -91,7 +105,7 @@ create table zjuhz_user.tbl_user_invite_detail
 (
    ikey                 char(10) not null,
    iuid                 int(10) unsigned not null,
-   realName             char(16) not null,
+   realName             char(6) not null,
    inviteTime           int unsigned not null default 0,
    regTime              int unsigned not null default 0,
    uid                  int unsigned not null default 0,
