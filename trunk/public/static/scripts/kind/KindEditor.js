@@ -7,15 +7,15 @@
 * @version 2.5.6
 */
 var KE_VERSION = "2.5.6";
-var KE_EDITOR_TYPE = "full"; //full or simple
-var KE_SAFE_MODE = false; // true or false
-var KE_UPLOAD_MODE = true; // true or false
+var KE_EDITOR_TYPE = "simple"; //full or simple
+var KE_SAFE_MODE = true; // true or false
+var KE_UPLOAD_MODE = false; // true or false
 var KE_FONT_FAMILY = "Courier New";
 var KE_WIDTH = "700px";
 var KE_HEIGHT = "400px";
 var KE_SITE_DOMAIN = "";
-var KE_SKIN_PATH  = "./skins/default/";
-var KE_ICON_PATH = "./icons/";
+var KE_SKIN_PATH  = "/static/scripts/kind/skins/tiny/";
+var KE_ICON_PATH = "/static/scripts/kind/icons/";
 var KE_IMAGE_ATTACH_PATH = "./attached/";
 var KE_IMAGE_UPLOAD_CGI = "./upload_cgi/upload.php";
 var KE_CSS_PATH = "/editor/common.css";
@@ -129,8 +129,7 @@ var KE_BOTTOM_TOOLBAR_ICON = Array(
 	Array('KE_HR', 'hr.gif', '横线'),
 	Array('KE_ICON', 'emoticons.gif', '笑脸'),
 	Array('KE_LINK', 'link.gif', '创建超级连接'),
-	Array('KE_UNLINK', 'unlink.gif', '删除超级连接'),
-	Array('KE_ABOUT', 'about.gif', '关于')
+	Array('KE_UNLINK', 'unlink.gif', '删除超级连接')
 );
 var KE_SIMPLE_TOOLBAR_ICON = Array(
 	Array('KE_FONTNAME', 'font.gif', '字体'),
@@ -147,8 +146,7 @@ var KE_SIMPLE_TOOLBAR_ICON = Array(
 	Array('KE_LAYER', 'layer.gif', '层'),
 	Array('KE_HR', 'hr.gif', '横线'),
 	Array('KE_ICON', 'emoticons.gif', '笑脸'),
-	Array('KE_LINK', 'link.gif', '创建超级连接'),
-	Array('KE_ABOUT', 'about.gif', '关于')
+	Array('KE_LINK', 'link.gif', '创建超级连接')
 );
 var KE_TITLE_TABLE = Array(
 	Array('H1', KE_LANG['SUBJECT'] + ' 1'), 
@@ -651,10 +649,6 @@ function KindPopupMenu(cmd)
 			break;
 		case 'KE_ABOUT':
 			var str = '';
-			str += '<div id="POPUP_'+cmd+'" style="width:230px;'+KindGetMenuCommonStyle()+';padding:5px;">';
-			str += '<span style="margin-right:10px;">KindEditor ' + KE_VERSION + '</span>' + 
-				'<a href="http://www.kindsoft.net/" target="_blank" style="color:#4169e1;" onclick="javascript:KindDisableMenu();">'+KE_LANG['ABOUT']+'</a><br />';
-			str += '</div>';
 			return str;
 			break;
 		default: 
