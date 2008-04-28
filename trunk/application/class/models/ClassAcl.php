@@ -108,7 +108,8 @@
 					{
 						$data = array(
 							'uid' => $uid,
-							'realName' => $this->_sessCommon->login['realName']
+							'realName' => $this->_sessCommon->login['realName'],
+							'sex' => $this->_sessCommon->login['sex']
 						);
 						DbModel::userInit($data);
 						$sessClass->userInit = 'Y';

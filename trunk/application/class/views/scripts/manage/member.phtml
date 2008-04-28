@@ -6,14 +6,14 @@
 </p>
 </div>
 
-<div class="sidebar class_show" style="width:500px; margin:0 10px;">
+<div class="sidebar class_show" style="width:500px; padding:0 10px;">
 <h2 class="quiet"><img src="/static/images/icon/group.gif" /> 成员管理</h2>
 <p class="quiet">
 <a href="javascript:memberList(<?= $this->class_id ?>)">成员列表(<?= $this->class_base_info['class_member_num'] ?>)</a> | 
 <a href="javascript:managerList(<?= $this->class_id ?>)">管理员(<?= count($this->class_base_info['class_managers']) ?>)</a> | 
 <a href="javascript:applyList(<?= $this->class_id ?>)">申请加入(<?= DbModel::getClassJoinApplyNum($this->class_id) ?>)</a>
 </p>
-<div id="listInner"></div>
+<span id="listInner"></span>
 </div>
 
 <script><?= Zend_Registry::get('sessClass')->default['managerMember'] ?></script>

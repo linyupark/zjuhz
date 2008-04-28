@@ -2,6 +2,80 @@
 
 	class DbModel
 	{	
+
+		/**
+		 * 更新班级通讯录信息
+		 *
+		 * @param array $data 需要更新的数据组
+		 * @param array $where 更新的条件，只能累积and
+		 * @return int 返回更新的数量 0或 1
+		 */
+		static function updateAddress($data, $where)
+		{
+			// 解析条件和数据
+			if(false == is_array($data) || false == is_array($where)) return false;
+			$set = '';
+			foreach ($data as $k => $v)
+			{
+				if(true == is_string($v)) $v = "'{$v}'";
+				$set .= "`{$k}` = {$v},";
+			}
+			$set = substr($set, 0, -1);
+			$where = ' WHERE '.implode(' AND ', $where);
+			
+			$db = Zend_Registry::get('dbClass');
+			$stmt = $db->query('UPDATE `tbl_class_addressbook` SET '.$set.$where.' LIMIT 1');
+			return $stmt->rowCount();
+		}
+		
+		/**
+		 * 查看是否已经初始化了班级通讯录信息
+		 *
+		 * @param int $class_id 班级id
+		 * @param int $uid 用户ID
+		 * @return array/false
+		 */
+		static function isAddressInit($class_id, $uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT `class_addressbook_id` FROM `tbl_class_addressbook` 
+								  WHERE `class_id`=? AND `uid`=?',array($class_id,$uid));
+		}
+		
+		/**
+		 * 根据会员在班级的权限来返回不同的话题信息列表
+		 *
+		 * @param int $class_id
+		 * @param string $role
+		 * @param string $type up置顶/elite精华/...可根据需要再做添加
+		 * @return array 班级话题信息数据列
+		 */
+		static function getClassTopic($class_id, $role, $type = '', $page = 1)
+		{
+			$where = array();
+			if($role == 'visitor') $where[] = '`class_topic_public` = 1';
+			if($type == 'hot') $where[] = '`class_topic_reply_num` > 10';
+			if($type == 'elite') $where[] = '`class_topic_elite` = 1';
+			if(count($where) > 0) $where = ' WHERE '.implode(' AND ', $where);
+			else $where = '';
+			
+			$db = Zend_Registry::get('dbClass');
+			//$row = $db->fetchRow('SELECT COUNT(`class_topic_id`) AS ')
+			//$return['numrows'] = 
+			return $db->fetchAll('SELECT `class_topic_id`,`class_topic_author`,`realName`,
+										 `class_topic_title`,`class_topic_pub_time`,`class_topic_reply_num`,`class_topic_up`,
+										 `class_topic_view_num`,`class_topic_last_reply` 
+						   		  FROM `vi_class_topic`'.$where.' 
+						   		  ORDER BY `class_topic_up` DESC, `class_topic_pub_time` DESC, `class_topic_reply_num` DESC');
+		}
+		
+		/**
+		 * 获取在24内登陆过的班级成员
+		 *
+		 * @param int $class_id 班级id
+		 * @param int $time_range 秒数内登陆
+		 * @return array 对应的成员姓名和id
+		 */
 		static function getActivityMember($class_id, $time_range= 86400)
 		{
 			$db = Zend_Registry::get('dbClass');

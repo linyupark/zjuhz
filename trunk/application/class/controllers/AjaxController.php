@@ -22,11 +22,19 @@
 			else return true;
 		}
 		
+		# 创建人判断
+		private function isCreater()
+		{
+			if($this->_sessClass->data[$this->_classId]['class_charge'] == $this->_uid)
+			return true;
+			else return false;
+		}
+		
 		# 一些需要管理员身份的操作先进行判断 -------------------------------
 		private function isManager()
 		{
 			if($this->_sessClass->data[$this->_classId]['class_charge'] != $this->_uid && 
-			   $this->_sessClass->data[$this->_classId]['class_member_charge'] != $this->_uid)
+			   $this->_sessClass->data[$this->_classId]['class_member_charge'] != 1)
 			return false;
 			else return true;
 		}
@@ -86,7 +94,13 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == $this->isCreater()) 
+				{
+					$this->view->err_tip = '只有班级创建人可以开除管理员';
+					$this->render('error');
+					$this->getResponse()->sendResponse();
+					exit();
+				}
 				$member_id = $request->getPost('member_id');
 				// 保证有数据
 				if(is_array($member_id) && count($member_id) > 0)
@@ -144,7 +158,13 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == $this->isCreater()) 
+				{
+					$this->view->err_tip = '只有班级创建人可以提拔管理员';
+					$this->render('error');
+					$this->getResponse()->sendResponse();
+					exit();
+				}
 				$member_id = $request->getPost('member_id');
 				// 保证有数据
 				if(is_array($member_id) && count($member_id) > 0)
