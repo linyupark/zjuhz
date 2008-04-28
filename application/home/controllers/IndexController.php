@@ -11,6 +11,7 @@ class IndexController extends Zend_Controller_Action
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		// 分配角色详细信息
 		$this->view->login = $this->_sessCommon->login;
+		if($this->view->login['uid'] != null) $this->getRequest()->setControllerName('welcome');
 	}
 	
     function indexAction()

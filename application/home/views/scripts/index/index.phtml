@@ -1,15 +1,15 @@
 <div id="main">
 
 <div class="sidebar" style="width:250px;">
-<form method="post">
+<form method="post" onsubmit="return login()">
 <div id="login_form">
 <p class="account">
 登陆帐号:<br />
-<input type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+<input name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
 </p>
 <p class="password">
 密码: (<a href="">忘记了?</a>)<br />
-<input type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+<input name="pswd" type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
 </p>
 <p>
 <input name="rememberme" type="hidden" value="0" />
@@ -27,6 +27,20 @@
 </form>
 </div>
 
+<script type="text/javascript">
+function login()
+{
+	$.post('/member/login/dologin/',
+			$("#login_form").fastSerialize(),
+			function(data){
+				if(data == 'redirect')
+				location.href="/home/welcome/";
+				else $.facebox('<img src="/static/images/icon/stop.gif" align="absmiddle" /> 登陆失败！')
+			}
+		);
+	return false;
+}
+</script>
 <!-- 宣传+快捷连接 -->
 <div class="sidebar intro">
 <h2>浙大校友在这里可以:</h2>

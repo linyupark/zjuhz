@@ -22,9 +22,40 @@
 <h2 class="quiet"><img src="/static/images/icon/picture.gif" /> 班级相册</h2>
 <div id="class_picture">尚未开放..</div>
 
-<h2 class="quiet"><img src="/static/images/icon/comments.gif" /> 班级讨论 
-<a href="/class/member/topic?c=<?= $this->class_base_info['class_id'] ?>">发起</a></h2>
-<div id="class_topics">
+<!-- 班级话题 /////////////////////////////// -->
+<table id="class_topics" class="cont_list mu10">
+<tr>
+<th colspan="5" class="txtl quiet">
+<img src="/static/images/icon/comments.gif" /> <b>话题讨论</b>
+<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=">所有</a>
+<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=hot">热门</a>
+<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=elite">精华</a></th>
+</tr>
+<tr class="quiet">
+	<td>主题</td>
+	<td>作者</td>
+	<td class="txtc">回复</td>
+	<td class="txtc">阅读</td>
+	<td>最后回复</td>
+</tr>
+<?php if($this->topics != null): foreach ($this->topics as $key => $val): ?>
+<tr class="list_item">
+	<td><a href=""><?= $val['class_topic_title'] ?></a></td>
+	<td><a href=""><?= $val['realName'] ?></a></td>
+	<td class="txtc"><?= $val['class_topic_reply_num'] ?></td>
+	<td class="txtc"><?= $val['class_topic_view_num'] ?></td>
+	<td><?= $val['class_topic_last_reply'] ?></td>
+</tr>
+<?php endforeach; else: ?>
+<tr><td>无</td></tr>
+<?php endif; ?>
+</table>
+<script type="text/javascript">
+	$('a[href$="topic_type=<?= $this->topic_type ?>"]').addClass('focus');
+	$('.list_item').each(function(i){ if(i%2 == 0) $(this).find('td').css('background','#f5f5f5'); });
+</script>
 
+<!-- 班级活动 /////////////////////////////// -->
+<div id="class_activity" class="hide">
 </div>
 </div>

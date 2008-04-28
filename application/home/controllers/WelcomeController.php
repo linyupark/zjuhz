@@ -7,15 +7,16 @@ class WelcomeController extends Zend_Controller_Action
 		$this->_helper->layout()->setLayout('main');
 		$this->view->headScript()->appendFile('/static/scripts/home.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
-		
-		//当前所属模块分配
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		// 分配角色详细信息
+		$this->view->login = $this->_sessCommon->login;
 		$this->view->request = $this->getRequest();
 	}
 	
     function indexAction()
     {
     	$frontendOptions = array(
-   			'lifetime' => 99999999,                  // cache lifetime of half a minute
+   			'lifetime' => 99999999,             // cache lifetime of half a minute
    			'automatic_serialization' => false  // this is default anyway
 		);
 
