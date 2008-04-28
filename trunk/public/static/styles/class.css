@@ -6,11 +6,10 @@
 .box h2 small{ font-weight:normal; font-size:12px; }
 
 .tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
-.err_tip{ color:#DD3C10; padding:5px; }
-.suc_tip{ color:#2D8934; padding:5px; }
+
 
 /* 班级列表TABLE -------------------------------------------- */
-.class_list{ width:600px; margin:10px; }
+.class_list{ margin:10px 0; }
 .class_list th{ font-weight:normal;text-align:left; background:#D9E6F7; padding:5px; 
 				border-top:1px solid #AFCAEF; border-bottom:1px solid #AFCAEF; }
 .class_list td{ padding:5px; border-bottom:1px solid #eee; }
@@ -39,3 +38,12 @@
 .focus{ font-weight:bold; color:#111; }
 #class_notice{ padding:5px; background:#587964; color:#eee; border:2px solid #8A775F; }
 #class_picture{ padding:5px; border:2px solid #eee; }
+
+/* 各功能帮助点点 ------------------------------------------ */
+.options{ color:#333; border:1px solid #D9E6F7; padding:8px; background:#EFF7FF }
+
+/* 班级内容列表通用样式 --------------------------------------- */
+.cont_list{ width:100%; }
+.cont_list th{ border-bottom:1px solid #618EBC; padding:3px; font-weight:normal; }
+.cont_list td{ padding:3px; color:#666 }
+.cont_list .focus{ background:#618EBC; color:#fff; padding:5px; }
