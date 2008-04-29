@@ -9,7 +9,7 @@
 
 
 /* 班级列表TABLE -------------------------------------------- */
-.class_list{ margin:10px 0; }
+.class_list{ margin:10px 0; width:620px }
 .class_list th{ font-weight:normal;text-align:left; background:#D9E6F7; padding:5px; 
 				border-top:1px solid #AFCAEF; border-bottom:1px solid #AFCAEF; }
 .class_list td{ padding:5px; border-bottom:1px solid #eee; }
@@ -47,3 +47,8 @@
 .cont_list th{ border-bottom:1px solid #618EBC; padding:3px; font-weight:normal; }
 .cont_list td{ padding:3px; color:#666 }
 .cont_list .focus{ background:#618EBC; color:#fff; padding:5px; }
+
+/* 每个成员通讯录单元表格样式 ----------------------------------- */
+.addressbook_item{ margin:5px 0 0 0; border:1px solid #D8DFEA; width:500px; }
+.addressbook_item td{ padding:5px 5px 2px 5px; border-top:1px solid #eee; }
+.addressbook_item th{ padding:5px; font-size:16px; }
