@@ -1,5 +1,6 @@
 @import url("paging.css");
 @import url("calendar-blue.css");
+@import url("passwdcheck.css");
 
 /* 用户个人名片 -------------------------------------------------------------- */
 .member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
