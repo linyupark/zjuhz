@@ -10,7 +10,11 @@ img { border: none; }
 a{ color:#314973; text-decoration:none; }
 a:hover{ text-decoration:underline; }
 
+hr{ border:none; border-top:1px solid #ccc;}
+ul{ list-style-position:inside }
+
 /* 常用字 */
+.f12{ font-size:12px; }
 .fw14{ font-size:14px; color:#fff; }
 .fb14{ font-size:14px; color:#000; }
 .f9{ font-size:9px; }
@@ -27,7 +31,7 @@ a:hover{ text-decoration:underline; }
 .mud5{ margin:5px 0; }
 .pu5{ padding-top:5px; }
 .pd5{ padding-bottom:5px; }
-.pud5{ padding:8px 0; }
+.pud5{ padding:5px 0; }
 .mu8{ margin-top:8px; }
 .mud8{ margin:8px 0; }
 .pu8{ padding-top:8px; }
@@ -101,4 +105,4 @@ a:hover{ text-decoration:underline; }
 #ajaxloading{ position: absolute;display: none;z-index: 100;width: 100px;height: 1.6em;top: 0px;right: 0px;line-height: 1.6em;overflow: hidden;background: #dd0000;color: #ffffff;text-align:center; }
 #ajaxhint {	display:none; margin:0px; padding:10px; border:1px solid; text-align:center; line-height:20px; border-color:#dd3c10; background:#ffebe8; width:100%; }
 
-.hand{ cursor:hand; }
+.hand{ cursor:pointer; }

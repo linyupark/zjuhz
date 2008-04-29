@@ -1,0 +1,39 @@
+<?php foreach ($this->rows as $key => $val): ?>
+<table class="addressbook_item">
+<tr>
+<td width="10%" valign="top"><img src="/static/users/user_test/tiny_head.jpg" /></td>
+<td>
+	<table>
+		<tr><th colspan="2" class="txtl" width="100%"><a href=""><?= $val['cname'] ?></a></th></tr>
+		<tr>
+			<td class="quiet">手机：</td>
+			<td><?= $val['mobile'] ?></td>
+			<td class="quiet">座机：</td>
+			<td><?= $val['addressbook_telephone'] ?></td>
+		</tr>
+		<tr>
+			<td class="quiet">QQ：</td>
+			<td><?= $val['qq'] ?></td>
+			<td class="quiet">MSN：</td>
+			<td><?= $val['msn'] ?></td>
+		</tr>
+		<tr>
+			<td class="quiet">公司：</td>
+			<td><?= $val['addressbook_company'] ?></td>
+			<td class="quiet">邮箱：</td>
+			<td><?= $val['eMail'] ?></td>
+		</tr>
+		<tr>
+			<td class="quiet">通讯地址：</td>
+			<td colspan="3"><?= $val['address'] ?></td>
+		</tr>
+		<tr>
+			<td class="quiet">邮政编码：</td>
+			<td colspan="3"><?= $val['postcode'] ?></td>
+		</tr>
+	</table>
+</td>
+</tr>
+</table>
+<?php endforeach; ?>
+<div class="pagination"><?= $this->pagination; ?></div>

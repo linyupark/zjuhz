@@ -2,12 +2,12 @@
 @import url("calendar-blue.css");
 @import url("passwdcheck.css");
 
-/* ÓÃ»§¸öÈËÃûÆ¬ -------------------------------------------------------------- */
+/* ç”¨æˆ·ä¸ªäººåç‰‡ -------------------------------------------------------------- */
 .member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
 .member_card .head{ padding:2px; border:1px solid #D7EAB2; background:#fff; width:50px; height:50px; }
 .member_card td{ padding:5px; }
 
-/* ¿ØÖÆÁ¬½Ó -------------------------------------------------------------- */
+/* æ§åˆ¶è¿æ¥ -------------------------------------------------------------- */
 .control_link{ width:150px; margin:10px 0 0 12px; }
 .control_link a{ display:block; padding:5px 5px; font-size:14px; text-decoration:none; }
 .control_link a:hover{ text-decoration:underline; }
@@ -23,21 +23,18 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_action{background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
 
 .control_list{ width:100%; }
-.control_list th{ padding:4px; color:#666; border-bottom:1px dashed #B2D0EA;font-size:14px; }
-.control_list th .txt{ padding:5px; border:1px solid #BDC7D8;  line-height:normal; font-weight:normal;font-size:14px; }
-.control_list th .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
-.control_list td{ padding:8px; }
-.control_list td a{ font-size:12px; color:#004BCA }
+.control_list th{ padding:5px 5px 0 10px; color:#666; border-bottom:1px solid #eee;font-size:12px; font-weight:normal }
+.control_list td{ padding:5px 5px 0 10px; background:#fff; font-size:12px; }
 .control_list td a.cat{ color:#666; }
 
-/* ¸öÈËºóÌ¨Í¨ÓÃ±íµ¥ÑùÊ½ ---------------------------------------------------- */
-.home_form{ padding:20px; }
+/* ä¸ªäººåå°é€šç”¨è¡¨å•æ ·å¼ ---------------------------------------------------- */
+.home_form{ padding:5px; }
 .home_form td{ font-size:14px; padding:10px 0 5px 10px; }
 .home_form td b{ color:#444;  }
 .home_form .txt,.home_form .bigtxt{ padding:5px; border:1px solid #BDC7D8;  line-height:normal; }
 .home_form .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
 .home_form .bigtxt{ width:400px; height:100px; }
 
-/* Í¨Ñ¶Â¼ÏêÏ¸ĞÅÏ¢±í¸ñÑùÊ½ ------------------------------------------------- */
+/* é€šè®¯å½•è¯¦ç»†ä¿¡æ¯è¡¨æ ¼æ ·å¼ ------------------------------------------------- */
 .address_detail{ display:none; }
 .address_detail td{ padding:2px; border-bottom:1px solid #eee; }

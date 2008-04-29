@@ -22,7 +22,7 @@
 			else return true;
 		}
 		
-		# 创建人判断
+		# 创建人判断 --------------------------------------------------
 		private function isCreater()
 		{
 			if($this->_sessClass->data[$this->_classId]['class_charge'] == $this->_uid)
@@ -37,6 +37,70 @@
 			   $this->_sessClass->data[$this->_classId]['class_member_charge'] != 1)
 			return false;
 			else return true;
+		}
+		
+		# 编辑自己所在班级的通讯录信息
+		function myclassaddressbookAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isMember()) exit();  // 不是班级成员
+				if($request->getPost('cname') != null) // 数据更新
+				{
+					$inputChians = new InputChains();
+					$cname = $inputChians->noEmpty($request->getPost('cname'),'名称');
+					$mobile = $inputChians->addressMobile($request->getPost('mobile'));
+					$email = $inputChians->addressEmail($request->getPost('eMail'));
+					$qq = strip_tags(trim($request->getPost('qq')));
+					$msn = strip_tags(trim($request->getPost('msn')));
+					$address = strip_tags(trim($request->getPost('address')));
+					$postcode = strip_tags(trim($request->getPost('postcode')));
+					$company = strip_tags(trim($request->getPost('company')));
+					$telephone = strip_tags(trim($request->getPost('telephone')));
+					if($inputChians->getMessages() != null)
+					{
+						// 弹出错误
+						$this->view->err_tip = $inputChain->getMessages();
+						$this->render('error');
+					}
+					else // 更新数据
+					{
+						DbModel::updateAddress(
+							array(
+								''
+							),
+							);
+					}
+				}
+				// 显示通讯录表单
+				$db = Zend_Registry::get('dbClass');
+				$this->view->addressbook = $db->fetchRow('SELECT * FROM `tbl_class_addressbook` 
+															WHERE `class_id` = ? AND `uid` = ?',array($this->_classId,$this->_uid));
+				$this->render('class-addressbook-form');
+			}
+		}
+		
+		# 班级通讯录查看(排除非班级成员)
+		function classaddressbookviewAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == $this->isMember()) exit();  // 不是班级成员
+				$page = (int)$request->getPost('page',1);
+				$rows = DbModel::fetchAddress($this->_classId,5,$page);
+				Page::$pagesize = 5;
+				Page::create(array(
+					'href_open'=>'<a href="javascript:classAddressbookView('.$this->_classId.',%d)">',
+					'href_close'=>'</a>',
+					'num_rows'=>$rows['numrows'],
+					'cur_page'=>$page
+				));
+				$this->view->pagination = Page::$page_str;
+				$this->view->rows = $rows['rows'];
+				$this->render('class-addressbook-view');
+			}
 		}
 		
 		# 班级新讨论提交

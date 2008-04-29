@@ -2,6 +2,24 @@
 
 	class DbModel
 	{	
+		/**
+		 * 获取通讯录信息
+		 *
+		 * @param int $class_id
+		 * @param int $pagesize 分页大小
+		 * @param int $page 当前分页
+		 * @return array[numrows]/array[rows]
+		 */
+		static function fetchAddress($class_id, $pagesize = 10, $page = 1)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$row = $db->fetchRow('SELECT COUNT(`class_addressbook_id`) AS `numrows` 
+								  FROM `tbl_class_addressbook` WHERE `class_id` = ?',$class_id);
+			$return['numrows'] = $row['numrows'];
+			$offset = ($page-1)*$pagesize;
+			$return['rows'] = $db->fetchAll('SELECT * FROM `tbl_class_addressbook` WHERE `class_id` = ? LIMIT '.$offset.','.$pagesize, $class_id);
+			return $return;
+		}
 
 		/**
 		 * 更新班级通讯录信息
