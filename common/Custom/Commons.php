@@ -106,11 +106,23 @@ class Commons
      * @param array $array 
      * @return string or true
      */
-	public static function modiSess($nameSpace, $nameId, $array)
+	static function modiSess($nameSpace, $nameId, $array)
 	{
 		foreach ($array as $key => $value)
 		{
 			$_SESSION[$nameSpace][$nameId][$key] = $array[$key];
 		}
+	}
+
+    /**
+     * 获取随机字符串
+     * 
+     * @param mixed $base
+     * @param integer $len
+     * @return string
+     */
+	static function getRandomStr($base,$len)
+    {
+    	return substr(md5(uniqid(rand() + $base, true)), 0, $len);
 	}
 }
