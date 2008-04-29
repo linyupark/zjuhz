@@ -1,4 +1,4 @@
-﻿document.write("<script type=\"text/javascript\" src=\"/static/scripts/passwdcheck.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/passwdcheck.js\"></script>");
 
 $(function() {
     $("#frmRegister").submit( function() {

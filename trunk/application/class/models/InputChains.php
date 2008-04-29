@@ -14,6 +14,38 @@
 			$this->_valid = new Zend_Validate();
 		}
 		
+		# 邮箱
+		function addressEmail($input, $name = 'eMail')
+		{
+			$input = trim($input);
+			if(false == empty($input))
+			{
+				if(false == Valid::isEmail($input))
+				{
+					$this->_messages[$name] = '邮箱格式错误';
+				}
+			}
+			return $input;
+		}
+		
+		# 手机号码
+		function addressMobile($input, $name = 'mobile')
+		{
+			$input = trim($input);
+			if(false == empty($input))
+			{
+				if(false == is_numeric($input))
+				{
+					$this->_messages[$name] = '手机号码必须全为数字';
+				}
+				if(strlen($input) < 11)
+				{
+					$this->_messages[$name] = '手机号码长度不对';
+				}
+			}
+			return $input;
+		}
+		
 		# 班级话题标签
 		function topicTag($input, $name='entity_tag')
 		{

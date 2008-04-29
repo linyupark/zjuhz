@@ -1,0 +1,46 @@
+<form id="address_form" onsubmit="return updateMyClassAddressbook()">
+<table class="class_list" style="width:100%; margin-left:0">
+<tr>
+<td width="13%" class="quiet">名称：</td>
+<td><input type="text" name="cname" class="inputtxt" value="<?= $this->addressbook['cname'] ?>" /> <span class="quiet">(可有别于真实姓名,只在通讯录中显示)</span></td>
+</tr>
+<tr>
+<td class="quiet">手机：</td>
+<td><input type="text" name="mobile" class="inputtxt" value="<?= $this->addressbook['mobile'] ?>" /></td>
+</tr>
+<tr>
+<td class="quiet">座机：</td>
+<td><input type="text" name="telephone" class="inputtxt" value="<?= $this->addressbook['addressbook_telephone'] ?>" /></td>
+</tr>
+<tr>
+<td class="quiet">邮箱：</td>
+<td><input type="text" name="eMail" class="inputtxt" value="<?= $this->addressbook['eMail'] ?>" style="width:250px" /></td>
+</tr>
+<tr>
+<td class="quiet">QQ：</td>
+<td><input type="text" name="qq" class="inputtxt" value="<?= $this->addressbook['qq'] ?>" style="width:250px" /></td>
+</tr>
+<tr>
+<td class="quiet">MSN：</td>
+<td><input type="text" name="msn" class="inputtxt" value="<?= $this->addressbook['msn'] ?>" style="width:250px" /></td>
+</tr>
+<tr>
+<td class="quiet">公司：</td>
+<td><input type="text" name="company" class="inputtxt" value="<?= $this->addressbook['addressbook_company'] ?>" style="width:300px" /></td>
+</tr>
+<tr>
+<td class="quiet">通讯地址：</td>
+<td><input type="text" name="address" class="inputtxt" value="<?= $this->addressbook['address'] ?>" style="width:300px" /></td>
+</tr>
+<tr>
+<td class="quiet">邮政编码：</td>
+<td><input type="text" name="postcode" class="inputtxt" value="<?= $this->addressbook['postcode'] ?>" /></td>
+</tr>
+<tr>
+<td>
+	<input type="hidden" name="class_id" value="<?= $this->addressbook['class_id'] ?>" />
+</td>
+<td class="txtc"><input type="submit" value="保存修改" class="btn" /></td>
+</tr>
+</table>
+</form>

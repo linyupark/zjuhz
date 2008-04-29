@@ -1,55 +1,81 @@
-
+<style>
+#login{ padding:10px 40px; }
+#login h2{ padding:0 15px; }
+#login h2 small{ font-size:12px; font-weight:normal; float:right; margin-top:-20px; }
+#register_form{ margin:20px; width:95% }
+#register_form td{ padding:5px; }
+</style>
 <div id="ajaxloading"></div>
 <div id="login">
 
     <form name="frmRegister" id="frmRegister" method="post" autocomplete="off">
-    <div class="reg_tit"><a href="/member/">会员中心</a> > 注册会员</div>	
-	<div class="zc">
-	<ul>	
-      <li class="msg" style="margin-top:10px;">如果您已经是本站会员，可以使用已有的账号直接 <a href="/member/">登录</a></li>
-	
-	  <li><span class="reg_tda">登录账号：</span><input style="margin-left:48px;" name="uname" id="uname" tabindex="1" class="user_txt" type="text" maxlength="16" value="" /><input type="button" id="btnCheck" name="btnCheck" value="检查账号是否可用"><li class="ligray">3-16位的字母、数字、下划线</li><div id="chkmsg" class="lired"></div>
-	
-      <li><span class="reg_tda">设置密码：</span><input style="margin-left:48px;" name="pswd" tabindex="2" class="user_txt" type="password" maxlength="16" value="" onkeyup=EvalPwdStrength(document.forms[0],this.value);  /></li><li class="ligray">6-16位的任意字符，不区分大小写。强度检测：</li>
-
-<TABLE class=pwdChkTbl2 cellSpacing=0 cellPadding=0>
-  <TBODY>
-    <TR>
-      <TD class=pwdChkCon0 id=idSM1 align=middle width="25%">
-	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
-	  <SPAN id=idSMT1 style="DISPLAY: none">不安全</SPAN>
-	  </TD>
-      <TD class=pwdChkCon0 id=idSM2 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
-	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
-	  <SPAN id=idSMT0 style="DISPLAY: inline; FONT-WEIGHT: normal; COLOR: #666">未评级</SPAN>
-	  <SPAN id=idSMT2 style="DISPLAY: none">普通</SPAN>
-	  </TD>
-      <TD class=pwdChkCon0 id=idSM3 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
-	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
-	  <SPAN id=idSMT3 style="DISPLAY: none">安全</SPAN>
-	  </TD>
-      <TD class=pwdChkCon0 id=idSM4 style="BORDER-LEFT: #fff 1px solid" align=middle width="25%">
-	  <SPAN style="FONT-SIZE: 1px">&nbsp;</SPAN>
-	  <SPAN id=idSMT4 style="DISPLAY: none">最佳</SPAN>
-	  </TD>
-	</TR>
-  </TBODY>
-</TABLE>
-								
-      <li><span class="reg_tda">密码确认：</span><input style="margin-left:48px;" name="repswd" tabindex="3" class="user_txt" type="password" maxlength="16" value="" /></li><li class="ligray">请再次输入密码以确认</li>	
-	
-      <li><span class="reg_tda">真实姓名：</span><input style="margin-left:48px;" name="rname" tabindex="4" class="user_txt" type="text" maxlength="6" /></li><li class="ligray">至少2字以上，且不能含有数字和符号</li>
-	
-      <li><span class="reg_tda">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span><input  style="margin-left:48px;" name="sex" tabindex="5" type="radio" value="男" checked="checked" /> 男 <input type="radio" name="sex" value="女" /> 女</li>	
-	
-	  <li><span class="reg_tda">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</span><input  style="margin-left:46px;width:102px;" type="text" class="user_txt" name="vcode" id="vcode" tabindex="6" maxlength="4"><span id="putVerifyImg"></span></li><li class="ligray" style="padding-bottom:0px;">请输入上图中的数字，点击图片可刷新</li>
-	
-      <li><span class="reg_tda"><p></p></span><input style="width:280px;height:40px;" type="submit" id="btnRegister" name="btnRegister" tabindex="7" value="同意以下服务条款，提交注册信息" /></li>
-	  
-      <li style="width:266px"><span class="reg_tda"><p></p></span><div id="ajaxhint"></div></li>
-	</ul>
-	</div>
-	<input type="hidden" name="ikey" value="<?= $this->ikey; ?>" />
-	<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
-	</form>
-</div>
+    <h2 class="quiet"><img src="/static/images/icon/write.gif" /> 注册帐号 
+    <small>已拥有帐号？请<a href="/member/">直接登录</a></small></h2>
+    <hr />
+    <table id="register_form">
+    <tr>
+    	<td>账号：</td>
+    	<td><input name="uname" id="uname" tabindex="1" class="inputtxt" type="text" maxlength="16" value="" />
+    		<input type="button" id="btnCheck" class="btn" style="height:22px" name="btnCheck" value="检查账号是否可用"> 
+    		<span id="chkmsg" class="quiet">3-16位的字母、数字、下划线</span></td>
+    </tr>
+    <tr>
+    	<td>密码：</td>
+    	<td><input name="pswd" tabindex="2" class="inputtxt" type="password" maxlength="16" value="" onkeyup="EvalPwdStrength(document.forms[0],this.value);" /> 
+    		<span class="quiet">6-16位的任意字符，不区分大小写。强度检测：</span></td>
+    </tr>
+    <tr>
+    	<td colspan="2">
+				    <table class="pwdChkTbl2" id="checkTD" cellSpacing="0" cellPadding="0" style="width:400px;">
+				    <tr>
+				      <td class="pwdChkCon0" id="idSM1" align="middle" width="25%">
+					  <span style="font-size: 1px">&nbsp;</span>
+					  <span id="idSMT1" style="display: none">不安全</span>
+					  </td>
+				      <td class="pwdChkCon0" id="idSM2" style="border-left: #fff 1px solid" align="middle" width="25%">
+					  <span style="font-size: 1px">&nbsp;</span>
+					  <span id="idSMT0" style="display: inline; font-weight: normal; COLOR: #666">未评级</span>
+					  <span id="idSMT2" style="display: none">普通</span>
+					  </td>
+				      <td class="pwdChkCon0" id="idSM3" style="border-left: #fff 1px solid" align="middle" width="25%">
+					  <span style="font-size: 1px">&nbsp;</span>
+					  <span id="idSMT3"" style="display: none">安全</span>
+					  </td>
+				      <td class="pwdChkCon0" id="idSM4" style="border-left: #fff 1px solid" align=middle width="25%">
+					  <span style="font-size: 1px">&nbsp;</span>
+					  <span id="idSMT4"" style="display: none">最佳</span>
+					  </td>
+					</tr>
+					</table>
+    	</td>
+    </tr>
+    <tr>
+    	<td>密码确认：</td>
+    	<td><input name="repswd" tabindex="3" class="inputtxt" type="password" maxlength="16" value="" />
+    		<span class="quiet">请再次输入密码以确认</span></td>
+    </tr>
+    <tr>
+    	<td>真实姓名：</td>
+    	<td><input name="rname" tabindex="4" class="inputtxt" type="text" maxlength="6" /> 
+    	<span class="quiet">至少2字以上，且不能含有数字和符号</span></td>
+    </tr>
+    <tr>
+    	<td>性别：</td>
+    	<td><input name="sex" tabindex="5" type="radio" value="男" checked="checked" /> 男 <input type="radio" name="sex" value="女" /> 女 </td>
+    </tr>
+    <tr>
+    	<td>验证码：</td>
+    	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="6" maxlength="4">
+    	<span id="putVerifyImg"></span> <span class="quiet">请输入上图中的数字，点击图片可刷新</span></td>
+    </tr>
+    <tr>
+    	<td colspan="2"><input type="submit" id="btnRegister" name="btnRegister" tabindex="7" value="同意以下服务条款，提交注册信息" class="btn" /></td>
+    </tr>
+    <tr>
+    <td colspan="2"><div id="ajaxhint" style="width:300px"></div></td>
+    </tr>
+    <tr>
+    	<td><input type="hidden" name="ikey" value="<?= $this->ikey; ?>" /></td>
+		<td><input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" /></td>
+    </tr>
+    </table></form></div>

@@ -1,3 +1,34 @@
+// 修改自己的通讯录
+function updateMyClassAddressbook()
+{
+	$.post('/class/ajax/my_class_addressbook', $('#address_form').fastSerialize(), function(data){
+		$.facebox(data);
+	});
+	return false;
+}
+
+// 自己的通讯录
+function myClassAddressbook(classid)
+{
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
+	$('a[href^="javascript:myClassAddressbook"]').addClass('focus');
+	$.post('/class/ajax/my_class_addressbook', {class_id:classid}, function(html){
+		$('#listInner').html(html);
+	});
+}
+
+// 查看班级通讯录
+function classAddressbookView(classid,pagenum)
+{
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
+	$('a[href^="javascript:classAddressbookView"]').addClass('focus');
+	$.post('/class/ajax/class_addressbook_view', {class_id:classid,page:pagenum}, function(data){
+		$('#listInner').html(data);
+	});
+}
+
 // 提交新话题
 function topicNew()
 {
@@ -42,7 +73,7 @@ function memberLvldown(classid)
 function managerList(classid)
 {
 	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
 	$('a[href^="javascript:managerList"]').addClass('focus');
 	$.post('/class/ajax/class_manager_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
@@ -75,7 +106,7 @@ function memberLvlup(classid)
 function memberList(classid)
 {
 	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
 	$('a[href^="javascript:memberList"]').addClass('focus');
 	$.post('/class/ajax/class_member_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
@@ -119,7 +150,7 @@ function selectAll(name)
 function applyList(classid)
 {
 	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<div class="loading"><img src="'+$.facebox.settings.loading_image+'"/></div>');
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
 	$('a[href^="javascript:applyList"]').addClass('focus');
 	$.post('/class/ajax/class_apply_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
