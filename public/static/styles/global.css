@@ -20,12 +20,34 @@ a:hover{ text-decoration:underline; }
 .hide {display:none;}
 .quiet {color:#666;}
 .loud {color:#000;}
+.strong{ font-weight:bold; }
+
+/* 常用布局 */
+.mu5{ margin-top:5px; }
+.mud5{ margin:5px 0; }
+.pu5{ padding-top:5px; }
+.pd5{ padding-bottom:5px; }
+.pud5{ padding:8px 0; }
+.mu8{ margin-top:8px; }
+.mud8{ margin:8px 0; }
+.pu8{ padding-top:8px; }
+.pd8{ padding-bottom:8px; }
+.pud8{ padding:8px 0; }
+.mu10{ margin-top:10px; }
+.mud10{ margin:10px 0; }
+.pu10{ padding-top:10px; }
+.pd10{ padding-bottom:10px; }
+.pud10{ padding:10px 0; }
 
 .rc { width:100% }
 .rc_tl { background:url(/static/images/bg/rc_t.gif) no-repeat left top; height:10px;   }
 .rc_tr { background:url(/static/images/bg/rc_t.gif) no-repeat right top; height:10px;   }
 .rc_bl { background:url(/static/images/bg/rc_b.gif) no-repeat left top; height:12px;  }
 .rc_br { background:url(/static/images/bg/rc_b.gif) no-repeat right top; height:12px;  }
+
+/* 错误和正确提示 */
+.err_tip{ color:#DD3C10; padding:5px; }
+.suc_tip{ color:#2D8934; padding:5px; }
 
 /* LOGO部分 */
 #logo{ padding-left:80px; height:63px; background:url(/static/images/logo.jpg) no-repeat 10px center; cursor:pointer; color:#444; }
