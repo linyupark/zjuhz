@@ -21,7 +21,7 @@ class Page
   public static $next = "下页";
   public static $last = "最后页";
 
-  static function init($_set)
+  private static function init($_set)
   {
     if (!is_array($_set))
       return ;
