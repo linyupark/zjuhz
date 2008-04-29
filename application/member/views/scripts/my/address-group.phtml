@@ -1,0 +1,24 @@
+<table class="control_list">
+<form class="home_form" name="frmGroup" id="frmGroup" autocomplete="off">
+<tr>
+<th><div align="center"><input type="text" class="txt" name="gname" id="gname" maxlength="10" /> <input type="hidden" name="gid" id="gid" value="<?= $this->gid; ?>"><input type="hidden" name="tmpgid" id="tmpgid" value="<?= $this->gid; ?>"><input type="submit" class="btn" value="新建组" name="btnGroup" id="btnGroup" /></div></th>
+</tr>
+</form>
+</table>
+
+<table class="control_list">
+<tr>
+<th>&nbsp;</th>
+<th><div align="left">&nbsp;组名</div></th>
+<th><div align="left">&nbsp;选项</div></th>
+</tr>
+
+<?php foreach ($this->groupList as $value) { ?>
+<tr id="group<?= $value['gid']; ?>">
+<td>&nbsp;</td>
+<td><div align="left"><a href=""><?= $value['gname']; ?></a> (已有<?= $value['count']; ?>张名片)</div></td>
+<td><div align="left"><a href="#" onclick="dogroupmodiBefore('<?= $value['gid']; ?>','<?= $value['gname']; ?>');return false;" id="modi<?= $value['gid']; ?>">改名</a> <a href="#" onClick="dogroupdelBefore('<?= $value['gid']; ?>');return false;" id="del">删除</a></div></td>
+</tr>
+<?php } ?>
+
+</table>

@@ -1,32 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-<meta http-equiv="Content-Language" content="zh-CN" >
-<title>会员注册 - 杭州浙江大学校友会 - zjuhz.com</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<script language="javascript" type="text/javascript" src="/static/scripts/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/common.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/passwdcheck.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/member/member.js"></script>
-<script language="javascript" type="text/javascript" src="/static/scripts/member/register/index.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/styles/common.css">
-<link rel="stylesheet" type="text/css" href="/static/styles/member.css">
-<link rel="stylesheet" type="text/css" href="/static/styles/passwdcheck.css">
-</head>
 
-<body>
 <div id="ajaxloading"></div>
 <div id="login">
 
     <form name="frmRegister" id="frmRegister" method="post" autocomplete="off">
-    <div class="reg_tit"><a href="/member/">会员中心</a> >> 会员注册</div>	
+    <div class="reg_tit"><a href="/member/">会员中心</a> > 注册会员</div>	
 	<div class="zc">
 	<ul>	
-      <li class="msg" style="margin-top:10px;">如果您已经是本站会员，可以使用已有的账号直接 <a href="/member/login/">登录</a></li>
+      <li class="msg" style="margin-top:10px;">如果您已经是本站会员，可以使用已有的账号直接 <a href="/member/">登录</a></li>
 	
-	  <li><span class="reg_tda">登录账号：</span><input style="margin-left:48px;" name="uname" id="uname" tabindex="1" class="user_txt" type="text" maxlength="16" value="" /><input type="button" id="btnChkUserName" name="btnChkUserName" value="检查账号是否可用"><li class="ligray">3-16位的字母、数字、下划线</li><div id="chkmsg" class="lired"></div>
+	  <li><span class="reg_tda">登录账号：</span><input style="margin-left:48px;" name="uname" id="uname" tabindex="1" class="user_txt" type="text" maxlength="16" value="" /><input type="button" id="btnCheck" name="btnCheck" value="检查账号是否可用"><li class="ligray">3-16位的字母、数字、下划线</li><div id="chkmsg" class="lired"></div>
 	
       <li><span class="reg_tda">设置密码：</span><input style="margin-left:48px;" name="pswd" tabindex="2" class="user_txt" type="password" maxlength="16" value="" onkeyup=EvalPwdStrength(document.forms[0],this.value);  /></li><li class="ligray">6-16位的任意字符，不区分大小写。强度检测：</li>
 
@@ -62,15 +44,12 @@
 	
 	  <li><span class="reg_tda">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</span><input  style="margin-left:46px;width:102px;" type="text" class="user_txt" name="vcode" id="vcode" tabindex="6" maxlength="4"><span id="putVerifyImg"></span></li><li class="ligray" style="padding-bottom:0px;">请输入上图中的数字，点击图片可刷新</li>
 	
-      <li><span class="reg_tda"><p></p></span><input style="width:280px;height:40px;" type="submit" id="btnSubmit" name="btnSubmit" tabindex="7" value="同意以下服务条款，提交注册信息" /></li>
+      <li><span class="reg_tda"><p></p></span><input style="width:280px;height:40px;" type="submit" id="btnRegister" name="btnRegister" tabindex="7" value="同意以下服务条款，提交注册信息" /></li>
 	  
       <li style="width:266px"><span class="reg_tda"><p></p></span><div id="ajaxhint"></div></li>
 	</ul>
 	</div>
-	<input type="hidden" name="ikey" value="<?php echo $this->ikey; ?>" />
+	<input type="hidden" name="ikey" value="<?= $this->ikey; ?>" />
 	<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
 	</form>
 </div>
-</body>
-
-</html>

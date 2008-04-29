@@ -35,13 +35,13 @@ class MemberAcl extends Zend_Controller_Plugin_Abstract
      */
 	public function __construct($sessRole='guest')
 	{
-		$this->_setRoleVisit($sessRole); //访客角色
+		$this->_setRoleVisit($sessRole); // 访客角色
 
 		$this->_aclHelp = Zend_Registry::get('aclMember');
 
-		$this->_setAclRole(); //设置角色
-		$this->_setAclRes();  //设置资源
-		$this->_setAclPriv(); //设置权限
+		$this->_setAclRole(); // 设置角色
+		$this->_setAclRes();  // 设置资源
+		$this->_setAclPriv(); // 设置权限
 
 		/* preDispatch */
 	}
@@ -65,7 +65,7 @@ class MemberAcl extends Zend_Controller_Plugin_Abstract
 	private function _setAclRole()
 	{
 		$this->_aclHelp->addRole(new Zend_Acl_Role('guest'))
-		               ->addRole(new Zend_Acl_Role('member', 'guest')); //继承于guest
+		               ->addRole(new Zend_Acl_Role('member', 'guest')); // 继承于guest
 	}
 
     /**
@@ -108,8 +108,8 @@ class MemberAcl extends Zend_Controller_Plugin_Abstract
 		if (!$this->_aclHelp->isAllowed($this->_roleVisit, $request->controller, $request->action))
 		{
 			// 权限校验未通过则强制修改ctrl和act
-			$request->setControllerName('Index');
-			$request->setActionName('index'); //要求访问者先(重)登录
+			$request->setControllerName('Error');
+			$request->setActionName('login'); // 要求访问者先(重)登录
 			// 获取本次未能打开的ctrl和act告之登录口以求登录后转回
 			// do it
 		}

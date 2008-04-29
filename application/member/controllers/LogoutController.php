@@ -26,13 +26,13 @@ class LogoutController extends Zend_Controller_Action
     }
 
     /**
-     * 清空SESSION并重定向
+     * 清空Session并重定向
      * 
      * @return void
      */
 	public function indexAction()
     {
     	Zend_Session::destroy(true);
-    	$this->_redirect('../member/');
+    	$this->_redirect('../');
     }
 }

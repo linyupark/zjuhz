@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心 - 会员后台专用类
+ * 会员中心-用户
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -26,7 +26,7 @@ class UserLogic extends MemberInterlayer
     	parent::__construct();
     	parent::_initLogic();
 
-    	$this->_loadMdl('User');
+    	$this->_load('UserModel');
     }
 
     /**
@@ -50,14 +50,49 @@ class UserLogic extends MemberInterlayer
     }
 
 	/**
-     * 更新表数据
+     * 会员注册
      * 
      * @param array $args
-     * @param string $uid
+     * @return integer
+     */
+	public function register($args)
+	{
+		return $this->_UserModel->callRegister($args);
+	}
+
+    /**
+     * 会员登录
+     * 
+     * @param array $args
+     * @return array or false
+     */
+	public function login($args)
+	{
+		$row = $this->_UserModel->callLogin($args);
+
+		return ($row['uid'] ? $row : false);
+	}
+
+    /**
+     * 登录帐号存在与否
+     * 
+     * @param string $username
+     * @return integer
+     */
+	public function check($username)
+	{
+		return $this->_UserModel->selectUsernameExist($username);
+	}
+
+    /**
+     * 常规更新数据
+     * 
+     * @param array $args
+     * @param integer $uid
      * @return integer
      */
 	public function update($args, $uid)
 	{
-		return $this->_mdlUser->update($args, $uid);
+		return $this->_UserModel->update($args, $uid);
 	}
 }

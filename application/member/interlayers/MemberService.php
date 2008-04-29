@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心_XML-RPC接口开放类
+ * 会员中心-XMLRPC接口类
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -24,7 +24,6 @@ class MemberService extends MemberInterlayer
 	public function __construct()
 	{
 		parent::__construct();
-		parent::_initService();
 	}
 
 	/**
@@ -47,28 +46,38 @@ class MemberService extends MemberInterlayer
 		return parent::_getInstance(__CLASS__);
 	}
 
-	/**
-     * 会员登录
-     * $args = array('username' => '', 'password' => '', 'lastIp' => '');
-     * 
-     * @param struct $args
-     * @return array or false
-     */
-	public function memberLogin($args)
-	{
-		return LoginLogic::init()->login($args);
-	}
-
-	/**
-     * 更新表数据
-     * $args = array('status' => xxx, 'editNick' => xxx, 'initAsk' => xxx);
+    /**
+     * 常规更新数据
      * 
      * @param struct $args
      * @param integer $uid
      * @return integer
      */
-	public function extUpdate($args, $uid)
+	public function UserExtUpdate($args, $uid)
 	{
-		return MemberLogic::init()->extUpdate($args, $uid);
+		return UserExtLogic::init()->update($args, $uid);
+	}
+
+    /**
+     * 根据会员ID返回通讯录组列表
+     * 
+     * @param integer $uid
+     * @return array
+     */
+	public function AddressGroupSelectList($uid)
+	{
+		return AddressGroupLogic::init()->selectList($uid);
+	}
+
+    /**
+     * 根据会员ID组ID返回通讯录内名片列表
+     * 
+     * @param string $gid
+     * @param integer $uid
+     * @return array
+     */
+	public function AddressCardSelectList($gid, $uid)
+	{
+		return AddressCardLogic::init()->selectList($gid, $uid);
 	}
 }

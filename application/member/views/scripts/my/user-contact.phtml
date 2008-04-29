@@ -1,25 +1,37 @@
 <table>
 <tr>
-<td align="right"><b>通讯地址：</b></td>
-<td><input name="qq" size="40" tabindex="1" value="" id="qq" class="txt" type="text"></td>
+<td align="right"><b>手机：</b></td>
+<td><input tabindex="1" value="<?= $this->sessCommon->login['mobile']; ?>" class="txt" type="text" id="mobile" name="mobile" maxlength="11"></td>
 </tr>
 <tr>
-<td align="right"><b>个人网站：</b></td>
-<td><input name="qq" size="40" tabindex="1" value="" id="qq" class="txt" type="text"></td>
+<td align="right"><b>电子邮箱：</b></td>
+<td><input tabindex="2" value="<?= $this->sessCommon->login['eMail']; ?>" class="txt" type="text" id="eMail" name="eMail" maxlength="50"></td>
+</tr>
+<tr>
+<td align="right"><b>QQ：</b></td>
+<td><input tabindex="3" value="<?= $this->sessCommon->login['qq']; ?>" class="txt" type="text" id="qq" name="qq" maxlength="15"></td>
 </tr>
 <tr>
 <td align="right"><b>MSN：</b></td>
-<td><input name="qq" size="40" tabindex="1" value="" id="qq" class="txt" type="text"></td>
+<td><input tabindex="4" value="<?= $this->sessCommon->login['msn']; ?>" class="txt" type="text" id="msn" name="msn" maxlength="50"></td>
 </tr>
 <tr>
-<td align="right"><b>手机：</b></td>
-<td><input name="qq" size="40" tabindex="1" value="" id="qq" class="txt" type="text"></td>
+<td align="right"><b>联络地址：</b></td>
+<td><input tabindex="5" value="<?= $this->sessCommon->login['address']; ?>" class="txt" type="text" id="address" name="address" maxlength="80"></td>
 </tr>
 <tr>
-<td align="right"><b>电话：</b></td>
-<td><input name="qq" size="40" tabindex="1" value="" id="qq" class="txt" type="text"></td>
+<td align="right"><b>邮政编码：</b></td>
+<td><input tabindex="6" value="<?= $this->sessCommon->login['postcode']; ?>" class="txt" type="text" id="postcode" name="postcode" maxlength="6"></td>
 </tr>
 <tr>
-<td></td><td><input type="submit" value="保存修改" class="btn" /></td>
+<td align="right"><b>其它联络方式：</b></td>
+<td><input tabindex="7" value="<?= $this->sessCommon->login['other']; ?>" class="txt" type="text" id="other" name="other" maxlength="50"></td>
+</tr>
+<tr>
+<td></td><td><input type="submit" value="保存修改" class="btn" id="btnUser" name="btnUser" /></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="ajaxhint" style="width:300px"></div></td>
 </tr>
 </table>

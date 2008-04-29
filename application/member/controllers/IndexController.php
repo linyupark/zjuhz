@@ -15,6 +15,13 @@
 class IndexController extends Zend_Controller_Action
 {
 	/**
+     * 会员模块配置对象
+     *
+     * @var object
+     */
+	private $_iniMember = null;
+
+	/**
      * 项目SESSION对象
      *
      * @var array
@@ -28,12 +35,12 @@ class IndexController extends Zend_Controller_Action
      */
     public function init()
     {
-		// 载入项目SESSION
-		$this->_sessMember = Zend_Registry::get('sessMember');	
+		$this->_iniMember  = Zend_Registry::get('iniMember'); // 载入项目配置
+		$this->_sessMember = Zend_Registry::get('sessMember'); // 载入项目SESSION
     }
 
     /**
-     * member验证码
+     * 验证码
      * 
      * @return void
      */
@@ -42,12 +49,11 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
 		$this->_helper->layout->disableLayout(); // 禁用layout
 
-		// 将验证码写入公共SESSION
 		ImageHandle::verify('common');
     }
 
     /**
-     * 信息提示
+     * 弹窗信息提示
      * 
      * @return void
      */
@@ -59,14 +65,24 @@ class IndexController extends Zend_Controller_Action
     }
 
     /**
-     * 会员中心首页兼登录
+     * 注册信息提示
+     * 
+     * @return void
+     */
+	public function welcomeAction()
+    {
+		$this->view->headTitle($this->_iniMember->head->title->welcome); // 载入标题
+
+    	$this->view->message = $this->_sessMember->message;
+    }
+
+    /**
+     * 会员中心首页
      * 
      * @return void
      */
 	public function indexAction()
     {
-    	// 记住账号
-    	//$this->view->uname = Zend_Controller_Request_Http::getCookie('alive');
-    	$this->view->uname = $_COOKIE['zjuhz_member']['alive'];
+    	$this->_redirect('/my/');
     }
 }

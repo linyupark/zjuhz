@@ -5,21 +5,21 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:ExtModel.php
+ * @version    Id:UserContactModel.php
  */
 
 
 /**
- * 会员中心-tbl_user_ext
+ * 会员中心-tbl_user_contact
  * 表级操作类,含单表读/写/改等方法
  */
-class ExtModel //extends Zend_Db_Table_Abstract
+class UserContactModel
 {
     /**
      * 数据表名
      * @var string
      */
-    protected $_name = 'tbl_user_ext';
+    protected $_name = 'tbl_user_contact';
 
     /**
      * 数据表主键
@@ -55,7 +55,7 @@ class ExtModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 更新表数据
+     * 常规更新数据
      * 
      * @param array $args
      * @param integer $uid
@@ -63,10 +63,8 @@ class ExtModel //extends Zend_Db_Table_Abstract
      */
 	public function update($args, $uid)
     {
-    	// where语句
-		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
-
-		// 更新表数据,返回更新的行数
-		return $this->_dao->update($this->_name, $args, $where);
+		return $this->_dao->update($this->_name, $args, 
+		    $this->_dao->quoteInto("{$this->_primary} = ?", $uid)
+		);
     }
 }

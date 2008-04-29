@@ -5,16 +5,16 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:RegisterLogic.php
+ * @version    Id:UserExtLogic.php
  */
 
 
 /**
- * 会员中心
+ * 会员中心-用户-扩展
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class RegisterLogic extends MemberInterlayer
+class UserExtLogic extends MemberInterlayer
 {
     /**
      * 构造方法
@@ -25,6 +25,8 @@ class RegisterLogic extends MemberInterlayer
     {
     	parent::__construct();
     	parent::_initLogic();
+
+    	$this->_load('UserExtModel');
     }
 
     /**
@@ -47,29 +49,15 @@ class RegisterLogic extends MemberInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-	/**
-     * 会员注册
+    /**
+     * 常规更新数据
      * 
      * @param array $args
-     * @return string
+     * @param integer $gid
+     * @return integer
      */
-	public function register($args)
+	public function update($args, $uid)
 	{
-		$this->_loadMdl('Member');
-
-		return $this->_mdlMember->register($args);
-	}
-
-	/**
-     * 帐号检测
-     * 
-     * @param string $username
-     * @return string
-     */
-	public function check($username)
-	{
-		$this->_loadMdl('User');
-
-		return $this->_mdlUser->checkUserName($username);
+		return $this->_UserExtModel->update($args, $uid);
 	}
 }

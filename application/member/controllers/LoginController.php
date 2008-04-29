@@ -35,40 +35,21 @@ class LoginController extends Zend_Controller_Action
      */
     public function init()
     {
-		// 载入项目配置
-		$this->_iniMember  = Zend_Registry::get('iniMember');
-		// 载入公共SESSION
-		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_iniMember  = Zend_Registry::get('iniMember'); // 载入项目配置
+		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
+
+		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->layout->disableLayout(); // 禁用layout
     }
 
-	/**
-     * 会员登录-显示页面
-     * 
-     * @return void
-     */
-	public function indexAction()
-	{
-		$this->_forward('index', 'Index');
-	}
-
-	/**
-     * 会员登录-显示页面
-     * 
-     * @return void
-     */
-	public function loginAction()
-	{
-		$this->_forward('index', 'Index');
-	}
-
     /**
-     * 会员登录-退出登录
+     * 登录
      * 
      * @return void
      */
-	public function logoutAction()
+    public function indexAction()
     {
-    	$this->_forward('index', 'Logout');
+		$this->_redirect('/my/');
     }
 
 	/**
@@ -78,38 +59,33 @@ class LoginController extends Zend_Controller_Action
      */
 	public function dologinAction()
 	{
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组
-			$postArgs = $this->getRequest()->getPost();
-			// 此处单独处理的数据单独取出 // next, see standard
-			$alive    = $postArgs['alive'];
-			// 此处注销无用数据
-			unset($postArgs['alive']);
+			$postArgs       = $this->getRequest()->getPost();
+			$postArgs['ip'] = Commons::getIp();
 
 			if ($loginArgs = LoginFilter::init()->login($postArgs))
 			{
-				if ($result = LoginLogic::init()->login($loginArgs))
+				if ($result = UserLogic::init()->login($loginArgs))
 				{
-					//登录成功
+					// 登录成功
 					$this->_sessCommon->role  = 'member';
 					$this->_sessCommon->login = $result;
 
-					//记住账号
-					((null === $alive) ? 
+					// 记住账号
+					((null === $postArgs['alive']) ?  
 					    setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
-					        setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
+					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/')
+					);
 
-					echo 'message'; // 请求ajax给出提示
+					echo 'redirect'; // 请求ajax跳转
 				}
 				else
 				{
-					//登录失败
+					// 登录失败
 					Zend_Session::destroy(true);
-					echo $this->_iniMember->hint->login->failure;
+
+					echo $this->_iniMember->hint->loginFailure;
 				}
 			}
 		}

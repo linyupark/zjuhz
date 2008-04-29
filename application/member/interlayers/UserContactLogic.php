@@ -5,16 +5,16 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:LoginLogic.php
+ * @version    Id:UserContactLogic.php
  */
 
 
 /**
- * 会员中心
+ * 会员中心-用户-联络方式
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class LoginLogic extends MemberInterlayer
+class UserContactLogic extends MemberInterlayer
 {
     /**
      * 构造方法
@@ -25,6 +25,8 @@ class LoginLogic extends MemberInterlayer
     {
     	parent::__construct();
     	parent::_initLogic();
+
+    	$this->_load('UserContactModel');
     }
 
     /**
@@ -47,18 +49,15 @@ class LoginLogic extends MemberInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-	/**
-     * 会员登录
+    /**
+     * 常规更新数据
      * 
      * @param array $args
-     * @return array or false
+     * @param integer $uid
+     * @return integer
      */
-	public function login($args)
+	public function update($args, $uid)
 	{
-		$this->_loadMdl('Member');
-
-		$row = $this->_mdlMember->login($args);
-
-		return ($row['uid'] ? $row : false);
+		return $this->_UserContactModel->update($args, $uid);
 	}
 }
