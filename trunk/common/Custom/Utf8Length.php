@@ -19,7 +19,7 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Utf8Length extends Zend_Validate_Abstract
 {
-
+    // constants for defining what currency symbol should be displayed
     const TOO_SHORT = '';
     const TOO_LONG  = '';
 

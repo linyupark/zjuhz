@@ -17,6 +17,7 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_StringEquals extends Zend_Validate_Abstract
 {
+	// constants for defining what currency symbol should be displayed
     const NOT_EQUALS = 'notEquals';
     const IS_NULL = 'isNull';
 
