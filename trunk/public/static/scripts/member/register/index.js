@@ -1,14 +1,17 @@
-﻿$(document).ready(function(){
-    $("#btnSubmit").click( function() {
-		register();
+﻿document.write("<script type=\"text/javascript\" src=\"/static/scripts/passwdcheck.js\"></script>");
+
+$(function() {
+    $("#frmRegister").submit( function() {
+		doregister();
+		return false;
     });
 
-    $("#btnChkUserName").click( function() {
-		check();
+    $("#btnCheck").click( function() {
+		docheck();
     });
 
     $("#uname").blur( function() {
-		check();
+		docheck();
     });
 
     $("#vcode").focus( function() {
@@ -16,53 +19,42 @@
     });
 });
 
-// 注册提交
-function register() {
+// 会员注册
+function doregister() {
 	ajaxloading(true);
-	$("#btnSubmit").attr("disabled", true);
+	$("#btnRegister").attr("disabled", true);
 	var formdata = $("#frmRegister").fastSerialize();
 
-	$.ajax( {
-		type   : "POST",
-        url    : "/member/register/doregister/",
-        data   : formdata,
-	    success: function(msg) {
-			if (msg == 'message') {
-				window.location.href = "/member/index/message/";
-			}
-			else {
-				$("#btnSubmit").attr("disabled", false);
-				getVerifyCode();
-				ajaxhint(true,msg);
-				ajaxloading();
-			}
+	$.post("/member/register/doregister/", formdata, function(msg) {
+		ajaxloading();
+
+		if (msg == "redirect") {
+            ajaxhint(false);
+			goToUrl("/member/index/welcome/", 0);
+			return false;
 		}
+
+		$("#btnRegister").attr("disabled", false);
+		ajaxhint(true, msg);
+		getVerifyCode();
 	});
 
 	return false;
 }
 
-// 检查帐号是否可用
-function check() {
+// 账号是否可用
+function docheck() {
 	var uname = $("#uname").val();
-	if (uname.length >= 3) {
-		ajaxloading(true);
-		$("#btnChkUserName").attr("disabled", true);
+    ajaxhint(true, "", "chkmsg");
 
-		$.ajax( {
-			type   : "POST",
-	        url    : "/member/register/docheck/",
-		    data   : 'uname=' + uname,
-			success: function(msg) {
-				$("#btnChkUserName").attr("disabled", false);
-				ajaxhint(true,msg,'chkmsg');
-				ajaxloading();
-			}
-		});
-	}
-	else {
-		ajaxhint(true,'','chkmsg');
-	}
+	ajaxloading(true);
+	$("#btnCheck").attr("disabled", true);
+
+	$.post("/member/register/docheck/", { uname: uname }, function(msg) {
+		ajaxloading();
+		$("#btnCheck").attr("disabled", false);
+		ajaxhint(true, msg, "chkmsg");
+	});
 
 	return false;
 }

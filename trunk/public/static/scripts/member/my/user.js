@@ -1,34 +1,30 @@
 document.write("<script type=\"text/javascript\" src=\"/static/scripts/member/my/my.js\"></script>");
 
 $(function() {
-    $("#btnSubmit").click( function() {
+    $("#frmUser").submit( function() {
 		douser();
+		return false;
     });
 });
 
-// 注册提交
+// 我的资料
 function douser() {
 	ajaxloading(true);
-	$("#btnSubmit").attr("disabled", true);
+	$("#btnUser").attr("disabled", true);
 	var formdata = $("#frmUser").fastSerialize();
 
-	$.ajax( {
-		type   : "POST",
-        url    : "/member/my/do"+type+"/",
-        data   : formdata,
-	    success: function(msg) {
-			if (msg == "message") {
-                ajaxhint(false);
-				ajaxloading();
-				popup_message("/member/index/message/");
-				goToUrl("/member/my/user/type/"+type+"/", 1000);
-			}
-			else {
-				$("#btnSubmit").attr("disabled", false);
-				ajaxhint(true,msg);
-				ajaxloading();
-			}
+	$.post("/member/my/do"+type+"/", formdata, function(msg) {
+		ajaxloading();
+
+		if (msg == "message") {
+			ajaxhint(false);
+			popup_message("/member/index/message/");
+			goToUrl("/member/my/user/type/"+type+"/", 1000);
+			return false;
 		}
+
+		$("#btnUser").attr("disabled", false);
+		ajaxhint(true, msg);
 	});
 
 	return false;

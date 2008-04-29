@@ -1,6 +1,3 @@
-document.write("<script type=\"text/javascript\" src=\"/static/scripts/calendar-setup.js\"></script>");
-document.write("<script type=\"text/javascript\" src=\"/static/scripts/calendar-zh.js\"></script>");
-
 /** The Calendar object constructor. */
 Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {
 	// member variables
