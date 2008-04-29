@@ -13,7 +13,7 @@
  * 会员中心-tbl_user
  * 表级操作类,含单表读/写/改等方法
  */
-class UserModel //extends Zend_Db_Table_Abstract
+class UserModel
 {
     /**
      * 数据表名
@@ -55,21 +55,62 @@ class UserModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 判断用户登录帐号是否已存在
+     * 会员注册
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function callRegister($args)
+    {
+		$this->_dao->prepare('CALL sp_register
+		    (:username, :password, :realName, :sex, :regIp, :ikey, @uid);')
+		    ->execute($args);
+
+		return $this->_dao->query('SELECT @uid AS uid')->fetchColumn();
+    }
+
+    /**
+     * 会员登录
+     * 
+     * @param array $args
+     * @return array
+     */
+	public function callLogin($args)
+    {
+		$stmt = $this->_dao->prepare('CALL sp_login(:username, :password, :lastIp);');
+		$stmt->execute($args);
+
+		return $stmt->fetch();
+    }
+
+    /**
+     * 登录帐号存在与否
      * 
      * @param string $username
-     * @return string
+     * @return integer
      */
-	public function checkUserName($username)
+	public function selectUsernameExist($username)
     {
-    	return $this->_dao->fetchOne(
-    	    "SELECT uid FROM {$this->_name} WHERE username = :username;",
-            array('username' => $username)
+    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
+    	    WHERE username = :username;", array('username' => $username)
         );
     }
 
     /**
-     * 更新表数据
+     * 昵称存在与否
+     * 
+     * @param string $nickname
+     * @return integer
+     */
+	public function selectNicknameExist($nickname)
+    {
+    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
+		    WHERE nickname = :nickname;", array('nickname' => $nickname)
+        );
+    }
+
+    /**
+     * 常规更新数据
      * 
      * @param array $args
      * @param integer $uid
@@ -77,10 +118,8 @@ class UserModel //extends Zend_Db_Table_Abstract
      */
 	public function update($args, $uid)
     {
-    	// where语句
-		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
-
-		// 更新表数据,返回更新的行数
-		return $this->_dao->update($this->_name, $args, $where);
+		return $this->_dao->update($this->_name, $args, 
+		    $this->_dao->quoteInto("{$this->_primary} = ?", $uid)
+		);
     }
 }

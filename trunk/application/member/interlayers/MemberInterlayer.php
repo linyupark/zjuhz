@@ -23,32 +23,39 @@ abstract class MemberInterlayer
 	protected $_iniMember = null;
 
 	/**
-     * ExtModel对象
+     * AddressCardModel对象
      *
      * @var object
      */
-	protected $_mdlExt = null;
+	protected $_AddressCardModel = null;
 
 	/**
-     * MemberModel对象
+     * AddressGroupModel对象
      *
      * @var object
      */
-	protected $_mdlMember = null;
+	protected $_AddressGroupModel = null;
 
 	/**
-     * MyModel对象
+     * UserContactModel对象
      *
      * @var object
      */
-	protected $_mdlMy = null;
+	protected $_UserContactModel = null;
+
+	/**
+     * UserExtModel对象
+     *
+     * @var object
+     */
+	protected $_UserExtModel = null;
 
 	/**
      * UserModel对象
      *
      * @var object
      */
-	protected $_mdlUser = null;
+	protected $_UserModel = null;
 
     /**
      * 构造方法
@@ -73,7 +80,7 @@ abstract class MemberInterlayer
      * 单件模式载入类
      * 
      * @param string $className
-     * @return false | object
+     * @return object or false
      */
 	protected static function _getInstance($className)
     {
@@ -111,33 +118,23 @@ abstract class MemberInterlayer
     }
 
     /**
-     * for Service
+     * 类实例
      * 
+     * @param string $className
      * @return void
      */
-    protected function _initService()
+	protected function _load($className)
     {
-    }
+    	$thisName = "_{$className}";
 
-    /**
-     * Model类实例
-     * 
-     * @param string $mdlName
-     * @return void
-     */
-	protected function _loadMdl($mdlName)
-    {
-    	$thisName = "_mdl{$mdlName}";
-    	$objName  = "{$mdlName}Model";
-
-    	if (!isset($this->$thisName))
+    	if (!is_object($this->$thisName))
     	{
-    		$this->$thisName = $this->_getInstance($objName);
+    		$this->$thisName = $this->_getInstance($className);
     	}
     }
 
     /**
-     * 初始化数据库访问类并注册
+     * 初始化数据库
      * 
      * @return void
      */
@@ -145,9 +142,8 @@ abstract class MemberInterlayer
     {
     	if (!Zend_Registry::isRegistered('dao'))
     	{
-    		/** Registry 数据库 */
 			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter, 
-			                        $this->_iniMember->db->default->params->toArray());
+			    $this->_iniMember->db->default->params->toArray());
 			$dao->query('set names utf8');
 			Zend_Db_Table::setDefaultAdapter($dao);
 			Zend_Registry::set('dao', $dao);

@@ -1,0 +1,20 @@
+<form class="home_form" name="frmInvite" id="frmInvite" autocomplete="off">
+<table>
+<tr>
+<td align="left"><b>被邀请的好友姓名：</b>  <?= $this->detail['cname']; ?></td>
+</tr>
+
+<tr>
+<td>
+<textarea name="textarea" cols="38" rows="5" id="iurl">您的好友 <?= $this->sessCommon->login['realName']; ?> 邀请您加入杭州浙大校友会。打开此链接即可注册：http://zjuhz/member/register/index/ikey/<?= $this->detail['cid']; ?>/</textarea>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<input type="button" value="复制邀请链接" class="btn" id="btnCopy" name="btnCopy" onClick="javascript:copyToClipBoard('iurl', '邀请好友注册的链接已复制成功！您可在QQ/MSN/EMAIL等处粘贴给好友即可。\n您的好友通过此链接注册且填写的信息与您通讯录上的相符，注册才能成功。')" />
+</td>
+</tr>
+</table>
+</form>
+<script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>

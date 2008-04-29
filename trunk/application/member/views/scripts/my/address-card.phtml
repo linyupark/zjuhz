@@ -1,0 +1,67 @@
+<table class="control_list">
+
+<tr>
+<form class="home_form" name="frmFind" id="frmFind" autocomplete="off">
+<th><div align="left">
+&nbsp;<input type="button" class="btn" value="新建名片" name="btnInsert" id="btnInsert" onclick="javascript:docardBefore('<?= $this->cid; ?>');return false;" />
+</div></th>
+</form>
+
+<form>
+<th><div align="right">
+<select class="txt" name="gid" id="gid"><option>所有组</option><?php foreach ($this->groupList as $value)  { ?>
+<option value="<?= $value['gid']; ?>"><?= $value['gname']; ?></option><?php } ?></select>
+<select class="txt" name="field" id="field"><option value="cname">按姓名</option><option value="mobile">按手机</option><option value="eMail">按邮箱</option><option value="qq">按QQ</option><option value="msn">按MSN</option><option value="address">按地址</option><option value="memo">按备注</option></select>
+<input type="text" class="txt" value="" name="wd" id="wd" /> 
+<input type="submit" class="btn" value="查找" />
+</div></th>
+</form>
+</tr>
+
+</table>
+
+<?php if ($this->total > 0) { ?>
+<table class="control_list">
+<tr>
+<th width="35px">&nbsp;</th>
+<th width="120px"><div align="left">&nbsp;姓名</div></th>
+<th width="200px"><div align="left">&nbsp;已建立联络方式</div></th>
+<th width="200px"><div align="left">&nbsp;所属组</div></th>
+<th width="150px"><div align="left">&nbsp;选项</div></th>
+</tr>
+
+<?php foreach ($this->cardList as $value) { ?>
+<tr>
+
+<td>&nbsp;
+
+</td>
+
+<td>
+<div align="left"><a href="#" onclick="javascript:docardBefore('<?= $value['cid']; ?>');return false;"><?= $value['cname']; ?></a></div>
+</td>
+
+<td>
+<div align="left">
+<?php if (!empty($value['mobile'])) { ?><img src="/static/images/icon/phone.gif" alt="<?= $value['mobile']; ?>" />&nbsp;<?php  }; ?>
+<?php if (!empty($value['eMail'])) { ?><a href="mailto:<?= $value['eMail']; ?>"><img src="/static/images/icon/email.gif" alt="向该好友发邮件" /></a>&nbsp;<?php  }; ?>
+<?php if (!empty($value['qq'])) { ?><a target=blank href=http://wpa.qq.com/msgrd?V=1&Uin=<?= $value['qq']; ?>&Site=zjuhz.com&Menu=yes><img src="/static/images/icon/qq.gif" alt="与该好友QQ联系" /></a>&nbsp;<?php  }; ?>
+<?php if (!empty($value['msn'])) { ?><a href=msnim:chat?contact=<?= $value['msn']; ?>><img src="/static/images/icon/msn.gif" alt="与该好友MSN联系" /></a>&nbsp;<?php  }; ?>
+<?php if (!empty($value['address'])) { ?><img src="/static/images/icon/building.gif" alt="<?= $value['address']; ?>" /><?php  }; ?>
+</div>
+</td>
+
+<td>
+<div align="left"><?= $value['gname']; ?></div>
+</td>
+
+<td>
+<div align="left"><a href="#" onclick="javascript:docardBefore('<?= $value['cid']; ?>');return false;">修改</a>&nbsp;&nbsp;<a href="#" onclick="javascript:doinviteBefore('<?= $value['cid']; ?>');return false;">邀请</a></div>
+</td>
+
+</tr>
+<?php } ?>
+
+</table>
+<?= $this->paging; ?>
+<?php } ?>

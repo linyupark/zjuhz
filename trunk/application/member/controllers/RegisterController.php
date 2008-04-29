@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-注册流程控制
+ * 会员中心-注册流程
  */
 class RegisterController extends Zend_Controller_Action
 {
@@ -41,13 +41,10 @@ class RegisterController extends Zend_Controller_Action
      * @return void
      */
     public function init()
-    {
-		// 载入项目配置
-		$this->_iniMember  = Zend_Registry::get('iniMember');
-		// 载入公共SESSION
-		$this->_sessCommon = Zend_Registry::get('sessCommon');
-		// 载入项目SESSION
-		$this->_sessMember = Zend_Registry::get('sessMember');
+    {		
+		$this->_iniMember  = Zend_Registry::get('iniMember'); // 载入项目配置
+		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
+		$this->_sessMember = Zend_Registry::get('sessMember'); // 载入项目SESSION
     }
 
     /**
@@ -57,8 +54,10 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	// 获取注册邀请码
-    	$this->view->ikey = $this->getRequest()->getParam('ikey');
+    	$this->view->headTitle($this->_iniMember->head->title->register); // 载入标题
+    	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js'); // 载入JS脚本
+    	
+    	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取注册邀请码
     }
 
     /**
@@ -83,23 +82,21 @@ class RegisterController extends Zend_Controller_Action
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组
-			$postArgs = $this->getRequest()->getPost();
-			// 此处单独处理的数据单独取出 // next, see standard
-			$vCode    = $postArgs['vcode'];
-			$sCode    = $this->_sessCommon->verify;
-			// 此处注销无用数据
+			$postArgs       = $this->getRequest()->getPost();
+			$postArgs['ip'] = Commons::getIp();
+			$sessCode       = $this->_sessCommon->verify;			
 			unset($this->_sessCommon->verify);
 
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				if (MemberClass::checkVerifyCode($vCode, $sCode))
+				if (MemberClass::checkVerifyCode($postArgs['vcode'], $sessCode))
 				{
-					$this->_sessMember->message = ((RegisterLogic::init()->register($regArgs)) ? 
-				        $this->_iniMember->hint->register->success : 
-				            $this->_iniMember->hint->register->failure);
+					$this->_sessMember->message = ((UserLogic::init()->register($regArgs)) ? 
+				        $this->_iniMember->hint->registerSuccess : 
+				        $this->_iniMember->hint->registerFailure
+				    );
 
-				    echo 'message'; // 请求ajax给出提示
+				    echo 'redirect'; // 请求ajax跳转
 				}
 			}
 		}
@@ -117,14 +114,14 @@ class RegisterController extends Zend_Controller_Action
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组 // next, see standard
 			$postArgs = $this->getRequest()->getPost();			
 
 			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((RegisterLogic::init()->check($username)) ? 
-				    $this->_iniMember->hint->username->isExist : 
-				        $this->_iniMember->hint->username->notExist);
+				echo ((UserLogic::init()->check($username)) ? 
+				    $this->_iniMember->hint->usernameIsExist : 
+				    $this->_iniMember->hint->usernameNotExist
+				);
 			}
 		}
 	}

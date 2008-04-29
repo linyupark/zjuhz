@@ -1,0 +1,44 @@
+<form class="home_form" name="frmCard" id="frmCard" autocomplete="off">
+<table>
+<tr>
+<td align="right"><b>姓名：</b></td>
+<td><input class="txt" type="text" name="cname" id="cname" maxlength="6" value="<?= $this->detail['cname']; ?>"></td>
+<td><b>名片组：</b></td>
+<td>
+<select name="gid" id="gid">
+<option>请选择</option>
+<?php foreach ($this->groupList as $value)  { ?>
+<option value="<?= $value['gid']; ?>" <?= ($this->detail['gid'] == $value['gid'] ? 'selected' : ''); ?>><?= $value['gname']; ?></option><?php } ?>
+</select></td>
+</tr>
+<tr>
+<td align="right"><b>手机：</b></td>
+<td><input class="txt" type="text" name="mobile" id="mobile" maxlength="11" value="<?= $this->detail['mobile']; ?>" /></td>
+<td><b>邮箱：</b></td>
+<td><input class="txt" type="text" name="eMail" id="eMail" maxlength="50" value="<?= $this->detail['eMail']; ?>" /></td>
+</tr>
+<tr>
+<td align="right"><b>QQ：</b></td>
+<td><input class="txt" type="text" name="qq" id="qq" maxlength="15" value="<?= $this->detail['qq']; ?>" /></td>
+<td><b>MSN：</b></td>
+<td><input class="txt" type="text" name="msn" id="msn" maxlength="50" value="<?= $this->detail['msn']; ?>" /></td>
+</tr>
+<tr>
+<td align="right"><b>地址：</b></td>
+<td><input class="txt" type="text" name="address" id="address" maxlength="80" value="<?= $this->detail['address']; ?>" /></td>
+<td><b>邮编：</b></td>
+<td><input class="txt" type="text" name="postcode" id="postcode" maxlength="6" value="<?= $this->detail['postcode']; ?>" /></td>
+</tr>
+<tr>
+<td align="right"><b>备注：</b></td>
+<td colspan="3"><textarea name="memo" cols="55" rows="3" id="memo" class="txt"><?= $this->detail['memo']; ?></textarea></td>
+</tr>
+<tr>
+<td align="right">&nbsp;</td>
+<td colspan="3"><input type="submit" value="新建/修改名片" class="btn" id="btnCard" name="btnCard" /></td>
+</tr>
+</table>
+<input type="hidden" id="cid" name="cid" value="<?= $this->cid; ?>" />
+<input type="hidden" id="tmpgid" name="tmpgid" value="<?= $this->detail['gid']; ?>" />
+</form>
+<script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>
