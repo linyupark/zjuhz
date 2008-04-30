@@ -1,3 +1,34 @@
+// 回复话题框
+function postTopicReply(classid,topic_id,page)
+{
+	$.post('/class/ajax/post_topic_reply', $('#reply_form').fastSerialize(), function(data){
+		if(data != '') // 出错
+		$('#result').html(data);
+		else
+		{
+			$.facebox.close;
+			fetchTopicReply(classid,topic_id,page);
+		}
+	});
+	return false;
+}
+
+// 话题回复表单
+function topicReplyForm(classid,topic_id,page)
+{
+	$.post('/class/ajax/topic_reply_form',{class_id:classid,tid:topic_id,p:page}, function(data){
+		$.facebox(data);
+	});
+}
+
+// 获取话题回复数据
+function fetchTopicReply(classid,topic_id,page)
+{
+	$.post('/class/ajax/fetch_topic_reply',{class_id:classid,tid:topic_id,p:page}, function(data){
+		$('#innerHtml').html(data);
+	});
+}
+
 // 修改自己的通讯录
 function updateMyClassAddressbook()
 {

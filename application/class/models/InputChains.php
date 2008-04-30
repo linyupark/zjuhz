@@ -14,6 +14,20 @@
 			$this->_valid = new Zend_Validate();
 		}
 		
+		#qq
+		function addressQQ($input, $name = 'qq')
+		{
+			$input = strip_tags(trim($input));
+			if(false == empty($input))
+			{
+				if(false == Valid::alphaNumLenRange($input, 4, 15))
+				{
+					$this->_messages[$name] = 'QQ格式有错误';
+				}
+			}
+			return $input;
+		}
+		
 		# 邮箱
 		function addressEmail($input, $name = 'eMail')
 		{

@@ -21,7 +21,7 @@ class HomeController extends Zend_Controller_Action
 		$uid = $this->view->login['uid'];
 		$class_id = $this->view->class_base_info['class_id'];
 		$login = $this->view->login;
-		// 没有做过班级通讯录判断的
+		// 没有初始化过班级通讯录判断的
 		if($this->_sessClass->addressInit == null)
 		{
 			if(false == DbModel::isAddressInit($class_id, $uid))

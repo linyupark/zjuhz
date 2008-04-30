@@ -4,39 +4,65 @@
 	{
 		function init()
 		{
-			$this->_sessCommon = Zend_Registry::get('sessCommon');
 			$this->_sessClass = Zend_Registry::get('sessClass');
 			// 获取班级id
 			$this->_classId = (int)$this->getRequest()->getPost('class_id');
 			// 获取用户id
-			$this->_uid = $this->_sessCommon->login['uid'];
+			$this->_uid = Zend_Registry::get('sessCommon')->login['uid'];
 			
 			$this->_helper->layout->disableLayout();
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
-		# 班级会员判断 -------------------------------------------------
-		private function isMember()
+		# 处理提交的回复
+		function posttopicreplyAction()
 		{
-			if($this->_sessClass->data[$this->_classId] == null) return false;
-			else return true;
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->topic_id = (int)$request->getPost('tid');
+				$this->view->class_id = $this->_classId;
+				$this->render('topic-reply-form');
+			}
 		}
 		
-		# 创建人判断 --------------------------------------------------
-		private function isCreater()
-		{
-			if($this->_sessClass->data[$this->_classId]['class_charge'] == $this->_uid)
-			return true;
-			else return false;
+		# 显示话题回复表单
+		function topicreplyformAction()
+		{	
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->topic_id = (int)$request->getPost('tid');
+				$this->view->class_id = $this->_classId;
+				$this->render('topic-reply-form');
+			}	
 		}
 		
-		# 一些需要管理员身份的操作先进行判断 -------------------------------
-		private function isManager()
+		# 返回指定的话题回复内容页数
+		function fetchtopicreplyAction()
 		{
-			if($this->_sessClass->data[$this->_classId]['class_charge'] != $this->_uid && 
-			   $this->_sessClass->data[$this->_classId]['class_member_charge'] != 1)
-			return false;
-			else return true;
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$page = (int)$request->getPost('p',1);
+				$topic_id = (int)$request->getPost('tid');
+				$rows = DbModel::fetchTopicReply($topic_id, 10, $page);
+				Page::$pagesize = 10;
+				Page::create(array(
+					'href_open' => '<a href="javascript:fetchTopicReply('.$topic_id.',%d)">',
+					'href_close' => '</a>',
+					'num_rows' => $rows['numrows'],
+					'cur_page' => $page
+				));
+				$this->view->page = $page;
+				$this->view->topic_id = $topic_id;
+				$this->view->class_id = $this->_classId;
+				$this->view->pagination = Page::$page_str;
+				$this->view->replies = $rows['rows'];
+				$this->render('topic-reply');
+			}
 		}
 		
 		# 编辑自己所在班级的通讯录信息
@@ -45,14 +71,14 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isMember()) exit();  // 不是班级成员
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
 				if($request->getPost('cname') != null) // 数据更新
 				{
 					$inputChians = new InputChains();
 					$cname = $inputChians->noEmpty($request->getPost('cname'),'名称');
 					$mobile = $inputChians->addressMobile($request->getPost('mobile'));
 					$email = $inputChians->addressEmail($request->getPost('eMail'));
-					$qq = strip_tags(trim($request->getPost('qq')));
+					$qq = $inputChians->addressQQ($request->getPost('qq'));
 					$msn = strip_tags(trim($request->getPost('msn')));
 					$address = strip_tags(trim($request->getPost('address')));
 					$postcode = strip_tags(trim($request->getPost('postcode')));
@@ -61,23 +87,42 @@
 					if($inputChians->getMessages() != null)
 					{
 						// 弹出错误
-						$this->view->err_tip = $inputChain->getMessages();
+						$this->view->err_tip = $inputChians->getMessages();
 						$this->render('error');
 					}
 					else // 更新数据
 					{
-						DbModel::updateAddress(
-							array(
-								''
-							),
-							);
+						$result = DbModel::updateAddress(array(
+							'cname'=>$cname,
+							'mobile'=>$mobile,
+							'eMail'=>$email,
+							'qq'=>$qq,
+							'msn'=>$msn,
+							'address'=>$address,
+							'postcode'=>$postcode,
+							'addressbook_company'=>$company,
+							'addressbook_telephone'=>$telephone),array('`class_id`='.$this->_classId,'`uid`='.$this->_uid));
+						if($result != 1)
+						{
+							// 弹出错误
+							$this->view->err_tip = '通讯没有改动或更新失败！';
+							$this->render('error');
+						}
+						else
+						{
+							$this->view->suc_tip = '通讯录信息更新成功！';
+							$this->render('success');
+						}
 					}
 				}
-				// 显示通讯录表单
-				$db = Zend_Registry::get('dbClass');
-				$this->view->addressbook = $db->fetchRow('SELECT * FROM `tbl_class_addressbook` 
-															WHERE `class_id` = ? AND `uid` = ?',array($this->_classId,$this->_uid));
-				$this->render('class-addressbook-form');
+				else // 显示表单
+				{
+					// 显示通讯录表单
+					$db = Zend_Registry::get('dbClass');
+					$this->view->addressbook = $db->fetchRow('SELECT * FROM `tbl_class_addressbook` 
+																WHERE `class_id` = ? AND `uid` = ?',array($this->_classId,$this->_uid));
+					$this->render('class-addressbook-form');
+				}
 			}
 		}
 		
@@ -87,7 +132,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isMember()) exit();  // 不是班级成员
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
 				$page = (int)$request->getPost('page',1);
 				$rows = DbModel::fetchAddress($this->_classId,5,$page);
 				Page::$pagesize = 5;
@@ -109,7 +154,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isMember()) exit();  // 不是班级成员
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
 				$inputChain = new InputChains();
 				$topic_title = $inputChain->topicTitle($request->getPost('topic_title'));
 				$topic_content = $inputChain->noEmpty($request->getPost('content'),'话题内容');
@@ -158,7 +203,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isCreater()) 
+				if(false == Cmd::isCreater($this->_classId)) 
 				{
 					$this->view->err_tip = '只有班级创建人可以开除管理员';
 					$this->render('error');
@@ -184,7 +229,7 @@
 		{
 			if($this->getRequest()->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$this->_sessClass->default['managerMember'] = "managerList({$this->_classId})";
 				$db = Zend_Registry::get('dbClass');
 				$rows = $db->fetchAll('SELECT `class_member_id`,`class_charge`,`class_member_charge`,`realName`,`class_member_last_access` 
@@ -202,7 +247,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$member_id = $request->getPost('member_id');
 				// 保证有数据
 				if(is_array($member_id) && count($member_id) > 0)
@@ -222,7 +267,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isCreater()) 
+				if(false == Cmd::isCreater($this->_classId)) 
 				{
 					$this->view->err_tip = '只有班级创建人可以提拔管理员';
 					$this->render('error');
@@ -248,7 +293,7 @@
 		{
 			if($this->getRequest()->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$this->_sessClass->default['managerMember'] = "memberList({$this->_classId})";
 				$db = Zend_Registry::get('dbClass');
 				$rows = $db->fetchAll('SELECT `class_member_id`,`class_charge`,`class_member_charge`,`realName`,`class_member_last_access` 
@@ -266,7 +311,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$apply_id = $request->getPost('apply_id');
 				// 保证有数据
 				if(is_array($apply_id) && count($apply_id) > 0)
@@ -285,7 +330,7 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$apply_id = $request->getPost('apply_id');
 				$member_id = $request->getPost('member_id');
 				// 保证有数据
@@ -308,7 +353,7 @@
 		{
 			if($this->getRequest()->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$apply_id = $this->getRequest()->getPost('apply_id');
 				$db = Zend_Registry::get('dbClass');
 				$row = $db->fetchRow('SELECT `class_apply_content` FROM `vi_class_apply` WHERE `class_apply_id` = ?', $apply_id);
@@ -321,7 +366,7 @@
 		{
 			if($this->getRequest()->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$this->_sessClass->default['managerMember'] = "applyList({$this->_classId})";
 				$db = Zend_Registry::get('dbClass');
 				$rows = $db->fetchAll('SELECT * FROM `vi_class_apply` WHERE `class_id` = ?', $this->_classId);
@@ -338,7 +383,7 @@
 			if($request->isXmlHttpRequest())
 			{
 				$class_notice = Commons::html2str(strip_tags(trim($request->getPost('notice_content'))));
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$db = Zend_Registry::get('dbClass');
 				if($db->update('tbl_class',
 								array('class_notice'=>$class_notice),
@@ -354,7 +399,7 @@
 		{
 			if($this->getRequest()->isXmlHttpRequest())
 			{
-				if(false == $this->isManager()) exit();  // 不是管理员
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
 				$db = Zend_Registry::get('dbClass');
 				$row = $db->fetchRow('SELECT `class_notice` FROM `tbl_class` 
 							   		  WHERE `class_id` = ?',$this->_classId);

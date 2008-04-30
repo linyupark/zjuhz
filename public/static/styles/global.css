@@ -10,11 +10,12 @@ img { border: none; }
 a{ color:#314973; text-decoration:none; }
 a:hover{ text-decoration:underline; }
 
-hr{ border:none; border-top:1px solid #ccc;}
+hr{ border:none; border-top:1px solid #ccc; height:1px; margin:5px 0; }
 ul{ list-style-position:inside }
 
 /* 常用字 */
 .f12{ font-size:12px; }
+.f14{ font-size:14px; }
 .fw14{ font-size:14px; color:#fff; }
 .fb14{ font-size:14px; color:#000; }
 .f9{ font-size:9px; }
@@ -26,19 +27,27 @@ ul{ list-style-position:inside }
 .loud {color:#000;}
 .strong{ font-weight:bold; }
 
+/* 常用背景色 */
+.bg-eee{ background:#eee }
+.bg-f5{ background:#f5f5f5 }
+.bg-fblue{ background:#EFF7FF }
+
 /* 常用布局 */
 .mu5{ margin-top:5px; }
 .mud5{ margin:5px 0; }
+.p5{ padding:5px; }
 .pu5{ padding-top:5px; }
 .pd5{ padding-bottom:5px; }
 .pud5{ padding:5px 0; }
 .mu8{ margin-top:8px; }
 .mud8{ margin:8px 0; }
+.p8{ padding:8px; }
 .pu8{ padding-top:8px; }
 .pd8{ padding-bottom:8px; }
 .pud8{ padding:8px 0; }
 .mu10{ margin-top:10px; }
 .mud10{ margin:10px 0; }
+.p10{ padding:10px; }
 .pu10{ padding-top:10px; }
 .pd10{ padding-bottom:10px; }
 .pud10{ padding:10px 0; }

@@ -2,6 +2,50 @@
 
 	class DbModel
 	{	
+		static function fetchTopicReply($topic_id, $pagesize, $page = 1)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$row = $db->fetchRow('SELECT COUNT(`class_reply_id`) AS `numrows` 
+												FROM `tbl_class_reply` WHERE `class_topic_id` = ?',$topic_id);
+
+			$return['numrows'] = $row['numrows'];
+			$return['rows'] = null;
+			
+			if($return['numrows'] >0)
+			{
+				$offset = ($page-1)*$pagesize;
+				$return['rows'] = $db->fetchAll('SELECT * FROM `vi_class_reply` 
+											 	 WHERE `class_topic_id` = '.$topic_id.' LIMIT '.$offset.','.$pagesize);
+			}
+			return $return;
+		}
+		
+		/**
+		 * 增加话题的阅读次数
+		 *
+		 * @param int $topic_id
+		 * @return int
+		 */
+		static function topicViewNumInc($topic_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->update('tbl_class_topic',
+								array('class_topic_view_num'=>new Zend_Db_Expr('class_topic_view_num+1')),
+								'`class_topic_id` ='.(int)$topic_id);
+		}
+		
+		/**
+		 * 返回指定id的话题详细信息
+		 *
+		 * @param int $topic_id
+		 * @return array
+		 */
+		static function fetchTopic($topic_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->fetchRow('SELECT * FROM `vi_class_topic` WHERE `class_topic_id` = ?',$topic_id);
+		}
+		
 		/**
 		 * 获取通讯录信息
 		 *

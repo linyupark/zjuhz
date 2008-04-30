@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * 班级列表显示
+ *
+ */
 class IndexController extends Zend_Controller_Action
 {
 	function init()

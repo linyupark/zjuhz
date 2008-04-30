@@ -52,3 +52,9 @@
 .addressbook_item{ margin:5px 0 0 0; border:1px solid #D8DFEA; width:500px; }
 .addressbook_item td{ padding:5px 5px 2px 5px; border-top:1px solid #eee; }
 .addressbook_item th{ padding:5px; font-size:16px; }
+
+/* 话题单元 ----------------------------------------------- */
+.topic{ padding:10px; }
+.topic .author{ border:1px solid #BCDDFF; padding:5px; background:#EFF7FF; }
+.topic h2{ padding:10px 0 5px 10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom; }
+.topic .content{ background:#fff; padding:10px; border:1px solid #eee; }

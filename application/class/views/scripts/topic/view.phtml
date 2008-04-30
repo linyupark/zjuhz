@@ -1,0 +1,34 @@
+<div class="sidebar topic">
+	<div class="author">
+		<table width="100%">
+		<tr>
+			<td width="15%" class="txtc pu10" valign="top">
+				<img src="/static/users/user_test/tiny_head.jpg" />
+				<p class="f14"><a href=""><?= $this->topic['realName'] ?></a></p>
+			</td>
+			<!-- 话题内容 ////////////////////////// -->
+			<td width="85%">
+				<h2 class="f14"><?= stripslashes($this->topic['class_topic_title']) ?></h2>
+				<p class="p8 bg-fblue quiet">
+				发布: <?= Commons::date($this->topic['class_topic_pub_time']) ?>  
+				<?php if($this->topic['class_topic_mod_time'] != null): ?>
+				 / 最后修改: <?= Commons::date($this->topic['class_topic_mod_time']) ?> 
+				<?php endif; ?>
+				<?php if(Cmd::isManager($this->class_id)): ?>
+				<a href="" style="background:url(/static/images/icon/doc_up.gif) no-repeat left center; padding:10px 5px 5px 20px;">设为顶置</a>
+				<a href="" style="background:url(/static/images/icon/doc_elite.gif) no-repeat left center; padding:10px 5px 5px 20px;">设为精华</a> 
+				<a href="" style="background:url(/static/images/icon/cross.gif) no-repeat left center; padding:10px 5px 5px 20px;">删除</a>
+				<?php endif; ?>
+				</p>
+				<div class="content">
+					<?= stripslashes($this->topic['class_topic_content']) ?>
+				</div>
+			</td>
+			<!-- 话题内容 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+		</tr>
+		</table>
+	</div>
+	<!-- 回复内容 /////////////////////////////////// -->
+	<div id="innerHtml"></div>
+	<script type="text/javascript">fetchTopicReply(<?= $this->class_id ?>,<?= $this->topic_id ?>,1)</script>
+</div>
