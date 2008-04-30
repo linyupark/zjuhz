@@ -1,0 +1,34 @@
+<div class="pagination"><?= $this->pagination ?></div>
+<?php if($this->replies != null): foreach ($this->replies as $k => $v): ?>
+<div class="reply">
+		<table width="100%">
+		<tr>
+			<td width="15%" class="txtc pu10" valign="top">
+				<img src="/static/users/user_test/tiny_head.jpg" />
+				<p class="f14"><a href=""><?= $v['realName'] ?></a></p>
+			</td>
+			<!-- 回复 ////////////////////////// -->
+			<td width="85%">
+				<h2 class="f12"><?= stripslashes($v['class_reply_title']) ?></h2>
+				<p class="p8 bg-fblue quiet">
+				发布: <?= Commons::date($v['class_reply_time']) ?>  
+				<?php if(Cmd::isManager($this->class_id)): ?>
+				<a href="" style="background:url(/static/images/icon/cross.gif) no-repeat left center; padding:10px 5px 5px 20px;">删除</a>
+				<?php endif; ?>
+				</p>
+				<div class="content">
+					<?= stripslashes($v['class_reply_content']) ?>
+				</div>
+			</td>
+			<!-- 回复 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+		</tr>
+		</table>
+</div>
+<?php endforeach;  ?>
+<div class="pagination"><?= $this->pagination ?></div>
+<button class="btn" onclick="topicReplyForm(<?= $this->class_id.','.$this->topic_id.','.$this->page ?>)">我要回复这个话题</button>
+<?php else: ?> 
+<div class="reply">
+还没有回复内容 <button class="btn" onclick="topicReplyForm(<?= $this->class_id.','.$this->topic_id.','.$this->page ?>)">我要回复这个话题</button>
+</div>
+<?php endif; ?>

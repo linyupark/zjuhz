@@ -1,0 +1,24 @@
+<?= $this->render('home/index.phtml'); ?>
+<!-- 管理条目 ///////////////////////////////////// -->
+<div class="sidebar" style="width:160px">
+<p class="toolbar">
+<a href="/class/home?c=<?= $this->class_id ?>"><img src="/static/images/icon/arrow_undo.gif" /> 返回</a>
+</p>
+</div>
+
+<div class="sidebar class_show" style="width:500px; margin:0 10px;">
+<h2 class="quiet"><img src="/static/images/icon/book.gif" /> 班级通讯录 
+</h2>
+<p class="quiet">
+<a href="javascript:classAddressbookView(<?= $this->class_id ?>,1)">浏览</a> | 
+<a href="javascript:myClassAddressbook(<?= $this->class_id ?>)">编辑我的</a> | 
+<a href="javascript:classAddressbookExport()">导出数据</a>
+<?php if(true == Cmd::isManager($this->class_id)): ?>
+ | <a href="javascript:classAddressbookImport()">导入数据</a>
+<?php endif; ?>
+</p>
+<div id="listInner"></div>
+</div>
+<script type="text/javascript">classAddressbookView(<?= $this->class_id ?>,1)</script>
+<!-- 班级基本信息 ///////////////////////////////////////// -->
+<?= $this->render('home/baseinfo.phtml'); ?>

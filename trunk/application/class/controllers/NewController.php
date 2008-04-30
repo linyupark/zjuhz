@@ -41,6 +41,8 @@ class NewController extends Zend_Controller_Action
 					$this->view->err_tip['class_name'] = '班级数据初始化失败';
 				else 
 				{
+					// 建立班级文件目录
+					@mkdir($_SERVER['DOCUMENT_ROOT'].'/static/classes/'.$class_id, 0777);
 					// 将sessClass清除,重新分配
 					$this->_sessClass->data = null;
 					$this->view->suc_tip = '班级建立成功,2秒后转向<a href="/class/home?c='.$class_id.'">班级主页</a>';

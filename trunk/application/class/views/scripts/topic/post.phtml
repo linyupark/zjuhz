@@ -23,10 +23,10 @@
 <p class="pud5 quiet"><b>标题：</b>
 <input type="text" name="topic_title" class="inputtxt" style="width:400px;" maxlength="100" /></p>
 <p class="mu5"><input type="hidden" name="content" id="content" value="" /></p>
-<?= $this->editor('550px','200px'); ?>
+<?= $this->editor($this->class_id, '550px','200px'); ?>
 <p class="mu5">
 	<input type="submit" value="提交新话题" class="btn" /> 
-	<input type="button" value="返回" class="btn" onclick="history.back()" />
+	<input type="button" value="返回" class="btn" onclick="location.href='/class/home?c=<?= $this->class_id ?>'" />
 </p>
 
 </div>
