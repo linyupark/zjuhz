@@ -48,11 +48,8 @@ class HomeController extends Zend_Controller_Action
 	# 一些公共需要分配的参数
 	private function commonParam()
 	{
-		$request = $this->getRequest();
-		$action = $request->getActionName();
-		$this->view->topic_type = $request->getParam('topic_type');
-		// 获取话题列
-		$this->view->topics = DbModel::getClassTopic($this->view->class_base_info['class_id'], $action, $this->view->topic_type);
+		
+		
 	}
 	
 	# 游客身份访问班级信息
@@ -76,7 +73,6 @@ class HomeController extends Zend_Controller_Action
 	function managerAction()
 	{
 		$this->enterHandler();
-		$this->commonParam();
 		$this->render('index');
 		$this->render('manager');
 		$this->render('baseinfo');

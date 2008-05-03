@@ -43,7 +43,7 @@
 .options{ color:#333; border:1px solid #D9E6F7; padding:8px; background:#EFF7FF }
 
 /* 班级内容列表通用样式 --------------------------------------- */
-.cont_list{ width:100%; }
+.cont_list{ padding:10px 0 0 10px; width:650px; }
 .cont_list th{ border-bottom:1px solid #618EBC; padding:3px; font-weight:normal; }
 .cont_list td{ padding:3px; color:#666 }
 .cont_list .focus{ background:#618EBC; color:#fff; padding:5px; }
@@ -55,6 +55,7 @@
 
 /* 话题单元 ----------------------------------------------- */
 .topic{ padding:10px; }
+.reply{ clear:both }
 .topic .author{ border:1px solid #BCDDFF; padding:5px; background:#EFF7FF; }
 .topic h2{ padding:10px 0 5px 10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom; }
 .topic .content{ background:#fff; padding:10px; border:1px solid #eee; }

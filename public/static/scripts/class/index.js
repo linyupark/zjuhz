@@ -1,3 +1,48 @@
+// ---------------------- 主话题操作块 ---------------------
+function delReply(classid,topic_id,reply_id)
+{
+	var d = confirm('确定删除该回复吗？');
+	if(d == true)
+	$.post('/class/ajax/del_reply', { class_id:classid,topic_id:topic_id,reply_id:reply_id } ,function(data)
+	{
+		$.facebox(data);
+	});
+}
+
+function delTopic(classid,topic_id)
+{
+	var d = confirm('确定删除该话题吗？');
+	if(d == true)
+	$.post('/class/ajax/del_topic', { class_id:classid,topic_id:topic_id } ,function(data)
+	{
+		$.facebox(data);
+	});
+}
+
+function eliteTopic(classid,topic_id,is_elite)
+{
+	$.post('/class/ajax/elite_topic', { class_id:classid,topic_id:topic_id,is_elite:is_elite } ,function(data)
+	{
+		if(is_elite == 0) is_elite = 1;
+		else is_elite = 0;
+		$('a[href^="javascript:eliteTopic"]').attr('href','javascript:eliteTopic('+classid+','+topic_id+','+is_elite+')');
+		$.facebox(data);
+	});
+}
+
+function fixTopic(classid,topic_id,is_up)
+{
+	$.post('/class/ajax/fix_topic', { class_id:classid,topic_id:topic_id,is_up:is_up } ,function(data)
+	{
+		if(is_up == 0) is_up = 1;
+		else is_up = 0;
+		$('a[href^="javascript:fixTopic"]').attr('href','javascript:fixTopic('+classid+','+topic_id+','+is_up+')');
+		$.facebox(data);
+	});
+}
+
+
+
 // 回复话题框
 function postTopicReply(classid,topic_id,page)
 {
@@ -6,8 +51,7 @@ function postTopicReply(classid,topic_id,page)
 		$('#result').html(data);
 		else
 		{
-			$.facebox.close;
-			fetchTopicReply(classid,topic_id,page);
+			location.href = '/class/topic/view?c='+classid+'&tid='+topic_id+'&p='+page+'#footer';
 		}
 	});
 	return false;
@@ -58,6 +102,18 @@ function classAddressbookView(classid,pagenum)
 	$.post('/class/ajax/class_addressbook_view', {class_id:classid,page:pagenum}, function(data){
 		$('#listInner').html(data);
 	});
+}
+
+// 更新话题
+function topicUpdate()
+{
+	var data = $('#topic_form').fastSerialize();
+	data.push({name:'content', value:editor.data()});
+	$.post('/class/ajax/class_topic_mod', data, function(html)
+	{
+		$.facebox(html);
+	});
+	return false;
 }
 
 // 提交新话题

@@ -3,18 +3,19 @@
 <div class="reply">
 		<table width="100%">
 		<tr>
-			<td width="15%" class="txtc pu10" valign="top">
-				<img src="/static/users/user_test/tiny_head.jpg" />
-				<p class="f14"><a href=""><?= $v['realName'] ?></a></p>
+			<td width="10%" class="txtc pu10" valign="top">
+				<img src="/static/users/user_test/tiny_head.jpg" width="35" height="35" />
+				<p class="f12"><a href=""><?= $v['realName'] ?></a></p>
 			</td>
 			<!-- 回复 ////////////////////////// -->
-			<td width="85%">
+			<td width="90%">
 				<h2 class="f12"><?= stripslashes($v['class_reply_title']) ?></h2>
 				<p class="p8 bg-fblue quiet">
 				发布: <?= Commons::date($v['class_reply_time']) ?>  
 				<?php if(Cmd::isManager($this->class_id)): ?>
-				<a href="" style="background:url(/static/images/icon/cross.gif) no-repeat left center; padding:10px 5px 5px 20px;">删除</a>
+				<a href="javascript:delReply(<?= $v['class_reply_id'] ?>)" style="background:url(/static/images/icon/cross.gif) no-repeat left center; padding:10px 5px 5px 20px;">删除</a>
 				<?php endif; ?>
+				<a href="javascript:scroll(0,0)" style="background:url(/static/images/icon/top.gif) no-repeat left center; padding:10px 5px 5px 45px;">#<?= (($this->page-1)*5)+($k+1) ?></a>
 				</p>
 				<div class="content">
 					<?= stripslashes($v['class_reply_content']) ?>
@@ -24,11 +25,8 @@
 		</tr>
 		</table>
 </div>
-<?php endforeach;  ?>
+<?php endforeach; endif;  ?>
 <div class="pagination"><?= $this->pagination ?></div>
-<button class="btn" onclick="topicReplyForm(<?= $this->class_id.','.$this->topic_id.','.$this->page ?>)">我要回复这个话题</button>
-<?php else: ?> 
-<div class="reply">
-还没有回复内容 <button class="btn" onclick="topicReplyForm(<?= $this->class_id.','.$this->topic_id.','.$this->page ?>)">我要回复这个话题</button>
-</div>
-<?php endif; ?>
+<p class="p10 txtc">
+<button class="btn" onclick="topicReplyForm(<?= $this->class_id.','.$this->topic_id.','.$this->pages ?>)">我要回复这个话题</button>
+</p>
