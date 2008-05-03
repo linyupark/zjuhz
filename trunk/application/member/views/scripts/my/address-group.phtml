@@ -7,14 +7,14 @@
 
 <table class="control_list">
 <tr>
-<th>组名</th>
-<th>选项</th>
+<th class="txtl" width="80%">组名</th>
+<th class="txtl" width="20%">选项</th>
 </tr>
 
 <?php foreach ($this->groupList as $value) { ?>
 <tr id="group<?= $value['gid']; ?>">
-<td><div align="left"><a href=""><?= $value['gname']; ?></a> (已有<?= $value['count']; ?>张名片)</div></td>
-<td><div align="left"><a href="#" onclick="dogroupmodiBefore('<?= $value['gid']; ?>','<?= $value['gname']; ?>');return false;" id="modi<?= $value['gid']; ?>">改名</a> <a href="#" onClick="dogroupdelBefore('<?= $value['gid']; ?>');return false;" id="del">删除</a></div></td>
+<td><div align="left"><a href=""><?= $value['gname']; ?></a></div></td>
+<td><div align="left"><a href="#" onclick="dogroupmodiBefore('<?= $value['gid']; ?>','<?= $value['gname']; ?>');return false;" id="modi<?= $value['gid']; ?>">重命名</a> <a href="#" onClick="dogroupdelBefore('<?= $value['gid']; ?>');return false;" id="del">删除</a></div></td>
 </tr>
 <?php } ?>
 

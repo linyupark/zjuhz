@@ -12,22 +12,22 @@
 <td><?= $this->sessCommon->login['sex']; ?></td>
 </tr>
 <tr>
-<td align="right"><b>曾用名：</b></td>
-<td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /></td>
+<td align="right"><b>曾用名：</b><br /><br /></td>
+<td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /> <br /><span class="quiet">输入您曾经使用过的名字以便校友找到您。</span></td>
 </tr>
 <?= $this->calendar(); ?>
 <tr>
-<td align="right"><b>出生日期：</b></td>
-<td><input type="text" class="txt" name="birthday" id="birthday" maxlength="10" value="<?= $this->sessCommon->login['birthday']; ?>" /> <a href="#" id="calendar">显示日历</a><br />格式为：年-月-日，如1980-01-01。</td>
+<td align="right"><b>出生日期：</b><br /><br /></td>
+<td><input type="text" class="txt" name="birthday" id="birthday" maxlength="10" value="<?= $this->sessCommon->login['birthday']; ?>" /> <a href="#" id="calendar">显示日历</a> <br /><span class="quiet">格式应为：年-月-日，如1980-01-01。</span></td>
 </tr>
 <?= $this->pcas(); ?>
 <tr>
-<td align="right"><b>我的家乡：</b></td>
-<td><select name="hometown_p" id="hometown_p"></select>&nbsp;<select name="hometown_c" id="hometown_c"></select>&nbsp;<select name="hometown_a" id="hometown_a"></select></td>
+<td align="right"><b>我的家乡：</b><br /><br /></td>
+<td><select name="hometown_p" id="hometown_p"></select>&nbsp;<select name="hometown_c" id="hometown_c"></select>&nbsp;<select name="hometown_a" id="hometown_a"></select> <br /><span class="quiet">可选择至最后县/市/区一层，我们会帮您找到同乡校友。</span></td>
 </tr>
 <tr>
-<td align="right"><b>当前所在地：</b></td>
-<td><select name="location_p" id="location_p"></select>&nbsp;<select name="location_c" id="location_c"></select>&nbsp;<select name="location_a" id="location_a"></select></td>
+<td align="right"><b>当前所在地：</b><br /><br /></td>
+<td><select name="location_p" id="location_p"></select>&nbsp;<select name="location_c" id="location_c"></select>&nbsp;<select name="location_a" id="location_a"></select> <br /><span class="quiet">想知道哪些校友与您当前在同一个地点吗？</span></td>
 </tr>
 <tr>
 <td></td>

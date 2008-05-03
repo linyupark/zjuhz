@@ -25,7 +25,7 @@ class LoginFilter extends MemberInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -52,12 +52,12 @@ class LoginFilter extends MemberInterlayer
      * 会员登录数据过滤
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function login($args)
 	{
 		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StringToLower'));
+		$filters = array('*' => array('StringTrim', 'StripTags', 'StringToLower'));
 
     	// 设置验证规则
 		$validators = array(

@@ -35,10 +35,13 @@
 </tr>
 <tr>
 <td align="right">&nbsp;</td>
-<td colspan="3"><input type="submit" value="新建/修改名片" class="btn" id="btnCard" name="btnCard" /></td>
+<td colspan="3"><input type="submit" value="保存名片" class="btn" id="btnCard" name="btnCard" />&nbsp;<button class="btn" onclick="history.go(-1);">返回</button></td>
 </tr>
+<tr>
+<td align="right">&nbsp;</td>
+<td colspan="3"><div id="ajaxhint" style="width:300px"></div></td>
+</tr>
+
 </table>
 <input type="hidden" id="cid" name="cid" value="<?= $this->cid; ?>" />
-<input type="hidden" id="tmpgid" name="tmpgid" value="<?= $this->detail['gid']; ?>" />
 </form>
-<script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>

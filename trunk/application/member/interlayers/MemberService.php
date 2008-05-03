@@ -23,7 +23,7 @@ class MemberService extends MemberInterlayer
      */
 	public function __construct()
 	{
-		parent::__construct();
+		//parent::__construct();
 	}
 
 	/**
@@ -33,17 +33,7 @@ class MemberService extends MemberInterlayer
      */
 	public function __destruct()
 	{
-		parent::__destruct();
-	}
-
-	/**
-     * 类实例
-     * 
-     * @return object
-     */
-	public static function init()
-	{
-		return parent::_getInstance(__CLASS__);
+		//parent::__destruct();
 	}
 
     /**
@@ -59,7 +49,7 @@ class MemberService extends MemberInterlayer
 	}
 
     /**
-     * 根据会员ID返回通讯录组列表
+     * 根据会员ID返回对应的通讯录组列表
      * 
      * @param integer $uid
      * @return array
@@ -70,7 +60,7 @@ class MemberService extends MemberInterlayer
 	}
 
     /**
-     * 根据会员ID组ID返回通讯录内名片列表
+     * 根据会员ID和组ID返回对应的名片列表
      * 
      * @param string $gid
      * @param integer $uid

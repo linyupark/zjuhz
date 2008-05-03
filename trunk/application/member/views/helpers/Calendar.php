@@ -10,6 +10,11 @@
 
 class Zend_View_Helper_Calendar
 {
+	/**
+     * 载入日历选择器
+     * 
+     * @return string
+     */
 	public static function calendar()
     {
     	return '<script type="text/javascript" src="/static/scripts/calendar.js"></script>

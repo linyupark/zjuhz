@@ -49,10 +49,10 @@ class MyFilter extends MemberInterlayer
     }
 
 	/**
-     * 基本信息
+     * 个人资料-基础信息
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function basic($args)
 	{
@@ -61,27 +61,23 @@ class MyFilter extends MemberInterlayer
 		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StripTags'));
+		$filters = array(
+		    '*' => array('StringTrim', 'StripTags')
+		);
 
     	// 设置验证规则
 		$validators = array(
 		    'everName' => array('allowEmpty' => true), 
 			'birthday' => array(
-			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError)), 
-            'hometown_a' => array(
-                array('Utf8Length', '2', '16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->pcasError, 
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->pcasError)), 
-            'location_a' => array(
-                array('Utf8Length', '2', '16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->pcasError, 
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->pcasError)),  
-            'location_p' => array('presence' => 'required'),
-            'location_c' => array('presence' => 'required'),
-            'hometown_p' => array('presence' => 'required'),
-            'hometown_c' => array('presence' => 'required'),
-            'lastModi' => array('presence' => 'required')
+            'hometown_a' => array('allowEmpty' => true), 
+            'location_a' => array('allowEmpty' => true),  
+            'location_p' => array('allowEmpty' => true),
+            'location_c' => array('allowEmpty' => true),
+            'hometown_p' => array('allowEmpty' => true),
+            'hometown_c' => array('allowEmpty' => true),
+            'lastModi' => array('allowEmpty' => true)
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
@@ -93,7 +89,7 @@ class MyFilter extends MemberInterlayer
 		else
 		{
 			return array(
-		    	'everName' => $input->getUnescaped('everName'), 'birthday' => $input->getUnescaped('birthday'), 
+			    'everName' => $input->getUnescaped('everName'), 'birthday' => $input->getUnescaped('birthday'), 
 		    	'hometown_p' => $input->getUnescaped('hometown_p'), 'hometown_c' => $input->getUnescaped('hometown_c'), 
 		    	'hometown_a' => $input->getUnescaped('hometown_a'), 'location_p' => $input->getUnescaped('location_p'), 
 		    	'location_c' => $input->getUnescaped('location_c'), 'location_a' => $input->getUnescaped('location_a'), 
@@ -105,21 +101,27 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
-     * 联络方式
+     * 个人资料-联络信息
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function contact($args)
 	{
 		// 载入相关ZEND扩展 - ZF1.5版本需此
 		// Zend_Validate_IsEmail
 		Zend_Loader::loadFile('IsEmail.php');
+		// Zend_Validate_IsMobile
+		Zend_Loader::loadFile('IsMobile.php');
+		// Zend_Validate_IsPhone
+		Zend_Loader::loadFile('IsPhone.php');
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
 		$filters = array(
 		    '*' => array(
-		        'StringTrim', 'StringToLower'),
+		        'StringTrim', 'StripTags'),
             'mobile' => 'Digits',		        
 	    	'qq' => 'Digits',
 	    	'postcode' => 'Digits'
@@ -128,9 +130,11 @@ class MyFilter extends MemberInterlayer
     	// 设置验证规则
 		$validators = array(
             'mobile' => array(
-			    array('StringLength', '11', '11'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
-               	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->mobileError, 
-                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->mobileError)), 
+			    array('IsMobile'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+               	    Zend_Validate_IsMobile::NOT_MOBILE => $this->_iniMember->hint->mobileError)), 
+            'phone' => array(
+			    array('IsPhone'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+               	    Zend_Validate_IsPhone::NOT_PHONE => $this->_iniMember->hint->phoneError)),                	    
             'eMail' => array(
 			    array('IsEmail'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_IsEmail::NOT_EMAIL => $this->_iniMember->hint->emailInvalid)), 
@@ -146,8 +150,11 @@ class MyFilter extends MemberInterlayer
 			    array('StringLength', '6', '6'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->postcodeError, 
                     Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->postcodeError)), 
-            'other' => array('allowEmpty' => true), 
-            'lastModi' => array('presence' => 'required')
+            'other' => array(
+		        array('Utf8Length', '0', '50'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->otherInvalid, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->otherInvalid)), 
+            'lastModi' => array('allowEmpty' => true)
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
@@ -159,10 +166,11 @@ class MyFilter extends MemberInterlayer
 		else
 		{
 			return array(
-		    	'mobile' => $input->getUnescaped('mobile'), 'eMail' => $input->getUnescaped('eMail'), 
-		    	'qq' => $input->getUnescaped('qq'), 'msn' => $input->getUnescaped('msn'), 
-		    	'address' => $input->getUnescaped('address'), 'postcode' => $input->getUnescaped('postcode'),	
-		    	'other' => $input->getUnescaped('other'), 'lastModi' => $input->getUnescaped('lastModi')		    	
+			    'mobile' => $input->getUnescaped('mobile'), 'phone' => $input->getUnescaped('phone'), 
+		    	'eMail' => $input->getUnescaped('eMail'), 'qq' => $input->getUnescaped('qq'), 
+		    	'msn' => $input->getUnescaped('msn'), 'address' => $input->getUnescaped('address'), 
+		    	'postcode' => $input->getUnescaped('postcode'),	'other' => $input->getUnescaped('other'), 
+		    	'lastModi' => $input->getUnescaped('lastModi')
 			);
 		}
 
@@ -170,10 +178,50 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
-     * 通讯录-名片
+     * 通讯录-名片查找
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
+     */
+	public function find($args)
+	{
+		// 设置过滤规则
+		$filters = array(
+		    '*' => array(
+		        'StringTrim', 'StripTags'),
+            'uid' => 'Digits'
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+		    'gid' => array('allowEmpty' => true),
+			'field' => array('allowEmpty' => true),
+			'wd' => array('allowEmpty' => true),
+			'uid' => array('presence' => 'required')			
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		if ($input->hasInvalid() || $input->hasMissing())
+		{
+			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
+		}
+		else
+		{
+			return array(
+		    	'gid' => $input->getUnescaped('gid'), 'field' => $input->getUnescaped('field'),
+		    	'wd' => $input->getUnescaped('wd'), 'uid' => $input->getUnescaped('uid')
+			);
+		}
+
+		return false;
+	}
+
+	/**
+     * 通讯录-名片新增/修改
+     * 
+     * @param array $args
+     * @return boolean or array
      */
 	public function card($args)
 	{
@@ -227,50 +275,6 @@ class MyFilter extends MemberInterlayer
 		        array('Utf8Length', '0', '200'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->memoInvalid, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->memoInvalid)),
-            'lastModi' => array('presence' => 'required')
-        );
-
-		$input = new Zend_Filter_Input($filters, $validators, $args);
-
-		if ($input->hasInvalid() || $input->hasMissing())
-		{
-			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
-		}
-		else
-		{
-			return array(
-		    	'cid' => $input->getUnescaped('cid'), 'uid' => $input->getUnescaped('uid'), 
-		    	'cname' => $input->getUnescaped('cname'), 'gid' => $input->getUnescaped('gid'), 
-		    	'mobile' => $input->getUnescaped('mobile'),	'eMail' => $input->getUnescaped('eMail'), 
-		    	'qq' => $input->getUnescaped('qq'),	'msn' => $input->getUnescaped('msn'), 
-		    	'address' => $input->getUnescaped('address'), 'postcode' => $input->getUnescaped('postcode'), 
-		    	'memo' => $input->getUnescaped('memo'),	'lastModi' => $input->getUnescaped('lastModi')
-			);
-		}
-
-		return false;
-	}
-
-	/**
-     * 通讯录-组
-     * 
-     * @param array $args
-     * @return string to ajax or false or array
-     */
-	public function group($args)
-	{
-		// 载入相关ZEND扩展 - ZF1.5版本需此
-		// Zend_Validate_Utf8Length
-		Zend_Loader::loadFile('Utf8Length.php');
-
-		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StripTags'));
-
-    	// 设置验证规则
-		$validators = array(
-		    'gid' => array(array('StringLength', '5', '5'), 'presence' => 'required'),
-			'uid' => array(array('Int'), 'presence' => 'required'),
-            'gname' => array(array('Utf8Length', '1', '10'), 'breakChainOnFailure' => true, 'presence' => 'required'),
             'lastModi' => array('allowEmpty' => true)
         );
 
@@ -283,8 +287,12 @@ class MyFilter extends MemberInterlayer
 		else
 		{
 			return array(
-		    	'gid' => $input->getUnescaped('gid'), 'uid' => $input->getUnescaped('uid'), 
-		    	'gname' => $input->getUnescaped('gname'), 'lastModi' => $input->getUnescaped('lastModi')
+			    'cid' => $input->getUnescaped('cid'), 'uid' => $input->getUnescaped('uid'), 
+		    	'cname' => $input->getUnescaped('cname'), 'gid' => $input->getUnescaped('gid'), 
+		    	'mobile' => $input->getUnescaped('mobile'),	'eMail' => $input->getUnescaped('eMail'), 
+		    	'qq' => $input->getUnescaped('qq'),	'msn' => $input->getUnescaped('msn'), 
+		    	'address' => $input->getUnescaped('address'), 'postcode' => $input->getUnescaped('postcode'), 
+		    	'memo' => $input->getUnescaped('memo'),	'lastModi' => $input->getUnescaped('lastModi')
 			);
 		}
 
@@ -292,15 +300,15 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
-     * 通讯录-邀请
+     * 通讯录-名片邀请
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function invite($args)
 	{
 		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StripTags'));
+		$filters = array('*' => array('StripTags'));
 
     	// 设置验证规则
 		$validators = array(
@@ -310,31 +318,65 @@ class MyFilter extends MemberInterlayer
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
 
-		if ($input->hasInvalid() || $input->hasMissing())
-		{
-			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
-		}
-		else
-		{
-			return array(
-		    	'cid' => $input->getUnescaped('cid'), 'status' => $input->getUnescaped('status')
-			);
-		}
-
-		return false;
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('cid' => $input->getUnescaped('cid'), 'status' => $input->getUnescaped('status')) : false
+		);
 	}
 
 	/**
-     * 通讯录-删除组
+     * 通讯录-组新增/修改
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
+     */
+	public function group($args)
+	{
+		// 载入相关ZEND扩展 - ZF1.5版本需此
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('Utf8Length.php');
+
+		// 设置过滤规则
+		$filters = array(
+		    '*' => array('StringTrim', 'StripTags')
+		);
+
+    	// 设置验证规则
+		$validators = array(
+		    'gid' => array(array('StringLength', '5', '5'), 'presence' => 'required'),
+			'uid' => array(array('Int'), 'presence' => 'required'),
+			'gname' => array(array('Utf8Length', '1', '10'), 'presence' => 'required'), 
+			'lastModi' => array('allowEmpty' => true)
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('gid' => $input->getUnescaped('gid'), 'uid' => $input->getUnescaped('uid'), 
+		        'gname' => $input->getUnescaped('gname'), 'lastModi' => $input->getUnescaped('lastModi')) : false
+		);
+	}
+
+	/**
+     * 通讯录-组删除
+     * 
+     * @param array $args
+     * @return boolean or array
      */
 	public function groupdel($args)
 	{
-		return array(
-		    'gid' => $args['gid'],
-		    'uid' => $args['uid']
+		// 设置过滤规则
+		$filters = array('*' => array('StripTags'));
+
+    	// 设置验证规则
+		$validators = array(
+		    'gid' => array(array('StringLength', '5', '5'), 'presence' => 'required'),
+			'uid' => array(array('Int'), 'presence' => 'required')
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('gid' => $input->getUnescaped('gid'), 'uid' => $input->getUnescaped('uid')) : false 
 		);
 	}
 }

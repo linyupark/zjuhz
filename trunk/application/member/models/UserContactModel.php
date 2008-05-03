@@ -16,7 +16,7 @@
 class UserContactModel
 {
     /**
-     * 数据表名
+     * 数据表名称
      * @var string
      */
     protected $_name = 'tbl_user_contact';

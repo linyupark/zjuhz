@@ -15,25 +15,25 @@
 class RegisterController extends Zend_Controller_Action
 {
 	/**
-     * 项目模块配置对象
+     * 项目模块配置
      *
      * @var object
      */
 	private $_iniMember = null;
 
 	/**
-     * 公用SESSION对象
+     * 项目Session
      *
-     * @var array
-     */
-	private $_sessCommon = null;
-
-	/**
-     * 项目SESSION对象
-     *
-     * @var array
+     * @var object
      */
 	private $_sessMember = null;
+
+	/**
+     * 公用Session
+     *
+     * @var object
+     */
+	private $_sessCommon = null;
 
     /**
      * 初始化
@@ -42,9 +42,11 @@ class RegisterController extends Zend_Controller_Action
      */
     public function init()
     {		
-		$this->_iniMember  = Zend_Registry::get('iniMember'); // 载入项目配置
-		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
-		$this->_sessMember = Zend_Registry::get('sessMember'); // 载入项目SESSION
+		$this->_iniMember  = Zend_Registry::get('iniMember');
+		$this->_sessMember = Zend_Registry::get('sessMember');
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+
+		$this->view->sessCommon = $this->_sessCommon;
     }
 
     /**
@@ -54,47 +56,54 @@ class RegisterController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	$this->view->headTitle($this->_iniMember->head->title->register); // 载入标题
-    	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js'); // 载入JS脚本
-    	
-    	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取注册邀请码
+    	$this->view->headTitle($this->_iniMember->head->titleRegister);
+    	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
+
+    	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取邀请码
     }
 
     /**
-     * 会员注册-显示页面
+     * 会员注册-邀请注册
      * 
      * @return void
      */
-	public function registerAction()
+	public function inviteAction()
     {
-		$this->_forward('index');
+    	$this->_forward('index');
+    }
+
+    /**
+     * 会员注册-注册完成
+     * 
+     * @return void
+     */
+	public function welcomeAction()
+    {
+		$this->view->headTitle($this->_iniMember->head->titleWelcome);
+
+    	$this->view->register = $this->_sessMember->register;
     }
 
 	/**
      * 会员注册-数据提交
      *
-     * @return string to ajax
+     * @return void
      */
 	public function doregisterAction()
 	{
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			$postArgs       = $this->getRequest()->getPost();
+			$postArgs = $this->getRequest()->getPost();
 			$postArgs['ip'] = Commons::getIp();
-			$sessCode       = $this->_sessCommon->verify;			
-			unset($this->_sessCommon->verify);
 
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				if (MemberClass::checkVerifyCode($postArgs['vcode'], $sessCode))
+				if (MemberClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
 				{
-					$this->_sessMember->message = ((UserLogic::init()->register($regArgs)) ? 
-				        $this->_iniMember->hint->registerSuccess : 
-				        $this->_iniMember->hint->registerFailure
-				    );
+					$this->_sessMember->register = ((UserLogic::init()->register($regArgs)) ? $regArgs : '');
 
 				    echo 'redirect'; // 请求ajax跳转
 				}
@@ -105,12 +114,12 @@ class RegisterController extends Zend_Controller_Action
 	/**
      * 会员注册-账号检测
      * 
-     * @return string to ajax
+     * @return void
      */
 	public function docheckAction()
 	{
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
@@ -118,8 +127,7 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((UserLogic::init()->check($username)) ? 
-				    $this->_iniMember->hint->usernameIsExist : 
+				echo ((UserLogic::init()->check($username)) ? $this->_iniMember->hint->usernameIsExist : 
 				    $this->_iniMember->hint->usernameNotExist
 				);
 			}
