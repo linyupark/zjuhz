@@ -1,0 +1,70 @@
+<?= $this->render('home/index.phtml'); ?>
+<!-- 管理条目 ///////////////////////////////////// -->
+<div class="sidebar" style="width:160px">
+<p class="toolbar">
+<a href="/class/home?c=<?= $this->class_id ?>"><img src="/static/images/icon/arrow_undo.gif" /> 返回</a>
+</p>
+</div>
+
+<!-- 班级话题详细列表 ///////////////////////// -->
+<div class="sidebar cont_list">
+<table id="class_topics" width="100%">
+<tr>
+<th colspan="4" class="txtl quiet">
+<img src="/static/images/icon/comments.gif" /> <b>话题讨论</b>
+<a href="list?c=<?= $this->class_id ?>&type=">所有</a>
+<a href="list?c=<?= $this->class_id ?>&type=hot">热门</a>
+<a href="list?c=<?= $this->class_id ?>&type=elite">精华</a></th>
+<th class="txtr"><a href="/class/topic/post?c=<?= $this->class_id ?>" style="background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:18px;">新话题</a></th>
+</tr>
+<tr class="quiet">
+	<td width="50%">主题</td>
+	<td>作者</td>
+	<td class="txtc">回复</td>
+	<td class="txtc">阅读</td>
+	<td class="txtc">最后回复</td>
+</tr>
+<?php if($this->topics != null): foreach ($this->topics as $key => $val): ?>
+<tr class="list_item">
+	<td>
+	<?php if($val['class_topic_up'] == 1) echo '[顶]'; ?>
+	<?php if($val['class_topic_elite'] == 1) echo '[精]'; ?>
+	<a href="/class/topic/view?c=<?= $this->class_id ?>&tid=<?= $val['class_topic_id'] ?>"><?= $val['class_topic_title'] ?></a>
+	<?php
+		if($val['class_topic_reply_num'] > 5)
+		{
+			$str = '<br /><img src="/static/images/icon/multipage.gif" /> ';
+			$p = 1;
+			for ($i=0;$i<$val['class_topic_reply_num'];$i+=5)
+			{
+				$str .= '<a href="/class/topic/view?c='.$this->class_id.'&tid='.$val['class_topic_id'].'&p='.$p.'">'.$p.'</a>&nbsp;';
+				$p++;
+			}
+			echo $str;
+		}
+	?>
+	</td>
+	<td><a href=""><?= $val['topicAuthor'] ?></a></td>
+	<td class="txtc"><?= $val['class_topic_reply_num'] ?></td>
+	<td class="txtc"><?= $val['class_topic_view_num'] ?></td>
+	<td class="txtc">
+		<?php if($val['replyAuthor'] != null)
+		{
+			echo date('m-d H:i',$val['class_topic_last_reply_time']).' / ';
+			echo "<a href='#'>{$val['replyAuthor']}</a>";
+		}
+		else echo '无'
+		?>
+	</td>
+</tr>
+<?php endforeach; else: ?>
+<tr><td>无</td></tr>
+<?php endif; ?>
+</table>
+<div class="pagination"><?= $this->pagination ?></div>
+</div>
+
+<script type="text/javascript">
+	$('a[href$="type=<?= $this->type ?>"]').addClass('focus');
+	$('.list_item').each(function(i){ if(i%2 == 0) $(this).find('td').css('background','#f5f5f5'); });
+</script>

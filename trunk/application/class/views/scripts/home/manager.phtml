@@ -2,6 +2,7 @@
 <!-- 管理条目 ///////////////////////////////////// -->
 <p class="toolbar">
 <a href="/member/my/address/"><img src="/static/images/icon/user.gif" /> 邀请加入</a>
+<a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/comments.gif" /> 班级话题</a>
 <a href="#"><img src="/static/images/icon/email.gif" /> 群发邮件</a>
 <a href="/class/addressbook?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
 <a href="#"><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
@@ -22,38 +23,7 @@
 <div id="class_picture">尚未开放..</div>
 
 <!-- 班级话题 /////////////////////////////// -->
-<table id="class_topics" class="cont_list mu10">
-<tr>
-<th colspan="4" class="txtl quiet">
-<img src="/static/images/icon/comments.gif" /> <b>话题讨论</b>
-<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=">所有</a>
-<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=hot">热门</a>
-<a href="home?c=<?= $this->class_base_info['class_id'] ?>&topic_type=elite">精华</a></th>
-<th class="txtr"><a href="/class/topic/post?c=<?= $this->class_base_info['class_id'] ?>" style="background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:18px;">新话题</a></th>
-</tr>
-<tr class="quiet">
-	<td>主题</td>
-	<td>作者</td>
-	<td class="txtc">回复</td>
-	<td class="txtc">阅读</td>
-	<td>最后回复</td>
-</tr>
-<?php if($this->topics != null): foreach ($this->topics as $key => $val): ?>
-<tr class="list_item">
-	<td><a href="/class/topic/view?c=<?= $this->class_base_info['class_id'] ?>&tid=<?= $val['class_topic_id'] ?>"><?= $val['class_topic_title'] ?></a></td>
-	<td><a href=""><?= $val['realName'] ?></a></td>
-	<td class="txtc"><?= $val['class_topic_reply_num'] ?></td>
-	<td class="txtc"><?= $val['class_topic_view_num'] ?></td>
-	<td><?= $val['class_topic_last_reply'] ?></td>
-</tr>
-<?php endforeach; else: ?>
-<tr><td>无</td></tr>
-<?php endif; ?>
-</table>
-<script type="text/javascript">
-	$('a[href$="topic_type=<?= $this->topic_type ?>"]').addClass('focus');
-	$('.list_item').each(function(i){ if(i%2 == 0) $(this).find('td').css('background','#f5f5f5'); });
-</script>
+
 
 <!-- 班级活动 /////////////////////////////// -->
 <div id="class_activity" class="hide">

@@ -14,56 +14,7 @@
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
-		# 处理提交的回复
-		function posttopicreplyAction()
-		{
-			$request = $this->getRequest();
-			if($request->isXmlHttpRequest())
-			{
-				$this->view->page = (int)$request->getPost('p',1);
-				$this->view->topic_id = (int)$request->getPost('tid');
-				$this->view->class_id = $this->_classId;
-				$this->render('topic-reply-form');
-			}
-		}
-		
-		# 显示话题回复表单
-		function topicreplyformAction()
-		{	
-			$request = $this->getRequest();
-			if($request->isXmlHttpRequest())
-			{
-				$this->view->page = (int)$request->getPost('p',1);
-				$this->view->topic_id = (int)$request->getPost('tid');
-				$this->view->class_id = $this->_classId;
-				$this->render('topic-reply-form');
-			}	
-		}
-		
-		# 返回指定的话题回复内容页数
-		function fetchtopicreplyAction()
-		{
-			$request = $this->getRequest();
-			if($request->isXmlHttpRequest())
-			{
-				$page = (int)$request->getPost('p',1);
-				$topic_id = (int)$request->getPost('tid');
-				$rows = DbModel::fetchTopicReply($topic_id, 10, $page);
-				Page::$pagesize = 10;
-				Page::create(array(
-					'href_open' => '<a href="javascript:fetchTopicReply('.$topic_id.',%d)">',
-					'href_close' => '</a>',
-					'num_rows' => $rows['numrows'],
-					'cur_page' => $page
-				));
-				$this->view->page = $page;
-				$this->view->topic_id = $topic_id;
-				$this->view->class_id = $this->_classId;
-				$this->view->pagination = Page::$page_str;
-				$this->view->replies = $rows['rows'];
-				$this->render('topic-reply');
-			}
-		}
+		/* 通讯录相关 //////////////////////////////////////////////////////// */
 		
 		# 编辑自己所在班级的通讯录信息
 		function myclassaddressbookAction()
@@ -148,6 +99,225 @@
 			}
 		}
 		
+		/* 话题相关 //////////////////////////////////////////////////////// */
+		
+		# 删除回复
+		function delreplyAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是成员
+				$reply_id = (int)$request->getPost('reply_id');
+				$topic_id = (int)$request->getPost('topic_id');
+				$db = Zend_Registry::get('dbClass');
+				if($db->delete('tbl_class_reply',
+						array('class_reply_id = '.$reply_id,'class_reply_author = '.$this->_uid)) > 0)
+				{
+					DbModel::topicReplyNumCut($topic_id);
+					$this->view->suc_tip = '成功删除回复';
+					echo Commons::js_jump('',1);
+					$this->render('success');
+				}
+				else 
+				{
+					$this->view->err_tip = '回复删除失败';
+					$this->render('rerror');
+				}
+			}
+		}
+		
+		# 删除话题
+		function deltopicAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
+				$topic_id = (int)$request->getPost('topic_id');
+				$db = Zend_Registry::get('dbClass');
+				if($db->delete('tbl_class_topic','class_topic_id = '.$topic_id) > 0)
+				{
+					$db->delete('tbl_class_reply','class_topic_id = '.$topic_id);
+					$this->view->suc_tip = '成功删除话题';
+					echo Commons::js_jump('/class/topic/list?c='.$this->_classId,1);
+					$this->render('success');
+				}
+				else 
+				{
+					$this->view->err_tip = '话题删除失败';
+					$this->render('rerror');
+				}
+			}
+		}
+		
+		# 话题设为精华操作/取消操作
+		function elitetopicAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
+				$topic_id = (int)$request->getPost('topic_id');
+				$is_elite = $request->getPost('is_elite');
+				$this->view->suc_tip = '<b>设置精华!</b> 点击“精华”可撤消';
+				if($is_elite == 0) $is_elite = 1;
+				else 
+				{
+					$is_elite = 0;
+					$this->view->suc_tip = '<b>撤消精华!</b> 点击“精华”可恢复';
+				}
+				$db = Zend_Registry::get('dbClass');
+				if($db->update('tbl_class_topic',array('class_topic_elite'=>$is_elite),
+								'class_topic_id='.$topic_id)==1)
+				$this->render('success');
+			}
+		}
+		
+		# 话题顶置操作/取消操作
+		function fixtopicAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
+				$topic_id = (int)$request->getPost('topic_id');
+				$is_up = $request->getPost('is_up');
+				$this->view->suc_tip = '<b>顶置成功!</b> 点击“顶置”可撤消';
+				if($is_up == 0) $is_up = 1;
+				else 
+				{
+					$is_up = 0;
+					$this->view->suc_tip = '<b>已撤消顶置!</b> 点击“顶置”可恢复';
+				}
+				$db = Zend_Registry::get('dbClass');
+				if($db->update('tbl_class_topic',array('class_topic_up'=>$is_up),
+								'class_topic_id='.$topic_id)==1)
+				$this->render('success');
+			}
+		}
+		
+		# 修改自己的话题
+		function classtopicmodAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
+				if($this->_uid != $request->getPost('author')) exit(); // 不是自己发表
+				$inputChain = new InputChains();
+				$topic_id = (int)$request->getPost('topic_id');
+				$topic_title = $inputChain->topicTitle($request->getPost('topic_title'));
+				$topic_content = $inputChain->noEmpty($request->getPost('content'),'话题内容');
+				$topic_tag = $inputChain->topicTag($request->getPost('tag'));
+				$topic_public = (int)$request->getPost('topic_public');
+				if(null != $inputChain->getMessages())
+				{
+					// 弹出错误
+					$this->view->err_tip = $inputChain->getMessages();
+					$this->render('error');
+				}
+				else 
+				{
+					$data = array(
+						'class_topic_title' => $topic_title,
+						'class_topic_content' => $topic_content,
+						'class_topic_public' => $topic_public,
+						'class_topic_tag' => $topic_tag,
+						'class_topic_mod_time' => time()
+					);
+					// 开始数据更新
+					$db = Zend_Registry::get('dbClass');
+					if($db->update('tbl_class_topic',$data,'class_topic_id = '.$topic_id) > 0)
+					// 弹出提示
+					$this->view->suc_tip = '话题更新成功！';
+					echo Commons::js_jump('',2);
+					$this->render('success');
+				}
+			}
+		}
+		
+		# 处理提交的回复
+		function posttopicreplyAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->topic_id = (int)$request->getPost('tid');
+				$this->view->class_id = $this->_classId;
+				$inputChain = new InputChains();
+				$topic_id = (int)$request->getPost('topic_id');
+				$reply_title = strip_tags(trim($request->getPost('reply_title')));
+				$reply_content = $inputChain->noEmpty($request->getPost('content'),'回复内容');
+				if(null != $inputChain->getMessages())
+				{
+					// 弹出错误
+					$this->view->err_tip = $inputChain->getMessages();
+					$this->render('error');
+				}
+				else 
+				{
+					$db = Zend_Registry::get('dbClass');
+					if($db->insert('tbl_class_reply',array(
+										'class_reply_author' => $this->_uid,
+										'class_topic_id' => $topic_id,
+										'class_reply_title' => $reply_title,
+										'class_reply_content' => Commons::html2str($reply_content),
+										'class_reply_time' => time())) >0)
+					DbModel::topicReplyNumInc($topic_id, $this->_uid);
+					else 
+					{
+						// 弹出错误
+						$this->view->err_tip = '回复失败~';
+						$this->render('error');
+					}
+				}
+			}	
+		}
+		
+		# 显示话题回复表单
+		function topicreplyformAction()
+		{	
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->topic_id = (int)$request->getPost('tid');
+				$this->view->class_id = $this->_classId;
+				$this->render('topic-reply-form');
+			}	
+		}
+		
+		# 返回指定的话题回复内容页数
+		function fetchtopicreplyAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$pagesize = 5;
+				$page = (int)$request->getPost('p',1);
+				$topic_id = (int)$request->getPost('tid');
+				$rows = DbModel::fetchTopicReply($topic_id, $pagesize, $page);
+				Page::$pagesize = $pagesize;
+				Page::create(array(
+					'href_open' => '<a href="javascript:fetchTopicReply('.$this->_classId.','.$topic_id.',%d)">',
+					'href_close' => '</a>',
+					'num_rows' => $rows['numrows'],
+					'cur_page' => $page
+				));
+				$this->view->pages = Page::$num_pages;
+				if($rows['numrows']%$pagesize == 0)
+				$this->view->pages += 1;
+				$this->view->page = $page;
+				$this->view->topic_id = $topic_id;
+				$this->view->class_id = $this->_classId;
+				$this->view->pagination = Page::$page_str;
+				$this->view->replies = $rows['rows'];
+				$this->render('topic-reply');
+			}
+		}
+		
 		# 班级新讨论提交
 		function classtopicnewAction()
 		{
@@ -191,13 +361,16 @@
 						if($db->insert('tbl_class_topic',$data) > 0)
 						// 弹出提示
 						$this->view->suc_tip = '话题发表成功！';
+						echo Commons::js_jump('/class/topic/list?c='.$this->classId,2);
 						$this->render('success');
 					}
 				}
 			}
 		}
 		
-		# 开除班级管理员 ----------------------------------------------
+		/* 成员管理 //////////////////////////////////////////////////////// */
+		
+		# 开除班级管理员
 		function classmemberlvldownAction()
 		{
 			$request = $this->getRequest();
@@ -224,7 +397,7 @@
 			}
 		}
 		
-		# 班级管理员列表 -----------------------------------------------
+		# 班级管理员列表
 		function classmanagerlistAction()
 		{
 			if($this->getRequest()->isXmlHttpRequest())
@@ -241,7 +414,7 @@
 			}
 		}
 		
-		# 踢出班级 -----------------------------------------------------
+		# 踢出班级
 		function classmemberoutAction()
 		{
 			$request = $this->getRequest();
@@ -261,7 +434,7 @@
 			}
 		}
 		
-		# 提升为班级管理员 ----------------------------------------------
+		# 提升为班级管理员
 		function classmemberlvlupAction()
 		{
 			$request = $this->getRequest();
@@ -288,7 +461,7 @@
 			}
 		}
 		
-		# 班级成员列表 ---------------------------------------------------
+		# 班级成员列表
 		function classmemberlistAction()
 		{
 			if($this->getRequest()->isXmlHttpRequest())
@@ -305,7 +478,9 @@
 			}
 		}
 		
-		# 班级申请删除 -------------------------------------------------
+		/* 申请相关 //////////////////////////////////////////////////////// */
+		
+		# 班级申请删除
 		function classapplydelAction()
 		{
 			$request = $this->getRequest();
@@ -324,7 +499,7 @@
 			}
 		}
 		
-		# 班级申请批准 -------------------------------------------------
+		# 班级申请批准
 		function classapplypassAction()
 		{
 			$request = $this->getRequest();
@@ -348,7 +523,7 @@
 			}
 		}
 		
-		# 班级申请加入的详细信息查看 --------------------------------------
+		# 班级申请加入的详细信息查看
 		function classapplydetailAction()
 		{
 			if($this->getRequest()->isXmlHttpRequest())
@@ -361,7 +536,7 @@
 			}
 		}
 		
-		# 班级申请加入列表 -----------------------------------------------
+		# 班级申请加入列表
 		function classapplylistAction()
 		{
 			if($this->getRequest()->isXmlHttpRequest())
@@ -376,40 +551,7 @@
 			}
 		}
 		
-		# 班级公告修改动作 -----------------------------------------------
-		function classnoticemodAction()
-		{
-			$request = $this->getRequest();
-			if($request->isXmlHttpRequest())
-			{
-				$class_notice = Commons::html2str(strip_tags(trim($request->getPost('notice_content'))));
-				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
-				$db = Zend_Registry::get('dbClass');
-				if($db->update('tbl_class',
-								array('class_notice'=>$class_notice),
-								'class_id = '.$this->_classId))
-				$this->view->content = $class_notice;
-				$this->view->class_id = $this->_classId;
-				$this->render('class-notice');
-			}
-		}
-		
-		# 编辑班级公告获取 -----------------------------------------------
-		function classnoticefetchAction()
-		{
-			if($this->getRequest()->isXmlHttpRequest())
-			{
-				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
-				$db = Zend_Registry::get('dbClass');
-				$row = $db->fetchRow('SELECT `class_notice` FROM `tbl_class` 
-							   		  WHERE `class_id` = ?',$this->_classId);
-				$this->view->content =strip_tags($row['class_notice']);
-				$this->view->class_id = $this->_classId;
-				$this->render('class-notice');
-			}
-		}
-		
-		# 加入班级连接反馈 ------------------------------------------------
+		# 加入班级连接反馈
 		function joinAction()
 		{
 			if($this->getRequest()->isXmlHttpRequest())
@@ -431,7 +573,7 @@
 			}
 		}
 		
-		# 申请加入班级表单 ------------------------------------------------
+		# 申请加入班级表单
 		function joinapplyAction()
 		{
 			$request = $this->getRequest();
@@ -461,6 +603,41 @@
 						echo '成功完成申请！请等待审核';
 					}
 				}
+			}
+		}
+		
+		/* 班级公告相关 //////////////////////////////////////////////////////// */
+		
+		# 班级公告修改动作
+		function classnoticemodAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$class_notice = Commons::html2str(strip_tags(trim($request->getPost('notice_content'))));
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
+				$db = Zend_Registry::get('dbClass');
+				if($db->update('tbl_class',
+								array('class_notice'=>$class_notice),
+								'class_id = '.$this->_classId))
+				$this->view->content = $class_notice;
+				$this->view->class_id = $this->_classId;
+				$this->render('class-notice');
+			}
+		}
+		
+		# 编辑班级公告获取
+		function classnoticefetchAction()
+		{
+			if($this->getRequest()->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是管理员
+				$db = Zend_Registry::get('dbClass');
+				$row = $db->fetchRow('SELECT `class_notice` FROM `tbl_class` 
+							   		  WHERE `class_id` = ?',$this->_classId);
+				$this->view->content =strip_tags($row['class_notice']);
+				$this->view->class_id = $this->_classId;
+				$this->render('class-notice');
 			}
 		}
 	}

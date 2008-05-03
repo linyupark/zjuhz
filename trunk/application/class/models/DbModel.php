@@ -2,6 +2,14 @@
 
 	class DbModel
 	{	
+		/**
+		 * 获取话题回复
+		 *
+		 * @param int $topic_id
+		 * @param int $pagesize
+		 * @param int $page
+		 * @return array
+		 */
 		static function fetchTopicReply($topic_id, $pagesize, $page = 1)
 		{
 			$db = Zend_Registry::get('dbClass');
@@ -18,6 +26,36 @@
 											 	 WHERE `class_topic_id` = '.$topic_id.' LIMIT '.$offset.','.$pagesize);
 			}
 			return $return;
+		}
+		
+		/**
+		 * 减少话题的回复次数
+		 *
+		 * @param int $topic_id
+		 * @return int
+		 */
+		static function topicReplyNumCut($topic_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->update('tbl_class_topic',
+								array('class_topic_reply_num'=>new Zend_Db_Expr('class_topic_reply_num-1')),
+								'`class_topic_id` ='.(int)$topic_id);
+		}
+		
+		/**
+		 * 增加话题的回复次数
+		 *
+		 * @param int $topic_id
+		 * @return int
+		 */
+		static function topicReplyNumInc($topic_id, $uid)
+		{
+			$db = Zend_Registry::get('dbClass');
+			return $db->update('tbl_class_topic',
+								array('class_topic_reply_num'=>new Zend_Db_Expr('class_topic_reply_num+1'),
+									  'class_topic_last_reply_time'=>time(),
+									  'class_topic_last_reply_author'=>$uid),
+								'`class_topic_id` ='.(int)$topic_id);
 		}
 		
 		/**
@@ -112,7 +150,7 @@
 		 * @param string $type up置顶/elite精华/...可根据需要再做添加
 		 * @return array 班级话题信息数据列
 		 */
-		static function getClassTopic($class_id, $role, $type = '', $page = 1)
+		static function getClassTopic($class_id, $role = null, $type = '', $pagesize = 1, $page = 1)
 		{
 			$where = array();
 			if($role == 'visitor') $where[] = '`class_topic_public` = 1';
@@ -122,13 +160,17 @@
 			else $where = '';
 			
 			$db = Zend_Registry::get('dbClass');
-			//$row = $db->fetchRow('SELECT COUNT(`class_topic_id`) AS ')
-			//$return['numrows'] = 
-			return $db->fetchAll('SELECT `class_topic_id`,`class_topic_author`,`realName`,
+			$row = $db->fetchRow('SELECT COUNT(`class_topic_id`) AS `numrows` 
+								  FROM `tbl_class_topic`'.$where);
+			$return['numrows'] = $row['numrows'];
+			$offset = ($page-1)*$pagesize;
+			$return['rows'] = $db->fetchAll('SELECT `class_topic_elite`,`class_topic_id`,`class_topic_author`,`topicAuthor`,`replyAuthor`,
 										 `class_topic_title`,`class_topic_pub_time`,`class_topic_reply_num`,`class_topic_up`,
-										 `class_topic_view_num`,`class_topic_last_reply` 
+										 `class_topic_view_num`,`class_topic_last_reply_time` 
 						   		  FROM `vi_class_topic`'.$where.' 
-						   		  ORDER BY `class_topic_up` DESC, `class_topic_pub_time` DESC, `class_topic_reply_num` DESC');
+						   		  ORDER BY `class_topic_up` DESC, `class_topic_pub_time` DESC, `class_topic_reply_num` DESC 
+						   		  LIMIT '.$offset.','.$pagesize);
+			return $return;
 		}
 		
 		/**
