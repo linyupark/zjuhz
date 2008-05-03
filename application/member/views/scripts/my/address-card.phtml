@@ -1,54 +1,43 @@
 <table>
-	<tr>
-		<td>
-			<form class="home_form" name="frmFind" id="frmFind" autocomplete="off">
-			<input type="button" class="btn" value="新建名片" name="btnInsert" id="btnInsert" onclick="javascript:docardBefore('<?= $this->cid; ?>');return false;" />
-			</form>
-		</td>
-		<td>
-			<form>
-			<select class="inputtxt" name="gid" id="gid"><option>所有组</option><?php foreach ($this->groupList as $value)  { ?>
-			<option value="<?= $value['gid']; ?>"><?= $value['gname']; ?></option><?php } ?></select>
-			<select class="inputtxt" name="field" id="field"><option value="cname">按姓名</option><option value="mobile">按手机</option><option value="eMail">按邮箱</option><option value="qq">按QQ</option><option value="msn">按MSN</option><option value="address">按地址</option><option value="memo">按备注</option></select>
-			<input type="text" class="inputtxt" value="" name="wd" id="wd" /> 
-			<input type="submit" class="btn" value="查找" />
-			</form>
-		</td>
-	</tr>
+  <tr>
+	<td><form class="home_form" name="frmFind" id="frmFind" autocomplete="off"><select name="gid" id="gid"><option>所有组</option><?php foreach ($this->groupList as $value)  { ?><option value="<?= $value['gid']; ?>" <?= ($this->gid == $value['gid'] ? 'selected' : ''); ?>><?= $value['gname']; ?></option><?php } ?></select>&nbsp;<?= $this->formSelect('field', $this->field, null, $this->find) ?>&nbsp;<input type="text" class="inputtxt" name="wd" id="wd" value="<?= $this->wd; ?>" />&nbsp;<input type="submit" class="btn" value="查找" /></form></td>
+	<td><button class="btn" onclick="location.href='/member/my/address/type/docard/'">新建名片</button></td>		
+  </tr>
 </table>
 
-<?php if ($this->total > 0) { ?>
+<?php if ($this->cardList) { ?>
+
+<p class="tip"><img src="/static/images/icon/info.gif" align="absmiddle" />&nbsp;&nbsp;将名片与校友关联便可更方便地查看资料；关联分为邀请(若校友未注册)和直接输校友UID(已注册)。</p>
+
 <table class="control_list">
 <tr>
-<th class="txtl" width="10%">姓名</th>
-<th class="txtl" width="50%">已建立联络方式</th>
-<th class="txtl" width="20%">所属组</th>
-<th class="txtl" width="20%">选项</th>
+<th class="txtl" width="27%">(状态) 姓名</th>
+<th class="txtl" width="27%">已建立的联系信息</th>
+<th class="txtl" width="25%">所属组</th>
+<th class="txtl" width="21%">选项</th>
 </tr>
 
 <?php foreach ($this->cardList as $value) { ?>
 <tr>
-
-
 <td class="txtl">
-<a href="#" onclick="javascript:docardBefore('<?= $value['cid']; ?>');return false;"><?= $value['cname']; ?></a>
+<img src="/static/images/bullet/<?= $this->status[$value['status']]; ?>.gif"> <?php if ($value['iuid']) { ?><a title="<?= $value['iuid']; ?>"><?php } echo $value['cname']; if ($value['iuid']) { ?></a><?php } ?>
 </td>
 
 <td class="txtl">
 <?php if (!empty($value['mobile'])) { ?><img src="/static/images/icon/phone.gif" alt="<?= $value['mobile']; ?>" />&nbsp;<?php  }; ?>
-<?php if (!empty($value['eMail'])) { ?><a href="mailto:<?= $value['eMail']; ?>"><img src="/static/images/icon/email.gif" alt="向该好友发邮件" /></a>&nbsp;<?php  }; ?>
-<?php if (!empty($value['qq'])) { ?><a target=blank href=http://wpa.qq.com/msgrd?V=1&Uin=<?= $value['qq']; ?>&Site=zjuhz.com&Menu=yes><img src="/static/images/icon/qq.gif" alt="与该好友QQ联系" /></a>&nbsp;<?php  }; ?>
-<?php if (!empty($value['msn'])) { ?><a href=msnim:chat?contact=<?= $value['msn']; ?>><img src="/static/images/icon/msn.gif" alt="与该好友MSN联系" /></a>&nbsp;<?php  }; ?>
+
+<?php if (!empty($value['eMail'])) { ?><a href="mailto:<?= $value['eMail']; ?>"><img src="/static/images/icon/email.gif" alt="邮件联系" /></a>&nbsp;<?php  }; ?>
+
+<?php if (!empty($value['qq'])) { ?><a target=blank href=http://wpa.qq.com/msgrd?V=1&Uin=<?= $value['qq']; ?>&Site=zjuhz.com&Menu=yes><img src="/static/images/icon/qq.gif" alt="QQ联系" /></a>&nbsp;<?php  }; ?>
+
+<?php if (!empty($value['msn'])) { ?><a href=msnim:chat?contact=<?= $value['msn']; ?>><img src="/static/images/icon/msn.gif" alt="MSN联系" /></a>&nbsp;<?php  }; ?>
+
 <?php if (!empty($value['address'])) { ?><img src="/static/images/icon/building.gif" alt="<?= $value['address']; ?>" /><?php  }; ?>
 </td>
 
-<td class="txtl">
-<?= $value['gname']; ?>
-</td>
+<td class="txtl"><?= $value['gname']; ?></td>
 
-<td class="txtl">
-<a href="#" onclick="javascript:docardBefore('<?= $value['cid']; ?>');return false;">修改</a>&nbsp;&nbsp;<a href="#" onclick="javascript:doinviteBefore('<?= $value['cid']; ?>');return false;">邀请</a>
-</td>
+<td class="txtl"><a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">查看</a>&nbsp;<a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">修改</a>&nbsp;<?php if (3 == $value['status']) { ?><a href="#" onClick="javascript:copyToClipBoard('http://www.zjuhz.com/member/register/invite/ikey/<?= $value['cid']; ?>/', '邀请好友注册的链接已复制成功！您可在QQ/MSN/EMAIL等处粘贴给好友即可。\n您的好友通过此链接注册且填写的信息与您通讯录上的相符，注册才能成功。')">邀请</a><?php } else { ?><?php } ?></td>
 
 </tr>
 <?php } ?>

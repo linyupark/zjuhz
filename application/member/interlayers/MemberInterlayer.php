@@ -16,42 +16,42 @@
 abstract class MemberInterlayer
 {
 	/**
-     * 会员模块配置对象
+     * 会员模块配置
      *
      * @var object
      */
 	protected $_iniMember = null;
 
 	/**
-     * AddressCardModel对象
+     * AddressCardModel
      *
      * @var object
      */
 	protected $_AddressCardModel = null;
 
 	/**
-     * AddressGroupModel对象
+     * AddressGroupModel
      *
      * @var object
      */
 	protected $_AddressGroupModel = null;
 
 	/**
-     * UserContactModel对象
+     * UserContactModel
      *
      * @var object
      */
 	protected $_UserContactModel = null;
 
 	/**
-     * UserExtModel对象
+     * UserExtModel
      *
      * @var object
      */
 	protected $_UserExtModel = null;
 
 	/**
-     * UserModel对象
+     * UserModel
      *
      * @var object
      */
@@ -77,10 +77,10 @@ abstract class MemberInterlayer
     }
 
     /**
-     * 单件模式载入类
+     * 单件模式初始化类
      * 
      * @param string $className
-     * @return object or false
+     * @return object or boolean
      */
 	protected static function _getInstance($className)
     {
@@ -96,6 +96,41 @@ abstract class MemberInterlayer
     	}
 
     	return false;
+    }
+
+    /**
+     * 单件模式初始化属性
+     * 
+     * @param string $className
+     * @return void
+     */
+	protected function _load($className)
+    {
+    	$thisName = "_{$className}";
+
+    	if (!is_object($this->$thisName))
+    	{
+    		$this->$thisName = $this->_getInstance($className);
+    	}
+    }
+
+    /**
+     * 数据库初始化
+     * 
+     * @return void
+     */
+    private function _setDao()
+    {
+    	if (!Zend_Registry::isRegistered('dao'))
+    	{
+			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter, 
+			    $this->_iniMember->db->default->params->toArray()
+			 );
+
+			$dao->query('set names utf8');
+			Zend_Db_Table::setDefaultAdapter($dao);
+			Zend_Registry::set('dao', $dao);
+    	}
     }
 
     /**
@@ -115,38 +150,5 @@ abstract class MemberInterlayer
      */
     protected function _initFilter()
     {
-    }
-
-    /**
-     * 类实例
-     * 
-     * @param string $className
-     * @return void
-     */
-	protected function _load($className)
-    {
-    	$thisName = "_{$className}";
-
-    	if (!is_object($this->$thisName))
-    	{
-    		$this->$thisName = $this->_getInstance($className);
-    	}
-    }
-
-    /**
-     * 初始化数据库
-     * 
-     * @return void
-     */
-    private function _setDao()
-    {
-    	if (!Zend_Registry::isRegistered('dao'))
-    	{
-			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter, 
-			    $this->_iniMember->db->default->params->toArray());
-			$dao->query('set names utf8');
-			Zend_Db_Table::setDefaultAdapter($dao);
-			Zend_Registry::set('dao', $dao);
-    	}
     }
 }

@@ -16,7 +16,7 @@
 class UserExtModel
 {
     /**
-     * 数据表名
+     * 数据表名称
      * @var string
      */
     protected $_name = 'tbl_user_ext';
@@ -28,7 +28,7 @@ class UserExtModel
     protected $_primary = 'uid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
      */
     protected $_dao = null;

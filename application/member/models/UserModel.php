@@ -16,7 +16,7 @@
 class UserModel
 {
     /**
-     * 数据表名
+     * 数据表名称
      * @var string
      */
     protected $_name = 'tbl_user';
@@ -28,7 +28,7 @@ class UserModel
     protected $_primary = 'uid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
      */
     protected $_dao = null;
@@ -40,7 +40,6 @@ class UserModel
      */
     public function __construct()
     {
-    	// 载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -55,7 +54,8 @@ class UserModel
     }
 
     /**
-     * 会员注册
+     * 会员账号注册
+     * 返回新注的uid 若为0注册失败
      * 
      * @param array $args
      * @return integer
@@ -70,21 +70,23 @@ class UserModel
     }
 
     /**
-     * 会员登录
+     * 会员账号登录
+     * 返回至少包含uid的信息数组 uid为0登录失败
      * 
      * @param array $args
      * @return array
      */
 	public function callLogin($args)
     {
-		$stmt = $this->_dao->prepare('CALL sp_login(:username, :password, :lastIp);');
+		$stmt = $this->_dao->prepare('CALL sp_login
+		    (:username, :password, :lastIp);');
 		$stmt->execute($args);
 
 		return $stmt->fetch();
     }
 
     /**
-     * 登录帐号存在与否
+     * 账号是否存在
      * 
      * @param string $username
      * @return integer
@@ -97,7 +99,7 @@ class UserModel
     }
 
     /**
-     * 昵称存在与否
+     * 昵称是否存在
      * 
      * @param string $nickname
      * @return integer

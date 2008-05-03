@@ -53,7 +53,7 @@ class AddressGroupLogic extends MemberInterlayer
      * 组资料写入或更新
      * 
      * @param array $args
-     * @return object
+     * @return integer
      */
 	public function insertOrUpdate($args)
     {    	
@@ -63,7 +63,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 主键存在与否
+     * 主键是否存在
      * 
      * @param string $gid
      * @return integer
@@ -74,7 +74,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 查询列表
+     * 查询组列表
      * 
      * @param integer $uid
      * @return array
@@ -108,7 +108,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 常规删除数据
+     * 删除组记录
      * 
      * @param array $args
      * @return integer

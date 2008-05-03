@@ -15,7 +15,7 @@
 class AddressCardModel
 {
     /**
-     * 数据表名
+     * 数据表名称
      * @var string
      */
     protected $_name = 'tbl_user_address_card';
@@ -27,7 +27,7 @@ class AddressCardModel
     protected $_primary = 'cid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
      */
     protected $_dao = null;
@@ -39,7 +39,6 @@ class AddressCardModel
      */
     public function __construct()
     {
-    	// 载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -54,20 +53,20 @@ class AddressCardModel
     }
 
     /**
-     * 主键存在与否
+     * 主键是否存在
      * 
      * @param string $cid
      * @return integer
      */
 	public function selectPrimaryExist($cid)
     {
-    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
+    	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
     	    WHERE {$this->_primary} = :cid;", array('cid' => $cid)
     	);
     }
 
     /**
-     * 查询列表
+     * 查询名片列表
      * 
      * @param string $gid
      * @param integer $uid
@@ -75,14 +74,29 @@ class AddressCardModel
      */
 	public function selectList($gid, $uid)
     {
-		return $this->_dao->fetchRow("SELECT cname,mobile,eMail,qq,msn,address,postcode,memo 
+		return $this->_dao->fetchAll("SELECT * 
 		    FROM {$this->_name} WHERE gid = :gid AND uid = :uid;", 
 		    array('gid' => $gid, 'uid' => $uid)
 		);
     }
 
     /**
-     * 查询详细
+     * 查询记录数
+     * 
+     * @param string $gid
+     * @param integer $uid
+     * @return array
+     */
+	public function selectCount($gid, $uid)
+    {
+		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
+		    FROM {$this->_name} WHERE gid = :gid AND uid = :uid;", 
+		    array('gid' => $gid, 'uid' => $uid)
+		);
+    }
+
+    /**
+     * 查询详细记录
      * 
      * @param string $cid
      * @param integer $uid
@@ -97,7 +111,7 @@ class AddressCardModel
     }
 
     /**
-     * 查询列表-查询
+     * 列表自定义查找
      * 
      * @param string $where
      * @param string $limit
@@ -112,12 +126,12 @@ class AddressCardModel
     }
 
     /**
-     * 查询列表-统计
+     * 列表自定义统计
      * 
      * @param string $where
      * @return integer
      */
-	public function selectCountList($where)
+	public function selectFindCount($where)
     {
 		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
 		    FROM {$this->_name} AS c, tbl_user_address_group AS g {$where};");

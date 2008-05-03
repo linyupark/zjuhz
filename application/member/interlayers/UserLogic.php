@@ -64,7 +64,7 @@ class UserLogic extends MemberInterlayer
      * 会员登录
      * 
      * @param array $args
-     * @return array or false
+     * @return array or boolean
      */
 	public function login($args)
 	{

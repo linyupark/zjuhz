@@ -15,7 +15,7 @@
 class AddressGroupModel
 {
     /**
-     * 数据表名
+     * 数据表名称
      * @var string
      */
     protected $_name = 'tbl_user_address_group';
@@ -27,7 +27,7 @@ class AddressGroupModel
     protected $_primary = 'gid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
      */
     protected $_dao = null;
@@ -54,7 +54,7 @@ class AddressGroupModel
     }
 
     /**
-     * 主键存在与否
+     * 主键是否存在
      * 
      * @param string $gid
      * @return integer
@@ -67,7 +67,7 @@ class AddressGroupModel
     }
 
     /**
-     * 查询列表
+     * 查询组列表
      * 
      * @param integer $uid
      * @return array
@@ -80,7 +80,7 @@ class AddressGroupModel
     }
 
     /**
-     * 常规写入数据
+     * 写入组数据
      * 
      * @param array $args
      * @return integer
@@ -91,7 +91,7 @@ class AddressGroupModel
     }
 
     /**
-     * 常规更新数据
+     * 更新组数据
      * 
      * @param array $args
      * @param string $gid
@@ -105,7 +105,7 @@ class AddressGroupModel
     }
 
     /**
-     * 常规删除数据
+     * 删除组记录
      * 
      * @param array $args
      * @return integer
@@ -113,7 +113,7 @@ class AddressGroupModel
 	public function delete($args)
     {
     	$stmt = $this->_dao->prepare("DELETE FROM {$this->_name} 
-    	    WHERE gid = :gid AND uid = :uid AND count = 0;");
+    	    WHERE gid = :gid AND uid = :uid;");
 		$stmt->execute($args);
 
 		return $stmt->rowCount();

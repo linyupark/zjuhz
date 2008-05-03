@@ -10,21 +10,14 @@
 
 
 /**
- * 会员中心-登录流程控制
+ * 会员中心-登录控制
  */
 class LoginController extends Zend_Controller_Action
 {
 	/**
-     * 项目模块配置对象
-     *
+     * 公用Session
+     * 
      * @var object
-     */
-	private $_iniMember = null;
-
-	/**
-     * 公用SESSION对象
-     *
-     * @var array
      */
 	private $_sessCommon = null;
 
@@ -35,21 +28,25 @@ class LoginController extends Zend_Controller_Action
      */
     public function init()
     {
-		$this->_iniMember  = Zend_Registry::get('iniMember'); // 载入项目配置
-		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
-
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+    	$this->_sessCommon = Zend_Registry::get('sessCommon');
     }
 
     /**
-     * 登录
+     * 通用登录页
      * 
      * @return void
      */
     public function indexAction()
     {
-		$this->_redirect('/my/');
+    	if ('member' === $this->_sessCommon->role)
+    	{
+    		$this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'));
+    		exit;
+    	}
+
+    	$this->view->headTitle(Zend_Registry::get('iniMember')->head->titleLogin);
+    	$this->view->uname    = $_COOKIE['zjuhz_member']['alive']; // 记住账号
+    	$this->view->redirect = $_SERVER['HTTP_REFERER']; // 上页来源
     }
 
 	/**
@@ -59,9 +56,12 @@ class LoginController extends Zend_Controller_Action
      */
 	public function dologinAction()
 	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			$postArgs       = $this->getRequest()->getPost();
+			$postArgs = $this->getRequest()->getPost();
 			$postArgs['ip'] = Commons::getIp();
 
 			if ($loginArgs = LoginFilter::init()->login($postArgs))
@@ -73,8 +73,7 @@ class LoginController extends Zend_Controller_Action
 					$this->_sessCommon->login = $result;
 
 					// 记住账号
-					((null === $postArgs['alive']) ?  
-					    setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
+					((null === $postArgs['alive']) ? '' : 
 					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/')
 					);
 
@@ -85,19 +84,9 @@ class LoginController extends Zend_Controller_Action
 					// 登录失败
 					Zend_Session::destroy(true);
 
-					echo $this->_iniMember->hint->loginFailure;
+					echo Zend_Registry::get('iniMember')->hint->loginFailure;
 				}
 			}
 		}
 	}
-
-    /**
-     * 会员登录-退出登录
-     * 
-     * @return void
-     */
-	public function dologoutAction()
-    {
-    	$this->_forward('index', 'Logout');
-    }
 }

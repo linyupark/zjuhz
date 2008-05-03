@@ -53,7 +53,7 @@ class UserExtLogic extends MemberInterlayer
      * 常规更新数据
      * 
      * @param array $args
-     * @param integer $gid
+     * @param integer $uid
      * @return integer
      */
 	public function update($args, $uid)

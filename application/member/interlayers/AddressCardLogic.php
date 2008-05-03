@@ -53,7 +53,7 @@ class AddressCardLogic extends MemberInterlayer
      * 名片资料写入或更新
      * 
      * @param array $args
-     * @return object
+     * @return integer
      */
 	public function insertOrUpdate($args)
     {    	
@@ -63,7 +63,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 主键存在与否
+     * 主键是否存在
      * 
      * @param string $cid
      * @return integer
@@ -74,7 +74,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 查询列表
+     * 查询名片列表
      * 
      * @param string $gid
      * @param integer $uid
@@ -86,7 +86,19 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 查询详细
+     * 查询记录数
+     * 
+     * @param string $gid
+     * @param integer $uid
+     * @return array
+     */
+	public function selectCount($gid, $uid)
+    {
+		return $this->_AddressCardModel->selectCount($gid, $uid);
+    }
+
+    /**
+     * 查询详细记录
      * 
      * @param string $cid
      * @param integer $uid
@@ -98,37 +110,28 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 查询列表
+     * 列表自定义查找/统计
      * 
      * @param string $type
-     * @param char $gid
-     * @param integer $uid
-     * @param string $field
-     * @param string $wd
+     * @param array $args
      * @param string $limit
      * @return integer or array
      */
-	public function selectFindList($type, $gid, $uid, $field, $wd, $limit)
+	public function selectFind($type, $args, $limit)
     {
-    	$where = "WHERE c.uid = {$uid} AND c.gid = g.gid"; // 基础
-    	$where .= (strlen($gid) === 5 ? " AND c.gid = '{$gid}'" : ''); // 组
+    	$where  = "WHERE c.uid = {$args['uid']} AND c.gid = g.gid"; // 基础
+    	$where .= (5 == strlen($args['gid']) ? " AND c.gid = '{$args['gid']}'" : ''); // 组范围
+        $where .= (array_key_exists($args['field'], $this->_iniMember->find->addressCard->toArray()) && isset($args['wd']) 
+			? " AND c.{$args['field']} LIKE '%{$args['wd']}%'" : ''); // 字段范围及关键字词
 
-    	$fieldList = array('cname'=>'cname', 'mobile', 'eMail', 'qq', 'msn', 'address', 'memo');
-    	if (array_search($field, $fieldList) && isset($wd))
-    	{
-    		$where .= " AND c.{$field} LIKE '%{$wd}%'";
-    	}
-
-    	if ($type == 'count')
-    	{
-    		return $this->_AddressCardModel->selectCountList($where);
-    	}
-
-    	return $this->_AddressCardModel->selectFindList($where, $limit);
+        return ('count' == $type ? 
+            $this->_AddressCardModel->selectFindCount($where) : 
+            $this->_AddressCardModel->selectFindList($where, $limit)
+        );
     }
 
     /**
-     * 写入名片数据
+     * 常规写入数据
      * 
      * @param array $args
      * @return integer
@@ -139,7 +142,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 更新名片数据
+     * 常规更新数据
      * 
      * @param array $args
      * @param string $cid
