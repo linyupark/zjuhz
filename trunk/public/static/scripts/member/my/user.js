@@ -15,15 +15,14 @@ function douser() {
 
 	$.post("/member/my/do"+type+"/", formdata, function(msg) {
 		ajaxloading();
+        $("#btnUser").attr("disabled", false);
 
-		if (msg == "message") {
+		if ("message" == msg) {
 			ajaxhint(false);
 			popup_message("/member/index/message/");
-			goToUrl("/member/my/user/type/"+type+"/", 1000);
 			return false;
 		}
-
-		$("#btnUser").attr("disabled", false);
+		
 		ajaxhint(true, msg);
 	});
 

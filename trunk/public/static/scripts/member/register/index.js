@@ -14,6 +14,10 @@ $(function() {
 		docheck();
     });
 
+    $("#rname").focus( function() {
+		putVerifyImg();
+    });
+
     $("#vcode").focus( function() {
 		putVerifyImg();
     });
@@ -28,9 +32,9 @@ function doregister() {
 	$.post("/member/register/doregister/", formdata, function(msg) {
 		ajaxloading();
 
-		if (msg == "redirect") {
+		if ("redirect" == msg) {
             ajaxhint(false);
-			goToUrl("/member/index/welcome/", 0);
+			goToUrl("/member/register/welcome/", 0);
 			return false;
 		}
 
@@ -45,16 +49,18 @@ function doregister() {
 // 账号是否可用
 function docheck() {
 	var uname = $("#uname").val();
-    ajaxhint(true, "", "chkmsg");
+	if (2 <= uname.length)
+	{
+		ajaxhint(true, "", "chkmsg");
 
-	ajaxloading(true);
-	$("#btnCheck").attr("disabled", true);
+		$("#btnCheck").attr("disabled", true);
 
-	$.post("/member/register/docheck/", { uname: uname }, function(msg) {
-		ajaxloading();
-		$("#btnCheck").attr("disabled", false);
-		ajaxhint(true, msg, "chkmsg");
-	});
+		$.post("/member/register/docheck/", { uname: uname }, function(msg) {
+			$("#btnCheck").attr("disabled", false);
+			$("#btnRegister").attr("disabled", false);
+			ajaxhint(true, msg, "chkmsg");
+		});
+	}
 
 	return false;
 }
