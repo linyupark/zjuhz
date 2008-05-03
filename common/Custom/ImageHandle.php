@@ -185,7 +185,7 @@ class ImageHandle
 	}
 
 	# 验证码 , 可静态调用
-	static function verify($session_namespace = '', $length = 4, $w = 48, $h = 22, $name = "verify")
+	static function verify($session_namespace = 'common', $length = 4, $w = 48, $h = 22, $name = "verify")
 	{
 		if (!extension_loaded("gd"))
 		throw new Exception("THE FUNCTION USED NEED GD EXTENSION!");

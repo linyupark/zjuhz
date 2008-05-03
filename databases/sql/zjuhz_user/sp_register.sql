@@ -14,7 +14,7 @@ BEGIN
     SELECT COUNT(uid) INTO uidCnt FROM tbl_user WHERE username = param_username LIMIT 1;
     IF uidCnt = 0 THEN
 
-        SELECT uid,cname INTO uidParent,nameMy FROM tbl_user_address_card WHERE cid = param_ikey AND status = 0;
+        SELECT uid,cname INTO uidParent,nameMy FROM tbl_user_address_card WHERE cid = param_ikey AND status IN (0,1,3);
         IF uidParent IS NULL OR uidParent = 0 THEN
             SET uidParent = 0;
             SET statusMy = 0;
@@ -35,7 +35,7 @@ BEGIN
                 INSERT INTO tbl_user_contact (uid) VALUES (uidMy);
 
                 IF uidMy > 0 THEN
-                    UPDATE tbl_user_address_card SET iuid = uidMy,status = statusMy WHERE cid = param_ikey AND status = 0 LIMIT 1;
+                    UPDATE tbl_user_address_card SET iuid = uidMy,status = statusMy WHERE cid = param_ikey AND status IN (0,1,3) LIMIT 1;
                 END IF;
 
             END IF;

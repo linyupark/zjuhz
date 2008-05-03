@@ -113,7 +113,6 @@ create table tbl_user_address_group
    uid                  int(10) unsigned not null,
    gname                char(10) not null,
    lastModi             int unsigned not null default 0,
-   count                smallint unsigned not null default 0,
    primary key (gid)
 )
 type = MYISAM;
@@ -133,6 +132,7 @@ create table zjuhz_user.tbl_user_contact
 (
    uid                  int(10) unsigned not null,
    mobile               varchar(11) default NULL,
+   phone                varchar(13) default NULL,
    eMail                varchar(50) default NULL,
    qq                   varchar(15) default NULL,
    msn                  varchar(50) default NULL,
