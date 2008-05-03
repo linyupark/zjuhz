@@ -11,7 +11,7 @@ $(function() {
     });
 
     $("#btnSubmit").click( function() {
-		question_insert();		
+		question_insert();
     });
 });
 
@@ -20,13 +20,13 @@ function question_insert() {
 	ajaxloading(true);
 	$("#btnSubmit").attr("disabled", true);
 	var formdata = $("#myform").fastSerialize();
-
+    formdata.push({name:'content', value:editor.data()});
 	$.ajax( {
 		type   : "POST",
         url    : "/help/question/doinsert/",
         data   : formdata,
 	    success: function(msg) {
-			if (msg == "message") {
+			if ("message" == msg) {
 				popup_message("/help/index/message/");
 				goToUrl("/help/", 3000);
 			}

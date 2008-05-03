@@ -12,16 +12,16 @@ function getObject(obj){
 }
 
 // 复制进剪贴板
-function copyToClipBoard(obj,msg){
-	window.clipboardData.setData("Text",getObject(obj).value);
-	alert(msg);
+function copyToClipBoard(value, msg){
+	window.clipboardData.setData("Text", value);
+	if (msg) { alert(msg); }
 }
 
 // 验证码不重复
-function verify(img_id,url){
+function verify(img_id, url){
    var t = new Date();
    t = t.getTime();
-   $("#"+img_id).attr("src",url+"?"+t);
+   $("#"+img_id).attr("src", url+"?"+t);
 }
 
 // ajax loading
@@ -31,20 +31,20 @@ function ajaxloading(show){
 }
 
 // ajax hint
-function ajaxhint(show,msg,id){
+function ajaxhint(show, msg, id){
 	var id = id ? id : "ajaxhint";
 	show ? $("#"+id).show() : $("#"+id).hide();
 	$("#"+id).text(msg);
 }
 
 function input_focus(class_name) {
-	$("."+class_name).css("background","#ffc");
-	$("."+class_name).css("color","#333");
+	$("."+class_name).css("background", "#ffc");
+	$("."+class_name).css("color", "#333");
 }
 
 function input_blur(class_name) {
-	$("."+class_name).css("background","#fff");
-	$("."+class_name).css("color","#aaa");
+	$("."+class_name).css("background", "#fff");
+	$("."+class_name).css("color", "#aaa");
 }
 
 // 写入img空标签
@@ -61,7 +61,7 @@ function putVerifyImg() {
 
 // 信息提示
 function popup_message(url) {
-	var pop = new Popup({ contentType:1, isReloadOnClose:true, width:340, height:80 });
+	var pop = new Popup({ contentType:1, isReloadOnClose:false, width:340, height:80 });
 	pop.setContent("title", "校友会提示您");
 	pop.setContent("contentUrl", url);
 	pop.build();
@@ -86,15 +86,18 @@ function to(url) {
 
 // 会员登录
 function dologin() {
-    ajaxloading(true);
 	$("#btnLogin").attr("disabled", true);
 	var formdata = $("#relogin_form").fastSerialize();
 
 	$.post("/member/login/dologin/", formdata, function(msg) {
-		ajaxloading();
-
 		if ("redirect" == msg) {
-			history.go(0);
+			var redirect = $("#redirect").val();
+			if (redirect) {
+				goToUrl(redirect, 0);
+			}
+			else {
+				history.go(0);
+			}
 			return false;
 		}
 

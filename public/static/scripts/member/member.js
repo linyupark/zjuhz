@@ -1,6 +1,5 @@
-// »ñÈ¡ÑéÖ¤Âë
+// è·å–éªŒè¯ç 
 function getVerifyCode() {
 	verify('verify','/member/index/verify/');
 	$("#vcode").val("");
 }
-

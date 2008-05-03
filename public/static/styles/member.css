@@ -2,6 +2,16 @@
 @import url("calendar-blue.css");
 @import url("passwdcheck.css");
 
+/* 用户登录注册 -------------------------------------------------------------- */
+#login{ padding:10px 40px; }
+#login h2{ padding:0 15px; font-size:16px;}
+#login h2 small{ font-size:12px; font-weight:normal; float:right; margin-top:-20px; }
+#register_form{ margin:20px; width:95% }
+#register_form td{ padding:5px; }
+.chkmsg {color:#FF0000;}
+.tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
+.textarea{ padding:5px; border:1px solid #BDC7D8;  line-height:normal;font-size:12px; }
+
 /* 用户个人名片 -------------------------------------------------------------- */
 .member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
 .member_card .head{ padding:2px; border:1px solid #D7EAB2; background:#fff; width:50px; height:50px; }
@@ -23,16 +33,15 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_action{background:#f7f7f7; border-top:1px solid #D9E6F7; border-bottom:1px solid #B2D0EA; clear:both; }
 
 .control_list{ width:100%; }
-.control_list th{ padding:5px 5px 0 10px; color:#666; border-bottom:1px solid #eee;font-size:12px; font-weight:normal }
-.control_list td{ padding:5px 5px 0 10px; background:#fff; font-size:12px; }
+.control_list th{ padding:15px 5px 0 10px; color:#666; border-bottom:1px solid #eee;font-size:14px; font-weight:normal }
+.control_list td{ padding:15px 5px 0 10px; background:#fff; font-size:12px; }
 .control_list td a.cat{ color:#666; }
 
 /* 个人后台通用表单样式 ---------------------------------------------------- */
 .home_form{ padding:5px; }
 .home_form td{ font-size:14px; padding:10px 0 5px 10px; }
 .home_form td b{ color:#444;  }
-.home_form .txt,.home_form .bigtxt{ padding:5px; border:1px solid #BDC7D8;  line-height:normal; }
-.home_form .btn{ border:2px double #ccc; background:#627091; color:#fff; cursor:pointer; height:30px; padding:0 5px; }
+.home_form .txt,.home_form .bigtxt{ padding:5px; border:1px solid #BDC7D8; line-height:normal; }
 .home_form .bigtxt{ width:400px; height:100px; }
 
 /* 通讯录详细信息表格样式 ------------------------------------------------- */

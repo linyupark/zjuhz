@@ -21,7 +21,7 @@ function reply_insert() {
 	ajaxloading(true);
 	$("#btnReply").attr("disabled", true);
 	var formdata = $("#myform").fastSerialize();
-
+    formdata.push({name:'content', value:editor.data()});
 	$.ajax( {
 		type   : "POST",
         url    : "/help/reply/doinsert/",
