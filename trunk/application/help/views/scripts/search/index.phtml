@@ -1,0 +1,50 @@
+<div class="sidebar">
+<!-- 互助分类 -->
+<?= $this->render('dynamic/sort.phtml'); ?>
+</div>
+
+<div class="sidebar">
+
+<!-- 搜索结果 -->
+<table class="help_set_large">
+
+    <!-- 结果概括 -->
+	<tr>
+	<th colspan="2" class="txtl">关键字词</th>
+	</tr>
+
+    <!-- 结果显示 -->	
+	<tr>
+	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
+	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
+	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	</tr>
+	<tr>
+	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
+    </tr>
+	<tr>
+	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
+	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
+	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	</tr>
+	<tr>
+	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
+    </tr>
+	<tr>
+	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
+	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
+	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	</tr>
+	<tr>
+	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
+    </tr>
+	<tr>
+	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
+	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
+	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	</tr>
+	<tr>
+	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
+    </tr>
+</table>
+</div>

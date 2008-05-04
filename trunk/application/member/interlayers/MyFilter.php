@@ -300,30 +300,6 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
-     * 通讯录-名片邀请
-     * 
-     * @param array $args
-     * @return boolean or array
-     */
-	public function invite($args)
-	{
-		// 设置过滤规则
-		$filters = array('*' => array('StripTags'));
-
-    	// 设置验证规则
-		$validators = array(
-		    'cid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
-			'status' => array(array('Int'), 'presence' => 'required'),
-        );
-
-		$input = new Zend_Filter_Input($filters, $validators, $args);
-
-		return (!$input->hasInvalid() && !$input->hasMissing() ? 
-		    array('cid' => $input->getUnescaped('cid'), 'status' => $input->getUnescaped('status')) : false
-		);
-	}
-
-	/**
      * 通讯录-组新增/修改
      * 
      * @param array $args

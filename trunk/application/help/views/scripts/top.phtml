@@ -27,8 +27,8 @@
 	<tr>
 	<td class="search_form" colspan="2">
 	<!-- 搜索框 -->
-	<form method="POST">
-        <input class="input" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input')" value="" name="keywords" id="keywords" maxlength="25" />
+	<form method="get" action="/help/search/">
+        <input class="input" type="text" onfocus="input_focus('input')" onblur="input_blur('input')" value="<?= $this->wd; ?>" name="wd" id="wd" maxlength="20" />
         <input class="btn" type="submit" value="搜索" />
 		<input class="btn" type="button" value="提问" onclick="goToHelp('question_insert');return false;" />		
     </form>
