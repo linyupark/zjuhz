@@ -92,4 +92,25 @@ class QuestionLogic extends HelpInterlayer
     {
 		return $this->_mdlQuestion->detail($qid);
     }
+
+    /**
+     * 问题/答案/标签搜索
+     * 
+     * @param string $type
+     * @param string $arg
+     * @param string $limit
+     * @return integer or array
+     */
+	public function selectSearch($type, $arg, $limit)
+    {
+    	if (!empty($arg))
+    	{
+    		$and = "AND (q.title LIKE '%{$arg}%' OR q.content LIKE '%{$arg}%' OR q.tags LIKE '%{$arg}%')";
+    	}
+
+        return ('count' == $type ? 
+            $this->_mdlQuestion->selectSearchCount($and) : 
+            $this->_mdlQuestion->selectSearchList($and, $limit)
+        );
+    }
 }

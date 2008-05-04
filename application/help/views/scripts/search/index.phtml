@@ -10,41 +10,29 @@
 
     <!-- 结果概括 -->
 	<tr>
-	<th colspan="2" class="txtl">关键字词</th>
+	<th colspan="2" class="txtl">有  <?= $this->total; ?> 项符合 <?= $this->wd; ?> 的搜索结果</th>
 	</tr>
 
     <!-- 结果显示 -->	
+	<?php foreach ($this->searchList as $value) { ?>
 	<tr>
-	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
-	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
-	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	<td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= Commons::highlight($this->wd, $value['title']); ?></a> <img src="/static/images/icon/icn_status_<?= $value['status']; ?>.gif"> <span class="f9"><?php if ($value['offer'] > 0 ) { ?><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?= $value['offer']; } ?></span> <a class="collection" id="collection" title="收藏该问题" onclick="javascript:collection_insert(<?= $value['qid']; ?>);">收藏</a></td>
 	</tr>
 	<tr>
-	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
+	  <td><?= Commons::highlight($this->wd, strip_tags($value['content'])); ?></td>
     </tr>
 	<tr>
-	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
-	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
-	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
+	  <td><?= $value['realName']; ?> <?= date('Y-m-d H:i', strtotime($value['addTime'])); ?><br /><br /></td>
+    </tr>
+	<?php } ?>
+	
+</table>
+
+<table align="center">
+
+	<tr>
+	<td><?= $this->paging; ?></td>
 	</tr>
-	<tr>
-	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
-    </tr>
-	<tr>
-	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
-	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
-	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
-	</tr>
-	<tr>
-	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
-    </tr>
-	<tr>
-	<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>分类名称]</a>
-	  <a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?>问题标题</a> 
-	  <?php if ($value['offer'] > 0 ) { ?>	  <span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	</td>
-	</tr>
-	<tr>
-	  <td>MAC（Media Access Control, 介质访问控制）MAC地址是烧录在Network Interface Card(网卡,NIC)里的.MAC地址,也叫硬件地址,是由48比特长(6字节),16进制的数字组成.0-23 ...</td>
-    </tr>
+	
 </table>
 </div>

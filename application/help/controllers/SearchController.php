@@ -15,7 +15,21 @@
 class SearchController extends Zend_Controller_Action
 {
 	/**
-     * 用户输入的关键字词 keyword
+     * 公用Session
+     *
+     * @var object
+     */
+	private $_sessCommon = null;
+
+	/**
+     * 项目Session
+     *
+     * @var object
+     */
+	private $_sessHelp = null;
+
+	/**
+     * 关键字词 keywords
      *
      * @var string
      */
@@ -28,7 +42,13 @@ class SearchController extends Zend_Controller_Action
      */
     public function init()
     {
-    	$this->_wd = $this->getRequest()->getParam('wd');
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+
+		$this->view->sessCommon = $this->_sessCommon;
+		$this->view->sessHelp   = $this->_sessHelp;
+
+    	$this->_wd = SearchFilter::init()->keywords($this->getRequest()->getParam('wd'));
     }
 
     /**
@@ -38,5 +58,14 @@ class SearchController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+    	$logic = QuestionLogic::init();
+
+    	$total = $logic->selectSearch('count', $this->_wd, '');
+    	$p     = new Paging(array('total' => $total, 'perpage' => 10));
+
+		$this->view->searchList = $logic->selectSearch('result', $this->_wd, $p->limit());
+		$this->view->paging     = $p->show();
+		$this->view->total      = $total;
+    	$this->view->wd         = $this->_wd;
     }
 }
