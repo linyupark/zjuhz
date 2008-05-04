@@ -29,6 +29,25 @@
 		</tr>
 		</table>
 	</div>
+	
+	<script type="text/javascript">
+		var params = window.location.search.substr(1).split("&");
+		if(params[2] != null)
+		{
+			if(params[2] != 'p=1')
+			{
+				$('.author .content').hide();
+				$('.author').css('cursor','pointer');
+
+				$('.author').click(function(){
+					if($('.author .content').is(':hidden'))
+					$('.author .content').show();
+					else $('.author .content').hide();
+				});
+			}
+		}
+	</script>
+	
 	<!-- 回复内容 /////////////////////////////////// -->
 	<div class="pagination"><?= $this->pagination ?></div>
 	<?php if($this->replies != null): foreach ($this->replies as $k => $v): ?>

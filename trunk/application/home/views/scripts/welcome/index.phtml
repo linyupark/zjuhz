@@ -24,7 +24,7 @@ foreach ($cat_rows as $k => $v): ?>
 <?php 
 foreach ($cat_rows as $k => $v):
 //获取相应文章快照
-$art_rows = $this->info_xmlrpc->call('info.get_arts_snapshot', array($v['category_id']));
+$art_rows = $this->info_xmlrpc->call('info.get_arts_snapshot', array((int)$v['category_id']));
 ?>			
 <table class="news_page" id="num_<?= $k+1 ?>">
 <tr>

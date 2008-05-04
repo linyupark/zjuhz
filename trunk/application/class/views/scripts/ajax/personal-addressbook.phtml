@@ -1,0 +1,50 @@
+<!-- 个人通讯录树(为导入班级所用) -->
+<style type="text/css">
+#address_records { padding:10px; border:1px solid #C3D9FF; background:#E0ECFF; }
+.items{ display:none; padding-left:10px; margin-left:10px; border-left:1px dashed #7DC621; } 
+</style>
+<p class="pud5"><b class="quiet">请打开通讯组钩选要导入的同学：</b></p>
+<?php if(null == $this->groups): ?>
+<p class="err_tip">您的通讯录没有记录~<a href="/member/my/address/">现在添加</a></p>
+<?php else : ?>
+<div id="address_records">
+<?php foreach ($this->groups as $k => $v): ?>
+<dl>
+	<dt>
+		<a href="javascript:switchFolder('<?= $v['gid'] ?>')"><img src="/static/images/icon/folder.gif" /> 
+		<?= $v['gname'] ?></a>
+	</dt>
+	<?php foreach ($this->items[$v['gid']] as $key => $val): ?>
+	<dd class="items gid_<?= $v['gid'] ?>">
+		<label for="records_<?= $v['gid'].'_'.$key ?>">
+			<input type="checkbox" name="records[<?= $val['cid'] ?>][cid]" value="<?= $val['cid'] ?>" id="records_<?= $v['gid'].'_'.$key ?>" /> 
+			<?= $val['cname'] ?>
+			<input type="hidden" name="records[<?= $val['cid'] ?>][cname]" value="<?= $val['cname'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][mobile]" value="<?= $val['mobile'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][eMail]" value="<?= $val['eMail'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][qq]" value="<?= $val['qq'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][msn]" value="<?= $val['msn'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][address]" value="<?= $val['address'] ?>" />
+			<input type="hidden" name="records[<?= $val['cid'] ?>][postcode]" value="<?= $val['postcode'] ?>" />
+		</label>
+	</dd>
+	<?php endforeach; ?>
+</dl>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+<p class="p10 txtc"><button onclick="classAddressbookImport(<?= $this->class_id ?>,2)" class="btn">进行导入</button></p>
+<script type="text/javascript">
+	function switchFolder(gid)
+	{
+		if($('.gid_'+gid).is(':hidden'))
+		{
+			$('.gid_'+gid).show();
+		}
+		else
+		{
+			$('.gid_'+gid+' input:checked').click();
+			$('.gid_'+gid).hide();
+		}
+	}
+</script>
