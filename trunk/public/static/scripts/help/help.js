@@ -22,7 +22,7 @@ function goToHelp(name)
 	var url = "/help/";
 
 	if (name == "question_insert") {
-		url = url + "question/insert/title/" + encodeURIComponent($("#keywords").val());
+		url = url + "question/insert/title/" + encodeURIComponent($("#wd").val());
 	}
 
 	window.location.href = url;
