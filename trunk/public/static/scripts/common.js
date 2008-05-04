@@ -12,9 +12,30 @@ function getObject(obj){
 }
 
 // 复制进剪贴板
-function copyToClipBoard(value, msg){
-	window.clipboardData.setData("Text", value);
-	if (msg) { alert(msg); }
+function copyToClipBoard(value, msg) {
+	if (window.clipboardData) {
+		window.clipboardData.setData("Text", value);
+	}
+	else if (window.netscape) {
+		netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+		var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+		if (!clip) return;
+		var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+		if (!trans) return;
+        trans.addDataFlavor('text/unicode');
+		var str = new Object();
+        var len = new Object();
+        var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+		var valuetext = value;
+		str.data = valuetext;
+        trans.setTransferData("text/unicode",str,valuetext.length*2);
+        var clipid = Components.interfaces.nsIClipboard;
+        if (!clip) return false;
+        clip.setData(trans,null,clipid.kGlobalClipboard);
+	}
+
+	alert(msg);
+    return true;
 }
 
 // 验证码不重复
