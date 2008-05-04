@@ -19,16 +19,16 @@
 .help_notice .nt{ display:none; float:left; color:#166E8B; text-decoration:none; }
 
 /* 求助集合 */
-.help_set{ clear:left; border:1px solid #D3E4CF; margin:8px 0 0 10px; width:475px; }
-.help_set th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px; }
-.help_set td{ padding:5px; }
-.help_set td a{ text-decoration:none; color:#004BCA }
-.help_set td a:hover{ text-decoration:underline; }
-.help_set td a:visited{ color:#800080; }
-.help_set td.cat { padding:5px 0 5px 10px; width:65px; }
-.help_set td.cat a{ color:#666; }
-.help_set td.cat a:visited{ color:#666; }
-.help_set td.coin{ font-size:9px; color:#537E01; text-align:center }
+.help_set{ clear:left; border:1px solid #D3E4CF; margin:10px 0 0 10px; width:475px; }
+.help_set th,.help_set_large th{ background:#F4FFF2; border-bottom:1px solid #C4DBBF; border-top:1px solid #C4DBBF; color:#5C7B23; font-size:12px; padding:5px 10px; }
+.help_set td,.help_set_large td{ padding:5px; }
+.help_set td a,.help_set_large td a{ text-decoration:none; color:#004BCA }
+.help_set td a:hover,.help_set_large td a:hover{ text-decoration:underline; }
+.help_set td a:visited,.help_set_large td a:visited{ color:#800080; }
+.help_set td.cat,.help_set_large td.cat { padding:5px 0 5px 10px; width:65px; }
+.help_set td.cat a,.help_set_large td.cat a{ color:#666; }
+.help_set td.cat a:visited,.help_set_large td.cat a:visited{ color:#666; }
+.help_set td.coin,.help_set_large td.coin{ font-size:9px; color:#537E01; text-align:center }
 
 /* 积分排行 */
 .help_rank{ width:165px; border:1px solid #E7DAC5; margin:10px 0 0 10px; }
@@ -154,3 +154,6 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .home_form .txt,.home_form .bigtxt{ padding:2px; border:1px solid #BDC7D8;  line-height:normal; }
 .home_form .btn{  border:3px double #ccc; background:#627091; color:#fff; cursor:pointer; padding:3px 8px }
 .home_form .bigtxt{ width:400px; height:100px; }
+
+/* 求助集合 */
+.help_set_large{ clear:left; border:1px solid #D3E4CF; margin:10px 0 0 10px; width:670px; }

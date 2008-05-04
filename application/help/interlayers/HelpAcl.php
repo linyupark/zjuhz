@@ -78,9 +78,10 @@ class HelpAcl extends Zend_Controller_Plugin_Abstract
 		$this->_aclHelp->add(new Zend_Acl_Resource('collection'))
 		               ->add(new Zend_Acl_Resource('error'))
 		               ->add(new Zend_Acl_Resource('index'))
-		               ->add(new Zend_Acl_Resource('my'))		               
+		               ->add(new Zend_Acl_Resource('my'))
 		               ->add(new Zend_Acl_Resource('question'))
-		               ->add(new Zend_Acl_Resource('reply'))		               
+		               ->add(new Zend_Acl_Resource('reply'))
+                       ->add(new Zend_Acl_Resource('search'))
 		               ->add(new Zend_Acl_Resource('sort'));
 	}
 
