@@ -11,7 +11,7 @@
 <!--<a href="#" class="report">检举</a>-->
 </p>
 <table width="100%">
-<tr><td><span class="coin"><?=  $this->detail['offer']; ?></span>&nbsp;&nbsp;<span class="tt"><?=  $this->detail['title']; ?></span></td></tr>
+<tr><td><span class="coin"><?= $this->detail['offer']; ?></span>&nbsp;&nbsp;<span class="tt"><?=  $this->detail['title']; ?></span></td></tr>
 <tr><td class="info"><span>提问人：<?php echo (($this->detail['anonym'] == 'N') ? $this->detail['realName'] : '匿名'); ?>&nbsp;&nbsp;&nbsp;&nbsp;提问时间：<?= date('Y-m-d H:i', strtotime($this->detail['addTime'])); ?></span></td></tr>
 <tr><td class="info"><span>标&nbsp;&nbsp;&nbsp;签：<?= $this->detail['tags']; ?></span>
 </td>

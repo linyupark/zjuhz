@@ -41,3 +41,15 @@ function helpRank() {
 	    }); 
 	});
 }
+
+// 收藏问题
+function collection_insert(qid) {
+
+	if (qid > 0) {
+		$.post("/help/collection/doinsert/", { qid: qid }, function(msg) {
+			alert('收藏成功！'); $("#collection").hide() }
+		); 
+	}
+
+    return false;
+}

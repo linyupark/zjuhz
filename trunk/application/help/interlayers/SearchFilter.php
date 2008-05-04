@@ -54,7 +54,7 @@ class SearchFilter extends HelpInterlayer
      * @param string $arg
      * @return string
      */
-	public function keyword($arg)
+	public function keywords($arg)
 	{
 		$filterChain = new Zend_Filter();
 		$filterChain->addFilter(new Zend_Filter_StringTrim())

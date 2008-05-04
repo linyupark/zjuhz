@@ -109,4 +109,34 @@ class QuestionModel //extends Zend_Db_Table_Abstract
 		    WHERE q.qid = :qid AND q.uid = ask.uid;", 
 		    array('qid' => $qid));
     }
+
+    /**
+     * 列表自定义搜索
+     * 
+     * @param string $and
+     * @param string $limit
+     * @return array
+     */
+	public function selectSearchList($and, $limit)
+    {
+		return $this->_dao->fetchAll("SELECT q.*,a.realName,s.pid,s.pName 
+		    FROM {$this->_name} AS q,tbl_ask AS a,tbl_ask_sort AS s 
+		    WHERE q.status IN (0,1) AND q.uid = a.uid AND q.sid IN (s.sid,s.parent,s.pid) {$and} 
+		    ORDER BY q.addTime DESC LIMIT {$limit};"
+		);
+    }
+
+    /**
+     * 列表自定义统计
+     * 
+     * @param string $and
+     * @return integer
+     */
+	public function selectSearchCount($and)
+    {
+		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
+		    FROM {$this->_name} AS q,tbl_ask AS a,tbl_ask_sort AS s 
+		    WHERE q.status IN (0,1) AND q.uid = a.uid AND q.sid IN (s.sid,s.parent,s.pid) {$and} ;" 
+		);
+    }
 }
