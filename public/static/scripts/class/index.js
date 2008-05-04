@@ -1,3 +1,61 @@
+function tabFocus(name)
+{
+	$('a[href^="javascript:"]').removeClass();
+	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
+	$('a[href^="javascript:'+name+'"]').addClass('focus');
+}
+
+// --------------------------- 通讯录相关 -------------------------------
+
+
+// 班级通讯录导入
+function classAddressbookImport(classid,step)
+{
+	if(step == 1) // 显示导入页
+	{
+		tabFocus('classAddressbookImport');
+		$.post('/class/ajax/my_personal_addressbook',{class_id:classid},function(html){
+			$('#listInner').html(html);
+		});
+	}
+	if(step == 2) // 执行导入工作
+	{
+		var data = $('#address_records').fastSerialize();
+		data.push({name:'class_id',value:classid});
+		$.facebox('<img src="/static/images/icon/ajax-loader.gif" /> 数据导入中...');
+		$.post('/class/ajax/import_addressbook',data,function(html){
+			$.facebox(html);
+		});
+	}
+}
+
+// 修改自己的通讯录
+function updateMyClassAddressbook()
+{
+	$.post('/class/ajax/my_class_addressbook', $('#address_form').fastSerialize(), function(data){
+		$.facebox(data);
+	});
+	return false;
+}
+
+// 自己的通讯录
+function myClassAddressbook(classid)
+{
+	tabFocus('myClassAddressbook');
+	$.post('/class/ajax/my_class_addressbook', {class_id:classid}, function(html){
+		$('#listInner').html(html);
+	});
+}
+
+// 查看班级通讯录
+function classAddressbookView(classid,pagenum)
+{
+	tabFocus('classAddressbookView');
+	$.post('/class/ajax/class_addressbook_view', {class_id:classid,page:pagenum}, function(data){
+		$('#listInner').html(data);
+	});
+}
+
 // ---------------------- 主话题操作块 ---------------------
 function delReply(classid,topic_id,reply_id)
 {
@@ -51,7 +109,7 @@ function postTopicReply(classid,topic_id,page)
 		$('#result').html(data);
 		else
 		{
-			location.href = '/class/topic/view?c='+classid+'&tid='+topic_id+'&p='+page+'#footer';
+			location.reload();
 		}
 	});
 	return false;
@@ -70,37 +128,6 @@ function fetchTopicReply(classid,topic_id,page)
 {
 	$.post('/class/ajax/fetch_topic_reply',{class_id:classid,tid:topic_id,p:page}, function(data){
 		$('#innerHtml').html(data);
-	});
-}
-
-// 修改自己的通讯录
-function updateMyClassAddressbook()
-{
-	$.post('/class/ajax/my_class_addressbook', $('#address_form').fastSerialize(), function(data){
-		$.facebox(data);
-	});
-	return false;
-}
-
-// 自己的通讯录
-function myClassAddressbook(classid)
-{
-	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
-	$('a[href^="javascript:myClassAddressbook"]').addClass('focus');
-	$.post('/class/ajax/my_class_addressbook', {class_id:classid}, function(html){
-		$('#listInner').html(html);
-	});
-}
-
-// 查看班级通讯录
-function classAddressbookView(classid,pagenum)
-{
-	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
-	$('a[href^="javascript:classAddressbookView"]').addClass('focus');
-	$.post('/class/ajax/class_addressbook_view', {class_id:classid,page:pagenum}, function(data){
-		$('#listInner').html(data);
 	});
 }
 
@@ -159,9 +186,7 @@ function memberLvldown(classid)
 // 班级管理员列表
 function managerList(classid)
 {
-	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
-	$('a[href^="javascript:managerList"]').addClass('focus');
+	tabFocus('managerList');
 	$.post('/class/ajax/class_manager_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
 	});
@@ -192,9 +217,7 @@ function memberLvlup(classid)
 // 班级成员列表
 function memberList(classid)
 {
-	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
-	$('a[href^="javascript:memberList"]').addClass('focus');
+	tabFocus('memberList');
 	$.post('/class/ajax/class_member_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
 	});
@@ -236,9 +259,7 @@ function selectAll(name)
 // 申请列表
 function applyList(classid)
 {
-	$('a[href^="javascript:"]').removeClass();
-	$('#listInner').html('<img src="/static/images/icon/ajax-loader.gif" />');
-	$('a[href^="javascript:applyList"]').addClass('focus');
+	tabFocus('applyList');
 	$.post('/class/ajax/class_apply_list/',{class_id:classid},function(data){
 		$('#listInner').html(data);
 	});

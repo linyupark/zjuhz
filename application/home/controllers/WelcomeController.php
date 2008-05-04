@@ -23,7 +23,7 @@ class WelcomeController extends Zend_Controller_Action
 		$backendOptions = array('cache_dir' => '../../cache/');
 
 		$this->view->cache = Zend_Cache::factory('Output', 'File', $frontendOptions, $backendOptions);
-		$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/info/api/');
+		$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
     	$this->view->role = 'member';
     	
     	$this->view->login = $this->_sessCommon->login;

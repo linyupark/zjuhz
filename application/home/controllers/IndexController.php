@@ -31,6 +31,6 @@ class IndexController extends Zend_Controller_Action
 		
 		$this->view->cache = $cache;
     	$this->view->role = 'guest';
-    	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://zjuhz/xmlrpc/InfoServer.php');
+    	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
     }
 }

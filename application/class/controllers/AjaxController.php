@@ -8,13 +8,75 @@
 			// 获取班级id
 			$this->_classId = (int)$this->getRequest()->getPost('class_id');
 			// 获取用户id
-			$this->_uid = Zend_Registry::get('sessCommon')->login['uid'];
+			$this->_uid = (int)Zend_Registry::get('sessCommon')->login['uid'];
 			
 			$this->_helper->layout->disableLayout();
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
 		/* 通讯录相关 //////////////////////////////////////////////////////// */
+		
+		# 导入操作开始 - 只允许创建者
+		function importaddressbookAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isCreater($this->_classId)) exit();  // 不是班级创建者
+				$records = $request->getPost('records');
+				if(count($records) > 0) // 有记录
+				{
+					$db = Zend_Registry::get('dbClass');
+					// 先删除老的记录
+					$db->delete('tbl_class_addressbook',array('class_id='.$this->_classId,'uid=0'));
+					foreach ($records as $cid => $key)
+					{
+						if($key['cid'] != null)
+						{
+							$data = array(
+								'class_id' => $this->_classId,
+								'uid' => 0,
+								'cname' => $key['cname'],
+								'mobile' => $key['mobile'],
+								'eMail' => $key['eMail'],
+								'qq' => $key['qq'],
+								'msn' => $key['msn'],
+								'address' => $key['address'],
+								'postcode' => $key['postcode'],
+							);
+							$db->insert('tbl_class_addressbook',$data);
+						}
+					}
+					$this->view->suc_tip = '成功导入数据！';
+					$this->render('success');
+				}
+			}
+		}
+		
+		# 显示个人通讯录 - 导入准备 - 只允许创建者使用
+		function mypersonaladdressbookAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isCreater($this->_classId)) exit();  // 不是班级创建者
+				// 显示XMLRPC数据
+				$client = new Zend_XmlRpc_Client('http://xmlrpc/MemberServer.php');
+				$groups = $client->call('rpcMember.AddressGroupSelectList',array($this->_uid));
+				if(count($groups) > 0)
+				{
+					foreach ($groups as $k => $v)
+					{
+						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectList',array($v['gid'],$this->_uid));
+					}
+				}
+				else { $groups = null; $items = null; }
+				$this->view->class_id = $this->_classId;
+				$this->view->groups = $groups;
+				$this->view->items = $items;
+				$this->render('personal-addressbook');
+			}
+		}
 		
 		# 编辑自己所在班级的通讯录信息
 		function myclassaddressbookAction()
@@ -361,7 +423,7 @@
 						if($db->insert('tbl_class_topic',$data) > 0)
 						// 弹出提示
 						$this->view->suc_tip = '话题发表成功！';
-						echo Commons::js_jump('/class/topic/list?c='.$this->classId,2);
+						echo Commons::js_jump('/class/topic/list?c='.$this->_classId,2);
 						$this->render('success');
 					}
 				}

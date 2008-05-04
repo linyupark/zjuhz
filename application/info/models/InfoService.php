@@ -26,7 +26,7 @@
 		/**
 		 * 获取信息列表,根据目录id
 		 *
-		 * @param string $cat_id
+		 * @param integer $cat_id
 		 * @return array
 		 */
 		function get_arts_snapshot($cat_id)
