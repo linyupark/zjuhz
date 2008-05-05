@@ -19,6 +19,16 @@
 <h2 class="quiet"><img src="/static/images/icon/picture.gif" /> 班级相册</h2>
 <div id="class_picture">尚未开放..</div>
 
-<h2 class="quiet"><img src="/static/images/icon/comments.gif" /> 班级讨论</h2>
-<div id="class_comments"></div>
+<!-- 班级对应身份所开放的最新话题列 -->
+<h2><img src="/static/images/icon/comments.gif" /> <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>">最新话题</a></h2>
+	<div id="class_topic">
+		<?php 
+		if(count($this->topics) > 0)
+		foreach ($this->topics as $key => $val)
+		{
+			echo '<li>['.date('m-d H:i',$val['class_topic_pub_time']).'] <a href="/class/topic/view?c='.$this->class_base_info['class_id'].'&tid='.$val['class_topic_id'].'">'.stripslashes($val['class_topic_title']).'</a></li>';
+		}
+		?>
+	</div>
+
 </div>
