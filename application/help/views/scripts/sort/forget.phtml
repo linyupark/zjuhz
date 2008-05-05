@@ -35,6 +35,12 @@
 <?php if ($this->total > 0) { ?>
 <!-- 问题列表 -->
 <table class="tab_content">
+<tr style="background:#FFFCF0">
+<th class="txtc p5 quiet" width="70%">问题</th>
+<th class="txtc p5 quiet" width="8%">状态</th>
+<th class="txtc p5 quiet" width="8%">回复</th>
+<th class="txtc p5 quiet" width="14%">时间</th>
+</tr>
 <?php foreach ($this->list as $value) { ?>
 <tr>
 <td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> <?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span> </td>
