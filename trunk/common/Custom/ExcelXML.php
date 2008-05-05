@@ -113,7 +113,7 @@ class ExcelXML
         	$style = '';
         	if($width != 0)
         	$style .= 'width:'.$width.'px;';
-			$cells .= "<td align='left' style='{$style}' >".iconv('utf-8','gb2312',$v)."</td>\n";
+			$cells .= "<td align='left' style='{$style}' >".$v."</td>\n";
         endforeach;
 
         // transform $cells content into one row
@@ -181,7 +181,7 @@ class ExcelXML
     {
 
         // deliver header (as recommended in php manual)
-        header("Content-Type: application/vnd.ms-excel; charset=gb2312");
+        header("Content-Type: application/vnd.ms-excel; charset=utf-8");
         header("Content-Disposition: inline; filename=\"" . $filename . ".xls\"");
 
         // print out document to the browser
