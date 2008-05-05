@@ -20,7 +20,8 @@ function relogin()
 			$("#relogin_form").fastSerialize(),
 			function(data){
 				if(data == 'redirect')
-				location.href="";
+				location.reload();
+				else $.facebox('<img src="/static/images/icon/stop.gif" align="absmiddle" /> 登陆失败~帐号或密码有错误！');
 			}
 		);
 	return false;

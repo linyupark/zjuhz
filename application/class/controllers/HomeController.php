@@ -45,16 +45,18 @@ class HomeController extends Zend_Controller_Action
 		}
 	}
 	
-	# 一些公共需要分配的参数
-	private function commonParam()
+	# 公共分配视图
+	private function commonView()
 	{
-		
-		
+		$class_id = $this->view->class_base_info['class_id'];
+		$rows = DbModel::getClassTopic($class_id, $this->getRequest()->getActionName(), null, 5, 1);
+		$this->view->topics = $rows['rows'];
 	}
 	
 	# 游客身份访问班级信息
 	function visitorAction()
 	{
+		$this->commonView();
 		$this->render('index');
 		$this->render('visitor');
 		$this->render('baseinfo');
@@ -64,6 +66,7 @@ class HomeController extends Zend_Controller_Action
 	function memberAction()
 	{
 		$this->enterHandler();
+		$this->commonView();
 		$this->render('index');
 		$this->render('member');
 		$this->render('baseinfo');
@@ -73,6 +76,7 @@ class HomeController extends Zend_Controller_Action
 	function managerAction()
 	{
 		$this->enterHandler();
+		$this->commonView();
 		$this->render('index');
 		$this->render('manager');
 		$this->render('baseinfo');

@@ -7,6 +7,14 @@ function tabFocus(name)
 
 // --------------------------- 通讯录相关 -------------------------------
 
+// 通讯录导出
+function classAddressbookExport(classid)
+{
+	tabFocus('classAddressbookExport');
+	$.post('/class/ajax/addressbook_export',{class_id:classid},function(html){
+		$('#listInner').html(html);
+	});
+}
 
 // 班级通讯录导入
 function classAddressbookImport(classid,step)

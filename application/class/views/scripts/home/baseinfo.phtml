@@ -38,7 +38,12 @@
 </tr>
 <tr>
 <td>加入方式：</td>
-<td class="txtl"><?= $this->class_base_info['class_join'] ?></td>
+<td class="txtl">
+<?php 
+	$w[0] = '需要申请验证';
+	echo $w[$this->class_base_info['class_join']]
+?>
+</td>
 </tr>
 </table>
 

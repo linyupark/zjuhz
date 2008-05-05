@@ -16,6 +16,23 @@
 		
 		/* 通讯录相关 //////////////////////////////////////////////////////// */
 		
+		# 导出相关 - 班级成员可操作
+		function addressbookexportAction()
+		{
+			$class_id = $this->getRequest()->getParam('c');
+			if(false == Cmd::isMember($class_id)) exit();  // 不是班级成员
+			$rows = DbModel::fetchAddress($class_id,999,1);
+			$doc[1] = array('<b>姓名</b>','<b>手机</b>','<b>电子邮箱</b>','<b>QQ</b>','<b>MSN</b>','<b>通讯地址</b>','<b>邮政编码</b>','<b>座机</b>','<b>所在单位</b>');
+			foreach ($rows['rows'] as $k => $v)
+			{
+				$doc[$k+2] = array($v['cname'],$v['mobile'],$v['eMail'],$v['qq'],$v['msn'],$v['address'],$v['postcode'],$v['addressbook_telephone'],$v['addressbook_company']);
+				
+			}
+			$excel = new ExcelXML();
+			$excel->addArray ($doc);
+			$excel->generateXML('MyClassAddressBook');
+		}
+		
 		# 导入操作开始 - 只允许创建者
 		function importaddressbookAction()
 		{
