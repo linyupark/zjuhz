@@ -51,7 +51,7 @@
 .cont_list .focus{ background:#618EBC; color:#fff; padding:5px; }
 
 /* 每个成员通讯录单元表格样式 ----------------------------------- */
-.addressbook_item{ margin:5px 0 0 0; border:1px solid #D8DFEA; width:500px; }
+.addressbook_item{ margin:5px 0 0 0; border:1px solid #D8DFEA; width:500px; clear:left }
 .addressbook_item td{ padding:5px 5px 2px 5px; border-top:1px solid #eee; }
 .addressbook_item th{ padding:5px; font-size:16px; }
 

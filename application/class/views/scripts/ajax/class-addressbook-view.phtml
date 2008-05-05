@@ -1,4 +1,6 @@
-<?php foreach ($this->rows as $key => $val): ?>
+<?php if($this->pagination): ?>
+<div class="pagination"><?= $this->pagination ?></div>
+<?php endif; foreach ($this->rows as $key => $val): ?>
 <table class="addressbook_item">
 <tr>
 <td width="10%" valign="top"><img src="/static/users/user_test/tiny_head.jpg" /></td>
