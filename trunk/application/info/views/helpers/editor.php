@@ -1,6 +1,6 @@
 <?php
 
-	class Zend_View_Helper_Editor
+	class Zend_View_Helper_editor
 	{
 		function editor($content_id = 'content', $width='650', $height='480')
 		{
