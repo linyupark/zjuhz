@@ -25,7 +25,7 @@ Zend_Loader::registerAutoload();
 Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
-/** 公用SESSION,包含如验证码,用户基本资料等 */
+/** 公用SESSION */
 Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
 /** 项目SESSION */
 Zend_Registry::set('sessHelp', new Zend_Session_Namespace('help'));
