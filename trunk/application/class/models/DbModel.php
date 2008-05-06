@@ -155,6 +155,7 @@
 		static function getClassTopic($class_id, $role = null, $type = '', $pagesize = 1, $page = 1)
 		{
 			$where = array();
+			$where[] = '`class_id` = '.(int)$class_id;
 			if($role == 'visitor') $where[] = '`class_topic_public` = 1';
 			if($type == 'hot') $where[] = '`class_topic_reply_num` > 10';
 			if($type == 'elite') $where[] = '`class_topic_elite` = 1';
@@ -209,7 +210,7 @@
 			if(!empty($query)) // 生成模糊查询
 			{
 				$keyArr = explode(' ', $query);
-				foreach ($keyArr as $k => $v)
+				foreach ($keyArr as $v)
 				{
 					$where .= "CONCAT(`realName`,`class_name`,`class_college`) LIKE '%{$v}%' OR";
 				}
@@ -422,22 +423,17 @@
 		static function initClass($data)
 		{
 			$db = Zend_Registry::get('dbClass');
-			try {
-				$db->insert('tbl_class', $data);
-				$class_id = $db->lastInsertId('tbl_class');
-				$db->insert('tbl_class_member', array(
-					'class_id' => $class_id,
-					'class_member_id' => $data['class_charge'],
-					'class_member_join_time' => time(),
-					'class_member_last_access' => time()
-				));
-				$db->insert('tbl_class_privacy',array('class_id' => $class_id));
-				return $class_id;
-			}
-			catch (Exception $e)
-			{
-				return false;
-			}
+
+			$db->insert('tbl_class', $data);
+			$class_id = $db->lastInsertId('tbl_class');
+			$db->insert('tbl_class_member', array(
+				'class_id' => $class_id,
+				'class_member_id' => $data['class_charge'],
+				'class_member_join_time' => time(),
+				'class_member_last_access' => time()
+			));
+			$db->insert('tbl_class_privacy',array('class_id' => $class_id));
+			return $class_id;
 		}
 		
 		/**

@@ -46,7 +46,7 @@
 					$db = Zend_Registry::get('dbClass');
 					// 先删除老的记录
 					$db->delete('tbl_class_addressbook',array('class_id='.$this->_classId,'uid=0'));
-					foreach ($records as $cid => $key)
+					foreach ($records as $key)
 					{
 						if($key['cid'] != null)
 						{
@@ -82,7 +82,7 @@
 				$groups = $client->call('rpcMember.AddressGroupSelectList',array($this->_uid));
 				if(count($groups) > 0)
 				{
-					foreach ($groups as $k => $v)
+					foreach ($groups as $v)
 					{
 						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectList',array($v['gid'],$this->_uid));
 					}
@@ -467,7 +467,7 @@
 				if(is_array($member_id) && count($member_id) > 0)
 				{
 					$db = Zend_Registry::get('dbClass');
-					foreach ($member_id as $k=>$v)
+					foreach ($member_id as $v)
 					{
 						$db->update('tbl_class_member',array('class_member_charge'=>0),
 							array('class_member_id = '.(int)$v, 'class_id = '.$this->_classId));
@@ -504,8 +504,7 @@
 				// 保证有数据
 				if(is_array($member_id) && count($member_id) > 0)
 				{
-					$db = Zend_Registry::get('dbClass');
-					foreach ($member_id as $k=>$v)
+					foreach ($member_id as $v)
 					{
 						DbModel::classMemberOut($v, $this->_classId);
 					}
@@ -531,7 +530,7 @@
 				if(is_array($member_id) && count($member_id) > 0)
 				{
 					$db = Zend_Registry::get('dbClass');
-					foreach ($member_id as $k=>$v)
+					foreach ($member_id as $v)
 					{
 						$db->update('tbl_class_member',array('class_member_charge'=>1),
 							array('class_member_id = '.(int)$v, 'class_id = '.$this->_classId));
@@ -570,7 +569,7 @@
 				// 保证有数据
 				if(is_array($apply_id) && count($apply_id) > 0)
 				{
-					foreach ($apply_id as $k=>$v)
+					foreach ($apply_id as $v)
 					{
 						DbModel::applyDel($v);
 					}

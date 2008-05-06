@@ -83,7 +83,7 @@
 					// 该用户有班级,则载入班级信息
 					if(false != $classes)
 					{
-						foreach ($classes as $k => $v)
+						foreach ($classes as $v)
 						{
 							$sessClass->data[$v['class_id']]['class_name'] = $v['class_name'];
 							$sessClass->data[$v['class_id']]['class_college'] = $v['class_college'];

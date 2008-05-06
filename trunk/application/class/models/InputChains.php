@@ -61,7 +61,7 @@
 		}
 		
 		# 班级话题标签
-		function topicTag($input, $name='entity_tag')
+		function topicTag($input)
 		{
 			if(null != $input && is_array($input))
 			{
