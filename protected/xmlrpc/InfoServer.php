@@ -11,7 +11,10 @@
 	
 	// 全局注册
 	$iniInfo = new Zend_Config_Ini('Ini/Info.ini');
-	$dbInfo = Zend_Db::factory($iniInfo->db->adapter, $iniInfo->db->params->toArray());
+	$iniDb = new Zend_Config_Ini('Ini/Db.ini');
+	$params = $iniDb->default->params->toArray();
+	$params['dbname'] = $iniInfo->db->params->dbname;
+	$dbInfo = Zend_Db::factory($iniDb->default->adapter, $params);
 	Zend_Registry::set('dbInfo', $dbInfo);
 
 	$server = new Zend_XmlRpc_Server();
