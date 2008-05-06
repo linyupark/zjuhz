@@ -22,6 +22,7 @@ require_once('Zend/Loader.php');
 Zend_Loader::registerAutoload();
 
 /** 项目配置文档对象 */
+Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
 /** 公用SESSION,包含如验证码,用户基本资料等 */

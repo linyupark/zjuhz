@@ -165,7 +165,7 @@ abstract class HelpInterlayer
     }
 
     /**
-     * 初始化数据库访问类并注册
+     * 数据库初始化
      * 
      * @return void
      */
@@ -173,10 +173,14 @@ abstract class HelpInterlayer
     {
     	if (!Zend_Registry::isRegistered('dao'))
     	{
-    		/** Registry 数据库 */
-			$dao = Zend_Db::factory($this->_iniHelp->db->default->adapter, 
-			                        $this->_iniHelp->db->default->params->toArray());
-			$dao->query('SET NAMES utf8');
+    		$iniDb   = Zend_Registry::get('iniDb');
+    		$adapter = $iniDb->default->adapter;
+    		$params  = $iniDb->default->params->toArray();
+    		$params['dbname'] = 'zjuhz_ask';
+ 
+			$dao = Zend_Db::factory($adapter, $params);
+
+			$dao->query('set names utf8');
 			Zend_Db_Table::setDefaultAdapter($dao);
 			Zend_Registry::set('dao', $dao);
     	}

@@ -123,9 +123,12 @@ abstract class MemberInterlayer
     {
     	if (!Zend_Registry::isRegistered('dao'))
     	{
-			$dao = Zend_Db::factory($this->_iniMember->db->default->adapter, 
-			    $this->_iniMember->db->default->params->toArray()
-			 );
+    		$iniDb   = Zend_Registry::get('iniDb');
+    		$adapter = $iniDb->default->adapter;
+    		$params  = $iniDb->default->params->toArray();
+    		$params['dbname'] = 'zjuhz_user';
+ 
+			$dao = Zend_Db::factory($adapter, $params);
 
 			$dao->query('set names utf8');
 			Zend_Db_Table::setDefaultAdapter($dao);
