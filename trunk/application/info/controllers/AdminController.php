@@ -40,6 +40,20 @@
 			
 		}
 		
+		# 刷新缓存
+		function managercacheAction()
+		{
+			$this->view->headTitle('刷新缓存');
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())// 有刷新请求
+			{
+				$cache_name = $request->getPost('cache_name');
+				$cache = CacheModel::init(null,99999);
+				$cache->remove($cache_name);
+				exit();
+			}
+		}
+		
 		# 删除成员 ------------------------------------------
 		function managerdelAction()
 		{

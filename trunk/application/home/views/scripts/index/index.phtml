@@ -45,11 +45,11 @@ function login()
 <div class="sidebar intro">
 <h2>浙大校友在这里可以:</h2>
 <ul>
-<li>拥有只属于浙大校友的互动空间 <a href="">..</a></li>
-<li>得到来自校友的帮助 <a href="">..</a></li>
-<li>组建或参与校友的各种俱乐部 <a href="">..</a></li>
-<li>体验高质量的社交环境 <a href="">..</a></li>
-<li>自由安全地控制个人隐私 <a href="">..</a></li>
+<li>拥有只属于浙大校友的互动空间</li>
+<li>得到来自校友的帮助</li>
+<li>组建或参与校友的各种俱乐部</li>
+<li>体验高质量的社交环境</li>
+<li>自由安全地控制个人隐私</li>
 </ul>
 </div>
 
@@ -87,7 +87,7 @@ $art_rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array((int)$v[
 <tr>
 <td valign="top">							
 <?php foreach ($art_rows as $k2 => $v): ?>
-<a href="/info/view/detail/id/<?= $v['entity_id'] ?>" title="[<?= Commons::date($v['entity_pub_time']) ?>] <?= $v['entity_title'] ?>"><?= substr($v['entity_title'],0,40).'..' ?></a>
+<a href="/info/view/detail/id/<?= $v['entity_id'] ?>" title="[<?= Commons::date($v['entity_pub_time']) ?>] <?= $v['entity_title'] ?>"><?= substr($v['entity_title'],0,80).'..' ?></a>
 <?php endforeach; ?>
 <a href="/info/?category=<?= $v['category_id'] ?>" class="more"></a>
 </td>

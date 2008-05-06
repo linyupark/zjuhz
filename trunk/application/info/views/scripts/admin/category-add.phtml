@@ -4,21 +4,9 @@
   <p class="tips"><?= $this->tips ?></p>
   <?php endif; ?>
 	<form method="POST">
-		<p>显示图标 
-		<select name="cate_icon" onchange="icon_show(this.value)" class="iconset">
-		<?php 
-			$iconDir = dir('../../public/static/images/icon/');
-			while (false !== ($entry = $iconDir->read())): if(strstr($entry,'.gif')): 
-		?>
-			<option class="icon" value="<?= substr($entry,0,-4) ?>"><?= substr($entry,0,-4) ?></option>
-		<?php
-			endif; endwhile;
-   		?>
-		</select>
-		<span id="iconinner"></span>
-		<script>
-			icon_show($('.icon:first').val());
-		</script>
+		<p>
+			<a href="javascript:icon_selector(0)">选择图标</a>
+			<input size="13" type="text" value="<?= $row->category_icon ?>" name="cate_icon" id="c0"" /> 
 		</p>
 		<p>
 		分类名称 <input type="text" name="cate_name" size="40" />
@@ -28,3 +16,17 @@
 		</p>
 	</form>
 </div>
+<script type="text/javascript">
+function icon_selector(cid)
+{
+	var str = '<div style="width:700px">';
+	<?php 
+		$iconDir = dir('../../public/static/images/icon/');
+		while (false !== ($entry = $iconDir->read())): if(strstr($entry,'.gif')): 
+	?>
+		str += '<a style="margin:5px; border-bottom:1px solid #ccc;" href="javascript:icon_selected('+cid+',\'<?= str_replace('.gif','',$entry) ?>\')"><img src="/static/images/icon/<?= $entry ?>" /></a>';
+	<?php endif; endwhile; ?>
+		str += '</div>'; 
+	$.facebox(str);
+}
+</script>
