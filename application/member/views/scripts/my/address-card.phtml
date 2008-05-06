@@ -37,7 +37,7 @@
 
 <td class="txtl"><?= $value['gname']; ?></td>
 
-<td class="txtl"><a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">查看</a>&nbsp;<a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">修改</a>&nbsp;<?php if (3 == $value['status']) { ?><a href="#" onClick="javascript:copyToClipBoard('http://192.168.18.18/member/register/invite/ikey/<?= $value['cid']; ?>/', '邀请好友注册的链接已复制成功！您可在QQ/MSN/EMAIL等处粘贴给好友即可。\n您的好友通过此链接注册且填写的信息与您通讯录上的相符，注册才能成功。')">邀请</a><?php } else { ?><?php } ?></td>
+<td class="txtl"><a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">查看</a>&nbsp;<a href="/member/my/address/type/docard/cid/<?= $value['cid']; ?>/">修改</a>&nbsp;<?php if (3 == $value['status']) { ?><a href="#" onClick="javascript:copyToClipBoard('http://<?= $_SERVER["SERVER_NAME"]; ?>/member/register/invite/ikey/<?= $value['cid']; ?>/', '邀请好友注册的链接已复制成功！您可在QQ/MSN/EMAIL等处粘贴给好友即可。\n您的好友通过此链接注册且填写的信息与您通讯录上的相符，注册才能成功。')">邀请</a><?php } else { ?><?php } ?></td>
 
 </tr>
 <?php } ?>
