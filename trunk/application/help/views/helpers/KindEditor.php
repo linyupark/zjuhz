@@ -19,7 +19,7 @@ class Zend_View_Helper_KindEditor
      */
 	public function kindEditor($width, $height)
 	{
-		return '<script type="text/javascript" src="/static/scripts/kind/KindEditor.js"></script>
+		return '<script type="text/javascript" src="/static/editor/kind/KindEditor.js"></script>
 		    <script type="text/javascript">
 	        var editor = new KindEditor("editor");
 	        editor.uploadMode   = false;
