@@ -1,8 +1,18 @@
-// 显示icon
-function icon_show(n)
+// 选择刷新缓存的区域
+function cacheFlush(cache_name)
 {
-	$('#iconinner').html('<img src="/static/images/icon/'+n+'.gif" />');
+	$.post('/info/admin/manager_cache', {cache_name:cache_name}, function(html){
+		if(html == '') $.facebox('刷新完毕！');
+		else $.facebox(html);
+	});
 }
+
+//分类图标选择完毕
+function icon_selected(cid, icon)
+{
+	$('#c'+cid).val(icon);
+	$.facebox.close();
+}	
 
 //增加TAG
 function add_tag()

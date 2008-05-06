@@ -14,7 +14,10 @@ require_once('Zend/Controller/Front.php');
 Zend_Loader::registerAutoload();
 
 $iniClass = new Zend_Config_Ini('Ini/Class.ini');
-$dbClass = Zend_Db::factory($iniClass->db->adapter, $iniClass->db->params->toArray());
+$iniDb = new Zend_Config_Ini('Ini/Db.ini');
+$params = $iniDb->default->params->toArray();
+$params['dbname'] = $iniClass->db->params->dbname;
+$dbClass = Zend_Db::factory($iniDb->default->adapter, $params);
 Zend_Registry::set('dbClass', $dbClass);
 Zend_Registry::set('iniClass', $iniClass);
 Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));

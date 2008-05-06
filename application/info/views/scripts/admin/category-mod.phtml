@@ -18,16 +18,8 @@
   			<input type="hidden" name="category_id" value="<?= $row->category_id ?>" />
   		</td>
   		<td width="20%">
-  			<select name="category_icon" onchange="icon_show(this.value)" class="iconset">
-		<?php 
-			$iconDir = dir('../../public/static/images/icon/');
-			while (false !== ($entry = $iconDir->read())): if(strstr($entry,'.gif')): 
-		?>
-			<option class="icon" value="<?= substr($entry,0,-4) ?>"<?php if($row->category_icon == substr($entry,0,-4)): ?> selected="selected"<?php endif; ?>><?= substr($entry,0,-4) ?></option>
-		<?php
-			endif; endwhile;
-   		?>
-		</select>
+  			<input size="13" type="text" value="<?= $row->category_icon ?>" name="category_icon" id="c<?= $row->category_id ?>"" /> 
+  			<a href="javascript:icon_selector(<?= $row->category_id ?>)">选择图标</a>
   		</td>
   		<td>
   			<input name="category_name" type="text" value="<?php echo $row->category_name ?>" size="40" />
@@ -42,3 +34,17 @@
   	<?php endforeach; endif; ?>
   </table>
 </div>
+<script type="text/javascript">
+function icon_selector(cid)
+{
+	var str = '<div style="width:700px">';
+	<?php 
+		$iconDir = dir('../../public/static/images/icon/');
+		while (false !== ($entry = $iconDir->read())): if(strstr($entry,'.gif')): 
+	?>
+		str += '<a style="margin:5px; border-bottom:1px solid #ccc;" href="javascript:icon_selected('+cid+',\'<?= str_replace('.gif','',$entry) ?>\')"><img src="/static/images/icon/<?= $entry ?>" /></a>';
+	<?php endif; endwhile; ?>
+		str += '</div>'; 
+	$.facebox(str);
+}
+</script>
