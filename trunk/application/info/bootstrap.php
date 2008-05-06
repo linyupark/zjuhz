@@ -28,7 +28,7 @@
 	
 	/** run */
 	$front = Zend_Controller_Front::getInstance();
-	$front->throwExceptions(true)
+	$front->throwExceptions(false)
 	      ->registerPlugin(new InfoAcl(Zend_Registry::get('sessCommon')))
 	      ->setControllerDirectory('../../application/info/controllers/')
 	      ->dispatch();
