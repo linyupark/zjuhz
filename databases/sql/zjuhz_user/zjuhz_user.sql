@@ -160,8 +160,6 @@ create table zjuhz_user.tbl_user_ext
 )
 type = MYISAM;
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 --
 -- Êý¾Ý¿â: 'zjuhz_user'
 --
