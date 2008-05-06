@@ -70,7 +70,8 @@ class MyFilter extends MemberInterlayer
 		    'everName' => array('allowEmpty' => true), 
 			'birthday' => array(
 			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
-               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError)), 
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'hometown_a' => array('allowEmpty' => true), 
             'location_a' => array('allowEmpty' => true),  
             'location_p' => array('allowEmpty' => true),
