@@ -15,16 +15,16 @@
 class CollectionController extends Zend_Controller_Action
 {
 	/**
-     * 公用SESSION对象
+     * 公用Session
      *
-     * @var array
+     * @var object
      */
 	private $_sessCommon = null;
 
 	/**
-     * 项目SESSION对象
+     * 项目Session
      *
-     * @var array
+     * @var object
      */
 	private $_sessHelp = null;
 
