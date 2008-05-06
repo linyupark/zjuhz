@@ -17,7 +17,6 @@ class IndexController extends Zend_Controller_Action
     function indexAction()
     {	
 		$this->view->cache = CacheModel::init(null,99999);
-    	$this->view->role = 'guest';
     	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
     }
 }
