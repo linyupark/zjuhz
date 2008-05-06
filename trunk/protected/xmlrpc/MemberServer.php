@@ -23,6 +23,7 @@ require_once('Zend/Loader.php');
 Zend_Loader::registerAutoload();
 
 /** 项目配置文档对象 */
+Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
 Zend_Registry::set('iniMember',new Zend_Config_Ini('../../common/Ini/Member.ini'));
 
 
