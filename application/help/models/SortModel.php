@@ -99,8 +99,8 @@ class SortModel //extends Zend_Db_Table_Abstract
 	{
 		return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0 OR q.status = 1) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :sid OR parent = :sid) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid));
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
     }
 
 	/**
@@ -114,8 +114,8 @@ class SortModel //extends Zend_Db_Table_Abstract
     {
     	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :sid OR parent = :sid) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid));
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
     }
 
     /**
@@ -129,8 +129,8 @@ class SortModel //extends Zend_Db_Table_Abstract
     {
     	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :sid OR parent = :sid) 
-		    ORDER BY q.offer DESC LIMIT {$limit};", array('sid' => $sid));
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
+		    ORDER BY q.offer DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
     }
 
     /**
@@ -144,8 +144,8 @@ class SortModel //extends Zend_Db_Table_Abstract
     {
     	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :sid OR parent = :sid) 
-		    ORDER BY q.reply ASC LIMIT {$limit};", array('sid' => $sid));
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
+		    ORDER BY q.reply ASC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
     }
 
     /**
@@ -159,7 +159,7 @@ class SortModel //extends Zend_Db_Table_Abstract
     {
     	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 1) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :sid OR parent = :sid) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid));
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
     }
 }
