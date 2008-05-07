@@ -5,20 +5,20 @@
 <div id="login_form">
 <p class="account">
 登陆帐号:<br />
-<input name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+<input tabindex="1" name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
 </p>
 <p class="password">
 密码: (<a href="">忘记了?</a>)<br />
-<input name="pswd" type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+<input tabindex="2" name="pswd" type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
 </p>
 <p>
 <input name="rememberme" type="hidden" value="0" />
-<label for="auto_login"><input name="rememberme" id="auto_login" type="checkbox" value="1" /> 请记住我,下次自动登陆</label>
+<label for="auto_login"><input tabindex="3" name="rememberme" id="auto_login" type="checkbox" value="1" /> 请记住我,下次自动登陆</label>
 </p>
 <p>
 <table>
 <tr>
-<td><input type="image" src="/static/images/btn/login.gif" /></td>
+<td><input tabindex="4" type="image" src="/static/images/btn/login.gif" /></td>
 <td valign="middle"><a href="/member/register/" class="registry">我要注册</a></td>
 </tr>
 </table>
