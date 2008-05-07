@@ -5,6 +5,10 @@
     <h2 class="quiet"><img src="/static/images/icon/write.gif" /> 注册账号 <small>已拥有账号？可直接<a href="/member/">登录</a></small></h2><hr /><p class="tip"><img src="/static/images/icon/info.gif" align="absmiddle" />&nbsp;&nbsp;为营造真实可靠的校友社区，注册实行实名邀请制。您可向已注册的校友索取邀请码，或致电0571-89988185索取。</p>
     <table id="register_form">
     <tr>
+    	<td>邀&nbsp;请&nbsp;&nbsp;码：<br /><br /></td>
+    	<td><input name="ikey" id="ikey" tabindex="1" class="inputtxt" type="text" maxlength="10" value="<?= $this->ikey; ?>" />&nbsp;<br /><span class="quiet">邀请码由10位随机数字、字母组成。</span></td>
+    </tr>
+    <tr>
     	<td>登录账号：<br /><br /></td>
     	<td><input name="uname" id="uname" tabindex="1" class="inputtxt" type="text" maxlength="16" value="" />&nbsp;<input type="button" id="btnCheck" class="btn" style="height:22px" name="btnCheck" value="检查账号是否可用">&nbsp;<span id="chkmsg" class="chkmsg"></span><br /><span class="quiet">登录账号由2-16个字母、数字、下划线组成，以字母开始以非下划线结尾。注册后不可修改。</span></td>
     </tr>
@@ -51,7 +55,7 @@
     	男&nbsp;<input type="radio" name="sex" value="女" /> 女&nbsp;<span class="quiet">注册后不可修改。</span><br /></td>
     </tr>
     <tr>
-    	<td>验证码：<br /><br /></td>
+    	<td>验&nbsp;证&nbsp;&nbsp;码：<br /><br /></td>
     	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="6" size="6" maxlength="4">&nbsp;<span id="putVerifyImg"></span>&nbsp;<span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span><br /></td>
     </tr>
     <tr>
@@ -61,7 +65,6 @@
     <td colspan="2"><div id="ajaxhint" style="width:282px"></div></td>
     </tr>
     </table>
-	<input type="hidden" name="ikey" value="<?= $this->ikey; ?>" />
 	<input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
 	</form>
 	<table>
