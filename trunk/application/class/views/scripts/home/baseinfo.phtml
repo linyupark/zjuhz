@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" style="width:170px;">
 <table class="class_base_info">
 <tr>
 <th colspan="2" width="170">班级基本信息</th>
@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td>成员人数：</td>
-<td class="txtl"><a href="/class/memberlist?c=<?= $this->class_base_info['class_id'] ?>"><?= $this->class_base_info['class_member_num'] ?></td>
+<td class="txtl"><a href="/class/memberlist?c=<?= $this->class_base_info['class_id'] ?>"><?= $this->class_base_info['class_member_num'] ?></a></td>
 </tr>
 <tr>
 <td>创建人：</td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td>管理员：</td>
-<td class="txtl"d>
+<td class="txtl">
 <?php if(count($this->class_base_info['class_managers'])>0): foreach ($this->class_base_info['class_managers'] as $k=>$v): ?>
 <a href="/member/home?uid=<?= $v['class_member_id'] ?>"><?= $v['realName'] ?></a> &nbsp; 
 <?php endforeach; endif; ?> 
@@ -51,14 +51,13 @@
 <tr>
 <th colspan="2" width="170">最近来过班级的同学</th>
 </tr>
+<tr>
 <td>
 <?php if(count($this->class_base_info['class_activity_member']) > 0) : 
 foreach ($this->class_base_info['class_activity_member'] as $key => $val): ?>
 <a href=""><?= $val['realName'] ?></a> &nbsp; 
 <?php endforeach; endif; ?>
 </td>
-<tr>
-
 </tr>
 </table>
 </div>
