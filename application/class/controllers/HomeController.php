@@ -88,6 +88,11 @@ class HomeController extends Zend_Controller_Action
 		$class_id = $this->getRequest()->getParam('c');
 		if(null == $class_id) 
 		{
+			// 没有加入班级，也没有建立过班级，返回班级列表页
+			if(count($this->_sessClass->data) == 0)
+			{
+				$this->_redirect('/');
+			}
 			$class_id = array_keys($this->_sessClass->data);
 			$class_id = $class_id[0];
 		}
