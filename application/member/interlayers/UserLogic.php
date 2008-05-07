@@ -95,4 +95,15 @@ class UserLogic extends MemberInterlayer
 	{
 		return $this->_UserModel->update($args, $uid);
 	}
+
+    /**
+     * 修改密码
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function updatePassword($args)
+	{
+		return $this->_UserModel->updatePassword($args);
+	}
 }

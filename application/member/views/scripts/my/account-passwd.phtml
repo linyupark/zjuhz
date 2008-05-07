@@ -1,0 +1,49 @@
+<table>
+<tr>
+<td align="right"><b>旧密码：</b><br /><br /></td>
+<td><input type="password" class="txt" name="oldpswd" id="oldpswd" tabindex="1" maxlength="16" value="" /> <br /><span class="quiet">输入当前正在使用中的密码。</span></td>
+</tr>
+<tr>
+<td align="right"><b>新密码：</b><br /><br /></td>
+<td><input type="password" class="txt" name="newpswd" id="newpswd" tabindex="2" maxlength="16" value="" onkeyup="EvalPwdStrength(document.forms[0],this.value);" /> 
+<br /><span class="quiet">输入新的密码，6-16个任意字符组成。</span></td>
+</tr>
+    <tr>
+    	<td></td>	
+    	<td colspan="2">
+		<table class="pwdChkTbl2" id="checkTD" cellSpacing="0" cellPadding="0" style="width:250px;">
+		<tr>
+		    <td width="25%" align="middle" class="pwdChkCon0" id="idSM1">
+			    <span id="idSMT1" style="display: none">不安全&nbsp;</span>			</td>
+			<td class="pwdChkCon0" id="idSM2" style="border-left: #fff 1px solid" align="middle" width="25%">
+				<span id="idSMT0" style="display: inline; font-weight: normal; COLOR: #666">未评级&nbsp;</span>
+				<span id="idSMT2" style="display: none">普通&nbsp;</span>
+            </td>
+			<td class="pwdChkCon0" id="idSM3" style="border-left: #fff 1px solid" align="middle" width="25%">
+				<span id="idSMT3" style="display: none">安全&nbsp;</span>
+		    </td>
+			<td class="pwdChkCon0" id="idSM4" style="border-left: #fff 1px solid" align=middle width="25%">
+				<span id="idSMT4" style="display: none">最佳&nbsp;</span>
+		    </td>
+		</tr>
+	    </table>
+    	</td>
+    </tr>
+<tr>
+<td align="right"><b>密码确认：</b><br /><br /></td>
+<td><input type="password" class="txt" name="pswd" id="pswd" tabindex="3" maxlength="16" value="" /> 
+<span class="quiet">再次输入密码以确认，并请牢记。</span></td>
+</tr>
+<tr>
+<td align="right"><b>验证码：</b><br /><br /></td>
+<td><input type="text" class="txt" name="vcode" id="vcode" size="6" tabindex="4" maxlength="4" value="" /> <span id="putVerifyImg"></span><br /><span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="保存修改" class="btn" name="btnAccount" id="btnAccount" tabindex="5" /><input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" /></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="ajaxhint" style="width:300px"></div></td>
+</tr>
+</table>

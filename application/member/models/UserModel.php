@@ -124,4 +124,19 @@ class UserModel
 		    $this->_dao->quoteInto("{$this->_primary} = ?", $uid)
 		);
     }
+
+    /**
+     * 修改密码
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function updatePassword($args)
+    {
+    	$stmt = $this->_dao->prepare("UPDATE {$this->_name} SET password = :password 
+    	    WHERE uid = :uid AND password = :oldpassword LIMIT 1;");
+		$stmt->execute($args);
+
+		return $stmt->rowCount();
+    }
 }

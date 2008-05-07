@@ -148,6 +148,27 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
+     * 账号安全
+     * 
+     * @return void
+     */
+	public function accountAction()
+	{
+		$this->view->headTitle($this->_iniMember->head->titleMyAccount);
+		$this->view->headScript()->appendFile('/static/scripts/member/my/account.js');
+
+    	$type = $this->getRequest()->getParam('type');
+		switch ($type)
+		{
+			default:        // 修改密码
+    			$type = 'passwd';
+		}
+
+		$this->view->ctrl = 'account';
+		$this->view->type = $type;
+	}
+
+	/**
      * 个人资料-基础信息
      * 
      * @return void
@@ -284,6 +305,48 @@ class MyController extends Zend_Controller_Action
 				    	echo 'hide';
 				    }
 			    }
+			}
+		}
+	}
+
+	/**
+     * 账号安全-修改密码
+     * 
+     * @return void
+     */
+	public function dopasswdAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid'] = $this->_sessUid;
+
+			if ($passwdArgs = MyFilter::init()->passwd($postArgs))
+			{
+				if (MemberClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
+				{
+					if ($passwdArgs['oldpassword'] === $this->_sessCommon->login['password'])
+				    {
+				    	if (UserLogic::init()->updatePassword($passwdArgs))
+				    	{
+				    		Commons::modiSess('common', 'login', $passwdArgs); // 同步Session
+				    		$this->_sessMember->message = $this->_iniMember->hint->modipswdSuccess;
+				    	}
+				    	else
+				    	{
+				    		$this->_sessMember->message = $this->_iniMember->hint->modipswdFailure;
+				    	}
+				    }
+				    else
+				    {
+					    $this->_sessMember->message = $this->_iniMember->hint->modipswdFailure;
+				    }
+
+    				echo 'message'; // 请求ajax给出提示
+				}
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 /**
  * [Custom] (C)2008 zjuhz.com
  * 
- * $File : Zend_Validate_StringEquals.php $
+ * $File : Zend_Validate_NotEquals.php $
  */
 
 /**
@@ -15,18 +15,16 @@ require_once 'Zend/Validate/Abstract.php';
  * @category   Zend_Extends
  * @package    Zend_Validate
  */
-class Zend_Validate_StringEquals extends Zend_Validate_Abstract
+class Zend_Validate_NotEquals extends Zend_Validate_Abstract
 {
 	// constants for defining what currency symbol should be displayed
-    const NOT_EQUALS = 'notEquals';
-    const IS_NULL = 'isNull';
+    const EQUALS = 'equals';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_EQUALS => "'%value%' are not equals",
-        self::IS_NULL => "'%value%' is null",
+        self::EQUALS => "'%value%' are equals",
     );
 
     /**
@@ -54,16 +52,6 @@ class Zend_Validate_StringEquals extends Zend_Validate_Abstract
     }
 
     /**
-     * Returns the input option
-     *
-     * @return mixed
-     */
-    public function getInput()
-    {
-        return $this->_input;
-    }
-
-    /**
      * Sets the input option
      *
      * @param  mixed $input
@@ -88,16 +76,10 @@ class Zend_Validate_StringEquals extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
 
-        if (is_null($this->_input) || is_null($this->_value))
+        if ($this->_input == $this->_value)
         {
-            $this->_error(self::IS_NULL);
+            $this->_error(self::EQUALS);
             return false;
-        }
-
-        if (strcmp($this->_input,$this->_value))
-        {
-            $this->_error(self::NOT_EQUALS);
-            return false;            
         }
 
         return true;

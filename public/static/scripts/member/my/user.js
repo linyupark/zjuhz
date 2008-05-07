@@ -20,6 +20,7 @@ function douser() {
 		if ("message" == msg) {
 			ajaxhint(false);
 			popup_message("/member/index/message/");
+			goToUrl("reload", 1000);
 			return false;
 		}
 		
