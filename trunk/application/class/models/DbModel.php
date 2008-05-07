@@ -229,7 +229,7 @@
 			{
 			//开始进行数据匹配
 			$return['rows'] = $db->fetchAll('SELECT `class_id`,`class_charge`,`realName`,`class_year`,`class_name`,`class_college` 
-												FROM `vi_class`'.$where.' LIMIT '.(int)$offset.','.$pagesize);
+												FROM `vi_class`'.$where.' ORDER BY `class_id` DESC LIMIT '.(int)$offset.','.$pagesize);
 			}
 			return $return;
 		}
