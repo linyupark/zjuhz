@@ -356,4 +356,56 @@ class MyFilter extends MemberInterlayer
 		    array('gid' => $input->getUnescaped('gid'), 'uid' => $input->getUnescaped('uid')) : false 
 		);
 	}
+
+	/**
+     * 账号安全-修改密码
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function passwd($args)
+	{
+		// 载入相关ZEND扩展 - ZF1.5版本需此
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('NotEquals.php');
+
+		// 设置过滤规则
+		$filters = array(
+		    '*' => array(
+		        'StringTrim', 'StringToLower')
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+		    'uid' => array(array('Int'), 'presence' => 'required'),
+          	'oldpswd' => array(
+       	        array('StringLength', '6', '16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passwordError, 
+              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passwordError)), 
+			'newpswd' => array(
+       	        array('StringLength', '6', '16'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->passwordError, 
+              	    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->passwordError)),               	    
+            'pswd' => array(
+			    array('InArray', array($args['newpswd']), true), 'breakChainOnFailure' => true, 'presence' => 'required', 
+			        'messages' => array(Zend_Validate_InArray::NOT_IN_ARRAY => $this->_iniMember->hint->passwordNotEqual)),    			        
+
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		if ($input->hasInvalid() || $input->hasMissing())
+		{
+			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
+		}
+		else
+		{
+			return array(
+			    'uid' => $input->getUnescaped('uid'), 'oldpassword' => md5($input->getUnescaped('oldpswd')), 
+		    	'password' => md5($input->getUnescaped('pswd'))
+			);
+		}
+
+		return false;
+	}
 }

@@ -1,0 +1,22 @@
+<div id="ajaxloading"></div>
+<div class="sidebar">
+<?= $this->render("card.phtml"); ?>
+
+<?= $this->render("my/menu-left.phtml"); ?>
+</div>
+
+<div class="sidebar">
+<?= $this->render("my/menu-top.phtml"); ?>
+<div class="control_content">
+<div class="control_tab">
+<a href="/member/my/account/type/passwd/">修改密码</a>
+</div>
+
+<div class="control_action">
+<form class="home_form" name="frmAccount" id="frmAccount">
+<?php echo $this->render('my/account-'.$this->type.'.phtml'); ?>
+</form>
+</div>
+</div>
+</div>
+<script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>
