@@ -3,6 +3,7 @@
 <div class="sidebar" style="width:160px">
 <p class="toolbar">
 <a href="/class/home?c=<?= $this->class_id ?>"><img src="/static/images/icon/arrow_undo.gif" /> 返回</a>
+<a href="/class/topic/post?c=<?= $this->class_id ?>"><img src="/static/images/icon/add.gif" /> 发表新话题</a>
 </p>
 </div>
 
@@ -27,8 +28,8 @@
 <?php if($this->topics != null): foreach ($this->topics as $key => $val): ?>
 <tr class="list_item">
 	<td>
-	<?php if($val['class_topic_up'] == 1) echo '[顶]'; ?>
-	<?php if($val['class_topic_elite'] == 1) echo '[精]'; ?>
+	<?php if($val['class_topic_up'] == 1) {echo '[顶]'; } ?>
+	<?php if($val['class_topic_elite'] == 1) {echo '[精]'; } ?>
 	<a href="/class/topic/view?c=<?= $this->class_id ?>&tid=<?= $val['class_topic_id'] ?>"><?= $val['class_topic_title'] ?></a>
 	<?php
 		if($val['class_topic_reply_num'] > 5)
