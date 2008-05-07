@@ -27,7 +27,7 @@
 
 /* 班级基本信息 ------------------------------------------ */
 .class_base_info th{ text-align:left; color:#fff; border-bottom:1px solid #666; padding:5px 0; 
-					background:#6288B6; text-indent:10px;  }
+					background:#6288B6; text-indent:10px; width:170px;  }
 .class_base_info td{ padding:3px 0 3px 5px; border-bottom:1px solid #eee; color:#666; }
 .class_base_info .txtl{ color:#444; }
 .toolbar { margin-left:10px; }
