@@ -13,7 +13,7 @@ function sort_init()
 		sort_list("sort2");
     });
 
-	//$("select").attr({ size: "8", style: "width:150px" }); // select?
+	$("select").attr({ size: "8", style: "width:150px" }); // select?
 	sort_add_options("sort0", 0);
 }
 
