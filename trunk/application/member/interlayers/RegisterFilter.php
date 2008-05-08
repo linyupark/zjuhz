@@ -62,8 +62,7 @@ class RegisterFilter extends MemberInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim', 'StripTags', 'StringToLower'), 
+		    '*' => array('StringTrim', 'StripTags', 'StringToLower'), 
 	    	'ikey' => 'Alnum'
     	);
 
@@ -124,7 +123,9 @@ class RegisterFilter extends MemberInterlayer
 	public function check($args)
 	{
 		// 设置过滤规则
-		$filters = array('uname' => array('StringTrim', 'StringToLower'));
+		$filters = array(
+		    'uname' => array('StringTrim', 'StringToLower')
+		);
 
     	// 设置验证规则
 		$validators = array(

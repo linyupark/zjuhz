@@ -21,19 +21,42 @@ class ErrorController extends Zend_Controller_Action
      */
     public function init()
     {
-		// 禁用自动渲染视图
-		$this->_helper->viewRenderer->setNoRender();
     }
 
     /**
-     * This action handles  
-     *    - Application errors
-     *    - Errors in the controller chain arising from missing 
-     *      controller classes and/or action methods
+     * 错误输出
+     * 
+     * @return void
      */
     public function errorAction()
     {
-    	//$this->_forward('index','Index');
-        print_r($this->getRequest()->getParams());
+        $errors = $this->getRequest()->getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            	
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+            	
+            default:
+            	
+                // Log the exception:
+                $exception = $errors->exception;
+                $log = new Zend_Log(new Zend_Log_Writer_Stream('MemberAppException.log'));
+                $log->debug($exception->getMessage() . "\n" .  $exception->getTraceAsString() . "\n");
+                break;
+        }
+
+        $this->_redirect('/');
+    }
+
+    /**
+     * 模块登录页
+     * 
+     * @return void
+     */
+    public function loginAction()
+    {
+    	$this->view->headTitle(Zend_Registry::get('iniHelp')->head->titleLogin);
+    	$this->view->uname = $_COOKIE['zjuhz_member']['alive']; // 记住账号
     }
 }

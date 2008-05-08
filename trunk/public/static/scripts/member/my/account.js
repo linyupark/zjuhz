@@ -29,7 +29,7 @@ function doaccount() {
 		if ("message" == msg) {
 			ajaxhint(false);
 			popup_message("/member/index/message/");
-			goToUrl("/member/my/account/type/"+type+"/", 1000);
+			goToUrl("/member/my/account/type/"+type+"/", 2000);
 			return false;
 		}
 		

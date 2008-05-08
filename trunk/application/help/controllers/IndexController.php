@@ -156,10 +156,10 @@ class IndexController extends Zend_Controller_Action
 		$this->entryAction(); // 子系统登录
 
 		$logic = HelpLogic::init();
-		$this->view->latest = $logic->latest(10); // 最新问题
-		$this->view->offer  = $logic->offer(10); // 高分问题
-		$this->view->forget = $logic->forget(10); // 被遗忘的
-		$this->view->solved = $logic->solved(10); // 最近解决
+		$this->view->latest = $logic->latest(12); // 最新问题
+		$this->view->offer  = $logic->offer(12); // 高分问题
+		$this->view->forget = $logic->forget(12); // 被遗忘的
+		$this->view->solved = $logic->solved(12); // 最近解决
 		$this->view->rand   = QuestionLogic::init()->rand(5); // 随机
 	}
 }

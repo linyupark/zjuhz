@@ -124,8 +124,7 @@ class AddressCardLogic extends MemberInterlayer
         $where .= (array_key_exists($args['field'], $this->_iniMember->find->addressCard->toArray()) && isset($args['wd']) 
 			? " AND c.{$args['field']} LIKE '%{$args['wd']}%'" : ''); // 字段范围及关键字词
 
-        return ('count' == $type ? 
-            $this->_AddressCardModel->selectFindCount($where) : 
+        return ('count' == $type ? $this->_AddressCardModel->selectFindCount($where) : 
             $this->_AddressCardModel->selectFindList($where, $limit)
         );
     }

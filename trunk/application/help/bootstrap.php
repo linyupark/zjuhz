@@ -9,6 +9,9 @@
  */
 
 
+/** set error_reporting */
+error_reporting('ALL');
+
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../common/Custom/'.PATH_SEPARATOR.
@@ -42,5 +45,5 @@ Zend_Controller_Front::getInstance()
     ->registerPlugin(new HelpAcl(Zend_Registry::get('sessCommon')->role))
 	->setDefaultModule('help')
     ->setControllerDirectory('../../application/help/controllers/')
-    ->throwExceptions(true)
+    ->throwExceptions(false)
     ->dispatch();

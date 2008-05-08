@@ -30,8 +30,23 @@ class ErrorController extends Zend_Controller_Action
      */
     public function errorAction()
     {
-        //$this->_forward('index', 'Index');
-        print_r($this->getRequest()->getParams());exit;
+        $errors = $this->getRequest()->getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            	
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+            	
+            default:
+            	
+                // Log the exception:
+                $exception = $errors->exception;
+                $log = new Zend_Log(new Zend_Log_Writer_Stream('MemberAppException.log'));
+                $log->debug($exception->getMessage() . "\n" .  $exception->getTraceAsString() . "\n");
+                break;
+        }
+
+        $this->_redirect('/');
     }
 
     /**
