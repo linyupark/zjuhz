@@ -12,9 +12,9 @@
 <!-- 问题分类 -->
 <div class="sub_category">
 <h2><?= $this->detail['name']; ?>(<?= $this->total; ?>)</h2>
-<table>
+<table width="100%">
 <?php foreach ($this->map as $key => $value) { $i++ ; if ($i % 4 == 1) { echo '<tr>'; } ?>
-<td>
+<td width="25%">
 <?php if ($this->detail['sid'] != $value['sid']) { ?>
 <a href="/help/sort/solved/sid/<?= $value['sid']; ?>/"><?= $value['name']; ?>(<?= $value['solved']; ?>)</a>
 <?php } else { echo $value['name']; } ?>
@@ -36,10 +36,10 @@
 <!-- 问题列表 -->
 <table class="tab_content">
 <tr style="background:#FFFCF0">
-<th class="txtc p5 quiet" width="70%">问题</th>
+<th class="txtc p5 quiet" width="75%">问题</th>
 <th class="txtc p5 quiet" width="8%">状态</th>
 <th class="txtc p5 quiet" width="8%">回复</th>
-<th class="txtc p5 quiet" width="14%">时间</th>
+<th class="txtc p5 quiet" width="9%">时间</th>
 </tr>
 <?php foreach ($this->list as $value) { ?>
 <tr>
