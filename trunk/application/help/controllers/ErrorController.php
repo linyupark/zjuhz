@@ -41,7 +41,7 @@ class ErrorController extends Zend_Controller_Action
             	
                 // Log the exception:
                 $exception = $errors->exception;
-                $log = new Zend_Log(new Zend_Log_Writer_Stream('MemberAppException.log'));
+                $log = new Zend_Log(new Zend_Log_Writer_Stream('HelpAppException.log'));
                 $log->debug($exception->getMessage() . "\n" .  $exception->getTraceAsString() . "\n");
                 break;
         }
