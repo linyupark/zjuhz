@@ -21,7 +21,7 @@
 		{
 			$class_id = $this->getRequest()->getParam('c');
 			if(false == Cmd::isMember($class_id)) exit();  // 不是班级成员
-			$rows = DbModel::fetchAddress($class_id,999,1);
+			$rows = AddressModel::fetch($class_id,999,1);
 			$doc[1] = array('<b>姓名</b>','<b>手机</b>','<b>电子邮箱</b>','<b>QQ</b>','<b>MSN</b>','<b>通讯地址</b>','<b>邮政编码</b>','<b>座机</b>','<b>所在单位</b>');
 			foreach ($rows['rows'] as $k => $v)
 			{
@@ -122,7 +122,7 @@
 					}
 					else // 更新数据
 					{
-						$result = DbModel::updateAddress(array(
+						$result = AddressModel::update(array(
 							'cname'=>$cname,
 							'mobile'=>$mobile,
 							'eMail'=>$email,
@@ -164,7 +164,7 @@
 			{
 				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
 				$page = (int)$request->getPost('page',1);
-				$rows = DbModel::fetchAddress($this->_classId,5,$page);
+				$rows = AddressModel::fetch($this->_classId,5,$page);
 				Page::$pagesize = 5;
 				Page::create(array(
 					'href_open'=>'<a href="javascript:classAddressbookView('.$this->_classId.',%d)">',
@@ -193,7 +193,7 @@
 				if($db->delete('tbl_class_reply',
 						array('class_reply_id = '.$reply_id,'class_reply_author = '.$this->_uid)) > 0)
 				{
-					DbModel::topicReplyNumCut($topic_id);
+					TopicModel::replyNumCut($topic_id);
 					$this->view->suc_tip = '成功删除回复';
 					echo Commons::js_jump('',1);
 					$this->render('success');
@@ -344,7 +344,7 @@
 										'class_reply_title' => $reply_title,
 										'class_reply_content' => Commons::html2str($reply_content),
 										'class_reply_time' => time())) >0)
-					DbModel::topicReplyNumInc($topic_id, $this->_uid);
+					TopicModel::replyNumInc($topic_id, $this->_uid);
 					else 
 					{
 						// 弹出错误
@@ -377,7 +377,7 @@
 				$pagesize = 5;
 				$page = (int)$request->getPost('p',1);
 				$topic_id = (int)$request->getPost('tid');
-				$rows = DbModel::fetchTopicReply($topic_id, $pagesize, $page);
+				$rows = TopicModel::fetchReply($topic_id, $pagesize, $page);
 				Page::$pagesize = $pagesize;
 				Page::create(array(
 					'href_open' => '<a href="javascript:fetchTopicReply('.$this->_classId.','.$topic_id.',%d)">',
@@ -506,7 +506,7 @@
 				{
 					foreach ($member_id as $v)
 					{
-						DbModel::classMemberOut($v, $this->_classId);
+						MemberModel::fireOut($v, $this->_classId);
 					}
 				}
 			}
@@ -571,7 +571,7 @@
 				{
 					foreach ($apply_id as $v)
 					{
-						DbModel::applyDel($v);
+						ApplyModel::delete($v);
 					}
 				}
 			}
@@ -591,7 +591,7 @@
 				{
 					foreach ($apply_id as $k=>$v)
 					{
-						if(false == DbModel::applyPass($v,$this->_classId,$member_id[$k]))
+						if(false == ApplyModel::pass($v,$this->_classId,$member_id[$k]))
 						{
 							echo "批准过程中程序发生错误,请联系网站管理人员!";
 							exit();
@@ -635,11 +635,11 @@
 			if($this->getRequest()->isXmlHttpRequest())
 			{
 				// 判断是否已经是该班级成员
-				if(false != DbModel::isJoined($this->_classId, $this->_uid))
+				if(false != MemberModel::isJoined($this->_classId, $this->_uid))
 				{
 					$this->render('join-already');
 				}
-				elseif (false != DbModel::isApplied($this->_classId, $this->_uid))
+				elseif (false != ApplyModel::isApplied($this->_classId, $this->_uid))
 				{
 					$this->render('join-stop');
 				}
@@ -660,11 +660,11 @@
 				$class_apply_content = Commons::html2str(strip_tags(trim($request->getPost('apply_content'))));
 				
 				// 判断是否已经是该班级成员
-				if(false != DbModel::isJoined($this->_classId, $this->_uid))
+				if(false != MemberModel::isJoined($this->_classId, $this->_uid))
 				{
 					echo '您已经是班级成员';
 				}
-				elseif (false != DbModel::isApplied($this->_classId, $this->_uid))
+				elseif (false != ApplyModel::isApplied($this->_classId, $this->_uid))
 				{
 					echo '您已经提交了加入申请';
 				}
@@ -676,7 +676,7 @@
 						'class_apply_content' => $class_apply_content,
 						'class_apply_time' => time()
 					);
-					if(false != DbModel::insertApply($data))
+					if(false != ApplyModel::insert($data))
 					{
 						echo '成功完成申请！请等待审核';
 					}

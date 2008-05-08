@@ -26,7 +26,7 @@
 			"cur_page" => $page));
 			
 			// 获取会员所申请加入班级的信息
-			$this->view->applies = DbModel::getClassApply($this->view->login['uid']);
+			$this->view->applies = ApplyModel::fetch($this->view->login['uid']);
 			
 			// 分配班级数据
 			$this->view->year = $year;
