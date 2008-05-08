@@ -24,12 +24,12 @@ class HomeController extends Zend_Controller_Action
 		// 没有初始化过班级通讯录判断的
 		if($this->_sessClass->addressInit == null)
 		{
-			if(false == DbModel::isAddressInit($class_id, $uid))
+			if(false == AddressModel::isInit($class_id, $uid))
 			{
 				// 尝试更新同班id 同名的记录,将uid从0变成实际uid
 				$data = array('uid' => $uid);
 				$where = array('`class_id` = '.$class_id, "`cname` = '{$login['realName']}'");
-				$affect_row = DbModel::updateAddress($data, $where);
+				$affect_row = AddressModel::update($data, $where);
 				if($affect_row != 1) // 该班管理员没有导入过，则初始化
 				{
 					$data = array(
@@ -49,7 +49,7 @@ class HomeController extends Zend_Controller_Action
 	private function commonView()
 	{
 		$class_id = $this->view->class_base_info['class_id'];
-		$rows = DbModel::getClassTopic($class_id, $this->getRequest()->getActionName(), null, 5, 1);
+		$rows = TopicModel::fetchList($class_id, $this->getRequest()->getActionName(), null, 5, 1);
 		$this->view->topics = $rows['rows'];
 	}
 	
@@ -107,7 +107,7 @@ class HomeController extends Zend_Controller_Action
 		{
 			echo $this->view->headTitle($class['class_name']);
 			// 不是班级成员
-			if(false == DbModel::isJoined($class_id,$this->view->login['uid']))
+			if(false == MemberModel::isJoined($class_id,$this->view->login['uid']))
 			{
 				if($this->_sessClass->data[$class_id] != null) // 刚刚踢出的
 				$this->_sessClass->data = null;
@@ -119,7 +119,7 @@ class HomeController extends Zend_Controller_Action
 				if($this->_sessClass->data[$class_id] == null) // 刚刚加入的,没初始化新的班级数据
 				$this->_sessClass->data = null;
 				// 更新最后访问时间
-				DbModel::updateLastAccessTime($uid, $class_id);
+				MemberModel::lastAccess($uid, $class_id);
 				
 				// 不是管理员
 				if($this->_sessClass->data[$class_id]['class_charge'] != $uid && 

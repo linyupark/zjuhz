@@ -3,11 +3,12 @@
 <p class="toolbar">
 <a href="/member/my/address/"><img src="/static/images/icon/user.gif" /> 邀请加入</a>
 <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/comments.gif" /> 班级话题</a>
+<a href="#"><img src="/static/images/icon/sport_tennis.gif" /> 班级活动</a>
 <a href="#"><img src="/static/images/icon/email.gif" /> 群发邮件</a>
 <a href="/class/addressbook?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
 <a href="#"><img src="/static/images/icon/lock.gif" /> 隐私控制</a>
 <a href="/class/manage/member?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/group.gif" /> 成员管理 
-<?= DbModel::getClassJoinApplyNum($this->class_base_info['class_id']) > 0 ? '<img src="/static/images/icon/new.gif" />' : '' ?></a>
+<?= ApplyModel::fetchNum($this->class_base_info['class_id']) > 0 ? '<img src="/static/images/icon/new.gif" />' : '' ?></a>
 </p>
 </div>
 

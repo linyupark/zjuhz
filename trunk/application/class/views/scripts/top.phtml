@@ -4,7 +4,7 @@
 	<td class="nav">
     <?php if ($this->login) { ?>
 		您好 , <?= $this->login['realName'] ?> | 
-		<?php if(false != DbModel::hasClass($this->login['uid'])) :?> <a href="/class/home">我的班级</a></a> | <?php endif; ?> 
+		<?php if(false != DbModel::hasClass($this->login['uid'])) :?> <a href="/class/home">我的班级</a> | <?php endif; ?> 
 		<a href="/member/my/">我的帐号</a> | 
 		<!-- <a href="">站内信<?= ($this->login['unRead'] > 0) ? "({$this->login['unRead']})" : ''; ?></a> |  -->
 		<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
