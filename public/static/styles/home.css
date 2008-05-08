@@ -40,11 +40,11 @@
 .intro ul{ color:#333; padding-left:8px; }
 .intro li{ line-height:200%; font-size:14px; list-style-type:none; list-style-position:outside; background:url(/static/images/bullet/blue.gif) no-repeat left center; padding-left:20px; }
 .intro h2{ padding:8px; font-size:14px; color:#3B5888; margin-top:10px;  }
-.notice{ width:300px; padding:0 8px 8px 0;font-size:13px; background:url(/static/images/bg/dashed.gif) repeat-x bottom; }
+.notice{ width:300px; padding:0 8px 8px 8px;font-size:13px; background:url(/static/images/bg/dashed.gif) repeat-x bottom; }
 .notice b{ color:#3B5888; font-size:14px; }
 
 /* 专题介绍区 ------------------------------------------- */
-.subject{ margin:10px 20px 10px 0px; float:right }
+.subject{ margin:10px 20px 10px 0px; float:right; width:230px; }
 .subject h2{ background:#E3EAED url(/static/images/bg/rc_tl2.png) no-repeat left top; padding:5px 15px; color:#222; font-size:14px; margin-top:8px;  border-bottom:1px solid #C3D2D9 }
 .subject a{ color:#3B5888; display:block; background:url(/static/images/bullet/red.gif) no-repeat left center; padding: 5px 5px 5px 20px; font-size:13px; }
 .subject a:hover{ text-decoration:none; color:#D32A2D  }
