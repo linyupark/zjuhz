@@ -74,7 +74,7 @@ class UserLogic extends MemberInterlayer
 	}
 
     /**
-     * 登录帐号存在与否
+     * 登录账号存在与否
      * 
      * @param string $username
      * @return integer

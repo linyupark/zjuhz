@@ -328,22 +328,29 @@ class MyController extends Zend_Controller_Action
 			{
 				if (MemberClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
 				{
-					if ($passwdArgs['oldpassword'] === $this->_sessCommon->login['password'])
-				    {
-				    	if (UserLogic::init()->updatePassword($passwdArgs))
-				    	{
-				    		Commons::modiSess('common', 'login', $passwdArgs); // 同步Session
-				    		$this->_sessMember->message = $this->_iniMember->hint->modipswdSuccess;
-				    	}
-				    	else
-				    	{
-				    		$this->_sessMember->message = $this->_iniMember->hint->modipswdFailure;
-				    	}
-				    }
-				    else
-				    {
-					    $this->_sessMember->message = $this->_iniMember->hint->modipswdFailure;
-				    }
+					if ($passwdArgs['oldpassword'] != $passwdArgs['password'])
+					{
+						if ($passwdArgs['oldpassword'] === $this->_sessCommon->login['password'])
+				        {
+				        	if (UserLogic::init()->updatePassword($passwdArgs))
+				    	    {
+				    	    	Commons::modiSess('common', 'login', $passwdArgs); // 同步Session
+				    		    $this->_sessMember->message = $this->_iniMember->hint->updatePswdSuccess;
+				    	    }
+				    	    else
+				    	    {
+				    		    $this->_sessMember->message = $this->_iniMember->hint->updatePswdFailure;
+				    	    }
+				        }
+				        else
+				        {
+					        $this->_sessMember->message = $this->_iniMember->hint->updatePswdFailure;
+				        }
+					}
+					else
+					{
+						$this->_sessMember->message = $this->_iniMember->hint->oldPswdEqualNewPswd;
+					}
 
     				echo 'message'; // 请求ajax给出提示
 				}

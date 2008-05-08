@@ -25,7 +25,7 @@ class MyFilter extends MemberInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -121,8 +121,7 @@ class MyFilter extends MemberInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim', 'StripTags'),
+		    '*' => array('StringTrim', 'StripTags'),
             'mobile' => 'Digits',		        
 	    	'qq' => 'Digits',
 	    	'postcode' => 'Digits'
@@ -188,8 +187,7 @@ class MyFilter extends MemberInterlayer
 	{
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim', 'StripTags'),
+		    '*' => array('StringTrim', 'StripTags'),
             'uid' => 'Digits'
     	);
 
@@ -234,8 +232,7 @@ class MyFilter extends MemberInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim', 'StringToLower'),
+		    '*' => array('StringTrim', 'StringToLower'),
             'mobile' => 'Digits',		        
 	    	'qq' => 'Digits',
 	    	'postcode' => 'Digits'
@@ -342,7 +339,9 @@ class MyFilter extends MemberInterlayer
 	public function groupdel($args)
 	{
 		// 设置过滤规则
-		$filters = array('*' => array('StripTags'));
+		$filters = array(
+		    '*' => array('StripTags')
+		);
 
     	// 设置验证规则
 		$validators = array(
@@ -371,8 +370,7 @@ class MyFilter extends MemberInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim', 'StringToLower')
+		    '*' => array('StringTrim', 'StringToLower')
     	);
 
     	// 设置验证规则

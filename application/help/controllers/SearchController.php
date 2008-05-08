@@ -61,7 +61,7 @@ class SearchController extends Zend_Controller_Action
     	$logic = QuestionLogic::init();
 
     	$total = $logic->selectSearch('count', $this->_wd, '');
-    	$p     = new Paging(array('total' => $total, 'perpage' => 10));
+    	$p     = new Paging(array('total' => $total, 'perpage' => 20));
 
 		$this->view->searchList = $logic->selectSearch('result', $this->_wd, $p->limit());
 		$this->view->paging     = $p->show();

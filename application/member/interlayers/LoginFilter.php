@@ -57,7 +57,9 @@ class LoginFilter extends MemberInterlayer
 	public function login($args)
 	{
 		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StripTags', 'StringToLower'));
+		$filters = array(
+		    '*' => array('StringTrim', 'StripTags', 'StringToLower')
+		);
 
     	// 设置验证规则
 		$validators = array(

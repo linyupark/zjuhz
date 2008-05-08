@@ -56,7 +56,6 @@ class IndexController extends Zend_Controller_Action
      */
 	public function indexAction()
     {
-    	// 暂时指向我的账号
     	$this->_redirect('/my/');
     }
 }
