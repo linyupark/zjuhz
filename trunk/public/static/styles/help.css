@@ -156,5 +156,5 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .home_form .bigtxt{ width:400px; height:100px; }
 
 /* 求助集合 */
-.help_set_large{ clear:left; border:1px solid #D3E4CF; margin:10px 0 0 10px; width:670px; }
+.help_set_large{ clear:left; border:1px solid #D3E4CF; margin:10px 0 0 10px; width:648px; }
 .help_set_large th{ background:#D3E4CF; font-weight:normal; padding:5px; color:#666; text-align:left }
