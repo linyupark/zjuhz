@@ -64,8 +64,8 @@ ul{ list-style-position:inside }
 
 /* LOGO部分 */
 #logo{ padding-left:80px; height:63px; background:url(/static/images/logo.jpg) no-repeat 10px center; cursor:pointer; color:#444; }
-#logo i{ font-size:16px; font-weight:bold; }
-#logo p{ font-size:12px; }
+#logo i{ font-size:12px; }
+#logo p{ font-size:14px; width:170px }
 
 /* 脚底 */
 #footer{ color:#999; clear:both; margin:0 auto;	width:100%;	background:url(/static/images/bg/dashed.gif) repeat-x left top; }
@@ -79,7 +79,7 @@ ul{ list-style-position:inside }
 #footer_decoration{	height:26px; color:#444; font-size:14px; color:#3B5888;	background:url(/static/images/bg/news_list.gif) repeat-x left bottom;	border-bottom:1px solid #BDC7D8; clear:left; }
 
 /* 头顶模块列表+帐号信息+主搜索 */
-.global_search{	width:622px; margin-left:40px; }
+.global_search{	width:570px; margin-left:20px; }
 .global_search .models{	font-size:9px; }
 .global_search a{ font-size:14px; color:#014CC9; margin:0 5px; }
 .global_search a.on{ text-decoration:none; color:#333; font-weight:bold; }
