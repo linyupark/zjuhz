@@ -53,24 +53,24 @@
 <!-- 答案 -->
 <div class="accepted">
 	<h3>满意答案</h3>
+	<p class="info"><span><?php echo (($value['anonym'] == 'N') ? $value['realName'] : '匿名'); ?>&nbsp;&nbsp;&nbsp;&nbsp;回答时间：<?= date('Y-m-d H:i', strtotime($value['addTime'])); ?></span></p>
 	<div class="content">
 	<?=  str_replace('\"', '"', $value['content']); ?>
 	</div>
-	<p class="info"><span><?php echo (($value['anonym'] == 'N') ? $value['realName'] : '匿名'); ?>&nbsp;&nbsp;&nbsp;&nbsp;回答时间：<?= date('Y-m-d H:i', strtotime($value['addTime'])); ?></span></p>
 </div>
 <?php } else { ?>
 <!-- 普通回答 -->
 <div class="other">
-	<div class="content">
-	<?=  str_replace('\"', '"', $value['content']); ?>
-	</div>
 	<p class="info"><span><?php echo (($value['anonym'] == 'N') ? $value['realName'] : '匿名'); ?>&nbsp;&nbsp;&nbsp;&nbsp;回答时间：<?= date('Y-m-d H:i', strtotime($value['addTime'])); ?></span></p>
 	<p class="toolbar">
 	<!--<a href="" class="report">检举</a>-->
 	<?php if ($this->sessCommon->login['uid'] == $this->detail['uid'] && $this->detail['status'] == 0 ) { ?>
 	<a class="accept" title="采纳为答案" onclick="javascript:question_accept(<?= $value['qid']; ?>, <?= $value['rid']; ?>, <?= $value['uid']; ?>);">采纳</a>
 	<?php } ?>
-	</p>
+	</p>	
+	<div class="content">
+	<?=  str_replace('\"', '"', $value['content']); ?>
+	</div>
 </div>
 <?php } ?>
 
@@ -86,7 +86,7 @@
 <?php if ($this->sessCommon->login['uid'] != $this->detail['uid']) { ?>
 <form method="post" name="myform" id="myform" autocomplete="off">
 <input tabindex="2" type="hidden" name="content" id="content" value="" /><?= $this->kindEditor('100%','120px'); ?>
-匿名回答：<input tabindex="1" type="radio" name="anonym" value="Y" />是 <input tabindex="2" name="anonym" type="radio" value="N" checked="checked" />否&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码：<input tabindex="3" type="text" name="vcode" id="vcode" class="verify" value="" maxlength="4" />&nbsp;<span id="putVerifyImg"></span><input type="submit" class="reply_btn" name="btnReply" id="btnReply" value="提交回答" /><br />
+匿名回答：<input tabindex="1" type="radio" name="anonym" value="Y" />是 <input tabindex="2" name="anonym" type="radio" value="N" checked="checked" />否&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码：<input tabindex="3" type="text" name="vcode" id="vcode" class="verify" value="" maxlength="4" />&nbsp;<span id="putVerifyImg"></span><input tabindex="4" type="submit" class="reply_btn" name="btnReply" id="btnReply" value="提交回答" /><br />
 <br />
 <div id="ajaxhint" style="width:242px"></div>
 <input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />
