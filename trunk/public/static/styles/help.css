@@ -90,7 +90,7 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 .reply_btn{ padding:4px; margin-top:10px; margin-left:30px; }
 
 /* 子分类块 */
-.sub_category { border:1px solid #D9E6F7; margin:8px 0 0 10px; width:475px; }
+.sub_category { border:1px solid #D9E6F7; margin:8px 0 0 10px; width:662px; }
 .sub_category h2{ color:#3E628A; background:#EFF7FF url(/static/images/icon/by.gif) no-repeat 5px center; border-bottom:1px solid #D9E6F7; padding:5px 0 5px 20px; font-size:14px; }
 .sub_category table{ }
 .sub_category td{ width:25%; padding:5px 5px 5px 10px; }
@@ -101,7 +101,7 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 #help_tab_btn{ margin-left:10px; padding-top:5px; }
 #help_tab_btn a{ border:1px solid #C4DBBF; float:left; display:block; margin:0 5px; text-decoration:none; font-weight:bold; color:#5C7B23; padding:5px 10px; border-bottom:1px solid #fff; }
 #help_tab_btn a.on{ border-top:1px solid #FAD1A5; border-left:1px solid #FAD1A5; border-right:1px solid #FAD1A5; border-bottom:1px solid #fff; background:#FFFCF0; color:#C26400; }
-.tab_content{ background:#fff; clear:left; border:1px solid #FAD1A5; margin-top:0.5px; width:475px; margin-left:10px; }
+.tab_content{ background:#fff; clear:left; border:1px solid #FAD1A5; margin-top:0.5px; width:662px; margin-left:10px; }
 .tab_content td{ padding:5px 5px; color:#C56D09 }
 .tab_content td.date{ font-size:9px; color:#666;text-align:center }
 .tab_content td.status{ text-align:center }
