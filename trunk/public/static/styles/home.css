@@ -44,7 +44,7 @@
 .notice b{ color:#3B5888; font-size:14px; }
 
 /* 专题介绍区 ------------------------------------------- */
-.subject{ margin:10px 20px 10px 0px; float:right; width:230px; }
+.subject{ margin:10px 20px 10px 0px; float:right; width:220px; }
 .subject h2{ background:#E3EAED url(/static/images/bg/rc_tl2.png) no-repeat left top; padding:5px 15px; color:#222; font-size:14px; margin-top:8px;  border-bottom:1px solid #C3D2D9 }
 .subject a{ color:#3B5888; display:block; background:url(/static/images/bullet/red.gif) no-repeat left center; padding: 5px 5px 5px 20px; font-size:13px; }
 .subject a:hover{ text-decoration:none; color:#D32A2D  }
