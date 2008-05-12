@@ -32,17 +32,15 @@ class LoginController extends Zend_Controller_Action
     }
 
     /**
-     * 通用登录页
+     * 会员登录-通用登录
      * 
      * @return void
      */
     public function indexAction()
     {
-    	if ('member' === $this->_sessCommon->role)
-    	{
-    		$this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'));
-    		exit;
-    	}
+    	('member' !== $this->_sessCommon->role ? '' : 
+    	    $this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'), array('exit'))
+    	);
 
     	$this->view->headTitle(Zend_Registry::get('iniMember')->head->titleLogin);
     	$this->view->uname    = $_COOKIE['zjuhz_member']['alive']; // 记住账号

@@ -50,7 +50,7 @@ class IndexController extends Zend_Controller_Action
     }
 
     /**
-     * 会员中心首页
+     * 校友-首页
      * 
      * @return void
      */

@@ -5,32 +5,32 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:SortModel.php
+ * @version    Id:AskSortModel.php
  */
 
 
 /**
- * 你问我答 - tbl_ask_sort
+ * 你问我答-tbl_ask_sort
  * 表级操作类,含单表读/写/改等方法
  */
-class SortModel //extends Zend_Db_Table_Abstract
+class AskSortModel //extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
      * @var string
-     */	
+     */
     protected $_name = 'tbl_ask_sort';
 
     /**
      * 数据表主键
      * @var string
-     */    
+     */
     protected $_primary = 'sid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
-     */    
+     */
     protected $_dao = null;
 
     /**
@@ -40,7 +40,6 @@ class SortModel //extends Zend_Db_Table_Abstract
      */
     public function __construct()
     {
-    	//载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -55,52 +54,54 @@ class SortModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 显示分类列表 Pairs-style
+     * 分类数量更新器
      * 
-     * @param integer $parent
-     * @return array
+     * @param array $args
+     * @return integer
      */
-	public function fetchPairs($parent)
-    {
-		return $this->_dao->fetchPairs("SELECT sid,name FROM {$this->_name} WHERE parent = :parent;", 
-		    array('parent' => $parent));
-    }
+	public function callCounter($args)
+	{
+		return $this->_dao->prepare('CALL sp_sort_counter(:sort0, :sort1, :sort2, :filed);')
+		                  ->execute($args);
+	}
 
     /**
-     * 显示分类列表 All-style
+     * 显示全部分类
      * 
      * @return array
      */
-	public function fetchAll()
+	public function selectList()
     {
 		return $this->_dao->fetchAll("SELECT * FROM {$this->_name};", array());
     }
 
     /**
-     * 分类下属问题计数器
+     * 按父层编号显示分类
      * 
-     * @param array $args
-     * @return integer
+     * @param integer $parent
+     * @return array
      */
-	public function counter($args)
-	{
-		return $this->_dao->prepare('CALL sp_sort_counter(:sort0,:sort1,:sort2,:filed);')
-		                  ->execute($args);
-	}
+	public function selectParentList($parent)
+    {
+		return $this->_dao->fetchPairs("SELECT sid, name FROM {$this->_name} 
+		    WHERE parent = :parent;", array('parent' => $parent)
+		);
+    }
 
 	/**
-     * 按分类显示问题列表
+     * 按分类显示全部问题
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function browse($sid, $limit)
+	public function selectSortAll($sid, $limit)
 	{
-		return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
+		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0 OR q.status = 1) AND q.sid IN (SELECT s.sid 
 		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		);
     }
 
 	/**
@@ -110,12 +111,13 @@ class SortModel //extends Zend_Db_Table_Abstract
      * @param string $limit
      * @return array
      */
-	public function latest($sid, $limit)
+	public function selectSortLatest($sid, $limit)
     {
-    	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
+    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
 		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		);
     }
 
     /**
@@ -125,12 +127,13 @@ class SortModel //extends Zend_Db_Table_Abstract
      * @param string $limit
      * @return array
      */
-	public function offer($sid, $limit)
+	public function selectSortOffer($sid, $limit)
     {
-    	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
+    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
 		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.offer DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
+		    ORDER BY q.offer DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		);
     }
 
     /**
@@ -140,12 +143,13 @@ class SortModel //extends Zend_Db_Table_Abstract
      * @param string $limit
      * @return array
      */
-	public function forget($sid, $limit)
+	public function selectSortForget($sid, $limit)
     {
-    	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
+    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
 		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.reply ASC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
+		    ORDER BY q.reply ASC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		);
     }
 
     /**
@@ -155,11 +159,12 @@ class SortModel //extends Zend_Db_Table_Abstract
      * @param string $limit
      * @return array
      */
-	public function solved($sid, $limit)
+	public function selectSortSolved($sid, $limit)
     {
-    	return $this->_dao->fetchAll("SELECT q.qid,q.title,q.offer,q.addTime,q.status,q.reply 
+    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
 		    FROM tbl_ask_question AS q WHERE (q.status = 1) AND q.sid IN (SELECT s.sid 
 		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid));
+		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		);
     }
 }

@@ -26,7 +26,7 @@ class AskLogic extends HelpInterlayer
     	parent::__construct();
     	parent::_initLogic();
 
-    	$this->_loadMdl('Ask');
+    	$this->_load('AskModel');
     }
 
     /**
@@ -50,29 +50,29 @@ class AskLogic extends HelpInterlayer
     }
 
 	/**
+     * 单个会员的模块资料
+     * 
+     * @param integer $uid
+     * @return array
+     */
+	public function selectRow($uid)
+	{
+		return $this->_AskModel->selectRow($uid);
+	}
+
+	/**
      * 激活tbl_ask表
      * 
      * @param array $args
      * @return integer
      */
-	public function activate($args)
+	public function insert($args)
 	{
-		return $this->_mdlAsk->activate($args);
+		return $this->_AskModel->insert($args);
 	}
 
 	/**
-     * 登录子系统
-     * 
-     * @param integer $uid
-     * @return array
-     */
-	public function entry($uid)
-	{
-		return $this->_mdlAsk->entry($uid);
-	}
-
-	/**
-     * 更新tbl_ask表资料
+     * 更新表资料
      * 
      * @param array $args
      * @param integer $uid
@@ -80,6 +80,6 @@ class AskLogic extends HelpInterlayer
      */
 	public function update($args, $uid)
 	{
-		return $this->_mdlAsk->update($args, $uid);
+		return $this->_AskModel->update($args, $uid);
 	}
 }

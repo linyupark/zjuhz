@@ -1,14 +1,14 @@
 <p class="err_message">您目前的身份无法访问该资源</p>
 <form method="post" id="relogin_form" onsubmit="return relogin()">
 <p>
-帐号 <input class="inputtxt" id="uname" maxlength="16" name="uname" value="" />
+账号 <input class="inputtxt" id="uname" maxlength="16" name="uname" value="" />
 </p>
 <p>
 密码 <input name="pswd" type="password" class="inputtxt" id="pswd" maxlength="16" />
 </p>
 <p>
 	<input type="submit" value="登陆" class="btn" />&nbsp;
-	<button class="btn" onclick="location.href='/member/register/'">注册帐号</button>
+	<button class="btn" onclick="location.href='/member/register/'">注册账号</button>
 </p>
 <p class="err_submessage">如果您忘记了密码，请 <a href="">取回密码</a></p>
 </form>
@@ -21,7 +21,7 @@ function relogin()
 			function(data){
 				if(data == 'redirect')
 				location.reload();
-				else $.facebox('<img src="/static/images/icon/stop.gif" align="absmiddle" /> 登陆失败~帐号或密码有错误！');
+				else $.facebox('<img src="/static/images/icon/stop.gif" align="absmiddle" /> 登陆失败~账号或密码有错误！');
 			}
 		);
 	return false;

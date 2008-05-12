@@ -25,7 +25,7 @@ class CollectionFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -56,7 +56,8 @@ class CollectionFilter extends HelpInterlayer
      */
 	public function insert($args)
 	{
-		return array('qid' => (int)$args['qid'], 
+		return array(
+		    'qid' => (int)$args['qid'], 
 		    'uid' => $args['uid'],  
 		);
 	}

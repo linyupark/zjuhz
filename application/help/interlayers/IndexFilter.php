@@ -5,7 +5,7 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:LogFilter.php
+ * @version    Id:IndexFilter.php
  */
 
 
@@ -15,7 +15,7 @@
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class LogFilter extends HelpInterlayer
+class IndexFilter extends HelpInterlayer
 {
     /**
      * 构造方法
@@ -25,7 +25,7 @@ class LogFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -49,16 +49,17 @@ class LogFilter extends HelpInterlayer
     }
 
 	/**
-     * 写积分日志
+     * 子系统激活过滤
      * 
      * @param array $args
      * @return array
      */
-	public function insert($args)
+	public function activate($args)
 	{
-		return array('uid' => $args['uid'], 
+		return array(
+		    'uid' => $args['uid'], 
+		    'realName' => $args['realName'], 
 		    'point' => (int)$args['point'], 
-		    'type' => $args['type'], 
 		);
 	}
 }

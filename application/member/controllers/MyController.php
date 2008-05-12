@@ -15,11 +15,11 @@
 class MyController extends Zend_Controller_Action
 {
 	/**
-     * 会员模块配置
+     * 公用Session
      *
      * @var object
      */
-	private $_iniMember = null;
+	private $_sessCommon = null;
 
 	/**
      * 项目Session
@@ -29,14 +29,14 @@ class MyController extends Zend_Controller_Action
 	private $_sessMember = null;
 
 	/**
-     * 公用Session
+     * 会员模块配置
      *
      * @var object
      */
-	private $_sessCommon = null;
+	private $_iniMember = null;
 
 	/**
-     * sess内的会员编号
+     * Session内的会员编号
      *
      * @var integer
      */
@@ -49,9 +49,9 @@ class MyController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		$this->_iniMember  = Zend_Registry::get('iniMember');
-		$this->_sessMember = Zend_Registry::get('sessMember');
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessMember = Zend_Registry::get('sessMember');
+		$this->_iniMember  = Zend_Registry::get('iniMember');
 
 		$this->_sessUid = $this->_sessCommon->login['uid'];
 

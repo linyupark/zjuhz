@@ -5,7 +5,7 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:ReplyLogic.php
+ * @version    Id:AskCollectionLogic.php
  */
 
 
@@ -14,7 +14,7 @@
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class ReplyLogic extends HelpInterlayer
+class AskCollectionLogic extends HelpInterlayer
 {
     /**
      * 构造方法
@@ -26,7 +26,7 @@ class ReplyLogic extends HelpInterlayer
     	parent::__construct();
     	parent::_initLogic();
 
-    	$this->_loadMdl('Reply');
+    	$this->_load('AskCollectionModel');
     }
 
     /**
@@ -49,26 +49,26 @@ class ReplyLogic extends HelpInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-    /**
-     * 回答问题
+	/**
+     * 我的收藏
+     * 
+     * @param integer $uid
+     * @param string $limit
+     * @return array
+     */
+	public function selectMyList($uid, $limit)
+	{
+		return $this->_AskCollectionModel->selectMyList($uid, $limit);
+	}
+
+	/**
+     * 收藏问题
      * 
      * @param array $args
      * @return integer
      */
 	public function insert($args)
-    {
-		return $this->_mdlReply->insert($args);
-    }
-
-    /**
-     * 回答列表
-     * 
-     * @param integer $qid
-     * @param string $limit
-     * @return array
-     */
-	public function browse($qid, $limit)
-    {
-		return $this->_mdlReply->browse($qid, $limit);
-    }
+	{
+		return $this->_AskCollectionModel->insert($args);
+	}
 }

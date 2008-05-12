@@ -66,6 +66,21 @@ class AddressCardModel
     }
 
     /**
+     * 查询详细记录
+     * 
+     * @param string $cid
+     * @param integer $uid
+     * @return array
+     */
+	public function selectDetail($cid, $uid)
+    {
+		return $this->_dao->fetchRow("SELECT * 
+		    FROM {$this->_name} WHERE cid = :cid AND uid = :uid;", 
+		    array('cid' => $cid, 'uid' => $uid)
+		);
+    }
+
+    /**
      * 查询名片列表
      * 
      * @param string $gid
@@ -96,21 +111,6 @@ class AddressCardModel
     }
 
     /**
-     * 查询详细记录
-     * 
-     * @param string $cid
-     * @param integer $uid
-     * @return array
-     */
-	public function selectDetail($cid, $uid)
-    {
-		return $this->_dao->fetchRow("SELECT * 
-		    FROM {$this->_name} WHERE cid = :cid AND uid = :uid;", 
-		    array('cid' => $cid, 'uid' => $uid)
-		);
-    }
-
-    /**
      * 列表自定义查找
      * 
      * @param string $where
@@ -134,7 +134,8 @@ class AddressCardModel
 	public function selectFindCount($where)
     {
 		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
-		    FROM {$this->_name} AS c, tbl_user_address_group AS g {$where};");
+		    FROM {$this->_name} AS c, tbl_user_address_group AS g {$where};"
+		);
     }
 
     /**

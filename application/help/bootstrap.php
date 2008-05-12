@@ -10,7 +10,7 @@
 
 
 /** set error_reporting */
-error_reporting('ALL');
+//error_reporting('ALL');
 
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.

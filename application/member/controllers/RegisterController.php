@@ -15,11 +15,11 @@
 class RegisterController extends Zend_Controller_Action
 {
 	/**
-     * 项目模块配置
+     * 公用Session
      *
      * @var object
      */
-	private $_iniMember = null;
+	private $_sessCommon = null;
 
 	/**
      * 项目Session
@@ -29,11 +29,11 @@ class RegisterController extends Zend_Controller_Action
 	private $_sessMember = null;
 
 	/**
-     * 公用Session
+     * 项目模块配置
      *
      * @var object
      */
-	private $_sessCommon = null;
+	private $_iniMember = null;
 
     /**
      * 初始化
@@ -41,10 +41,10 @@ class RegisterController extends Zend_Controller_Action
      * @return void
      */
     public function init()
-    {		
-		$this->_iniMember  = Zend_Registry::get('iniMember');
-		$this->_sessMember = Zend_Registry::get('sessMember');
+    {
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessMember = Zend_Registry::get('sessMember');
+		$this->_iniMember  = Zend_Registry::get('iniMember');
 
 		$this->view->sessCommon = $this->_sessCommon;
     }
@@ -127,7 +127,7 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((UserLogic::init()->check($username)) ? $this->_iniMember->hint->usernameIsExist : 
+				echo ((UserLogic::init()->selectUsernameExist($username)) ? $this->_iniMember->hint->usernameIsExist : 
 				    $this->_iniMember->hint->usernameNotExist
 				);
 			}

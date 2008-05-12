@@ -35,7 +35,7 @@
 				
 				//各项校验
 				if(!Zend_Validate::is($username,'StringLength',array(3,50)))
-				$this->view->error_tips = '* 帐号长度必须在3-12位之间,不能包含中文以及下划线<br />';
+				$this->view->error_tips = '* 账号长度必须在3-12位之间,不能包含中文以及下划线<br />';
 				
 				if(!Zend_Validate::is($password,'NotEmpty'))
 				$this->view->error_tips .= '* 密码不能为空<br />';
@@ -52,7 +52,7 @@
 												'user_password=?'=>md5($password)));
 					if($row == null)
 					{
-						$this->view->error_tips = '* 帐号密码错误';
+						$this->view->error_tips = '* 账号密码错误';
 					}
 					else 
 					{

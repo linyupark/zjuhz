@@ -25,7 +25,7 @@ class QuestionFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -62,8 +62,7 @@ class QuestionFilter extends HelpInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim'), 
+		    '*' => array('StringTrim'), 
 	    	'title' => 'StripTags',
 	    	'tags' => 'StripTags',
     	);
@@ -86,14 +85,13 @@ class QuestionFilter extends HelpInterlayer
 			'offer' => array(
 			    array('Between', '0', $args['point']), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniHelp->hint->offer->notBetween)),
-            'anonym' => array('presence' => 'required'),
+            'anonym' => array('presence' => 'required')
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
 
 		if ($input->hasInvalid() || $input->hasMissing())
 		{
-			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
 		}
 		else
@@ -117,7 +115,8 @@ class QuestionFilter extends HelpInterlayer
      */
 	public function accept($args)
 	{
-		return array('qid' => (int)$args['qid'], 
+		return array(
+		    'qid' => (int)$args['qid'], 
 		    'rid' => (int)$args['rid'], 
 		    'quid' => (int)$args['quid'], 
 		    'ruid' => (int)$args['ruid'], 

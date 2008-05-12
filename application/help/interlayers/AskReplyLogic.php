@@ -5,7 +5,7 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:HelpLogic.php
+ * @version    Id:AskReplyLogic.php
  */
 
 
@@ -14,7 +14,7 @@
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class HelpLogic extends HelpInterlayer
+class AskReplyLogic extends HelpInterlayer
 {
     /**
      * 构造方法
@@ -26,7 +26,7 @@ class HelpLogic extends HelpInterlayer
     	parent::__construct();
     	parent::_initLogic();
 
-    	$this->_loadMdl('Help');
+    	$this->_load('AskReplyModel');
     }
 
     /**
@@ -50,46 +50,38 @@ class HelpLogic extends HelpInterlayer
     }
 
     /**
-     * 最新求助
+     * 回答问题
      * 
-     * @param string $limit
-     * @return array
+     * @param array $args
+     * @return integer
      */
-	public function latest($limit)
-	{
-		return $this->_mdlHelp->latest($limit);
-	}
+	public function insert($args)
+    {
+		return $this->_AskReplyModel->callInsert($args);
+    }
 
     /**
-     * 高分悬赏
+     * 回答列表
      * 
+     * @param integer $qid
      * @param string $limit
      * @return array
      */
-	public function offer($limit)
-	{
-		return $this->_mdlHelp->offer($limit);
-	}
+	public function selectList($qid, $limit)
+    {
+		return $this->_AskReplyModel->selectList($qid, $limit);
+    }
 
-    /**
-     * 被遗忘的
+	/**
+     * 我的回答
      * 
+     * @param integer $uid
+     * @param integer $status
      * @param string $limit
      * @return array
      */
-	public function forget($limit)
+	public function selectMyList($uid, $status, $limit)
 	{
-		return $this->_mdlHelp->forget($limit);
-	}
-
-    /**
-     * 最近解决
-     * 
-     * @param string $limit
-     * @return array
-     */
-	public function solved($limit)
-	{
-		return $this->_mdlHelp->solved($limit);
+		return $this->_AskReplyModel->selectMyList($uid, $status, $limit);
 	}
 }

@@ -5,32 +5,32 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:LogModel.php
+ * @version    Id:AskCollectionModel.php
  */
 
 
 /**
- * 你问我答 - tbl_ask_point_log
+ * 你问我答-tbl_ask_collection
  * 表级操作类,含单表读/写/改等方法
  */
-class LogModel //extends Zend_Db_Table_Abstract
+class AskCollectionModel //extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
      * @var string
-     */	
-    protected $_name = 'tbl_ask_point_log';
+     */
+    protected $_name = 'tbl_ask_collection';
 
     /**
      * 数据表主键
      * @var string
-     */    
-    protected $_primary = 'id';
+     */
+    protected $_primary = 'cid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
-     */    
+     */
     protected $_dao = null;
 
     /**
@@ -40,7 +40,6 @@ class LogModel //extends Zend_Db_Table_Abstract
      */
     public function __construct()
     {
-    	//载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -54,15 +53,30 @@ class LogModel //extends Zend_Db_Table_Abstract
     	$this->_dao->closeConnection();
     }
 
+	/**
+     * 我收藏的问题
+     * 
+     * @param integer $uid
+     * @param string $limit
+     * @return array
+     */
+	public function selectMyList($uid, $limit)
+    {
+		return $this->_dao->fetchAll("SELECT c.cid, c.addTime, q.qid, q.title, q.anonym, q.offer, q.reply, s.pid, s.pName 
+		    FROM tbl_ask_collection AS c, tbl_ask_question AS q, tbl_ask_sort AS s 
+		    WHERE c.uid = :uid AND c.qid = q.qid AND q.sid = s.sid 
+		    ORDER BY c.addTime DESC LIMIT {$limit}", array('uid' => $uid)
+		);
+    }
+
     /**
-     * 写积分日志
+     * 常规数据写入
      * 
      * @param array $args
      * @return integer
      */
 	public function insert($args)
     {
-		// 插入数据行并返回行数
 		return $this->_dao->insert($this->_name, $args);
     }
 }

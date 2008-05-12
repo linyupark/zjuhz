@@ -52,6 +52,7 @@ function question_accept(qid, rid, uid)
 	pop.show();
 	return false;
 }
+
 function doaccept(param)
 {
 	var sort0 = $("#sort0").val();

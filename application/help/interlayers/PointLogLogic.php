@@ -5,17 +5,16 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:AskFilter.php
+ * @version    Id:PointLogLogic.php
  */
 
 
 /**
  * 你问我答
- * 控制器附属层:参数过滤操作
- * 纯安全处理(验证过滤) 返回安全字符(串)
+ * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class AskFilter extends HelpInterlayer
+class PointLogLogic extends HelpInterlayer
 {
     /**
      * 构造方法
@@ -25,7 +24,9 @@ class AskFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	parent::_initLogic();
+
+    	$this->_load('PointLogModel');
     }
 
     /**
@@ -48,28 +49,14 @@ class AskFilter extends HelpInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-	/**
-     * 子系统激活过滤
-     * 
-     * @param array $args
-     * @return array
-     */
-	public function activate($args)
-	{
-		return array('uid' => $args['uid'], 
-		    'realName' => $args['realName'], 
-		    'point' => (int)$args['point'], 
-		);
-	}
-
-	/**
-     * 子系统登录过滤
+    /**
+     * 写积分日志
      * 
      * @param array $args
      * @return integer
      */
-	public function entry($args)
+	public function insert($args)
 	{
-		return $args['uid'];
+		return $this->_PointLogModel->insert($args);
 	}
 }
