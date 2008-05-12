@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答 - tbl_ask
+ * 你问我答-tbl_ask
  * 表级操作类,含单表读/写/改等方法
  */
 class AskModel //extends Zend_Db_Table_Abstract
@@ -18,19 +18,19 @@ class AskModel //extends Zend_Db_Table_Abstract
     /**
      * 数据表名
      * @var string
-     */	
+     */
     protected $_name = 'tbl_ask';
 
     /**
      * 数据表主键
      * @var string
-     */    
+     */
     protected $_primary = 'uid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
-     */    
+     */
     protected $_dao = null;
 
     /**
@@ -40,7 +40,6 @@ class AskModel //extends Zend_Db_Table_Abstract
      */
     public function __construct()
     {
-    	//载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 
@@ -55,27 +54,27 @@ class AskModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 激活tbl_ask表
-     * 
-     * @param array $args
-     * @return integer
-     */
-	public function activate($args)
-    {
-		// 插入数据行并返回行数
-		return $this->_dao->insert($this->_name, $args);
-    }
-
-    /**
-     * 登录子系统
+     * 单个会员的模块资料
      * 
      * @param integer $uid
      * @return array
      */
-	public function entry($uid)
+	public function selectRow($uid)
     {
-    	return $this->_dao->fetchRow("SELECT * FROM {$this->_name} WHERE uid = :uid;", 
-    	    array('uid' => $uid));
+    	return $this->_dao->fetchRow("SELECT * FROM {$this->_name} 
+    	    WHERE uid = :uid;", array('uid' => $uid)
+    	);
+    }
+
+    /**
+     * 写入表数据
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function insert($args)
+    {
+		return $this->_dao->insert($this->_name, $args);
     }
 
     /**
@@ -87,10 +86,8 @@ class AskModel //extends Zend_Db_Table_Abstract
      */
 	public function update($args, $uid)
     {
-    	// where语句
-		$where = $this->_dao->quoteInto("{$this->_primary} = ?", $uid);
-
-		// 更新表数据,返回更新的行数
-		return $this->_dao->update($this->_name, $args, $where);
+		return $this->_dao->update($this->_name, $args, 
+		    $this->_dao->quoteInto("{$this->_primary} = ?", $uid)
+		);
     }
 }

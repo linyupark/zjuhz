@@ -16,67 +16,53 @@
 abstract class HelpInterlayer
 {
 	/**
-     * 问答模块配置对象
+     * 问答模块配置
      *
      * @var object
      */
 	protected $_iniHelp = null;
 
 	/**
+     * AskCollectionModel
+     * 
+     * @var object
+     */
+	protected $_AskCollectionModel = null;
+
+	/**
      * AskModel
-     *
+     * 
      * @var object
      */
-	protected $_mdlAsk = null;
+	protected $_AskModel = null;
 
 	/**
-     * CollectionModel
+     * AskQuestionModel
      *
      * @var object
      */
-	protected $_mdlCollection = null;
+	protected $_AskQuestionModel = null;
 
 	/**
-     * HelpModel
+     * AskReplyModel
      *
      * @var object
      */
-	protected $_mdlHelp = null;
+	protected $_AskReplyModel = null;
 
 	/**
-     * LogModel
+     * AskSortModel
      *
      * @var object
      */
-	protected $_mdlLog = null;
+	protected $_AskSortModel = null;
 
 	/**
-     * MyModel
-     *
+     * PointLogModel
+     * 
      * @var object
      */
-	protected $_mdlMy = null;
-
-	/**
-     * QuestionModel
-     *
-     * @var object
-     */
-	protected $_mdlQuestion = null;
-
-	/**
-     * ReplyModel
-     *
-     * @var object
-     */
-	protected $_mdlReply = null;
-
-	/**
-     * SortModel
-     *
-     * @var object
-     */
-	protected $_mdlSort = null;
+	protected $_PointLogModel = null;
 
     /**
      * 构造方法
@@ -98,10 +84,10 @@ abstract class HelpInterlayer
     }
 
     /**
-     * 单件模式载入类
+     * 单件模式初始化类
      * 
      * @param string $className
-     * @return false | object
+     * @return object or boolean
      */
 	protected static function _getInstance($className)
     {
@@ -120,47 +106,18 @@ abstract class HelpInterlayer
     }
 
     /**
-     * for Entry
+     * 单件模式初始化属性
      * 
+     * @param string $className
      * @return void
      */
-    protected function _initLogic()
+	protected function _load($className)
     {
-    	self::_setDao();
-    }
+    	$thisName = "_{$className}";
 
-    /**
-     * for Filter
-     * 
-     * @return void
-     */
-    protected function _initFilter()
-    {
-    }
-
-    /**
-     * for Service
-     * 
-     * @return void
-     */
-    protected function _initService()
-    {
-    }
-
-    /**
-     * Model类实例
-     * 
-     * @param string $name
-     * @return void
-     */
-	protected function _loadMdl($name)
-    {
-    	$thisName = "_mdl{$name}";
-    	$objName  = "{$name}Model";
-
-    	if (!isset($this->$thisName))
+    	if (!is_object($this->$thisName))
     	{
-    		$this->$thisName = $this->_getInstance($objName);
+    		$this->$thisName = $this->_getInstance($className);
     	}
     }
 
@@ -184,5 +141,24 @@ abstract class HelpInterlayer
 			Zend_Db_Table::setDefaultAdapter($dao);
 			Zend_Registry::set('dao', $dao);
     	}
+    }
+
+    /**
+     * for Logic
+     * 
+     * @return void
+     */
+    protected function _initLogic()
+    {
+    	self::_setDao();
+    }
+
+    /**
+     * for Filter
+     * 
+     * @return void
+     */
+    protected function _initFilter()
+    {
     }
 }

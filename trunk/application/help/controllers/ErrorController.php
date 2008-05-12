@@ -38,11 +38,11 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
             	
             default:
-            	
+
                 // Log the exception:
                 $exception = $errors->exception;
                 $log = new Zend_Log(new Zend_Log_Writer_Stream('HelpAppException.log'));
-                $log->debug($exception->getMessage() . "\n" .  $exception->getTraceAsString() . "\n");
+                $log->debug($exception->getMessage()."\n".$exception->getTraceAsString()."\n");
                 break;
         }
 

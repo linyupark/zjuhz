@@ -16,21 +16,21 @@ class SearchController extends Zend_Controller_Action
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessHelp = null;
 
 	/**
      * 关键字词 keywords
-     *
+     * 
      * @var string
      */
 	private $_wd = null;
@@ -58,14 +58,15 @@ class SearchController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-    	$logic = QuestionLogic::init();
+    	$logic = AskQuestionLogic::init();
 
-    	$total = $logic->selectSearch('count', $this->_wd, '');
-    	$p     = new Paging(array('total' => $total, 'perpage' => 20));
+    	$total  = $logic->selectSearch('count', $this->_wd, '');
+    	$paging = new Paging(array('total' => $total, 'perpage' => 10));
 
-		$this->view->searchList = $logic->selectSearch('result', $this->_wd, $p->limit());
-		$this->view->paging     = $p->show();
-		$this->view->total      = $total;
-    	$this->view->wd         = $this->_wd;
+		$this->view->wd         = $this->_wd;
+        $this->view->total      = $total;
+    	$this->view->paging     = $paging->show();
+		$this->view->searchList = $logic->selectSearch('result', $this->_wd, $paging->limit());
+		$this->view->headTitle($this->_wd);
     }
 }

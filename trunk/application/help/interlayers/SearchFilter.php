@@ -25,7 +25,7 @@ class SearchFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**

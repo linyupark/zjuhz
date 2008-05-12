@@ -86,28 +86,16 @@ class UserModel
     }
 
     /**
-     * 账号是否存在
+     * 检查是否存在
      * 
-     * @param string $username
+     * @param string $name
+     * @param string $value
      * @return integer
      */
-	public function selectUsernameExist($username)
+	public function selectExist($name, $value)
     {
     	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
-    	    WHERE username = :username;", array('username' => $username)
-        );
-    }
-
-    /**
-     * 昵称是否存在
-     * 
-     * @param string $nickname
-     * @return integer
-     */
-	public function selectNicknameExist($nickname)
-    {
-    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
-		    WHERE nickname = :nickname;", array('nickname' => $nickname)
+    	    WHERE {$name} = :value;", array('value' => $value)
         );
     }
 
@@ -134,7 +122,7 @@ class UserModel
 	public function updatePassword($args)
     {
     	$stmt = $this->_dao->prepare("UPDATE {$this->_name} SET password = :password 
-    	    WHERE uid = :uid AND password = :oldpassword LIMIT 1;");
+    	    WHERE uid = :uid AND password = :oldpassword;");
 		$stmt->execute($args);
 
 		return $stmt->rowCount();

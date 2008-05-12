@@ -1,20 +1,18 @@
 <div class="sidebar">
-<!-- 互助分类 -->
 <?= $this->render('dynamic/sort.phtml'); ?>
 </div>
 
 <div class="sidebar">
 
-<!-- 搜索结果 -->
 <table class="help_set_large">
 
 	<tr style="border-bottom:1px solid #eee">
 		<th width="70%">有  <?= $this->total; ?> 项符合 <?= $this->wd; ?> 的搜索结果</td>
-		<th width="10%">状态</td>
-		<th width="10%">积分</td>
+		<th width="10%">问题状态</td>
+		<th width="10%">积分悬赏</td>
 		<th width="10%">&nbsp;</td>
 	</tr>
-    <!-- 结果显示 -->	
+
 	<?php foreach ($this->searchList as $value) { ?>
 	<tr>
 	<td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= Commons::highlight($this->wd, $value['title']); ?></a></td>

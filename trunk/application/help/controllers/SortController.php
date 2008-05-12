@@ -15,56 +15,56 @@
 class SortController extends Zend_Controller_Action
 {
 	/**
-     * 问答模块配置对象
-     *
+     * 公用Session
+     * 
+     * @var object
+     */
+	private $_sessCommon = null;
+
+	/**
+     * 项目Session
+     * 
+     * @var object
+     */
+	private $_sessHelp = null;
+
+	/**
+     * 问答模块配置
+     * 
      * @var object
      */
 	private $_iniHelp = null;
 
 	/**
-     * 公用SESSION对象
-     *
-     * @var array
-     */
-	private $_sessCommon = null;
-
-	/**
-     * 项目SESSION对象
-     *
-     * @var array
-     */
-	private $_sessHelp = null;
-
-	/**
      * sess内的会员编号
-     *
+     * 
      * @var integer
      */
 	private $_sessUid = 0;
 
 	/**
      * sort分类编号
-     *
+     * 
      * @var integer
      */
 	private $_sortId = 0;
 
 	/**
      * 初始化
-     *
+     * 
      * @return void
      */
 	public function init()
 	{
-		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
-		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
-		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+		$this->_iniHelp    = Zend_Registry::get('iniHelp');
 
-		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
-		$this->_sortId     = (int)$this->getRequest()->getParam('sid'); // sortId
+		$this->_sessUid = $this->_sessCommon->login['uid'];
+		$this->_sortId  = (int)$this->getRequest()->getParam('sid');
 
-		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
-		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
+		$this->view->sessCommon = $this->_sessCommon;
+		$this->view->sessHelp   = $this->_sessHelp;
 	}
 
 	/**
@@ -77,157 +77,84 @@ class SortController extends Zend_Controller_Action
 	}
 
 	/**
-     * 发布问题-分类联动
-     *
+     * 问题分类-JSON
+     * 
      * @return void
      */
 	public function jsonAction()
 	{		
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
 
 		echo ($this->getRequest()->isXmlHttpRequest() ? 
-		    Zend_Json::encode(SortLogic::init()->fetchPairs($this->_sortId)) : '');
+		    Zend_Json::encode(AskSortLogic::init()->selectParentList($this->_sortId)) : '');
 	}
 
 	/**
-     * 查看分类列表
-     *
+     * 问题分类-查看列表
+     * 
      * @return void
      */
 	public function browseAction()
 	{
-		$all    = SortLogic::init()->fetchAll(); // 取出全部分类
-		$detail = HelpClass::getSortDetail($all, $this->_sortId); // 当前分类详情
-		if ($this->_sortId == $detail['sid'])
+		$sortAll    = AskSortLogic::init()->selectList();
+		$sortDetail = HelpClass::getSortDetail($sortAll, $this->_sortId);
+		if ($this->_sortId == $sortDetail['sid'])
 		{
-			$total  = $detail['question'] - $detail['closed'] - $detail['overtime'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			$type = $this->getRequest()->getParam('type');
+		    switch ($type)
+		    {
+			    case 'latest': // 最新问题
+			    {
+			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
+			    	$paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			    	$list   = AskSortLogic::init()->selectSortLatest($this->_sortId, $paging->limit());
 
-			$this->view->total  = $total;
-			$this->view->detail = $detail;
-			$this->view->paging = $paging->show();
-			$this->view->map    = HelpClass::getSortMap($all, $this->_sortId);
-			$this->view->path   = HelpClass::getSortPath($all, $this->_sortId);
-			$this->view->list   = SortLogic::init()->browse($this->_sortId, $paging->limit());
-			$this->view->headTitle($detail['name']);
-			$this->view->headScript()->appendFile('/static/scripts/help/sort/browse.js'); // 载入JS脚本
-		}
-		else
-		{
-			$this->_forward('index', 'Index');
-		}
-	}
+    			    break;
+			    }
+			    case 'offer': // 高分悬赏
+			    {
+			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
+			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			        $list   = AskSortLogic::init()->selectSortOffer($this->_sortId, $paging->limit());
 
-	/**
-     * 查看最新列表
-     *
-     * @return void
-     */
-	public function latestAction()
-	{
-		$all    = SortLogic::init()->fetchAll(); // 取出全部分类
-		$detail = HelpClass::getSortDetail($all, $this->_sortId); // 当前分类详情
-		if ($this->_sortId == $detail['sid'])
-		{
-			$total  = $detail['question'] - $detail['solved'] - $detail['closed'] - $detail['overtime'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 25));
+    			    break;
+			    }
+			    case 'forget': // 被遗忘的
+			    {
+			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
+			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			        $list   = AskSortLogic::init()->selectSortForget($this->_sortId, $paging->limit());
 
-			$this->view->total  = $total;
-			$this->view->detail = $detail;
-			$this->view->paging = $paging->show();
-			$this->view->map    = HelpClass::getSortMap($all, $this->_sortId);
-			$this->view->path   = HelpClass::getSortPath($all, $this->_sortId);
-			$this->view->list   = SortLogic::init()->latest($this->_sortId, $paging->limit());
-			$this->view->headTitle($detail['name']);
-			$this->view->headScript()->appendFile('/static/scripts/help/sort/latest.js'); // 载入JS脚本
-		}
-		else
-		{
-			$this->_forward('index', 'Index');
-		}
-	}
+    			    break;
+			    }
+			    case 'solved': // 已经解决
+			    {
+			    	$total  = $sortDetail['solved'];
+			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			        $list   = AskSortLogic::init()->selectSortSolved($this->_sortId, $paging->limit());
 
-	/**
-     * 查看高分列表
-     *
-     * @return void
-     */
-	public function offerAction()
-	{
-		$all    = SortLogic::init()->fetchAll(); // 取出全部分类
-		$detail = HelpClass::getSortDetail($all, $this->_sortId); // 当前分类详情
-		if ($this->_sortId == $detail['sid'])
-		{
-			$total  = $detail['question'] - $detail['solved'] - $detail['closed'] - $detail['overtime'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 25));
+    			    break;
+			    }
+			    default: // 全部问题
+			    {
+    			    $type   = 'all';
 
-			$this->view->total  = $total;
-			$this->view->detail = $detail;
-			$this->view->paging = $paging->show();
-			$this->view->map    = HelpClass::getSortMap($all, $this->_sortId);
-			$this->view->path   = HelpClass::getSortPath($all, $this->_sortId);
-			$this->view->list   = SortLogic::init()->offer($this->_sortId, $paging->limit());
-			$this->view->headTitle($detail['name']);
-			$this->view->headScript()->appendFile('/static/scripts/help/sort/offer.js'); // 载入JS脚本
-		}
-		else
-		{
-			$this->_forward('index', 'Index');
-		}
-	}
+			    	$total  = $sortDetail['question'] - $sortDetail['closed'] - $sortDetail['overtime'];
+			    	$paging	= new Paging(array('total' => $total, 'perpage' => 25));
+			    	$list   = AskSortLogic::init()->selectSortAll($this->_sortId, $paging->limit());
+			    }
+			}
 
-	/**
-     * 查看高分列表
-     *
-     * @return void
-     */
-	public function forgetAction()
-	{
-		$all    = SortLogic::init()->fetchAll(); // 取出全部分类
-		$detail = HelpClass::getSortDetail($all, $this->_sortId); // 当前分类详情
-		if ($this->_sortId == $detail['sid'])
-		{
-			$total  = $detail['question'] - $detail['solved'] - $detail['closed'] - $detail['overtime'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 25));
-
-			$this->view->total  = $total;
-			$this->view->detail = $detail;
-			$this->view->paging = $paging->show();
-			$this->view->map    = HelpClass::getSortMap($all, $this->_sortId);
-			$this->view->path   = HelpClass::getSortPath($all, $this->_sortId);
-			$this->view->list   = SortLogic::init()->forget($this->_sortId, $paging->limit());
-			$this->view->headTitle($detail['name']);
-			$this->view->headScript()->appendFile('/static/scripts/help/sort/forget.js'); // 载入JS脚本
-		}
-		else
-		{
-			$this->_forward('index', 'Index');
-		}
-	}
-
-	/**
-     * 查看解决列表
-     *
-     * @return void
-     */
-	public function solvedAction()
-	{
-		$all    = SortLogic::init()->fetchAll(); // 取出全部分类
-		$detail = HelpClass::getSortDetail($all, $this->_sortId); // 当前分类详情
-		if ($this->_sortId == $detail['sid'])
-		{
-			$total  = $detail['solved'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 25));
-
-			$this->view->total  = $total;
-			$this->view->detail = $detail;
-			$this->view->paging = $paging->show();
-			$this->view->map    = HelpClass::getSortMap($all, $this->_sortId);
-			$this->view->path   = HelpClass::getSortPath($all, $this->_sortId);
-			$this->view->list   = SortLogic::init()->solved($this->_sortId, $paging->limit());
-			$this->view->headTitle($detail['name']);
-			$this->view->headScript()->appendFile('/static/scripts/help/sort/solved.js'); // 载入JS脚本
+		    $this->view->sort   = $sortDetail;
+		    $this->view->type   = $type;
+	        $this->view->total  = $total;
+	        $this->view->paging = $paging->show();
+	        $this->view->list   = $list;
+	        $this->view->map    = HelpClass::getSortMap($sortAll, $this->_sortId);
+	        $this->view->path   = HelpClass::getSortPath($sortAll, $this->_sortId);
+	        $this->view->headTitle($sortDetail['name']);
+	        $this->view->headScript()->appendFile('/static/scripts/help/sort/sort.js');	
 		}
 		else
 		{

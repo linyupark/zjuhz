@@ -25,7 +25,7 @@ class SortFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -54,7 +54,7 @@ class SortFilter extends HelpInterlayer
      * @param integer $sid
      * @return integer
      */
-	public function checkSortId($sid)
+	public function sortId($sid)
 	{
 		return (int)$sid;
 	}

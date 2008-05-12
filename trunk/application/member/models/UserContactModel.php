@@ -28,7 +28,7 @@ class UserContactModel
     protected $_primary = 'uid';
 
     /**
-     * 数据表访问对象
+     * 数据表访问
      * @var object
      */
     protected $_dao = null;
@@ -40,7 +40,6 @@ class UserContactModel
      */
     public function __construct()
     {
-    	// 载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 

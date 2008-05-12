@@ -15,48 +15,48 @@
 class MyController extends Zend_Controller_Action
 {
 	/**
-     * 问答模块配置对象
+     * 公用Session
+     *
+     * @var object
+     */
+	private $_sessCommon = null;
+
+	/**
+     * 项目Session
+     *
+     * @var object
+     */
+	private $_sessHelp = null;
+
+	/**
+     * 问答模块配置
      *
      * @var object
      */
 	private $_iniHelp = null;
 
 	/**
-     * 公用SESSION对象
-     *
-     * @var array
-     */
-	private $_sessCommon = null;
-
-	/**
-     * 项目SESSION对象
-     *
-     * @var array
-     */
-	private $_sessHelp = null;
-
-	/**
      * sess内的会员编号
-     *
+     * 
      * @var integer
      */
 	private $_sessUid = 0;
 
 	/**
      * 初始化
-     *
+     * 
      * @return void
      */
 	public function init()
 	{
-		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
-		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
-		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+		$this->_iniHelp    = Zend_Registry::get('iniHelp');
 
-		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
+		$this->_sessUid = $this->_sessCommon->login['uid'];
 
-		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
-		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
+		$this->view->sessCommon = $this->_sessCommon;
+		$this->view->sessHelp   = $this->_sessHelp;
 	}
 
 	/**
@@ -66,7 +66,9 @@ class MyController extends Zend_Controller_Action
      */
 	public function indexAction()
 	{
-		$this->_sessHelp->login = AskLogic::init()->entry($this->_sessUid); // 刷新SESSION
+		// 刷新模块登录session
+		$this->_sessHelp->login = AskLogic::init()->selectRow($this->_sessUid);
+
 		$this->_forward('question');
 	}
 
@@ -77,29 +79,34 @@ class MyController extends Zend_Controller_Action
      */
 	public function questionAction()
 	{
-		$this->view->headTitle($this->_iniHelp->head->title->my->question); // 载入标题
-		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js'); // 载入JS脚本
+		$this->view->headTitle($this->_iniHelp->head->titleMyQuestion);
+		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js');
 
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
 		{
 			case 'solved':
+			{
     			$status = 1;
-    			$total  = $this->_sessHelp->login['solved'];
     			break;
+			}
 			default:
+			{
     			$status = 0;
-    			$total  = $this->_sessHelp->login['unsolved'];
     			$type   = 'unsolved';
+    			
+			}
 		}
 
+        $total    = $this->_sessHelp->login[$type];
 		$paging	  = new Paging(array('total' => $total, 'perpage' => 20));
-		$question = MyLogic::init()->question($this->_sessUid, $status, $paging->limit());
+		$question = ($total > 0 ? AskQuestionLogic::init()->selectMyList($this->_sessUid, $status, $paging->limit()) : '');
+
 		$this->view->ctrl     = 'question';
-		$this->view->type     = $type;		
-        $this->view->question = $question;
+		$this->view->type     = $type;
 		$this->view->total    = $total;
 		$this->view->paging   = $paging->show();
+        $this->view->question = $question;
 	}
 
 	/**
@@ -109,58 +116,66 @@ class MyController extends Zend_Controller_Action
      */
 	public function replyAction()
 	{
-		$this->view->headTitle($this->_iniHelp->head->title->my->reply); // 载入标题
-		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js'); // 载入JS脚本
+		$this->view->headTitle($this->_iniHelp->head->titleMyReply);
+		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js');
 
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
 		{
 			case 'answer':
+			{
     			$status = 1;
-    			$total  = $this->_sessHelp->login['answer'];
     			break;
+			}
 			default:
+			{
     			$status = 0;
-    			$total  = $this->_sessHelp->login['reply'];
     			$type   = 'reply';
+			}
 		}
 
+        $total  = $this->_sessHelp->login[$type];
 		$paging = new Paging(array('total' => $total, 'perpage' => 20));
-		$reply  = MyLogic::init()->reply($this->_sessUid, $status, $paging->limit());
+		$reply  = ($total > 0 ? AskReplyLogic::init()->selectMyList($this->_sessUid, $status, $paging->limit()) : '');
+
 		$this->view->ctrl   = 'reply';
-		$this->view->type   = $type;		
-        $this->view->reply  = $reply;
+		$this->view->type   = $type;
 		$this->view->total  = $total;
 		$this->view->paging = $paging->show();
+        $this->view->reply  = $reply;
 	}
 
 	/**
-     * 我的回答
+     * 我的收藏
      * 
      * @return void
      */
 	public function collectionAction()
 	{
-		$this->view->headTitle($this->_iniHelp->head->title->my->collection); // 载入标题
-		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js'); // 载入JS脚本
+		$this->view->headTitle($this->_iniHelp->head->titleMyCollection);
+		$this->view->headScript()->appendFile('/static/scripts/help/my/my.js');
 
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
 		{
 			case 'collection':
-    			$total  = $this->_sessHelp->login['collection'];
+			{
     			break;
+			}
 			default:
-    			$total  = $this->_sessHelp->login['collection'];
-    			$type   = 'collection';
+			{
+    			$type = 'collection';
+			}
 		}
 
+        $total      = $this->_sessHelp->login['collection'];
 		$paging     = new Paging(array('total' => $total, 'perpage' => 20));
-		$collection = MyLogic::init()->collection($this->_sessUid, $paging->limit());
+		$collection = ($total > 0 ? AskCollectionLogic::init()->selectMyList($this->_sessUid, $paging->limit()) : '');;
+
 		$this->view->ctrl       = 'collection';
-		$this->view->type       = $type;		
-        $this->view->collection = $collection;
+		$this->view->type       = $type;
 		$this->view->total      = $total;
-		$this->view->paging     = $paging->show();
+		$this->view->paging     = $paging->show();		
+        $this->view->collection = $collection;
 	}
 }

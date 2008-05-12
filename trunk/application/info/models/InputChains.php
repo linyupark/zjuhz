@@ -31,7 +31,7 @@
 			$valid = $this->_valid;
 			$valid->addValidator(new Zend_Validate_StringLength(3,50));
 			if(!$valid->isValid($input))
-			$this->_messages[$name] = '帐号长度范围(3~50)';
+			$this->_messages[$name] = '账号长度范围(3~50)';
 			return $input;
 		}
 		

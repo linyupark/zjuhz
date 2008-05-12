@@ -1,34 +1,30 @@
-<!-- 当前路径 -->
 <div id="help_position">
 <a href="/help/" title="首页">首页</a> > <?= $this->path; ?>
 </div>
 
 <div class="sidebar">
-<!-- 问题分类 -->
 <div class="sub_category">
-<h2><?= $this->detail['name']; ?>(<?= $this->total; ?>)</h2>
+<h2><?= $this->sort['name']; ?>(<?= $this->total; ?>)</h2>
 <table width="100%">
 <?php foreach ($this->map as $key => $value) { $i++ ; if ($i % 4 == 1) { echo '<tr>'; } ?>
 <td width="25%">
-<?php if ($this->detail['sid'] != $value['sid']) { ?>
-<a href="/help/sort/browse/sid/<?= $value['sid']; ?>/"><?= $value['name']; ?>(<?= $value['question']-$value['closed']-$value['overtime']; ?>)</a>
+<?php if ($this->sort['sid'] != $value['sid']) { ?>
+<a href="/help/sort/browse/sid/<?= $value['sid']; ?>/"><?= $value['name']; ?>(<?php if ('latest' == $this->type || 'offer' == $this->type || 'forget' == $this->type) { echo $value['question']-$value['solved']-$value['closed']-$value['overtime']; } elseif ('solved' == $this->type) { echo $value['solved']; } else { echo $value['question']-$value['closed']-$value['overtime']; } ?>)</a>
 <?php } else { echo $value['name']; } ?>
 </td>
 <?php if ($i % 4 == 0) { echo '</tr>'; } } ?>
 </table>
 </div>
 
-<!-- 状态导航 -->
 <div id="help_tab_btn">
-<a href="/help/sort/browse/sid/<?= $this->detail['sid']; ?>/" class="on">全部问题</a>
-<a href="/help/sort/latest/sid/<?= $this->detail['sid']; ?>/">最新问题</a>
-<a href="/help/sort/offer/sid/<?= $this->detail['sid']; ?>/">高分求助</a>
-<a href="/help/sort/forget/sid/<?= $this->detail['sid']; ?>/">被遗忘的</a>
-<a href="/help/sort/solved/sid/<?= $this->detail['sid']; ?>/">最近解决</a>
+<a href="/help/sort/browse/type/all/sid/<?= $this->sort['sid']; ?>/">全部问题</a>
+<a href="/help/sort/browse/type/latest/sid/<?= $this->sort['sid']; ?>/">最新问题</a>
+<a href="/help/sort/browse/type/offer/sid/<?= $this->sort['sid']; ?>/">高分求助</a>
+<a href="/help/sort/browse/type/forget/sid/<?= $this->sort['sid']; ?>/">被遗忘的</a>
+<a href="/help/sort/browse/type/solved/sid/<?= $this->sort['sid']; ?>/">最近解决</a>
 </div>
 
 <?php if ($this->total > 0) { ?>
-<!-- 问题列表 -->
 <table class="tab_content">
 <tr style="background:#FFFCF0">
 <th class="txtc p5 quiet" width="72%">问题标题</th>
@@ -51,6 +47,7 @@
 </div>
 
 <div class="sidebar">
-<!-- 积分排行 -->
 <?= $this->render('dynamic/point.phtml'); ?>
 </div>
+
+<script language="javascript" type="text/javascript">var type="<?= $this->type; ?>";</script>

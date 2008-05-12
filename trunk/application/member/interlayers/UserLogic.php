@@ -79,9 +79,9 @@ class UserLogic extends MemberInterlayer
      * @param string $username
      * @return integer
      */
-	public function check($username)
+	public function selectUsernameExist($username)
 	{
-		return $this->_UserModel->selectUsernameExist($username);
+		return $this->_UserModel->selectExist('username', $username);
 	}
 
     /**

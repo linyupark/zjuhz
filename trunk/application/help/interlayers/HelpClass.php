@@ -22,7 +22,7 @@ class HelpClass extends HelpInterlayer
      */
     public function __construct()
     {
-    	//parent::__construct();
+    	parent::__construct();
     }
 
     /**
@@ -32,7 +32,7 @@ class HelpClass extends HelpInterlayer
      */
 	public function __destruct()
     {
-    	//parent::__destruct();
+    	parent::__destruct();
     }
 
     /**
@@ -49,8 +49,8 @@ class HelpClass extends HelpInterlayer
      * session内的验证码校验
      * 
      * @param integer $input
-     * @param string $sess
-     * @return string or true
+     * @param integer $sess
+     * @return boolean
      */
 	public static function checkVerifyCode($input, $sess)
 	{

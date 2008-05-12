@@ -25,7 +25,7 @@ class ReplyFilter extends HelpInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initFilter();
+    	//parent::_initFilter();
     }
 
     /**
@@ -62,8 +62,7 @@ class ReplyFilter extends HelpInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array(
-		        'StringTrim'),  
+		    '*' => array('StringTrim'),  
     	);
 
     	//*设置验证规则
@@ -82,7 +81,6 @@ class ReplyFilter extends HelpInterlayer
 
 		if ($input->hasInvalid() || $input->hasMissing())
 		{
-			//print_r($input->getMessages());exit;
 			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
 		}
 		else

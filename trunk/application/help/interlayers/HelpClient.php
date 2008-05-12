@@ -62,8 +62,10 @@ class HelpClient extends HelpInterlayer
      * @param integer $uid
      * @return integer
      */
-	public function activate($uid)
+	public function UserExtUpdate($uid)
 	{
-		return $this->_rpcMember->call('rpcMember.UserExtUpdate', array(array('initAsk' => 'Y'), (int)$uid));
+		return $this->_rpcMember->call('rpcMember.UserExtUpdate', 
+		    array(array('initAsk' => 'Y'), (int)$uid)
+		);
 	}
 }

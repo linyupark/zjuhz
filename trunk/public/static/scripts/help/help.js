@@ -47,7 +47,7 @@ function collection_insert(qid) {
 
 	if (qid > 0) {
 		$.post("/help/collection/doinsert/", { qid: qid }, function(msg) {
-			alert('收藏成功！'); $("#collection").hide() }
+			alert('已收藏成功！'); $("#collection").hide() }
 		); 
 	}
 

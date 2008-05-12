@@ -67,7 +67,7 @@
 				$where = $this->User->getAdapter()->quoteInto('user_id = ?',$id);
 				$this->User->delete($where);
 				$this->Entity->delete($where);
-				echo "该成员帐号删除成功！";
+				echo "该成员账号删除成功！";
 			}
 		}
 		

@@ -39,7 +39,6 @@ class AddressGroupModel
      */
     public function __construct()
     {
-    	// 载入数据库操作类
         $this->_dao = Zend_Registry::get('dao');
     }
 

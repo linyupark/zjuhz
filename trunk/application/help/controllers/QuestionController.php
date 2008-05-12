@@ -15,25 +15,25 @@
 class QuestionController extends Zend_Controller_Action
 {
 	/**
-     * 问答模块配置对象
+     * 公用Session
      *
      * @var object
-     */
-	private $_iniHelp = null;
-
-	/**
-     * 公用SESSION对象
-     *
-     * @var array
      */
 	private $_sessCommon = null;
 
 	/**
-     * 项目SESSION对象
+     * 项目Session
      *
-     * @var array
+     * @var object
      */
 	private $_sessHelp = null;
+
+	/**
+     * 问答模块配置
+     *
+     * @var object
+     */
+	private $_iniHelp = null;
 
 	/**
      * sess内的会员编号
@@ -49,14 +49,14 @@ class QuestionController extends Zend_Controller_Action
      */
 	public function init()
 	{
-		$this->_iniHelp    = Zend_Registry::get('iniHelp'); // 载入项目配置
-		$this->_sessCommon = Zend_Registry::get('sessCommon'); // 载入公共SESSION
-		$this->_sessHelp   = Zend_Registry::get('sessHelp'); // 载入项目SESSION
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
+		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+		$this->_iniHelp    = Zend_Registry::get('iniHelp');
 
-		$this->_sessUid    = $this->_sessCommon->login['uid']; // sessionUid
+		$this->_sessUid    = $this->_sessCommon->login['uid'];
 
-		$this->view->sessCommon = $this->_sessCommon; // Session资料注入
-		$this->view->sessHelp   = $this->_sessHelp; // Session资料注入
+		$this->view->sessCommon = $this->_sessCommon;
+		$this->view->sessHelp   = $this->_sessHelp;
 	}
 
 	/**
@@ -75,45 +75,40 @@ class QuestionController extends Zend_Controller_Action
      */
 	public function insertAction()
 	{		
-		$this->view->headTitle($this->_iniHelp->head->title->question->insert); // 载入标题
-		$this->view->headScript()->appendFile('/static/scripts/help/question/insert.js'); // 载入JS脚本
+		$this->view->headTitle($this->_iniHelp->head->titleQuestionInsert);
+		$this->view->headScript()->appendFile('/static/scripts/help/question/insert.js');
 
-		$this->view->title    = $this->getRequest()->getParam('title'); // title
+		$this->view->title = $this->getRequest()->getParam('title');
 	}
 
 	/**
      * 发布问题-数据提交
      * 
-     * @return string to ajax
+     * @return void
      */
 	public function doinsertAction()
-	{		
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组
-			$postArgs = $this->getRequest()->getPost(); //print_r($postArgs);exit;
-			// 此处单独处理的数据单独取出
-			$vCode   = $postArgs['vcode'];
-			$sCode   = $this->_sessCommon->verify;
+			$postArgs = $this->getRequest()->getPost();
+
 			$point   = $this->_sessHelp->login['point'];
 			$offer   = $postArgs['offer'];
 			$after   = $point - $offer;
 			$counter = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
-			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'question', );
-			// 此处可注入数据将用与判断
+			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'question');
+
 			$postArgs['uid']   = $this->_sessUid;
 			$postArgs['point'] = $point;
-			// 此处注销无用数据
-			unset($this->_sessCommon->verify);
 
 			if ($insArgs = QuestionFilter::init()->insert($postArgs))
 			{
-				if (HelpClass::checkVerifyCode($vCode, $sCode))
+				if (HelpClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
 				{
-					if (QuestionLogic::init()->insert($insArgs))
+					if (AskQuestionLogic::init()->insert($insArgs))
 					{
 						// sessHelp内的各值对应变化
 						$this->_sessHelp->login['point'] = $after; // 可用积分
@@ -121,13 +116,13 @@ class QuestionController extends Zend_Controller_Action
 						$this->_sessHelp->login['unsolved']++; // 未解决数
 
 						// 分类数量更新
-						SortLogic::init()->counter($counter);
+						AskSortLogic::init()->counter($counter);
 
 						// 积分日志操作?
 						if ($offer > 0)
 						{
 							// 数据已过滤可直接生成
-							LogLogic::init()->insert(array('uid' => $insArgs['uid'], 
+							PointLogLogic::init()->insert(array('uid' => $insArgs['uid'], 
 							    'point' => "-{$insArgs['offer']}", 'type' => 2, 
 							));
 						}
@@ -145,7 +140,7 @@ class QuestionController extends Zend_Controller_Action
 	/**
      * 发布问题-采纳答案
      * 
-     * @return string to ajax
+     * @return void
      */
 	public function doacceptAction()
 	{
@@ -154,29 +149,28 @@ class QuestionController extends Zend_Controller_Action
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			// 此处接收传递的数据数组 // next, see standard
 			$postArgs = $this->getRequest()->getPost();
-			$counter  = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
-			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'solved', );
-			// 此处可注入数据将用与判断 // next, see standard
 			$postArgs['quid'] = $this->_sessUid;
+
+			$counter  = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
+			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'solved', );			
 
 			if ($insArgs = QuestionFilter::init()->accept($postArgs))
 			{
-				if (($offer = QuestionLogic::init()->accept($insArgs)) >= 0)
+				if (($offer = AskQuestionLogic::init()->accept($insArgs)) >= 0)
 				{
 					// sessHelp内的各值对应变化
 					$this->_sessHelp->login['unsolved']--;
 					$this->_sessHelp->login['solved']++;
 
 					// 分类数量更新
-					SortLogic::init()->counter($counter);
+					AskSortLogic::init()->counter($counter);
 
 					// 积分日志操作?
 					if ($offer > 0)
 					{
 						// 数据已过滤可直接生成
-						LogLogic::init()->insert(array('uid' => $insArgs['ruid'], 
+						PointLogLogic::init()->insert(array('uid' => $insArgs['ruid'], 
 						    'point' => $offer, 'type' => 4, 
 						));
 					}
@@ -198,10 +192,10 @@ class QuestionController extends Zend_Controller_Action
 	public function detailAction()
 	{
 		$qid    = (int)$this->getRequest()->getParam('qid');
-		$detail = QuestionLogic::init()->detail($qid);
+		$detail = AskQuestionLogic::init()->selectRow($qid);
 		if ($qid == $detail['qid'])
 		{
-			$all        = SortLogic::init()->fetchAll(); // 取出全部分类
+			$all        = AskSortLogic::init()->selectList(); // 取出全部分类
 			$sortDetail = HelpClass::getSortDetail($all, $detail['sid']); // 当前分类详情
 			$total  = $detail['reply'];
 			$paging	= new Paging(array('total' => $total, 'perpage' => 10));
@@ -211,7 +205,7 @@ class QuestionController extends Zend_Controller_Action
 			$this->view->paging = $paging->show();
 			$this->view->geneal = HelpClass::getSortGeneal($all, $detail['sid']);
 			$this->view->detail = $detail;
-			$this->view->reply  = ReplyLogic::init()->browse($qid, $paging->limit());
+			$this->view->reply  = AskReplyLogic::init()->selectList($qid, $paging->limit());
 			$this->view->path   = HelpClass::getSortPath($all, $sortDetail['sid']);
 			$this->view->headTitle($detail['title']); // 载入标题
 			$this->view->headScript()->appendFile('/static/scripts/help/question/detail.js'); // 载入JS脚本

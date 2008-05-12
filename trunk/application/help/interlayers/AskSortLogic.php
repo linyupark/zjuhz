@@ -5,7 +5,7 @@
  * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:SortLogic.php
+ * @version    Id:AskSortLogic.php
  */
 
 
@@ -14,7 +14,7 @@
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class SortLogic extends HelpInterlayer
+class AskSortLogic extends HelpInterlayer
 {
     /**
      * 构造方法
@@ -26,7 +26,7 @@ class SortLogic extends HelpInterlayer
     	parent::__construct();
     	parent::_initLogic();
 
-    	$this->_loadMdl('Sort');
+    	$this->_load('AskSortModel');
     }
 
     /**
@@ -49,27 +49,6 @@ class SortLogic extends HelpInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-	/**
-     * 显示分类列表
-     * 
-     * @param integer $parent
-     * @return array
-     */
-	public function fetchPairs($parent)
-	{
-		return $this->_mdlSort->fetchPairs($parent);
-	}
-
-	/**
-     * 显示分类列表
-     * 
-     * @return array
-     */
-	public function fetchAll()
-	{
-		return $this->_mdlSort->fetchAll();
-	}
-
     /**
      * 分类下属问题计数器
      * 
@@ -78,66 +57,87 @@ class SortLogic extends HelpInterlayer
      */
 	public function counter($args)
     {
-		return $this->_mdlSort->counter($args);
+		return $this->_AskSortModel->callCounter($args);
     }
 
 	/**
-     * 按分类显示问题列表
+     * 显示分类列表
      * 
-     * @param integer $sid
-     * @param string $limit
      * @return array
      */
-	public function browse($sid, $limit)
+	public function selectList()
 	{
-		return $this->_mdlSort->browse($sid, $limit);
+		return $this->_AskSortModel->selectList();
 	}
 
 	/**
-     * 按最新显示问题列表
+     * 显示分类列表
      * 
-     * @param integer $sid
-     * @param string $limit
+     * @param integer $parent
      * @return array
      */
-	public function latest($sid, $limit)
+	public function selectParentList($parent)
 	{
-		return $this->_mdlSort->latest($sid, $limit);
+		return $this->_AskSortModel->selectParentList($parent);
 	}
 
 	/**
-     * 按高分显示问题列表
+     * 按分类显示全部问题
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function offer($sid, $limit)
+	public function selectSortAll($sid, $limit)
 	{
-		return $this->_mdlSort->offer($sid, $limit);
+		return $this->_AskSortModel->selectSortAll($sid, $limit);
 	}
 
 	/**
-     * 按回复显示问题列表
+     * 按分类显示最新求助
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function forget($sid, $limit)
+	public function selectSortLatest($sid, $limit)
 	{
-		return $this->_mdlSort->forget($sid, $limit);
+		return $this->_AskSortModel->selectSortLatest($sid, $limit);
 	}
 
 	/**
-     * 按解决显示问题列表
+     * 按分类显示高分求助
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function solved($sid, $limit)
+	public function selectSortOffer($sid, $limit)
 	{
-		return $this->_mdlSort->solved($sid, $limit);
+		return $this->_AskSortModel->selectSortOffer($sid, $limit);
+	}
+
+	/**
+     * 按分类显示被遗忘的
+     * 
+     * @param integer $sid
+     * @param string $limit
+     * @return array
+     */
+	public function selectSortForget($sid, $limit)
+	{
+		return $this->_AskSortModel->selectSortForget($sid, $limit);
+	}
+
+	/**
+     * 按分类显示最近解决
+     * 
+     * @param integer $sid
+     * @param string $limit
+     * @return array
+     */
+	public function selectSortSolved($sid, $limit)
+	{
+		return $this->_AskSortModel->selectSortSolved($sid, $limit);
 	}
 }
