@@ -50,7 +50,7 @@ class PointLogLogic extends HelpInterlayer
     }
 
     /**
-     * 写积分日志
+     * 插入积分日志记录
      * 
      * @param array $args
      * @return integer

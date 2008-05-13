@@ -54,13 +54,13 @@ class AskCollectionModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 我收藏的问题
+     * 查找uid的收藏记录
      * 
      * @param integer $uid
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $limit)
+	public function selectUidAll($uid, $limit)
     {
 		return $this->_dao->fetchAll("SELECT c.cid, c.addTime, q.qid, q.title, q.anonym, q.offer, q.reply, s.pid, s.pName 
 		    FROM tbl_ask_collection AS c, tbl_ask_question AS q, tbl_ask_sort AS s 
@@ -70,7 +70,7 @@ class AskCollectionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 常规数据写入
+     * 插入收藏记录
      * 
      * @param array $args
      * @return integer

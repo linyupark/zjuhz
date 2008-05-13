@@ -50,7 +50,7 @@ class AskQuestionLogic extends HelpInterlayer
     }
 
     /**
-     * 提交问题
+     * 插入问题资料
      * 
      * @param array $args
      * @return integer
@@ -61,7 +61,7 @@ class AskQuestionLogic extends HelpInterlayer
     }
 
     /**
-     * 采纳答案
+     * 更新问题数据(采纳答案)
      * 
      * @param array $args
      * @return integer
@@ -72,31 +72,31 @@ class AskQuestionLogic extends HelpInterlayer
     }
 
     /**
-     * 显示问题详情
+     * 查找qid的问题详情
      * 
      * @param integer $qid
      * @return array
      */
-	public function selectRow($qid)
+	public function selectQidRow($qid)
     {
-		return $this->_AskQuestionModel->selectRow($qid);
+		return $this->_AskQuestionModel->selectQidRow($qid);
     }
 
 	/**
-     * 我的问题
+     * 查找uid的问题记录
      * 
      * @param integer $uid
      * @param integer $status
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $status, $limit)
+	public function selectUidAll($uid, $status, $limit)
 	{
-		return $this->_AskQuestionModel->selectMyList($uid, $status, $limit);
+		return $this->_AskQuestionModel->selectUidAll($uid, $status, $limit);
 	}
 
 	/**
-     * 随机显示问题
+     * 查找随机问题
      * 
      * @param string $limit
      * @return array
@@ -125,47 +125,47 @@ class AskQuestionLogic extends HelpInterlayer
         );
     }
 
-    /**
-     * 最新求助
+	/**
+     * 查找全部最新提问
      * 
      * @param string $limit
      * @return array
      */
-	public function selectAllLatest($limit)
+	public function selectLatestAll($limit)
 	{
-		return $this->_AskQuestionModel->selectAllLatest($limit);
+		return $this->_AskQuestionModel->selectQuestionAll(0, 'q.qid DESC', $limit);
 	}
 
     /**
-     * 高分悬赏
+     * 查找全部高分提问
      * 
      * @param string $limit
      * @return array
      */
-	public function selectAllOffer($limit)
+	public function selectOfferAll($limit)
 	{
-		return $this->_AskQuestionModel->selectAllOffer($limit);
+		return $this->_AskQuestionModel->selectQuestionAll(0, 'q.offer DESC', $limit);
 	}
 
     /**
-     * 被遗忘的
+     * 查找全部被遗忘的
      * 
      * @param string $limit
      * @return array
      */
-	public function selectAllForget($limit)
+	public function selectForgetAll($limit)
 	{
-		return $this->_AskQuestionModel->selectAllForget($limit);
+		return $this->_AskQuestionModel->selectQuestionAll(0, 'q.reply ASC', $limit);
 	}
 
     /**
-     * 最近解决
+     * 查找全部最近解决
      * 
      * @param string $limit
      * @return array
      */
-	public function selectAllSolved($limit)
+	public function selectSolvedAll($limit)
 	{
-		return $this->_AskQuestionModel->selectAllSolved($limit);
+		return $this->_AskQuestionModel->selectQuestionAll(1, 'q.qid DESC', $limit);
 	}
 }

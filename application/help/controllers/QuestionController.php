@@ -192,10 +192,10 @@ class QuestionController extends Zend_Controller_Action
 	public function detailAction()
 	{
 		$qid    = (int)$this->getRequest()->getParam('qid');
-		$detail = AskQuestionLogic::init()->selectRow($qid);
+		$detail = AskQuestionLogic::init()->selectQidRow($qid);
 		if ($qid == $detail['qid'])
 		{
-			$all        = AskSortLogic::init()->selectList(); // 取出全部分类
+			$all        = AskSortLogic::init()->selectAll(); // 取出全部分类
 			$sortDetail = HelpClass::getSortDetail($all, $detail['sid']); // 当前分类详情
 			$total  = $detail['reply'];
 			$paging	= new Paging(array('total' => $total, 'perpage' => 10));
@@ -205,7 +205,7 @@ class QuestionController extends Zend_Controller_Action
 			$this->view->paging = $paging->show();
 			$this->view->geneal = HelpClass::getSortGeneal($all, $detail['sid']);
 			$this->view->detail = $detail;
-			$this->view->reply  = AskReplyLogic::init()->selectList($qid, $paging->limit());
+			$this->view->reply  = AskReplyLogic::init()->selectQidAll($qid, $paging->limit());
 			$this->view->path   = HelpClass::getSortPath($all, $sortDetail['sid']);
 			$this->view->headTitle($detail['title']); // 载入标题
 			$this->view->headScript()->appendFile('/static/scripts/help/question/detail.js'); // 载入JS脚本

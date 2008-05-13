@@ -113,7 +113,7 @@ class IndexController extends Zend_Controller_Action
 	{
 		if ('member' === $this->_sessCommon->role && !$this->_sessHelp->login)
 		{
-			$this->_sessHelp->login = AskLogic::init()->selectRow($this->_sessCommon->login['uid']);
+			$this->_sessHelp->login = AskLogic::init()->selectUidRow($this->_sessCommon->login['uid']);
 		}
 	}
 
@@ -132,9 +132,9 @@ class IndexController extends Zend_Controller_Action
 
 		$logic = AskQuestionLogic::init();
 		$this->view->rand   = AskQuestionLogic::init()->selectRandQuestion(5); // 随机
-		$this->view->latest = $logic->selectAllLatest(12); // 最新问题
-		$this->view->offer  = $logic->selectAllOffer(12);  // 高分问题
-		$this->view->forget = $logic->selectAllForget(12); // 被遗忘的
-		$this->view->solved = $logic->selectAllSolved(12); // 最近解决	
+		$this->view->latest = $logic->selectLatestAll(12); // 最新问题
+		$this->view->offer  = $logic->selectOfferAll(12);  // 高分问题
+		$this->view->forget = $logic->selectForgetAll(12); // 被遗忘的
+		$this->view->solved = $logic->selectSolvedAll(12); // 最近解决	
 	}
 }

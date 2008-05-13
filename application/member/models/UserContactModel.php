@@ -54,7 +54,7 @@ class UserContactModel
     }
 
     /**
-     * 常规更新数据
+     * 更新会员联络资料
      * 
      * @param array $args
      * @param integer $uid

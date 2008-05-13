@@ -50,14 +50,14 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 组资料写入或更新
+     * 插入/更新组的记录/资料
      * 
      * @param array $args
      * @return integer
      */
 	public function insertOrUpdate($args)
     {    	
-    	return ($this->selectPrimaryExist($args['gid']) ? 
+    	return ($this->selectGidCount($args['gid']) ? 
     	    $this->update($args, $args['gid']) : $this->insert($args)
     	);
     }
@@ -68,24 +68,24 @@ class AddressGroupLogic extends MemberInterlayer
      * @param string $gid
      * @return integer
      */
-	public function selectPrimaryExist($gid)
+	public function selectGidCount($gid)
     {
-    	return $this->_AddressGroupModel->selectPrimaryExist($gid);
+    	return $this->_AddressGroupModel->selectFieldCount('gid', $gid);
     }
 
     /**
-     * 查询组列表
+     * 查找uid对应的名片组
      * 
      * @param integer $uid
      * @return array
      */
-	public function selectList($uid)
+	public function selectUidAll($uid)
     {
-    	return $this->_AddressGroupModel->selectList($uid);
+    	return $this->_AddressGroupModel->selectUidAll($uid);
     }
 
     /**
-     * 写入组数据
+     * 插入名片组记录
      * 
      * @param array $args
      * @return integer
@@ -96,7 +96,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 更新组数据
+     * 更新名片组资料
      * 
      * @param array $args
      * @param string $gid
@@ -108,7 +108,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 删除组记录
+     * 删除名片组记录
      * 
      * @param array $args
      * @return integer

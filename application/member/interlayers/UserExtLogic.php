@@ -50,7 +50,7 @@ class UserExtLogic extends MemberInterlayer
     }
 
     /**
-     * 常规更新数据
+     * 更新会员扩展资料
      * 
      * @param array $args
      * @param integer $uid

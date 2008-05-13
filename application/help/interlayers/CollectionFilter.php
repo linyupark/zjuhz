@@ -49,7 +49,7 @@ class CollectionFilter extends HelpInterlayer
     }
 
 	/**
-     * 收藏问题
+     * 过滤收藏记录
      * 
      * @param array $args
      * @return array
@@ -58,7 +58,7 @@ class CollectionFilter extends HelpInterlayer
 	{
 		return array(
 		    'qid' => (int)$args['qid'], 
-		    'uid' => $args['uid'],  
+		    'uid' => $args['uid']
 		);
 	}
 }

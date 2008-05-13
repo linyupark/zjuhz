@@ -67,7 +67,7 @@ class MyController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		// 刷新模块登录session
-		$this->_sessHelp->login = AskLogic::init()->selectRow($this->_sessUid);
+		$this->_sessHelp->login = AskLogic::init()->selectUidRow($this->_sessUid);
 
 		$this->_forward('question');
 	}
@@ -100,7 +100,7 @@ class MyController extends Zend_Controller_Action
 
         $total    = $this->_sessHelp->login[$type];
 		$paging	  = new Paging(array('total' => $total, 'perpage' => 20));
-		$question = ($total > 0 ? AskQuestionLogic::init()->selectMyList($this->_sessUid, $status, $paging->limit()) : '');
+		$question = ($total > 0 ? AskQuestionLogic::init()->selectUidAll($this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl     = 'question';
 		$this->view->type     = $type;
@@ -136,7 +136,7 @@ class MyController extends Zend_Controller_Action
 
         $total  = $this->_sessHelp->login[$type];
 		$paging = new Paging(array('total' => $total, 'perpage' => 20));
-		$reply  = ($total > 0 ? AskReplyLogic::init()->selectMyList($this->_sessUid, $status, $paging->limit()) : '');
+		$reply  = ($total > 0 ? AskReplyLogic::init()->selectUidAll($this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl   = 'reply';
 		$this->view->type   = $type;
@@ -170,7 +170,7 @@ class MyController extends Zend_Controller_Action
 
         $total      = $this->_sessHelp->login['collection'];
 		$paging     = new Paging(array('total' => $total, 'perpage' => 20));
-		$collection = ($total > 0 ? AskCollectionLogic::init()->selectMyList($this->_sessUid, $paging->limit()) : '');;
+		$collection = ($total > 0 ? AskCollectionLogic::init()->selectUidAll($this->_sessUid, $paging->limit()) : '');;
 
 		$this->view->ctrl       = 'collection';
 		$this->view->type       = $type;

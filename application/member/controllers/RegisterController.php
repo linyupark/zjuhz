@@ -127,7 +127,7 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((UserLogic::init()->selectUsernameExist($username)) ? $this->_iniMember->hint->usernameIsExist : 
+				echo ((UserLogic::init()->selectUsernameCount($username)) ? $this->_iniMember->hint->usernameIsExist : 
 				    $this->_iniMember->hint->usernameNotExist
 				);
 			}

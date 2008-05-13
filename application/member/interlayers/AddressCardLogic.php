@@ -50,67 +50,67 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 名片资料写入或更新
+     * 写入/更新名片记录/资料
      * 
      * @param array $args
      * @return integer
      */
 	public function insertOrUpdate($args)
-    {    	
-    	return ($this->selectPrimaryExist($args['cid']) ? 
+    {
+    	return ($this->selectCidCount($args['cid']) ? 
     	    $this->update($args, $args['cid']) : $this->insert($args)
     	);
     }
 
     /**
-     * 主键是否存在
+     * 查找cid存在数量
      * 
      * @param string $cid
      * @return integer
      */
-	public function selectPrimaryExist($cid)
+	public function selectCidCount($cid)
     {
-    	return $this->_AddressCardModel->selectPrimaryExist($cid);
+    	return $this->_AddressCardModel->selectFieldCount('cid', $cid);
     }
 
     /**
-     * 查询名片列表
-     * 
-     * @param string $gid
-     * @param integer $uid
-     * @return array
-     */
-	public function selectList($gid, $uid)
-    {
-		return $this->_AddressCardModel->selectList($gid, $uid);
-    }
-
-    /**
-     * 查询记录数
-     * 
-     * @param string $gid
-     * @param integer $uid
-     * @return array
-     */
-	public function selectCount($gid, $uid)
-    {
-		return $this->_AddressCardModel->selectCount($gid, $uid);
-    }
-
-    /**
-     * 查询详细记录
+     * 查询cid对应的名片详情
      * 
      * @param string $cid
      * @param integer $uid
      * @return array
      */
-	public function selectDetail($cid, $uid)
+	public function selectCidRow($cid, $uid)
     {
-		return $this->_AddressCardModel->selectDetail($cid, $uid);
+		return $this->_AddressCardModel->selectCidRow($cid, $uid);
     }
 
     /**
-     * 列表自定义查找/统计
+     * 查询gid对应的名片组
+     * 
+     * @param string $gid
+     * @param integer $uid
+     * @return array
+     */
+	public function selectGidAll($gid, $uid)
+    {
+		return $this->_AddressCardModel->selectGidAll($gid, $uid);
+    }
+
+    /**
+     * 查询gid对应的记录数
+     * 
+     * @param string $gid
+     * @param integer $uid
+     * @return array
+     */
+	public function selectGidCount($gid, $uid)
+    {
+		return $this->_AddressCardModel->selectGidCount($gid, $uid);
+    }
+
+    /**
+     * 名片列表自定义查找/统计
      * 
      * @param string $type
      * @param array $args
@@ -130,7 +130,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 常规写入数据
+     * 插入名片记录
      * 
      * @param array $args
      * @return integer
@@ -141,7 +141,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 常规更新数据
+     * 更新名片资料
      * 
      * @param array $args
      * @param string $cid

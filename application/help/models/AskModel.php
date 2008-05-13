@@ -54,12 +54,12 @@ class AskModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 单个会员的模块资料
+     * 查找uid的模块资料
      * 
      * @param integer $uid
      * @return array
      */
-	public function selectRow($uid)
+	public function selectUidRow($uid)
     {
     	return $this->_dao->fetchRow("SELECT * FROM {$this->_name} 
     	    WHERE uid = :uid;", array('uid' => $uid)
@@ -67,7 +67,7 @@ class AskModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 写入表数据
+     * 插入uid的模块记录
      * 
      * @param array $args
      * @return integer
@@ -77,8 +77,8 @@ class AskModel //extends Zend_Db_Table_Abstract
 		return $this->_dao->insert($this->_name, $args);
     }
 
-    /**
-     * 更新表数据
+	/**
+     * 更新uid的模块资料
      * 
      * @param array $args
      * @param integer $uid

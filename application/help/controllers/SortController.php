@@ -87,7 +87,7 @@ class SortController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 
 		echo ($this->getRequest()->isXmlHttpRequest() ? 
-		    Zend_Json::encode(AskSortLogic::init()->selectParentList($this->_sortId)) : '');
+		    Zend_Json::encode(AskSortLogic::init()->selectParentPairs($this->_sortId)) : '');
 	}
 
 	/**
@@ -97,7 +97,7 @@ class SortController extends Zend_Controller_Action
      */
 	public function browseAction()
 	{
-		$sortAll    = AskSortLogic::init()->selectList();
+		$sortAll    = AskSortLogic::init()->selectAll();
 		$sortDetail = HelpClass::getSortDetail($sortAll, $this->_sortId);
 		if ($this->_sortId == $sortDetail['sid'])
 		{
@@ -108,7 +108,7 @@ class SortController extends Zend_Controller_Action
 			    {
 			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
 			    	$paging	= new Paging(array('total' => $total, 'perpage' => 25));
-			    	$list   = AskSortLogic::init()->selectSortLatest($this->_sortId, $paging->limit());
+			    	$list   = AskSortLogic::init()->selectLatestAll($this->_sortId, $paging->limit());
 
     			    break;
 			    }
@@ -116,7 +116,7 @@ class SortController extends Zend_Controller_Action
 			    {
 			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
 			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
-			        $list   = AskSortLogic::init()->selectSortOffer($this->_sortId, $paging->limit());
+			        $list   = AskSortLogic::init()->selectOfferAll($this->_sortId, $paging->limit());
 
     			    break;
 			    }
@@ -124,7 +124,7 @@ class SortController extends Zend_Controller_Action
 			    {
 			    	$total  = $sortDetail['question'] - $sortDetail['solved'] - $sortDetail['closed'] - $sortDetail['overtime'];
 			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
-			        $list   = AskSortLogic::init()->selectSortForget($this->_sortId, $paging->limit());
+			        $list   = AskSortLogic::init()->selectForgetAll($this->_sortId, $paging->limit());
 
     			    break;
 			    }
@@ -132,7 +132,7 @@ class SortController extends Zend_Controller_Action
 			    {
 			    	$total  = $sortDetail['solved'];
 			        $paging	= new Paging(array('total' => $total, 'perpage' => 25));
-			        $list   = AskSortLogic::init()->selectSortSolved($this->_sortId, $paging->limit());
+			        $list   = AskSortLogic::init()->selectSolvedAll($this->_sortId, $paging->limit());
 
     			    break;
 			    }
@@ -142,7 +142,7 @@ class SortController extends Zend_Controller_Action
 
 			    	$total  = $sortDetail['question'] - $sortDetail['closed'] - $sortDetail['overtime'];
 			    	$paging	= new Paging(array('total' => $total, 'perpage' => 25));
-			    	$list   = AskSortLogic::init()->selectSortAll($this->_sortId, $paging->limit());
+			    	$list   = AskSortLogic::init()->selectQuestionAll($this->_sortId, $paging->limit());
 			    }
 			}
 

@@ -53,25 +53,26 @@ class AddressGroupModel
     }
 
     /**
-     * 主键是否存在
+     * 查找字段存在数量
      * 
-     * @param string $gid
+     * @param string $field
+     * @param string $cid
      * @return integer
      */
-	public function selectPrimaryExist($gid)
+	public function selectFieldCount($field, $value)
     {
-    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
-    	    WHERE {$this->_primary} = :gid;", array('gid' => $gid)
+    	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
+    	    WHERE {$field} = :field;", array('field' => $value)
     	);
     }
 
     /**
-     * 查询组列表
+     * 查找uid对应的名片组
      * 
      * @param integer $uid
      * @return array
      */
-	public function selectList($uid)
+	public function selectUidAll($uid)
     {
     	return $this->_dao->fetchAll("SELECT * FROM {$this->_name} 
     	    WHERE uid = :uid;", array('uid' => $uid)
@@ -79,7 +80,7 @@ class AddressGroupModel
     }
 
     /**
-     * 写入组数据
+     * 插入名片组记录
      * 
      * @param array $args
      * @return integer
@@ -90,10 +91,9 @@ class AddressGroupModel
     }
 
     /**
-     * 更新组数据
+     * 更新名片组资料
      * 
      * @param array $args
-     * @param string $gid
      * @return integer
      */
 	public function update($args, $gid)
@@ -104,7 +104,7 @@ class AddressGroupModel
     }
 
     /**
-     * 删除组记录
+     * 删除名片组记录
      * 
      * @param array $args
      * @return integer

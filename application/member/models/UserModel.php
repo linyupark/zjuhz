@@ -86,21 +86,21 @@ class UserModel
     }
 
     /**
-     * 检查是否存在
+     * 查找字段存在数量
      * 
-     * @param string $name
-     * @param string $value
+     * @param string $field
+     * @param string $cid
      * @return integer
      */
-	public function selectExist($name, $value)
+	public function selectFieldCount($field, $value)
     {
-    	return $this->_dao->fetchOne("SELECT COUNT(*) FROM {$this->_name} 
-    	    WHERE {$name} = :value;", array('value' => $value)
+    	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
+    	    WHERE {$field} = :field;", array('field' => $value)
         );
     }
 
     /**
-     * 常规更新数据
+     * 更新会员基本资料
      * 
      * @param array $args
      * @param integer $uid
@@ -114,7 +114,7 @@ class UserModel
     }
 
     /**
-     * 修改密码
+     * 更新会员密码
      * 
      * @param array $args
      * @return integer

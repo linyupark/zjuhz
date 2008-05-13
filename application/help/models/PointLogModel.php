@@ -54,7 +54,7 @@ class PointLogModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 常规插入数据
+     * 插入积分日志记录
      * 
      * @param array $args
      * @return integer
