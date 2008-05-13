@@ -113,7 +113,7 @@ class MyController extends Zend_Controller_Action
 			case 'docard': // 名片操作
 			{
 				$cid    = $this->getRequest()->getParam('cid');
-				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectDetail($cid, $this->_sessUid) : '');
+				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
 
 				$this->view->detail = $detail;
                 $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : Commons::getRandomStr($this->_sessUid, 10));
@@ -142,7 +142,7 @@ class MyController extends Zend_Controller_Action
 			}
 		}
 
-		$this->view->groupList = AddressGroupLogic::init()->selectList($this->_sessUid);
+		$this->view->groupList = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
 		$this->view->ctrl = 'address';
 		$this->view->type = $type;
 	}
@@ -298,7 +298,7 @@ class MyController extends Zend_Controller_Action
 			if ($groupdelArgs = MyFilter::init()->groupdel($postArgs))
 			{
 				// 只有当组内未存有名片时才能删除
-				if (!AddressCardLogic::init()->selectCount($groupdelArgs['gid'], $groupdelArgs['uid']))
+				if (!AddressCardLogic::init()->selectGidCount($groupdelArgs['gid'], $groupdelArgs['uid']))
 			    {
 			    	if (AddressGroupLogic::init()->delete($groupdelArgs))
 				    {

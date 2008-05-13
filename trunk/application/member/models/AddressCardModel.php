@@ -53,26 +53,27 @@ class AddressCardModel
     }
 
     /**
-     * 主键是否存在
+     * 查找字段存在数量
      * 
+     * @param string $field
      * @param string $cid
      * @return integer
      */
-	public function selectPrimaryExist($cid)
+	public function selectFieldCount($field, $value)
     {
     	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
-    	    WHERE {$this->_primary} = :cid;", array('cid' => $cid)
+    	    WHERE {$field} = :field;", array('field' => $value)
     	);
     }
 
     /**
-     * 查询详细记录
+     * 查询cid对应的名片详情
      * 
      * @param string $cid
      * @param integer $uid
      * @return array
      */
-	public function selectDetail($cid, $uid)
+	public function selectCidRow($cid, $uid)
     {
 		return $this->_dao->fetchRow("SELECT * 
 		    FROM {$this->_name} WHERE cid = :cid AND uid = :uid;", 
@@ -81,13 +82,13 @@ class AddressCardModel
     }
 
     /**
-     * 查询名片列表
+     * 查询gid对应的名片组
      * 
      * @param string $gid
      * @param integer $uid
      * @return array
      */
-	public function selectList($gid, $uid)
+	public function selectGidAll($gid, $uid)
     {
 		return $this->_dao->fetchAll("SELECT * 
 		    FROM {$this->_name} WHERE gid = :gid AND uid = :uid;", 
@@ -96,13 +97,13 @@ class AddressCardModel
     }
 
     /**
-     * 查询记录数
+     * 查询gid对应的记录数
      * 
      * @param string $gid
      * @param integer $uid
      * @return array
      */
-	public function selectCount($gid, $uid)
+	public function selectGidCount($gid, $uid)
     {
 		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
 		    FROM {$this->_name} WHERE gid = :gid AND uid = :uid;", 
@@ -111,7 +112,7 @@ class AddressCardModel
     }
 
     /**
-     * 列表自定义查找
+     * 查找自定义条件的名片列表
      * 
      * @param string $where
      * @param string $limit
@@ -126,7 +127,7 @@ class AddressCardModel
     }
 
     /**
-     * 列表自定义统计
+     * 统计自定义条件的记录总数
      * 
      * @param string $where
      * @return integer
@@ -139,7 +140,7 @@ class AddressCardModel
     }
 
     /**
-     * 常规写入数据
+     * 插入名片记录
      * 
      * @param array $args
      * @return integer
@@ -150,7 +151,7 @@ class AddressCardModel
     }
 
     /**
-     * 常规更新数据
+     * 更新名片资料
      * 
      * @param array $args
      * @param string $cid

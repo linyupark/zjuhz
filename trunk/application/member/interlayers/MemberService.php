@@ -54,9 +54,9 @@ class MemberService extends MemberInterlayer
      * @param integer $uid
      * @return array
      */
-	public function AddressGroupSelectList($uid)
+	public function AddressGroupSelectUidAll($uid)
 	{
-		return AddressGroupLogic::init()->selectList($uid);
+		return AddressGroupLogic::init()->selectUidAll($uid);
 	}
 
     /**
@@ -66,8 +66,8 @@ class MemberService extends MemberInterlayer
      * @param integer $uid
      * @return array
      */
-	public function AddressCardSelectList($gid, $uid)
+	public function AddressCardSelectGidAll($gid, $uid)
 	{
-		return AddressCardLogic::init()->selectList($gid, $uid);
+		return AddressCardLogic::init()->selectGidAll($gid, $uid);
 	}
 }

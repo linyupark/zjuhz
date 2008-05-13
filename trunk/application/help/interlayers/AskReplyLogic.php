@@ -50,7 +50,7 @@ class AskReplyLogic extends HelpInterlayer
     }
 
     /**
-     * 回答问题
+     * 写入回复记录
      * 
      * @param array $args
      * @return integer
@@ -61,27 +61,27 @@ class AskReplyLogic extends HelpInterlayer
     }
 
     /**
-     * 回答列表
+     * 查找qid的全部回复
      * 
      * @param integer $qid
      * @param string $limit
      * @return array
      */
-	public function selectList($qid, $limit)
+	public function selectQidAll($qid, $limit)
     {
-		return $this->_AskReplyModel->selectList($qid, $limit);
+		return $this->_AskReplyModel->selectQidAll($qid, $limit);
     }
 
 	/**
-     * 我的回答
+     * 查找uid按自定义状态的全部回复
      * 
      * @param integer $uid
      * @param integer $status
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $status, $limit)
+	public function selectUidAll($uid, $status, $limit)
 	{
-		return $this->_AskReplyModel->selectMyList($uid, $status, $limit);
+		return $this->_AskReplyModel->selectUidAll($uid, $status, $limit);
 	}
 }

@@ -47,15 +47,4 @@ class SortFilter extends HelpInterlayer
     {
     	return parent::_getInstance(__CLASS__);
     }
-
-	/**
-     * 显示分类列表
-     * 
-     * @param integer $sid
-     * @return integer
-     */
-	public function sortId($sid)
-	{
-		return (int)$sid;
-	}
 }

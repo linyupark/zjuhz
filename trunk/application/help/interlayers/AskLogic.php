@@ -49,19 +49,19 @@ class AskLogic extends HelpInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
-	/**
-     * 单个会员的模块资料
+    /**
+     * 查找uid的模块资料
      * 
      * @param integer $uid
      * @return array
      */
-	public function selectRow($uid)
+	public function selectUidRow($uid)
 	{
-		return $this->_AskModel->selectRow($uid);
+		return $this->_AskModel->selectUidRow($uid);
 	}
 
-	/**
-     * 激活tbl_ask表
+    /**
+     * 插入uid的模块记录
      * 
      * @param array $args
      * @return integer
@@ -72,11 +72,11 @@ class AskLogic extends HelpInterlayer
 	}
 
 	/**
-     * 更新表资料
+     * 更新uid的模块资料
      * 
      * @param array $args
      * @param integer $uid
-     * @return array
+     * @return integer
      */
 	public function update($args, $uid)
 	{

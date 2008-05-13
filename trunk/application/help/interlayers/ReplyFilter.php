@@ -52,7 +52,7 @@ class ReplyFilter extends HelpInterlayer
      * 回答问题数据过滤
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function insert($args)
 	{
@@ -62,10 +62,10 @@ class ReplyFilter extends HelpInterlayer
 
 		// 设置过滤规则
 		$filters = array(
-		    '*' => array('StringTrim'),  
+		    '*' => array('StringTrim')
     	);
 
-    	//*设置验证规则
+    	// 设置验证规则
 		$validators = array(
 		    'uid' => array(array('Int'), 'presence' => 'required'),
 			'qid' => array(array('Int'), 'presence' => 'required'), 
@@ -74,7 +74,7 @@ class ReplyFilter extends HelpInterlayer
        	        array('Utf8Length', '2', '3000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
               	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->reply->formatError,
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->reply->formatError)),			
-            'anonym' => array('presence' => 'required'),
+            'anonym' => array('presence' => 'required')
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
@@ -88,7 +88,7 @@ class ReplyFilter extends HelpInterlayer
 			return array(
 			    'uid' => $input->getUnescaped('uid'), 'qid' => $input->getUnescaped('qid'), 
 			    'content' => $input->getUnescaped('content'), 'anonym' => $input->getUnescaped('anonym'), 
-			    'offer' => $input->getUnescaped('offer'), 
+			    'offer' => $input->getUnescaped('offer')
 			);
 		}
 

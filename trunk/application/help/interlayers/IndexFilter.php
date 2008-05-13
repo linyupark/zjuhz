@@ -59,7 +59,7 @@ class IndexFilter extends HelpInterlayer
 		return array(
 		    'uid' => $args['uid'], 
 		    'realName' => $args['realName'], 
-		    'point' => (int)$args['point'], 
+		    'point' => (int)$args['point']
 		);
 	}
 }

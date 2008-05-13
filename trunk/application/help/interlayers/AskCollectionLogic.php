@@ -50,19 +50,19 @@ class AskCollectionLogic extends HelpInterlayer
     }
 
 	/**
-     * 我的收藏
+     * 查找uid的收藏记录
      * 
      * @param integer $uid
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $limit)
+	public function selectUidAll($uid, $limit)
 	{
-		return $this->_AskCollectionModel->selectMyList($uid, $limit);
+		return $this->_AskCollectionModel->selectUidAll($uid, $limit);
 	}
 
-	/**
-     * 收藏问题
+    /**
+     * 插入收藏记录
      * 
      * @param array $args
      * @return integer

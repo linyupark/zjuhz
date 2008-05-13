@@ -54,7 +54,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 提交问题
+     * 插入问题资料
      * 
      * @param array $args
      * @return integer
@@ -68,7 +68,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 采纳答案
+     * 更新问题数据(采纳答案)
      * 
      * @param array $args
      * @return integer
@@ -82,12 +82,12 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 显示问题详情
+     * 查找qid的问题详情
      * 
      * @param integer $qid
      * @return array
      */
-	public function selectRow($qid)
+	public function selectQidRow($qid)
     {
 		return $this->_dao->fetchRow("SELECT q.*, ask.realName 
 		    FROM {$this->_name} AS q, tbl_ask AS ask 
@@ -96,14 +96,14 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 我的问题
+     * 查找uid的问题记录
      * 
      * @param integer $uid
      * @param integer $status
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $status, $limit)
+	public function selectUidAll($uid, $status, $limit)
     {
 		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.anonym, q.addTime, q.replyTime, q.reply, s.pid, s.pName 
 		    FROM tbl_ask_question AS q, tbl_ask_sort AS s 
@@ -113,7 +113,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 问题随机列表
+     * 查找随机问题或答案
      * 
      * @param integer $status
      * @param string $limit
@@ -129,7 +129,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 列表自定义搜索
+     * 搜索自定义方式的记录
      * 
      * @param string $and
      * @param string $limit
@@ -145,7 +145,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 列表自定义统计
+     * 统计自定义搜索的记录
      * 
      * @param string $and
      * @return integer
@@ -159,62 +159,19 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 全部最新
+     * 查找自定义状态的全部问题
      * 
+     * @param integer $status
+     * @param string $order
      * @param string $limit
      * @return array
      */
-	public function selectAllLatest($limit)
+	public function selectQuestionAll($status, $order, $limit)
     {
-		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, s.pid, s.pName 
+		return $this->_dao->fetchAll("SELECT q.*, s.pid, s.pName 
 		    FROM tbl_ask_question AS q, tbl_ask_sort AS s 
-		    WHERE q.status = 0 AND q.sid = s.sid 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array()
+		    WHERE q.status = :status AND q.sid = s.sid 
+		    ORDER BY {$order} LIMIT {$limit};", array('status' => $status)
 		);
-    }
-
-    /**
-     * 全部高分
-     * 
-     * @param string $limit
-     * @return array
-     */
-	public function selectAllOffer($limit)
-    {
-		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, s.pid, s.pName 
-		    FROM tbl_ask_question AS q, tbl_ask_sort AS s 
-		    WHERE q.status = 0 AND q.sid = s.sid 
-		    ORDER BY q.offer DESC LIMIT {$limit};", array()
-		);
-    }
-
-    /**
-     * 全部遗忘
-     * 
-     * @param string $limit
-     * @return array
-     */
-	public function selectAllForget($limit)
-    {
-		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, s.pid, s.pName 
-		    FROM tbl_ask_question AS q,tbl_ask_sort AS s 
-		    WHERE q.status = 0 AND q.sid = s.sid 
-		    ORDER BY q.reply ASC LIMIT {$limit};", array()
-		);
-    }
-
-    /**
-     * 全部解决
-     * 
-     * @param string $limit
-     * @return array
-     */
-	public function selectAllSolved($limit)
-    {
-		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, s.pid, s.pName 
-		    FROM tbl_ask_question AS q, tbl_ask_sort AS s 
-		    WHERE q.status = 1 AND q.sid = s.sid 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array()
-		);   	
     }
 }

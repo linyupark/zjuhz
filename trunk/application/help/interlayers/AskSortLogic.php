@@ -50,7 +50,7 @@ class AskSortLogic extends HelpInterlayer
     }
 
     /**
-     * 分类下属问题计数器
+     * 更新分类拥有的数量
      * 
      * @param array $args
      * @return integer
@@ -60,84 +60,84 @@ class AskSortLogic extends HelpInterlayer
 		return $this->_AskSortModel->callCounter($args);
     }
 
-	/**
-     * 显示分类列表
+    /**
+     * 查找全部分类
      * 
      * @return array
      */
-	public function selectList()
+	public function selectAll()
 	{
-		return $this->_AskSortModel->selectList();
+		return $this->_AskSortModel->selectAll();
 	}
 
-	/**
-     * 显示分类列表
+    /**
+     * 查找parent的子分类
      * 
      * @param integer $parent
      * @return array
      */
-	public function selectParentList($parent)
+	public function selectParentPairs($parent)
 	{
-		return $this->_AskSortModel->selectParentList($parent);
+		return $this->_AskSortModel->selectParentPairs($parent);
 	}
 
 	/**
-     * 按分类显示全部问题
+     * 查找按分类自定义状态的全部问题
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function selectSortAll($sid, $limit)
+	public function selectQuestionAll($sid, $limit)
 	{
-		return $this->_AskSortModel->selectSortAll($sid, $limit);
+		return $this->_AskSortModel->selectQuestionAll('0, 1', $sid, 'q.qid DESC', $limit);
 	}
 
 	/**
-     * 按分类显示最新求助
+     * 查找按分类自定义状态的最新求助
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function selectSortLatest($sid, $limit)
+	public function selectLatestAll($sid, $limit)
 	{
-		return $this->_AskSortModel->selectSortLatest($sid, $limit);
+		return $this->_AskSortModel->selectQuestionAll('0', $sid, 'q.qid DESC', $limit);
 	}
 
 	/**
-     * 按分类显示高分求助
+     * 查找按分类自定义状态的高分求助
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function selectSortOffer($sid, $limit)
+	public function selectOfferAll($sid, $limit)
 	{
-		return $this->_AskSortModel->selectSortOffer($sid, $limit);
+		return $this->_AskSortModel->selectQuestionAll('0', $sid, 'q.offer DESC', $limit);
 	}
 
 	/**
-     * 按分类显示被遗忘的
+     * 查找按分类自定义状态的被遗忘的
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function selectSortForget($sid, $limit)
+	public function selectForgetAll($sid, $limit)
 	{
-		return $this->_AskSortModel->selectSortForget($sid, $limit);
+		return $this->_AskSortModel->selectQuestionAll('0', $sid, 'q.reply ASC', $limit);
 	}
 
 	/**
-     * 按分类显示最近解决
+     * 查找按分类自定义状态的最近解决
      * 
      * @param integer $sid
      * @param string $limit
      * @return array
      */
-	public function selectSortSolved($sid, $limit)
+	public function selectSolvedAll($sid, $limit)
 	{
-		return $this->_AskSortModel->selectSortSolved($sid, $limit);
+		return $this->_AskSortModel->selectQuestionAll('1', $sid, 'q.qid DESC', $limit);
 	}
 }

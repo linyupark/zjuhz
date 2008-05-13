@@ -79,13 +79,13 @@ class UserLogic extends MemberInterlayer
      * @param string $username
      * @return integer
      */
-	public function selectUsernameExist($username)
+	public function selectUsernameCount($username)
 	{
-		return $this->_UserModel->selectExist('username', $username);
+		return $this->_UserModel->selectFieldCount('username', $username);
 	}
 
     /**
-     * 常规更新数据
+     * 更新会员基本资料
      * 
      * @param array $args
      * @param integer $uid
@@ -97,7 +97,7 @@ class UserLogic extends MemberInterlayer
 	}
 
     /**
-     * 修改密码
+     * 更新会员密码
      * 
      * @param array $args
      * @return integer

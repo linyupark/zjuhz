@@ -54,7 +54,7 @@ class AskReplyModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 问题回复写入
+     * 写入回复记录
      * 
      * @param array $args
      * @return integer
@@ -68,13 +68,13 @@ class AskReplyModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 按问题显示回复列表
+     * 查找qid的全部回复
      * 
      * @param integer $qid
      * @param string $limit
      * @return array
      */
-	public function selectList($qid, $limit)
+	public function selectQidAll($qid, $limit)
     {
 		return $this->_dao->fetchAll("SELECT ask.realName, r.* 
 		    FROM tbl_ask AS ask, tbl_ask_reply AS r 
@@ -84,14 +84,14 @@ class AskReplyModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 显示我的回复列表
+     * 查找uid按自定义状态的全部回复
      * 
      * @param integer $uid
      * @param integer $status
      * @param string $limit
      * @return array
      */
-	public function selectMyList($uid, $status, $limit)
+	public function selectUidAll($uid, $status, $limit)
     {
 		return $this->_dao->fetchAll("SELECT r.rid, r.uid, r.anonym, r.addTime, q.qid, q.title, q.offer, q.reply, s.pid, s.pName 
 		    FROM tbl_ask_reply AS r, tbl_ask_question AS q, tbl_ask_sort AS s 

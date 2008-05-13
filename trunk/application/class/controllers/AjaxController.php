@@ -79,12 +79,12 @@
 				if(false == Cmd::isCreater($this->_classId)) exit();  // 不是班级创建者
 				// 显示XMLRPC数据
 				$client = new Zend_XmlRpc_Client('http://xmlrpc/MemberServer.php');
-				$groups = $client->call('rpcMember.AddressGroupSelectList',array($this->_uid));
+				$groups = $client->call('rpcMember.AddressGroupSelectUidAll',array($this->_uid));
 				if(count($groups) > 0)
 				{
 					foreach ($groups as $v)
 					{
-						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectList',array($v['gid'],$this->_uid));
+						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectGidAll',array($v['gid'],$this->_uid));
 					}
 				}
 				else { $groups = null; $items = null; }

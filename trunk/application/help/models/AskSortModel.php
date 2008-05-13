@@ -54,7 +54,7 @@ class AskSortModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 分类数量更新器
+     * 更新分类拥有的数量
      * 
      * @param array $args
      * @return integer
@@ -66,22 +66,22 @@ class AskSortModel //extends Zend_Db_Table_Abstract
 	}
 
     /**
-     * 显示全部分类
+     * 查找全部分类
      * 
      * @return array
      */
-	public function selectList()
+	public function selectAll()
     {
 		return $this->_dao->fetchAll("SELECT * FROM {$this->_name};", array());
     }
 
     /**
-     * 按父层编号显示分类
+     * 查找parent的子分类
      * 
      * @param integer $parent
      * @return array
      */
-	public function selectParentList($parent)
+	public function selectParentPairs($parent)
     {
 		return $this->_dao->fetchPairs("SELECT sid, name FROM {$this->_name} 
 		    WHERE parent = :parent;", array('parent' => $parent)
@@ -89,82 +89,20 @@ class AskSortModel //extends Zend_Db_Table_Abstract
     }
 
 	/**
-     * 按分类显示全部问题
+     * 查找按分类自定义状态的全部问题
      * 
+     * @param string $status
      * @param integer $sid
+     * @param string $order
      * @param string $limit
      * @return array
      */
-	public function selectSortAll($sid, $limit)
+	public function selectQuestionAll($status, $sid, $order, $limit)
 	{
 		return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
-		    FROM tbl_ask_question AS q WHERE (q.status = 0 OR q.status = 1) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
-		);
-    }
-
-	/**
-     * 按分类显示最新求助
-     * 
-     * @param integer $sid
-     * @param string $limit
-     * @return array
-     */
-	public function selectSortLatest($sid, $limit)
-    {
-    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
-		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
-		);
-    }
-
-    /**
-     * 按分类显示高分求助
-     * 
-     * @param integer $sid
-     * @param string $limit
-     * @return array
-     */
-	public function selectSortOffer($sid, $limit)
-    {
-    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
-		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.offer DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
-		);
-    }
-
-    /**
-     * 按分类显示被遗忘的
-     * 
-     * @param integer $sid
-     * @param string $limit
-     * @return array
-     */
-	public function selectSortForget($sid, $limit)
-    {
-    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
-		    FROM tbl_ask_question AS q WHERE (q.status = 0) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.reply ASC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
-		);
-    }
-
-    /**
-     * 按分类显示最近解决
-     * 
-     * @param integer $sid
-     * @param string $limit
-     * @return array
-     */
-	public function selectSortSolved($sid, $limit)
-    {
-    	return $this->_dao->fetchAll("SELECT q.qid, q.title, q.offer, q.addTime, q.status, q.reply 
-		    FROM tbl_ask_question AS q WHERE (q.status = 1) AND q.sid IN (SELECT s.sid 
-		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent) 
-		    ORDER BY q.qid DESC LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
+		    FROM tbl_ask_question AS q WHERE (q.status IN ({$status})) AND (q.sid IN (SELECT s.sid 
+		    FROM tbl_ask_sort AS s WHERE sid = :sid OR pid = :pid OR parent = :parent)) 
+		    ORDER BY {$order} LIMIT {$limit};", array('sid' => $sid, 'pid' => $sid, 'parent' => $sid)
 		);
     }
 }

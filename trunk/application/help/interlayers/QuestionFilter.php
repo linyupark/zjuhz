@@ -52,19 +52,19 @@ class QuestionFilter extends HelpInterlayer
      * 发布问题数据过滤
      * 
      * @param array $args
-     * @return string to ajax or false or array
+     * @return boolean or array
      */
 	public function insert($args)
 	{
 		// 载入其关ZEND扩展 - ZF1.5版本需此
-		//Zend_Validate_Utf8Length
+		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
 		$filters = array(
 		    '*' => array('StringTrim'), 
 	    	'title' => 'StripTags',
-	    	'tags' => 'StripTags',
+	    	'tags' => 'StripTags'
     	);
 
     	// 设置验证规则
@@ -100,7 +100,7 @@ class QuestionFilter extends HelpInterlayer
 			    'uid' => $input->getUnescaped('uid'), 'title' => $input->getUnescaped('title'), 
 			    'content' => $input->getUnescaped('content'), 'tags' => $input->getUnescaped('tags'), 
 			    'sid' => $input->getUnescaped('sortId'), 'offer' => $input->getUnescaped('offer'), 
-			    'anonym' => $input->getUnescaped('anonym'), 
+			    'anonym' => $input->getUnescaped('anonym')
 			);
 		}
 
@@ -119,7 +119,7 @@ class QuestionFilter extends HelpInterlayer
 		    'qid' => (int)$args['qid'], 
 		    'rid' => (int)$args['rid'], 
 		    'quid' => (int)$args['quid'], 
-		    'ruid' => (int)$args['ruid'], 
+		    'ruid' => (int)$args['ruid']
 		);
 	}
 }
