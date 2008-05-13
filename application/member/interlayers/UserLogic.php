@@ -50,7 +50,7 @@ class UserLogic extends MemberInterlayer
     }
 
 	/**
-     * 会员注册
+     * 会员账号注册
      * 
      * @param array $args
      * @return integer
@@ -61,7 +61,7 @@ class UserLogic extends MemberInterlayer
 	}
 
     /**
-     * 会员登录
+     * 会员账号登录
      * 
      * @param array $args
      * @return array or boolean
@@ -74,7 +74,7 @@ class UserLogic extends MemberInterlayer
 	}
 
     /**
-     * 登录账号存在与否
+     * 查找username存在数量
      * 
      * @param string $username
      * @return integer

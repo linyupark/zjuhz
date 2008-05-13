@@ -63,7 +63,7 @@ class AddressGroupLogic extends MemberInterlayer
     }
 
     /**
-     * 主键是否存在
+     * 查找gid存在数量
      * 
      * @param string $gid
      * @return integer

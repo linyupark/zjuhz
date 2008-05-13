@@ -110,7 +110,7 @@ class AddressCardLogic extends MemberInterlayer
     }
 
     /**
-     * 名片列表自定义查找/统计
+     * 自定义查找/统计名片列表
      * 
      * @param string $type
      * @param array $args
