@@ -1,0 +1,22 @@
+<table>
+	<tr>
+		<td class="pagination" colspan="4"><?= $this->pagination ?></td>
+	</tr>
+		<?php
+			for($i=0;$i<$this->pagesize;$i++)
+			{
+				if($i%4 == 0) echo '<tr>';
+				if($this->samples[$i])
+				echo "<td><a href='/static/subjects/{$this->name}/pics/orig/{$this->samples[$i]}' class='thickbox' rel='浙江大学求是寻根'><img alt='浙江大学求是寻根照片' src='/static/subjects/{$this->name}/pics/sample/{$this->samples[$i]}' alt='{$i}' /></a></td>";
+				if($i%4 == 3) echo '</tr>';
+			}
+		?>
+	<tr>
+		<td class="pagination" colspan="4"><?= $this->pagination ?></td>
+	</tr>
+</table>
+<script type="text/javascript">
+	$(document).ready(function(){   
+  		tb_init('a.thickbox');//pass where to apply thickbox
+	});
+</script>

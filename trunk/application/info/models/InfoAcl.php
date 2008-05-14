@@ -31,12 +31,13 @@
 				$acl->add(new Zend_Acl_Resource('view'))
 				    ->add(new Zend_Acl_Resource('index'))
 				    ->add(new Zend_Acl_Resource('support'))
+				    ->add(new Zend_Acl_Resource('subject'))
 				    ->add(new Zend_Acl_Resource('login'))
 				    ->add(new Zend_Acl_Resource('logout'))
 				    ->add(new Zend_Acl_Resource('search'))
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
-				$acl->allow('guest', array('view','login','support','index','search'))
+				$acl->allow('guest', array('view','login','support','index','search','subject'))
 					->allow('member', null)
 					->deny('member', 'admin')
 				    ->allow('staff', null)

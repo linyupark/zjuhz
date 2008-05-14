@@ -27,6 +27,8 @@ ul{ list-style-position:inside }
 .loud {color:#000;}
 .strong{ font-weight:bold; }
 
+.clearfloat{ clear:both; }
+
 /* 常用背景色 */
 .bg-eee{ background:#eee }
 .bg-f5{ background:#f5f5f5 }
@@ -105,7 +107,7 @@ ul{ list-style-position:inside }
 .err_submessage{ color:#666; }
 
 /* 分页 */
-.pagination{ padding:10px 0; font-size:12px; }
+.pagination{ padding:10px 0; font-size:12px;}
 .pagination a{  display:block; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
 .pagination a:hover{ border:1px solid #ccc; }
 .pagination b{ display:block; float:left; padding:2px 5px; }
