@@ -1,3 +1,11 @@
+// 专题图片分页显示缩略图
+function album(name,page)
+{
+	$.get('/info/subject/album/of/'+name+'/p/'+page,null,function(html){
+		$('.album').html(html);
+	});
+}
+
 // 选择刷新缓存的区域
 function cacheFlush(cache_name)
 {
