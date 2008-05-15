@@ -13,7 +13,7 @@
 				发布: <?= Commons::date($this->topic['class_topic_pub_time']) ?>  
 				<?php if($this->topic['class_topic_mod_time'] != null): ?>
 				 / 最后修改: <?= Commons::date($this->topic['class_topic_mod_time']) ?> 
-				<?php endif; if($this->topic['class_topic_author'] == $this->login['uid']): ?>
+				<?php endif; if($this->topic['class_topic_author'] == $this->passport('uid')): ?>
 				<a href="/class/topic/modify?c=<?= $this->class_id ?>&tid=<?= $this->topic_id ?>" style="background:url(/static/images/icon/pencil.gif) no-repeat left center; padding:10px 5px 5px 20px;">编辑</a>
 				<?php endif; if(Cmd::isManager($this->class_id)): ?>
 				<a href="javascript:fixTopic(<?= $this->class_id.','.$this->topic_id.','.$this->topic['class_topic_up'] ?>)" style="background:url(/static/images/icon/doc_up.gif) no-repeat left center; padding:10px 5px 5px 20px;">顶置</a>
