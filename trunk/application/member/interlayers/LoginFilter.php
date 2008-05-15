@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心
+ * 校友中心
  * 控制器附属层:参数过滤操作
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
@@ -57,9 +57,7 @@ class LoginFilter extends MemberInterlayer
 	public function login($args)
 	{
 		// 设置过滤规则
-		$filters = array(
-		    '*' => array('StringTrim', 'StripTags', 'StringToLower')
-		);
+		$filters = array('*' => array('StringTrim', 'StripTags', 'StringToLower'));
 
     	// 设置验证规则
 		$validators = array(

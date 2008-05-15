@@ -10,14 +10,14 @@
 
 
 /**
- * 你问我答_XML-RPC客户端
+ * 校友互助_XML-RPC客户端
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
 class HelpClient extends HelpInterlayer
 {
 	/**
-     * 会员中心RPC调用接口
+     * 校友中心RPC调用接口
      *
      * @var object
      */
@@ -57,7 +57,7 @@ class HelpClient extends HelpInterlayer
     }
 
 	/**
-     * 更新表数据
+     * 更新校友扩展表数据
      * 
      * @param integer $uid
      * @return integer

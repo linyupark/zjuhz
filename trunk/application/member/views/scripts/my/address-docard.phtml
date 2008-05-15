@@ -7,7 +7,7 @@
 <td>
 <select name="gid" id="gid">
 <option>请选择</option>
-<?php foreach ($this->groupList as $value)  { ?>
+<?php foreach ($this->group as $value)  { ?>
 <option value="<?= $value['gid']; ?>" <?= ($this->detail['gid'] == $value['gid'] ? 'selected' : ''); ?>><?= $value['gname']; ?></option><?php } ?>
 </select></td>
 </tr>

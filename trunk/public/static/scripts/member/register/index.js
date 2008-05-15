@@ -49,8 +49,8 @@ function doregister() {
 // 账号是否可用
 function docheck() {
 	var uname = $("#uname").val();
-	if (2 <= uname.length)
-	{
+
+	if (2 <= uname.length) {
 		ajaxhint(true, "", "chkmsg");
 
 		$("#btnCheck").attr("disabled", true);

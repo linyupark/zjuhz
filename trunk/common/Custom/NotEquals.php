@@ -11,6 +11,7 @@
  */
 require_once 'Zend/Validate/Abstract.php';
 
+
 /**
  * @category   Zend_Extends
  * @package    Zend_Validate
@@ -18,13 +19,13 @@ require_once 'Zend/Validate/Abstract.php';
 class Zend_Validate_NotEquals extends Zend_Validate_Abstract
 {
 	// constants for defining what currency symbol should be displayed
-    const EQUALS = 'equals';
+    const NOT_EQUALS = 'notEquals';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
-        self::EQUALS => "'%value%' are equals",
+        self::NOT_EQUALS => "'%value%' are not equals",
     );
 
     /**
@@ -55,7 +56,7 @@ class Zend_Validate_NotEquals extends Zend_Validate_Abstract
      * Sets the input option
      *
      * @param  mixed $input
-     * @return Zend_Validate_StringEquals Provides a fluent interface
+     * @return Zend_Validate_NotEquals Provides a fluent interface
      */
     public function setInput($input)
     {
@@ -76,12 +77,12 @@ class Zend_Validate_NotEquals extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
 
-        if ($this->_input == $this->_value)
+        if ($this->_input !== $this->_value)
         {
-            $this->_error(self::EQUALS);
+            $this->_error(self::NOT_EQUALS);
             return false;
         }
 
         return true;
-    }    
+    }
 }

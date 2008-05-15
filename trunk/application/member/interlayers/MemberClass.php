@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心
+ * 校友中心
  * member子系统-通用类库
  */
 class MemberClass extends MemberInterlayer
@@ -44,18 +44,4 @@ class MemberClass extends MemberInterlayer
     {
     	return parent::_getInstance(__CLASS__);
     }
-
-    /**
-     * session内的验证码校验
-     * 
-     * @param integer $input
-     * @param integer $sess
-     * @return boolean
-     */
-	public static function checkVerifyCode($input, $sess)
-	{
-		if ($sess !== md5($input)) { exit('请正确输入验证码，应是四位纯数字。');	}
-
-		return true;
-	}
 }

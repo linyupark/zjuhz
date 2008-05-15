@@ -1,12 +1,10 @@
 ﻿<div id="ajaxloading"></div>
-<!-- 当前位置 -->
 <div id="help_position"><a href="/help/">校友互助</a> > <a href="/help/question/insert/">我要提问</a></div>
 
-<!-- 我要提问 -->
 <div class="sidebar">
     <div id="topic" class="help_on">
         <h2>我要提问 </h2>
-        <!-- 提问表单 -->
+
 	    <div id="question_insert_form">
         <form method="post" name="myform" id="myform" autocomplete="off">
 		    <table width="100%" border="0">
@@ -39,7 +37,7 @@
 			              </TR>
 		              </TBODY>
 		          </TABLE>
-				  您也可以只选择大类，如果没有合适的子类的话。			
+				  将您的问题归入恰当的分类有助于获得更多的解答。			
 		        </td>
                 <td>&nbsp;</td>
               </tr>			  
@@ -50,20 +48,20 @@
               </tr>			  
               <tr>
                 <td>是否匿名：</td>
-                <td><input tabindex="8" type="radio" name="anonym" value="Y" />
-                  是
-                    <input tabindex="9" name="anonym" type="radio" value="N" checked="checked" />
-                    否</td>
+                <td><label for="anonym_y"><input id="anonym_y" tabindex="8" type="radio" name="anonym" value="Y" />
+                  是</label>
+                    <label for="anonym_n"><input id="anonym_n" name="anonym" type="radio" value="N" checked="checked" />
+                    否</label></td>
                 <td>&nbsp;</td>
               </tr>			  
               <tr>
                 <td>验证码：</td>
-                <td><input tabindex="10" type="text" name="vcode" id="vcode" class="verify" value="" maxlength="4" />&nbsp;<span id="putVerifyImg"></span></td>
+                <td><input tabindex="9" type="text" name="vcode" id="vcode" class="verify" value="" maxlength="4" />&nbsp;<span id="putVerifyImg"></span></td>
                 <td>&nbsp;</td>
               </tr>			  
               <tr>
                 <td></td>
-                <td><input tabindex="11" type="submit" name="btnSubmit" id="btnSubmit" class="help_btn_medium" value="提交问题" /></td>
+                <td><input tabindex="10" type="submit" name="btnQuestion" id="btnQuestion" class="help_btn_medium" value="提交问题" /></td>
                 <td></td>
               </tr>
               <tr>
@@ -72,14 +70,13 @@
                 <td></td>
               </tr>			  
             </table>
-            <INPUT type="hidden" name="sortId" id="sortId" value="0">
+            <input type="hidden" name="sortId" id="sortId" value="0">
 		    <input type="hidden" name="isPutVerifyImg" id="isPutVerifyImg" value="show" />			
         </form>        
 	    </div>
     </div>
 </div>
 
-<!-- 类似问题 -->
 <div class="sidebar">
     <table class="rightside_dot">
         <tr>

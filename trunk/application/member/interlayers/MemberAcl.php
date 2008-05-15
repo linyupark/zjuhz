@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心
+ * 校友中心
  * member子系统-资源访问列表定义及控制类
  */
 class MemberAcl extends Zend_Controller_Plugin_Abstract

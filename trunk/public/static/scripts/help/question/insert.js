@@ -10,34 +10,36 @@ $(function() {
 		putVerifyImg();
     });
 
-    $("#btnSubmit").click( function() {
+    $("#offer").focus( function() {
+		putVerifyImg();
+    });
+
+    $("#myform").submit( function() {
 		question_insert();
+		return false;
     });
 });
 
 // 提交问题
 function question_insert() {
 	ajaxloading(true);
-	$("#btnSubmit").attr("disabled", true);
+	$("#btnQuestion").attr("disabled", true);
 	var formdata = $("#myform").fastSerialize();
     formdata.push({name:'content', value:editor.data()});
-	$.ajax( {
-		type   : "POST",
-        url    : "/help/question/doinsert/",
-        data   : formdata,
-	    success: function(msg) {
-			if ("message" == msg) {
-				popup_message("/help/index/message/");
-				goToUrl("/help/", 3000);
-			}
-			else {
-				$("#btnSubmit").attr("disabled", false);
-				getVerifyCode();
-				ajaxhint(true,msg);
-				ajaxloading();
-			}
 
+	$.post("/help/question/doinsert/", formdata, function(msg) {
+        ajaxloading();
+		$("#btnQuestion").attr("disabled", false);
+
+		if ("message" == msg) {
+			ajaxhint(false);
+			popup_message("/help/index/message/");
+			goToUrl("/help/", 2000);
+			return false;
 		}
+
+		getVerifyCode();
+		ajaxhint(true, msg);
 	});
 
 	return false;

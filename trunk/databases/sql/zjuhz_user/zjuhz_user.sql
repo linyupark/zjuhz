@@ -161,25 +161,25 @@ create table zjuhz_user.tbl_user_ext
 type = MYISAM;
 
 --
--- Êı¾İ¿â: 'zjuhz_user'
+-- æ•°æ®åº“: 'zjuhz_user'
 --
 
 --
--- µ¼³ö±íÖĞµÄÊı¾İ 'tbl_user'
+-- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® 'tbl_user'
 --
 
 INSERT INTO tbl_user (uid, username, password, realName, nickname, everName, sex, birthday, hometown_p, hometown_c, hometown_a, location_p, location_c, location_a, lastModi, regIp, regTime, ikey, iuid) VALUES
-(1, 'zjuhz', 'e10adc3949ba59abbe56e057f20f883e', 'Ğ£ÓÑ»á', 'Ğ£ÓÑ»á', NULL, 'ÄĞ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '2008-04-29 09:16:55', NULL, 0);
+(1, 'zjuhz', 'e10adc3949ba59abbe56e057f20f883e', 'æ ¡å‹ä¼š', 'æ ¡å‹ä¼š', NULL, 'ç”·', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '2008-04-29 09:16:55', NULL, 0);
 
 --
--- µ¼³ö±íÖĞµÄÊı¾İ 'tbl_user_contact'
+-- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® 'tbl_user_contact'
 --
 
 INSERT INTO tbl_user_contact (uid, mobile, eMail, qq, msn, address, postcode, other, lastModi) VALUES
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 --
--- µ¼³ö±íÖĞµÄÊı¾İ 'tbl_user_ext'
+-- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® 'tbl_user_ext'
 --
 
 INSERT INTO tbl_user_ext (uid, status, lastIp, lastLogin, editNick, initAsk, initClass) VALUES

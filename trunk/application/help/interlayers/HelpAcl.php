@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * help子系统-资源访问列表定义及控制类
  */
 class HelpAcl extends Zend_Controller_Plugin_Abstract

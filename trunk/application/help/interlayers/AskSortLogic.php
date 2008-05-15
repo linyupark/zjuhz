@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -53,11 +53,11 @@ class AskSortLogic extends HelpInterlayer
      * 更新分类拥有的数量
      * 
      * @param array $args
-     * @return integer
+     * @return void
      */
 	public function counter($args)
     {
-		return $this->_AskSortModel->callCounter($args);
+		$this->_AskSortModel->callCounter($args);
     }
 
     /**

@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-tbl_ask_question
+ * 校友互助-tbl_ask_question
  * 表级操作类,含单表读/写/改等方法
  */
 class AskQuestionModel //extends Zend_Db_Table_Abstract
@@ -139,7 +139,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     {
 		return $this->_dao->fetchAll("SELECT q.*, a.realName, s.pid, s.pName 
 		    FROM {$this->_name} AS q, tbl_ask AS a, tbl_ask_sort AS s 
-		    WHERE q.status IN (0,1) AND q.uid = a.uid AND q.sid IN (s.sid, s.parent, s.pid) {$and} 
+		    WHERE q.status IN (0, 1) AND q.uid = a.uid AND q.sid IN (s.sid, s.parent, s.pid) {$and} 
 		    ORDER BY q.addTime DESC LIMIT {$limit};"
 		);
     }
@@ -154,7 +154,7 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
     {
 		return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) 
 		    FROM {$this->_name} AS q, tbl_ask AS a, tbl_ask_sort AS s 
-		    WHERE q.status IN (0,1) AND q.uid = a.uid AND q.sid IN (s.sid, s.parent, s.pid) {$and};" 
+		    WHERE q.status IN (0, 1) AND q.uid = a.uid AND q.sid IN (s.sid, s.parent, s.pid) {$and};" 
 		);
     }
 
@@ -172,6 +172,20 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
 		    FROM tbl_ask_question AS q, tbl_ask_sort AS s 
 		    WHERE q.status = :status AND q.sid = s.sid 
 		    ORDER BY {$order} LIMIT {$limit};", array('status' => $status)
+		);
+    }
+
+	/**
+     * 更新qid的问题资料
+     * 
+     * @param array $args
+     * @param integer $qid
+     * @return integer
+     */
+	public function update($args, $qid)
+    {
+		return $this->_dao->update($this->_name, $args, 
+		    $this->_dao->quoteInto("{$this->_primary} = ?", $qid)
 		);
     }
 }

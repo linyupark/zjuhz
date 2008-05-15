@@ -10,10 +10,17 @@
 
 
 /**
- * 你问我答-收藏帖子
+ * 校友互助-收藏功能
  */
 class CollectionController extends Zend_Controller_Action
 {
+	/**
+     * 公用Session
+     *
+     * @var object
+     */
+	private $_sessCommon = null;
+
 	/**
      * 项目Session
      *
@@ -22,13 +29,23 @@ class CollectionController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
+     * sess内的会员编号
+     * 
+     * @var integer
+     */
+	private $_sessUid = 0;
+
+	/**
      * 初始化
      * 
      * @return void
      */
 	public function init()
 	{
+		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
+
+		$this->_sessUid = $this->_sessCommon->login['uid'];
 	}
 
 	/**
@@ -44,19 +61,18 @@ class CollectionController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
-			$postArgs['uid'] = Zend_Registry::get('sessCommon')->login['uid'];
+			$postArgs['uid'] = $this->_sessUid;
 
 			if ($insArgs = CollectionFilter::init()->insert($postArgs))
 			{
 				if (AskCollectionLogic::init()->insert($insArgs))
 				{
 					// 更新会员已收藏总数
-					AskLogic::init()->update(array(
-					    'collection' => new Zend_Db_Expr('collection + 1')), $insArgs['uid']
-					);
-
-					// sessHelp内的各值对应变化
-					$this->_sessHelp->login['collection']++;
+					if (AskLogic::init()->update(array('collection' => 
+					    new Zend_Db_Expr('collection + 1')), $insArgs['uid']))
+					{
+					    $this->_sessHelp->login['collection']++; // sess内的各值对应变化
+					}
 
 					echo 'alert'; // 请求ajax弹出提示
 				}

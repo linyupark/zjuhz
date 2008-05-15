@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-退出登录
+ * 校友中心-退出登录
  */
 class LogoutController extends Zend_Controller_Action
 {

@@ -10,13 +10,14 @@
 
 
 /**
+ * 校友互助
  * 位于控制层和模型层间的夹层,是控制器访问模型层唯一入口.
  * index.php <-> controllers {<-> interlayers(Filters|Logics|...)} <-> models * 
  */
 abstract class HelpInterlayer
 {
 	/**
-     * 问答模块配置
+     * 互助模块配置
      *
      * @var object
      */

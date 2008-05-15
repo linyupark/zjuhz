@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心
+ * 校友中心
  * 控制器附属层:参数过滤操作
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
@@ -56,9 +56,10 @@ class RegisterFilter extends MemberInterlayer
      */
 	public function register($args)
 	{
-		// 载入相关ZEND扩展 - ZF1.5版本需此
 		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
+		// Zend_Validate_NotEquals
+		Zend_Loader::loadFile('NotEquals.php');
 
 		// 设置过滤规则
 		$filters = array(
@@ -71,7 +72,7 @@ class RegisterFilter extends MemberInterlayer
           	'ikey' => array(
                 array('StringLength', '10', '10'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->ikeyError, 
-                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)),		
+                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), 	
 		    'uname' => array(
 		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError)), 
@@ -86,8 +87,11 @@ class RegisterFilter extends MemberInterlayer
                 array('Utf8Length', '2', '6'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realNameError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realNameError)), 
-            'sex' => array('presence' => 'required',), 
-            'ip' => array('presence' => 'required')
+            'sex' => array('presence' => 'required'), 
+            'ip' => array('presence' => 'required'), 
+            'scode' => array(
+       	        array('NotEquals', md5($args['vcode'])), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniHelp->hint->verifyError))
         );
 
         /*$options = array(
@@ -123,14 +127,13 @@ class RegisterFilter extends MemberInterlayer
 	public function check($args)
 	{
 		// 设置过滤规则
-		$filters = array(
-		    'uname' => array('StringTrim', 'StringToLower')
-		);
+		$filters = array('uname' => array('StringTrim', 'StringToLower'));
 
     	// 设置验证规则
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 
+		   	    'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError))
         );
 

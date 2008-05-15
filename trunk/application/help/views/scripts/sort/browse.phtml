@@ -1,14 +1,14 @@
 <div id="help_position">
-<a href="/help/" title="首页">首页</a> > <?= $this->path; ?>
+<a href="/help/" title="首页">首页</a> > <?= $this->sortPath; ?>
 </div>
 
 <div class="sidebar">
 <div class="sub_category">
-<h2><?= $this->sort['name']; ?>(<?= $this->total; ?>)</h2>
+<h2><?= $this->sortDetail['name']; ?>(<?= $this->total; ?>)</h2>
 <table width="100%">
-<?php foreach ($this->map as $key => $value) { $i++ ; if ($i % 4 == 1) { echo '<tr>'; } ?>
+<?php foreach ($this->sortMap as $key => $value) { $i++ ; if ($i % 4 == 1) { echo '<tr>'; } ?>
 <td width="25%">
-<?php if ($this->sort['sid'] != $value['sid']) { ?>
+<?php if ($this->sortDetail['sid'] != $value['sid']) { ?>
 <a href="/help/sort/browse/sid/<?= $value['sid']; ?>/"><?= $value['name']; ?>(<?php if ('latest' == $this->type || 'offer' == $this->type || 'forget' == $this->type) { echo $value['question']-$value['solved']-$value['closed']-$value['overtime']; } elseif ('solved' == $this->type) { echo $value['solved']; } else { echo $value['question']-$value['closed']-$value['overtime']; } ?>)</a>
 <?php } else { echo $value['name']; } ?>
 </td>
@@ -17,11 +17,11 @@
 </div>
 
 <div id="help_tab_btn">
-<a href="/help/sort/browse/type/all/sid/<?= $this->sort['sid']; ?>/">全部问题</a>
-<a href="/help/sort/browse/type/latest/sid/<?= $this->sort['sid']; ?>/">最新问题</a>
-<a href="/help/sort/browse/type/offer/sid/<?= $this->sort['sid']; ?>/">高分求助</a>
-<a href="/help/sort/browse/type/forget/sid/<?= $this->sort['sid']; ?>/">被遗忘的</a>
-<a href="/help/sort/browse/type/solved/sid/<?= $this->sort['sid']; ?>/">最近解决</a>
+<a href="/help/sort/browse/type/all/sid/<?= $this->sortDetail['sid']; ?>/">全部问题</a>
+<a href="/help/sort/browse/type/latest/sid/<?= $this->sortDetail['sid']; ?>/">最新问题</a>
+<a href="/help/sort/browse/type/offer/sid/<?= $this->sortDetail['sid']; ?>/">高分求助</a>
+<a href="/help/sort/browse/type/forget/sid/<?= $this->sortDetail['sid']; ?>/">被遗忘的</a>
+<a href="/help/sort/browse/type/solved/sid/<?= $this->sortDetail['sid']; ?>/">最近解决</a>
 </div>
 
 <?php if ($this->total > 0) { ?>
@@ -32,7 +32,7 @@
 <th class="txtc p5 quiet" width="8%">回复数</th>
 <th class="txtc p5 quiet" width="10%">提问时间</th>
 </tr>
-<?php foreach ($this->list as $value) { ?>
+<?php foreach ($this->question as $value) { ?>
 <tr>
 <td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> <?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span> </td>
 <td class="status"><img src="/static/images/icon/icn_status_<?= $value['status']; ?>.gif"></td>

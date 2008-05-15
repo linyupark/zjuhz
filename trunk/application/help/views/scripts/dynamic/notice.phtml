@@ -2,6 +2,6 @@
 <div class="help_notice" start="2">
 <strong><img src="/static/images/icon/sound_none.gif" /></strong>
 <?php if ($this->rand) { $i=0; foreach ($this->rand as $value) { ?>
-<a href="/help/question/detail/qid/<?= $value['qid']; ?>/" class="nt" <?php if($i==0) { ?>style="display:block"<?php } ?>>* <?= $value['title']; ?></a>
+<a href="/help/question/detail/qid/<?= $value['qid']; ?>/" class="nt" <?php if(0==$i) { ?>style="display:block"<?php } ?>>* <?= $value['title']; ?></a>
 <?php $i++; } } ?>
 </div>

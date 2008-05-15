@@ -38,8 +38,7 @@ function docard() {
 }
 
 // 组修改之前
-function dogroupmodiBefore(gid, gname)
-{
+function dogroupmodiBefore(gid, gname) {
 	if ("重命名" == $("#modi"+gid).html()) {
 		$("#gname").val(gname);
 		$("#gid").val(gid);
@@ -78,8 +77,7 @@ function dogroup() {
 }
 
 // 组删除之前
-function dogroupdelBefore(gid)
-{
+function dogroupdelBefore(gid) {
 	var popup = new Popup({ contentType:3, isReloadOnClose:false, width:340, height:105});
 	popup.setContent("title", "校友会提示您");
 	popup.setContent("confirmCon", "您确定要删除该组吗？(请先确认已无名片)");
