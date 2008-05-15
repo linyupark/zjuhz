@@ -29,6 +29,9 @@ class IndexController extends Zend_Controller_Action
 		// 获取会员所申请加入班级的信息
 		$this->view->applies = ApplyModel::fetch($this->view->passport('uid'));
 		
+		// 获取收到班级邀请信息
+		$this->view->invites = InviteModel::fetchAll($this->view->passport('uid'));
+		
 		// 分配班级数据
 		$this->view->year = $year;
 		$this->view->college = $college;

@@ -13,12 +13,11 @@
 			
 			$this->view->class_id = $this->getRequest()->getParam('c');
 			$this->view->class_base_info = DbModel::getClassInfo($this->view->class_id);
-			$this->view->login = Zend_Registry::get('sessCommon')->login;
 		}
 		
 		function indexAction()
 		{
-			
+			$this->view->headTitle('邀请校友加入');
 		}
 	}
 

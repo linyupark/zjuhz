@@ -1,9 +1,8 @@
-<?php 
-if(count($this->applies) == 0): ?>
-<p style="border-top:1px solid #ccc; margin-top:10px">
-<?php else: ?>
+
 <ul><b>我的申请：</b><br />
-<?php foreach ($this->applies as $k => $v): ?>
+<?php if(count($this->applies) == 0): ?>
+无
+<?php else: foreach ($this->applies as $v): ?>
 <li><a href="/class/home?c=(<?= $v['class_id'] ?>)"><?= $v['class_name'] ?></a></li>
 <?php endforeach; ?>
 </ul>

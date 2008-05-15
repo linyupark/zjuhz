@@ -1,0 +1,33 @@
+<div class="container"">
+<h2 class="quiet f14">邀请内容</h2>
+<hr />
+<table style="width:100%">
+<tr>
+	<td width="20%">来自：</td>
+	<td class="txtl f14"><a href="<?= $this->invite['class_member_id'] ?>"><?= $this->invite['realName'] ?></a></td>
+</tr>
+
+<tr>
+	<td>班级学院：</td>
+	<td class="txtl  f14">
+		<a href="/class/home?c=<?= $this->invite['class_id'] ?>">
+			<?= $this->invite['class_name'].'('.$this->invite['class_college'] ?>)
+		</a>
+	</td>
+</tr>
+
+<tr>
+	<td>备注：</td>
+	<td class="txtl f14"><?= stripslashes($this->invite['class_invite_memo']) ?></td>
+</tr>
+
+<tr>
+	<td></td>
+	<td class="txtr">
+		<input type="button" onclick="" class="btn" value="接受" />
+		<input type="button" onclick="" class="btn" value="拒绝" />
+	</td>
+</tr>
+
+</table>
+</div>
