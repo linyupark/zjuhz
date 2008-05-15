@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-tbl_ask_reply
+ * 校友互助-tbl_ask_reply
  * 表级操作类,含单表读/写/改等方法
  */
 class AskReplyModel //extends Zend_Db_Table_Abstract
@@ -54,20 +54,6 @@ class AskReplyModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 写入回复记录
-     * 
-     * @param array $args
-     * @return integer
-     */
-	public function callInsert($args)
-    {
-		$this->_dao->prepare('CALL sp_reply_insert(:qid, :uid, :content, :anonym, :offer, @rid);')
-		           ->execute($args);
-
-		return $this->_dao->query('SELECT @rid AS rid')->fetchColumn();
-    }
-
-    /**
      * 查找qid的全部回复
      * 
      * @param integer $qid
@@ -98,5 +84,16 @@ class AskReplyModel //extends Zend_Db_Table_Abstract
 		    WHERE (r.uid = :uid) AND (r.status = 1 OR r.status = :status) AND r.qid = q.qid AND q.sid = s.sid 
 		    ORDER BY r.addTime DESC LIMIT {$limit};", array('uid' => $uid, 'status' => $status)
 		);
+    }
+
+    /**
+     * 插入问题的回复记录
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function insert($args)
+    {
+		return $this->_dao->insert($this->_name, $args);
     }
 }

@@ -128,3 +128,8 @@ function dologin() {
 
 	return false;
 }
+
+// 载入时默认焦点
+function onLoadToInputFocus(objname){
+	getObject(objname).focus();
+}

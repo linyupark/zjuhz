@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-我的账号
+ * 校友中心-我的账号
  */
 class MyController extends Zend_Controller_Action
 {
@@ -82,9 +82,13 @@ class MyController extends Zend_Controller_Action
 		switch ($type)
 		{
 			case 'contact': // 联系信息
+			{
     			break;
+			}
 			default:        // 基本信息
+			{
     			$type = 'basic';
+			}
 		}
 
 		$this->view->ctrl = 'user';
@@ -115,36 +119,36 @@ class MyController extends Zend_Controller_Action
 				$cid    = $this->getRequest()->getParam('cid');
 				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
 
-				$this->view->detail = $detail;
-                $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : Commons::getRandomStr($this->_sessUid, 10));
+                $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : 
+                    Commons::getRandomStr($this->_sessUid, 10));
+                $this->view->detail = $detail;
 
     			break;
 			}
 			default:       // 名片管理
 			{
+    			$type = 'card';
+
 				$getArgs = $this->getRequest()->getParams();
 				$getArgs['uid'] = $this->_sessUid;
 
 				$findArgs = MyFilter::init()->find($getArgs);
-                $logic    = AddressCardLogic::init(); // 名片数据库操作类
+                $logic    = AddressCardLogic::init();
+				$paging   = new Paging(array('total' => $logic->selectFind('count', $findArgs, ''), 'perpage' => 20));
 
-				$p = new Paging(array('total' => $logic->selectFind('count', $findArgs, ''), 'perpage' => 20));
-			    $this->view->cardList = $logic->selectFind('result', $findArgs, $p->limit());
-			    $this->view->paging   = $p->show();
-
+			    $this->view->find   = $this->_iniMember->find->addressCard->toArray();
+			    $this->view->status = $this->_iniMember->status->invite->toArray();
 			    $this->view->gid    = $findArgs['gid'];
 			    $this->view->field  = $findArgs['field'];
                 $this->view->wd     = $findArgs['wd'];
-			    $this->view->find   = $this->_iniMember->find->addressCard->toArray();
-			    $this->view->status = $this->_iniMember->status->invite->toArray();
-
-    			$type = 'card';
+			    $this->view->paging = $paging->show();
+                $this->view->card   = $logic->selectFind('result', $findArgs, $paging->limit());
 			}
 		}
 
-		$this->view->groupList = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
-		$this->view->ctrl = 'address';
-		$this->view->type = $type;
+		$this->view->ctrl  = 'address';
+		$this->view->type  = $type;
+		$this->view->group = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
 	}
 
 	/**
@@ -160,8 +164,10 @@ class MyController extends Zend_Controller_Action
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
 		{
-			default:        // 修改密码
+			default: // 修改密码
+			{
     			$type = 'passwd';
+			}
 		}
 
 		$this->view->ctrl = 'account';
@@ -169,7 +175,7 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
-     * 个人资料-基础信息
+     * 我的资料-基础信息
      * 
      * @return void
      */
@@ -198,7 +204,7 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
-     * 个人资料-联络信息
+     * 我的资料-联络信息
      * 
      * @return void
      */
@@ -245,8 +251,7 @@ class MyController extends Zend_Controller_Action
 			if ($cardArgs = MyFilter::init()->card($postArgs))
 			{
 				$this->_sessMember->message = (AddressCardLogic::init()->insertOrUpdate($cardArgs) ? 
-				    $this->_iniMember->hint->insertSuccess : $this->_iniMember->hint->insertFailure 
-				);
+				    $this->_iniMember->hint->insertSuccess : $this->_iniMember->hint->insertFailure);
 
 				echo 'message';
 			}
@@ -272,8 +277,7 @@ class MyController extends Zend_Controller_Action
 			if ($groupArgs = MyFilter::init()->group($postArgs))
 			{
 				$this->_sessMember->message = ((AddressGroupLogic::init()->insertOrUpdate($groupArgs)) ? 
-				    $this->_iniMember->hint->insertSuccess : $this->_iniMember->hint->insertFailure 
-				);
+				    $this->_iniMember->hint->insertSuccess : $this->_iniMember->hint->insertFailure);
 
 				echo 'message';
 			}
@@ -297,13 +301,10 @@ class MyController extends Zend_Controller_Action
 
 			if ($groupdelArgs = MyFilter::init()->groupdel($postArgs))
 			{
-				// 只有当组内未存有名片时才能删除
+				// 仅当组内未存有名片才能删除
 				if (!AddressCardLogic::init()->selectGidCount($groupdelArgs['gid'], $groupdelArgs['uid']))
 			    {
-			    	if (AddressGroupLogic::init()->delete($groupdelArgs))
-				    {
-				    	echo 'hide';
-				    }
+			    	echo (AddressGroupLogic::init()->delete($groupdelArgs) ? 'hide' : '');
 			    }
 			}
 		}
@@ -322,38 +323,32 @@ class MyController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
-			$postArgs['uid'] = $this->_sessUid;
+			$postArgs['uid']   = $this->_sessUid;
+			$postArgs['scode'] = $this->_sessCommon->verify;
 
 			if ($passwdArgs = MyFilter::init()->passwd($postArgs))
 			{
-				if (MemberClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
+				if ($passwdArgs['oldpassword'] != $passwdArgs['password'])
 				{
-					if ($passwdArgs['oldpassword'] != $passwdArgs['password'])
-					{
-						if ($passwdArgs['oldpassword'] === $this->_sessCommon->login['password'])
-				        {
-				        	if (UserLogic::init()->updatePassword($passwdArgs))
-				    	    {
-				    	    	Commons::modiSess('common', 'login', $passwdArgs); // 同步Session
-				    		    $this->_sessMember->message = $this->_iniMember->hint->updatePswdSuccess;
-				    	    }
-				    	    else
-				    	    {
-				    		    $this->_sessMember->message = $this->_iniMember->hint->updatePswdFailure;
-				    	    }
-				        }
-				        else
-				        {
-					        $this->_sessMember->message = $this->_iniMember->hint->updatePswdFailure;
-				        }
-					}
-					else
-					{
-						$this->_sessMember->message = $this->_iniMember->hint->oldPswdEqualNewPswd;
-					}
+					// 设定默认错误信息 可免else语句
+					$this->_sessMember->message = $this->_iniMember->hint->updatePswdFailure;
 
-    				echo 'message'; // 请求ajax给出提示
+					if ($passwdArgs['oldpassword'] === $this->_sessCommon->login['password'])
+				    {
+				       	if (UserLogic::init()->updatePassword($passwdArgs))
+				   	    {
+				   	    	Commons::modiSess('common', 'login', $passwdArgs); // 同步Session
+
+				   		    $this->_sessMember->message = $this->_iniMember->hint->updatePswdSuccess;
+				   	    }
+				    }
 				}
+				else
+				{
+					$this->_sessMember->message = $this->_iniMember->hint->oldPswdEqualNewPswd;
+				}
+
+    			echo 'message'; // 请求ajax给出提示
 			}
 		}
 	}

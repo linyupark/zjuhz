@@ -10,7 +10,7 @@
 
 
 /**
- * 错误处理
+ * 校友互助-错误处理
  */
 class ErrorController extends Zend_Controller_Action
 {
@@ -34,16 +34,15 @@ class ErrorController extends Zend_Controller_Action
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-            	
+
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-            	
+
             default:
 
                 // Log the exception:
                 $exception = $errors->exception;
                 $log = new Zend_Log(new Zend_Log_Writer_Stream('HelpAppException.log'));
                 $log->debug($exception->getMessage()."\n".$exception->getTraceAsString()."\n");
-                break;
         }
 
         $this->_redirect('/');

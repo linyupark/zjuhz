@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-我的互助
+ * 校友互助-我的互助
  */
 class MyController extends Zend_Controller_Action
 {
@@ -29,7 +29,7 @@ class MyController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
-     * 问答模块配置
+     * 互助模块配置
      *
      * @var object
      */
@@ -66,7 +66,7 @@ class MyController extends Zend_Controller_Action
      */
 	public function indexAction()
 	{
-		// 刷新模块登录session
+		// 刷新模块登录sess
 		$this->_sessHelp->login = AskLogic::init()->selectUidRow($this->_sessUid);
 
 		$this->_forward('question');
@@ -88,19 +88,21 @@ class MyController extends Zend_Controller_Action
 			case 'solved':
 			{
     			$status = 1;
+
     			break;
 			}
 			default:
 			{
+				$type = 'unsolved';
+
     			$status = 0;
-    			$type   = 'unsolved';
-    			
 			}
 		}
 
         $total    = $this->_sessHelp->login[$type];
 		$paging	  = new Paging(array('total' => $total, 'perpage' => 20));
-		$question = ($total > 0 ? AskQuestionLogic::init()->selectUidAll($this->_sessUid, $status, $paging->limit()) : '');
+		$question = ($total > 0 ? AskQuestionLogic::init()->selectUidAll(
+		    $this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl     = 'question';
 		$this->view->type     = $type;
@@ -125,18 +127,21 @@ class MyController extends Zend_Controller_Action
 			case 'answer':
 			{
     			$status = 1;
+
     			break;
 			}
 			default:
 			{
+				$type = 'reply';
+
     			$status = 0;
-    			$type   = 'reply';
 			}
 		}
 
         $total  = $this->_sessHelp->login[$type];
 		$paging = new Paging(array('total' => $total, 'perpage' => 20));
-		$reply  = ($total > 0 ? AskReplyLogic::init()->selectUidAll($this->_sessUid, $status, $paging->limit()) : '');
+		$reply  = ($total > 0 ? AskReplyLogic::init()->selectUidAll(
+		    $this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl   = 'reply';
 		$this->view->type   = $type;
@@ -170,12 +175,13 @@ class MyController extends Zend_Controller_Action
 
         $total      = $this->_sessHelp->login['collection'];
 		$paging     = new Paging(array('total' => $total, 'perpage' => 20));
-		$collection = ($total > 0 ? AskCollectionLogic::init()->selectUidAll($this->_sessUid, $paging->limit()) : '');;
+		$collection = ($total > 0 ? AskCollectionLogic::init()->selectUidAll(
+		    $this->_sessUid, $paging->limit()) : '');
 
 		$this->view->ctrl       = 'collection';
 		$this->view->type       = $type;
 		$this->view->total      = $total;
-		$this->view->paging     = $paging->show();		
+		$this->view->paging     = $paging->show();
         $this->view->collection = $collection;
 	}
 }

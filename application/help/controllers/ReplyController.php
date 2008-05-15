@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-回复帖子
+ * 校友互助-问题回复
  */
 class ReplyController extends Zend_Controller_Action
 {
@@ -29,7 +29,7 @@ class ReplyController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
-     * 问答模块配置
+     * 互助模块配置
      *
      * @var object
      */
@@ -37,7 +37,7 @@ class ReplyController extends Zend_Controller_Action
 
 	/**
      * sess内的会员编号
-     *
+     * 
      * @var integer
      */
 	private $_sessUid = 0;
@@ -69,34 +69,33 @@ class ReplyController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
             $postArgs = $this->getRequest()->getPost();
-
-			$point = $this->_sessHelp->login['point'];
-			$offer = $this->_iniHelp->point->reply; // 回复奖励
-			$after = $point + $offer; // 当前分加奖励分
-
+			$postArgs['scode'] = $this->_sessCommon->verify;
 			$postArgs['uid']   = $this->_sessUid;
-			$postArgs['offer'] = $offer;
+
+			$offer = (int)$this->_iniHelp->point->reply; // 回复奖励
 
 			if ($insArgs = ReplyFilter::init()->insert($postArgs))
 			{
-				if (HelpClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
+				if (AskReplyLogic::init()->insert($insArgs))
 				{
-					if (AskReplyLogic::init()->insert($insArgs))
+					// 更新会员回复总数和总积分
+					if (AskLogic::init()->update(array('reply' => new Zend_Db_Expr('reply + 1'), 
+					    'point' => new Zend_Db_Expr("point + {$offer}")), $insArgs['uid']))
 					{
-						// sessHelp内的各值对应变化
-						$this->_sessHelp->login['point'] = $after; // 可用积分
-						$this->_sessHelp->login['reply']++; // 总回答数
-
-						// 积分日志操作?
-						if ($offer > 0)
-						{
-							PointLogLogic::init()->insert(array(
-							    'uid' => $this->_sessUid, 'point' => $offer, 'type' => 3, 
-							));
-						}
-
-						echo 'reload'; // 请求ajax重载页面
+						// sess同步
+						$this->_sessHelp->login['reply']++;
+						$this->_sessHelp->login['point'] = $this->_sessHelp->login['point'] + $offer;
 					}
+
+					// 更新问题回复时间及回复总数
+                    AskQuestionLogic::init()->update(array('reply' => new Zend_Db_Expr('reply + 1'), 
+					    'replyTime' => $_SERVER['REQUEST_TIME']), $insArgs['qid']);
+
+					// 积分日志
+					(0 < $offer ? PointLogLogic::init()->insert(array(
+					        'uid' => $this->_sessUid, 'point' => $offer, 'type' => 3)) : '');
+
+					echo 'reload'; // 请求ajax重载页面
 				}
 			}
 		}

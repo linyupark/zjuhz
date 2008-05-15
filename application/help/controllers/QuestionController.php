@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-问题帖子
+ * 校友互助-问题帖子
  */
 class QuestionController extends Zend_Controller_Action
 {
@@ -29,7 +29,7 @@ class QuestionController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
-     * 问答模块配置
+     * 互助模块配置
      *
      * @var object
      */
@@ -53,7 +53,7 @@ class QuestionController extends Zend_Controller_Action
 		$this->_sessHelp   = Zend_Registry::get('sessHelp');
 		$this->_iniHelp    = Zend_Registry::get('iniHelp');
 
-		$this->_sessUid    = $this->_sessCommon->login['uid'];
+		$this->_sessUid = $this->_sessCommon->login['uid'];
 
 		$this->view->sessCommon = $this->_sessCommon;
 		$this->view->sessHelp   = $this->_sessHelp;
@@ -94,44 +94,33 @@ class QuestionController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
-
-			$point   = $this->_sessHelp->login['point'];
-			$offer   = $postArgs['offer'];
-			$after   = $point - $offer;
-			$counter = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
-			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'question');
-
+			$postArgs['point'] = $this->_sessHelp->login['point'];
 			$postArgs['uid']   = $this->_sessUid;
-			$postArgs['point'] = $point;
+			$postArgs['scode'] = $this->_sessCommon->verify;
+
+			$counter = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'],  
+			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'question');
 
 			if ($insArgs = QuestionFilter::init()->insert($postArgs))
 			{
-				if (HelpClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
+				if (AskQuestionLogic::init()->insert($insArgs))
 				{
-					if (AskQuestionLogic::init()->insert($insArgs))
-					{
-						// sessHelp内的各值对应变化
-						$this->_sessHelp->login['point'] = $after; // 可用积分
-						$this->_sessHelp->login['question']++; // 总问题数
-						$this->_sessHelp->login['unsolved']++; // 未解决数
+					// sess内的各值对应变化
+					$this->_sessHelp->login['point'] = $postArgs['point'] - $insArgs['offer']; // 可用积分
+					$this->_sessHelp->login['question']++; // 总问题数
+					$this->_sessHelp->login['unsolved']++; // 未解决数
 
-						// 分类数量更新
-						AskSortLogic::init()->counter($counter);
+					// 分类数量更新
+					AskSortLogic::init()->counter($counter);
 
-						// 积分日志操作?
-						if ($offer > 0)
-						{
-							// 数据已过滤可直接生成
-							PointLogLogic::init()->insert(array('uid' => $insArgs['uid'], 
-							    'point' => "-{$insArgs['offer']}", 'type' => 2, 
-							));
-						}
+					// 积分日志
+					(0 < $insArgs['offer'] ? PointLogLogic::init()->insert(array(
+					    'uid' => $insArgs['uid'], 'point' => "-{$insArgs['offer']}", 'type' => 2)) : '');
 
-						// 写入信息提示
-						$this->_sessHelp->message = $this->_iniHelp->hint->question->insertSuccess;
+					// 写入信息提示
+                    $this->_sessHelp->message = $this->_iniHelp->hint->questionSuccess;
 
-						echo 'message'; // 请求ajax给出提示
-					}
+					echo 'message'; // 请求ajax给出提示
 				}
 			}
 		}
@@ -144,20 +133,21 @@ class QuestionController extends Zend_Controller_Action
      */
 	public function doacceptAction()
 	{
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
-		$this->_helper->layout->disableLayout(); // 禁用layout
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
 
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
-			$postArgs['quid'] = $this->_sessUid;
+			$postArgs['quid']  = $this->_sessUid;
+			$postArgs['scode'] = $this->_sessCommon->verify;
 
 			$counter  = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
-			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'solved', );			
+			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'solved');
 
 			if ($insArgs = QuestionFilter::init()->accept($postArgs))
 			{
-				if (($offer = AskQuestionLogic::init()->accept($insArgs)) >= 0)
+				if ((0 <= ($offer = AskQuestionLogic::init()->accept($insArgs))))
 				{
 					// sessHelp内的各值对应变化
 					$this->_sessHelp->login['unsolved']--;
@@ -166,17 +156,12 @@ class QuestionController extends Zend_Controller_Action
 					// 分类数量更新
 					AskSortLogic::init()->counter($counter);
 
-					// 积分日志操作?
-					if ($offer > 0)
-					{
-						// 数据已过滤可直接生成
-						PointLogLogic::init()->insert(array('uid' => $insArgs['ruid'], 
-						    'point' => $offer, 'type' => 4, 
-						));
-					}
+					// 积分日志
+					(0 < $offer ? PointLogLogic::init()->insert(array(
+					    'uid' => $insArgs['ruid'], 'point' => $offer, 'type' => 4)) : '');
 
 					// 写入信息提示
-					$this->_sessHelp->message = $this->_iniHelp->hint->reply->acceptSuccess;
+					$this->_sessHelp->message = $this->_iniHelp->hint->replyAccept;
 
 					echo 'message'; // 请求ajax给出提示
 				}
@@ -191,28 +176,25 @@ class QuestionController extends Zend_Controller_Action
      */
 	public function detailAction()
 	{
-		$qid    = (int)$this->getRequest()->getParam('qid');
-		$detail = AskQuestionLogic::init()->selectQidRow($qid);
-		if ($qid == $detail['qid'])
-		{
-			$all        = AskSortLogic::init()->selectAll(); // 取出全部分类
-			$sortDetail = HelpClass::getSortDetail($all, $detail['sid']); // 当前分类详情
-			$total  = $detail['reply'];
-			$paging	= new Paging(array('total' => $total, 'perpage' => 10));
+		$qid      = $this->getRequest()->getParam('qid');
+		$question = AskQuestionLogic::init()->selectQidRow($qid);
 
-			//print_r(HelpClass::getSortGenealogy($all, $detail['sid']));exit;
-			$this->view->total  = $total;
-			$this->view->paging = $paging->show();
-			$this->view->geneal = HelpClass::getSortGeneal($all, $detail['sid']);
-			$this->view->detail = $detail;
-			$this->view->reply  = AskReplyLogic::init()->selectQidAll($qid, $paging->limit());
-			$this->view->path   = HelpClass::getSortPath($all, $sortDetail['sid']);
-			$this->view->headTitle($detail['title']); // 载入标题
-			$this->view->headScript()->appendFile('/static/scripts/help/question/detail.js'); // 载入JS脚本
-		}
-		else
-		{
-			$this->_forward('index', 'Index');
-		}
+		($qid != $question['qid'] ? $this->_redirect('/', array('exit')) : '');
+
+		$sortAll    = AskSortLogic::init()->selectAll(); // 取出全部分类
+		$sortDetail = HelpClass::getSortDetail($sortAll, $question['sid']); // 当前分类详情
+
+		$total  = $question['reply']; // 问题含有的回复数
+		$paging	= new Paging(array('total' => $total, 'perpage' => 10));
+		$reply  = (0 < $total ? AskReplyLogic::init()->selectQidAll($qid, $paging->limit()) : '');
+
+		$this->view->headTitle($question['title']);
+		$this->view->headScript()->appendFile('/static/scripts/help/question/detail.js');
+		$this->view->geneal   = HelpClass::getSortGeneal($sortAll, $question['sid']);
+		$this->view->path     = HelpClass::getSortPath($sortAll, $sortDetail['sid']);
+		$this->view->question = $question;
+		$this->view->total    = $total;
+		$this->view->paging   = $paging->show();
+		$this->view->reply    = $reply;
 	}
 }

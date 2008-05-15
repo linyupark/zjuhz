@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-tbl_ask_collection
+ * 校友互助-tbl_ask_collection
  * 表级操作类,含单表读/写/改等方法
  */
 class AskCollectionModel //extends Zend_Db_Table_Abstract

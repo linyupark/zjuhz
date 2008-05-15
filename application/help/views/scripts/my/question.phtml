@@ -11,7 +11,7 @@
 <a href="/help/my/question/type/unsolved/">待解决的问题</a>
 <a href="/help/my/question/type/solved/">已解决的问题</a>
 </div>
-<?php if ($this->total > 0) { ?>
+<?php if (0 < $this->total) { ?>
 <div class="control_action">
 <table class="control_list">
 <tr>
@@ -22,17 +22,17 @@
 </tr>
 <?php foreach ($this->question as $value) { ?>
 <tr>
-<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/" target="_blank" class="cat">[<?= $value['pName']; ?>]</a> <a href="/help/question/detail/qid/<?= $value['qid']; ?>/" target="_blank"><?= $value['title']; ?></a> <?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="我给出的悬赏"><?php echo $value['offer']; } ?></span></td>
+<td><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/" target="_blank" class="cat">[<?= $value['pName']; ?>]</a> <a href="/help/question/detail/qid/<?= $value['qid']; ?>/" target="_blank"><?= $value['title']; ?></a> <?php if (0 < $value['offer']) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="我给出的悬赏"><?php echo $value['offer']; } ?></span></td>
 <td width="7%" align="center"><?= $value['reply']; ?></td>
 <td width="9%" align="center"><?= (('Y' === $value['anonym']) ? '是' : '否'); ?></td>
-<td width="14%" align="center"><?= (($value['reply'] > 0) ? date('m-d H:i', $value['replyTime']) : ''); ?></td>
+<td width="14%" align="center"><?= ((0 < $value['reply']) ? date('m-d H:i', $value['replyTime']) : ''); ?></td>
 </tr>
 <?php } ?>
 </table>
 </div>
 <?php } ?>
 </div>
-<?php if ($this->total > 0) { echo $this->paging; } ?>
+<?php if (0 < $this->total) { echo $this->paging; } ?>
 </div>
 
 <script language="javascript" type="text/javascript">var ctrl="<?= $this->ctrl; ?>";var type="<?= $this->type; ?>";</script>

@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-通讯录-组
+ * 校友中心-通讯录-组
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -58,8 +58,7 @@ class AddressGroupLogic extends MemberInterlayer
 	public function insertOrUpdate($args)
     {    	
     	return ($this->selectGidCount($args['gid']) ? 
-    	    $this->update($args, $args['gid']) : $this->insert($args)
-    	);
+    	    $this->update($args, $args['gid']) : $this->insert($args));
     }
 
     /**

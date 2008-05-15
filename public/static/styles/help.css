@@ -80,9 +80,9 @@ a.help_link:hover,a.help_rule:hover{ background-color:#EFF7FF; border:1px solid 
 /* 工具条 */
 .toolbar{ float:right; margin-top:-28px; padding-right:10px; font-size:12px; }
 .toolbar a{text-decoration:none;}
-.collection{ background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px;cursor:hand; }
-.report{ background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px;cursor:hand; }
-.accept{ background:url(/static/images/icon/lightbulb.gif) no-repeat left center; padding-left:20px;cursor:hand; }
+.collection{ background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:20px; }
+.report{ background:url(/static/images/icon/bomb.gif) no-repeat left center; padding-left:20px; }
+.accept{ background:url(/static/images/icon/lightbulb.gif) no-repeat left center; padding-left:20px; }
 
 /* 提交答案表 */
 #reply_form{ margin:0 0 0 15px; color:#666; width:650px; }

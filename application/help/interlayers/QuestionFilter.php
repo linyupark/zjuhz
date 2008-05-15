@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * 控制器附属层:参数过滤操作
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
@@ -56,9 +56,10 @@ class QuestionFilter extends HelpInterlayer
      */
 	public function insert($args)
 	{
-		// 载入其关ZEND扩展 - ZF1.5版本需此
 		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
+		// Zend_Validate_NotEquals
+		Zend_Loader::loadFile('NotEquals.php');
 
 		// 设置过滤规则
 		$filters = array(
@@ -72,20 +73,23 @@ class QuestionFilter extends HelpInterlayer
 		    'uid' => array(array('Int'), 'presence' => 'required'),
 		    'title' => array(
 		   	    array('Utf8Length', '4', '25'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-		   	        Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->title->formatError,
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->title->formatError)), 
+		   	        Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->titleError,
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->titleError)), 
           	'content' => array(
        	        array('Utf8Length', '2', '3000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-              	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->content->formatError,
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->content->formatError)),
+              	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->contentError,
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->contentError)),
             'tags' => array('allowEmpty' => true),
 			'sortId' => array(
 			    array('Between', '2', '999'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniHelp->hint->sort->formatError)),
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniHelp->hint->sortError)),
 			'offer' => array(
 			    array('Between', '0', $args['point']), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniHelp->hint->offer->notBetween)),
-            'anonym' => array('presence' => 'required')
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniHelp->hint->offerNotBtw)),
+            'anonym' => array('presence' => 'required'), 
+            'scode' => array(
+       	        array('NotEquals', md5($args['vcode'])), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniHelp->hint->verifyError)) 
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);

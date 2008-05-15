@@ -8,10 +8,14 @@
  * @version    Id:KindEditor.php
  */
 
+
+/**
+ * 校友互助-视图工具
+ */
 class Zend_View_Helper_KindEditor
 {
 	/**
-     * 载入KindEditor编辑器
+     * KindEditor编辑器Js文件
      * 
      * @param string $width
      * @param string $height

@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-通讯录-名片
+ * 校友中心-通讯录-名片
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -58,8 +58,7 @@ class AddressCardLogic extends MemberInterlayer
 	public function insertOrUpdate($args)
     {
     	return ($this->selectCidCount($args['cid']) ? 
-    	    $this->update($args, $args['cid']) : $this->insert($args)
-    	);
+    	    $this->update($args, $args['cid']) : $this->insert($args));
     }
 
     /**
@@ -125,8 +124,7 @@ class AddressCardLogic extends MemberInterlayer
 			? " AND c.{$args['field']} LIKE '%{$args['wd']}%'" : ''); // 字段范围及关键字词
 
         return ('count' == $type ? $this->_AddressCardModel->selectFindCount($where) : 
-            $this->_AddressCardModel->selectFindList($where, $limit)
-        );
+            $this->_AddressCardModel->selectFindList($where, $limit));
     }
 
     /**

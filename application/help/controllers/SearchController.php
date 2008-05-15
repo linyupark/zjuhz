@@ -10,7 +10,7 @@
 
 
 /**
- * 问题/答案/标签等搜索
+ * 校友互助-综合搜索
  */
 class SearchController extends Zend_Controller_Action
 {
@@ -49,24 +49,25 @@ class SearchController extends Zend_Controller_Action
 		$this->view->sessHelp   = $this->_sessHelp;
 
     	$this->_wd = SearchFilter::init()->keywords($this->getRequest()->getParam('wd'));
+    	(empty($this->_wd) ? $this->_redirect($_SERVER['HTTP_REFERER']) : ''); // 若未输关键字词返回上页
     }
 
     /**
-     * 搜索
+     * 搜索显示
      * 
      * @return void
      */
     public function indexAction()
     {
-    	$logic = AskQuestionLogic::init();
+    	$logic  = AskQuestionLogic::init();
 
     	$total  = $logic->selectSearch('count', $this->_wd, '');
     	$paging = new Paging(array('total' => $total, 'perpage' => 10));
 
-		$this->view->wd         = $this->_wd;
-        $this->view->total      = $total;
-    	$this->view->paging     = $paging->show();
-		$this->view->searchList = $logic->selectSearch('result', $this->_wd, $paging->limit());
-		$this->view->headTitle($this->_wd);
+    	$this->view->headTitle($this->_wd);
+		$this->view->wd     = $this->_wd;
+        $this->view->total  = $total;
+    	$this->view->paging = $paging->show();
+		$this->view->search = $logic->selectSearch('result', $this->_wd, $paging->limit());
     }
 }

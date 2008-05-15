@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-登录控制
+ * 校友中心-登录控制
  */
 class LoginController extends Zend_Controller_Action
 {
@@ -39,8 +39,7 @@ class LoginController extends Zend_Controller_Action
     public function indexAction()
     {
     	('member' !== $this->_sessCommon->role ? '' : 
-    	    $this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'), array('exit'))
-    	);
+    	    $this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'), array('exit')));
 
     	$this->view->headTitle(Zend_Registry::get('iniMember')->head->titleLogin);
     	$this->view->uname    = $_COOKIE['zjuhz_member']['alive']; // 记住账号
@@ -72,8 +71,7 @@ class LoginController extends Zend_Controller_Action
 
 					// 记住账号
 					((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
-					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/')
-					);
+					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 
 					echo 'redirect'; // 请求ajax跳转
 				}

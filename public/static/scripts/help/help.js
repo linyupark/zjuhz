@@ -1,12 +1,16 @@
-﻿function showNotice() {
+﻿// 互助随机问题广播
+function showNotice() {
 	var notice_num = parseInt($(".help_notice a").length);
 	var show_num = parseInt($(".help_notice").attr("start"));
+
 	$(".help_notice a").hide();
 	$(".help_notice a:eq("+(show_num-1)+")").show("slow");
 	show_num++;
+
 	if(show_num > notice_num) {
 		show_num = 1;
 	}
+
 	$(".help_notice").attr("start", show_num);
 }
 
@@ -17,11 +21,10 @@ function getVerifyCode() {
 }
 
 // 跳转
-function goToHelp(name)
-{
+function goToHelp(name) {
 	var url = "/help/";
 
-	if (name == "question_insert") {
+	if ("question_insert" == name) {
 		url = url + "question/insert/title/" + encodeURIComponent($("#wd").val());
 	}
 
@@ -45,11 +48,9 @@ function helpRank() {
 // 收藏问题
 function collection_insert(qid) {
 
-	if (qid > 0) {
+	if (0 < qid) {
 		$.post("/help/collection/doinsert/", { qid: qid }, function(msg) {
-			alert('已收藏成功！'); $("#collection").hide() }
+			alert("已收藏成功！"); $("#collection").hide() }
 		); 
 	}
-
-    return false;
 }

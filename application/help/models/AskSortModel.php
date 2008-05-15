@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-tbl_ask_sort
+ * 校友互助-tbl_ask_sort
  * 表级操作类,含单表读/写/改等方法
  */
 class AskSortModel //extends Zend_Db_Table_Abstract
@@ -57,12 +57,12 @@ class AskSortModel //extends Zend_Db_Table_Abstract
      * 更新分类拥有的数量
      * 
      * @param array $args
-     * @return integer
+     * @return void
      */
 	public function callCounter($args)
 	{
-		return $this->_dao->prepare('CALL sp_sort_counter(:sort0, :sort1, :sort2, :filed);')
-		                  ->execute($args);
+		$this->_dao->prepare('CALL sp_sort_counter(:sort0, :sort1, :sort2, :filed);')
+		           ->execute($args);
 	}
 
     /**

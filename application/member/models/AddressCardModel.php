@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-tbl_user_address_card
+ * 校友中心-tbl_user_address_card
  */
 class AddressCardModel
 {

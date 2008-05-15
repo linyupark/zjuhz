@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-主控程序
+ * 校友中心-主控程序
  */
 class IndexController extends Zend_Controller_Action
 {
@@ -30,7 +30,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function verifyAction()
     {
-		$this->_helper->viewRenderer->setNoRender(); // 禁用自动渲染视图
+		$this->_helper->viewRenderer->setNoRender(); // 禁用渲染view
 		$this->_helper->layout->disableLayout(); // 禁用layout
 
 		// $_SESSION['common']['verify']
@@ -50,7 +50,7 @@ class IndexController extends Zend_Controller_Action
     }
 
     /**
-     * 校友-首页
+     * 校友中心-首页
      * 
      * @return void
      */

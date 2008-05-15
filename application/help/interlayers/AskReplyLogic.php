@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -50,17 +50,6 @@ class AskReplyLogic extends HelpInterlayer
     }
 
     /**
-     * 写入回复记录
-     * 
-     * @param array $args
-     * @return integer
-     */
-	public function insert($args)
-    {
-		return $this->_AskReplyModel->callInsert($args);
-    }
-
-    /**
      * 查找qid的全部回复
      * 
      * @param integer $qid
@@ -84,4 +73,15 @@ class AskReplyLogic extends HelpInterlayer
 	{
 		return $this->_AskReplyModel->selectUidAll($uid, $status, $limit);
 	}
+
+    /**
+     * 插入问题的回复记录
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function insert($args)
+    {
+		return $this->_AskReplyModel->insert($args);
+    }
 }

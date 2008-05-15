@@ -10,6 +10,7 @@
 
 
 /**
+ * 校友中心
  * 位于控制层和模型层间的夹层,是控制器访问模型层唯一入口.
  * index.php <-> controllers {<-> interlayers(Filters|Logics|...)} <-> models * 
  */

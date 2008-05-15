@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-注册流程
+ * 校友中心-注册流程
  */
 class RegisterController extends Zend_Controller_Action
 {
@@ -97,16 +97,14 @@ class RegisterController extends Zend_Controller_Action
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
-			$postArgs['ip'] = Commons::getIp();
+			$postArgs['ip']    = Commons::getIp();
+			$postArgs['scode'] = $this->_sessCommon->verify;
 
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				if (MemberClass::checkVerifyCode($postArgs['vcode'], $this->_sessCommon->verify))
-				{
-					$this->_sessMember->register = ((UserLogic::init()->register($regArgs)) ? $regArgs : '');
+				$this->_sessMember->register = (UserLogic::init()->register($regArgs) ? $regArgs : '');
 
-				    echo 'redirect'; // 请求ajax跳转
-				}
+				echo 'redirect'; // 请求ajax跳转
 			}
 		}
 	}
@@ -127,7 +125,8 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($username = RegisterFilter::init()->check($postArgs))
 			{
-				echo ((UserLogic::init()->selectUsernameCount($username)) ? $this->_iniMember->hint->usernameIsExist : 
+				echo (UserLogic::init()->selectUsernameCount($username) ? 
+				    $this->_iniMember->hint->usernameIsExist : 
 				    $this->_iniMember->hint->usernameNotExist
 				);
 			}

@@ -10,7 +10,7 @@
 
 
 /**
- * 会员中心-tbl_user_ext
+ * 校友中心-tbl_user_ext
  * 表级操作类,含单表读/写/改等方法
  */
 class UserExtModel

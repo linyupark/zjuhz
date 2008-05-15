@@ -7,7 +7,7 @@
 
 <table class="help_set">
 
-    <!-- 最新 -->
+    <!-- 最新问题 -->
 	<tr>
 	<th class="txtl">最新问题</th>
 	<th class="txtr" colspan="2"></th>
@@ -17,12 +17,12 @@
 	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
-	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	<?php if (0 < $value['offer']) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
 
-	<!-- 高分 -->
+	<!-- 高分求助 -->
 	<tr>
 	<th class="txtl">高分求助</th>
 	<th class="txtr" colspan="2"></th>
@@ -32,12 +32,11 @@
 	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
-	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	<?php if (0 < $value['offer']) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
 
-	<!-- 遗忘 -->
 	<tr>
 	<th class="txtl">被遗忘的</th>
 	<th class="txtr" colspan="2"></th>
@@ -47,12 +46,11 @@
 	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
-	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	<?php if (0 < $value['offer']) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>
 
-	<!-- 解决 -->
 	<tr>
 	<th class="txtl">最近解决</th>
 	<th class="txtr" colspan="2"></th>
@@ -62,7 +60,7 @@
 	<td class="cat"><a href="/help/sort/browse/sid/<?= $value['pid']; ?>/">[<?= $value['pName']; ?>]</a></td>
 	<td>
 	<a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= $value['title']; ?></a> 
-	<?php if ($value['offer'] > 0 ) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
+	<?php if (0 < $value['offer']) { ?><span class="f9"><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?php echo $value['offer']; } ?></span>	
 	</td>
 	</tr>
     <?php } ?>

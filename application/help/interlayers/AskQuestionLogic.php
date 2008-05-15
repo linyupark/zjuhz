@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * 控制器附属层:数据库操作入口
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
@@ -117,7 +117,7 @@ class AskQuestionLogic extends HelpInterlayer
 	public function selectSearch($type, $arg, $limit)
     {
     	$and = (!empty($arg) ? 
-            "AND (q.title LIKE '%{$arg}%' OR q.content LIKE '%{$arg}%' OR q.tags LIKE '%{$arg}%')" : '');
+            "AND (q.title LIKE '%{$arg}%' OR q.content LIKE '%{$arg}%')" : '');
 
         return ('count' == $type ? 
             $this->_AskQuestionModel->selectSearchCount($and) : 
@@ -167,5 +167,17 @@ class AskQuestionLogic extends HelpInterlayer
 	public function selectSolvedAll($limit)
 	{
 		return $this->_AskQuestionModel->selectQuestionAll(1, 'q.qid DESC', $limit);
+	}
+
+	/**
+     * 更新qid的问题资料
+     * 
+     * @param array $args
+     * @param integer $qid
+     * @return integer
+     */
+	public function update($args, $qid)
+	{
+		return $this->_AskQuestionModel->update($args, $qid);
 	}
 }

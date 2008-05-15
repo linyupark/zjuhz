@@ -5,11 +5,10 @@
     $("#vcode").focus( function() {
 		putVerifyImg();
     });
+
 	$("#myform").submit( function() {
-		return false;
-    } );
-    $("#btnReply").click( function() {
 		reply_insert();
+		return false;
     });
 });
 
@@ -19,22 +18,19 @@ function reply_insert() {
 	$("#btnReply").attr("disabled", true);
 	var formdata = $("#myform").fastSerialize();
     formdata.push({name:'content', value:editor.data()});
-	$.ajax( {
-		type   : "POST",
-        url    : "/help/reply/doinsert/",
-        data   : formdata,
-	    success: function(msg) {
-			if (msg == "reload") {
-				window.location.reload();
-			}
-			else {
-				$("#btnReply").attr("disabled", false);
-				getVerifyCode();
-				ajaxhint(true,msg);
-				ajaxloading();
-			}
 
+	$.post("/help/reply/doinsert/", formdata, function(msg) {
+        ajaxloading();
+		$("#btnReply").attr("disabled", false);
+
+		if ("reload" == msg) {
+			ajaxhint(false);
+			window.location.reload();
+			return false;
 		}
+
+		getVerifyCode();
+		ajaxhint(true, msg);
 	});
 
 	return false;
@@ -44,13 +40,12 @@ function reply_insert() {
 function question_accept(qid, rid, uid)
 {
 	var pop = new Popup({ contentType:3, isReloadOnClose:false, width:340, height:80 });
-	pop.setContent("title", "采纳为答案");
+	pop.setContent("title", "采纳为最佳答案");
 	pop.setContent("confirmCon", "您确定将此回答采纳为最佳答案吗？");
 	pop.setContent("callBack", doaccept);
 	pop.setContent("parameter", {qid:qid, rid:rid, uid:uid});
 	pop.build();
 	pop.show();
-	return false;
 }
 
 function doaccept(param)
@@ -62,7 +57,7 @@ function doaccept(param)
 	$.post("/help/question/doaccept/", { 
 		qid:param["qid"], rid:param["rid"], ruid:param["uid"], sort0:sort0, sort1:sort1, sort2:sort2}, 
 			function(msg) { //alert(msg);
-				if (msg == 'message') { popup_message("/help/index/message/"); }
+				if ('message' == msg) { popup_message("/help/index/message/"); }
 				goToUrl("reload", 3000);
 	});
 }

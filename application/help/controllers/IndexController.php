@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答-主控程序
+ * 校友互助-主控程序
  */
 class IndexController extends Zend_Controller_Action
 {
@@ -29,7 +29,7 @@ class IndexController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
-     * 问答模块配置
+     * 互助模块配置
      *
      * @var object
      */
@@ -92,13 +92,12 @@ class IndexController extends Zend_Controller_Action
 			{
 				if (AskLogic::init()->insert($actArgs))
 				{
-               		$this->_sessCommon->login['initAsk'] = 'Y';
                		HelpClient::init()->UserExtUpdate($actArgs['uid']); // 通知更新
+               		$this->_sessCommon->login['initAsk'] = 'Y';
 
-					// 写入积分日志
-					PointLogLogic::init()->insert(array(
-					    'uid' => $actArgs['uid'], 'point' => $actArgs['point'], 'type' => 1, 
-					));
+					// 积分日志
+					PointLogLogic::init()->insert(array('uid' => $actArgs['uid'], 
+					    'point' => $actArgs['point'], 'type' => 1));
 				}
 			}
 		}
@@ -131,7 +130,7 @@ class IndexController extends Zend_Controller_Action
 		$this->entryAction(); // 子系统登录
 
 		$logic = AskQuestionLogic::init();
-		$this->view->rand   = AskQuestionLogic::init()->selectRandQuestion(5); // 随机
+		$this->view->rand   = AskQuestionLogic::init()->selectRandQuestion(5); // 随机问题
 		$this->view->latest = $logic->selectLatestAll(12); // 最新问题
 		$this->view->offer  = $logic->selectOfferAll(12);  // 高分问题
 		$this->view->forget = $logic->selectForgetAll(12); // 被遗忘的

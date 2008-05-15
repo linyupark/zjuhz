@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * 控制器附属层:参数过滤操作
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
@@ -56,25 +56,26 @@ class ReplyFilter extends HelpInterlayer
      */
 	public function insert($args)
 	{
-		// 载入其关ZEND扩展 - ZF1.5版本需此
 		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
+		// Zend_Validate_NotEquals
+		Zend_Loader::loadFile('NotEquals.php');
 
 		// 设置过滤规则
-		$filters = array(
-		    '*' => array('StringTrim')
-    	);
+		$filters = array('*' => array('StringTrim'));
 
     	// 设置验证规则
 		$validators = array(
-		    'uid' => array(array('Int'), 'presence' => 'required'),
+		    'uid' => array(array('Int'), 'presence' => 'required'), 
 			'qid' => array(array('Int'), 'presence' => 'required'), 
-			'offer' => array(array('Int'), 'presence' => 'required'), 
           	'content' => array(
        	        array('Utf8Length', '2', '3000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-              	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->reply->formatError,
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->reply->formatError)),			
-            'anonym' => array('presence' => 'required')
+              	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniHelp->hint->replyError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniHelp->hint->replyError)), 
+            'anonym' => array('presence' => 'required'), 
+            'scode' => array(
+       	        array('NotEquals', md5($args['vcode'])), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniHelp->hint->verifyError))
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
@@ -87,8 +88,7 @@ class ReplyFilter extends HelpInterlayer
 		{
 			return array(
 			    'uid' => $input->getUnescaped('uid'), 'qid' => $input->getUnescaped('qid'), 
-			    'content' => $input->getUnescaped('content'), 'anonym' => $input->getUnescaped('anonym'), 
-			    'offer' => $input->getUnescaped('offer')
+			    'content' => $input->getUnescaped('content'), 'anonym' => $input->getUnescaped('anonym')
 			);
 		}
 

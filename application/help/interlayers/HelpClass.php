@@ -10,7 +10,7 @@
 
 
 /**
- * 你问我答
+ * 校友互助
  * help子系统-通用类库
  */
 class HelpClass extends HelpInterlayer
@@ -44,20 +44,6 @@ class HelpClass extends HelpInterlayer
     {
     	return parent::_getInstance(__CLASS__);
     }
-
-    /**
-     * session内的验证码校验
-     * 
-     * @param integer $input
-     * @param integer $sess
-     * @return boolean
-     */
-	public static function checkVerifyCode($input, $sess)
-	{
-		if ($sess !== md5($input)) { exit('请正确输入验证码，应是四位纯数字。');	}
-
-		return true;
-	}
 
     /**
      * 获取当前分类路线图
