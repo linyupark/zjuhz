@@ -181,7 +181,7 @@ class Paging
 		  */
 		function show()
 		{
-			$pagestr = '<div class="pagingnavi" id="lopage">有<span class="num">'.$this->total.'</span>条记录';
+			$pagestr = '<div class="paging" id="paging">有<span class="num">'.$this->total.'</span>条记录';
 			$pagestr.= '&nbsp;&nbsp;&nbsp;共<span class="num">'.$this->_totalPage.'</span>页';
 			
 			if ($this->_totalPage > 1) //只有大1页时才显示分页按钮

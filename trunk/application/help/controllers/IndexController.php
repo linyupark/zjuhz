@@ -104,19 +104,6 @@ class IndexController extends Zend_Controller_Action
 	}
 
 	/**
-     * 模块使用时先登录
-     * 
-     * @return void
-     */
-	public function entryAction()
-	{
-		if ('member' === $this->_sessCommon->role && !$this->_sessHelp->login)
-		{
-			$this->_sessHelp->login = AskLogic::init()->selectUidRow($this->_sessCommon->login['uid']);
-		}
-	}
-
-	/**
      * 你问我答首页
      * 
      * @return void
@@ -127,7 +114,6 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headScript()->appendFile('/static/scripts/help/index/index.js');
 
 		$this->activateAction(); // 首次使用激活
-		$this->entryAction(); // 子系统登录
 
 		$logic = AskQuestionLogic::init();
 		$this->view->rand   = AskQuestionLogic::init()->selectRandQuestion(5); // 随机问题
