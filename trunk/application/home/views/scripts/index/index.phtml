@@ -5,7 +5,7 @@
 <div id="login_form">
 <p class="account">
 登陆账号:<br />
-<input tabindex="1" name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
+<input value="<?= $this->uname ?>" tabindex="1" name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
 </p>
 <p class="password">
 密码: (<a href="">忘记了?</a>)<br />
@@ -13,7 +13,7 @@
 </p>
 <p>
 <input name="rememberme" type="hidden" value="0" />
-<label for="auto_login"><input tabindex="3" name="rememberme" id="auto_login" type="checkbox" value="1" /> 记住我的登录账号</label>
+<label for="alive"><input tabindex="3" id="alive" type="checkbox" checked="checked" value="0" name="alive" /> 记住我的登录账号</label>
 </p>
 <br />
 <table>
