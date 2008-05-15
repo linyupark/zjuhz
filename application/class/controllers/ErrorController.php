@@ -38,6 +38,6 @@ class ErrorController extends Zend_Controller_Action
     
     function reloginAction()
     {
-    	
+    	$this->view->uname = $_COOKIE['zjuhz_member']['alive']; // 记住账号
     }
 }
