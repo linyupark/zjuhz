@@ -57,6 +57,14 @@ class QuestionController extends Zend_Controller_Action
 
 		$this->view->sessCommon = $this->_sessCommon;
 		$this->view->sessHelp   = $this->_sessHelp;
+
+		// 若未激活则转至首页
+		(('member' === $this->_sessCommon->role && 'N' === $this->_sessCommon->login['initAsk']) ? 
+		    $this->_redirect('/', array('exit')) : '');
+		
+		// 子系统登录
+		$this->_sessHelp->login = ('member' === $this->_sessCommon->role && !$this->_sessHelp->login ? 
+		    AskLogic::init()->selectUidRow($this->_sessCommon->login['uid']) : $this->_sessHelp->login);
 	}
 
 	/**

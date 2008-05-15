@@ -10,7 +10,6 @@
 		<th width="70%">有  <?= $this->total; ?> 项符合 <?= $this->wd; ?> 的搜索结果</td>
 		<th width="10%">问题状态</td>
 		<th width="10%">积分悬赏</td>
-		<th width="10%">&nbsp;</td>
 	</tr>
 
 	<?php foreach ($this->search as $value) { ?>
@@ -18,7 +17,6 @@
 	<td><a href="/help/question/detail/qid/<?= $value['qid']; ?>/"><?= Commons::highlight($this->wd, $value['title']); ?></a></td>
 	<td><img src="/static/images/icon/icn_status_<?= $value['status']; ?>.gif"></td>
 	<td><span class="f9"><?php if (0 < $value['offer']) { ?><img src="/static/images/icon/icn_offer.gif" title="积分悬赏"><?= $value['offer']; } ?></span></td>
-	<td><a class="collection" id="collection" title="收藏该问题" onclick="javascript:collection_insert(<?= $value['qid']; ?>);">收藏</a></td>
 	</tr>
 	<!--
 	<tr>
