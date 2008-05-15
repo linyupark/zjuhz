@@ -1,0 +1,10 @@
+
+<ul><b>收到以下班级邀请：</b><br />
+<?php 
+if(count($this->invites) == 0): ?>
+无
+<?php else: foreach ($this->invites as $v): ?>
+<li><a href='javascript:inviteView(<?= $v['class_invite_id'] ?>)'><?= $v['class_name'] ?></a></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>

@@ -1,0 +1,19 @@
+<?php if(false == $this->users): ?>
+<p class="quiet pud10">在已注册校友中未找到符合的..</p>
+<script>$('input[name="realname"]').select()</script>
+<?php else: ?>
+<table class="class_list" style="width:100%; margin-left:0">
+  <tr>
+    <th>姓名</th>
+    <th>性别</th>
+    <th></th>
+  </tr>
+  <?php foreach ($this->users as $v): ?>
+  <tr>
+  	<td><?= $v['realName'] ?></td>
+  	<td><?= $v['sex'] ?></td>
+  	<td><a href="javascript:invite(<?= $v['uid'].','.$this->class_id ?>)">邀请</a></td>
+  </tr>
+  <?php endforeach; ?>
+</table>
+<?php endif; ?>

@@ -12,6 +12,90 @@
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
+		/* 邀请相关 ////////////////////////////////////////////////////////// */
+		
+		# 查看邀请
+		function inviteviewAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$invite_id = (int)$request->getPost('invite_id');
+				$this->view->invite = InviteModel::fetchRow($invite_id);
+				$this->render('invite-view');
+			}
+		}
+		
+		# 发出邀请
+		function invitesendAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
+				$from = (int)$request->getPost('from');
+				$call = (int)$request->getPost('call');
+				$memo = $request->getPost('invite_memo');
+				if($from == 0 || $call == 0)
+				{
+					// 弹出错误
+					$this->view->err_tip = '发送人和接受人发生异常';
+					$this->render('error');
+				}
+				else 
+				{
+					$db = Zend_Registry::get('dbClass');
+					$is_invited = $db->fetchRow('SELECT `class_invite_id` FROM `tbl_class_invite` 
+								   				WHERE `class_id` = ? AND `class_call_id` = ?',
+								   				array($this->_classId, $call));
+					if(FALSE != $is_invited)
+					{
+						// 弹出错误
+						$this->view->err_tip = '本班级已经有人邀请该校友';
+						$this->render('error');
+					}
+					else 
+					{
+						$db->insert('tbl_class_invite',array(
+							'class_id' => $this->_classId,
+							'class_call_id' => $call,
+							'class_member_id' => $from,
+							'class_invite_memo' => $memo
+						));
+						$this->view->suc_tip = '邀请成功！';
+						$this->render('success');
+					}
+				}
+			}
+		}
+		
+		# 弹出邀请表单
+		function inviteAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
+				$this->view->class_id = $this->_classId;
+				$this->view->uid = (int)trim($request->getPost('uid'));
+				$this->render('invite-form');
+			}
+		}
+		
+		# 搜索名字罗列结果 - 必须为班级成员
+		function invitesearchAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
+				$realname = trim($request->getPost('realname'));
+				$this->view->users = UserModel::fetch($this->_classId, $realname);
+				$this->view->class_id = $this->_classId;
+				$this->render('invite-search');
+			}
+		}
+		
 		/* 通讯录相关 //////////////////////////////////////////////////////// */
 		
 		# 导出相关 - 班级成员可操作

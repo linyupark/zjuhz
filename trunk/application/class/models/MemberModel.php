@@ -5,7 +5,7 @@
 	 *
 	 */
 	class MemberModel
-	{
+	{	
 		/**
 		 * 检查指定memberid是否有对应的班级
 		 *

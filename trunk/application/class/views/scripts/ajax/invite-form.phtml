@@ -1,0 +1,11 @@
+<div id="invite_send_form" class="container" style="width:370px">
+<h2 style="font-size:14px; color:#666">发送班级邀请</h2>
+<span id="innerHTML"></span>
+<textarea name="invite_memo" class="inputtxt" style="width:99%;height:100px;font-size:12px;"></textarea>
+<input type="hidden" name="class_id" value="<?= $this->class_id ?>" />
+<input type="hidden" name="call" value="<?= $this->uid ?>" />
+<input type="hidden" name="from" value="<?= $this->passport('uid') ?>" />
+<p class="txtr">
+<button onclick="inviteSend()" class="btn">提交邀请</button>
+</p>
+</div>

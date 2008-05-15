@@ -14,7 +14,7 @@
 			$this->_valid = new Zend_Validate();
 		}
 		
-		#qq
+		# qq
 		function addressQQ($input, $name = 'qq')
 		{
 			$input = strip_tags(trim($input));

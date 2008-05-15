@@ -11,6 +11,7 @@
 			{
 				$this->_redirect('/home');
 			}
+			$this->view->class_base_info = DbModel::getClassInfo($this->view->class_id);
 		}
 		
 		# 话题列表
