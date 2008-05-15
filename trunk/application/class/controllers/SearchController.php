@@ -4,9 +4,7 @@
 	{
 		function init()
 		{
-			// 注册全局SESSION
-			$this->_sessCommon = Zend_Registry::get('sessCommon');
-			$this->view->login = $this->_sessCommon->login;
+			
 		}
 		
 		function indexAction()
@@ -26,7 +24,7 @@
 			"cur_page" => $page));
 			
 			// 获取会员所申请加入班级的信息
-			$this->view->applies = ApplyModel::fetch($this->view->login['uid']);
+			$this->view->applies = ApplyModel::fetch($this->view->passport('uid'));
 			
 			// 分配班级数据
 			$this->view->year = $year;

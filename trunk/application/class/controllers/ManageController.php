@@ -7,7 +7,6 @@
 			// 注册全局SESSION
 			$this->_sessClass = Zend_Registry::get('sessClass');
 			
-			$this->view->login = Zend_Registry::get('sessCommon')->login;
 			$this->view->class_id = $this->getRequest()->getParam('c');
 			$this->view->class_base_info = DbModel::getClassInfo($this->view->class_id);
 			
@@ -15,7 +14,7 @@
 			if(false == Cmd::isManager($this->view->class_id))
 			$this->_redirect('/home?c='.$this->view->class_id);
 		}
-		
+
 		# 成员管理 ----------------------------------------------------------
 		function memberAction()
 		{

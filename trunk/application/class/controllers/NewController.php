@@ -5,9 +5,7 @@ class NewController extends Zend_Controller_Action
 	function init()
 	{
 		// 注册全局SESSION
-		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessClass = Zend_Registry::get('sessClass');
-		$this->view->login = Zend_Registry::get('sessCommon')->login;
 	}
 	
 	function indexAction()
@@ -35,7 +33,7 @@ class NewController extends Zend_Controller_Action
 					'class_year' => $year,
 					'class_create_time' => time(),
 					'class_college' => $college,
-					'class_charge' => $this->view->login['uid'],
+					'class_charge' => $this->view->passport('uid'),
 				);
 				if(!$class_id = DbModel::initClass($data))
 					$this->view->err_tip['class_name'] = '班级数据初始化失败';

@@ -7,7 +7,6 @@
 			$this->_sessClass = Zend_Registry::get('sessClass');
 			$this->view->class_id = (int)$this->_getParam('c'); // 班级id
 			$this->view->topic_id = (int)$this->_getParam('tid'); // 话题id
-			$this->view->login = Zend_Registry::get('sessCommon')->login;
 			if(!$this->view->class_id) //没有指定正确的参数
 			{
 				$this->_redirect('/home');
@@ -48,7 +47,7 @@
 			$topic = TopicModel::fetchDetail($this->view->topic_id);
 			
 			// 检查是否是作者在编辑自己的话题
-			if($this->view->login['uid'] != $topic['class_topic_author'])
+			if($this->view->passport('uid') != $topic['class_topic_author'])
 			$this->_redirect('/home');
 			
 			// 显示编辑页面

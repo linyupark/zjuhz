@@ -7,8 +7,6 @@
 			$this->_sessClass = Zend_Registry::get('sessClass');
 			// 获取班级id
 			$this->_classId = (int)$this->getRequest()->getPost('class_id');
-			// 获取用户id
-			$this->_uid = (int)Zend_Registry::get('sessCommon')->login['uid'];
 			
 			$this->_helper->layout->disableLayout();
 			$this->_helper->ViewRenderer->setNoRender();
@@ -79,12 +77,12 @@
 				if(false == Cmd::isCreater($this->_classId)) exit();  // 不是班级创建者
 				// 显示XMLRPC数据
 				$client = new Zend_XmlRpc_Client('http://xmlrpc/MemberServer.php');
-				$groups = $client->call('rpcMember.AddressGroupSelectUidAll',array($this->_uid));
+				$groups = $client->call('rpcMember.AddressGroupSelectUidAll',array($this->view->passport('uid')));
 				if(count($groups) > 0)
 				{
 					foreach ($groups as $v)
 					{
-						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectGidAll',array($v['gid'],$this->_uid));
+						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectGidAll',array($v['gid'],$this->view->passport('uid')));
 					}
 				}
 				else { $groups = null; $items = null; }
@@ -131,7 +129,7 @@
 							'address'=>$address,
 							'postcode'=>$postcode,
 							'addressbook_company'=>$company,
-							'addressbook_telephone'=>$telephone),array('`class_id`='.$this->_classId,'`uid`='.$this->_uid));
+							'addressbook_telephone'=>$telephone),array('`class_id`='.$this->_classId,'`uid`='.$this->view->passport('uid')));
 						if($result != 1)
 						{
 							// 弹出错误
@@ -150,7 +148,7 @@
 					// 显示通讯录表单
 					$db = Zend_Registry::get('dbClass');
 					$this->view->addressbook = $db->fetchRow('SELECT * FROM `tbl_class_addressbook` 
-																WHERE `class_id` = ? AND `uid` = ?',array($this->_classId,$this->_uid));
+																WHERE `class_id` = ? AND `uid` = ?',array($this->_classId,$this->view->passport('uid')));
 					$this->render('class-addressbook-form');
 				}
 			}
@@ -191,7 +189,7 @@
 				$topic_id = (int)$request->getPost('topic_id');
 				$db = Zend_Registry::get('dbClass');
 				if($db->delete('tbl_class_reply',
-						array('class_reply_id = '.$reply_id,'class_reply_author = '.$this->_uid)) > 0)
+						array('class_reply_id = '.$reply_id,'class_reply_author = '.$this->view->passport('uid'))) > 0)
 				{
 					TopicModel::replyNumCut($topic_id);
 					$this->view->suc_tip = '成功删除回复';
@@ -283,7 +281,7 @@
 			if($request->isXmlHttpRequest())
 			{
 				if(false == Cmd::isMember($this->_classId)) exit();  // 不是班级成员
-				if($this->_uid != $request->getPost('author')) exit(); // 不是自己发表
+				if($this->view->passport('uid') != $request->getPost('author')) exit(); // 不是自己发表
 				$inputChain = new InputChains();
 				$topic_id = (int)$request->getPost('topic_id');
 				$topic_title = $inputChain->topicTitle($request->getPost('topic_title'));
@@ -339,12 +337,12 @@
 				{
 					$db = Zend_Registry::get('dbClass');
 					if($db->insert('tbl_class_reply',array(
-										'class_reply_author' => $this->_uid,
+										'class_reply_author' => $this->view->passport('uid'),
 										'class_topic_id' => $topic_id,
 										'class_reply_title' => $reply_title,
 										'class_reply_content' => Commons::html2str($reply_content),
 										'class_reply_time' => time())) >0)
-					TopicModel::replyNumInc($topic_id, $this->_uid);
+					TopicModel::replyNumInc($topic_id, $this->view->passport('uid'));
 					else 
 					{
 						// 弹出错误
@@ -429,7 +427,7 @@
 					{
 						$data = array(
 							'class_id' => $this->_classId,
-							'class_topic_author' => $this->_uid,
+							'class_topic_author' => $this->view->passport('uid'),
 							'class_topic_title' => $topic_title,
 							'class_topic_content' => $topic_content,
 							'class_topic_pub_time' => time(),
@@ -635,11 +633,11 @@
 			if($this->getRequest()->isXmlHttpRequest())
 			{
 				// 判断是否已经是该班级成员
-				if(false != MemberModel::isJoined($this->_classId, $this->_uid))
+				if(false != MemberModel::isJoined($this->_classId, $this->view->passport('uid')))
 				{
 					$this->render('join-already');
 				}
-				elseif (false != ApplyModel::isApplied($this->_classId, $this->_uid))
+				elseif (false != ApplyModel::isApplied($this->_classId, $this->view->passport('uid')))
 				{
 					$this->render('join-stop');
 				}
@@ -660,11 +658,11 @@
 				$class_apply_content = Commons::html2str(strip_tags(trim($request->getPost('apply_content'))));
 				
 				// 判断是否已经是该班级成员
-				if(false != MemberModel::isJoined($this->_classId, $this->_uid))
+				if(false != MemberModel::isJoined($this->_classId, $this->view->passport('uid')))
 				{
 					echo '您已经是班级成员';
 				}
-				elseif (false != ApplyModel::isApplied($this->_classId, $this->_uid))
+				elseif (false != ApplyModel::isApplied($this->_classId, $this->view->passport('uid')))
 				{
 					echo '您已经提交了加入申请';
 				}
@@ -672,7 +670,7 @@
 				{
 					$data = array(
 						'class_id' => $this->_classId,
-						'class_member_id' => $this->_uid,
+						'class_member_id' => $this->view->passport('uid'),
 						'class_apply_content' => $class_apply_content,
 						'class_apply_time' => time()
 					);
