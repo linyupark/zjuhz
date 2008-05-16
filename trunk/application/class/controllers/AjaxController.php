@@ -193,15 +193,16 @@
 			$request = $this->getRequest();
 			if($request->isXmlHttpRequest())
 			{
+				$uid = (int)$this->view->passport('uid');
 				if(false == Cmd::isCreater($this->_classId)) exit();  // 不是班级创建者
 				// 显示XMLRPC数据
 				$client = new Zend_XmlRpc_Client('http://xmlrpc/MemberServer.php');
-				$groups = $client->call('rpcMember.AddressGroupSelectUidAll',array((int)$this->view->passport('uid')));
+				$groups = $client->call('rpcMember.AddressGroupSelectUidAll',array($uid));
 				if(count($groups) > 0)
 				{
 					foreach ($groups as $v)
 					{
-						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectGidAll',array((int)$v['gid'],(int)$this->view->passport('uid')));
+						$items[$v['gid']] = $client->call('rpcMember.AddressCardSelectGidAll',array($v['gid'],$uid));
 					}
 				}
 				else { $groups = null; $items = null; }
