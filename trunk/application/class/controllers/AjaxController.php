@@ -14,6 +14,41 @@
 		
 		/* 邀请相关 ////////////////////////////////////////////////////////// */
 		
+		# 接受邀请
+		function inviteacceptAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$invite_id = (int)$request->getPost('invite_id');
+				$member_id = (int)$request->getPost('member_id');
+				if(true == InviteModel::accept($invite_id, $this->_classId,$member_id))
+				{
+					$this->view->suc_tip = '成功加入该班级';
+					echo Commons::js_jump('/class/home?c='.$this->_classId,1);
+					$this->render('success');
+				}
+			}
+		}
+		
+		# 拒绝邀请
+		function inviterefuseAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$invite_id = (int)$request->getPost('invite_id');
+				$db = Zend_Registry::get('dbClass');
+				$r = $db->delete('tbl_class_invite','`class_invite_id` = '.$invite_id);
+				if($r == 1)
+				{
+					$this->view->suc_tip = '成功拒绝该班级邀请';
+					echo Commons::js_jump('',1);
+					$this->render('success');
+				}
+			}
+		}
+		
 		# 查看邀请
 		function inviteviewAction()
 		{

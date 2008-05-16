@@ -24,8 +24,8 @@
 <tr>
 	<td></td>
 	<td class="txtr">
-		<input type="button" onclick="" class="btn" value="接受" />
-		<input type="button" onclick="" class="btn" value="拒绝" />
+		<input type="button" onclick="inviteAccept(<?= $this->invite['class_invite_id'].','.$this->invite['class_id'].','.$this->invite['class_call_id'] ?>)" class="btn" value="接受" />
+		<input type="button" onclick="inviteRefuse(<?= $this->invite['class_invite_id'] ?>)" class="btn" value="拒绝" />
 	</td>
 </tr>
 

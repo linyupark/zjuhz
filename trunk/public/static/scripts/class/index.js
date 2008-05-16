@@ -5,6 +5,63 @@ function tabFocus(name)
 	$('a[href^="javascript:'+name+'"]').addClass('focus');
 }
 
+// --------------------------- 邀请加入班级相关 ------------------------
+
+// 接受邀请
+function inviteAccept(invite_id, class_id, uid)
+{
+	var data = {invite_id:invite_id, class_id:class_id, member_id:uid};
+	$.post('/class/ajax/invite_accept',data,function(html){
+		$.facebox(html);
+	});
+}
+
+// 拒绝邀请
+function inviteRefuse(invite_id)
+{
+	var data = {invite_id:invite_id};
+	$.post('/class/ajax/invite_refuse',data,function(html){
+		$.facebox(html);
+	});
+}
+
+// 查看邀请
+function inviteView(invite_id)
+{
+	var data = {invite_id:invite_id};
+	$.post('/class/ajax/invite_view',data,function(html){
+		$.facebox(html);
+	});
+}
+
+// 发送邀请
+function inviteSend()
+{
+	$('#innerHTML').html('<img src="/static/images/icon/ajax-loader.gif" /> 发送中..');
+	$.post('/class/ajax/invite_send',$('#invite_send_form').fastSerialize(),function(html){
+		$('#innerHTML').html(html);
+	});
+}
+
+// 邀请的弹框
+function invite(uid,class_id)
+{
+	var data = {uid:uid, class_id:class_id};
+	$.post('/class/ajax/invite', data, function(html){
+		$.facebox(html);
+	});
+}
+
+// 可被邀请查找
+function inviteSearch()
+{
+	$('#userList').html('<img src="/static/images/icon/ajax-loader.gif" />');
+	$.post('/class/ajax/invite_search',$('#invite_form').fastSerialize(),function(html){
+		$('#userList').html(html);
+	});
+	return false;
+}
+
 // --------------------------- 通讯录相关 -------------------------------
 
 // 通讯录导出
