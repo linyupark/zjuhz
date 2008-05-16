@@ -403,7 +403,8 @@
 						$data = array(
 							'entity_title' => $title,
 							'category_id' => $cate_id,
-							'entity_mod_time' => $pub_time,
+							'entity_pub_time' => $pub_time,
+							'entity_mod_time' => time(),
 							'entity_content' => $content,
 							'entity_tag' => $tag,
 							'entity_top' => $top
