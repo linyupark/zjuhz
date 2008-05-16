@@ -35,10 +35,10 @@ if($act=='upload'){
 		@copy($_FILES['file1']['tmp_name'],$realFile);
 	}
 	if($type=='img'){
-		die("<script>window.parent.LoadIMG('../{$upfileDir}{$targetFile}');</script>");
+		die("<script>window.parent.LoadIMG('/static/editor/sina/{$upfileDir}{$targetFile}');</script>");
 	}
 	elseif($type=='attach'){
-		die("<script>window.parent.LoadAttach('../{$upfileDir}{$targetFile}');</script>");
+		die("<script>window.parent.LoadAttach('/static/editor/sina/{$upfileDir}{$targetFile}');</script>");
 	}
 }
 
