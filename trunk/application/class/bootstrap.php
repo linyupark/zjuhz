@@ -31,7 +31,7 @@ Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layou
 /** run */
 $info_front = Zend_Controller_Front::getInstance();
 $info_front->setDefaultModule('class')
-           ->throwExceptions(false)
+           ->throwExceptions(true)
            ->registerPlugin(new ClassAcl(Zend_Registry::get('sessCommon')))
            ->setControllerDirectory('../../application/class/controllers/')
            ->dispatch();
