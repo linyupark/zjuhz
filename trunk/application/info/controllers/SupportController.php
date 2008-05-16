@@ -24,6 +24,8 @@
 			$this->view->login = $this->_sessCommon->login;
 		}
 		
+		function contactusAction(){}
+		
 		function aboutAction(){}
 		
 		function privacyclaimAction(){}
