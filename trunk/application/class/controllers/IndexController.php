@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
 		$page = $this->_getParam('p',1);
 			
 		//按页获取信息列表
-		Page::$pagesize = 20;
+		Page::$pagesize = 15;
 		$rows = DbModel::searchClass('', $year, $college, ($page-1)*Page::$pagesize,Page::$pagesize);
 		Page::create(array(
 		"href_open" => "<a href='/class/?year={$year}&college={$college}&p=%d'>", 
