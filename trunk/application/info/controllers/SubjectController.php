@@ -61,7 +61,6 @@ class SubjectController extends Zend_Controller_Action {
 				'游览井冈山百竹园',
 				'探访团乘缆车观望五龙潭',
 				'五龙潭之仙女潭',
-				'探访团乘缆车观望五龙潭',
 				'五龙潭之碧玉潭',
 				'游览井冈山革命烈士陵园',
 			);
