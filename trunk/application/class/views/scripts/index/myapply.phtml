@@ -3,7 +3,7 @@
 <?php if(count($this->applies) == 0): ?>
 无
 <?php else: foreach ($this->applies as $v): ?>
-<li><a href="/class/home?c=(<?= $v['class_id'] ?>)"><?= $v['class_name'] ?></a></li>
+<li><a href="/class/home?c=<?= $v['class_id'] ?>"><?= $v['class_name'] ?></a></li>
 <?php endforeach; ?>
 </ul>
 <?php endif; ?>
