@@ -62,7 +62,7 @@ class SearchController extends Zend_Controller_Action
     	$logic  = AskQuestionLogic::init();
 
     	$total  = $logic->selectSearch('count', $this->_wd, '');
-    	$paging = new Paging(array('total' => $total, 'perpage' => 10));
+    	$paging = new Paging(array('totalRs' => $total, 'perPage' => 10));
 
     	$this->view->headTitle($this->_wd);
 		$this->view->wd     = $this->_wd;

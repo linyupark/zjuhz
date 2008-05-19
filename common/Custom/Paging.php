@@ -9,306 +9,238 @@
  */
 
 /**
- * 公共分页类
+ * 数据分页类
  */
-class Paging 
+class Paging
 {
-	/**
-     * 标签名
-     *
-     * @var string
+    /**
+     * 页码名称
      */
-	public $pageName  = 'p';
+	const PRE_PAGE   = '上一页';
+	const NEXT_PAGE  = '下一页';
+	const FIRST_PAGE = '首页';
+	const LAST_PAGE  = '尾页';
 
-	/**
-     * 首页
-     *
-     * @var string
+    /**
+     * 数据总记录数 Total RecordSet
+     * @var integer
      */
-	public $firstPage = null;
+    private $_totalRs = 0;
 
-	/**
-     * 末页
-     *
-     * @var string
+    /**
+     * 每页显示记录数
+     * @var integer
      */
-	public $lastPage  = null;
+    private $_perPage = 20;
 
-	/**
-     * 控制记录条的个数
-     *
-     * @var string
-     */
-	private $_pageBarNum = 10;
-
-	/**
+    /**
      * 总页数
-     *
+     * @var integer
+     */
+    private $_totalPage = 0;
+
+    /**
+     * 当前页码
+     * @var integer
+     */
+    private $_nowPage = 0;
+
+    /**
+     * url
      * @var string
      */
-	private $_totalPage  = 0;
+    private $_url = null;
 
-	/**
-     * 当前页
-     *
+    /**
+     * 下一页码编号
      * @var string
      */
-	private $_nowIndex = 1;
+    private $_nextPage = 0;
 
-	/**
-     * url地址头
-     *
+    /**
+     * 上一页码编号
      * @var string
      */
-	private $url = null;
+    private $_prePage = 0;
 
+    /**
+     * 页码标签
+     * @var string
+     */
+    private $_tagPage = 'p';
 
-		 function Paging($array)
-		 {
-			 if(is_array($array))
-			 {
-				 if(!array_key_exists('total',$array))$this->error(__FUNCTION__,'need a param of total');
-			     $total=intval($array['total']);
-			     $perpage=(array_key_exists('perpage',$array))?intval($array['perpage']):10;
-			     $_nowIndex=(array_key_exists('_nowIndex',$array))?intval($array['_nowIndex']):'';
-				 $url=(array_key_exists('url',$array))?$array['url']:'';
-			 }
-			 else
-			 {
-				 $total=$array;
-				 $perpage=10;
-			     $_nowIndex='';
-			     $url='';
-			 }
-			 if((!is_int($total))||($total<0))$this->error(__FUNCTION__,$total.' is not a positive integer!');
-			 if((!is_int($perpage))||($perpage<=0))$this->error(__FUNCTION__,$perpage.' is not a positive integer!');
-			 if(!empty($array['pageName']))$this->set('pageName',$array['pageName']);//设置pagename
-			 $this->_set__nowIndex($_nowIndex);//设置当前页
-			 $this->_set_url($url);//设置链接地址
-			 $this->_totalPage=ceil($total/$perpage);
-			 $this->perpage=$perpage;
-			 $this->total=$total;
+    /**
+     * 页码左显示记录数
+     * @var string
+     */
+    private $_leftNum = 4;
 
-		    $this->firstPage=1;
-		    $this->lastPage=$this->_totalPage;
+    /**
+     * 每页显示记录数
+     * @var string
+     */
+    private $_rightNum = 5;
 
-		 }
-		 
-		 /*
-		  * 获取显示“首页”的代码
-		  *
-		  * @return string
-		  */
-		 function firstPage($style='')
-		 {
-			 if($this->_nowIndex-5<1)
-			 {
-				 return '';
-			     //return '<span class="'.$style.'">'.$this->firstPage.'</span>';
-			 }
-			 else
-			 {
-				 $str = '&nbsp;...&nbsp;';
-			 }
-			 $str = $this->_get_link($this->_get_url(1),$this->firstPage,$style) . $str ;
-			 return $str;
-		 }
-		 		
-		 /*
-		  * 获取显示“尾页”的代码
-		  *
-		  * @return string
-		  */
-		 function lastPage($style='')
-		 {
-			 if($this->_nowIndex+5>=$this->_totalPage)
-			 {
-				 return ;
-			     //return '<span class="'.$style.'">'.$this->lastPage.'</span>';
-			 }
-			 return '&nbsp;...&nbsp;'.$this->_get_link($this->_get_url($this->_totalPage),$this->lastPage,$style);
-		 }
-		 
-		 function nowbar($style='',$_nowIndex_style='')
-		 {
-			 $plus=ceil($this->_pageBarNum/2);
-			 if($this->_pageBarNum-$plus+$this->_nowIndex>$this->_totalPage)$plus=($this->_pageBarNum-$this->_totalPage+$this->_nowIndex);
-			 $begin=$this->_nowIndex-$plus+1;
-			 $begin=($begin>=1)?$begin:1;
-			 $return='';
-			 for($i=$begin;$i<$begin+$this->_pageBarNum;$i++)
-			 {
-				 if($i<=$this->_totalPage){
-				    if($i!=$this->_nowIndex)
-			        $return.=$this->_get_text($this->_get_link($this->_get_url($i),$i,$style));
-			     else 
-			        $return.=$this->_get_text('<span class="'.$_nowIndex_style.'">'.$i.'</span>');
-				 }else{
-				    break;
-				 }
-			    $return.="\n";
-			  }
-			  unset($begin);
-			  return $return;
-		 }
-		
-		 /*
-		  * 获取显示跳转按钮的代码
-		  *
-		  * @return string
-		  */
-		 function select()
-		 {	
-			 $return='<select name="Page_Select" >';
-			 for($i=1;$i<=$this->_totalPage;$i++)
-			 {
-				 if($i==$this->_nowIndex){
-				    $return.='<option value="'.$i.'" selected>'.$i.'</option>';
-			     }else{
-				    $return.='<option value="'.$i.'">'.$i.'</option>';
-				 }
-			 }
-			 unset($i);
-		    $return.='</select>';
-			return $return;
-		 }
- 
-		 /*
-		  * 控制分页显示风格（你可以增加相应的风格）
-		  *
-		  * @param int $mode
-		  * @return string
-		  */
-		function show()
+    /**
+     * 构造方法
+     * 
+     * @param array $args
+     * @return void
+     */
+    public function __construct($args)
+    {
+        $this->_totalRs   = (int)$args['totalRs']; // 获取总数
+        $this->_perPage   = ($args['perPage'] > 0 ? $args['perPage'] : $this->_perPage); // 每页显示数
+        $this->_totalPage = ceil($this->_totalRs / $this->_perPage); // 总共应为多少页
+        // 获取当前页 若调用处未传递则本类自行获取 调用处可传递支持url重写后的参数
+        $this->_nowPage   = ($args['nowPage'] > 0 ? $args['nowPage'] : $_GET[$this->_tagPage]);
+        $this->_nowPage   = ($this->_nowPage > $this->_totalPage || 0 >= $this->_nowPage ? 1 : $this->_nowPage);
+        $this->_url       = $this->_setUrl(); // 设定分页链接
+        $this->_nextPage  = $this->_nowPage + 1; // 下一页码
+        $this->_prePage   = $this->_nowPage - 1; // 上一页码
+    }
+
+    /**
+     * 析构方法
+     * 
+     * @return void
+     */
+	public function __destruct()
+    {
+    }
+
+    /**
+     * 生成用于SQL的LIMIT
+     * 
+     * @return string
+     */
+    public function limit()
+    {
+    	$limit = ($this->_nowPage - 1) * $this->_perPage; // 左标值(limit LEFT, RIGHT)
+
+    	return "{$limit}, {$this->_perPage}";
+    }
+
+    /**
+     * 显示完整的分页(含HTML代码)
+     * 
+     * @return string
+     */
+    public function show()
+    {
+    	$show = '<div class="paging" id="paging">';
+
+    	/*
+    	$show .= '<span class="num">'.$this->_totalRs.
+    	         '</span>条数据&nbsp;-&nbsp;共分<span class="num">'.
+    	         $this->_totalPage.'</span>页&nbsp;&nbsp;'; //*/
+
+    	$show .= ($this->_perPage < $this->_totalRs ? 
+    	    $this->_preBar().$this->_mainBar().$this->_nextBar().$this->_jumpBar() : '');
+
+		$show .= '</div>';
+
+		return $show;
+    }
+
+    /**
+     * 显示上一页(若有的话)和首页
+     * 
+     * @return string
+     */
+    private function _preBar()
+    {
+    	$preBar = (($this->_leftNum + 1) < $this->_nowPage ? 
+    	    "<a class='text' href='{$this->_url}1' class='abc'>".self::FIRST_PAGE."</a>&nbsp;" : '');
+
+    	$preBar .= (1 != $this->_nowPage ? 
+    	    "<a class='text' href='{$this->_url}{$this->_prePage}'>".self::PRE_PAGE."</a>&nbsp;" : '');
+
+    	return $preBar;
+    }
+
+    /**
+     * 显示主分页
+     * 
+     * @return string
+     */
+    private function _mainBar()
+    {
+    	// ----- 页码循环值 -----
+        // 页码显示范围计算
+    	$start = $this->_nowPage - $this->_leftNum;
+    	$end   = $this->_nowPage + $this->_rightNum;
+
+    	for ($i=$start; $i<=$end; $i++)
+    	{
+    		if (0 >= $i || $i > $this->_totalPage) { continue; }
+
+    		$mainBar .= ($i == $this->_nowPage ? 
+    		    "<span class='curr'>{$i}</span>&nbsp;" : 
+    		    "<a class='num' href='{$this->_url}{$i}'>{$i}</a>&nbsp;");
+
+    	}
+
+    	return $mainBar;
+    }
+
+    /**
+     * 显示下一页(若有的话)和末页
+     * 
+     * @return string
+     */
+    private function _nextBar()
+    {
+    	$nextBar = ($this->_nowPage < $this->_totalPage ? 
+    	    "<a class='text' href='{$this->_url}{$this->_nextPage}'>".self::NEXT_PAGE."</a>&nbsp;" : '');
+
+    	$nextBar .= (($this->_totalPage - $this->_nowPage) > $this->_rightNum ? 
+    	    "<a class='text' href='{$this->_url}{$this->_totalPage}'>".self::LAST_PAGE."</a>&nbsp;" : '');
+
+    	return $nextBar;
+    }
+
+    /**
+     * 显示页码入跳转框(含HTML表单等)
+     * 
+     * @return string
+     */
+    private function _jumpBar()
+    {
+    }
+
+    /**
+     * 分页链接url
+     * 
+     * @return void
+     */
+    private function _setUrl()
+	{
+		// 判断原始Url是否存有参数
+		if(empty($_SERVER['QUERY_STRING']))
 		{
-			$pagestr = '<div class="paging" id="paging">有<span class="num">'.$this->total.'</span>条记录';
-			$pagestr.= '&nbsp;&nbsp;&nbsp;共<span class="num">'.$this->_totalPage.'</span>页';
-			
-			if ($this->_totalPage > 1) //只有大1页时才显示分页按钮
-			{
-				$pagestr.= '&nbsp;&nbsp;|&nbsp;&nbsp;';
-				$pagestr.= $this->firstPage().' ';
-				$pagestr.= $this->nowbar('','curr');
-				$pagestr.= $this->lastPage();
-			}
-			
-			$pagestr.= '</div>';
-			return $pagestr;
+			// 若原始Url中不存有参数
+			$setUrl = $_SERVER['REQUEST_URI'] . "?{$this->_tagPage}="; // 附上分页参数
 		}
-		 
-		 /*----------------private function (私有方法)-----------------------------------------------------------*/
-		 /*
-		  * 设置url头地址
-		  * @param: String $url
-		  * @return boolean
-		  */
-		 function _set_url($url="")
-		 {
-			 if(!empty($url))
-			 {
-				 //手动设置
-			     $this->url=$url.((stristr($url,'?'))?'&':'?').$this->pageName."=";
-			 }
-			 else
-			 {
-				 //自动获取
-			     if(empty($_SERVER['QUERY_STRING']))
-				 {
-					 //不存在QUERY_STRING时
-					 $this->url=$_SERVER['REQUEST_URI']."?".$this->pageName."=";
-				 }
-				 else
-				 {
-					 //
-				     if(stristr($_SERVER['QUERY_STRING'],$this->pageName.'='))
-					 {
-						 //地址存在页面参数
-					     $this->url=str_replace($this->pageName.'='.$this->_nowIndex,'',$_SERVER['REQUEST_URI']);
-						 $last=$this->url[strlen($this->url)-1];
-
-					     if($last=='?'||$last=='&')
-						 {
-							 $this->url.=$this->pageName."=";
-					     }
-						 else
-						 {
-							 $this->url.='&'.$this->pageName."=";
-					     }
-					 }
-					 else
-					 {
-						 //
-						$this->url=$_SERVER['REQUEST_URI'].'&'.$this->pageName.'=';
- 					 }//end if    
-				 }//end if
-			 }//end if
-		 }
- 
-		 /*
-	  	  * 设置当前页面
-	 	  *
-		  */
-	 	 function _set__nowIndex($_nowIndex)
-		 {
-			 if(empty($_nowIndex)){
-		     //系统获取
-				   
-			 if(isset($_GET[$this->pageName])){
-			    $this->_nowIndex=intval($_GET[$this->pageName]);
-			 }
-			 }else{
-		     //手动设置
-			 $this->_nowIndex=intval($_nowIndex);
-			}
-		 }
-		
-		 /*
-		  * 为指定的页面返回地址值
-		  *
-		  * @param int $pageno
-		  * @return string $url
-		  */
-		 function _get_url($pageno=1)
-		 {
-			 return $this->url.$pageno;
-		 }
-		  
-		/*
-		 * 获取分页显示文字，比如说默认情况下_get_text('<a href="">1</a>')将返回[<a href="">1</a>]
-		 *
-		 * @param String $str
-		 * @return string $url
-		 */ 
-		 function _get_text($str)
-		 {
-		 	  return $str;
-		 }
-		 
-		 /*
-		  * 获取链接地址
-		  */
-		 function _get_link($url,$text,$style='')
-		 {
-			 $style=(empty($style))?'':'class="'.$style.'"';
-			 return '<a '.$style.' href="'.$url.'">'.$text.'</a>';
-		 }
-
-		 /*
-		  * 出错处理方式
-		  */
-		 function error($function,$errormsg)
-		 {
-			 die('Error in file <b>'.__FILE__.'</b> ,Function <b>'.$function.'()</b> :'.$errormsg);
-		 }
-
-		function limit()
+		else
 		{
-			$num	 = ($this->_nowIndex-1)*$this->perpage; //计算当前取值起点
-			if ($num <= 0 OR $this->_nowIndex>$this->total)
+			// 若原始Url中已存有参数
+			if(stristr($_SERVER['QUERY_STRING'], "{$this->_tagPage}=")) // 是否存有分页本身
 			{
-				$num = 0;
+				// 将当前页码链接去除
+				$setUrl = strtr($_SERVER['REQUEST_URI'], array("{$this->_tagPage}={$this->_nowPage}" => ''));
+
+				// 通过判断末位字符选择附加起始字符是''或'&'
+				$setUrl .= ('?' == $setUrl[strlen($setUrl)-1] || '&' == $setUrl[strlen($setUrl)-1] ? 
+				    "{$this->_tagPage}=" : "&{$this->_tagPage}=");
 			}
-			$limitSql = $num.','.$this->perpage;
-			return $limitSql;
+			else
+			{
+				// 若原始Url中存有参数且非分页本身则直接无需去除当前页码链接可直接附加
+				$setUrl = $_SERVER['REQUEST_URI']."&{$this->_tagPage}=";
+ 			}
 		}
+
+		return $setUrl;
+	 }
 }

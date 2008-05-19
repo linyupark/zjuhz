@@ -100,8 +100,8 @@ class MyController extends Zend_Controller_Action
 		}
 
         $total    = $this->_sessHelp->login[$type];
-		$paging	  = new Paging(array('total' => $total, 'perpage' => 20));
-		$question = ($total > 0 ? AskQuestionLogic::init()->selectUidAll(
+		$paging   = new Paging(array('totalRs' => $total));
+		$question = (0 < $total ? AskQuestionLogic::init()->selectUidAll(
 		    $this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl     = 'question';
@@ -139,8 +139,8 @@ class MyController extends Zend_Controller_Action
 		}
 
         $total  = $this->_sessHelp->login[$type];
-		$paging = new Paging(array('total' => $total, 'perpage' => 20));
-		$reply  = ($total > 0 ? AskReplyLogic::init()->selectUidAll(
+		$paging = new Paging(array('totalRs' => $total));
+		$reply  = (0 < $total ? AskReplyLogic::init()->selectUidAll(
 		    $this->_sessUid, $status, $paging->limit()) : '');
 
 		$this->view->ctrl   = 'reply';
@@ -174,8 +174,8 @@ class MyController extends Zend_Controller_Action
 		}
 
         $total      = $this->_sessHelp->login['collection'];
-		$paging     = new Paging(array('total' => $total, 'perpage' => 20));
-		$collection = ($total > 0 ? AskCollectionLogic::init()->selectUidAll(
+		$paging	    = new Paging(array('totalRs' => $total));
+		$collection = (0 < $total ? AskCollectionLogic::init()->selectUidAll(
 		    $this->_sessUid, $paging->limit()) : '');
 
 		$this->view->ctrl       = 'collection';
