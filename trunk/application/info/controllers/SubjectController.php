@@ -99,9 +99,11 @@ class SubjectController extends Zend_Controller_Action {
 			$offset = ($page-1)*$pagesize;
 			$samples = array_slice($samples, $offset, $pagesize);
 			
+			$descriptions = $this->description($name);
+			
 			$this->view->pages = Page::$num_pages;
 			$this->view->name = $name;
-			$this->view->descriptions = $this->description($name);
+			$this->view->descriptions = array_slice($descriptions, $offset, $pagesize);
 			$this->view->pagesize = $pagesize;
 			$this->view->page = $page;
 			$this->view->pagination = $page_str;
