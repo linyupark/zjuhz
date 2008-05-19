@@ -82,7 +82,7 @@ class SortController extends Zend_Controller_Action
      * @return void
      */
 	public function jsonAction()
-	{		
+	{
 		$this->_helper->viewRenderer->setNoRender();
 		$this->_helper->layout->disableLayout();
 
@@ -144,7 +144,7 @@ class SortController extends Zend_Controller_Action
 		    }
 		}
 
-		$paging	  = new Paging(array('total' => $total, 'perpage' => 25));
+		$paging	  = new Paging(array('totalRs' => $total));
         $question = (0 < $total ? AskSortLogic::init()->$method($this->_sortId, $paging->limit()) : '');
 
         $this->view->headTitle($sortDetail['name']);

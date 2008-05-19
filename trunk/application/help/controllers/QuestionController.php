@@ -193,7 +193,7 @@ class QuestionController extends Zend_Controller_Action
 		$sortDetail = HelpClass::getSortDetail($sortAll, $question['sid']); // 当前分类详情
 
 		$total  = $question['reply']; // 问题含有的回复数
-		$paging	= new Paging(array('total' => $total, 'perpage' => 10));
+		$paging	= new Paging(array('totalRs' => $total, 'perPage' => 10));
 		$reply  = (0 < $total ? AskReplyLogic::init()->selectQidAll($qid, $paging->limit()) : '');
 
 		$this->view->headTitle($question['title']);

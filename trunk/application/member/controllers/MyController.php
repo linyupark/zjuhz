@@ -134,7 +134,7 @@ class MyController extends Zend_Controller_Action
 
 				$findArgs = MyFilter::init()->find($getArgs);
                 $logic    = AddressCardLogic::init();
-				$paging   = new Paging(array('total' => $logic->selectFind('count', $findArgs, ''), 'perpage' => 20));
+				$paging   = new Paging(array('totalRs' => $logic->selectFind('count', $findArgs, '')));
 
 			    $this->view->find   = $this->_iniMember->find->addressCard->toArray();
 			    $this->view->status = $this->_iniMember->status->invite->toArray();

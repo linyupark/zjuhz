@@ -68,11 +68,8 @@ class CollectionController extends Zend_Controller_Action
 				if (AskCollectionLogic::init()->insert($insArgs))
 				{
 					// 更新会员已收藏总数
-					if (AskLogic::init()->update(array('collection' => 
-					    new Zend_Db_Expr('collection + 1')), $insArgs['uid']))
-					{
-					    $this->_sessHelp->login['collection']++; // sess内的各值对应变化
-					}
+					(AskLogic::init()->update(array('collection' => new Zend_Db_Expr('collection + 1')), 
+					    $insArgs['uid']) ? $this->_sessHelp->login['collection']++ : '');
 
 					echo 'alert'; // 请求ajax弹出提示
 				}

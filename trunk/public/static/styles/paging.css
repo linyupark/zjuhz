@@ -1,49 +1,42 @@
+/* paging green skin */
+
 .paging {
 	text-align:center;
-	font:12px Arial, tahoma, sans-serif;
-	padding-top:5px;
-	padding-bottom:5px;
+	font-size:12px;
+	padding-top:10px;
+	padding-bottom:10px;
 	margin:0px;
 }
 
-.paging a {
+.paging a.num {
 	border:1px solid #E2F1AF;
 	background:#FFFFFF;
 	text-decoration:none;
 	color:#C16012;
-	padding:2px 6px 2px 6px;
+	padding:2px 6px 4px 6px;
 }
 
-.paging a:visited {
-	border: 1px solid #E2F1AF;
-	background: #FFFFFF;
-	text-decoration: none;
-	padding:2px 6px 2px 6px;
-}
-
-.paging .break {
-	border: medium none;
-	text-decoration: none;
+.paging a.text {
+	border:1px solid #E2F1AF;
+	background:#FFFFFF;
+	text-decoration:none;
 	color:#C16012;
-	padding:2px 6px 2px 6px;
-}
-
-.paging .num {
-	color:#C16012;
-	font:10px Arial, tahoma, sans-serif;
-	padding:0 3px 0 3px;
-}
-
-.paging .curr {
-	padding:2px 6px;
-	border-color:#999;
-	font-weight:bold;
-	font:10px Arial, tahoma, sans-serif;
-	background:transparent;
+	padding:4px 6px 2px 6px;
 }
 
 .paging a:hover {
 	color:#C16012;
 	background:#E2F1AF;
-	text-decoration:none
+	text-decoration:none;
+}
+
+.paging .num {
+	padding:0 3px 0 3px;
+	font-size:12px;
+	color:#C16012;
+}
+
+.paging .curr {
+	padding:2px 4px;
+	font-size:11px;
 }
