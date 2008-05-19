@@ -63,6 +63,8 @@ class SubjectController extends Zend_Controller_Action {
 				'五龙潭之仙女潭',
 				'五龙潭之碧玉潭',
 				'游览井冈山革命烈士陵园',
+				'游览井冈山雕塑园',
+				'五名代表登顶瞻仰井冈山革命烈士纪念碑',
 			);
 		return $data[$name];
 	}
