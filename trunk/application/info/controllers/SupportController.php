@@ -28,5 +28,7 @@
 		
 		function aboutAction(){}
 		
+		function helpAction(){}
+		
 		function privacyclaimAction(){}
 	}
