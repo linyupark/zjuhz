@@ -61,9 +61,9 @@
 			$input = trim(strip_tags($input));
 			
 			$valid = $this->_valid;
-			$valid->addValidator(new Zend_Validate_StringLength(3,100));
+			$valid->addValidator(new Zend_Validate_StringLength(3,200));
 			if(!$valid->isValid($input))
-			$this->_messages[$name] = '信息标题不能为空且长度不得少于3字符大于100字符';
+			$this->_messages[$name] = '信息标题不能为空且长度不得少于3字符大于200字符';
 			return $input;
 		}
 		
