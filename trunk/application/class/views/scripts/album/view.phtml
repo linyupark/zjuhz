@@ -19,6 +19,7 @@
 				</p>
 				<div class="content">
 					<img src="/static/classes/<?= $this->class_id ?>/album/<?= $this->album['class_album_filename'] ?>" />
+					<p class="err_message txtl"><?= $this->album['class_album_description'] ?></p>
 				</div>
 			</td>
 			<!-- 相册内容 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
@@ -68,6 +69,6 @@
 	<?php endforeach; endif;  ?>
 	<div class="pagination"><?= $this->pagination ?></div>
 	<p class="p10 txtc">
-	<button class="btn" onclick="albumReplyForm(<?= $this->class_id.','.$this->album_id.','.$this->pages ?>)">我要回复这个话题</button>
+	<button class="btn" onclick="albumReplyForm(<?= $this->class_id.','.$this->album_id.','.$this->pages ?>)">我要发表评论</button>
 	</p>
 </div>
