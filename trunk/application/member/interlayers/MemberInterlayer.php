@@ -18,42 +18,49 @@ abstract class MemberInterlayer
 {
 	/**
      * 会员模块配置
-     *
+     * 
      * @var object
      */
 	protected $_iniMember = null;
 
 	/**
      * AddressCardModel
-     *
+     * 
      * @var object
      */
 	protected $_AddressCardModel = null;
 
 	/**
      * AddressGroupModel
-     *
+     * 
      * @var object
      */
 	protected $_AddressGroupModel = null;
 
 	/**
+     * InviteLogModel
+     * 
+     * @var object
+     */
+	protected $_InviteLogModel = null;
+
+	/**
      * UserContactModel
-     *
+     * 
      * @var object
      */
 	protected $_UserContactModel = null;
 
 	/**
      * UserExtModel
-     *
+     * 
      * @var object
      */
 	protected $_UserExtModel = null;
 
 	/**
      * UserModel
-     *
+     * 
      * @var object
      */
 	protected $_UserModel = null;

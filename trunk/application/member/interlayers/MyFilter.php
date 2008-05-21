@@ -396,4 +396,33 @@ class MyFilter extends MemberInterlayer
 
 		return false;
 	}
+
+	/**
+     * 通讯录-邀请好友
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function invite($args)
+	{
+		// Zend_Validate_IsEmail
+		Zend_Loader::loadFile('IsEmail.php');
+
+		// 设置过滤规则
+		$filters = array();
+
+    	// 设置验证规则
+		$validators = array(
+		    'cid' => array(array('StringLength', '10', '10'), 'presence' => 'required'), 
+		    'eMail' => array(array('IsEmail'), 'presence' => 'required'), 
+		    'bodyText' => array('presence' => 'required')
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? array(
+		    'cid' => $input->getUnescaped('cid'), 'eMail' => $input->getUnescaped('eMail'), 
+		    'bodyText' => $input->getUnescaped('bodyText')) : false 
+		);
+	}
 }

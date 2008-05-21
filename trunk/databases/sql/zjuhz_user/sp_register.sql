@@ -10,11 +10,12 @@ BEGIN
     DECLARE nameMy CHAR(6);
     DECLARE uidMy INT(10) DEFAULT 0;
     DECLARE statusMy TINYINT(1) DEFAULT 0;
+    DECLARE statusCard TINYINT(1) DEFAULT 0;
 
     SELECT COUNT(uid) INTO uidCnt FROM tbl_user WHERE username = param_username LIMIT 1;
     IF uidCnt = 0 THEN
 
-        SELECT uid,cname INTO uidParent,nameMy FROM tbl_user_address_card WHERE cid = param_ikey AND status IN (0,1,3);
+        SELECT uid,cname,status INTO uidParent,nameMy,statusCard FROM tbl_user_address_card WHERE cid = param_ikey AND status IN (0,1,3);
         IF uidParent IS NULL OR uidParent = 0 THEN
             SET uidParent = 0;
             SET statusMy = 0;
@@ -36,6 +37,10 @@ BEGIN
 
                 IF uidMy > 0 THEN
                     UPDATE tbl_user_address_card SET iuid = uidMy,status = statusMy WHERE cid = param_ikey AND status IN (0,1,3) LIMIT 1;
+
+                    IF statusCard = 0 OR statusCard = 1 THEN
+                        UPDATE tbl_user_invite_log SET isReg = 'Y' WHERE cid = param_ikey;
+                    END IF;
                 END IF;
 
             END IF;

@@ -89,7 +89,7 @@ class UserModel
      * 查找字段存在数量
      * 
      * @param string $field
-     * @param string $cid
+     * @param string $value
      * @return integer
      */
 	public function selectFieldCount($field, $value)
