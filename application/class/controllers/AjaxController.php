@@ -12,6 +12,106 @@
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
+		/* 相册相关 //////////////////////////////////////////////////////////*/
+		
+		# 处理提交的回复
+		function postalbumreplyAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->album_id = (int)$request->getPost('aid');
+				$this->view->class_id = $this->_classId;
+				$inputChain = new InputChains();
+				$album_id = (int)$request->getPost('album_id');
+				$reply_title = strip_tags(trim($request->getPost('reply_title')));
+				$reply_content = $inputChain->noEmpty($request->getPost('content'),'回复内容');
+				if(null != $inputChain->getMessages())
+				{
+					// 弹出错误
+					$this->view->err_tip = $inputChain->getMessages();
+					$this->render('error');
+				}
+				else 
+				{
+					$db = Zend_Registry::get('dbClass');
+					if($db->insert('tbl_class_reply',array(
+										'class_reply_author' => $this->view->passport('uid'),
+										'class_album_id' => $album_id,
+										'class_reply_title' => $reply_title,
+										'class_reply_content' => Commons::html2str($reply_content),
+										'class_reply_time' => time())) >0)
+					AlbumModel::replyNumInc($album_id);
+					else 
+					{
+						// 弹出错误
+						$this->view->err_tip = '回复失败~';
+						$this->render('error');
+					}
+				}
+			}	
+		}
+		
+		# 显示相册回复表单
+		function albumreplyformAction()
+		{	
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$this->view->page = (int)$request->getPost('p',1);
+				$this->view->album_id = (int)$request->getPost('aid');
+				$this->view->class_id = $this->_classId;
+				$this->render('album-reply-form');
+			}	
+		}
+		
+		# 下载操作
+		function downloadpicAction()
+		{
+			$request = $this->getRequest();
+			$class_id = (int)$request->getParam('c');
+			$file = $request->getParam('file');
+			$name = urldecode($request->getParam('name'));
+			Commons::download(DOCROOT.'/static/classes/'.$class_id.'/album/'.$file,$name.'_'.$file);
+		}
+		
+		# 移动照片所属文件夹
+		function movealbumcategoryAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是班级管理员
+				$album_id = $request->getPost('album_id');
+				$category = urldecode($request->getPost('change'));
+				$r = AlbumModel::modCategory($album_id, $category);
+				if($r != 1)
+				{
+					$this->view->err_tip = '修改失败';
+					$this->render('error');
+				}
+			}
+		}
+		
+		# 新建立照片所属文件夹
+		function newalbumcategoryAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是班级管理员
+				$album_id = $request->getPost('album_id');
+				$new_category = $request->getPost('new');
+				$r = AlbumModel::modCategory($album_id, $new_category);
+				if($r != 1)
+				{
+					$this->view->err_tip = '修改失败';
+					$this->render('error');
+				}
+			}
+		}
+		
 		/* 邀请相关 ////////////////////////////////////////////////////////// */
 		
 		# 接受邀请

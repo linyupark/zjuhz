@@ -1,5 +1,6 @@
 @import url("global.css");
 @import url("facebox.css");
+@import url("thickbox.css");
 
 .box{ padding:20px 0 0 40px; }
 .box h2{ font-size:14px; padding:8px 0; color:#666; }
@@ -39,7 +40,9 @@
 .class_show h2{ font-size:12px; padding:10px 0 5px 0;  }
 .focus{ font-weight:bold; color:#111; }
 #class_notice{ padding:5px; background:#587964; color:#eee; border:2px solid #8A775F; }
-#class_picture{ padding:5px; border:2px solid #eee; }
+#class_picture{  overflow:hidden; }
+#class_picture a{ padding:5px; border:1px solid #eee; display:block; float:left; margin-left:5px }
+#class_picture a:hover{ border:1px solid #ccc; }
 
 /* 各功能帮助点点 ------------------------------------------ */
 .options{ color:#333; border:1px solid #D9E6F7; padding:8px; background:#EFF7FF }

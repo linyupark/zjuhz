@@ -1,9 +1,10 @@
-<form id="album_form" action="public?c=<?= $this->class_id ?>" enctype="multipart/form-data" method="post">
+
+<form id="album_form" enctype="multipart/form-data" method="post">
 <input type="hidden" name="class_id" value="<?= $this->class_id ?>" ?>
 <div class="sidebar" style="width:200px; padding:10px 0 10px 10px;">
 <div class="options">
 <p><b><img src="/static/images/icon/lock.gif" /> 隐私控制</b><br />
-<select name="topic_public" style="width:150px" class="inputtxt mu5">
+<select name="public" style="width:150px" class="inputtxt mu5">
 <option value="0">只对班级公开</option>
 <option value="1">完全公开</option>
 </select></p>
@@ -20,11 +21,11 @@
 <table class="sidebar" style="width:550px; padding:10px; margin:20px;">
 <tr>
 	<td class="pud10 quiet">
-		<b>请选择分类：</b>
+		<b>照片分类：</b>
 	</td>
 	<td>
 		<select name="category">
-		<option value="未分类">未分类</option>
+		<?= $this->albumcategory($this->class_id, $this->f) ?>
 		</select>
 		<input class="inputtxt" type="file" name="userfile" />
 	</td>
@@ -50,5 +51,11 @@
 		<input type="button" value="返回" class="btn" onclick="history.back()" />
 	</td>
 </tr>
+<?php if($this->tips): ?>
+<tr>
+	<td></td>
+	<td class="err_message"><?= $this->tips ?></td>
+</tr>
+<?php endif; ?>
 </table>
 </form>

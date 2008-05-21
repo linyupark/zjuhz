@@ -125,4 +125,20 @@ class Commons
     {
     	return substr(md5(uniqid(rand() + $base, true)), 0, $len);
 	}
+	
+	/**
+	 * 下载指定文件
+	 *
+	 * @param string $file 完整下载路径
+	 * @param string $name 另存为的名称
+	 * @param boolean $delete 是否在下载完后删除
+	 */
+	function download($file, $name, $delete = false)
+    {
+      header("Content-type:application/x-octet-stream");
+      header("Content-Disposition:attachment;filename=$name");
+      readfile($file);
+      if ($delete == ture)
+        unlink($file);
+    }
 }

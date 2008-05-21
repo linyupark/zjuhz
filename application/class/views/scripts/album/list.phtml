@@ -7,25 +7,70 @@
 </p>
 </div>
 
-<!-- 班级话题详细列表 ///////////////////////// -->
+<!-- 班级照片详细列表 ///////////////////////// -->
 <div class="sidebar cont_list">
 <table id="class_topics" width="100%">
 <tr>
-<th colspan="4" class="txtl quiet">
+<th colspan="3" class="txtl quiet">
 <img src="/static/images/icon/picture.gif" /> <b>班级相册</b>
-<select onchange="">
-	<option value="">全部照片</option>
-	<option value="未分类">未分类</option>
+<select class="inputtxt" style="width:150px" name="category" onchange="window.location.href='/class/album/list?c=<?= $this->class_id ?>&f='+this.value">
+<?= $this->albumcategory($this->class_id, $this->f) ?>
 </select>
+<?= $this->numrows ?> 张
+</th>
 <th class="txtr"><a href="/class/album/public?c=<?= $this->class_id ?>" style="background:url(/static/images/icon/add.gif) no-repeat left center; padding-left:18px;">新照片</a></th>
 </tr>
 <tr class="quiet">
-	<td width="50%">主题</td>
-	<td>作者</td>
-	<td class="txtc">回复</td>
-	<td class="txtc">阅读</td>
-	<td class="txtc">最后回复</td>
+	<td width="40%">图片预览</td>
+	<td width="20%">发布人</td>
+	<td width="10%" class="txtc">评论</td>
+	<td width="30%" class="txtc">操作</td>
 </tr>
 
+<?php if(count($this->items)>0): foreach($this->items as $v): ?>
+<tr class="item" id="no_<?= $v['class_album_id']?>">
+	<td>
+		<a class="thickbox" href="/static/classes/<?= $this->class_id.'/album/'.$v['class_album_filename'] ?>">
+			<img src="/static/classes/<?= $this->class_id.'/album/'.$v['class_album_filename'] ?>" alt="<?= stripslashes($v['class_album_name']) ?>" height="100" />
+		</a>
+	</td>
+	<td>
+		<a href=""><?= $v['realName'] ?></a><br />
+		<?= Commons::date($v['class_album_pub_time']) ?>
+	</td>
+	<td class="txtc">
+		<?= $v['class_album_reply_num'] ?>条 <br />
+		<a href="/class/album/view?c=<?= $this->class_id ?>&aid=<?= $v['class_album_id'] ?>">查看</a>
+	</td>
+	<td class="txtc">
+		<a href="/class/ajax/download_pic?c=<?= $this->class_id ?>&file=<?=$v['class_album_filename'] ?>&name=<?= stripslashes($v['class_album_name']) ?>">下载照片</a><br />
+		<a href="">发表评论</a><br />
+		移动到：
+		<select class="inputtxt" name="change" onchange="moveAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)">
+		<?php if(true == Cmd::isManager($this->class_id)): ?>
+		<?= $this->albumcategory($this->class_id, $v['class_album_category']) ?>
+		<?php endif; ?>
+		</select>
+		<br />
+		或：<input type="text" name="new" class="inputtxt" size="10" /> 
+		<input class="btn" type="button" onclick="newAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)" value="新建" />
+	</td>
+</tr>
+<?php endforeach; else: ?>
+<tr>
+	<td colspan='4'>该类别没有任何照片</td>
+</tr>
+<?php endif; ?>
 </table>
+
+<div class="pagination"><?= $this->pagination ?></div>
 </div>
+
+
+<script type="text/javascript">
+	$('.item').each(function(i){
+		if(i%2 == 0) {
+			$(this).css('background','#f5f5f5');
+		}
+	});
+</script>

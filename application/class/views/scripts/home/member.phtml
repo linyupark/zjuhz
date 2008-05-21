@@ -3,6 +3,7 @@
 <p class="toolbar">
 <a href="/class/invite?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/user.gif" /> 邀请加入</a>
 <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/comments.gif" /> 班级话题</a>
+<a href="/class/album/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/picture.gif" /> 班级相册</a>
 <a href="#"><img src="/static/images/icon/email.gif" /> 群发邮件</a>
 <a href="/class/addressbook?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
 </p>
@@ -10,17 +11,25 @@
 
 <!-- 信息显示区 //////////////////////////////////////  -->
 <div class="sidebar class_show" style="width:500px; margin:0 10px">
-<h2 class="quiet"><img src="/static/images/icon/layers.gif" /> 班级黑板报</h2>
+<h2 class="quiet clearfloat"><img src="/static/images/icon/layers.gif" /> 班级黑板报</h2>
 <div id="class_notice">
 <?= stripcslashes($this->class_base_info['class_notice']) == '' ? '这个管理员很懒,黑板报都没出..' : stripcslashes($this->class_base_info['class_notice']); ?>
 </div>
 
 
-<h2 class="quiet"><img src="/static/images/icon/picture.gif" /> 班级相册</h2>
-<div id="class_picture">尚未开放..</div>
+<h2 class="quiet clearfloat"><img src="/static/images/icon/picture.gif" /> 最新照片</h2>
+<div id="class_picture">
+	<?php if($this->albums): foreach($this->albums as $album): ?>
+	<a title="发布人:<?= $album['realName'].' | 描述:'.$album['class_album_description'] ?>" href="/static/classes/<?= $class_id ?>/album/<?= $album['class_album_filename'] ?>" class="thickbox">
+		<img src="/static/classes/<?= $class_id ?>/album/<?= $album['class_album_filename'] ?>" height="80" />
+	</a>
+	<?php endforeach; else: ?>
+	无
+	<?php endif; ?>
+</div>
 
 <!-- 班级对应身份所开放的最新话题列 -->
-<h2><img src="/static/images/icon/comments.gif" /> <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>">最新话题</a></h2>
+<h2 class="clearfloat"><img src="/static/images/icon/comments.gif" /> <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>">最新话题</a></h2>
 	<div id="class_topic">
 		<?php 
 		if(count($this->topics) > 0)
