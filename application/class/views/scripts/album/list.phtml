@@ -43,8 +43,11 @@
 		<a href="/class/album/view?c=<?= $this->class_id ?>&aid=<?= $v['class_album_id'] ?>">查看</a>
 	</td>
 	<td class="txtc">
-		<a href="/class/ajax/download_pic?c=<?= $this->class_id ?>&file=<?=$v['class_album_filename'] ?>&name=<?= stripslashes($v['class_album_name']) ?>">下载照片</a><br />
-		<a href="">发表评论</a><br />
+		
+		<a href="/class/ajax/download_pic?c=<?= $this->class_id ?>&file=<?=$v['class_album_filename'] ?>&name=<?= stripslashes($v['class_album_name']) ?>">
+			<img src="/static/images/icon/disk.gif" />
+		</a>
+		<a href="javascript:albumReplyForm(<?= $this->class_id.','.$v['class_album_id'].',1' ?>)">发表评论</a><br />
 		移动到：
 		<select class="inputtxt" name="change" onchange="moveAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)">
 		<?php if(true == Cmd::isManager($this->class_id)): ?>
