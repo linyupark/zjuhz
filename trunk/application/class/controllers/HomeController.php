@@ -8,6 +8,8 @@ class HomeController extends Zend_Controller_Action
 {
 	function init()
 	{
+		// 加载JS插件
+		$this->view->headScript()->appendFile('/static/scripts/thickbox-compressed.js');
 		$this->_sessClass = Zend_Registry::get('sessClass');
 		$this->view->class_base_info = $this->getRequest()->getParam('class');
 	}
@@ -34,6 +36,11 @@ class HomeController extends Zend_Controller_Action
 						'uid' => $uid, 
 						'class_id'=> $class_id, 
 						'cname' => $passport['realName'],
+						'mobile' => $passport['mobile'],
+						'eMail' => $passport['eMail'],
+						'qq' => $passport['qq'],
+						'msn' => $passport['address'],
+						'postcode' => $passport['postcode']
 					);
 					$db = Zend_Registry::get('dbClass');
 					$db->insert('tbl_class_addressbook', $data);
@@ -47,8 +54,14 @@ class HomeController extends Zend_Controller_Action
 	private function commonView()
 	{
 		$class_id = $this->view->class_base_info['class_id'];
-		$rows = TopicModel::fetchList($class_id, $this->getRequest()->getActionName(), null, 5, 1);
+		$role = $this->getRequest()->getActionName();
+		$pub = false; // 是否为对外开放信息
+		if($role == 'visitor') $pub = true;
+		// 话题
+		$rows = TopicModel::fetchList($class_id, $role, null, 5, 1);
 		$this->view->topics = $rows['rows'];
+		// 相册
+		$this->view->albums = AlbumModel::fetchLast($class_id, 5, $pub);
 	}
 	
 	# 游客身份访问班级信息

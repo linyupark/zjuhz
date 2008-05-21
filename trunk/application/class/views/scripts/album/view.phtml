@@ -1,0 +1,73 @@
+<p class="class_tab">
+<b><a href="/class/home">我的班级</a></b> &raquo; 
+<a href="/class/home?c=<?= $this->class_id ?>"><?= Zend_Registry::get('sessClass')->data[$this->class_id]['class_name'] ?></a> &raquo; 
+<a href="/class/album/list?c=<?= $this->class_id ?>">班级相册</a> &raquo; <a href="/class/album/list?c=<?= $this->class_id ?>&f=<?= urlencode($this->album['class_album_category']) ?>"><?= $this->album['class_album_category'] ?></a> &raquo; <?= $this->title ?>
+</p>
+<div class="sidebar topic">
+	<div class="author">
+		<table width="100%">
+		<tr>
+			<td width="15%" class="txtc pu10" valign="top">
+				<img src="/static/users/user_test/tiny_head.jpg" />
+				<p class="f14"><a href=""><?= $this->album['realName'] ?></a></p>
+			</td>
+			<!-- 相册内容 ////////////////////////// -->
+			<td width="85%">
+				<h2 class="f14"><?= stripslashes($this->album['class_album_name']) ?></h2>
+				<p class="p8 bg-fblue quiet">
+				发布: <?= Commons::date($this->album['class_album_pub_time']) ?>  
+				</p>
+				<div class="content">
+					<img src="/static/classes/<?= $this->class_id ?>/album/<?= $this->album['class_album_filename'] ?>" />
+				</div>
+			</td>
+			<!-- 相册内容 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+		</tr>
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+		var img = $('.content img');
+		var width = parseInt(img.width());
+		if( width > 650)
+		{
+			img.width(650);
+			img.css('cursor','pointer');
+			img.click(function(){ window.location.href=img.attr('src') });
+		}
+	</script>
+	
+	<!-- 回复内容 /////////////////////////////////// -->
+	<div class="pagination"><?= $this->pagination ?></div>
+	<?php if($this->replies != null): foreach ($this->replies as $k => $v): ?>
+	<div class="reply">
+			<table width="100%">
+			<tr>
+				<td width="10%" class="txtc pu10" valign="top">
+					<img src="/static/users/user_test/tiny_head.jpg" width="35" height="35" />
+					<p class="f12"><a href=""><?= $v['realName'] ?></a></p>
+				</td>
+				<!-- 回复 ////////////////////////// -->
+				<td width="90%">
+					<h2 class="f12"><?= stripslashes($v['class_reply_title']) ?></h2>
+					<p class="p8 bg-fblue quiet">
+					<small class="f9 quiet"><?= Commons::date($v['class_reply_time']) ?></small>  回复：
+					<?php if(Cmd::isManager($this->class_id)): ?>
+					<a href="javascript:delReply(<?= $this->class_id.','.$this->album_id.','.$v['class_reply_id'] ?>)" style="background:url(/static/images/icon/cross.gif) no-repeat left center; padding:10px 5px 5px 20px;">删除</a>
+					<?php endif; ?>
+					<a href="javascript:scroll(0,0)">#<?= (($this->page-1)*5)+($k+1) ?></a>
+					</p>
+					<div class="content">
+						<?= stripslashes($v['class_reply_content']) ?>
+					</div>
+				</td>
+				<!-- 回复 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+			</tr>
+			</table>
+	</div>
+	<?php endforeach; endif;  ?>
+	<div class="pagination"><?= $this->pagination ?></div>
+	<p class="p10 txtc">
+	<button class="btn" onclick="albumReplyForm(<?= $this->class_id.','.$this->album_id.','.$this->pages ?>)">我要回复这个话题</button>
+	</p>
+</div>

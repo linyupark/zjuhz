@@ -5,6 +5,59 @@ function tabFocus(name)
 	$('a[href^="javascript:'+name+'"]').addClass('focus');
 }
 
+
+// --------------------------- 班级相册相关 ---------------------------
+
+// 回复话题框
+function postAlbumReply()
+{
+	$.post('/class/ajax/post_album_reply', $('#reply_form').fastSerialize(), function(data){
+		if(data != '') // 出错
+		$('#result').html(data);
+		else
+		{
+			location.reload();
+		}
+	});
+	return false;
+}
+
+function albumReplyForm(class_id, album_id, page)
+{
+	$.post('/class/ajax/album_reply_form',{class_id:class_id,aid:album_id,p:page}, function(data){
+		$.facebox(data);
+	});
+}
+
+// 移动照片
+function moveAlbumCategory(album_id, class_id)
+{
+	var data = $('#no_'+album_id).fastSerialize();
+	data.push({name:'album_id',value:album_id});
+	data.push({name:'class_id',value:class_id});
+	$.post('/class/ajax/move_album_category', data, function(html){
+		if(html != "") $.facebox(html);
+		else{
+			$('#no_'+album_id).fadeOut();
+		}
+	});
+}
+
+// 建立新的相册文件夹
+function newAlbumCategory(album_id, class_id)
+{
+	var data = $('#no_'+album_id).fastSerialize();
+	data.push({name:'album_id',value:album_id});
+	data.push({name:'class_id',value:class_id});
+	$.post('/class/ajax/new_album_category', data, function(html){
+		if(html != "") $.facebox(html);
+		else{
+			history.go(0);
+		}
+	});
+}
+
+
 // --------------------------- 邀请加入班级相关 ------------------------
 
 // 接受邀请
