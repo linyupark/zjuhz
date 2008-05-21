@@ -125,6 +125,15 @@ class MyController extends Zend_Controller_Action
 
     			break;
 			}
+			case 'doinvite': // 邀请操作
+			{
+				$cid    = $this->getRequest()->getParam('cid');
+				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
+
+				$this->view->detail = $detail;
+
+    			break;
+			}
 			default:       // 名片管理
 			{
     			$type = 'card';
@@ -352,4 +361,56 @@ class MyController extends Zend_Controller_Action
 			}
 		}
 	}
+
+	/**
+     * 通讯录-email邀请好友
+     * 
+     * @return void
+     */
+	public function doemailAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$cid = $postArgs['cid'];
+
+			$this->_sessMember->message = $this->_iniMember->hint->inviteFailure;
+
+			if (!$this->_sessMember->invite[$cid] && ($inviteArgs = MyFilter::init()->invite($postArgs)))
+			{
+				$AddressCardLogic   = AddressCardLogic::init();
+			    if ($AddressCardRow = $AddressCardLogic->selectCidRow($cid, $this->_sessUid))
+			    {
+			    	$InviteLogLogic = InviteLogLogic::init();
+				    if (!$InviteLogLogic->selectCidRow($cid))
+			        {
+			        	$insertArgs = array('cid' => $cid, 'logTime' => $_SERVER['REQUEST_TIME']);
+			            $updateArgs = array('status' => 0);
+			    	    if (!$InviteLogLogic->insert($insertArgs) ? false : $AddressCardLogic->update($updateArgs, $cid))
+			    	    {
+			    	    	//*
+			    	    	$config = array('name'=>'smtp.gmail.com', 'username'=>'service@zjuhz.com', 
+			    	    	    'password'=>'89988185-service_zjuhz_com', 'auth'=>'login', 'ssl' => 'ssl');
+
+		                    $mail = new Zend_Mail('utf-8');
+                            $smtp = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
+
+                            $mail->addTo($AddressCardRow['eMail'], $AddressCardRow['cname'])
+                                     ->setFrom('service@zjuhz.com', $this->_sessCommon->login['realName'])
+                                     ->setSubject("{$this->_sessCommon->login['realName']} 邀请您加入杭州浙江大学校友网")
+                                     ->setBodyText($inviteArgs['bodyText']);
+                            $mail->send($smtp);//*/
+
+		    	    	    $this->_sessMember->message = $this->_iniMember->hint->inviteSuccess;
+		    	        }
+                    }
+
+			        $this->_sessMember->invite[$cid] = true; // 标记cid已邀请
+			    }
+			}
+		}
+	}	
 }

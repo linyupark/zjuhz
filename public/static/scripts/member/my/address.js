@@ -10,6 +10,11 @@ $(function() {
 		dogroup();
 		return false;
     });
+
+    $("#sendemail").click( function() {
+		doinvite("email");
+		return false;
+    });
 });
 
 
@@ -100,6 +105,23 @@ function dogroupdel(para) {
 			$("#group" + para["gid"]).hide(0);
 			return false;
 		}
+	});
+
+	return false;
+}
+
+// 通讯录邀请好友
+
+// 邀请好友 email OR sms
+function doinvite(type) {
+	$("#send"+type).attr("disabled", true);
+	$("#loading"+type).show();
+	var formdata = $("#frm"+type).fastSerialize();
+
+	$.post("/member/my/do"+type, formdata, function(msg) {
+        $("#loading"+type).hide();
+        popup_message("/member/index/message/");
+		return false;
 	});
 
 	return false;
