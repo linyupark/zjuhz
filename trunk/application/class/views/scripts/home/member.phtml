@@ -1,11 +1,12 @@
+<?php $class_id = $this->class_base_info['class_id']; ?>
 <div class="sidebar" style="width:160px">
 <!-- 管理条目 ///////////////////////////////////// -->
 <p class="toolbar">
-<a href="/class/invite?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/user.gif" /> 邀请加入</a>
-<a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/comments.gif" /> 班级话题</a>
-<a href="/class/album/list?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/picture.gif" /> 班级相册</a>
+<a href="/class/invite?c=<?= $class_id ?>"><img src="/static/images/icon/user.gif" /> 邀请加入</a>
+<a href="/class/topic/list?c=<?= $class_id ?>"><img src="/static/images/icon/comments.gif" /> 班级话题</a>
+<a href="/class/album/list?c=<?= $class_id ?>"><img src="/static/images/icon/picture.gif" /> 班级相册</a>
 <a href="#"><img src="/static/images/icon/email.gif" /> 群发邮件</a>
-<a href="/class/addressbook?c=<?= $this->class_base_info['class_id'] ?>"><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
+<a href="/class/addressbook?c=<?= $class_id ?>"><img src="/static/images/icon/book.gif" /> 班级通讯录</a>
 </p>
 </div>
 
@@ -29,13 +30,13 @@
 </div>
 
 <!-- 班级对应身份所开放的最新话题列 -->
-<h2 class="clearfloat"><img src="/static/images/icon/comments.gif" /> <a href="/class/topic/list?c=<?= $this->class_base_info['class_id'] ?>">最新话题</a></h2>
+<h2 class="clearfloat"><img src="/static/images/icon/comments.gif" /> <a href="/class/topic/list?c=<?= $class_id ?>">最新话题</a></h2>
 	<div id="class_topic">
 		<?php 
 		if(count($this->topics) > 0)
 		foreach ($this->topics as $key => $val)
 		{
-			echo '<li>['.date('m-d H:i',$val['class_topic_pub_time']).'] <a href="/class/topic/view?c='.$this->class_base_info['class_id'].'&tid='.$val['class_topic_id'].'">'.stripslashes($val['class_topic_title']).'</a></li>';
+			echo '<li>['.date('m-d H:i',$val['class_topic_pub_time']).'] <a href="/class/topic/view?c='.$class_id.'&tid='.$val['class_topic_id'].'">'.stripslashes($val['class_topic_title']).'</a></li>';
 		}
 		?>
 	</div>
