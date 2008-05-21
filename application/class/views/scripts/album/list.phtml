@@ -48,15 +48,15 @@
 			<img src="/static/images/icon/disk.gif" />
 		</a>
 		<a href="javascript:albumReplyForm(<?= $this->class_id.','.$v['class_album_id'].',1' ?>)">发表评论</a><br />
+		<?php if(true == Cmd::isManager($this->class_id)): // 管理员可做 ?>
 		移动到：
 		<select class="inputtxt" name="change" onchange="moveAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)">
-		<?php if(true == Cmd::isManager($this->class_id)): ?>
 		<?= $this->albumcategory($this->class_id, $v['class_album_category']) ?>
-		<?php endif; ?>
 		</select>
 		<br />
 		或：<input type="text" name="new" class="inputtxt" size="10" /> 
 		<input class="btn" type="button" onclick="newAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)" value="新建" />
+		<?php endif; ?>
 	</td>
 </tr>
 <?php endforeach; else: ?>
