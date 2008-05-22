@@ -125,8 +125,7 @@ class MyController extends Zend_Controller_Action
 			case 'docard': // 名片操作
 			{
 				$cid    = $this->getRequest()->getParam('cid');
-				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : 
-					$this->_redirect('/member/my/address/type/card/', array('exit')));
+				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
 
                 $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : 
                     Commons::getRandomStr($this->_sessUid, 10));
