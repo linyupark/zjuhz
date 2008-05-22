@@ -19,21 +19,23 @@
 				</p>
 				<div class="content">
 					<img src="/static/classes/<?= $this->class_id ?>/album/<?= $this->album['class_album_filename'] ?>" />
-					<p>
-						<?php if($this->previous): ?>
+					
+					<table width="100%">
+						<tr>
+							<td><?php if($this->previous): ?>
 						前一张: 
 						<a href="/class/album/view?c=<?= $this->class_id ?>&aid=<?= $this->previous['class_album_id'] ?>">
 							<?= $this->previous['class_album_name'] ?>
 						</a>
-						<?php endif; ?>
-						
-						<?php if($this->next): ?>
+						<?php endif; ?></td>
+							<td class="txtr"><?php if($this->next): ?>
 						后一张: 
 						<a href="/class/album/view?c=<?= $this->class_id ?>&aid=<?= $this->next['class_album_id'] ?>">
 							<?= $this->next['class_album_name'] ?>
 						</a>
-						<?php endif; ?>
-					</p>
+						<?php endif; ?></td>
+						</tr>
+					</table>
 					<p class="err_message txtl"><?= $this->album['class_album_description'] ?></p>
 				</div>
 			</td>
@@ -43,14 +45,16 @@
 	</div>
 	
 	<script type="text/javascript">
-		var img = $('.content img');
-		var width = parseInt(img.width());
-		if( width > 650)
-		{
-			img.width(650);
-			img.css('cursor','pointer');
-			img.click(function(){ window.location.href=img.attr('src') });
-		}
+		window.setInterval(function(){
+			var img = $('.content img');
+			var width = parseInt(img.width());
+			if( width > 650)
+			{
+				img.width(650);
+				img.css('cursor','pointer');
+				img.click(function(){ window.location.href=img.attr('src') });
+			}
+		},300);
 	</script>
 	
 	<!-- 回复内容 /////////////////////////////////// -->
