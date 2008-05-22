@@ -10,29 +10,28 @@
 
 
 /** set error_reporting */
-//error_reporting('ALL');
+error_reporting('ALL');
 
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../common/Custom/'.PATH_SEPARATOR.
                  '../../application/help/interlayers/'.PATH_SEPARATOR.
                  '../../application/help/models/');
-//echo get_include_path();exit;
 
 /** Zend_Loader */
 require_once('Zend/Loader.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-/** 项目配置文档对象 */
+/** Config */
 Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
-/** 公用SESSION */
+/** Session */
 Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
-/** 项目SESSION */
 Zend_Registry::set('sessHelp', new Zend_Session_Namespace('help'));
-/** 项目ACL */
+
+/** ACL */
 Zend_Registry::set('aclHelp', new Zend_Acl());
 
 /** Zend_Layout */

@@ -29,6 +29,13 @@ class MyController extends Zend_Controller_Action
 	private $_sessMember = null;
 
 	/**
+     * 公用模块配置
+     *
+     * @var object
+     */
+	private $_iniCommon = null;
+
+	/**
      * 会员模块配置
      *
      * @var object
@@ -51,6 +58,7 @@ class MyController extends Zend_Controller_Action
 	{
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessMember = Zend_Registry::get('sessMember');
+		$this->_iniCommon  = Zend_Registry::get('iniCommon');
 		$this->_iniMember  = Zend_Registry::get('iniMember');
 
 		$this->_sessUid = $this->_sessCommon->login['uid'];
@@ -391,18 +399,14 @@ class MyController extends Zend_Controller_Action
 			            $updateArgs = array('status' => 0);
 			    	    if (!$InviteLogLogic->insert($insertArgs) ? false : $AddressCardLogic->update($updateArgs, $cid))
 			    	    {
-			    	    	//*
-			    	    	$config = array('name'=>'smtp.gmail.com', 'username'=>'service@zjuhz.com', 
-			    	    	    'password'=>'89988185-service_zjuhz_com', 'auth'=>'login', 'ssl' => 'ssl');
+			    	    	$config = $this->_iniCommon->mail->gmail->toArray(); // 载入ini的配置
+		                    $mail   = new Zend_Mail('utf-8');
 
-		                    $mail = new Zend_Mail('utf-8');
-                            $smtp = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
-
-                            $mail->addTo($AddressCardRow['eMail'], $AddressCardRow['cname'])
-                                     ->setFrom('service@zjuhz.com', $this->_sessCommon->login['realName'])
-                                     ->setSubject("{$this->_sessCommon->login['realName']} 邀请您加入杭州浙江大学校友网")
-                                     ->setBodyText($inviteArgs['bodyText']);
-                            $mail->send($smtp);//*/
+                            $mail->setFrom($config['username'], $this->_sessCommon->login['realName']) // 配置中的发信方
+                                 ->addTo($AddressCardRow['eMail'], $AddressCardRow['cname']) // 数据表中的收信方
+                                 ->setSubject($this->_iniCommon->mail->subject->invite) // 配置中的邮件主题
+                                 ->setBodyText($inviteArgs['bodyText']) // 表单中的邮件正文
+                                 ->send(new Zend_Mail_Transport_Smtp($config['name'], $config));
 
 		    	    	    $this->_sessMember->message = $this->_iniMember->hint->inviteSuccess;
 		    	        }
