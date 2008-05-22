@@ -2,7 +2,7 @@
 <table>
 <tr>
 <td align="right"><b>姓名：</b></td>
-<td><input class="txt" type="text" name="cname" id="cname" maxlength="6" value="<?= $this->detail['cname']; ?>"></td>
+<td><?php if (2 == $this->detail['status'] OR 4 == $this->detail['status']) { ?><?= $this->detail['cname']; ?><input type="hidden" name="cname" id="cname" maxlength="6" readonly value="<?= $this->detail['cname']; ?>"><?php } else { ?><input class="txt" type="text" name="cname" id="cname" maxlength="6" value="<?= $this->detail['cname']; ?>"><?php } ?></td>
 <td><b>名片组：</b></td>
 <td>
 <select name="gid" id="gid">
