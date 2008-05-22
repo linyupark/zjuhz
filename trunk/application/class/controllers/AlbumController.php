@@ -40,6 +40,7 @@
 			{
 				// 建立目录
 				$album_dir = DOCROOT.'/static/classes/'.$this->view->class_id.'/album/';
+				echo $album_dir;
 				if(FALSE == is_dir($album_dir))
 				{
 					@mkdir($album_dir, 0777);
@@ -162,6 +163,12 @@
 			{
 				$this->view->album = $album;
 				$this->view->title = $album['class_album_name'];
+				
+				$sibling = AlbumModel::sibling($album['class_album_category'],$album_id);
+				
+				// 前后相片
+				$this->view->previous = $sibling['previous'];
+				$this->view->next = $sibling['next'];
 				
 				// 回复部分
 				$pagesize = 5;
