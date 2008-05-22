@@ -4,27 +4,39 @@
 <td align="left"><img src="/static/images/icon/email.gif">&nbsp;<b>直接发送邮件邀请：</b></td>
 <td align="left">&nbsp;</td>
 </tr>
+<?php if ($this->detail['eMail']) { ?>
 <tr>
 <td align="left">好友姓名(接收邮箱)：<?= $this->detail['cname']; ?>(<?= $this->detail['eMail']; ?>)&nbsp;&nbsp;<a href="/member/my/address/type/docard/cid/<?= $this->detail['cid']; ?>/">修改</a></td>
 <td align="left">&nbsp;</td>
 </tr>
 <tr>
-  <td align="left"><textarea class="inputtxt" name="bodyText" id="bodyText" cols="60" rows="7" readonly>我是<?= $this->sessCommon->login['realName']; ?>，我在杭州浙江大学校友会网站(www.zjuhz.com)内找到了很多浙大同学，这里还创建了我们的班级，也有同学们的照片和帖子，只要注册就能看到！:)
+  <td align="left"><textarea class="inputtxt" name="bodyText" id="bodyText" cols="60" rows="7" readonly>我是<?= $this->sessCommon->login['realName']; ?>，我在杭州浙江大学校友会网站(www.zjuhz.com)内找到了很多浙大同学，这里还创建了我们的班级，也有同学们的照片和话题帖子，只要注册就能看到！:)
 
-杭州浙江大学校友会网站是一个真实可靠的浙大校友社区，你可以第一时间了解母校动态、与同学或校友交流！
+杭州浙江大学校友会网站是一个真实可靠的浙大校友社区，你可以第一时间了解母校动态、与同学(或校友)们交流，还能组织(或参加)丰富的线下活动呢！
 
-在浏览器内打开下面的链接即可注册：
+只要在浏览器内打开下面的链接即可注册：
 http://<?= $_SERVER["SERVER_NAME"]; ?>/member/register/invite/ikey/<?= $this->detail['cid']; ?>/
 
-你也可以先逛逛，想要加入时在注册页面内输入邀请码：<?= $this->detail['cid']; ?>
+你也可以先打开主页逛逛，想要加入时在注册页面内输入邀请码：<?= $this->detail['cid']; ?>
 
 http://www.zjuhz.com/
+
+大家都在等你哦！^_^
+
+
+(此邮件不需要回复)
   </textarea></td>
   <td align="left"><input type="button" name="sendemail" id="sendemail" value="发送邮件" class="btn" />
     <span class="f12" id="loadingemail" style="display:none"><font color="#FF0000">请稍候...</font></span><br />
     <br />
     <span class="f12">* 邮件是以您的名义将左侧的内容发给好友，只能发送一次，若对方未收到邮件或无效果，请换其它邀请方式。</span></td>
 </tr>
+<?php } else { ?>
+<tr>
+<td align="left">您还没填写该好友的Email，填写后便能通过邮件方式邀请。&nbsp;&nbsp;<a href="/member/my/address/type/docard/cid/<?= $this->detail['cid']; ?>/">立即填写</a></td>
+<td align="left">&nbsp;</td>
+</tr>
+<?php } ?>
 </table>
 <input type="hidden" name="cid" id="cid" value="<?= $this->detail['cid']; ?>" />
 <input type="hidden" name="eMail" id="eMail" value="<?= $this->detail['eMail']; ?>" />
