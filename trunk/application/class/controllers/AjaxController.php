@@ -14,6 +14,23 @@
 		
 		/* 相册相关 //////////////////////////////////////////////////////////*/
 		
+		# 删除照片
+		function delalbumAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是班级管理员
+				$album_id = $request->getPost('album_id');
+				$r = AlbumModel::delete($album_id);
+				if($r != true)
+				{
+					$this->view->err_tip = '修改失败';
+					$this->render('error');
+				}
+			}
+		}
+		
 		# 处理提交的回复
 		function postalbumreplyAction()
 		{

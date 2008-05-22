@@ -3,6 +3,31 @@
 	class AlbumModel
 	{
 		/**
+		 * 删除相片以及评论
+		 *
+		 * @param int $album_id
+		 * @return boolean
+		 */
+		static function delete($album_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$row = self::fetchDetail($album_id);
+			if($db->delete('tbl_class_album','class_album_id = '.(int)$album_id) == 1)
+			{
+				// 删除相关的评论记录
+				$db->delete('tbl_class_reply','class_album_id = '.(int)$album_id);
+				// 如果是班级专有相片,删除物理图片文件
+				if($row['class_album_is_personal'] == 0)
+				{
+					$file = DOCROOT.'/static/classes/'.$row['class_id'].'/album/'.$row['class_album_filename'];
+					@unlink($file);
+				}
+				return true;
+			}
+			return false;
+		}
+		
+		/**
 		 * 增加相册的回复次数
 		 *
 		 * @param int $topic_id

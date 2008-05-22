@@ -8,6 +8,21 @@ function tabFocus(name)
 
 // --------------------------- 班级相册相关 ---------------------------
 
+// 删除相片
+function delAlbum(album_id, class_id)
+{
+	var d = confirm('是否要删除该班级图片?相关评论也会删除');
+	if(d == true)
+	{
+		$.post('/class/ajax/del_album', {album_id:album_id, class_id:class_id}, function(html){
+		if(html != "") $.facebox(html);
+			else{
+				$('#no_'+album_id).fadeOut();
+			}
+		})
+	}
+}
+
 // 回复话题框
 function postAlbumReply()
 {

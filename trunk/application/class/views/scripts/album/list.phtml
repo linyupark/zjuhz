@@ -47,8 +47,9 @@
 		<a href="/class/ajax/download_pic?c=<?= $this->class_id ?>&file=<?=$v['class_album_filename'] ?>&name=<?= stripslashes($v['class_album_name']) ?>">
 			<img src="/static/images/icon/disk.gif" />
 		</a>
-		<a href="javascript:albumReplyForm(<?= $this->class_id.','.$v['class_album_id'].',1' ?>)">发表评论</a><br />
+		<a href="javascript:albumReplyForm(<?= $this->class_id.','.$v['class_album_id'].',1' ?>)">发表评论</a>
 		<?php if(true == Cmd::isManager($this->class_id)): // 管理员可做 ?>
+		<a href="javascript:delAlbum(<?= $v['class_album_id'].','.$this->class_id ?>)" title="删除"><img src="/static/images/icon/cross.gif" /></a><br />
 		移动到：
 		<select class="inputtxt" name="change" onchange="moveAlbumCategory(<?= $v['class_album_id'].','.$this->class_id ?>)">
 		<?= $this->albumcategory($this->class_id, $v['class_album_category']) ?>
