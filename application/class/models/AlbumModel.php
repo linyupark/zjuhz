@@ -3,6 +3,36 @@
 	class AlbumModel
 	{
 		/**
+		 * 返回当前同类相片的前一张和后一张
+		 *
+		 * @param string $category 分类名称
+		 * @param int $album_id 当前照片的id	
+		 * @return array['previous']/array['next']
+		 */
+		static function sibling($category, $album_id)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$previous = $db->fetchRow('
+				SELECT `class_album_name`,`class_album_id`  
+				FROM `tbl_class_album` 
+				WHERE `class_album_id` < ? AND `class_album_category` = ? 
+				LIMIT 1
+			',array($album_id, $category));
+			
+			$next = $db->fetchRow('
+				SELECT `class_album_name`,`class_album_id` 
+				FROM `tbl_class_album` 
+				WHERE `class_album_id` > ? AND `class_album_category` = ? 
+				LIMIT 1
+			',array($album_id, $category));
+			
+			$result['previous'] = $previous;
+			$result['next'] = $next;
+			
+			return $result;
+		}
+		
+		/**
 		 * 删除相片以及评论
 		 *
 		 * @param int $album_id
@@ -41,8 +71,9 @@
 								'`class_album_id` ='.(int)$album_id);
 		}
 		
-	 	/* 获取相册回复
-		 *
+	 	/** 
+		 * 获取相册回复
+		 * 
 		 * @param int $album_id
 		 * @param int $pagesize
 		 * @param int $page

@@ -40,7 +40,6 @@
 			{
 				// 建立目录
 				$album_dir = DOCROOT.'/static/classes/'.$this->view->class_id.'/album/';
-				echo $album_dir;
 				if(FALSE == is_dir($album_dir))
 				{
 					@mkdir($album_dir, 0777);

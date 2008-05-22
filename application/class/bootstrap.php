@@ -27,6 +27,8 @@ Zend_Registry::set('sessClass', new Zend_Session_Namespace('class'));
 /* Layout */
 Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layout' => 'main'));
 
+define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
+
 
 /** run */
 $info_front = Zend_Controller_Front::getInstance();
