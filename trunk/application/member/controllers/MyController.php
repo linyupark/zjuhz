@@ -125,7 +125,8 @@ class MyController extends Zend_Controller_Action
 			case 'docard': // 名片操作
 			{
 				$cid    = $this->getRequest()->getParam('cid');
-				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
+				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : 
+					$this->_redirect('/member/my/address/type/card/', array('exit')));
 
                 $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : 
                     Commons::getRandomStr($this->_sessUid, 10));
@@ -136,7 +137,8 @@ class MyController extends Zend_Controller_Action
 			case 'doinvite': // 邀请操作
 			{
 				$cid    = $this->getRequest()->getParam('cid');
-				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : '');
+				$detail = (10 == strlen($cid) ? AddressCardLogic::init()->selectCidRow($cid, $this->_sessUid) : 
+                    $this->_redirect('/member/my/address/type/card/', array('exit')));
 
 				$this->view->detail = $detail;
 
