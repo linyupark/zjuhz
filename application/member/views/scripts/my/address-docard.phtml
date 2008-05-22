@@ -35,7 +35,7 @@
 </tr>
 <tr>
 <td align="right">&nbsp;</td>
-<td colspan="3"><input type="submit" value="保存名片" class="btn" id="btnCard" name="btnCard" />&nbsp;<button class="btn" onclick="history.go(-1);">返回</button></td>
+<td colspan="3"><input type="submit" value="保存名片" class="btn" id="btnCard" name="btnCard" />&nbsp;<?php if (2 == $this->detail['status'] OR 4 == $this->detail['status']) { ?><?php } else { ?><button class="btn" onclick="top.location.href='/member/my/address/type/doinvite/cid/<?= $this->cid; ?>/';">邀请</button>&nbsp;<?php } ?><button class="btn" onclick="history.go(-1);">返回</button></td>
 </tr>
 <tr>
 <td align="right">&nbsp;</td>
