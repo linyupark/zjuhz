@@ -16,17 +16,11 @@ class IndexController extends Zend_Controller_Action
 		$year = $this->_getParam('year');
 		$college = $this->_getParam('college');
 		
-		if($year == '') $year = $this->view->Passport('year');
-		if($college == '') $college = $this->view->college($this->view->Passport('college'));
-		
 		$page = $this->_getParam('p',1);
 			
 		//按页获取信息列表
 		Page::$pagesize = 15;
 		$rows = DbModel::searchClass('', $year, $college, ($page-1)*Page::$pagesize,Page::$pagesize);
-		
-		if($rows['numrows'] == 0)
-		$rows = DbModel::searchClass('', '', '', ($page-1)*Page::$pagesize,Page::$pagesize);
 		
 		Page::create(array(
 		"href_open" => "<a href='/class/?year={$year}&college={$college}&p=%d'>", 
@@ -41,6 +35,10 @@ class IndexController extends Zend_Controller_Action
 		
 		// 获取收到班级邀请信息
 		$this->view->invites = InviteModel::fetchAll($this->view->passport('uid'));
+		
+		// 相关班级信息
+		$correlation = DbModel::searchClass('', $this->view->Passport('year'), $this->view->college($this->view->Passport('college')), 0,5);
+		$this->view->correlation = $correlation['rows'];
 		
 		// 分配班级数据
 		$this->view->year = $year;

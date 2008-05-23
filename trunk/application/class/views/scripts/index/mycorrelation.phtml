@@ -1,0 +1,10 @@
+
+<ul><b>相关班级：</b><br />
+<?php 
+if(count($this->correlation) == 0): ?>
+无
+<?php else: foreach ($this->correlation as $v): ?>
+<li><a href='/class/home?c=<?= $v['class_id'] ?>'><?= $v['class_name'] ?></a></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>
