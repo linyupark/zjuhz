@@ -13,8 +13,8 @@ class IndexController extends Zend_Controller_Action
 	function indexAction()
 	{
 		// 获取班级列表
-		$year = $this->_getParam('year');
-		$college = $this->_getParam('college');
+		$year = $this->_getParam('year',$this->view->Passport('year'));
+		$college = $this->_getParam('college',$this->view->Passport('college'));
 		$page = $this->_getParam('p',1);
 			
 		//按页获取信息列表

@@ -13,7 +13,7 @@
 <p><b>院系名称：</b><br />
 <select name="college" class="inputtxt" style="width:180px">
 <option value="">所有学院</option>
-<?php foreach (Zend_Registry::get('iniClass')->college->name->toArray() as $k => $v): ?>
+<?php foreach (Zend_Registry::get('iniConfig')->college->name->toArray() as $v): ?>
 <option value="<?= $v ?>"<?php if($this->college == $v):?>selected="selected"<?php endif; ?>><?= $v ?></option>
 <?php endforeach; ?>
 </select>
