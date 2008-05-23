@@ -1,7 +1,18 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `zjuhz_user`.`sp_register` $$
-CREATE PROCEDURE `zjuhz_user`.`sp_register` (IN param_username CHAR(16),IN param_password CHAR(16),IN param_realName CHAR(6),IN param_sex CHAR(1),IN param_regIp CHAR(15),IN param_ikey CHAR(10),OUT out_uid INT(10))
+CREATE PROCEDURE `zjuhz_user`.`sp_register` (
+    IN param_username CHAR(16),
+    IN param_password CHAR(16),
+    IN param_realName CHAR(6),
+    IN param_sex CHAR(1),
+    IN param_year SMALLINT(1),
+    IN param_college CHAR(20),
+    IN param_major VARCHAR(30),
+    IN param_regIp CHAR(15),
+    IN param_ikey CHAR(10),
+    OUT out_uid INT(10)
+)
 BEGIN
 
 
@@ -27,7 +38,7 @@ BEGIN
 
         IF statusMy = 2 THEN
 
-            INSERT INTO tbl_user (username,password,realName,nickname,sex,regIp,ikey,iuid) VALUES (param_username,md5(param_password),param_realName,param_realName,param_sex,param_regIp,param_ikey,uidParent);
+            INSERT INTO tbl_user (username,password,realName,nickname,sex,year,college,major,regIp,ikey,iuid) VALUES (param_username,md5(param_password),param_realName,param_realName,param_sex,param_year,param_college,param_major,param_regIp,param_ikey,uidParent);
             SET uidMy = LAST_INSERT_ID();
 
             IF uidMy > uidParent THEN

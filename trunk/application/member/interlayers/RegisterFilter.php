@@ -72,7 +72,7 @@ class RegisterFilter extends MemberInterlayer
           	'ikey' => array(
                 array('StringLength', '10', '10'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->ikeyError, 
-                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), 	
+                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), 
 		    'uname' => array(
 		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError)), 
@@ -88,10 +88,20 @@ class RegisterFilter extends MemberInterlayer
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realNameError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realNameError)), 
             'sex' => array('presence' => 'required'), 
+            'year' => array(
+			    array('Between', '1900', '2050'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->yearNotBetween)), 
+            'college' => array(
+			    array('Between', '1', '50'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->collegeNotBetween)), 
+            'major' => array(
+                array('Utf8Length', '2', '30'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->majorError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->majorError)), 
             'ip' => array('presence' => 'required'), 
             'scode' => array(
        	        array('NotEquals', md5($args['vcode'])), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniHelp->hint->verifyError))
+              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniMember->hint->verifyError))
         );
 
         /*$options = array(
@@ -111,7 +121,9 @@ class RegisterFilter extends MemberInterlayer
 			return array(
 		    	'username' => $input->getUnescaped('uname'), 'password' => $input->getUnescaped('pswd'), 
 		  		'realName' => $input->getUnescaped('rname'), 'sex' => $input->getUnescaped('sex'), 
-		  		'regIp' => $input->getUnescaped('ip'), 'ikey' => $input->getUnescaped('ikey')
+		  		'year' => $input->getUnescaped('year'), 'college' => $input->getUnescaped('college'), 
+		  		'major' => $input->getUnescaped('major'), 'regIp' => $input->getUnescaped('ip'), 
+		  		'ikey' => $input->getUnescaped('ikey')
 			);
 		}
 

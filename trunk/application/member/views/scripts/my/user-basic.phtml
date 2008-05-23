@@ -12,6 +12,14 @@
 <td><?= $this->sessCommon->login['sex']; ?></td>
 </tr>
 <tr>
+<td align="right"><b>入学信息：</b></td>
+<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option <?= ($i == $this->sessCommon->login['year'] ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college as $key => $value) { ?><option <?= ($key == $this->sessCommon->login['college'] ? 'selected' : ''); ?> value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
+</tr>
+<tr>
+<td align="right"><b>所学专业：</b></td>
+<td><input name="major" id="major" tabindex="9" class="inputtxt" type="text" size="37" maxlength="30" value="<?= $this->sessCommon->login['major']; ?>" />&nbsp;<br /><span class="quiet">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
+</tr>
+<tr>
 <td align="right"><b>曾用名：</b><br /><br /></td>
 <td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /> <br /><span class="quiet">输入您曾经使用过的名字以便校友找到您。</span></td>
 </tr>

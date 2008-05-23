@@ -64,9 +64,19 @@ class MyFilter extends MemberInterlayer
 
     	// 设置验证规则
 		$validators = array(
+            'year' => array(
+			    array('Between', '1900', '2050'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->yearNotBetween)), 
+            'college' => array(
+			    array('Between', '1', '50'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->collegeNotBetween)), 
+            'major' => array(
+                array('Utf8Length', '2', '30'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->majorError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->majorError)), 
 		    'everName' => array('allowEmpty' => true), 
 			'birthday' => array(
-			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'hometown_a' => array('allowEmpty' => true), 
@@ -87,11 +97,12 @@ class MyFilter extends MemberInterlayer
 		else
 		{
 			return array(
-			    'everName' => $input->getUnescaped('everName'), 'birthday' => $input->getUnescaped('birthday'), 
-		    	'hometown_p' => $input->getUnescaped('hometown_p'), 'hometown_c' => $input->getUnescaped('hometown_c'), 
-		    	'hometown_a' => $input->getUnescaped('hometown_a'), 'location_p' => $input->getUnescaped('location_p'), 
-		    	'location_c' => $input->getUnescaped('location_c'), 'location_a' => $input->getUnescaped('location_a'), 
-		    	'lastModi' =>  $input->getUnescaped('lastModi')
+			    'year' => $input->getUnescaped('year'), 'college' => $input->getUnescaped('college'), 
+		  		'major' => $input->getUnescaped('major'), 'everName' => $input->getUnescaped('everName'), 
+		  		'birthday' => $input->getUnescaped('birthday'), 'hometown_p' => $input->getUnescaped('hometown_p'), 
+		  		'hometown_c' => $input->getUnescaped('hometown_c'), 'hometown_a' => $input->getUnescaped('hometown_a'), 
+		  		'location_p' => $input->getUnescaped('location_p'), 'location_c' => $input->getUnescaped('location_c'), 
+		  		'location_a' => $input->getUnescaped('location_a'), 'lastModi' =>  $input->getUnescaped('lastModi')
 			);
 		}
 

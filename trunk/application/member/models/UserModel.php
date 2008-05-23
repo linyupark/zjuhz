@@ -63,7 +63,7 @@ class UserModel
 	public function callRegister($args)
     {
 		$this->_dao->prepare('CALL sp_register
-		    (:username, :password, :realName, :sex, :regIp, :ikey, @uid);')
+		    (:username, :password, :realName, :sex, :year, :college, :major, :regIp, :ikey, @uid);')
 		    ->execute($args);
 
 		return $this->_dao->query('SELECT @uid AS uid')->fetchColumn();

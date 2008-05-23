@@ -96,6 +96,8 @@ class MyController extends Zend_Controller_Action
 			default:        // 基本信息
 			{
     			$type = 'basic';
+
+    			$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
 			}
 		}
 
