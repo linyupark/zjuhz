@@ -16,21 +16,28 @@ class RegisterController extends Zend_Controller_Action
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessMember = null;
 
 	/**
+     * 公用模块配置
+     * 
+     * @var object
+     */
+	private $_iniCommon = null;
+
+	/**
      * 项目模块配置
-     *
+     * 
      * @var object
      */
 	private $_iniMember = null;
@@ -44,9 +51,10 @@ class RegisterController extends Zend_Controller_Action
     {
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->_sessMember = Zend_Registry::get('sessMember');
+		$this->_iniCommon  = Zend_Registry::get('iniCommon');
 		$this->_iniMember  = Zend_Registry::get('iniMember');
 
-		$this->view->sessCommon = $this->_sessCommon;
+		(isset($this->_sessCommon->role) ? $this->_redirect('../', array('exit')) : '');
     }
 
     /**
@@ -59,6 +67,7 @@ class RegisterController extends Zend_Controller_Action
     	$this->view->headTitle($this->_iniMember->head->titleRegister);
     	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
 
+    	$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
     	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取邀请码
     }
 
@@ -86,7 +95,7 @@ class RegisterController extends Zend_Controller_Action
 
 	/**
      * 会员注册-数据提交
-     *
+     * 
      * @return void
      */
 	public function doregisterAction()

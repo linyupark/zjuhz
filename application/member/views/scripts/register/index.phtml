@@ -10,11 +10,11 @@
     </tr>
     <tr>
     	<td>登录账号：<br /><br /></td>
-    	<td><input name="uname" id="uname" tabindex="1" class="inputtxt" type="text" maxlength="16" value="" />&nbsp;<input type="button" id="btnCheck" class="btn" style="height:22px" name="btnCheck" value="检查账号是否可用">&nbsp;<span id="chkmsg" class="chkmsg"></span><br /><span class="quiet">登录账号由2-16个字母、数字、下划线组成，以字母开始以非下划线结尾。注册后不可修改。</span></td>
+    	<td><input name="uname" id="uname" tabindex="2" class="inputtxt" type="text" maxlength="16" value="" />&nbsp;<input type="button" id="btnCheck" class="btn" style="height:22px" name="btnCheck" value="检查账号是否可用">&nbsp;<span id="chkmsg" class="chkmsg"></span><br /><span class="quiet">登录账号由2-16个字母、数字、下划线组成，以字母开始以非下划线结尾。注册后不可修改。</span></td>
     </tr>
     <tr>
     	<td>登录密码：</td>
-    	<td><input name="pswd" id="pswd" tabindex="2" class="inputtxt" type="password" maxlength="16" value="" onkeyup="EvalPwdStrength(document.forms[0],this.value);" />&nbsp;<span class="quiet">登录密码由6-16个任意字符组成。注册后可修改。</span></td>
+    	<td><input name="pswd" id="pswd" tabindex="3" class="inputtxt" type="password" maxlength="16" value="" onkeyup="EvalPwdStrength(document.forms[0],this.value);" />&nbsp;<span class="quiet">登录密码由6-16个任意字符组成。注册后可修改。</span></td>
     </tr>
     <tr>
     	<td></td>	
@@ -43,23 +43,31 @@
     </tr>
     <tr>
     	<td>密码确认：<br /><br /></td>
-    	<td><input name="repswd" id="repswd" tabindex="3" class="inputtxt" type="password" maxlength="16" value="" />&nbsp;<span class="quiet">再次输入密码以确认。</span><br /></td>
+    	<td><input name="repswd" id="repswd" tabindex="4" class="inputtxt" type="password" maxlength="16" value="" />&nbsp;<span class="quiet">再次输入密码以确认。</span><br /></td>
     </tr>
     <tr>
     	<td>真实姓名：<br /><br /></td>
-    	<td><input name="rname" id="rname" tabindex="4" class="inputtxt" type="text" maxlength="6" />&nbsp;<span class="quiet">注册后不可修改。</span><br /></td>
+    	<td><input name="rname" id="rname" tabindex="5" class="inputtxt" type="text" maxlength="6" />&nbsp;<span class="quiet">注册后不可修改。</span><br /></td>
     </tr>
     <tr>
     	<td>您的性别：<br /><br /></td>
-    	<td><label for="male"><input name="sex" id="male" type="radio" tabindex="5" value="男" checked="checked" /> 
+    	<td><label for="male"><input name="sex" id="male" type="radio" tabindex="6" value="男" checked="checked" /> 
     	男</label>&nbsp;<label for="female"><input name="sex" id="female" type="radio" value="女" /> 女</label>&nbsp;<span class="quiet">注册后不可修改。</span><br /></td>
     </tr>
     <tr>
-    	<td>验&nbsp;证&nbsp;&nbsp;码：<br /><br /></td>
-    	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="6" size="6" maxlength="4">&nbsp;<span id="putVerifyImg"></span>&nbsp;<span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span><br /></td>
+    	<td>入学信息：<br /><br /></td>
+    	<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
     </tr>
     <tr>
-    	<td colspan="2"><input type="submit" id="btnRegister" name="btnRegister" tabindex="7" value="同意以下注册协议，提交注册信息" class="btn" /></td>
+    	<td>所学专业：<br /><br /></td>
+    	<td><input name="major" id="major" tabindex="9" class="inputtxt" type="text" size="37" maxlength="30" />&nbsp;<br /><span class="quiet">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
+    </tr>
+    <tr>
+    	<td>验&nbsp;证&nbsp;&nbsp;码：<br /><br /></td>
+    	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="10" size="6" maxlength="4">&nbsp;<span id="putVerifyImg"></span>&nbsp;<span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span><br /></td>
+    </tr>
+    <tr>
+    	<td colspan="2"><input type="submit" id="btnRegister" name="btnRegister" tabindex="11" value="同意以下注册协议，提交注册信息" class="btn" /></td>
     </tr>
     <tr>
     <td colspan="2"><div id="ajaxhint" style="width:282px"></div></td>

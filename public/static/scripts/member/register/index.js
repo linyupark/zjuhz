@@ -14,7 +14,7 @@ $(function() {
 		docheck();
     });
 
-    $("#rname").focus( function() {
+    $("#major").focus( function() {
 		putVerifyImg();
     });
 
