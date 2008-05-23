@@ -36,6 +36,15 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 </p>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.entity img').each(function(){
+			$(this).width('auto');
+			$(this).height('auto');
+		});
+	});
+</script>
+
 <!-- 同类上下篇 ////////////////////////////////////////////// -->
 <table width="100%">
 <tr>
