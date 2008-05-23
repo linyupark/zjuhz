@@ -13,18 +13,28 @@ class IndexController extends Zend_Controller_Action
 	function indexAction()
 	{
 		// 获取班级列表
-		$year = $this->_getParam('year',$this->view->Passport('year'));
-		$college = $this->_getParam('college',$this->view->Passport('college'));
+		$year = $this->_getParam('year');
+		$college = $this->_getParam('college');
+		
+		if($year == '') $year = $this->view->Passport('year');
+		if($college == '') $college = $this->view->college($this->view->Passport('college'));
+		
 		$page = $this->_getParam('p',1);
 			
 		//按页获取信息列表
 		Page::$pagesize = 15;
 		$rows = DbModel::searchClass('', $year, $college, ($page-1)*Page::$pagesize,Page::$pagesize);
+		
+		if($rows['numrows'] == 0)
+		$rows = DbModel::searchClass('', '', '', ($page-1)*Page::$pagesize,Page::$pagesize);
+		
 		Page::create(array(
 		"href_open" => "<a href='/class/?year={$year}&college={$college}&p=%d'>", 
 		"href_close" => "</a>", 
 		"num_rows" => $rows['numrows'],
 		"cur_page" => $page));
+		
+		
 		
 		// 获取会员所申请加入班级的信息
 		$this->view->applies = ApplyModel::fetch($this->view->passport('uid'));

@@ -1,6 +1,6 @@
 <!-- 一些操作 //////////////////////////////////////// -->
 <div class="sidebar class_sub_bar">
-<form method="GET">
+<form action="search" method="GET">
 <p><b>入学年份：</b><br />
 <select name="year" class="inputtxt" style="width:180px">
 <option value="">不限制</option>
@@ -13,7 +13,7 @@
 <p><b>院系名称：</b><br />
 <select name="college" class="inputtxt" style="width:180px">
 <option value="">所有学院</option>
-<?php foreach (Zend_Registry::get('iniConfig')->college->name->toArray() as $v): ?>
+<?php foreach ($this->college() as $v): ?>
 <option value="<?= $v ?>"<?php if($this->college == $v):?>selected="selected"<?php endif; ?>><?= $v ?></option>
 <?php endforeach; ?>
 </select>
