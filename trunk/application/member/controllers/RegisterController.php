@@ -66,7 +66,7 @@ class RegisterController extends Zend_Controller_Action
     {
     	$this->view->headTitle($this->_iniMember->head->titleRegister);
     	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
-Commons::getUserFolder(1);
+
     	$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
     	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取邀请码
     }
