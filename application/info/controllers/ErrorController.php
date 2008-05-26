@@ -5,6 +5,9 @@ class ErrorController extends Zend_Controller_Action
 	
 	function init()
 	{
+		$this->view->headTitle('信息中心');
+		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen')
+								   ->appendStylesheet('/static/styles/info_front.css','screen');
 		// 注册全局SESSION
 		$this->_sessCommon = Zend_Registry::get('sessCommon');
 		$this->view->login = Zend_Registry::get('sessCommon')->login;
@@ -38,6 +41,6 @@ class ErrorController extends Zend_Controller_Action
     
     function reloginAction()
     {
-    	
+    	$this->view->uname = $_COOKIE['zjuhz_member']['alive']; // 记住账号
     }
 }
