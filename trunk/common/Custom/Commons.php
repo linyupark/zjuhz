@@ -128,7 +128,7 @@ class Commons
 	
 	/**
 	 * 下载指定文件
-	 *
+	 * 
 	 * @param string $file 完整下载路径
 	 * @param string $name 另存为的名称
 	 * @param boolean $delete 是否在下载完后删除
@@ -140,5 +140,40 @@ class Commons
       readfile($file);
       if ($delete == ture)
         unlink($file);
+    }
+
+	/**
+	 * 获取用户文件夹路径(若缺少则自动创建)
+	 * 
+	 * @param integer $uid
+	 * @param string $sub
+     * @return string or boolean
+	 */
+    static function getUserFolder($uid, $sub='')
+    {
+    	// 用户文件夹下各子文件夹
+    	$subArray = array('' => '', 'albums' => 'albums/');
+
+    	if (0 < $uid && array_key_exists($sub, $subArray))
+    	{
+    		$folder      = "/static/users/".intval($uid/1000)."/{$uid}/{$subArray[$sub]}";
+            $folderArray = explode('/', $folder);
+
+            if(!file_exists("..{$folder}"))
+	        {
+	        	foreach ($folderArray as $value)
+                {
+                	$path .= "{$value}/";
+            	    $dir  = "..$path";
+
+            	    (0 <= $value && !file_exists($dir) ? (mkdir($dir, 0777) ? 
+            	        chmod($dir, 0777) : '') : '' );
+		        }
+	        }
+
+	        return $folder;
+    	}
+
+    	return false;
     }
 }

@@ -63,9 +63,6 @@ class ReplyController extends Zend_Controller_Action
      */
 	public function doinsertAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
             $postArgs = $this->getRequest()->getPost();

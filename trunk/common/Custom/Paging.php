@@ -135,8 +135,7 @@ class Paging
     	         '</span>条数据&nbsp;-&nbsp;共分<span class="num">'.
     	         $this->_totalPage.'</span>页&nbsp;&nbsp;'; //*/
 
-    	$show .= ($this->_perPage < $this->_totalRs ? 
-    	    $this->_preBar().$this->_mainBar().$this->_nextBar().$this->_jumpBar() : '');
+    	$show .= ($this->_perPage < $this->_totalRs ? $this->_preBar().$this->_mainBar().$this->_nextBar().$this->_jumpBar() : '');
 
 		$show .= '</div>';
 
@@ -151,10 +150,10 @@ class Paging
     private function _preBar()
     {
     	$preBar = (($this->_leftNum + 1) < $this->_nowPage ? 
-    	    "<a class='text' href='{$this->_url}1' class='abc'>".self::FIRST_PAGE."</a>&nbsp;" : '');
+    	    "<span><a class='text' href='{$this->_url}1'>".self::FIRST_PAGE."</a></span>" : '');
 
     	$preBar .= (1 != $this->_nowPage ? 
-    	    "<a class='text' href='{$this->_url}{$this->_prePage}'>".self::PRE_PAGE."</a>&nbsp;" : '');
+    	    "<span><a class='text' href='{$this->_url}{$this->_prePage}'>".self::PRE_PAGE."</a></span>" : '');
 
     	return $preBar;
     }
@@ -176,8 +175,8 @@ class Paging
     		if (0 >= $i || $i > $this->_totalPage) { continue; }
 
     		$mainBar .= ($i == $this->_nowPage ? 
-    		    "<span class='curr'>{$i}</span>&nbsp;" : 
-    		    "<a class='num' href='{$this->_url}{$i}'>{$i}</a>&nbsp;");
+    		    "<span class='curr'>{$i}</span>" : 
+    		    "<span><a class='num' href='{$this->_url}{$i}'>{$i}</a></span>");
 
     	}
 
@@ -192,10 +191,10 @@ class Paging
     private function _nextBar()
     {
     	$nextBar = ($this->_nowPage < $this->_totalPage ? 
-    	    "<a class='text' href='{$this->_url}{$this->_nextPage}'>".self::NEXT_PAGE."</a>&nbsp;" : '');
+    	    "<span><a class='text' href='{$this->_url}{$this->_nextPage}'>".self::NEXT_PAGE."</a></span>" : '');
 
     	$nextBar .= (($this->_totalPage - $this->_nowPage) > $this->_rightNum ? 
-    	    "<a class='text' href='{$this->_url}{$this->_totalPage}'>".self::LAST_PAGE."</a>&nbsp;" : '');
+    	    "<span><a class='text' href='{$this->_url}{$this->_totalPage}'>".self::LAST_PAGE."</a></span>" : '');
 
     	return $nextBar;
     }

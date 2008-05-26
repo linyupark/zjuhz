@@ -201,9 +201,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function dobasicAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -230,9 +227,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function docontactAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -259,9 +253,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function docardAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -285,9 +276,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function dogroupAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -311,9 +299,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function dogroupdelAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -337,9 +322,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function dopasswdAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
@@ -380,9 +362,6 @@ class MyController extends Zend_Controller_Action
      */
 	public function doemailAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
 			$postArgs = $this->getRequest()->getPost();
