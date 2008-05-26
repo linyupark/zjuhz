@@ -25,7 +25,6 @@
 				// 增加所有控制角色,决定继承关系
 				$acl->addRole(new Zend_Acl_Role('guest'))
 				    ->addRole(new Zend_Acl_Role('member', 'guest'))
-				    ->addRole(new Zend_Acl_Role('staff', 'guest'))
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 增加所要控制的资源(Controller)
 				$acl->add(new Zend_Acl_Resource('view'))
@@ -37,12 +36,9 @@
 				    ->add(new Zend_Acl_Resource('search'))
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
-				$acl->allow('guest', array('view','login','support','index','search','subject'))
-					->allow('member', null)
-					->deny('member', 'admin')
-				    ->allow('staff', null)
-				    ->deny('staff', 'admin')
-				    ->allow('staff', 'admin', array('entity_add', 'entity_mod','index'))
+				$acl->deny(array('guest','member'))
+					->allow(array('guest','member'), array('view','login','logout','support','index','search','subject'))
+				    ->allow('member', 'admin', array('entity_add', 'entity_mod','index'))
 				    ->allow('admin');
 				// 寄存
 				Zend_Registry::set('acl', $acl);
@@ -58,9 +54,13 @@
 		 */
 		public function preDispatch($request)
 		{
-			// 根据SESSION确定当前的角色
-			if(!$sessRole = $this->_sessCommon->role)
+			$sessRole = $this->_sessCommon->role;
+			
+			if(NULL == $sessRole)
+			{
 				$sessRole = 'guest';
+				$this->_sessCommon->role = $sessRole;
+			}
 				
 			// 默认分配的CA
 			$controller = $request->controller;
@@ -71,9 +71,32 @@
 			if (!$this->_acl->isAllowed($sessRole, $resource, $action))
 			{
 				$request->setControllerName('error');
-				$request->setActionName('error');
-				$request->setParam('message','deny');
-				echo $sessRole.':'.$resource.':'.$action;
+				$request->setActionName('relogin');
+			}
+			else // 自动将会员信息载入info数据库
+			{
+				$sessInfo = Zend_Registry::get('sessInfo');
+				$inited = $sessInfo->inited;
+				// 是会员的话进行INFO数据库初始化工作
+				if($sessRole == 'member' && $inited != TRUE) 
+				{
+					$data = $this->_sessCommon->login;
+					$User = new UserModel();
+					$inited = $User->fetchRow("user_name = '{$data['username']}'");
+					if(FALSE == $inited) // 没有初始化过则
+					{
+						$row = array(
+							'user_id' => $data['uid'],
+							'user_name' => $data['username'],
+							'user_password' => $data['password'],
+							'user_role' => 'member'
+						);
+						$info_user_id = $User->insert($row);
+						$sessInfo->user_id = $info_user_id;
+					}
+					$sessInfo->user_id = $data['uid'];
+					$sessInfo->inited = TRUE;
+				}
 			}
 		}
 	}

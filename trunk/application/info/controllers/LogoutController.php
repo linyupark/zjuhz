@@ -20,8 +20,6 @@
 		#后台登陆入口 --------------------------------
 		function indexAction()
 		{
-			//强制转换用户身份,重新登陆
-			Zend_Session::destroy();
-			echo Commons::js_jump('/',2);
+			$this->_redirect('/');
 		}
 	}
