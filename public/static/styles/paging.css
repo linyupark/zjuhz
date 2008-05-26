@@ -1,4 +1,4 @@
-/* paging green skin */
+/* paging blue skin */
 
 .paging {
 	text-align:center;
@@ -8,26 +8,31 @@
 	margin:0px;
 }
 
+.paging span{
+	padding:1px;
+}
+
 .paging a.num {
-	border:1px solid #E2F1AF;
+	border:1px solid #9aafe5;
 	background:#FFFFFF;
 	text-decoration:none;
-	color:#C16012;
+	color:#3568b9;
 	padding:2px 6px 4px 6px;
 }
 
 .paging a.text {
-	border:1px solid #E2F1AF;
+	border:1px solid #9aafe5;
 	background:#FFFFFF;
 	text-decoration:none;
-	color:#C16012;
+	color:#3568b9;
 	padding:4px 6px 2px 6px;
 }
 
 .paging a:hover {
-	color:#C16012;
-	background:#E2F1AF;
+    color:#fff;
+	background:#296cb3;
 	text-decoration:none;
+	border:1px #2e6ab1 solid;
 }
 
 .paging .num {
@@ -37,6 +42,9 @@
 }
 
 .paging .curr {
-	padding:2px 4px;
-	font-size:11px;
+    color:#fff;
+	padding:2px 6px 4px 6px;
+	border:1px solid #9aafe5;
+	background:#296cb3;
+	cursor:default;
 }

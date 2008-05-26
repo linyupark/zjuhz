@@ -25,6 +25,7 @@ Zend_Loader::registerAutoload();
 
 /** Config */
 Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
+Zend_Registry::set('iniCommon', new Zend_Config_Ini('../../common/Ini/Config.ini'));
 Zend_Registry::set('iniHelp', new Zend_Config_Ini('../../common/Ini/Help.ini'));
 
 /** Session */
@@ -34,14 +35,10 @@ Zend_Registry::set('sessHelp', new Zend_Session_Namespace('help'));
 /** ACL */
 Zend_Registry::set('aclHelp', new Zend_Acl());
 
-/** Zend_Layout */
-Zend_Layout::startMvc(array(
-    'layoutPath' => '../../application/layouts/', 
-    'layout' => 'main'));
-
 /** run */
 Zend_Controller_Front::getInstance()
-    ->registerPlugin(new HelpAcl(Zend_Registry::get('sessCommon')->role))
+    ->registerPlugin(new HelpPreAjaxPlugin())
+    ->registerPlugin(new HelpAclPlugin(Zend_Registry::get('sessCommon')->role))
 	->setDefaultModule('help')
     ->setControllerDirectory('../../application/help/controllers/')
     ->throwExceptions(false)
