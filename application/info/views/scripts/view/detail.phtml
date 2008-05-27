@@ -72,24 +72,62 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <?php foreach ($this->tag as $k => $v): ?>
 <a href="/info/search/look/for/<?= urlencode($this->escape($v)) ?>"><?= $this->escape($v) ?></a>
 <?php endforeach; endif; ?>&nbsp;&nbsp;&nbsp;
-<a href="#">发表评论(尚未开放)</a>&nbsp;&nbsp;&nbsp;
 <img src="/static/images/icon/top.gif" style="cursor:pointer" onclick="javascript:scroll(0,0)" align="absmiddle" />&nbsp;&nbsp;&nbsp;
 <img style="cursor: pointer;" src="/static/images/icon/printer.gif" alt="打印" onclick="window.print()" align="absmiddle">
 </p>
 
-
-<!-- 相关文章 ////////////////////////////////////////////// -->
-<table class="similarity">
-<tr><th colspan="2">:: 相关文章 ::</th></tr>
-<?php if(!$this->similarity): ?>
-<tr><td colspan="2">没有找到</td></tr>
-<?php else: foreach ($this->similarity as $k2 => $v2): ?>
-<tr>
-<td class="f12"><a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
-<td class="f9"><?= Commons::date($v2['entity_pub_time']) ?></td>
-</tr>
-<?php endforeach; endif; ?>
-</table>
+<div id="sub_container">
+	<!-- 相关文章 ////////////////////////////////////////////// -->
+	<table class="similarity" style="float:left">
+	<tr><th colspan="2">:: 相关文章 ::</th></tr>
+	<?php if(!$this->similarity): ?>
+	<tr><td colspan="2">没有找到</td></tr>
+	<?php else: foreach ($this->similarity as $k2 => $v2): ?>
+	<tr>
+	<td class="f12"><a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
+	<td class="f9"><?= Commons::date($v2['entity_pub_time']) ?></td>
+	</tr>
+	<?php endforeach; endif; ?>
+	</table>
+	<table class="similarity" style="float:right">
+	<tr><th colspan="2">:: <a href="javascript:toggle()" id="toggleBtn">查看评论</a> :: 
+	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">发表评论</a></th></tr>
+	<tr>
+		<td id="commentList" class="hide"></td>
+	</tr>
+	</table>
+</div>
 
 <?php endif; ?>
 </div>
+
+<script type="text/javascript">
+	function toggle()
+	{
+		if($('#toggleBtn').text() == '查看评论')
+		{
+			$('#toggleBtn').text('隐藏评论');
+			$('#commentList').show();
+		}
+		else
+		{
+			$('#toggleBtn').text('查看评论');
+			$('#commentList').hide();
+		}
+	}
+	function commentView(entity_id, page)
+	{
+		$.post('/info/comment/view', {entity_id:entity_id, page:page}, function(html){
+			$('#commentList').html(html);
+		});
+	}
+	
+	function commentForm(entity_id)
+	{
+		$.post('/info/comment/form', {entity_id:entity_id}, function(html){
+			$.facebox(html);
+		});
+	}
+	
+	commentView(<?= $this->entity['entity_id'] ?>,1);
+</script>
