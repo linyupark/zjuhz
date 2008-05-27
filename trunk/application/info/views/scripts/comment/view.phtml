@@ -1,0 +1,15 @@
+	<div class="pagination"><?= $this->pagination ?></div>
+	<?php if(!$this->comments):  ?>
+	没有评论
+	<?php else: foreach($this->comments as $comment): ?>
+	<div>
+		<p class='commentUnit'>
+			<a href=""><?= $comment['comment_username'] ?></a> 
+			<small><?= Commons::date($comment['comment_time']) ?></small>
+		</p>
+		<p class='commentcont'>
+			<?= stripslashes($comment['comment_content']) ?>
+		</p>
+	</div>
+	<?php endforeach; endif; ?>
+	<div class="pagination"><?= $this->pagination ?></div>
