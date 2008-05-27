@@ -122,7 +122,7 @@ class ImageHandle
 			imagecopyresized($dest_im, $this->_im, 0, 0, 0, 0, $w, $h, $this->width, $this->height);
 		}
 		$this->_im = $dest_im;
-		$this->destroy($dest_im);
+		//$this->destroy($dest_im);
 		$this->output($dest_im_name, $dest_im_ext, 85);
 		$this->destroy();
 	}
@@ -179,7 +179,7 @@ class ImageHandle
 				break;
 		}
 		imagecopymerge($this->_im, $dest_im, $dest_x, $dest_y, 0, 0, $dest_w, $dest_h, $pct);
-		$this->destroy($dest_im);
+		//$this->destroy($dest_im);
 		$this->output($this->name, $this->ext, 85);
 		$this->destroy();
 	}
