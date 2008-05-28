@@ -12,6 +12,9 @@
 /** set error_reporting */
 error_reporting('ALL');
 
+/** set gzip output */
+//(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') ? ob_start('ob_gzhandler') : ob_start());
+
 /** set_include_path */
 set_include_path(get_include_path().PATH_SEPARATOR.
                  '../../common/Custom/'.PATH_SEPARATOR.
@@ -34,6 +37,10 @@ Zend_Registry::set('sessMember', new Zend_Session_Namespace('member'));
 
 /** ACL */
 Zend_Registry::set('aclMember', new Zend_Acl());
+
+/** define constants */
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(Zend_Registry::get('sessCommon')->login['uid']));
 
 /** run */
 Zend_Controller_Front::getInstance()

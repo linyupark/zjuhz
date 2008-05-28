@@ -1,8 +1,6 @@
 @import url("paging.css");
-@import url("calendar-blue.css");
-@import url("passwdcheck.css");
 
-/* 用户登录注册 -------------------------------------------------------------- */
+/* 登录注册 */
 #login{ padding:10px 40px; }
 #login h2{ padding:0 15px; font-size:16px;}
 #login h2 small{ font-size:12px; font-weight:normal; float:right; margin-top:-20px; }
@@ -12,12 +10,12 @@
 .tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
 .textarea{ padding:5px; border:1px solid #BDC7D8;  line-height:normal;font-size:12px; }
 
-/* 用户个人名片 -------------------------------------------------------------- */
+/* 个人名片 */
 .member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
 .member_card .head{ padding:2px; border:1px solid #D7EAB2; background:#fff; width:50px; height:50px; }
 .member_card td{ padding:5px; }
 
-/* 控制连接 -------------------------------------------------------------- */
+/* 控制连接 */
 .control_link{ width:150px; margin:10px 0 0 12px; }
 .control_link a{ display:block; padding:5px 5px; font-size:14px; text-decoration:none; }
 .control_link a:hover{ text-decoration:underline; }
@@ -37,13 +35,13 @@ h2.control_nav{ font-size:14px; background:#D9E6F7 url(/static/images/bg/rc_tl3.
 .control_list td{ padding:15px 5px 0 10px; background:#fff; font-size:12px; }
 .control_list td a.cat{ color:#666; }
 
-/* 个人后台通用表单样式 ---------------------------------------------------- */
+/* 后台表单 */
 .home_form{ padding:5px; }
 .home_form td{ font-size:14px; padding:10px 0 5px 10px; }
 .home_form td b{ color:#444;  }
 .home_form .txt,.home_form .bigtxt{ padding:5px; border:1px solid #BDC7D8; line-height:normal; }
 .home_form .bigtxt{ width:400px; height:100px; }
 
-/* 通讯录详细信息表格样式 ------------------------------------------------- */
+/* 通讯录详细信息 */
 .address_detail{ display:none; }
 .address_detail td{ padding:2px; border-bottom:1px solid #eee; }

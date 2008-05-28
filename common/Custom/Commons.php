@@ -144,6 +144,7 @@ class Commons
 
 	/**
 	 * 获取用户文件夹路径(若缺少则自动创建)
+	 * for example:if uid = 1 then return "/static/users/0/1/"
 	 * 
 	 * @param integer $uid
 	 * @param string $sub
@@ -175,5 +176,20 @@ class Commons
     	}
 
     	return false;
+    }
+
+	/**
+	 * 获取用户头像
+	 * 
+	 * @param integer $uid
+	 * @param string $type(small-54*54/medium/large-200*200/original)
+     * @return string or boolean
+	 */
+    static function getUserFace($uid, $type='small')
+    {
+    	// if uid = 1 then <img src="/static/users/0/1/medium.jpg" onerror=this.src="/static/images/default-face.jpg";>
+    	return (0 < $uid ? '<img src="'.self::getUserFolder($uid).$type.'.jpg" 
+    	    onerror=this.src="/static/images/default-face.jpg";>' : false
+    	);
     }
 }

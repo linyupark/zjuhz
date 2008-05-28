@@ -101,7 +101,7 @@ class ImageHandle
 			$dest_im = $this->create($length, $length);
 			imagecopy($dest_im, $this->_im, 0, 0, 0, 0, $length, $length);
 			$this->_im = $dest_im;
-			$this->destroy($dest_im);
+			//$this->destroy($dest_im);
 			$this->output($dest_im_name, $dest_im_ext, 85);
 			$this->destroy();
 		}
