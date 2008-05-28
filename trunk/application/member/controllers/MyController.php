@@ -245,6 +245,8 @@ class MyController extends Zend_Controller_Action
 			// 再以正方形强制缩小
 			$image->init(USER_ROOT.'square.jpg');
 			$image->abs_resize(54, 54, USER_ROOT.'small');
+			$image->abs_resize(200, 200, USER_ROOT.'large');
+			$image->destroy();
 
 			echo 'message';
 
