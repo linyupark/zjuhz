@@ -75,6 +75,7 @@
 			
 			$Comment = new CommentModel();
 			$Comment->insert(array(
+				'user_id' => $this->_sessCommon->login['uid'],
 				'entity_id' => $entity_id,
 				'comment_username' => $username,
 				'comment_time' => time(),
