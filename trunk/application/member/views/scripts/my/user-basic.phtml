@@ -1,5 +1,54 @@
 <table>
 <tr>
+<td align="right"><b>我的头像：</b><br /><br /><br /></td>
+<td><span id="userFace"><?= $this->face($this->sessCommon->login['uid']); ?></span> <a href="#" id="showUpload">更改头像</a> <span id="previewImage"></span></td>
+</tr>
+<tr id="doUpload" style="display:none">
+
+<script type="text/javascript">
+		var swfu;
+
+		window.onload = function () {
+			swfu = new SWFUpload({
+				upload_url: "/member/my/doface/", 
+				file_post_name: "fileData", 
+
+				file_size_limit : "20.48", 
+				file_types : "*.jpg", 
+				file_types_description : "JPG Files", 
+				file_upload_limit : "0", 
+				file_queue_limit : "1", 
+
+				swfupload_loaded_handler : swfUploadLoaded,
+
+				file_queued_handler : fileQueued, 
+				file_queue_error_handler : fileQueueError, 
+				file_dialog_complete_handler : fileDialogComplete, 
+
+				upload_progress_handler : uploadProgress, 
+				upload_error_handler : uploadError, 
+				upload_success_handler : uploadSuccess, 
+				upload_complete_handler : uploadComplete, 
+
+				flash_url : "/static/swfs/swfupload_f9.swf", 
+
+				swfupload_element_id : "flashUI", 
+				degraded_element_id : "degradedUI", 
+
+				custom_settings : {
+					progress_target : "fsUploadProgress",
+					upload_successful : false
+				},
+
+				debug: false
+			});
+		};
+</script>
+
+<td></td>
+<td><div id="flashUI" style="display: none;"><input type="text" id="fileName" readonly class="inputtxt" size="32" />&nbsp;<input id="btnBrowse" type="button" value="选择头像..." onclick="fileBrowse.apply(swfu)" />&nbsp;<input type="button" value=" 上 传 " id="btnUpload" /><br /><span class="f12">* 头像必须是jpg格式的图片文件，大小在20KB以内，建议图片尺寸200*200。</span></div><div id="fsUploadProgress"></div><div id="degradedUI"><span class="f12">* 上传组件载入失败，请刷新并确认本机已安装 Flash Player 9 且已启用。</span></div></td>
+</tr>
+<tr>
 <td align="right"><b>登录账号：</b></td>
 <td><?= $this->sessCommon->login['username']; ?></td>
 </tr>

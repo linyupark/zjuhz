@@ -1,8 +1,17 @@
 document.write("<script type=\"text/javascript\" src=\"/static/scripts/member/my/my.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/swfupload/swfupload.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/swfupload/swfupload.graceful_degradation.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/swfupload/fileprogress.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/swfupload/handlers.js\"></script>");
 
 $(function() {
     $("#frmUser").submit( function() {
 		douser();
+		return false;
+    });
+
+    $("#showUpload").click( function() {
+		$('#doUpload').toggle();
 		return false;
     });
 });

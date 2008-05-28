@@ -16,42 +16,42 @@ class MyController extends Zend_Controller_Action
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessMember = null;
 
 	/**
      * 公用模块配置
-     *
+     * 
      * @var object
      */
 	private $_iniCommon = null;
 
 	/**
      * 会员模块配置
-     *
+     * 
      * @var object
      */
 	private $_iniMember = null;
 
 	/**
      * Session内的会员编号
-     *
+     * 
      * @var integer
      */
 	private $_sessUid = 0;
 
 	/**
      * 初始化
-     *
+     * 
      * @return void
      */
 	public function init()
@@ -97,6 +97,8 @@ class MyController extends Zend_Controller_Action
 			{
     			$type = 'basic';
 
+    			$this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');
+    			$this->view->headLink()->appendStylesheet('/static/styles/calendar-blue.css','screen');
     			$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
 			}
 		}
@@ -187,6 +189,8 @@ class MyController extends Zend_Controller_Action
 			default: // 修改密码
 			{
     			$type = 'passwd';
+
+    			$this->view->headLink()->appendStylesheet('/static/styles/passwdcheck.css','screen');
 			}
 		}
 
@@ -217,6 +221,38 @@ class MyController extends Zend_Controller_Action
 					echo 'message'; // 请求ajax给出提示
 				}
 			}
+		}
+	}
+
+	/**
+     * 我的资料-更改头像
+     * 
+     * @return void
+     */
+	public function dofaceAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
+		Upload::init(array('max_size' => 30, 'cust_name' => 'original.jpg', 
+		    'allow_type' => 'jpg|jpeg', 'overwrite' => true, 'upload_path' => USER_ROOT));
+
+		if(Upload::handle('fileData')) // 上传成功
+		{
+			// 以最小边切成正方形
+			$image = new ImageHandle(USER_ROOT.'original.jpg');
+			$image->square(USER_ROOT.'square');
+			// 再以正方形强制缩小
+			$image->init(USER_ROOT.'square.jpg');
+			$image->abs_resize(54, 54, USER_ROOT.'small');
+
+			echo 'message';
+
+		} else {
+
+            //print_r(Upload::getTip());exit;
+			echo 'failure'; 
+
 		}
 	}
 

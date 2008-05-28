@@ -1,7 +1,7 @@
 <div class="member_card">
 <table>
 <tr>
-<td><img src="/static/users/user_test/tiny_head.jpg" class="head" /></td>
+<td><?= $this->face($this->sessCommon->login['uid']); ?></td>
 <td>
 <p><?= $this->sessCommon->login['realName']; ?></p>
 <p></p>
