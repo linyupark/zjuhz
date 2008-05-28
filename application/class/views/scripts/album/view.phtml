@@ -8,7 +8,7 @@
 		<table width="100%">
 		<tr>
 			<td width="15%" class="txtc pu10" valign="top">
-				<img src="/static/users/user_test/tiny_head.jpg" />
+				<?= Commons::getUserFace($this->passport('uid'),'medium') ?>
 				<p class="f14"><a href=""><?= $this->album['realName'] ?></a></p>
 			</td>
 			<!-- 相册内容 ////////////////////////// -->
@@ -64,7 +64,7 @@
 			<table width="100%">
 			<tr>
 				<td width="10%" class="txtc pu10" valign="top">
-					<img src="/static/users/user_test/tiny_head.jpg" width="35" height="35" />
+					<?= Commons::getUserFace($this->passport('uid')) ?>
 					<p class="f12"><a href=""><?= $v['realName'] ?></a></p>
 				</td>
 				<!-- 回复 ////////////////////////// -->

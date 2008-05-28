@@ -3,7 +3,7 @@
 <?php endif; foreach ($this->rows as $key => $val): ?>
 <table class="addressbook_item">
 <tr>
-<td width="10%" valign="top"><img src="/static/users/user_test/tiny_head.jpg" /></td>
+<td width="10%" valign="top"><?= Commons::getUserFace($val['uid']) ?></td>
 <td>
 	<table>
 		<tr><th colspan="2" class="txtl" width="100%"><a href=""><?= $val['cname'] ?></a></th></tr>
