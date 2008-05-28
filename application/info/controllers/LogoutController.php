@@ -20,6 +20,8 @@
 		#后台登陆入口 --------------------------------
 		function indexAction()
 		{
+			if($this->_sessCommon->role == 'admin')
+			Zend_Registry::get('sessCommon')->role = 'member';
 			$this->_redirect('/');
 		}
 	}
