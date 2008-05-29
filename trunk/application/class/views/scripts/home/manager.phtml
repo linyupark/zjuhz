@@ -17,6 +17,14 @@
 
 <!-- 信息显示区 //////////////////////////////////////  -->
 <div class="sidebar class_show" style="width:500px; margin:0 10px">
+
+<?php if($this->class_base_info['class_member_num'] <= 5): // 小于5人的班级允许修改名称?>
+<script type="text/javascript">
+	$('.class_tab a:contains("<?= $this->class_base_info['class_name'] ?>")').replaceWith('<input id="targetClass" onblur="this.value=\'<?= $this->class_base_info['class_name'] ?>\'" onkeydown="if(event.keyCode==13)changeClassname(<?= $class_id ?>)" onclick="this.value=\'修改班级名\';this.select()" class="inputtxt" type="text" value="<?= $this->class_base_info['class_name'] ?>" />');
+</script>
+<?php endif; ?>
+
+
 <h2 class="quiet clearfloat"><img src="/static/images/icon/layers.gif" /> 班级黑板报</h2>
 <div id="class_notice" style="cursor:pointer" onmouseover="this.style.borderStyle='dashed'" onmouseout="this.style.borderStyle='solid'" onclick="modClassNotice(<?= $class_id ?>,0)">
 <?= stripcslashes($this->class_base_info['class_notice']) == '' ? '点我开始编辑黑板报' : stripcslashes($this->class_base_info['class_notice']); ?>

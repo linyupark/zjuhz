@@ -6,6 +6,16 @@ function tabFocus(name)
 }
 
 
+function changeClassname(class_id)
+{
+	var value = $('#targetClass').val();
+	$('#targetClass').val('修改中..');
+	if(value != '修改班级名')
+	$.post('/class/ajax/change_classname', {class_id:class_id, class_name: value}, function(html){
+		$.facebox(html);
+	});
+}
+
 // --------------------------- 班级相册相关 ---------------------------
 
 // 删除相片
