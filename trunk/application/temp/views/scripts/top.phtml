@@ -1,32 +1,31 @@
-<table id="global_search">
+<table class="global_search">
+<tr>
+<!-- 状态信息 /////////////////////////////////////////// -->
+	<td class="nav">
+    <?php if ($this->passport()) { ?>
+		您好，<?= $this->passport('realName') ?>|<a href="/member/my/">我的账号</a>|<!-- <a href="">站内信<?= ($this->passport('unRead') > 0) ? "({$this->passport('unRead')})" : ''; ?></a> |  --><a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+	</td>
+</tr>
+</table>
+<table class="global_search">
 	<tr>
 	<!-- 模块选择 /////////////////////////////////////////// -->
 	<td class="models">
+	<a href="/member/">校友</a>
 	<a href="/info/">资讯</a>
 	<a href="/help/">互助</a>
-	<a href="/class/">班级</a>
-	<a href="/member/" class="on">校友</a>
-	<a href="/blog/">日志</a>
-	<a href="/play/">活动</a>
+	<a href="/class/" class="on">班级</a>
+	<a href="#">群组</a>
+	<a href="#">活动</a>
+	<a href="#">相册</a>
 	</td>
-	<?php if($this->role != 'member'): ?>
-	<!-- 未登陆 /////////////////////////////////////////// -->
-	<td class="nav">
-	尚未登陆,<a href="">登陆</a>
-	</td>
-	<?php else: ?>
-	<!-- 登陆后 /////////////////////////////////////////// -->
-	<td class="nav">
-	欢迎：<a href=""><?= $this->login['realName'] ?></a>
-<a href="">站内信<?= ($this->login['unRead'] > 0) ? "({$this->login['unRead']})" : ''; ?></a>
-<a href="/member/login/dologout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
-	</td>
-	<?php endif; ?>
 	</tr>
 	<tr>
 	<td class="search_form" colspan="2">
 	<!-- 搜索框 /////////////////////////////////////////// -->
-	<form method="POST" action="/info/search/look/">
+	<form method="GET" action="/class/search">
+	<input type="hidden" name="year" value="<?= $this->year ?>" />
+	<input type="hidden" name="college" value="<?= $this->college ?>" />
 <input class="input" name="for" type="text" onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#ccc'" onfocus="input_focus('input')" onblur="input_blur('input')" value="<?= $this->keywords ?>" />
 <input class="btn" type="submit" value="搜索" /> 
 </form>
