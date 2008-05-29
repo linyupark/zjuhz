@@ -41,9 +41,16 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 		$('.entity img').each(function(){
 			$(this).width('auto');
 			$(this).height('auto');
-			if($(this).width() > 700)
-			$(this).width(700);
 		});
+		
+		var t = window.setInterval(function(){
+			$('.entity img').each(function(){
+				if($(this).width()>780)
+				{
+					$(this).width(780);
+				}
+			});
+		},1000);
 	});
 </script>
 
