@@ -1,30 +1,26 @@
 
 
 <div class="sidebar" style="padding:20px;">
-<a href="javascript:void(0)" rel="card">11111</a>
-<a href="javascript:void(0)" rel="card">22222</a>
-<a href="javascript:void(0)" rel="card">33333</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
-<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:ucard(1)">22222</a>
+<a href="javascript:ucard(2)">33333</a>
+<a href="javascript:ucard(3)">44444</a>
+<a href="javascript:ucard(4)">44444</a>
+<a href="javascript:ucard(5)">44444</a>
 </div>
 
 <script type="text/javascript">
-	function cardInit()
+
+	function ucard(id)
 	{
-		$('a[rel="card"]').bind('mouseover',function(){
+		return false;
+	}
+	function ucardInit()
+	{
+		$('a[href^="javascript:ucard"]').bind('mouseover',function(){
 			$('.cardContainer').remove();
+			var id = $(this).attr('href');
+			id = id.replace('javascript:ucard(','');
+			id = parseInt(id.replace(')',''));
 			var x = $(this).offset().left;
 			var y = $(this).offset().top+20;
 			var w = $('body').width();
@@ -37,8 +33,8 @@
 				x = x-card_w;
 			}
 			$('.cardContainer').css({left:x});
-			$('.cardContainer').load('/temp/card/load');
+			$('.cardContainer').load('/temp/card/load?id='+id);
 		});
 	}
-	cardInit();
+	ucardInit();
 </script>
