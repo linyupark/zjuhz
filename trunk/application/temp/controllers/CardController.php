@@ -19,6 +19,7 @@ class CardController extends Zend_Controller_Action {
 	public function loadAction()
 	{
 		$this->_helper->layout->disableLayout();
+		echo $this->getRequest()->getParam('id');
 	}
 
 }
