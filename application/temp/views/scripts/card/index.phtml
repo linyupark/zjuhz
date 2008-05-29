@@ -1,0 +1,44 @@
+
+
+<div class="sidebar" style="padding:20px;">
+<a href="javascript:void(0)" rel="card">11111</a>
+<a href="javascript:void(0)" rel="card">22222</a>
+<a href="javascript:void(0)" rel="card">33333</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+<a href="javascript:void(0)" rel="card">44444</a>
+</div>
+
+<script type="text/javascript">
+	function cardInit()
+	{
+		$('a[rel="card"]').bind('mouseover',function(){
+			$('.cardContainer').remove();
+			var x = $(this).offset().left;
+			var y = $(this).offset().top+20;
+			var w = $('body').width();
+			var h = $('body').height();
+			var card_w = 200;
+			$(this).after('<div class="cardContainer">加载个人信息...</div>');
+			$('.cardContainer').css({border:'1px solid #ccc', opacity:'0.9', position:'absolute', width:card_w, top:y, background:'#f5f5f5'});
+			if((card_w+x) > w)
+			{
+				x = x-card_w;
+			}
+			$('.cardContainer').css({left:x});
+			$('.cardContainer').load('/temp/card/load');
+		});
+	}
+	cardInit();
+</script>
