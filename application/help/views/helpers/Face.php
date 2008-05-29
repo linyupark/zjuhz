@@ -14,10 +14,10 @@ class Zend_View_Helper_Face
      * 显示用户头像
      * 
 	 * @param integer $uid
-	 * @param string $type(smaller/medium/larger/original)
+	 * @param string $type
      * @return string or boolean
      */
-	public static function face($uid, $type='small')
+	public static function face($uid, $type='medium')
     {
     	return Commons::getUserFace($uid, $type);
     }

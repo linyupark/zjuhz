@@ -182,10 +182,10 @@ class Commons
 	 * 获取用户头像
 	 * 
 	 * @param integer $uid
-	 * @param string $type(small-54*54/medium/large-200*200/original)
+	 * @param string $type(small-30*30/medium-54*54/large-200*200/original/square)
      * @return string or boolean
 	 */
-    static function getUserFace($uid, $type='small')
+    static function getUserFace($uid, $type='medium')
     {
     	// if uid = 1 then <img src="/static/users/0/1/medium.jpg" onerror=this.src="/static/images/default-face.jpg";>
     	return (0 < $uid ? '<img src="'.self::getUserFolder($uid).$type.'.jpg" 

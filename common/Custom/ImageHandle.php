@@ -103,7 +103,7 @@ class ImageHandle
 			$this->_im = $dest_im;
 			//$this->destroy($dest_im);
 			$this->output($dest_im_name, $dest_im_ext, 85);
-			//$this->destroy();
+			$this->destroy();
 		}
 	}
 
@@ -124,7 +124,7 @@ class ImageHandle
 		$this->_im = $dest_im;
 		//$this->destroy($dest_im);
 		$this->output($dest_im_name, $dest_im_ext, 85);
-		//$this->destroy();
+		$this->destroy();
 	}
 
 	#百分比缩略(0.9~0.1)
@@ -181,7 +181,7 @@ class ImageHandle
 		imagecopymerge($this->_im, $dest_im, $dest_x, $dest_y, 0, 0, $dest_w, $dest_h, $pct);
 		//$this->destroy($dest_im);
 		$this->output($this->name, $this->ext, 85);
-		//$this->destroy();
+		$this->destroy();
 	}
 
 	# 验证码 , 可静态调用

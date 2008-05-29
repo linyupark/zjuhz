@@ -1,0 +1,19 @@
+<table>
+<tr>
+<td align="right">&nbsp;&nbsp;&nbsp;<b>更改头像：</b><br /><br /><br /></td>
+<td><span id="userFace"><?= $this->face($this->sessCommon->login['uid']); ?></span> <span id="previewImage"></span></td>
+</tr>
+<tr>
+<td align="right"><b></b><br /></td>
+<td><input type="file" name="fileData" onkeypress="return false;" id="fileData" class="inputtxt" size="33" onchange="document.getElementById('previewImage').innerHTML = '=> <img src=\''+this.value+'\' width=54 height=54>';"></td>
+</tr>
+<tr>
+<td></td><td><input type="button" value=" 上 传 " class="btn" id="btnUpload" name="btnUpload" disabled />&nbsp;<img id="loading" src="/static/images/loading1.gif" style="display:none;"><br /><br />
+<span class="f12">* 头像必须是jpg格式的图片文件，大小在20KB以内，建议图片尺寸200*200。</span><br />
+</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</table>
