@@ -108,6 +108,29 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
+     * 我的头像
+     * 
+     * @return void
+     */
+	public function faceAction()
+	{
+		$this->view->headTitle($this->_iniMember->head->titleMyFace);
+		$this->view->headScript()->appendFile('/static/scripts/member/my/face.js');
+
+    	$type = $this->getRequest()->getParam('type');
+		switch ($type)
+		{
+			default:        // 上传头像
+			{
+    			$type = 'upload';
+			}
+		}
+
+		$this->view->ctrl = 'face';
+		$this->view->type = $type;
+	}
+
+	/**
      * 通讯录
      * 
      * @return void
@@ -234,7 +257,7 @@ class MyController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender();
 		$this->_helper->layout->disableLayout();
 
-		Upload::init(array('max_size' => 30, 'cust_name' => 'original.jpg', 
+		Upload::init(array('max_size' => 25, 'cust_name' => 'original.jpg', 
 		    'allow_type' => 'jpg|jpeg', 'overwrite' => true, 'upload_path' => USER_ROOT));
 
 		if(Upload::handle('fileData')) // 上传成功
@@ -242,11 +265,13 @@ class MyController extends Zend_Controller_Action
 			// 以最小边切成正方形
 			$image = new ImageHandle(USER_ROOT.'original.jpg');
 			$image->square(USER_ROOT.'square');
-			// 再以正方形强制缩小
+			// 再以正方形强制切割
 			$image->init(USER_ROOT.'square.jpg');
-			$image->abs_resize(54, 54, USER_ROOT.'small');
-			$image->abs_resize(200, 200, USER_ROOT.'large');
-			$image->destroy();
+			$image->abs_resize(30, 30, USER_ROOT.'small'); // 小图
+			$image->init(USER_ROOT.'square.jpg');
+			$image->abs_resize(54, 54, USER_ROOT.'medium'); // 中图
+			$image->init(USER_ROOT.'square.jpg');
+			$image->abs_resize(200, 200, USER_ROOT.'large'); // 大图
 
 			echo 'message';
 
