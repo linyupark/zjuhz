@@ -257,7 +257,7 @@ class MyController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender();
 		$this->_helper->layout->disableLayout();
 
-		Upload::init(array('max_size' => 25, 'cust_name' => 'original.jpg', 
+		Upload::init(array('max_size' => 35, 'cust_name' => 'original.jpg', 
 		    'allow_type' => 'jpg|jpeg', 'overwrite' => true, 'upload_path' => USER_ROOT));
 
 		if(Upload::handle('fileData')) // 上传成功

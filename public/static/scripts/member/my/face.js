@@ -25,11 +25,9 @@ function doupload() {
         secureuri:false, 
         fileElementId:"fileData", 
         dataType: "json", 
-        success: function (data, status) {}, 
-        error: function (data, status, e) {}
+        success: function (data, status) { goToUrl("reload", 0); }, 
+        error: function (data, status, e) { goToUrl("reload", 0); }
 	})
-
-	goToUrl("reload", 0);
 
     return false;
 }
