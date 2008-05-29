@@ -14,6 +14,31 @@
 		
 		/* 相册相关 //////////////////////////////////////////////////////////*/
 		
+		function changeclassnameAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				if(false == Cmd::isManager($this->_classId)) exit();  // 不是班级管理员
+				$inputChains = new InputChains();
+				$class_name = $inputChains->className($request->getPost('class_name'));
+				if(count($inputChains->getMessages()) > 0) //数据有问题
+				{
+					$this->view->err_tip = $inputChains->getMessages();
+					$this->render('error');
+				}
+				else 
+				{
+					$db = Zend_Registry::get('dbClass');
+					$db->update('tbl_class', array('class_name' => $class_name), 'class_id='.$this->_classId);
+					$this->_sessClass->data[$this->_classId] = null;
+					$this->view->suc_tip = "班级名称修改成功!";
+					echo Commons::js_jump('/class/home?c='.$this->_classId, 1);
+					$this->render('success');
+				}
+			}
+		}
+		
 		# 删除照片
 		function delalbumAction()
 		{
