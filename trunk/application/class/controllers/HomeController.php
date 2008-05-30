@@ -20,6 +20,10 @@ class HomeController extends Zend_Controller_Action
 		$passport = $this->view->passport();
 		$uid = $passport['uid'];
 		$class_id = $this->view->class_base_info['class_id'];
+		
+		$cache = Cmd::cacheClassInit($uid);
+		if(!$cache->load('classCache'))
+		Cmd::cacheClass($uid);
 
 		// 没有初始化过班级通讯录判断的
 		if($this->_sessClass->addressInit == null)

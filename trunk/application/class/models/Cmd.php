@@ -2,12 +2,8 @@
 
 	class Cmd
 	{
-		/**
-		 * 建立某成员的班级信息缓存
-		 *
-		 * @param int $uid 成员唯一id
-		 */
-		static function cacheClass($uid)
+		
+		static function cacheClassInit($uid)
 		{
 			$cacheDir = DOCROOT.Commons::getUserFolder($uid).'cache/';
 			if(FALSE == file_exists($cacheDir))
@@ -23,8 +19,17 @@
 			$backendOptions = array(
 			    'cache_dir' => $cacheDir
 			);
-			$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-			
+			return Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+		}
+		
+		/**
+		 * 建立某成员的班级信息缓存
+		 *
+		 * @param int $uid 成员唯一id
+		 */
+		static function cacheClass($uid)
+		{
+			$cache = self::cacheClassInit($uid);
 			$db = Zend_Registry::get('dbClass');
 			$rowset = $db->fetchAll('SELECT `class_name`,`class_college`,`class_year`,`class_id` FROM `vi_class_member` 
 									WHERE `class_member_id` = ?', $uid);
