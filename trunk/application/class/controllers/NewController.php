@@ -44,6 +44,7 @@ class NewController extends Zend_Controller_Action
 					// 将sessClass清除,重新分配
 					$this->_sessClass->data = null;
 					$this->view->suc_tip = '班级建立成功,2秒后转向<a href="/class/home?c='.$class_id.'">班级主页</a>';
+					Cmd::cacheClass($this->view->passport('uid'));
 					echo Commons::js_jump('/class/home?c='.$class_id,2);
 				}
 			}

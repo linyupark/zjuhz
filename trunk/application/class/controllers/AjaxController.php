@@ -33,6 +33,7 @@
 					$db->update('tbl_class', array('class_name' => $class_name), 'class_id='.$this->_classId);
 					$this->_sessClass->data[$this->_classId] = null;
 					$this->view->suc_tip = "班级名称修改成功!";
+					Cmd::cacheClass($this->view->passport('uid'));
 					echo Commons::js_jump('/class/home?c='.$this->_classId, 1);
 					$this->render('success');
 				}
@@ -167,6 +168,7 @@
 				if(true == InviteModel::accept($invite_id, $this->_classId,$member_id))
 				{
 					$this->view->suc_tip = '成功加入该班级';
+					Cmd::cacheClass(member_id);
 					echo Commons::js_jump('/class/home?c='.$this->_classId,1);
 					$this->render('success');
 				}
@@ -767,6 +769,7 @@
 					foreach ($member_id as $v)
 					{
 						MemberModel::fireOut($v, $this->_classId);
+						Cmd::cacheClass($member_id);
 					}
 				}
 			}
