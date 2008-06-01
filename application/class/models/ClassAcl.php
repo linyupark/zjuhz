@@ -25,11 +25,10 @@
 				// 增加所有控制角色,决定继承关系
 				$acl->addRole(new Zend_Acl_Role('guest'))
 				    ->addRole(new Zend_Acl_Role('member'))
-				    ->addRole(new Zend_Acl_Role('staff'))
 				    ->addRole(new Zend_Acl_Role('admin'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow(array('member','staff','admin'));
+					->allow(array('member','admin'));
 				// 寄存
 				Zend_Registry::set('acl', $acl);
 				$this->_acl = $acl;
@@ -57,8 +56,6 @@
 		   if(false == $this->_acl->has($resource))
 		   {
 		    	$this->_acl->add(new Zend_Acl_Resource($resource));
-		    	// 再次注册
-		    	Zend_Registry::set('acl', $this->_acl);
 		   }
 		   
 		   // 权限再定义
