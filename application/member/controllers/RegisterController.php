@@ -54,7 +54,7 @@ class RegisterController extends Zend_Controller_Action
 		$this->_iniCommon  = Zend_Registry::get('iniCommon');
 		$this->_iniMember  = Zend_Registry::get('iniMember');
 
-		(isset($this->_sessCommon->role) ? $this->_redirect('../', array('exit')) : '');
+		//(isset($this->_sessCommon->role) ? $this->_redirect('../', array('exit')) : '');
     }
 
     /**
@@ -68,7 +68,6 @@ class RegisterController extends Zend_Controller_Action
     	$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
     	$this->view->headLink()->appendStylesheet('/static/styles/passwdcheck.css','screen');
 
-    	$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
     	$this->view->ikey = $this->getRequest()->getParam('ikey'); // 获取邀请码
     }
 
