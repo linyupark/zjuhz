@@ -56,7 +56,7 @@
     </tr>
     <tr>
     	<td>入学信息：<br /><br /></td>
-    	<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
+    	<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college() as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
     </tr>
     <tr>
     	<td>所学专业：<br /><br /></td>
