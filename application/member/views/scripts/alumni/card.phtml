@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>校友中心-基础信息迷你名片</title>
+<style>
+#ucard { margin:10px;text-align:left; }
+#ucard u{ text-decoration:none; border-bottom:1px solid #666; }
+</style>
+</head>
+
+<body>
+<?php if($this->card) { ?>
+<p>
+<img style="cursor:pointer;" src="/static/images/icon/close.gif" onclick="$('.cardContainer').remove()" />
+</p>
+<table id="ucard">
+  <tr>
+    <td valign="top"><?= $this->face($this->card['uid']); ?></td>
+    <td style="padding:0 0 0 5px" valign="bottom">
+    <p>性别：<u><?= $this->card['sex']; ?></u></p>
+    <p>最近上线：<u><?= date('m月d日', $this->card['lastLogin']); ?></u></p>	
+    <p>入学年份：<u><?= (1900 < $this->card['year'] ? "{$this->card['year']}年" : ''); ?></u></p>
+    <p>所在院系：<u><?= (0 < $this->card['college'] ? $this->college($this->card['college']) : ''); ?></u></p>
+    </td>
+  </tr>
+</table>
+<table height="100%" border="0">
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<?php } else { ?>
+<p>
+<img style="cursor:pointer;" src="/static/images/icon/close.gif" onclick="$('.cardContainer').remove()" />
+</p>
+<table align="center">
+  <tr>
+    <td>&nbsp;抱歉，该校友暂未完善个人资料。</td>
+  </tr>
+</table>
+<?php } ?>
+</body>
+</html>

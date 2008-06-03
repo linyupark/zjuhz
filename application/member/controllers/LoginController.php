@@ -70,6 +70,10 @@ class LoginController extends Zend_Controller_Action
 					((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
 					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 
+					// 名片缓存
+					CacheLogic::setOptions('cache_dir', Commons::getUserCache($result['uid']));
+					CacheLogic::init()->cardSave($this->_sessCommon->login);
+
 					echo 'redirect'; // 请求ajax跳转
 				}
 				else

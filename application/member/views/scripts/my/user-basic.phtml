@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="right"><b>入学信息：</b></td>
-<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option <?= ($i == $this->sessCommon->login['year'] ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college as $key => $value) { ?><option <?= ($key == $this->sessCommon->login['college'] ? 'selected' : ''); ?> value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
+<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option <?= ($i == $this->sessCommon->login['year'] ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college() as $key => $value) { ?><option <?= ($key == $this->sessCommon->login['college'] ? 'selected' : ''); ?> value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
 </tr>
 <tr>
 <td align="right"><b>所学专业：</b><br /><br /></td>

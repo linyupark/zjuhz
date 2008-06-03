@@ -10,9 +10,8 @@
 
 
 /**
- * 校友中心-用户-联络方式
- * 控制器附属层:数据库操作入口
- * 介于控制器和模型之间,是控制器访问模型的唯一入口
+ * 校友中心-tbl_user_contact
+ * 控制器附属层:模型层操作入口
  */
 class UserContactLogic extends MemberInterlayer
 {

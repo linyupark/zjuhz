@@ -153,7 +153,7 @@ class Commons
     static function getUserFolder($uid, $sub='')
     {
     	// 用户文件夹下各子文件夹
-    	$subArray = array('' => '', 'albums' => 'albums/');
+    	$subArray = array('' => '', '*' => '', 'albums' => 'albums/', 'cache' => 'cache/');
 
     	if (0 < $uid && array_key_exists($sub, $subArray))
     	{
@@ -172,10 +172,36 @@ class Commons
 		        }
 	        }
 
+	        // 在用户主文件夹下创建子文件夹
+	        if ('*' == $sub)
+		    {
+		    	foreach ($subArray as $value)
+                {
+                	$dir = "..$folder/{$value}/";
+
+                	if(!file_exists("..{$dir}"))
+                	{
+                		(0 <= $value && !file_exists($dir) ? (mkdir($dir, 0777) ? 
+            	            chmod($dir, 0777) : '') : '' );
+                	}
+		        }
+		    }
+
 	        return $folder;
     	}
 
     	return false;
+    }
+
+	/**
+	 * 获取用户缓存文件夹路径(传用户编号或用户根目录)
+	 * 
+	 * @param integer | string $arg
+     * @return string
+	 */
+    static function getUserCache($arg)
+    {
+    	return (0 < $arg ? DOCUMENT_ROOT.Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**

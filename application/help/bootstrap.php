@@ -38,9 +38,11 @@ Zend_Registry::set('sessHelp', new Zend_Session_Namespace('help'));
 /** ACL */
 Zend_Registry::set('aclHelp', new Zend_Acl());
 
-/** define constants */
-//define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
-//define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(Zend_Registry::get('sessCommon')->login['uid']));
+/** constants */
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('USER_UID', Zend_Registry::get('sessCommon')->login['uid']);
+define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(USER_UID, '*'));
+define('USER_CACHE', Commons::getUserCache(USER_ROOT));
 
 /** run */
 Zend_Controller_Front::getInstance()

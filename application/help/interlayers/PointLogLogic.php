@@ -10,9 +10,8 @@
 
 
 /**
- * 校友互助
- * 控制器附属层:数据库操作入口
- * 介于控制器和模型之间,是控制器访问模型的唯一入口
+ * 校友互助-tbl_ask_point_log
+ * 控制器附属层:模型层操作入口
  */
 class PointLogLogic extends HelpInterlayer
 {
