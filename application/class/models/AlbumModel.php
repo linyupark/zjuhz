@@ -2,6 +2,19 @@
 
 	class AlbumModel
 	{
+		static function fetchItemNum($class_id, $category)
+		{
+			$db = Zend_Registry::get('dbClass');
+			
+			// 得到记录总数
+			$row = $db->fetchRow('SELECT COUNT(`class_album_id`) AS `numrows` 
+						   		  FROM `tbl_class_album` 
+						   		  WHERE `class_id` = ? AND `class_album_category` = ?',
+						   	      array($class_id,$category));
+			if(FALSE == $row) return FALSE;
+			return $row['numrows'];
+		}
+		
 		/**
 		 * 返回当前同类相片的前一张和后一张
 		 *
@@ -157,11 +170,8 @@
 			$db = Zend_Registry::get('dbClass');
 			
 			// 得到记录总数
-			$row = $db->fetchRow('SELECT COUNT(`class_album_id`) AS `numrows` 
-						   		  FROM `tbl_class_album` 
-						   		  WHERE `class_id` = ? AND `class_album_category` = ?',
-						   	      array($class_id,$category));
-			
+			$numrows = self::fetchItemNum($class_id, $category);
+			if(FALSE == $numrows) $numrows = 0;
 			
 			$offset = ($page - 1)*$pagesize;
 				
@@ -179,7 +189,7 @@
 								  LIMIT '.$offset.','.$pagesize,
 								  array($class_id,$category));
 								  
-			return array('numrows' => $row['numrows'],'rows'=>$rows);
+			return array('numrows' => $numrows,'rows'=>$rows);
 		}
 		
 		/**

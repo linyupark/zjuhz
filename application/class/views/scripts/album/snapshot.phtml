@@ -1,0 +1,22 @@
+<style type="text/css">
+	.
+</style>
+
+<?= $this->render('home/index.phtml'); ?>
+<!-- 管理条目 ///////////////////////////////////// -->
+<div class="sidebar" style="width:160px">
+<p class="toolbar">
+<a href="/class/home?c=<?= $this->class_id ?>"><img src="/static/images/icon/arrow_undo.gif" /> 返回</a>
+<a href="/class/album/public?c=<?= $this->class_id ?>"><img src="/static/images/icon/add.gif" /> 发布新照片</a>
+</p>
+</div>
+
+<!-- 班级照片详细列表 ///////////////////////// -->
+<div class="sidebar cont_list">
+<p><img src="/static/images/icon/picture.gif" /> <b class="quiet">班级相册</b></p>
+<?php if($this->result): foreach ($this->result as $name => $num): ?>
+	<a href="/class/album/list?c=<?= $this->class_id ?>&f=<?= urlencode($name) ?>" class="class_album_folder"><?= $name ?>(<?= $num ?> 张)</a>
+<?php endforeach; else: ?>
+	
+<?php endif; ?>
+</div>

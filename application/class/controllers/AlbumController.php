@@ -107,6 +107,19 @@
 			$this->render('public');
 		}
 		
+		public function snapshotAction()
+		{
+			// 获取所有相册分类
+			$categories = AlbumModel::fetchCategory($this->view->class_id);
+			$result['未分类'] = AlbumModel::fetchItemNum($this->view->class_id, '未分类');
+			foreach ($categories as $val)
+			{
+				$cate = $val['class_album_category'];
+				$result[$cate] = AlbumModel::fetchItemNum($this->view->class_id, $cate);
+			}
+			$this->view->result = $result;
+		}
+		
 		/**
 		 * 显示照片列表
 		 *
@@ -118,7 +131,8 @@
 			
 			// 默认获取未分类图片
 			$category = urldecode($request->getParam('f'));
-			if(null == $category) $category = '未分类';
+			if(null == $category)
+			$this->_forward('snapshot');
 			
 			// 开始获取
 			$page = (int)$request->getParam('p',1); //分页信息
