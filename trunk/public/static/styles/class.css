@@ -8,6 +8,18 @@
 
 .tip{ padding:10px; font-size:14px; color:#333;  border:1px solid #5D748F; background:#EFF7FF }
 
+/* 班级相册目录样式 */
+.class_album_folder{
+	display:block;
+	width:90px;
+	height:90px;
+	background:url(/static/images/icon/folder-b.gif) no-repeat center center;
+	border:1px solid #ccc;
+	float:left;
+	margin:10px 0 0 10px;
+	padding:10px;
+}
+
 /* 班级首页HOME 班级话题无序列表 */
 #class_topic{ list-style-position:inside; color:#666; padding:0 10px; }
 
