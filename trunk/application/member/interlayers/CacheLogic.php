@@ -36,6 +36,15 @@ class CacheLogic extends MemberInterlayer
     );
 
 	/**
+     * hopper it(即从传入数组中只保留以下键值)
+     * 
+     * @var array
+     */
+    private $_hoppers = array(
+        'card' => array('uid', 'sex', 'lastLogin', 'year', 'college')
+    );
+
+	/**
      * frontendOptions
      * 
      * @var array
@@ -116,6 +125,18 @@ class CacheLogic extends MemberInterlayer
     }
 
     /**
+     * 数组漏斗设置
+     * 
+     * @param array $data
+     * @param string $name
+     * @return void
+     */
+	private function _setHoppers($data, $name)
+    {
+    	return array_intersect_key($data, array_flip($this->_hoppers[$name]));
+    }
+
+    /**
      * 初始名片缓存
      * 
      * @return void
@@ -125,8 +146,8 @@ class CacheLogic extends MemberInterlayer
     	$this->_setFrontendOptions();
     	$this->_setBackendOptions();
 
-    	$this->_cache = Zend_Cache::factory(
-			'Core', 'File', $this->_frontendOptions, $this->_backendOptions
+    	$this->_cache = Zend_Cache::factory('Core', 'File', 
+    	    $this->_frontendOptions, $this->_backendOptions
 	    );
     }
 
@@ -140,7 +161,7 @@ class CacheLogic extends MemberInterlayer
     {
     	$this->cardInit();
 
-    	return $this->_cache->save($data, 'card');
+    	return $this->_cache->save($this->_setHoppers($data, 'card'), 'card');
     }
 
     /**
