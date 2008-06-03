@@ -34,8 +34,8 @@ class HelpPreAjaxPlugin extends Zend_Controller_Plugin_Abstract
         {
         	// 允许嵌入布局
         	Zend_Layout::startMvc(array(
-        	  'layoutPath' => '../../application/layouts/', 
-        	  'layout' => 'main')
+        	    'layoutPath' => '../../application/layouts/', 
+        	    'layout' => 'main')
         	);
 
         	// 允许渲染页面

@@ -99,7 +99,6 @@ class MyController extends Zend_Controller_Action
 
     			$this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');
     			$this->view->headLink()->appendStylesheet('/static/styles/calendar-blue.css','screen');
-    			$this->view->college = $this->_iniCommon->college->name->toArray(); // 入学年份
 			}
 		}
 
@@ -238,6 +237,7 @@ class MyController extends Zend_Controller_Action
 				if (UserLogic::init()->update($basicArgs, $this->_sessUid))
 				{
 					Commons::modiSess('common', 'login', $basicArgs); // 同步Session
+		            CacheLogic::init()->cardSave($this->_sessCommon->login); // 同步名片
 
 					$this->_sessMember->message = $this->_iniMember->hint->insertSuccess;
 

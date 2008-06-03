@@ -123,6 +123,25 @@ abstract class HelpInterlayer
     }
 
     /**
+     * for Logic
+     * 
+     * @return void
+     */
+    protected function _initLogic()
+    {
+    	$this->_setDao();
+    }
+
+    /**
+     * for Filter
+     * 
+     * @return void
+     */
+    protected function _initFilter()
+    {
+    }
+
+    /**
      * 数据库初始化
      * 
      * @return void
@@ -142,24 +161,5 @@ abstract class HelpInterlayer
 			Zend_Db_Table::setDefaultAdapter($dao);
 			Zend_Registry::set('dao', $dao);
     	}
-    }
-
-    /**
-     * for Logic
-     * 
-     * @return void
-     */
-    protected function _initLogic()
-    {
-    	self::_setDao();
-    }
-
-    /**
-     * for Filter
-     * 
-     * @return void
-     */
-    protected function _initFilter()
-    {
     }
 }

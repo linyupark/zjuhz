@@ -133,3 +133,30 @@ function dologin() {
 function onLoadToInputFocus(objname){
 	getObject(objname).focus();
 }
+
+// 载入用户名片
+function ucard(uid) {
+
+}
+
+function ucardInit() {
+	$('a[href^="javascript:ucard"]').bind('mouseover', function() {
+		$('.cardContainer').remove();
+		var uid = $(this).attr('href');
+		uid = uid.replace('javascript:ucard(','');
+		uid = parseInt(uid.replace(')',''));
+		var x = $(this).offset().left;
+		var y = $(this).offset().top+20;
+		var w = $('body').width();
+		var h = $('body').height();
+		var card_w = 200;
+		$(this).after('<div class="cardContainer"><img src="/static/images/loading1.gif"></div>');
+		$('.cardContainer').css({border:'1px solid #ccc', opacity:'0.9', position:'absolute', width:card_w, top:y, background:'#f5f5f5'});
+		if((card_w+x) > w) {
+			x = x-card_w;
+		}
+
+		$('.cardContainer').css({left:x});
+		$('.cardContainer').load('/member/alumni/card/uid/' + uid + '/');
+	});
+}

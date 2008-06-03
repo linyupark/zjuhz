@@ -75,7 +75,8 @@ class MemberAclPlugin extends Zend_Controller_Plugin_Abstract
      */
 	private function _setAclRes()
 	{
-		$this->_aclHelp->add(new Zend_Acl_Resource('error'))
+		$this->_aclHelp->add(new Zend_Acl_Resource('alumni'))
+		               ->add(new Zend_Acl_Resource('error'))
 		               ->add(new Zend_Acl_Resource('index'))
 		               ->add(new Zend_Acl_Resource('login'))
 		               ->add(new Zend_Acl_Resource('logout'))
