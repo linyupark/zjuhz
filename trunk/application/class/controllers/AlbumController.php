@@ -187,7 +187,6 @@
 				$pagesize = 5;
 				$page = (int)$request->getParam('p',1);
 				$rows = AlbumModel::fetchReply($album_id, $pagesize, $page);
-				Zend_Debug::dump($rows);
 
 				Page::$pagesize = $pagesize;
 				Page::create(array(
