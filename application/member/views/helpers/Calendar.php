@@ -19,7 +19,6 @@ class Zend_View_Helper_Calendar
     {
     	return '<script type="text/javascript" src="/static/scripts/calendar.js"></script>
     	    <script type="text/javascript" src="/static/scripts/calendar-setup.js"></script>
-    	    <script type="text/javascript" src="/static/scripts/calendar-zh.js"></script>
-    	';
+    	    <script type="text/javascript" src="/static/scripts/calendar-zh.js"></script>';
     }
 }

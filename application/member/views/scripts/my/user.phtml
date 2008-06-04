@@ -10,11 +10,12 @@
 <div class="control_content">
 <div class="control_tab">
 <a href="/member/my/user/type/basic/">基础信息</a>
-<a href="/member/my/user/type/contact/">联系信息</a>
+<a href="/member/my/user/type/contact/">联系方式</a>
+<a href="/member/my/user/type/work/">工作经验</a>
 </div>
 
 <div class="control_action">
-<form class="home_form" name="frmUser" id="frmUser">
+<form class="home_form" name="frmUser" id="frmUser" autocomplete="off">
 <?php echo $this->render('my/user-'.$this->type.'.phtml'); ?>
 </form>
 </div>

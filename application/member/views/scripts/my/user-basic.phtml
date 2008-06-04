@@ -46,7 +46,7 @@
 </script>
 
 <td></td>
-<td><div id="flashUI" style="display: none;"><input type="text" id="fileName" readonly class="inputtxt" size="32" />&nbsp;<input id="btnBrowse" type="button" value="选择头像..." onclick="fileBrowse.apply(swfu)" />&nbsp;<input type="button" value=" 上 传 " id="btnUpload" /><br /><span class="f12">* 头像必须是jpg格式的图片文件，大小在30KB以内，建议图片尺寸200*200。</span></div><div id="fsUploadProgress"></div><div id="degradedUI"><span class="f12">* <a href="/member/my/face/">点击这里立即上传我的新头像 >>></a></span></div></td>
+<td><div id="flashUI" style="display: none;"><input type="text" id="fileName" readonly class="inputtxt" size="32" />&nbsp;<input id="btnBrowse" type="button" value="选择头像..." onclick="fileBrowse.apply(swfu)" />&nbsp;<input type="button" value=" 上 传 " id="btnUpload" /><br /><span class="quiet f12">* 头像必须是jpg格式的图片文件，大小在30KB以内，建议图片尺寸200*200。</span></div><div id="fsUploadProgress"></div><div id="degradedUI"><span class="f12">* <a href="/member/my/face/">点击这里立即上传我的新头像 >>></a></span></div></td>
 </tr>
 <tr>
 <td align="right"><b>登录账号：</b></td>
@@ -66,25 +66,25 @@
 </tr>
 <tr>
 <td align="right"><b>所学专业：</b><br /><br /></td>
-<td><input name="major" id="major" tabindex="9" class="inputtxt" type="text" size="37" maxlength="30" value="<?= $this->sessCommon->login['major']; ?>" />&nbsp;<br /><span class="quiet">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
+<td><input name="major" id="major" tabindex="9" class="inputtxt" type="text" size="37" maxlength="30" value="<?= $this->sessCommon->login['major']; ?>" />&nbsp;<br /><span class="quiet f12">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
 </tr>
 <tr>
 <td align="right"><b>曾用名：</b><br /><br /></td>
-<td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /> <br /><span class="quiet">输入您曾经使用过的名字以便校友找到您。</span></td>
+<td><input type="text" class="txt" name="everName" id="everName" maxlength="10" value="<?= $this->sessCommon->login['everName']; ?>" /> <br /><span class="quiet f12">输入您曾经使用过的名字以便校友找到您。</span></td>
 </tr>
 <?= $this->calendar(); ?>
 <tr>
 <td align="right"><b>出生日期：</b><br /><br /></td>
-<td><input type="text" class="txt" name="birthday" id="birthday" maxlength="10" value="<?= $this->sessCommon->login['birthday']; ?>" /> <a href="#" id="calendar">显示日历</a> <br /><span class="quiet">格式应为：年-月-日，如1980-01-01。</span></td>
+<td><input type="text" class="txt" name="birthday" id="birthday" maxlength="10" value="<?= $this->sessCommon->login['birthday']; ?>" /> <a href="#" id="calendar">显示日历</a> <br /><span class="quiet f12">格式应为：年-月-日，如1998-04-07。</span></td>
 </tr>
 <?= $this->pcas(); ?>
 <tr>
 <td align="right"><b>我的家乡：</b><br /><br /></td>
-<td><select name="hometown_p" id="hometown_p"></select>&nbsp;<select name="hometown_c" id="hometown_c"></select>&nbsp;<select name="hometown_a" id="hometown_a"></select> <br /><span class="quiet">可选择至最后县/市/区一层，我们会帮您找到同乡校友。</span></td>
+<td><select name="hometown_p" id="hometown_p"></select>&nbsp;<select name="hometown_c" id="hometown_c"></select>&nbsp;<select name="hometown_a" id="hometown_a"></select> <br /><span class="quiet f12">可选择至最后县/市/区一层，我们会帮您找到同乡校友。</span></td>
 </tr>
 <tr>
 <td align="right"><b>当前所在地：</b><br /><br /></td>
-<td><select name="location_p" id="location_p"></select>&nbsp;<select name="location_c" id="location_c"></select>&nbsp;<select name="location_a" id="location_a"></select> <br /><span class="quiet">想知道哪些校友与您当前在同一个地点吗？</span></td>
+<td><select name="location_p" id="location_p"></select>&nbsp;<select name="location_c" id="location_c"></select>&nbsp;<select name="location_a" id="location_a"></select> <br /><span class="quiet f12">想知道哪些校友与您当前在同一个地点吗？</span></td>
 </tr>
 <tr>
 <td></td>

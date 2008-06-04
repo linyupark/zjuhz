@@ -174,3 +174,40 @@ create table zjuhz_user.tbl_user_invite_log
    primary key (cid)
 )
 type = MYISAM;
+
+/*==============================================================*/
+/* Table: tbl_user_work                                         */
+/*==============================================================*/
+create table zjuhz_user.tbl_user_work
+(
+   wid                  char(10) not null,
+   uid                  int(10) unsigned not null,
+   company              varchar(50) not null,
+   startDate            date not null,
+   endDate              date not null,
+   industry             tinyint unsigned not null default 0,
+   property             tinyint unsigned not null default 0,
+   division             varchar(30) default NULL,
+   functional           tinyint unsigned not null default 0,
+   job                  varchar(20) default NULL,
+   description          text default NULL,
+   lastModi             int unsigned not null default 0,
+   primary key (wid)
+)
+type = MYISAM;
+
+/*==============================================================*/
+/* Index: idx_uid                                               */
+/*==============================================================*/
+create index idx_uid on tbl_user_work
+(
+   uid
+);
+
+/*==============================================================*/
+/* Index: idx_startDate                                         */
+/*==============================================================*/
+create index idx_startDate on tbl_user_work
+(
+   startDate
+);

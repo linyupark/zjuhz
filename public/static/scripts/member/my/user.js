@@ -38,3 +38,32 @@ function douser() {
 
 	return false;
 }
+
+// 工作删除之前
+function doworkdelBefore(wid) {
+	var popup = new Popup({ contentType:3, isReloadOnClose:false, width:340, height:105});
+	popup.setContent("title", "校友会提示您");
+	popup.setContent("confirmCon", "您确定要删除该工作经验吗？");
+	popup.setContent("callBack", doworkdel);
+	popup.setContent("parameter", { wid : wid, popup : popup });
+	popup.build();
+	popup.show();
+	return false;
+}
+
+// 工作删除
+function doworkdel(para) {
+	ajaxloading(true);
+
+	$.post("/member/my/doworkdel/", { wid : para["wid"] }, function(msg) {
+		ajaxloading();
+		para["popup"].close();
+
+		if ("hide" == msg) {
+			$("#work" + para["wid"]).hide(0);
+			return false;
+		}
+	});
+
+	return false;
+}

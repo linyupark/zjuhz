@@ -65,6 +65,13 @@ abstract class MemberInterlayer
      */
 	protected $_UserModel = null;
 
+	/**
+     * UserWorkModel
+     * 
+     * @var object
+     */
+	protected $_UserWorkModel = null;
+
     /**
      * 构造方法
      * 
