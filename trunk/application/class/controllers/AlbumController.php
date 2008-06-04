@@ -182,7 +182,7 @@
 				// 前后相片
 				$this->view->previous = $sibling['previous'];
 				$this->view->next = $sibling['next'];
-				/*
+				
 				// 回复部分
 				$pagesize = 5;
 				$page = (int)$request->getParam('p',1);
@@ -202,7 +202,7 @@
 				$this->view->page = $page;
 				$this->view->pagination = Page::$page_str;
 				$this->view->replies = $rows['rows'];
-				$this->view->album_id = $album_id;*/
+				$this->view->album_id = $album_id;
 			}
 		}
 		
