@@ -188,7 +188,7 @@
 				$page = (int)$request->getParam('p',1);
 				$rows = AlbumModel::fetchReply($album_id, $pagesize, $page);
 				Zend_Debug::dump($rows);
-				/*
+
 				Page::$pagesize = $pagesize;
 				Page::create(array(
 					'href_open' => '<a href="/class/album/view?c='.
@@ -205,7 +205,7 @@
 				$this->view->pagination = Page::$page_str;
 				$this->view->replies = $rows['rows'];
 				$this->view->album_id = $album_id;
-*/
+
 			}
 		}
 		
