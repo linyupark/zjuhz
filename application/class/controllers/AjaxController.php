@@ -146,11 +146,18 @@
 				if(false == Cmd::isManager($this->_classId)) exit();  // 不是班级管理员
 				$album_id = $request->getPost('album_id');
 				$new_category = $request->getPost('new');
-				$r = AlbumModel::modCategory($album_id, $new_category);
-				if($r != 1)
+				if(trim($new_category) == '')
 				{
-					$this->view->err_tip = '修改失败';
+					$this->view->err_tip = '分类不能为空';
 					$this->render('error');
+				}
+				else{
+					$r = AlbumModel::modCategory($album_id, $new_category);
+					if($r != 1)
+					{
+						$this->view->err_tip = '修改失败';
+						$this->render('error');
+					}
 				}
 			}
 		}
