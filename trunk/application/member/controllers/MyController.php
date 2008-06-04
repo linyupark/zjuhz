@@ -85,6 +85,8 @@ class MyController extends Zend_Controller_Action
 	{
 		$this->view->headTitle($this->_iniMember->head->titleMyUser);
 		$this->view->headScript()->appendFile('/static/scripts/member/my/user.js');
+		$this->view->headLink()->appendStylesheet('/static/styles/calendar-blue.css', 'screen');
+        $this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');		
 
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
@@ -93,12 +95,21 @@ class MyController extends Zend_Controller_Action
 			{
     			break;
 			}
+			case 'work':    // 工作经验
+			{
+				$wid    = $this->getRequest()->getParam('wid');
+				$detail = (10 == strlen($wid) ? UserWorkLogic::init()->selectWidRow($wid, $this->_sessUid) : '');
+
+                $this->view->wid    = (10 == strlen($detail['wid']) ? $detail['wid'] : 
+                    Commons::getRandomStr($this->_sessUid, 10));
+                $this->view->detail = $detail;
+                $this->view->work   = UserWorkLogic::init()->selectUidAll($this->_sessUid);
+
+    			break;
+			}
 			default:        // 基本信息
 			{
     			$type = 'basic';
-
-    			$this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');
-    			$this->view->headLink()->appendStylesheet('/static/styles/calendar-blue.css','screen');
 			}
 		}
 
@@ -212,7 +223,7 @@ class MyController extends Zend_Controller_Action
 			{
     			$type = 'passwd';
 
-    			$this->view->headLink()->appendStylesheet('/static/styles/passwdcheck.css','screen');
+    			$this->view->headLink()->appendStylesheet('/static/styles/passwdcheck.css', 'screen');
 			}
 		}
 
@@ -284,7 +295,7 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
-     * 我的资料-联络信息
+     * 我的资料-联络方式
      * 
      * @return void
      */
@@ -305,6 +316,50 @@ class MyController extends Zend_Controller_Action
 
 					echo 'message';
 				}
+			}
+		}
+	}
+
+	/**
+     * 我的资料-工作经验
+     * 
+     * @return void
+     */
+	public function doworkAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid']      = $this->_sessUid;
+			$postArgs['lastModi'] = $_SERVER['REQUEST_TIME'];
+
+			if ($workArgs = MyFilter::init()->work($postArgs))
+			{
+				if (UserWorkLogic::init()->insertOrUpdate($workArgs))
+				{
+					$this->_sessMember->message = $this->_iniMember->hint->insertSuccess;
+
+					echo 'message';
+				}
+			}
+		}
+	}
+
+	/**
+     * 我的资料-删除工作
+     * 
+     * @return void
+     */
+	public function doworkdelAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid'] = $this->_sessUid;
+
+			if ($workdelArgs = MyFilter::init()->workdel($postArgs))
+			{
+				echo (UserWorkLogic::init()->delete($workdelArgs) ? 'hide' : '');
 			}
 		}
 	}

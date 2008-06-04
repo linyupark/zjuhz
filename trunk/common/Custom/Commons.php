@@ -142,6 +142,20 @@ class Commons
         unlink($file);
     }
 
+    /**
+     * 文本字符转换
+     * 
+     * @param string $arg
+     * @return string
+     */
+	static function txtcode($arg)
+    {
+    	$arg = str_replace(CHR(10), '<br>' , $arg);
+    	$arg = str_replace(' ', '&nbsp;', $arg);
+
+    	return $arg;
+	}
+
 	/**
 	 * 获取用户文件夹路径(若缺少则自动创建)
 	 * for example:if uid = 1 then return "/static/users/0/1/"

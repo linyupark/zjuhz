@@ -110,7 +110,7 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
-     * 个人资料-联络信息
+     * 个人资料-联络方式
      * 
      * @param array $args
      * @return boolean or array
@@ -129,7 +129,7 @@ class MyFilter extends MemberInterlayer
 		// 设置过滤规则
 		$filters = array(
 		    '*' => array('StringTrim', 'StripTags'),
-            'mobile' => 'Digits',		        
+            'mobile' => 'Digits',
 	    	'qq' => 'Digits',
 	    	'postcode' => 'Digits'
     	);
@@ -182,6 +182,115 @@ class MyFilter extends MemberInterlayer
 		}
 
 		return false;
+	}
+
+	/**
+     * 个人资料-工作经验
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function work($args)
+	{
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('Utf8Length.php');
+
+		// 设置过滤规则
+		$filters = array(
+		    '*' => array('StringTrim', 'StripTags'),
+		    'wid' => 'Alnum',
+            'uid' => 'Digits',
+	    	'industry' => 'Digits',
+	    	'property' => 'Digits',
+	    	'functional' => 'Digits'
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+            'wid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
+            'uid' => array(array('Int'), 'presence' => 'required'),
+            'company' => array(
+		        array('Utf8Length', '2', '50'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->companyError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->companyError)), 
+            'startDate' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
+            'endDate' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
+            'industry' => array(
+			    array('Between', '1', '99'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->industryError)), 
+            'property' => array(
+			    array('Between', '1', '99'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->propertyError)), 
+			'division' => array(
+		        array('Utf8Length', '0', '30'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->divisionError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->divisionError)), 
+            'functional' => array(
+			    array('Between', '1', '99'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->functionalError)), 
+            'job' => array(
+		        array('Utf8Length', '0', '20'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->jobError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->jobError)), 
+            'description' => array(
+		        array('Utf8Length', '0', '2000'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->descriptionError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->descriptionError)), 
+            'lastModi' => array('allowEmpty' => true)                    
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		if ($input->hasInvalid() || $input->hasMissing())
+		{
+			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
+		}
+		else
+		{
+			return array(
+			    'wid' => $input->getUnescaped('wid'), 'uid' => $input->getUnescaped('uid'), 
+		    	'company' => $input->getUnescaped('company'), 'startDate' => $input->getUnescaped('startDate'), 
+		    	'endDate' => $input->getUnescaped('endDate'), 'industry' => $input->getUnescaped('industry'), 
+		    	'property' => $input->getUnescaped('property'),	'division' => $input->getUnescaped('division'), 
+		    	'functional' => $input->getUnescaped('functional'),	'job' => $input->getUnescaped('job'), 
+		    	'description' => $input->getUnescaped('description'), 'lastModi' => $input->getUnescaped('lastModi')
+			);
+		}
+
+		return false;
+	}
+
+	/**
+     * 个人资料-删除工作
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function workdel($args)
+	{
+		// 设置过滤规则
+		$filters = array(
+		    'wid' => 'Alnum',
+            'uid' => 'Digits'
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+		    'wid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
+			'uid' => array(array('Int'), 'presence' => 'required')
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('wid' => $input->getUnescaped('wid'), 'uid' => $input->getUnescaped('uid')) : false 
+		);
 	}
 
 	/**
