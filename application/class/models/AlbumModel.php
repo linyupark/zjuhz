@@ -96,9 +96,10 @@
 		{
 			$db = Zend_Registry::get('dbClass');
 			$row = $db->fetchRow('SELECT COUNT(`class_reply_id`) AS `numrows` 
-												FROM `tbl_class_reply` WHERE `class_album_id` = ?',$album_id);
-
+												FROM `tbl_class_reply` WHERE `class_album_id` = '.(int)$album_id);
+			
 			$return['numrows'] = $row['numrows'];
+			
 			$return['rows'] = null;
 			
 			if($return['numrows'] >0)
