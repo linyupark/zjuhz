@@ -163,7 +163,8 @@
 		{
 			$request = $this->getRequest();
 			$album_id = (int)$request->getParam('aid');
-			
+			echo $album_id;
+			/*
 			// 获取话题可看人群范围(阅读权限判断)
 			$album = AlbumModel::fetchDetail($album_id);
 			if($album['class_album_public'] == 0 && !Cmd::isMember($this->view->class_id))
@@ -202,8 +203,8 @@
 				$this->view->page = $page;
 				$this->view->pagination = Page::$page_str;
 				$this->view->replies = $rows['rows'];
-				$this->view->album_id =$album_id;
-			}
+				$this->view->album_id = $album_id;
+			}*/
 		}
 		
 		/**
