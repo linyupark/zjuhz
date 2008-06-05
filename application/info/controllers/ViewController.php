@@ -9,9 +9,6 @@
 
 			// 获取全局SESSION 
 			$this->_sessCommon = Zend_Registry::get('sessCommon');
-								   
-			// 当前所属模块分配
-			$this->view->request = $this->getRequest();
 			
 			// 分配当前角色信息
 			$this->view->role = $this->_sessCommon->role;
