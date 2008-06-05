@@ -1,0 +1,67 @@
+<table>
+  <tr>
+	<td><button class="btn" onclick="location.href='/member/my/user/type/edu/#new'">新增教育经历</button></td>		
+  </tr>
+</table>
+
+<br />
+
+<fieldset>
+<legend class="f14">&nbsp;我的教育经历&nbsp;</legend>
+<table class="control_list">
+<tr>
+<th class="txtl" width="50%">学校名称</th>
+<th class="txtl" width="32%">就读时间</th>
+<th class="txtl" width="18%">选项</th>
+</tr>
+<?php foreach ($this->edu as $value) { ?>
+<tr id="edu<?= $value['eid']; ?>">
+<td class="txtl"><?= $value['school']; ?></td>
+<td class="txtl"><?= $value['startDate']; ?> 至 <?= $value['endDate']; ?></td>
+<td class="txtl"><a href="/member/my/user/type/edu/eid/<?= $value['eid']; ?>/#edit"><img src="/static/images/icon/mini_icon_bbsarticle.gif" alt="修改">修改</a> <a href="#" onClick="doedudelBefore('<?= $value['eid']; ?>');return false;" id="del"><img src="/static/images/icon/cross.gif" alt="删除">删除</a></td>
+</tr>
+<?php } ?>
+</table>
+</fieldset>
+
+<br />
+
+<fieldset>
+<legend class="f14">&nbsp;<?= (!$this->detail ? '新增教育经历' : '修改教育经历'); ?>&nbsp;</legend>
+<a name="new" id="new"></a>
+<a name="edit" id="edit"></a>
+<table id="new_edu">
+<tr>
+<td align="right"><b>学校名称：</b><br /></td>
+<td><input name="school" type="text" id="school" maxlength="50" size="33" class="inputtxt" tabindex="1" value="<?= $this->detail['school']; ?>" />&nbsp;</td>
+</tr>
+<tr>
+<td align="right"><b>就读时间：</b><br /><br /></td>
+<td>从&nbsp;<input name="startDate" type="text" id="startDate" size="12" maxlength="10" class="inputtxt" tabindex="2" value="<?= $this->detail['startDate']; ?>" />&nbsp;到&nbsp;<input name="endDate" type="text" id="endDate" size="12" maxlength="10" class="inputtxt" tabindex="3" value="<?= $this->detail['endDate']; ?>" />&nbsp;<br /><span class="quiet f12">请输入您在该学校就读的起止时间。格式应为：年-月-日，如1998-04-07。</span>&nbsp;</td>
+</tr>
+<tr>
+<td align="right"><b>专业名称：</b><br /></td>
+<td><input name="major" type="text" id="major" maxlength="30" size="33" class="inputtxt" tabindex="4" value="<?= $this->detail['major']; ?>" />&nbsp;</td>
+</tr>
+<tr>
+<td align="right"><b>取得学历：</b><br /></td>
+<td><select name="edulevel" id="edulevel" tabindex="5"><option>--请选择--</option><?php foreach ($this->edulevel() as $key => $value) { ?><option <?= ($key == $this->detail['edulevel'] ? 'selected' : ''); ?> value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;</td>
+</tr>
+<tr>
+<td align="right"><b>在校描述：</b><br /><br /><br /><br /><br /><br /></td>
+<td><textarea name="description" class="bigtxt" id="description" tabindex="6"><?= $this->detail['description']; ?></textarea>
+&nbsp;<br /><span class="quiet f12">请输入在该学校期间所学的课程、成绩、在校表现、所获奖励等。2000字以内。</span>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><input type="submit" value="保存修改" class="btn" name="btnUser" id="btnUser" tabindex="7" /></td>
+</tr>
+<tr>
+<td></td>
+<td><div id="ajaxhint" style="width:300px"></div></td>
+</tr>
+</table>
+<input type="hidden" id="eid" name="eid" value="<?= $this->eid; ?>">
+<!--<script language="javascript" type="text/javascript">Calendar.setup({inputField : "startDate", button : "startDate"});</script>
+<script language="javascript" type="text/javascript">Calendar.setup({inputField : "endDate", button : "endDate"});</script>-->
+</fieldset>

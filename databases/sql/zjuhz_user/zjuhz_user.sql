@@ -211,3 +211,37 @@ create index idx_startDate on tbl_user_work
 (
    startDate
 );
+
+/*==============================================================*/
+/* Table: tbl_user_edu                                          */
+/*==============================================================*/
+create table zjuhz_user.tbl_user_edu
+(
+   eid                  char(10) not null,
+   uid                  int(10) unsigned not null,
+   school               varchar(50) not null,
+   startDate            date not null,
+   endDate              date not null,
+   major                varchar(30) default NULL,
+   edulevel             tinyint unsigned not null default 0,
+   description          text default NULL,
+   lastModi             int unsigned not null default 0,
+   primary key (eid)
+)
+type = MYISAM;
+
+/*==============================================================*/
+/* Index: idx_uid                                               */
+/*==============================================================*/
+create index idx_uid on tbl_user_edu
+(
+   uid
+);
+
+/*==============================================================*/
+/* Index: idx_startDate                                         */
+/*==============================================================*/
+create index idx_startDate on tbl_user_edu
+(
+   startDate
+);

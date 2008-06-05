@@ -18,7 +18,7 @@
 <tr id="work<?= $value['wid']; ?>">
 <td class="txtl"><?= $value['company']; ?></td>
 <td class="txtl"><?= $value['startDate']; ?> 至 <?= $value['endDate']; ?></td>
-<td class="txtl"><a href="/member/my/user/type/work/wid/<?= $value['wid']; ?>/"><img src="/static/images/icon/mini_icon_bbsarticle.gif" alt="修改">修改</a> <a href="#" onClick="doworkdelBefore('<?= $value['wid']; ?>');return false;" id="del"><img src="/static/images/icon/cross.gif" alt="删除">删除</a></td>
+<td class="txtl"><a href="/member/my/user/type/work/wid/<?= $value['wid']; ?>/#edit"><img src="/static/images/icon/mini_icon_bbsarticle.gif" alt="修改">修改</a> <a href="#" onClick="doworkdelBefore('<?= $value['wid']; ?>');return false;" id="del"><img src="/static/images/icon/cross.gif" alt="删除">删除</a></td>
 </tr>
 <?php } ?>
 </table>
@@ -29,6 +29,7 @@
 <fieldset>
 <legend class="f14">&nbsp;<?= (!$this->detail ? '新增工作经验' : '修改工作经验'); ?>&nbsp;</legend>
 <a name="new" id="new"></a>
+<a name="edit" id="edit"></a>
 <table id="new_work">
 <tr>
 <td align="right"><b>公司名称：</b><br /></td>
@@ -56,12 +57,12 @@
 </tr>
 <tr>
 <td align="right"><b>工作描述：</b><br /><br /><br /><br /><br /><br /></td>
-<td><textarea name="description" class="bigtxt" id="description"><?= $this->detail['description']; ?></textarea>
+<td><textarea name="description" class="bigtxt" id="description" tabindex="9"><?= $this->detail['description']; ?></textarea>
 &nbsp;<br /><span class="quiet f12">请输入在该公司期间的职责范围、工作业绩、离职原因等内容。2000字以内。</span>&nbsp;</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
-<td><input type="submit" value="保存修改" class="btn" name="btnUser" id="btnUser" /></td>
+<td><input type="submit" value="保存修改" class="btn" name="btnUser" id="btnUser" tabindex="10" /></td>
 </tr>
 <tr>
 <td></td>

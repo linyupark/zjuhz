@@ -52,6 +52,13 @@ abstract class MemberInterlayer
 	protected $_UserContactModel = null;
 
 	/**
+     * UserEduModel
+     * 
+     * @var object
+     */
+	protected $_UserEduModel = null;
+
+	/**
      * UserExtModel
      * 
      * @var object

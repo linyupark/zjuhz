@@ -294,6 +294,102 @@ class MyFilter extends MemberInterlayer
 	}
 
 	/**
+     * 个人资料-教育经历
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function edu($args)
+	{
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('Utf8Length.php');
+
+		// 设置过滤规则
+		$filters = array(
+		    '*' => array('StringTrim', 'StripTags'),
+		    'eid' => 'Alnum',
+            'uid' => 'Digits',
+	    	'edulevel' => 'Digits'
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+            'eid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
+            'uid' => array(array('Int'), 'presence' => 'required'),
+            'school' => array(
+		        array('Utf8Length', '2', '50'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->schoolError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->schoolError)), 
+            'startDate' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
+            'endDate' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
+			'major' => array(
+		        array('Utf8Length', '0', '30'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->majorError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->majorError)), 
+            'edulevel' => array(
+			    array('Between', '1', '99'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->edulevelError)), 
+            'description' => array(
+		        array('Utf8Length', '0', '2000'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->descriptionError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->descriptionError)), 
+            'lastModi' => array('allowEmpty' => true)                    
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		if ($input->hasInvalid() || $input->hasMissing())
+		{
+			foreach ($input->getMessages() as $message) { foreach ($message as $msg) { echo $msg; } exit; }
+		}
+		else
+		{
+			return array(
+			    'eid' => $input->getUnescaped('eid'), 'uid' => $input->getUnescaped('uid'), 
+		    	'school' => $input->getUnescaped('school'), 'startDate' => $input->getUnescaped('startDate'), 
+		    	'endDate' => $input->getUnescaped('endDate'), 'major' => $input->getUnescaped('major'), 
+		    	'edulevel' => $input->getUnescaped('edulevel'),	'description' => $input->getUnescaped('description'), 
+		    	'lastModi' => $input->getUnescaped('lastModi')
+			);
+		}
+
+		return false;
+	}
+
+	/**
+     * 个人资料-删除教育
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function edudel($args)
+	{
+		// 设置过滤规则
+		$filters = array(
+		    'eid' => 'Alnum',
+            'uid' => 'Digits'
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+		    'eid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
+			'uid' => array(array('Int'), 'presence' => 'required')
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('eid' => $input->getUnescaped('eid'), 'uid' => $input->getUnescaped('uid')) : false 
+		);
+	}
+
+	/**
      * 通讯录-名片查找
      * 
      * @param array $args

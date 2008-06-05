@@ -107,6 +107,18 @@ class MyController extends Zend_Controller_Action
 
     			break;
 			}
+			case 'edu':    // 教育经历
+			{
+				$eid    = $this->getRequest()->getParam('eid');
+				$detail = (10 == strlen($eid) ? UserEduLogic::init()->selectEidRow($eid, $this->_sessUid) : '');
+
+                $this->view->eid    = (10 == strlen($detail['eid']) ? $detail['eid'] : 
+                    Commons::getRandomStr($this->_sessUid, 10));
+                $this->view->detail = $detail;
+                $this->view->edu    = UserEduLogic::init()->selectUidAll($this->_sessUid);
+
+    			break;
+			}
 			default:        // 基本信息
 			{
     			$type = 'basic';
@@ -360,6 +372,50 @@ class MyController extends Zend_Controller_Action
 			if ($workdelArgs = MyFilter::init()->workdel($postArgs))
 			{
 				echo (UserWorkLogic::init()->delete($workdelArgs) ? 'hide' : '');
+			}
+		}
+	}
+
+	/**
+     * 我的资料-教育经历
+     * 
+     * @return void
+     */
+	public function doeduAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid']      = $this->_sessUid;
+			$postArgs['lastModi'] = $_SERVER['REQUEST_TIME'];
+
+			if ($eduArgs = MyFilter::init()->edu($postArgs))
+			{
+				if (UserEduLogic::init()->insertOrUpdate($eduArgs))
+				{
+					$this->_sessMember->message = $this->_iniMember->hint->insertSuccess;
+
+					echo 'message';
+				}
+			}
+		}
+	}
+
+	/**
+     * 我的资料-删除教育
+     * 
+     * @return void
+     */
+	public function doedudelAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid'] = $this->_sessUid;
+
+			if ($edudelArgs = MyFilter::init()->edudel($postArgs))
+			{
+				echo (UserEduLogic::init()->delete($edudelArgs) ? 'hide' : '');
 			}
 		}
 	}
