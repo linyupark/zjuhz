@@ -7,6 +7,28 @@
 	class TopicModel
 	{
 		/**
+		 * 返回班级公共话题
+		 *
+		 * @param int $pagesize
+		 * @param int $page
+		 */
+		static function fetchPublic($pagesize, $page)
+		{
+			$db = Zend_Registry::get('dbClass');
+			$row = $db->fetchRow('SELECT COUNT(`class_topic_id`) AS `numrows` 
+								  FROM `tbl_class_topic` WHERE `class_topic_public` = 1');
+			$return['numrows'] = $row['numrows'];
+			$offset = ($page-1)*$pagesize;
+			$return['rows'] = $db->fetchAll('SELECT `class_id`,`uid`,`replyUid`,`class_topic_id`,`class_topic_author`,`topicAuthor`,`replyAuthor`,
+										 `class_topic_title`,`class_topic_pub_time`,`class_topic_reply_num`,`class_topic_up`,
+										 `class_topic_view_num`,`class_topic_last_reply_time`,`class_name` 
+						   		  FROM `vi_class_topic` WHERE `class_topic_public` = 1 
+						   		  ORDER BY `class_topic_pub_time` DESC, `class_topic_reply_num` DESC 
+						   		  LIMIT '.$offset.','.$pagesize);
+			return $return;
+		}
+		
+		/**
 		 * 根据会员在班级的权限来返回不同的话题信息列表
 		 *
 		 * @param int $class_id
@@ -29,7 +51,7 @@
 								  FROM `tbl_class_topic`'.$where);
 			$return['numrows'] = $row['numrows'];
 			$offset = ($page-1)*$pagesize;
-			$return['rows'] = $db->fetchAll('SELECT `class_topic_elite`,`class_topic_id`,`class_topic_author`,`topicAuthor`,`replyAuthor`,
+			$return['rows'] = $db->fetchAll('SELECT `class_topic_elite`,`uid`,`replyUid`,`class_topic_id`,`class_topic_author`,`topicAuthor`,`replyAuthor`,
 										 `class_topic_title`,`class_topic_pub_time`,`class_topic_reply_num`,`class_topic_up`,
 										 `class_topic_view_num`,`class_topic_last_reply_time` 
 						   		  FROM `vi_class_topic`'.$where.' 

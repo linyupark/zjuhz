@@ -5,7 +5,7 @@
 		
 		static function cacheClassInit($uid)
 		{
-			$cacheDir = DOCROOT.Commons::getUserFolder($uid).'cache/';
+			$cacheDir = Commons::getUserCache($uid);
 			if(FALSE == file_exists($cacheDir))
 			{
 				@mkdir($cacheDir, 0777);

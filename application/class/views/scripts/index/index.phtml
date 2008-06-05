@@ -27,6 +27,40 @@
 <?= $this->render('index/myinvite.phtml'); ?>
 </div>
 
+<!-- 所有班级公开话题表格 ///////////////////////////////// -->
+<table class="mz-table" cellpadding="0" cellspacing="0" width="620" style="margin-top:10px;">
+<thead>
+	<tr>
+		<th class="top-left" colspan="2" width="50%">班级公共话题</th>
+		<th width="20%">发布人(班级)</th>
+		<th width="10%">回复</th>
+		<th class="top-right" width="20%">最后回复</th>
+	</tr>
+</thead>
+<tbody>
+	<?php if($this->pub_topics): foreach($this->pub_topics as $k => $topic): ?>
+	<tr<?php if($k%2==1) echo ' class="even"'; ?>>
+		<td class="left" colspan="2"><a target="_blank" href="/class/topic/view?c=<?= $topic['class_id'].'&tid='.$topic['class_topic_id'] ?>"><?= $topic['class_topic_title'] ?></a></td>
+		<td><a href="#<?= $topic['uid'] ?>"><?= $topic['topicAuthor'] ?></a> (<a href="/class/home?c=<?= $topic['class_id']?>"><?= $topic['class_name'] ?></a>)<br />
+		<span class="f9"><?= Commons::date($topic['class_topic_pub_time']) ?></span></td>
+		<td><?= $topic['class_topic_reply_num'] ?></td>
+		<td class="right"><a href="#<?= $topic['replyUid'] ?>"><?= $topic['replyAuthor'] == '' ? '无':$topic['replyAuthor'] ?></a> <br /><span class="f9"><?= Commons::date($topic['class_topic_last_reply_time']) ?></span></td>
+	</tr>
+	<?php endforeach; else: ?>
+	<tr>
+		<td colspan="5">还没有任何开放的话题..</td>
+	</tr>
+	<?php endif; ?>
+</tbody>
+<tfoot>
+	<tr>
+		<td class="bottom-left" colspan="3"></td>
+		<td class="bottom-right" colspan="2"></td>
+	</tr>
+</tfoot>
+</table>
+<div class="pagination"><?= $this->topic_pagination ?></div>
+
 <!-- 网站内所有班级列表 /////////////////////////////////// -->
 <div class="sidebar">
 <table class="class_list">
@@ -51,6 +85,6 @@ foreach ($this->class_rows as $k => $v): ?>
 <tr><td colspan="5">没有找到相关班级</td></tr>
 <?php endif; ?>
 </table>
-<div class="pagination"><?= $this->pagination ?></div>
+<div class="pagination"><?= $this->class_pagination ?></div>
 </div>
 
