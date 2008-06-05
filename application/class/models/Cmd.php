@@ -31,7 +31,7 @@
 		{
 			$cache = self::cacheClassInit($uid);
 			$db = Zend_Registry::get('dbClass');
-			$rowset = $db->fetchAll('SELECT `class_name`,`class_college`,`class_year`,`class_id` FROM `vi_class_member` 
+			$rowset = $db->fetchAll('SELECT `class_id`,`class_name` FROM `vi_class_member` 
 									WHERE `class_member_id` = ?', $uid);
 			
 			$cache->save($rowset, 'classCache');
