@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+.mz-table {
+	border-collapse: separate;
+}
+
+.mz-table thead th {
+	background: none;
+}
+
+.mz-table thead td,
+.mz-table thead th {
+	background: #f9fafa url(/static/images/elements/mz-table/header.png) top repeat-x;
+	border: 0;
+	font-size:12px;
+	font-weight:normal;
+}
+.mz-table thead .top-left {
+	background: url(/static/images/elements/mz-table/top-left.png) top left no-repeat;
+}
+
+.mz-table thead .top-right {
+	background: url(/static/images/elements/mz-table/top-right.png) top right no-repeat;
+}
+
+td.left  { border-left:  1px solid #d7d7d7; }
+td.right { border-right: 1px solid #d7d7d7; }
+
+.mz-table tfoot td {
+	background: #f9fafa url(/static/images/elements/mz-table/footer.png) bottom repeat-x;
+	border: 0;
+}
+
+.mz-table tfoot .bottom-left {
+	background: url(/static/images/elements/mz-table/bottom-left.png) bottom left no-repeat;
+}
+
+.mz-table tfoot .bottom-right {
+	background: url(/static/images/elements/mz-table/bottom-right.png) bottom right no-repeat;
+}
+
+.mz-table tfoot td { height: 12px; }
+
+
+.mz-table tr.odd td { background: #fff; }
+.mz-table tr.even td { background: #f5f5f5; }
+.mz-table tr:target td { background: yellow; }
+
+.mz-table td,
+.mz-table th {
+	margin: 0;
+	padding: 0.5em;
+}
+
+.mz-table td.dl,
+.mz-table th.dl {
+  white-space: nowrap;
+}
+
+.mz-table th {
+  text-align: left;
+}

@@ -1,6 +1,7 @@
 @import url("global.css");
 @import url("facebox.css");
 @import url("thickbox.css");
+@import url("elements/mz-table.css");
 
 .box{ padding:20px 0 0 40px; }
 .box h2{ font-size:14px; padding:8px 0; color:#666; }
@@ -71,7 +72,7 @@
 .addressbook_item th{ padding:5px; font-size:16px; }
 
 /* 话题单元 ----------------------------------------------- */
-.topic{ padding:10px; }
+.topic{ padding:10px; width:840px; }
 .reply{ clear:both }
 .topic .author{ border:1px solid #BCDDFF; padding:5px; background:#EFF7FF; }
 .topic h2{ padding:10px 0 5px 10px; background:url(/static/images/bg/dashed.gif) repeat-x bottom; }

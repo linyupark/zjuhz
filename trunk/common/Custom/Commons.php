@@ -215,7 +215,7 @@ class Commons
 	 */
     static function getUserCache($arg)
     {
-    	return (0 < $arg ? DOCUMENT_ROOT.Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
+    	return (0 < $arg ? $_SERVER['DOCUMENT_ROOT'].Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**

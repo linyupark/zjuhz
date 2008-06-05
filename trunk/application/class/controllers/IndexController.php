@@ -17,9 +17,10 @@ class IndexController extends Zend_Controller_Action
 		$college = $this->_getParam('college');
 		
 		$page = $this->_getParam('p',1);
+		$topicPage = $this->_getParam('tp',1);
 			
 		//按页获取信息列表
-		Page::$pagesize = 15;
+		Page::$pagesize = 10;
 		$rows = DbModel::searchClass('', $year, $college, ($page-1)*Page::$pagesize,Page::$pagesize);
 		
 		Page::create(array(
@@ -27,8 +28,19 @@ class IndexController extends Zend_Controller_Action
 		"href_close" => "</a>", 
 		"num_rows" => $rows['numrows'],
 		"cur_page" => $page));
+		$this->view->class_pagination = Page::$page_str;
 		
 		
+		// 获取班级所有公开话题
+		Page::$pagesize = 10;
+		$topic_rows = TopicModel::fetchPublic(10, $topicPage);
+		Page::create(array(
+		"href_open" => "<a href='/class/?year={$year}&college={$college}&p={$page}&tp=%d'>", 
+		"href_close" => "</a>", 
+		"num_rows" => $topic_rows['numrows'],
+		"cur_page" => $topicPage));
+		$this->view->pub_topics = $topic_rows['rows'];
+		$this->view->topic_pagination = Page::$page_str;
 		
 		// 获取会员所申请加入班级的信息
 		$this->view->applies = ApplyModel::fetch($this->view->passport('uid'));
@@ -45,6 +57,5 @@ class IndexController extends Zend_Controller_Action
 		$this->view->college = $college;
 		$this->view->class_rows = $rows['rows'];
 		$this->view->class_num = $rows['numrows'];
-		$this->view->pagination = Page::$page_str;
 	}
 }
