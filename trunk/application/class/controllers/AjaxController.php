@@ -954,6 +954,28 @@
 			}
 		}
 		
+		# 注册时候直接申请
+		function joinapplydirectAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{	
+				$uid = $request->getParam('uid');
+				$name = $request->getParam('realName');
+				foreach ($this->_classId as $class_id)
+				{
+					if(false == MemberModel::isJoined($class_id, $uid) && false == ApplyModel::isApplied($class_id, $uid))
+					$data = array(
+						'class_id' => $class_id,
+						'class_member_id' => $uid,
+						'class_apply_content' => '我是'.$name.',前来报道~',
+						'class_apply_time' => time()
+					);
+					ApplyModel::insert($data);
+				}
+			}
+		}
+		
 		/* 班级公告相关 //////////////////////////////////////////////////////// */
 		
 		# 班级公告修改动作
