@@ -46,6 +46,16 @@
 				});
 			}
 		}
+		window.setInterval(function(){
+			var img = $('.content img');
+			var width = parseInt(img.width());
+			if( width > 650)
+			{
+				img.width(650);
+				img.css('cursor','pointer');
+				img.click(function(){ window.location.href=img.attr('src') });
+			}
+		},300);
 	</script>
 	
 	<!-- 回复内容 /////////////////////////////////// -->
