@@ -5,26 +5,26 @@
  * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:UserWorkModel.php
+ * @version    Id:UserEduModel.php
  */
 
 
 /**
- * 校友中心-tbl_user_work
+ * 校友中心-tbl_user_edu
  */
-class UserWorkModel
+class UserEduModel
 {
     /**
      * 数据表名称
      * @var string
      */
-    protected $_name = 'tbl_user_work';
+    protected $_name = 'tbl_user_edu';
 
     /**
      * 数据表主键
      * @var string
      */
-    protected $_primary = 'wid';
+    protected $_primary = 'eid';
 
     /**
      * 数据表访问
@@ -53,21 +53,21 @@ class UserWorkModel
     }
 
     /**
-     * 查找wid存在数量
+     * 查找eid存在数量
      * 
-     * @param string $wid
+     * @param string $eid
      * @param integer $uid
      * @return integer
      */
-	public function selectWidCount($wid, $uid)
+	public function selectEidCount($eid, $uid)
     {
     	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
-    	    WHERE uid = :uid AND wid = :wid;", array('wid' => $wid, 'uid' => $uid)
+    	    WHERE uid = :uid AND eid = :eid;", array('eid' => $eid, 'uid' => $uid)
     	);
     }
 
     /**
-     * 查找uid对应的工作经验
+     * 查找uid对应的教育经历
      * 
      * @param integer $uid
      * @return array
@@ -80,22 +80,22 @@ class UserWorkModel
     }
 
     /**
-     * 查询wid对应的工作详情
+     * 查询eid对应的教育详情
      * 
-     * @param string $wid
+     * @param string $eid
      * @param integer $uid
      * @return array
      */
-	public function selectWidRow($wid, $uid)
+	public function selectEidRow($eid, $uid)
     {
 		return $this->_dao->fetchRow("SELECT * 
-		    FROM {$this->_name} WHERE uid = :uid AND wid = :wid;", 
-		    array('wid' => $wid, 'uid' => $uid)
+		    FROM {$this->_name} WHERE uid = :uid AND eid = :eid;", 
+		    array('eid' => $eid, 'uid' => $uid)
 		);
     }
 
     /**
-     * 插入工作记录
+     * 插入教育记录
      * 
      * @param array $args
      * @return integer
@@ -106,7 +106,7 @@ class UserWorkModel
     }
 
     /**
-     * 更新工作资料
+     * 更新教育资料
      * 
      * @param array $args
      * @return integer
@@ -114,12 +114,12 @@ class UserWorkModel
 	public function update($args)
     {
 		return $this->_dao->update($this->_name, $args, 
-		    $this->_dao->quoteInto("{$this->_primary} = ?", $args['wid'])
+		    $this->_dao->quoteInto("{$this->_primary} = ?", $args['eid'])
 		);
     }
 
     /**
-     * 删除工作记录
+     * 删除教育记录
      * 
      * @param array $args
      * @return integer
@@ -127,7 +127,7 @@ class UserWorkModel
 	public function delete($args)
     {
     	$stmt = $this->_dao->prepare("DELETE FROM {$this->_name} 
-    	    WHERE uid = :uid AND wid = :wid;");
+    	    WHERE uid = :uid AND eid = :eid;");
 		$stmt->execute($args);
 
 		return $stmt->rowCount();

@@ -29,7 +29,7 @@ function douser() {
 		if ("message" == msg) {
 			ajaxhint(false);
 			popup_message("/member/index/message/");
-			goToUrl("reload", 1000);
+			goToUrl("/member/my/user/type/"+type+"/", 1000);
 			return false;
 		}
 		
@@ -61,6 +61,35 @@ function doworkdel(para) {
 
 		if ("hide" == msg) {
 			$("#work" + para["wid"]).hide(0);
+			return false;
+		}
+	});
+
+	return false;
+}
+
+// 教育删除之前
+function doedudelBefore(eid) {
+	var popup = new Popup({ contentType:3, isReloadOnClose:false, width:340, height:105});
+	popup.setContent("title", "校友会提示您");
+	popup.setContent("confirmCon", "您确定要删除该教育经历吗？");
+	popup.setContent("callBack", doedudel);
+	popup.setContent("parameter", { eid : eid, popup : popup });
+	popup.build();
+	popup.show();
+	return false;
+}
+
+// 工作删除
+function doedudel(para) {
+	ajaxloading(true);
+
+	$.post("/member/my/doedudel/", { eid : para["eid"] }, function(msg) {
+		ajaxloading();
+		para["popup"].close();
+
+		if ("hide" == msg) {
+			$("#edu" + para["eid"]).hide(0);
 			return false;
 		}
 	});
