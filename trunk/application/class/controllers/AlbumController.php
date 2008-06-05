@@ -147,8 +147,6 @@
 				'cur_page' => $page
 			));
 			
-			echo '<a href="/class/album/list?c='.$class_id.'&f='.urlencode($category).'&p=%d">';
-			
 			// 分配视图变量
 			$this->view->f = $category;
 			$this->view->numrows = $result['numrows'];
