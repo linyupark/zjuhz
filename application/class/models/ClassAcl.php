@@ -88,6 +88,7 @@
 							$sessClass->data[$v['class_id']]['class_charge'] = $v['class_charge'];
 							$sessClass->data[$v['class_id']]['class_member_charge'] = $v['class_member_charge'];
 						}
+						Cmd::cacheClass($uid);
 					}
 				}
 				
