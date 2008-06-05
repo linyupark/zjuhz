@@ -18,7 +18,7 @@
   发布时间 <input type="text" name="pub_time" value="<?php if(!$this->pub_time) echo Commons::date(); else echo $this->pub_time; ?>" size="20" />
   <input type="hidden" name="top" value="0" />
   <input type="hidden" name="private" value="0" />
-  <input type="checkbox" name="private" value="1"<?php if($this->row->entity_top == 1): ?> checked="checked"<?php endif;?> /> 仅校友可见
+  <input type="checkbox" name="private" value="1"<?php if($this->row->entity_private == 1): ?> checked="checked"<?php endif;?> /> 仅校友可见
   <input type="checkbox" name="top" value="1"<?php if($this->row->entity_top == 1): ?> checked="checked"<?php endif;?> /> 顶置
   </p>
   <p>
