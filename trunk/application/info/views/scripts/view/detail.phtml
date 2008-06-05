@@ -26,7 +26,11 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 
 <!-- 主体 ////////////////////////////////////////////// -->
 <div class="print entity">
+<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
+<p class="err_message">您需要登录后才能阅读这篇文章。</p>
+<?php else: ?>
 <?= stripslashes($this->entity['entity_content']) ?>
+<?php endif; ?>
 <p id="maker">
 发布人:<?= $this->entity['user_name'] ?>(<?= $this->entity['role_nickname'] ?>)<br />
 发布于:<?= Commons::date($this->entity['entity_pub_time']) ?>
