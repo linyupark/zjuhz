@@ -338,6 +338,7 @@
 				$tag = $inputChains->entityTag($this->getRequest()->getPost('tag'));
 				$cate_id = $this->getRequest()->getPost('cate_id');
 				$top = $this->getRequest()->getPost('top');
+				$private = $this->getRequest()->getPost('private');
 				
 				// 校验信息结果
 				if(count($inputChains->getMessages()) > 0)
@@ -352,7 +353,8 @@
 						'entity_pub_time' => $pub_time,
 						'entity_content' => $content,
 						'entity_tag' => $tag,
-						'entity_top' => $top
+						'entity_top' => $top,
+						'entity_private' => $private
 					);
 					if($this->Entity->insert($data))
 					$this->view->tips = "信息添加成功";
@@ -393,6 +395,7 @@
 					$tag = $inputChains->entityTag($this->getRequest()->getPost('tag'));
 					$cate_id = $this->getRequest()->getPost('cate_id');
 					$top = $this->getRequest()->getPost('top');
+					$private = $this->getRequest()->getPost('private');
 				
 					// 校验信息结果
 					if(count($inputChains->getMessages()) > 0)
@@ -407,7 +410,8 @@
 							'entity_mod_time' => time(),
 							'entity_content' => $content,
 							'entity_tag' => $tag,
-							'entity_top' => $top
+							'entity_top' => $top,
+							'entity_private' => $private
 						);
 						$where = $this->Entity->getAdapter()->quoteInto('entity_id = ?', $entity_id);
 						if($this->Entity->update($data, $where))
