@@ -17,7 +17,7 @@
 <?php foreach ($this->edu as $value) { ?>
 <tr id="edu<?= $value['eid']; ?>">
 <td class="txtl"><?= $value['school']; ?></td>
-<td class="txtl"><?= $value['startDate']; ?> 至 <?= $value['endDate']; ?></td>
+<td class="txtl"><?= $value['startDate']; ?> 至 <?= ($value['startDate'] <= $value['endDate'] ? $value['endDate'] : '今'); ?></td>
 <td class="txtl"><a href="/member/my/user/type/edu/eid/<?= $value['eid']; ?>/#edit"><img src="/static/images/icon/mini_icon_bbsarticle.gif" alt="修改">修改</a> <a href="#" onClick="doedudelBefore('<?= $value['eid']; ?>');return false;" id="del"><img src="/static/images/icon/cross.gif" alt="删除">删除</a></td>
 </tr>
 <?php } ?>
@@ -37,7 +37,7 @@
 </tr>
 <tr>
 <td align="right"><b>就读时间：</b><br /><br /></td>
-<td>从&nbsp;<input name="startDate" type="text" id="startDate" size="12" maxlength="10" class="inputtxt" tabindex="2" value="<?= $this->detail['startDate']; ?>" />&nbsp;到&nbsp;<input name="endDate" type="text" id="endDate" size="12" maxlength="10" class="inputtxt" tabindex="3" value="<?= $this->detail['endDate']; ?>" />&nbsp;<br /><span class="quiet f12">请输入您在该学校就读的起止时间。格式应为：年-月-日，如1998-04-07。</span>&nbsp;</td>
+<td>从&nbsp;<input name="startDate" type="text" id="startDate" size="12" maxlength="10" class="inputtxt" tabindex="2" value="<?= $this->detail['startDate']; ?>" />&nbsp;到&nbsp;<input name="endDate" type="text" id="endDate" size="12" maxlength="10" class="inputtxt" tabindex="3" value="<?= $this->detail['endDate']; ?>" />&nbsp;<br /><span class="quiet f12">格式应为：年-月-日，如1998-04-07。若不填截止时间代表至今。</span>&nbsp;</td>
 </tr>
 <tr>
 <td align="right"><b>专业名称：</b><br /></td>

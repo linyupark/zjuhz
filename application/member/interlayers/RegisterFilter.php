@@ -162,4 +162,19 @@ class RegisterFilter extends MemberInterlayer
 
 		return false;
 	}
+
+	/**
+     * 显示班级过滤
+     * 
+     * @param string $cid
+     * @return boolean
+     */
+	public function classes($cid)
+	{
+		$chain = new Zend_Validate();
+        $chain->addValidator(new Zend_Validate_StringLength(10, 10))
+              ->addValidator(new Zend_Validate_Alnum());
+
+        return ($chain->isValid($cid) ? true : false);
+	}
 }

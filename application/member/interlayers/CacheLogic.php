@@ -175,4 +175,31 @@ class CacheLogic extends MemberInterlayer
 
     	return $this->_cache->load('card');
     }
+
+    /**
+     * 初始班级缓存
+     * 
+     * @return void
+     */
+	public function classInit()
+    {
+    	$this->_setFrontendOptions();
+    	$this->_setBackendOptions();
+
+    	$this->_cache = Zend_Cache::factory('Core', 'File', 
+    	    $this->_frontendOptions, $this->_backendOptions
+	    );
+    }
+
+    /**
+     * 载入班级缓存
+     * 
+     * @return string|false cached datas
+     */
+	public function classLoad()
+    {
+    	$this->classInit();
+
+    	return $this->_cache->load('classCache');
+    }
 }
