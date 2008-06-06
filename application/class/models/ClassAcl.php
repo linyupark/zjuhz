@@ -26,9 +26,12 @@
 				$acl->addRole(new Zend_Acl_Role('guest'))
 				    ->addRole(new Zend_Acl_Role('member'))
 				    ->addRole(new Zend_Acl_Role('admin'));
+				    
+				$acl->add(new Zend_Acl_Resource('ajax'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow(array('member','admin'));
+					->allow(array('member','admin'))
+					->allow('guest', 'ajax', 'joinapplydirect');
 				// 寄存
 				Zend_Registry::set('acl', $acl);
 				$this->_acl = $acl;
