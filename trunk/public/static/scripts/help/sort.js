@@ -35,7 +35,7 @@ function sort_list(getname) {
 
 	if (1 < sid && next < cnt) {
 		$.getJSON("/help/sort/json/", { sid: sid }, function(msg) {
-				if (msg != "") {
+				if ("" != msg) {
 					$("#" + name + next).addOption("", "请选择");
 					$("#" + name + next).addOption(msg, false);
 				}

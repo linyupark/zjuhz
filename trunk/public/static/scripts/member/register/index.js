@@ -1,4 +1,5 @@
 document.write("<script type=\"text/javascript\" src=\"/static/scripts/passwdcheck.js\"></script>");
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/jquery.selectboxes.js\"></script>");
 
 $(function() {
     $("#frmRegister").submit( function() {
@@ -18,8 +19,20 @@ $(function() {
 		putVerifyImg();
     });
 
+    $("#rname").blur( function() {
+		doclasses();
+    });
+
+    $("#ikey").blur( function() {
+		doclasses();
+    });
+
     $("#vcode").focus( function() {
 		putVerifyImg();
+    });
+
+    $("#selectbox").blur( function() {
+		$("#classes").val($("#selectbox").selectedValues());
     });
 });
 
@@ -60,6 +73,29 @@ function docheck() {
 			$("#btnRegister").attr("disabled", false);
 			ajaxhint(true, msg, "chkmsg");
 		});
+	}
+
+	return false;
+}
+
+// 好友班级显示
+function doclasses() {
+	var ikey = $("#ikey").val();
+
+    if (10 == ikey.length && !$("#ikey").attr("readonly")) {
+        $("#btnRegister").attr("disabled", true);
+
+        $.getJSON("/member/register/doclasses/", { cid: ikey }, function(msg) {
+			$("#selectbox").addOption(msg, false);
+
+			if (msg) {
+				$("#joinClass").show();
+				$("#ikey").attr("readonly", true);
+			}
+
+        });
+
+		$("#btnRegister").attr("disabled", false);
 	}
 
 	return false;
