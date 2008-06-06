@@ -84,7 +84,7 @@ create table zjuhz_ask.tbl_ask_closed
    sid                  smallint unsigned not null default 0,
    title                char(25) not null,
    content              text not null,
-   append               varchar(100) default NULL,
+   append               varchar(200) default NULL,
    tags                 char(30) default NULL,
    offer                smallint unsigned not null default 0,
    anonym               enum('Y','N') not null default 'N',

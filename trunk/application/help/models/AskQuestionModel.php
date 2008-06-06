@@ -188,4 +188,19 @@ class AskQuestionModel //extends Zend_Db_Table_Abstract
 		    $this->_dao->quoteInto("{$this->_primary} = ?", $qid)
 		);
     }
+
+	/**
+     * 更新qid的问题补充
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function updateAppend($args)
+    {
+    	$stmt = $this->_dao->prepare("UPDATE {$this->_name} SET append = :append 
+    	    WHERE qid = :qid AND uid = :uid;");
+		$stmt->execute($args);
+
+		return $stmt->rowCount();
+    }
 }

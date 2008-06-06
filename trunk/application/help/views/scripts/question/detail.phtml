@@ -20,19 +20,21 @@
 <td class="txt">
 
 <div class="content">
-<?=  str_replace('\"', '"', $this->question['content']); ?><br />
-<?php if ($this->question['append']) { ?>
-<div class="memo">
-<p>提问人的补充：</p>
-<?= $this->question['append']; ?>
+<?= str_replace('\"', '"', $this->question['content']); ?><br />
+<div class="memo" >
+<form id="appendform">
+<?php if ($this->question['append']) { ?><p><b>问题补充：</b></p><?php } ?>
+<div id="memodiv" style="word-break:break-all"><p><?= $this->txtcode($this->question['append']); ?></p></div>
+<div id="appenddiv" style="display:none;"><textarea onpaste="return false;" name="append" id="append" class="inputtxt" style="height:60px;width:400px"><?= $this->question['append']; ?></textarea>&nbsp;<input type="submit" id="btnAppend" value="提交补充" /><input type="hidden" name="qid" id="qid" value="<?= $this->question['qid']; ?>" /></div>
+</form>
 </div>
-<?php } ?>
 </div>
+
 <?php if (0 == $this->question['status'] && $this->sessCommon->login['uid'] != $this->question['uid']) { ?>
 <input type="button" value="我来回答" class="topic_btn" onclick="location.href='#reply'" />
 <?php } if (0 == $this->question['status'] && $this->sessCommon->login['uid'] == $this->question['uid']) { ?>
-<!--<input type="button" value="问题补充" class="topic_btn" />
-<input type="button" value="无满意答案" class="topic_btn" />
+<input type="button" value="问题补充" class="topic_btn" id="appendbtn" />
+<!--<input type="button" value="无满意答案" class="topic_btn" />
 <input type="button" value="提高悬赏" class="topic_btn" />-->
 <?php } ?>
 </td>
