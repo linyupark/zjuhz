@@ -962,7 +962,13 @@
 			{	
 				$uid = $request->getParam('uid');
 				$name = $request->getParam('realName');
-				$class_ids = explode(',', $this->_classId);
+				$sex = $request->getParam('sex');
+				$class_ids = explode(',', $this->getRequest()->getPost('class_id'));
+				DbModel::userInit(array(
+					'uid' => $uid,
+					'realName' => $name,
+					'sex' => $sex
+				));
 				foreach ($class_ids as $class_id)
 				{
 					if(false == MemberModel::isJoined($class_id, $uid) && false == ApplyModel::isApplied($class_id, $uid))
