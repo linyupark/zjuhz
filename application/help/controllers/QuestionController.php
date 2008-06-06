@@ -199,4 +199,25 @@ class QuestionController extends Zend_Controller_Action
 		$this->view->paging   = $paging->show();
 		$this->view->reply    = $reply;
 	}
+
+	/**
+     * 问题补充-提交补充
+     * 
+     * @return void
+     */
+	public function doappendAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$postArgs = $this->getRequest()->getPost();
+			$postArgs['uid'] = $this->_sessUid;
+
+			if ($appendArgs = QuestionFilter::init()->append($postArgs))
+			{
+				AskQuestionLogic::init()->updateAppend($appendArgs);
+
+				echo 'refresh';
+			}
+		}
+	}
 }

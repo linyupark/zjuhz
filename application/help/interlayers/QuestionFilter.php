@@ -126,4 +126,37 @@ class QuestionFilter extends HelpInterlayer
 		    'ruid' => (int)$args['ruid']
 		);
 	}
+
+	/**
+     * 问题补充数据过滤
+     * 
+     * @param array $args
+     * @return boolean or array
+     */
+	public function append($args)
+	{
+		// Zend_Validate_Utf8Length
+		Zend_Loader::loadFile('Utf8Length.php');
+
+		// 设置过滤规则
+		$filters = array(
+		    'qid' => 'Digits', 
+            'uid' => 'Digits', 
+            'append' => array('StringTrim', 'StripTags')
+    	);
+
+    	// 设置验证规则
+		$validators = array(
+		    'qid' => array(array('Int'), 'presence' => 'required'),
+			'uid' => array(array('Int'), 'presence' => 'required'),
+			'append' => array(array('Utf8Length', '0', '200'), 'allowEmpty' => true)
+        );
+
+		$input = new Zend_Filter_Input($filters, $validators, $args);
+
+		return (!$input->hasInvalid() && !$input->hasMissing() ? 
+		    array('qid' => $input->getUnescaped('qid'), 'uid' => $input->getUnescaped('uid'), 
+		    'append' => $input->getUnescaped('append')) : false 
+		);
+	}
 }

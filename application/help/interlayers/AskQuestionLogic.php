@@ -179,4 +179,15 @@ class AskQuestionLogic extends HelpInterlayer
 	{
 		return $this->_AskQuestionModel->update($args, $qid);
 	}
+
+	/**
+     * 更新qid的问题补充
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function updateAppend($args)
+	{
+		return $this->_AskQuestionModel->updateAppend($args);
+	}
 }
