@@ -962,7 +962,8 @@
 			{	
 				$uid = $request->getParam('uid');
 				$name = $request->getParam('realName');
-				foreach ($this->_classId as $class_id)
+				$class_ids = explode(',', $this->_classId);
+				foreach ($class_ids as $class_id)
 				{
 					if(false == MemberModel::isJoined($class_id, $uid) && false == ApplyModel::isApplied($class_id, $uid))
 					$data = array(
