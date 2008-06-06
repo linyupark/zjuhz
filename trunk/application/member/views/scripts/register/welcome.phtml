@@ -1,6 +1,6 @@
 <div class="sidebar" style="padding:20px; border:1px solid #CDD8EF; background:#EFF7F7; width:750px; margin:16px;">
 <?php if ($this->register) { ?>
-<h2><img src="/static/images/icon/done.gif" />亲爱的校友<?= $this->register['rname']; ?>：您的账号已经注册成功，欢迎加入！</h2>
+<h2><img src="/static/images/icon/done.gif" />亲爱的<?= $this->register['realName']; ?>：您的账号已经注册成功，欢迎加入！</h2>
 <hr />
 <div class="sidebar">
 <p class="pud5"><b class="quiet">我们目前提供以下服务，有需要改进的地方欢迎与我们联系：</b></p>
@@ -10,6 +10,9 @@
 <li><a href="/class/">班级</a></li>
 </ul>
 </div>
+
+<?php if ($this->register['classes'] && 0 < $this->register['uid']) { ?><script language="javascript">$.post('/class/ajax/joinapplydirect/', {uid: <?= $this->register['uid']; ?>, realName: '<?= $this->register['realName']; ?>', sex: '<?= $this->register['sex']; ?>', class_id: '<?= $this->register['classes']; ?>'}, function(msg) {});</script><?php unset($_SESSION['member']['register']['classes']); } ?>
+
 <?php } else { ?>
 <h2><img src="/static/images/icon/stop.gif" />亲爱的校友：很遗憾，本次注册失败。</h2>
 <hr />

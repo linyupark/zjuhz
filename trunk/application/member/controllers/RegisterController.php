@@ -89,8 +89,9 @@ class RegisterController extends Zend_Controller_Action
 	public function welcomeAction()
     {
 		$this->view->headTitle($this->_iniMember->head->titleWelcome);
+		$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
 
-    	$this->view->register = $this->_sessMember->register;
+    	$this->view->register = $this->_sessMember->register;   	
     }
 
 	/**
@@ -108,7 +109,13 @@ class RegisterController extends Zend_Controller_Action
 
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
-				$this->_sessMember->register = (UserLogic::init()->register($regArgs) ? $regArgs : '');
+				$this->_sessMember->register = null;
+				if ($uid = UserLogic::init()->register($regArgs))
+				{
+					$this->_sessMember->register            = $regArgs;
+					$this->_sessMember->register['uid']     = $uid;
+				    $this->_sessMember->register['classes'] = $postArgs['classes'];
+				}
 
 				echo 'redirect'; // 请求ajax跳转
 			}
@@ -131,6 +138,28 @@ class RegisterController extends Zend_Controller_Action
 				echo (UserLogic::init()->selectUsernameCount($username) ? 
 				    $this->_iniMember->hint->usernameIsExist : 
 				    $this->_iniMember->hint->usernameNotExist);
+			}
+		}
+	}
+
+	/**
+     * 会员注册-显示班级
+     * 
+     * @return void
+     */
+	public function doclassesAction()
+	{
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$cid = $this->getRequest()->getParam('cid');
+
+			if (RegisterFilter::init()->classes($cid))
+			{
+				if ($cardArgs = AddressCardLogic::init()->selectCidToUid($cid))
+				{
+					CacheLogic::setOptions('cache_dir', Commons::getUserCache($cardArgs['uid']));
+    	            echo Zend_Json::encode(CacheLogic::init()->classLoad());
+				}
 			}
 		}
 	}

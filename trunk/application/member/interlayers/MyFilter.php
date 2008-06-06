@@ -218,7 +218,7 @@ class MyFilter extends MemberInterlayer
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'endDate' => array(
-			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'industry' => array(
@@ -325,7 +325,7 @@ class MyFilter extends MemberInterlayer
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'endDate' => array(
-			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
 			'major' => array(

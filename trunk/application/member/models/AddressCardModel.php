@@ -82,6 +82,20 @@ class AddressCardModel
     }
 
     /**
+     * 查询cid对应名片的uid
+     * 
+     * @param string $cid
+     * @return array
+     */
+	public function selectCidToUid($cid)
+    {
+		return $this->_dao->fetchRow("SELECT uid 
+		    FROM {$this->_name} WHERE cid = :cid;", 
+		    array('cid' => $cid)
+		);
+    }
+
+    /**
      * 查询gid对应的名片组
      * 
      * @param string $gid
