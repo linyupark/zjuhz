@@ -26,12 +26,9 @@
 				$acl->addRole(new Zend_Acl_Role('guest'))
 				    ->addRole(new Zend_Acl_Role('member'))
 				    ->addRole(new Zend_Acl_Role('admin'));
-				    
-				$acl->add(new Zend_Acl_Resource('ajax'));
 				// 权限设置
 				$acl->deny('guest', null)
-					->allow(array('member','admin'))
-					->allow('guest', 'ajax', 'joinapplydirect');
+					->allow(array('member','admin'));
 				// 寄存
 				Zend_Registry::set('acl', $acl);
 				$this->_acl = $acl;
@@ -66,6 +63,7 @@
 			// 无权限的请求,重新分配CA
 			if (!$this->_acl->isAllowed($sessRole, $resource, $action))
 			{
+				if($action == 'joinapplydirect') return ;
 				$request->setControllerName('error');
 				$request->setActionName('relogin');
 			}
