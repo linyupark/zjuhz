@@ -966,13 +966,15 @@
 				foreach ($class_ids as $class_id)
 				{
 					if(false == MemberModel::isJoined($class_id, $uid) && false == ApplyModel::isApplied($class_id, $uid))
-					$data = array(
+					{
+						$data = array(
 						'class_id' => $class_id,
 						'class_member_id' => $uid,
 						'class_apply_content' => '我是'.$name.',前来报道~',
 						'class_apply_time' => time()
-					);
-					ApplyModel::insert($data);
+						);
+						ApplyModel::insert($data);
+					}
 				}
 			}
 		}
