@@ -103,7 +103,7 @@ class RegisterController extends Zend_Controller_Action
 	{
 		if ($this->getRequest()->isXmlHttpRequest())
 		{
-			$postArgs = $this->getRequest()->getPost(); print_r($postArgs);exit;
+			$postArgs = $this->getRequest()->getPost();
 			$postArgs['ip']    = Commons::getIp();
 			$postArgs['scode'] = $this->_sessCommon->verify;
 
