@@ -15,7 +15,7 @@
 <?php endif; ?>
 </div>
 <div class="pagination clearfloat"><?= $this->pagination ?></div>
-<div class="sidebar" style="width:600px; margin:10px 0 0 10px">
+<div class="sidebar clearfloat"" style="width:600px; margin:10px 0 0 10px">
 <?php if($this->rows): foreach ($this->rows as $v): ?>
 <div class="search_result_box">
 <a href="/info/view/detail/id/<?= $v['entity_id']?>"><?= Commons::highlight($this->escape($this->keywords), $v['entity_title'])?></a>
