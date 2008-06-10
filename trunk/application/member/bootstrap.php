@@ -10,7 +10,7 @@
 
 
 /** set error_reporting */
-//error_reporting('ALL');
+error_reporting('ALL');
 
 /** set gzip output */
 //(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') ? ob_start('ob_gzhandler') : ob_start());
@@ -40,6 +40,7 @@ Zend_Registry::set('aclMember', new Zend_Acl());
 
 /** constants */
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('DOCUMENT_CACHE', "../../cache/member/");
 define('USER_UID', Zend_Registry::get('sessCommon')->login['uid']);
 define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(USER_UID, '*'));
 define('USER_CACHE', Commons::getUserCache(USER_ROOT));
