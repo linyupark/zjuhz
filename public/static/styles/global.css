@@ -1,8 +1,11 @@
 * { padding:0; margin:0; font-family:Verdana, Arial, Helvetica, sans-serif; line-height:150%; }
+
 body { background:#E5E5E5; padding-bottom:5px; font-size:12px; }
+
 table{ border-collapse:collapse; }
 
 .sidebar{ float:left; }
+
 #wrap { width:860px; margin:0 auto; background:#fff ; margin-top:8px; overflow:hidden; }
 #global_pos{ margin:10px 0 0 18px; color:#666; }
 img { border: none; }
