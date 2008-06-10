@@ -91,7 +91,7 @@ class RegisterController extends Zend_Controller_Action
 		$this->view->headTitle($this->_iniMember->head->titleWelcome);
 		$this->view->headScript()->appendFile('/static/scripts/member/register/index.js');
 
-    	$this->view->register = $this->_sessMember->register;   	
+    	$this->view->register = $this->_sessMember->register;
     }
 
 	/**
