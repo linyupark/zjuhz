@@ -11,6 +11,11 @@ $(function() {
 		docheck();
     });
 
+    $("#btnReselect").click( function() {
+		$("#selectbox").selectOptions("", true);
+		$("#classes").val("");
+    });
+
     $("#uname").blur( function() {
 		docheck();
     });
