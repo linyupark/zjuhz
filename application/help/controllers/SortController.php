@@ -83,8 +83,17 @@ class SortController extends Zend_Controller_Action
      */
 	public function jsonAction()
 	{
-		echo ($this->getRequest()->isXmlHttpRequest() ? Zend_Json::encode(
-		    AskSortLogic::init()->selectParentPairs($this->_sortId)) : '');
+		if ($this->getRequest()->isXmlHttpRequest())
+		{
+			$cache = CacheLogic::init();
+			if(!$json = $cache->jsonLoad($this->_sortId))
+			{
+				$json = AskSortLogic::init()->selectParentPairs($this->_sortId);
+				$cache->jsonSave($json, $this->_sortId);
+			}
+		}
+
+		echo Zend_Json::encode($json);
 	}
 
 	/**

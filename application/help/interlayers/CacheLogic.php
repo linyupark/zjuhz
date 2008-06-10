@@ -2,7 +2,7 @@
 
 /**
  * @category   zjuhz.com
- * @package    member
+ * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
  * @version    Id:CacheLogic.php
@@ -10,10 +10,10 @@
 
 
 /**
- * 校友中心-缓存
+ * 校友互助-缓存
  * 控制器附属层:模型层操作入口
  */
-class CacheLogic extends MemberInterlayer
+class CacheLogic extends HelpInterlayer
 {
 	/**
      * Zend_Cache
@@ -29,7 +29,7 @@ class CacheLogic extends MemberInterlayer
      */
     private static $_options = array(
         /* backend options */
-        'cache_dir' => USER_CACHE, // from bootstarp
+        'cache_dir' => DOCUMENT_CACHE, // from bootstarp
         /* frontend options */
         'lifeTime' => null, 
         'automatic_serialization' => true
@@ -41,7 +41,7 @@ class CacheLogic extends MemberInterlayer
      * @var array
      */
     private $_hoppers = array(
-        'card' => array('uid', 'sex', 'lastLogin', 'year', 'college')
+        'json' => array('sid', 'name')
     );
 
 	/**
@@ -137,16 +137,16 @@ class CacheLogic extends MemberInterlayer
     }
 
     /**
-     * 初始名片缓存
+     * 初始json方式的分类缓存
      * 
      * @return void
      */
-	public function cardInit()
+	public function jsonInit()
     {
     	if (!isset($this->_cache))
     	{
     		// 固定变更项写入
-    	    // ...
+    	    self::$_options['cache_dir'] = DOCUMENT_CACHE.'sort/';
     	    // 参数变更初始化
     	    $this->_setFrontendOptions();
     	    $this->_setBackendOptions();
@@ -154,64 +154,33 @@ class CacheLogic extends MemberInterlayer
     	    $this->_cache = Zend_Cache::factory('Core', 'File', 
     	        $this->_frontendOptions, $this->_backendOptions
 	        );
-    	}
+    	}	        
     }
 
     /**
-     * 保存名片缓存
+     * 保存json方式的分类缓存
      * 
      * @param array $data
+     * @param integer $sid
      * @return boolean True if no problem
      */
-	public function cardSave($data)
+	public function jsonSave($data, $sid)
     {
-    	$this->cardInit();
+    	$this->jsonInit();
 
-    	return $this->_cache->save($this->_setHoppers($data, 'card'), 'card');
+    	return $this->_cache->save($this->_setHoppers($data, 'json'), "json{$sid}");
     }
 
     /**
-     * 载入名片缓存
+     * 载入json方式的分类缓存
      * 
+     * @param integer $sid
      * @return string|false cached datas
      */
-	public function cardLoad()
+	public function jsonLoad($sid)
     {
-    	$this->cardInit();
+    	$this->jsonInit();
 
-    	return $this->_cache->load('card');
-    }
-
-    /**
-     * 初始班级缓存
-     * 
-     * @return void
-     */
-	public function classInit()
-    {
-    	if (!isset($this->_cache))
-    	{
-    		// 固定变更项写入
-    	    // ...
-    	    // 参数变更初始化
-    	    $this->_setFrontendOptions();
-    	    $this->_setBackendOptions();
-
-    	    $this->_cache = Zend_Cache::factory('Core', 'File', 
-    	        $this->_frontendOptions, $this->_backendOptions
-	        );
-    	}
-    }
-
-    /**
-     * 载入班级缓存
-     * 
-     * @return string|false cached datas
-     */
-	public function classLoad()
-    {
-    	$this->classInit();
-
-    	return $this->_cache->load('classCache');
+    	return $this->_cache->load("json{$sid}");
     }
 }
