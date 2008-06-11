@@ -57,6 +57,7 @@
 					else 
 					{
 						$this->_sessCommon->role = $row->user_role; //角色输入session
+						$this->_sessInfo->inited = TRUE;
 						$this->_sessInfo->user_id = $row->user_id; //用户名输入session
 						Zend_Session::rememberMe(3600*24);
 						$this->view->error_tips = '* 登陆成功~2秒后自动转向<a href="/info/admin/">控制页</a>';
