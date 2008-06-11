@@ -90,7 +90,7 @@ class ReplyController extends Zend_Controller_Action
 
 					// 积分日志
 					(0 < $offer ? PointLogLogic::init()->insert(array(
-					        'uid' => $this->_sessUid, 'point' => $offer, 'type' => 3)) : '');
+					        'uid' => $this->_sessUid, 'qid' => $insArgs['qid'], 'point' => $offer, 'type' => 3)) : '');
 
 					echo 'reload'; // 请求ajax重载页面
 				}

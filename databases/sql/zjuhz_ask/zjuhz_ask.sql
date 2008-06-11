@@ -185,6 +185,7 @@ create table zjuhz_ask.tbl_ask_point_log
 (
    id                   int unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    point                smallint not null default 0,
    time                 timestamp not null default CURRENT_TIMESTAMP,
    type                 tinyint unsigned not null default 0,
