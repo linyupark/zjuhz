@@ -108,7 +108,7 @@ class QuestionController extends Zend_Controller_Action
 
 			if ($insArgs = QuestionFilter::init()->insert($postArgs))
 			{
-				if (AskQuestionLogic::init()->insert($insArgs))
+				if ($qid = AskQuestionLogic::init()->insert($insArgs))
 				{
 					// sess内的各值对应变化
 					$this->_sessHelp->login['point'] = $postArgs['point'] - $insArgs['offer']; // 可用积分
@@ -120,7 +120,7 @@ class QuestionController extends Zend_Controller_Action
 
 					// 积分日志
 					(0 < $insArgs['offer'] ? PointLogLogic::init()->insert(array(
-					    'uid' => $insArgs['uid'], 'point' => "-{$insArgs['offer']}", 'type' => 2)) : '');
+					    'uid' => $insArgs['uid'], 'qid' => $qid, 'point' => "-{$insArgs['offer']}", 'type' => 2)) : '');
 
 					// 写入信息提示
                     $this->_sessHelp->message = $this->_iniHelp->hint->questionSuccess;
@@ -160,7 +160,7 @@ class QuestionController extends Zend_Controller_Action
 
 					// 积分日志
 					(0 < $offer ? PointLogLogic::init()->insert(array(
-					    'uid' => $insArgs['ruid'], 'point' => $offer, 'type' => 4)) : '');
+					    'uid' => $insArgs['ruid'], 'qid' => $insArgs['qid'], 'point' => $offer, 'type' => 4)) : '');
 
 					// 写入信息提示
 					$this->_sessHelp->message = $this->_iniHelp->hint->replyAccept;
