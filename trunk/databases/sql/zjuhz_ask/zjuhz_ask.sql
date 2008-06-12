@@ -34,14 +34,6 @@ create table zjuhz_ask.tbl_ask
 type = MYISAM;
 
 /*==============================================================*/
-/* Index: idx_point                                             */
-/*==============================================================*/
-create index idx_point on tbl_ask
-(
-   point
-);
-
-/*==============================================================*/
 /* Table: tbl_ask_answer                                        */
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_answer
@@ -185,7 +177,7 @@ create table zjuhz_ask.tbl_ask_point_log
 (
    id                   int unsigned not null auto_increment,
    uid                  int(10) unsigned not null,
-   sid                  smallint unsigned not null default 0,
+   qid                  int(10) unsigned not null default 0,
    point                smallint not null default 0,
    time                 timestamp not null default CURRENT_TIMESTAMP,
    type                 tinyint unsigned not null default 0,
@@ -194,20 +186,30 @@ create table zjuhz_ask.tbl_ask_point_log
 type = MYISAM;
 
 /*==============================================================*/
-/* Table: tbl_ask_point_week                                    */
+/* Table: tbl_ask_point_expert                                  */
 /*==============================================================*/
-create table zjuhz_ask.tbl_ask_point_week
+create table zjuhz_ask.tbl_ask_point_expert
 (
    uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
    point                int unsigned not null default 0,
+   time                 int(10) unsigned not null default 0,
    primary key (uid)
 )
 type = MYISAM;
 
 /*==============================================================*/
+/* Index: idx_sid                                               */
+/*==============================================================*/
+create index idx_sid on tbl_ask_point_expert
+(
+   sid
+);
+
+/*==============================================================*/
 /* Index: idx_point                                             */
 /*==============================================================*/
-create index idx_point on tbl_ask_point_week
+create index idx_point on tbl_ask_point_expert
 (
    point
 );
