@@ -93,19 +93,20 @@
 			{
 				$this->_helper->layout->setLayout('error');
 				$this->view->err_tip = '内容不能为空!';
-				exit();
 			}
-			
-			$Comment = new CommentModel();
-			$Comment->insert(array(
-				'user_id' => $this->_sessCommon->login['uid'],
-				'entity_id' => $entity_id,
-				'comment_username' => $username,
-				'comment_time' => time(),
-				'comment_content' => $content
-			));
-			$this->_helper->layout->setLayout('success');
-			$this->view->suc_tip = '评论成功!';
+			else
+			{
+				$Comment = new CommentModel();
+				$Comment->insert(array(
+					'user_id' => $this->_sessCommon->login['uid'],
+					'entity_id' => $entity_id,
+					'comment_username' => $username,
+					'comment_time' => time(),
+					'comment_content' => $content
+				));
+				$this->_helper->layout->setLayout('success');
+				$this->view->suc_tip = '评论成功!';
+			}
 		}
 		
 		# 显示评论提交表单
