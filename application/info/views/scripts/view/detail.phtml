@@ -98,7 +98,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 	<tr><td colspan="2">没有找到</td></tr>
 	<?php else: foreach ($this->similarity as $k2 => $v2): ?>
 	<tr>
-	<td class="f12"><a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
+	<td class="f12">&raquo; <a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
 	<td class="f9"><?= Commons::date($v2['entity_pub_time']) ?></td>
 	</tr>
 	<?php endforeach; endif; ?>
