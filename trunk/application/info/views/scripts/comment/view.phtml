@@ -3,7 +3,7 @@
 	<?php else: foreach($this->comments as $comment): ?>
 	<div>
 		<p class='commentUnit'>
-			<?= Commons::getUserFace($comment['user_id'],'small') ?> <a href=""><?= $comment['comment_username'] ?></a> 
+			<?php echo $this->card($comment['user_id'], $comment['comment_username']); ?>
 			<small><?= Commons::date($comment['comment_time']) ?></small>
 		</p>
 		<p class='commentcont'>
@@ -12,3 +12,6 @@
 	</div>
 	<?php endforeach; endif; ?>
 	<div class="pagination"><?= $this->pagination ?></div>
+	<script type="text/javascript">
+		ucardInit();
+	</script>
