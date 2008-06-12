@@ -1,5 +1,4 @@
-	<div class="pagination"><?= $this->pagination ?></div>
-	<?php if(!$this->comments):  ?>
+<?php if(!$this->comments):  ?>
 	没有评论
 	<?php else: foreach($this->comments as $comment): ?>
 	<div>
