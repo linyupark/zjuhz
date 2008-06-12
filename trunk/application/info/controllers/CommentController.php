@@ -17,6 +17,7 @@
 		{
 			if(!$this->getRequest()->isXmlHttpRequest()) exit();
 			$this->_sessCommon = Zend_Registry::get('sessCommon');
+			$this->view->login = $this->_sessCommon->login;
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNoRender();
 		}
@@ -27,6 +28,22 @@
 			{
 				$this->_helper->layout->setLayout('error');
 				$this->view->err_tip = '只有登陆后才能进行评论!';
+			}
+		}
+		
+		function deleteAction()
+		{
+			$request = $this->getRequest();
+			if($this->_sessCommon->login['username'] != 'zjuhz')
+			{
+				$this->_helper->layout->setLayout('error');
+				$this->view->err_tip = '没有删除评论的权限!';
+			}
+			else
+			{
+				$comment_id = (int)$request->getPost('comment_id');
+				$Db = Zend_Registry::get('dbInfo');
+				$Db->delete('tbl_comment', 'comment_id = '.$comment_id);
 			}
 		}
 		
