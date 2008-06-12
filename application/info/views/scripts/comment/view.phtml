@@ -5,6 +5,9 @@
 		<p class='commentUnit'>
 			<?php echo $this->card($comment['user_id'], $comment['comment_username']); ?>
 			<small><?= Commons::date($comment['comment_time']) ?></small>
+			<?php if($this->login['username'] == 'zjuhz'):  ?>
+			<a href="javascript:deleteComment(<?= $comment['comment_id'] ?>)">删除</a>
+			<?php endif; ?>
 		</p>
 		<p class='commentcont'>
 			<?= stripslashes($comment['comment_content']) ?>
@@ -14,4 +17,14 @@
 	<div class="pagination"><?= $this->pagination ?></div>
 	<script type="text/javascript">
 		ucardInit();
+		function deleteComment(id)
+		{
+			var t = confirm('确定删除该评论？');
+			if(t == true){
+				$.post('/info/comment/delete', {comment_id:id}, function(html){
+					if(html != '') $.facebox(html);
+					else history.go(0);
+				});
+			}
+		}
 	</script>

@@ -31,6 +31,9 @@
 				<img src="/static/images/bullet/green.gif" align="absmiddle" /> 
 				<?php endif; ?>
 				<a href="/info/view/detail/id/<?= $v['entity_id'] ?>"><?= $v['entity_title'] ?></a>
+				<?php if(time()-$v['entity_pub_time'] < (12*3600)): ?>
+				<img src="/static/images/icon/new.gif" />
+				<?php endif; ?>
 			</td>
 			<td style="font-size:10px"><?= Commons::date($v['entity_pub_time']) ?></td>
 			<td style="font-size:10px"><?= $v['user_name'] ?></td>
