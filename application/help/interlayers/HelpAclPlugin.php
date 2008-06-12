@@ -93,7 +93,6 @@ class HelpAclPlugin extends Zend_Controller_Plugin_Abstract
 	private function _setAclPriv()
 	{
 		$this->_aclHelp->deny('guest')
-			           ->allow('guest', 'index')
 		               ->allow('member');
 	}
 

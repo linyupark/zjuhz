@@ -171,6 +171,20 @@ create index idx_sid on tbl_ask_overtime
 );
 
 /*==============================================================*/
+/* Table: tbl_ask_point_expert                                  */
+/*==============================================================*/
+create table zjuhz_ask.tbl_ask_point_expert
+(
+   logId                int unsigned not null default 0,
+   uid                  int(10) unsigned not null,
+   sid                  smallint unsigned not null default 0,
+   point                smallint not null default 0,
+   date                 date not null,
+   primary key (logId)
+)
+type = MYISAM;
+
+/*==============================================================*/
 /* Table: tbl_ask_point_log                                     */
 /*==============================================================*/
 create table zjuhz_ask.tbl_ask_point_log
@@ -184,35 +198,6 @@ create table zjuhz_ask.tbl_ask_point_log
    primary key (id)
 )
 type = MYISAM;
-
-/*==============================================================*/
-/* Table: tbl_ask_point_expert                                  */
-/*==============================================================*/
-create table zjuhz_ask.tbl_ask_point_expert
-(
-   uid                  int(10) unsigned not null,
-   sid                  smallint unsigned not null default 0,
-   point                int unsigned not null default 0,
-   time                 int(10) unsigned not null default 0,
-   primary key (uid)
-)
-type = MYISAM;
-
-/*==============================================================*/
-/* Index: idx_sid                                               */
-/*==============================================================*/
-create index idx_sid on tbl_ask_point_expert
-(
-   sid
-);
-
-/*==============================================================*/
-/* Index: idx_point                                             */
-/*==============================================================*/
-create index idx_point on tbl_ask_point_expert
-(
-   point
-);
 
 /*==============================================================*/
 /* Table: tbl_ask_question                                      */

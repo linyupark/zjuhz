@@ -103,7 +103,7 @@ class QuestionController extends Zend_Controller_Action
 			$postArgs['uid']   = $this->_sessUid;
 			$postArgs['scode'] = $this->_sessCommon->verify;
 
-			$counter = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'],  
+			$sorter = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'],  
 			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'question');
 
 			if ($insArgs = QuestionFilter::init()->insert($postArgs))
@@ -116,7 +116,7 @@ class QuestionController extends Zend_Controller_Action
 					$this->_sessHelp->login['unsolved']++; // 未解决数
 
 					// 分类数量更新
-					AskSortLogic::init()->counter($counter);
+					AskSortLogic::init()->counter($sorter);
 
 					// 积分日志
 					(0 < $insArgs['offer'] ? PointLogLogic::init()->insert(array(
@@ -144,7 +144,7 @@ class QuestionController extends Zend_Controller_Action
 			$postArgs['quid']  = $this->_sessUid;
 			$postArgs['scode'] = $this->_sessCommon->verify;
 
-			$counter  = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
+			$sorter  = array('sort0' => (int)$postArgs['sort0'], 'sort1' => (int)$postArgs['sort1'], 
 			    'sort2' => (int)$postArgs['sort2'], 'filed' => 'solved');
 
 			if ($insArgs = QuestionFilter::init()->accept($postArgs))
@@ -156,7 +156,7 @@ class QuestionController extends Zend_Controller_Action
 					$this->_sessHelp->login['solved']++;
 
 					// 分类数量更新
-					AskSortLogic::init()->counter($counter);
+					AskSortLogic::init()->counter($sorter);
 
 					// 积分日志
 					(0 < $offer ? PointLogLogic::init()->insert(array(
