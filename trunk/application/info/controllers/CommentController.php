@@ -69,9 +69,14 @@
 			$this->noguest();
 			$request = $this->getRequest();
 			$entity_id = $request->getPost('entity_id');
-			$username = $this->_sessCommon->login['username'];
+			$username = $this->_sessCommon->login['realName'];
 			$time = time();
 			$content = nl2br(strip_tags(htmlspecialchars($request->getPost('content'))));
+			if(empty($content))
+			{
+				$this->_helper->layout->setLayout('error');
+				$this->view->suc_tip = '内容不能为空!';
+			}
 			
 			$Comment = new CommentModel();
 			$Comment->insert(array(
