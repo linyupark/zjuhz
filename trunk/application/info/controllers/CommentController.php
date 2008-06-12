@@ -92,7 +92,8 @@
 			if(empty($content))
 			{
 				$this->_helper->layout->setLayout('error');
-				$this->view->suc_tip = '内容不能为空!';
+				$this->view->err_tip = '内容不能为空!';
+				exit();
 			}
 			
 			$Comment = new CommentModel();
