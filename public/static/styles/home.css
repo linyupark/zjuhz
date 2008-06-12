@@ -90,8 +90,3 @@
 .news_page a.more{ margin-top:8px; background:url(/static/images/btn/more.gif) no-repeat; width:51px; height:15px; padding:0; margin-left:220px; }
 .news_page img{ padding:5px; border:1px solid #999; background:#fff; display:none; }
 
-/* 用户个人名片 */
-.member_card{ margin:10px; border:1px solid #D7EAB2; background:#F9FFED; width:140px; }
-.member_card .head{ padding:2px; border:1px solid #D7EAB2; background:#fff; width:50px; height:50px; }
-.member_card td{ padding:5px; }
-

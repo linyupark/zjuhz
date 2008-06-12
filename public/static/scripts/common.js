@@ -149,7 +149,7 @@ function ucardInit() {
 		var y = $(this).offset().top+20;
 		var w = $('body').width();
 		var h = $('body').height();
-		var card_w = 200;
+		var card_w = 250;
 		$(this).after('<div class="cardContainer"><img src="/static/images/loading1.gif"></div>');
 		$('.cardContainer').css({border:'1px solid #ccc', opacity:'0.9', position:'absolute', width:card_w, top:y, background:'#f5f5f5'});
 		if((card_w+x) > w) {
