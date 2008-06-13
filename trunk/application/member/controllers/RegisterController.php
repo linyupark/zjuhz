@@ -54,7 +54,7 @@ class RegisterController extends Zend_Controller_Action
 		$this->_iniCommon  = Zend_Registry::get('iniCommon');
 		$this->_iniMember  = Zend_Registry::get('iniMember');
 
-		(isset($this->_sessCommon->role) ? $this->_redirect('../', array('exit')) : '');
+		('member' == $this->_sessCommon->role ? $this->_redirect('../', array('exit')) : '');
     }
 
     /**
