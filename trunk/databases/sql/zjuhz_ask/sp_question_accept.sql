@@ -18,8 +18,8 @@ BEGIN
 
                 UPDATE tbl_ask_question SET status = 1 WHERE qid = param_qid LIMIT 1;
                 UPDATE tbl_ask_reply SET status = 1 WHERE rid = param_rid LIMIT 1;
-                UPDATE tbl_ask SET solved = solved + 1, unsolved=unsolved - 1 WHERE uid = param_quid LIMIT 1;
-                UPDATE tbl_ask SET answer=answer + 1,point = point + myoffer WHERE uid = param_ruid LIMIT 1;
+                UPDATE tbl_ask SET solved = solved + 1, unsolved = unsolved - 1 WHERE uid = param_quid LIMIT 1;
+                UPDATE tbl_ask SET answer = answer + 1, point = point + myoffer, expertPoint = expertPoint + myoffer WHERE uid = param_ruid LIMIT 1;
 
             END IF;
 
