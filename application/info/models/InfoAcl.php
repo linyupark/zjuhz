@@ -89,6 +89,7 @@
 						$row = array(
 							'user_id' => $data['uid'],
 							'user_name' => $data['username'],
+							'realName' => $data['realName'],
 							'user_password' => $data['password'],
 							'user_role' => 'member'
 						);

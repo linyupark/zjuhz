@@ -19,7 +19,7 @@
 			                      		AND `e`.`category_id` = `c`.`category_id` 
 			                      		AND `e`.`entity_pub` = 0');
 			                      		*/
-			return $this->_db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`user_name`,`category_name` 
+			return $this->_db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`user_id`,`user_name`,`category_name` 
 										 FROM `vi_entity` WHERE `entity_pub` = 0');
 		}
 		
@@ -134,6 +134,12 @@
 		private function increaseViewNum($id, $num)
 		{
 			$this->_db->update('tbl_entity', array('entity_view_num' => $num+1), '`entity_id` = '.$id);
+		}
+		
+		# 给用户咨询积分做累加
+		public function increaseCoin($uid, $num)
+		{
+			$this->_db->update('tbl_user', array('user_coin' => new Zend_Db_Expr('user_coin+5')), '`user_id` = '.$uid);
 		}
 		
 		# 获得一些数据库处理信息

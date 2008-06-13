@@ -21,6 +21,7 @@
   		<td><?= Commons::date($v['entity_pub_time']) ?></td>
   		<td>
   		<input type="hidden" name="entity_id" value="<?= $v['entity_id'] ?>" />
+        <input type="hidden" name="user_id" value="<?= $v['user_id'] ?>" />
   		<input onclick="entity_pub(<?= $v['entity_id'] ?>)" type="button" value="发布" />
   		</td>
   	</tr>

@@ -114,6 +114,7 @@ function entity_del(post_id)
 				$('.tips').html(data);
 				if(data == '该信息已成功删除')
 					$('#post_'+post_id).fadeOut(1000);
+				$('.tips').fadeOut(1000);
 			}
 		);	
 	}
