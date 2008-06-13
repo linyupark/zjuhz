@@ -58,6 +58,13 @@ class CacheLogic extends MemberInterlayer
      */
     private $_backendOptions = array();
 
+	/**
+     * methods
+     * 
+     * @var array
+     */
+    private $_methods = array();
+
     /**
      * 构造方法
      * 
