@@ -245,8 +245,10 @@
 				$this->_helper->layout->disableLayout();
 				$this->getResponse()->insert('bar', '');
 				$entity_id = $this->getRequest()->getPost('entity_id');
+				$user_id = $this->getRequest()->getPost('user_id');
 				$this->Entity->update(array('entity_pub'=>1),'entity_id = '.$entity_id);
-				echo '该信息已成功发布';
+				$this->DbModel->increaseCoin($user_id, 5); //累加资讯积分 
+				echo '该信息已成功发布, 提交人增加资讯积分5';
 			}
 		}
 		

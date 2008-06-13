@@ -48,7 +48,7 @@
 			
 			$this->view->pagination = Page::$page_str;
 												  
-			$this->view->rows = $Db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`entity_top`,`user_name`
+			$this->view->rows = $Db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`entity_top`,`user_name`,`realName`
 			                                   FROM `vi_entity` WHERE `category_id` = ? AND `entity_pub` = 1 
 			                                   ORDER BY `entity_top` DESC ,`entity_pub_time` DESC, `entity_id` DESC 
 			                                   LIMIT '.Page::$offset.','.Page::$pagesize, $categoryId);
