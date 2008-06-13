@@ -21,6 +21,7 @@ create table zjuhz_ask.tbl_ask
    uid                  int(10) unsigned not null,
    realName             char(6) not null,
    point                int unsigned not null default 0,
+   expertPoint          int unsigned not null default 0,
    question             int unsigned not null default 0,
    unsolved             int unsigned not null default 0,
    solved               int unsigned not null default 0,
