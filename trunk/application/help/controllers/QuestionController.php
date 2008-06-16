@@ -199,9 +199,9 @@ class QuestionController extends Zend_Controller_Action
 		$this->view->paging   = $paging->show();
 		$this->view->reply    = $reply;
 
-		$cache = CacheLogic::init();
-		$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
-		$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
+		//$cache = CacheLogic::init();
+		//$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
+		//$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
 	}
 
 	/**

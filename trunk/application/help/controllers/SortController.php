@@ -163,8 +163,8 @@ class SortController extends Zend_Controller_Action
         $this->view->paging     = $paging->show(); // 显示分页
         $this->view->question   = $question; // 问题列表
 
-		$cache = CacheLogic::init();
-		$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
-		$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
+		//$cache = CacheLogic::init();
+		//$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
+		//$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
 	}
 }
