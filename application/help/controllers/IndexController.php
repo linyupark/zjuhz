@@ -122,8 +122,8 @@ class IndexController extends Zend_Controller_Action
 		$this->view->forget = $logic->selectForgetAll(12); // 被遗忘的
 		$this->view->solved = $logic->selectSolvedAll(12); // 最近解决
 
-		$cache = CacheLogic::init();
-		$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
-		$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
+		//$cache = CacheLogic::init();
+		//$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
+		//$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
 	}
 }
