@@ -18,7 +18,7 @@
 		<tr>
 			<th width="65%">标题 <small> <?= $this->numrows ?>篇 , <?= $this->numpages ?>页</small></th>
 			<th width="20%">发布时间</th>
-			<th width="15%">发布人</th>
+			<th width="15%">点击数</th>
 		</tr>
 		<?php if(!count($this->rows)): ?>
 		<tr><td colspan="3">该类尚未发布任何信息</td></tr>
@@ -36,7 +36,7 @@
 				<?php endif; ?>
 			</td>
 			<td style="font-size:10px"><?= Commons::date($v['entity_pub_time']) ?></td>
-			<td style="font-size:12px; color:#666"><?= $v['realName'] ?></td>
+			<td style="font-size:12px; color:#666"><?= $v['entity_view_num'] ?></td>
 		</tr>
 		<?php endforeach; endif; ?>
 		<tr>
