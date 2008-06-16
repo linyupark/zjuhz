@@ -120,6 +120,10 @@ class IndexController extends Zend_Controller_Action
 		$this->view->latest = $logic->selectLatestAll(12); // 最新问题
 		$this->view->offer  = $logic->selectOfferAll(12);  // 高分问题
 		$this->view->forget = $logic->selectForgetAll(12); // 被遗忘的
-		$this->view->solved = $logic->selectSolvedAll(12); // 最近解决	
+		$this->view->solved = $logic->selectSolvedAll(12); // 最近解决
+
+		$cache = CacheLogic::init();
+		$this->view->expert  = $cache->rankAskLoad('expert'); // 总专家榜
+		$this->view->actvite = $cache->rankAskLoad('active'); // 总活跃榜
 	}
 }

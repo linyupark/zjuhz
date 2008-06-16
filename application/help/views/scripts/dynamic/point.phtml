@@ -1,9 +1,23 @@
 <table class="help_rank">
 <tr>
-<th class="txtl" colspan="2">互助积分榜</th>
+<th class="txtl" colspan="3">互助专家分总榜</th>
 </tr>
+<?php for ($e=0; $e<10; $e++) { ?>
 <tr>
-<td><a href="#" class="rank"></a></td>
-<td></td>
+  <td width="70%">&nbsp;<a href="#" class="rank"><?= $this->expert[$e]['realName']; ?></a></td>
+  <td width="30%"><img src="/static/images/icon/icn_offer.gif" alt="总专家分" /><?= $this->expert[$e]['expertPoint']; ?>&nbsp;</td>
 </tr>
+<?php } ?>
+</table>
+
+<table class="help_rank">
+<tr>
+<th class="txtl" colspan="3">互助活跃值总榜</th>
+</tr>
+<?php for ($a=0; $a<10; $a++) { ?>
+<tr>
+  <td width="70%">&nbsp;<a href="#" class="rank"><?= $this->actvite[$a]['realName']; ?></a></td>
+  <td width="30%"><img src="/static/images/icon/icn_offer.gif" alt="总活跃值" /><?= $this->actvite[$a]['active']; ?>&nbsp;</td>
+</tr>
+<?php } ?>
 </table>

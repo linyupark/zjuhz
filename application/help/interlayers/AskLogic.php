@@ -60,6 +60,26 @@ class AskLogic extends HelpInterlayer
 	}
 
     /**
+     * 查找排行榜-按专家分
+     * 
+     * @return array
+     */
+	public function selectRankExpert()
+	{
+		return $this->_AskModel->selectRank('expert');
+	}
+
+    /**
+     * 查找排行榜-按活跃值
+     * 
+     * @return array
+     */
+	public function selectRankActive()
+	{
+		return $this->_AskModel->selectRank('active');
+	}
+
+    /**
      * 插入uid的模块记录
      * 
      * @param array $args

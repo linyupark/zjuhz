@@ -150,7 +150,7 @@ abstract class HelpInterlayer
     {
     	if (!Zend_Registry::isRegistered('dao'))
     	{
-    		$iniDb   = Zend_Registry::get('iniDb');
+    		$iniDb   = new Zend_Config_Ini('../../common/Ini/Db.ini');
     		$adapter = $iniDb->default->adapter;
     		$params  = $iniDb->default->params->toArray();
     		$params['dbname'] = 'zjuhz_ask';

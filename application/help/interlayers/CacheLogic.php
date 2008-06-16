@@ -58,6 +58,18 @@ class CacheLogic extends HelpInterlayer
      */
     private $_backendOptions = array();
 
+	/**
+     * methods
+     * 
+     * @var array
+     */
+    private $_methods = array(
+        'rankAsk' => array(
+            'expert' => 'selectRankExpert', 
+            'active' => 'selectRankActive'
+        )
+    );
+
     /**
      * 构造方法
      * 
@@ -136,6 +148,7 @@ class CacheLogic extends HelpInterlayer
     	return array_intersect_key($data, array_flip($this->_hoppers[$name]));
     }
 
+
     /**
      * 初始json方式的分类缓存
      * 
@@ -154,7 +167,7 @@ class CacheLogic extends HelpInterlayer
     	    $this->_cache = Zend_Cache::factory('Core', 'File', 
     	        $this->_frontendOptions, $this->_backendOptions
 	        );
-    	}	        
+    	}
     }
 
     /**
@@ -182,5 +195,74 @@ class CacheLogic extends HelpInterlayer
     	$this->jsonInit();
 
     	return $this->_cache->load("json{$sid}");
+    }
+
+
+    /**
+     * 初始各类榜单缓存
+     * 
+     * @return void
+     */
+	public function rankInit()
+    {
+    	// 固定变更项写入
+    	self::$_options['cache_dir'] = DOCUMENT_CACHE.'rank/';    	    
+    	// 参数变更初始化
+    	$this->_setFrontendOptions();
+    	$this->_setBackendOptions();
+
+    	$this->_cache = Zend_Cache::factory('Core', 'File', 
+    	    $this->_frontendOptions, $this->_backendOptions
+	    );
+    }
+
+    /**
+     * 初始用于统计tbl_ask的榜单缓存
+     * 
+     * @return void
+     */
+	public function rankAskInit()
+    {
+    	if (!isset($this->_cache))
+    	{
+    		self::$_options['lifeTime'] = 14400; // 4 hours
+
+    	    $this->rankInit();
+    	}
+    }
+
+    /**
+     * 保存用于统计tbl_ask的榜单缓存
+     * 
+     * @param array $data
+     * @param string $type
+     * @return boolean True if no problem
+     */
+	public function rankAskSave($data, $type)
+    {
+    	$this->rankAskInit();
+
+    	return $this->_cache->save($data, "rankAsk{$type}");
+    }
+
+    /**
+     * 载入用于统计tbl_ask的榜单缓存
+     * 
+     * @param string $type
+     * @return string|false cached datas
+     */
+	public function rankAskLoad($type)
+    {
+    	$this->rankAskInit();
+
+    	if(!$data = $this->_cache->load("rankAsk{$type}"))
+    	{
+            $method = $this->_methods['rankAsk'][$type]; // 获取方法
+    		$data = AskLogic::init()->$method();
+
+    	    $this->rankAskSave($data, $type);
+    	}
+
+    	return $data;
     }
 }
