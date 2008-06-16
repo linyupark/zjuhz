@@ -67,6 +67,24 @@ class AskModel //extends Zend_Db_Table_Abstract
     }
 
     /**
+     * 查找本表的各类排行榜
+     * 
+     * @param string $name
+     * @return array
+     */
+	public function selectRank($name)
+    {
+    	$sql = array(
+    	    'expert' => "SELECT uid, realName, expertPoint, answer 
+    	        FROM {$this->_name} WHERE expertPoint > 0 ORDER BY expertPoint DESC LIMIT 100", 
+    	    'active' => "SELECT uid, realName, sum(question + reply) AS active 
+    	        FROM {$this->_name} GROUP BY uid ORDER BY active DESC LIMIT 100;"
+    	);
+
+    	return $this->_dao->fetchAll($sql[$name]);
+    }
+
+    /**
      * 插入uid的模块记录
      * 
      * @param array $args
