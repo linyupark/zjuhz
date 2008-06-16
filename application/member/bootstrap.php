@@ -27,7 +27,6 @@ require_once('Zend/Loader.php');
 Zend_Loader::registerAutoload();
 
 /** Config */
-Zend_Registry::set('iniDb', new Zend_Config_Ini('../../common/Ini/Db.ini'));
 Zend_Registry::set('iniCommon', new Zend_Config_Ini('../../common/Ini/Config.ini'));
 Zend_Registry::set('iniMember', new Zend_Config_Ini('../../common/Ini/Member.ini'));
 
