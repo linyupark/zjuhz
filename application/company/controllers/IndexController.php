@@ -63,8 +63,14 @@ class IndexController extends Zend_Controller_Action {
 	# 管理页
 	public function adminAction()
 	{
+		$request = $this->getRequest();
+		$mtab = $request->getParam('m', 'admininfo');
+		$stab = $request->getParam('s', 'index');
+		$this->view->mtab = $mtab;
+		$this->view->stab = $stab;
 		// 菜单判断部分参考个人平台的 my-nav
 		$this->_helper->layout->setLayout('admin');
 		$this->getResponse()->insert('nav', $this->view->render('admin-nav.phtml'));
+		$this->render($mtab.'-'.$stab);
 	}
 }
