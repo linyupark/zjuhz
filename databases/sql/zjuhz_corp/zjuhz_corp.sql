@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2008-6-16 11:46:20                           */
+/* Created on:     2008-6-16 14:59:05                           */
 /*==============================================================*/
 
 
@@ -138,6 +138,7 @@ create table zjuhz_corp.tbl_corp_company_link
    uid                  int(10) unsigned not null default 0,
    name                 varchar(20) not null,
    url                  varchar(200) not null,
+   orderId              tinyint unsigned not null default 0,
    click                int unsigned not null default 0,
    primary key (lid)
 )
@@ -151,3 +152,22 @@ create index idx_id on tbl_corp_company_link
    cid,
    uid
 );
+
+/*==============================================================*/
+/* Index: idx_order                                             */
+/*==============================================================*/
+create index idx_order on tbl_corp_company_link
+(
+   orderId
+);
+
+/*==============================================================*/
+/* Table: tbl_corp_industry                                     */
+/*==============================================================*/
+create table zjuhz_corp.tbl_corp_industry
+(
+   iid                  tinyint unsigned not null,
+   count                int unsigned not null default 0,
+   primary key (iid)
+)
+type = MYISAM;
