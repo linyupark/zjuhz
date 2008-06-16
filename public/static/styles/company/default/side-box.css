@@ -1,0 +1,35 @@
+.side-box{
+	width: 180px;
+	padding:10px;
+	background:#EAF2F5;
+	margin-top:10px;
+}
+
+.side-box img{
+	margin:10px 0 0 0;
+	border:2px solid #666;
+}
+
+.side-box li a{ 
+	font-size:12px; 
+	display:block;
+	line-height:170%;
+	padding:3px 5px;
+}
+
+.side-box li a:hover{
+	color: #EA5506;
+	background-color: #fff;
+}
+
+.side-box-title, .side-box-subtitle{
+	color: #586B7A;
+	padding:5px 0 5px 5px;
+	font-weight:bold;
+	font-size:14px;
+}
+
+.side-box-subtitle{
+	font-size:12px;
+}
+

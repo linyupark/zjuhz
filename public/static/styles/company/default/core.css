@@ -1,0 +1,91 @@
+/* element------------------------------- */
+
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	background:url(/static/images/company/body.jpg) repeat-x top;
+  	color: #444;
+  	font-size:14px;
+}
+
+hr{ border:none; border-bottom:1px solid #ccc; height:1px; }
+p,td,th{ line-height:150%; }
+small{ font-size:9px; }
+strong{ font-weight:bold }
+
+
+/* class ------------------------------ */
+
+.txtr{ text-align:right}
+.dark{color: #353E47;}
+.f16{ font-size:16px }
+.lh150{ line-height:150%; }
+.pd10{ padding:10px; }
+.pdr10{ padding-right:10px; }
+.floatRight{float:right;}
+.floatLeft{float:left;}
+
+.pagination{ padding:10px 0; font-size:12px;}
+.pagination a{  display:block; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
+.pagination a:hover{ border:1px solid #ccc; }
+.pagination b{ display:block; float:left; padding:2px 5px; }
+
+a {text-decoration: none;color: #3B5D77;}
+
+a:hover {color: #111; text-decoration:underline}
+
+a img {border: 0;}
+
+/* layout-------------------------------- */
+#wrap{
+	position: relative;
+	width:960px;
+	margin:0 auto;
+}
+#container{
+	clear:both;
+	background:#fff;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+#footer{
+	text-align:right;
+	clear:both;
+	background:url(/static/images/company/footer.png) repeat-x top;
+	height:79px;
+	margin-top:20px;
+	padding:10px;
+	font-size:12px;
+	color:#666;
+	line-height:200%;
+}
+
+#footer a{ margin:0 10px; }
+
+
+	#gb-box{
+		float:left;
+	}
+	.gb-item{
+		padding:5px;
+		margin-top:10px;
+	}	
+	.gb-title{
+		padding:5px;
+	}
+	.gb-content{
+		padding:10px;
+		background:#F5FAFE;
+		border:1px dashed #CBD7EC;
+		line-height:160%;
+	} .gb-content .gb-reply{
+		padding:10px;
+		background:#FFFFCC;
+		border:1px dashed #ccc;
+		margin-top:10px;
+	}
+	
+	.gb-reply-box{
+		margin-top:30px;
+	}
+
