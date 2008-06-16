@@ -2,7 +2,7 @@
 <tr>
 <th class="txtl" colspan="3">互助专家分总榜</th>
 </tr>
-<?php for ($e=0; $e<10; $e++) { ?>
+<?php for ($e=0; $e<10; $e++) { if (!isset($this->expert[$e]['uid'])) { break; } ?>
 <tr>
   <td width="70%">&nbsp;<a href="#" class="rank"><?= $this->expert[$e]['realName']; ?></a></td>
   <td width="30%"><img src="/static/images/icon/icn_offer.gif" alt="总专家分" /><?= $this->expert[$e]['expertPoint']; ?>&nbsp;</td>
@@ -14,7 +14,7 @@
 <tr>
 <th class="txtl" colspan="3">互助活跃值总榜</th>
 </tr>
-<?php for ($a=0; $a<10; $a++) { ?>
+<?php for ($a=0; $a<10; $a++) { if (!isset($this->expert[$e]['uid'])) { break; } ?>
 <tr>
   <td width="70%">&nbsp;<a href="#" class="rank"><?= $this->actvite[$a]['realName']; ?></a></td>
   <td width="30%"><img src="/static/images/icon/icn_offer.gif" alt="总活跃值" /><?= $this->actvite[$a]['active']; ?>&nbsp;</td>
