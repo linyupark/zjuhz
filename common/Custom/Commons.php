@@ -167,7 +167,7 @@ class Commons
     static function getUserFolder($uid, $sub='')
     {
     	// 用户文件夹下各子文件夹
-    	$subArray = array('' => '', '*' => '', 'albums' => 'albums/', 'cache' => 'cache/');
+    	$subArray = array('' => '', '*' => '', 'albums' => 'albums/', 'cache' => 'cache/', 'company' => 'company/');
 
     	if (0 < $uid && array_key_exists($sub, $subArray))
     	{
