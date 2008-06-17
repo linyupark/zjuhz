@@ -114,11 +114,11 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 	<?php endforeach; endif; ?>
 	</table>
 	<table class="similarity" style="float:right">
-	<tr><th colspan="2">:: <a href="javascript:toggle()" id="toggleBtn">查看评论</a> :: 
-	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">发表评论</a></th></tr>
+	<tr><th colspan="2">:: <a href="javascript:toggle()" id="toggleBtn">查看回复</a> :: 
+	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">回复主题</a></th></tr>
 	<tr>
 		<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
-		<td>需要登陆后才能查看评论</td>
+		<td>需要登陆后才能查看回复</td>
 		<?php else: ?>
 		<td id="commentList" class="hide"></td>
 		<?php endif; ?>
@@ -132,14 +132,14 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <script type="text/javascript">
 	function toggle()
 	{
-		if($('#toggleBtn').text() == '查看评论')
+		if($('#toggleBtn').text() == '查看回复')
 		{
-			$('#toggleBtn').text('隐藏评论');
+			$('#toggleBtn').text('隐藏回复');
 			$('#commentList').show();
 		}
 		else
 		{
-			$('#toggleBtn').text('查看评论');
+			$('#toggleBtn').text('查看回复');
 			$('#commentList').hide();
 		}
 	}

@@ -1,5 +1,5 @@
 <?php if(!$this->comments):  ?>
-	没有评论
+	没有回复
 	<?php else: foreach($this->comments as $comment): ?>
 	<div>
 		<p class='commentUnit'>
@@ -19,7 +19,7 @@
 		ucardInit();
 		function deleteComment(id)
 		{
-			var t = confirm('确定删除该评论？');
+			var t = confirm('确定删除该回复？');
 			if(t == true){
 				$.post('/info/comment/delete', {comment_id:id}, function(html){
 					if(html != '') $.facebox(html);
