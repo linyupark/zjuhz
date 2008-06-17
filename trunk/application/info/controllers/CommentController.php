@@ -27,7 +27,7 @@
 			if($this->_sessCommon->role == 'guest')
 			{
 				$this->_helper->layout->setLayout('error');
-				$this->view->err_tip = '只有登陆后才能进行评论!';
+				$this->view->err_tip = '只有登陆后才能进行回复!';
 			}
 		}
 		
@@ -37,7 +37,7 @@
 			if($this->_sessCommon->login['username'] != 'zjuhz')
 			{
 				$this->_helper->layout->setLayout('error');
-				$this->view->err_tip = '没有删除评论的权限!';
+				$this->view->err_tip = '没有删除回复的权限!';
 			}
 			else
 			{
@@ -105,7 +105,7 @@
 					'comment_content' => $content
 				));
 				$this->_helper->layout->setLayout('success');
-				$this->view->suc_tip = '评论成功!';
+				$this->view->suc_tip = '回复成功!';
 			}
 		}
 		
