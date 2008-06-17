@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="/static/styles/group/screen.css" media="screen" />
+<script type="text/javascript" src="/static/scripts/jquery.js"></script>
+<script type="text/javascript" src="/static/scripts/jquery.pngFix.pack.js"></script>
+<script type="text/javascript" src="/static/scripts/common.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<?php $this->headTitle('互动群组_杭州浙江大学校友会')->setSeparator('_'); ?>
+<?= $this->headTitle(); ?>
+</head>
+
+<body>
+	<div id="header" class="container">
+		<div class="span-8">
+			<a href="/"><img src="/static/images/group/zjuhz.gif" alt="群组" /></a>
+		</div>
+		<div class="span-16 last">
+			
+		</div>
+	</div>
+	<div id="container" class="container">
+		<?= $this->layout()->sidebar; ?>
+		<?= $this->layout()->content; ?>
+	</div>
+	
+	<div id="footer" class="container txtr hrefspan-8">
+		<hr />
+		<a href="/info/support/help">帮助</a>
+		<a href="/info/support/about">关于</a>
+		<a href="/info/support/contact_us">联系我们</a>
+		<a href="/info/support/privacy_claim">隐私声明</a>
+		<a href="http://www.zjuhz.com/old" target="_blank">旧版回顾</a>
+		<a href="http://ourzju.uu1001.com" target="_blank">校友论坛</a>
+		<a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备06052510号</a>
+		杭州浙江大学校友会(筹)&copy;2008 
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			$('img[src$="png"]').parent().pngFix(); 
+		}
+	</script>
+</body>
+</html>

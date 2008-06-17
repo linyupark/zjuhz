@@ -1,10 +1,10 @@
-﻿/*
+/*
 MySQL Data Transfer
 Source Host: localhost
 Source Database: zjuhz_class
 Target Host: localhost
 Target Database: zjuhz_class
-Date: 2008-6-5 11:52:21
+Date: 2008-6-17 16:45:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,7 +22,7 @@ CREATE TABLE `tbl_class` (
   `class_member_num` smallint(6) unsigned NOT NULL default '1',
   PRIMARY KEY  (`class_id`),
   UNIQUE KEY `className` (`class_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_activity
@@ -58,7 +58,7 @@ CREATE TABLE `tbl_class_addressbook` (
   `addressbook_telephone` char(20) default NULL,
   `addressbook_company` char(120) default NULL,
   PRIMARY KEY  (`class_addressbook_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_album
@@ -77,7 +77,7 @@ CREATE TABLE `tbl_class_album` (
   `class_album_reply_num` int(11) unsigned NOT NULL default '0',
   `class_album_tag` tinytext,
   PRIMARY KEY  (`class_album_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_apply
@@ -89,7 +89,7 @@ CREATE TABLE `tbl_class_apply` (
   `class_apply_content` tinytext,
   `class_apply_time` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`class_apply_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_invite
@@ -101,7 +101,7 @@ CREATE TABLE `tbl_class_invite` (
   `class_member_id` int(10) unsigned NOT NULL,
   `class_invite_memo` text,
   PRIMARY KEY  (`class_invite_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_member
@@ -142,7 +142,7 @@ CREATE TABLE `tbl_class_reply` (
   `class_reply_content` text NOT NULL,
   `class_reply_time` int(11) unsigned NOT NULL,
   PRIMARY KEY  (`class_reply_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_topic
@@ -164,7 +164,7 @@ CREATE TABLE `tbl_class_topic` (
   `class_topic_public` tinyint(1) NOT NULL default '0' COMMENT '0:只对班级成员;1:公开',
   `class_topic_tag` tinytext,
   PRIMARY KEY  (`class_topic_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tbl_class_user
@@ -174,7 +174,7 @@ CREATE TABLE `tbl_class_user` (
   `realName` char(16) NOT NULL,
   `sex` char(3) NOT NULL,
   PRIMARY KEY  (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- View structure for vi_class
@@ -221,4 +221,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vi_class_user` AS select `tbl_class_user`.`uid` AS `uid`,`tbl_class_user`.`realName` AS `realName`,`tbl_class_user`.`sex` AS `sex`,`tbl_class_member`.`class_id` AS `class_id` from (`tbl_class_user` left join `tbl_class_member` on((`tbl_class_user`.`uid` = `tbl_class_member`.`class_member_id`)));
 
-
+-- ----------------------------
+-- Records 
+-- ----------------------------
