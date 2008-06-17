@@ -23,6 +23,26 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <?= $this->escape($this->entity['entity_title']) ?>
 </h2>
 
+<!-- 同类上下篇 ////////////////////////////////////////////// -->
+<table width="100%">
+<tr>
+<?php if($this->sibling['previous']): ?>
+<td class="sibling_previous"><img src="/static/images/icon/previous.gif" /> 
+<a href="/info/view/detail/id/<?= $this->escape($this->sibling['previous']['entity_id']) ?>">
+<?= $this->escape($this->sibling['previous']['entity_title']) ?></a>
+</td>
+<?php endif; ?>
+
+<?php if($this->sibling['next']): ?>
+<td class="sibling_next">
+<a href="/info/view/detail/id/<?= $this->escape($this->sibling['next']['entity_id']) ?>">
+<?= $this->escape($this->sibling['next']['entity_title']) ?></a> 
+<img src="/static/images/icon/next.gif" /> 
+</td>
+<?php endif; ?>
+</tr>
+</table>
+
 <p class="toolbar" style="text-align:center">
     已被阅读(<?= $this->entity['entity_view_num'] ?>)&nbsp;&nbsp;&nbsp;
     <?php if($this->role == 'member'): ?>
@@ -33,6 +53,8 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
     最后修改于:<?= Commons::date($this->entity['entity_mod_time']) ?>
     <?php endif; ?>
 </p>
+
+
 
 <!-- 主体 ////////////////////////////////////////////// -->
 <div class="print entity" style="margin-top:5px;">
