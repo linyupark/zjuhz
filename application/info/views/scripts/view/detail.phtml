@@ -41,13 +41,6 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <?php else: ?>
 <?= stripslashes($this->entity['entity_content']) ?>
 <?php endif; ?>
-<p id="maker">
-发布人:<?= $this->entity['realName'] ?>(<?= $this->entity['role_nickname'] ?>)<br />
-发布于:<?= Commons::date($this->entity['entity_pub_time']) ?>
-<?php if($this->entity['entity_mod_time']): ?>
-<br />最后修改于:<?= Commons::date($this->entity['entity_mod_time']) ?>
-<?php endif; ?>
-</p>
 </div>
 
 <script type="text/javascript">
