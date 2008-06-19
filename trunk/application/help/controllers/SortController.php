@@ -29,7 +29,7 @@ class SortController extends Zend_Controller_Action
 	private $_sessHelp = null;
 
 	/**
-     * 互助模块配置
+     * 项目模块配置
      * 
      * @var object
      */

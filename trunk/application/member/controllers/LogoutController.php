@@ -32,6 +32,6 @@ class LogoutController extends Zend_Controller_Action
     {
     	Zend_Session::destroy(true);
 
-    	$this->_redirect('../');
+    	$this->_redirect('../', array('exit'));
     }
 }

@@ -49,7 +49,7 @@ class SearchController extends Zend_Controller_Action
 		$this->view->sessHelp   = $this->_sessHelp;
 
     	$this->_wd = SearchFilter::init()->keywords($this->getRequest()->getParam('wd'));
-    	(empty($this->_wd) ? $this->_redirect($_SERVER['HTTP_REFERER']) : ''); // 若未输关键字词返回上页
+    	(empty($this->_wd) ? $this->_redirect($_SERVER['HTTP_REFERER'], array('exit')) : ''); // 若未输关键字词返回上页
     }
 
     /**
