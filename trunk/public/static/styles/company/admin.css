@@ -3,8 +3,9 @@
 @import url("default/corner-box.css");
 
 .table{ background:#FDF4D6; border:1px solid #D6E9FD }
-.table td, .table th{ padding:10px; border-bottom:1px dashed #eee; }
+.table td, .table th{ padding:10px; border-bottom:1px dashed #eee;vertical-align:middle }
 .table th{ background:#f5f5f5; }
+.table p{ margin-top:5px; }
 
 
 li{ margin-top:10px;}
@@ -44,6 +45,13 @@ position: relative;
 #header h1{
 	 font-size:30px; color:#444; padding:15px 30px; font-family:Georgia, "Times New Roman", Times, serif ;
 	 font-weight:bold
+}
+
+#header #logo{
+	background: url(/static/images/company/zjuhz.gif) no-repeat left center;
+	height: 90px;
+	width:410px;
+	display:block;
 }
 
 h2{
@@ -163,10 +171,3 @@ input.radio {
   background: none;
   border: 0px;
 }
-
-/* 全局错误样式 */
-.err_message{ text-align:center; background:#FFFFCC; border:1px solid #FFCC33; padding:10px; margin:10px 20px; font-size:14px; }
-#relogin_form{ text-align:center }
-#relogin_form p{ padding:10px 0 0 0; }
-
-

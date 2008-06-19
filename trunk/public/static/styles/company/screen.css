@@ -8,7 +8,7 @@
 @import url("default/mid-box.css");
 @import url("default/corner-box.css");
 
-/* 全局错误样式 */
+/* relogin */
 .err_message{ text-align:center; background:#FFFFCC; border:1px solid #FFCC33; padding:10px; margin:10px 20px; font-size:14px; }
 #relogin_form{ text-align:center }
-#relogin_form p{ padding:10px 0 0 0; }
+#relogin_form p{ padding:10px 0 0 0;text-align:center }
