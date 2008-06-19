@@ -158,7 +158,6 @@ create table zjuhz_user.tbl_user_ext
    lastLogin            int(10) unsigned not null default 0,
    editNick             enum('Y','N') not null default 'N',
    initAsk              enum('Y','N') not null default 'N',
-   initClass            enum('Y','N') not null default 'N',
    primary key (uid)
 )
 type = MYISAM;

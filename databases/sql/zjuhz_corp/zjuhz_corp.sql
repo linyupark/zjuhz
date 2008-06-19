@@ -20,7 +20,9 @@ create table zjuhz_corp.tbl_corp
 (
    uid                  int(10) unsigned not null,
    realName             char(6) not null,
-   company              tinyint(1) unsigned not null default 0,
+   valid                tinyint(1) unsigned not null default 0,
+   auditing             tinyint(1) unsigned not null default 0,
+   untread              tinyint(1) unsigned not null default 0,
    primary key (uid)
 )
 type = MYISAM;
@@ -32,7 +34,7 @@ create table zjuhz_corp.tbl_corp_company
 (
    cid                  char(10) not null,
    uid                  int(10) unsigned not null default 0,
-   name                 varchar(30) not null,
+   name                 varchar(50) not null,
    industry             tinyint unsigned not null default 0,
    property             tinyint unsigned not null default 0,
    province             char(8) not null,
@@ -108,9 +110,8 @@ create table zjuhz_corp.tbl_corp_company_contact
 (
    cid                  char(10) not null,
    uid                  int(10) unsigned not null default 0,
-   mobile               varchar(11) default NULL,
-   phone                varchar(18) default NULL,
-   fax                  varchar(18) default NULL,
+   phone                varchar(13) not null,
+   fax                  varchar(13) default NULL,
    eMail                varchar(50) default NULL,
    url                  varchar(50) default NULL,
    address              varchar(80) default NULL,
