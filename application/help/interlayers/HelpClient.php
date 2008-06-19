@@ -2,7 +2,7 @@
 
 /**
  * @category   zjuhz.com
- * @package    member
+ * @package    help
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
  * @version    Id:HelpClient.php

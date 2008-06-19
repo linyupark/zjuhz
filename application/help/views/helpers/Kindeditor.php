@@ -8,10 +8,6 @@
  * @version    Id:Kindeditor.php
  */
 
-
-/**
- * 校友互助-视图工具
- */
 class Zend_View_Helper_Kindeditor
 {
 	/**

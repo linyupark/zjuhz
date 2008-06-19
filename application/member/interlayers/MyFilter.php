@@ -137,11 +137,11 @@ class MyFilter extends MemberInterlayer
     	// 设置验证规则
 		$validators = array(
             'mobile' => array(
-			    array('IsMobile'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+			    array('IsMobile'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_IsMobile::NOT_MOBILE => $this->_iniMember->hint->mobileError)), 
             'phone' => array(
 			    array('IsPhone'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
-               	    Zend_Validate_IsPhone::NOT_PHONE => $this->_iniMember->hint->phoneError)),                	    
+               	    Zend_Validate_IsPhone::NOT_PHONE => $this->_iniMember->hint->phoneError)), 
             'eMail' => array(
 			    array('IsEmail'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_IsEmail::NOT_EMAIL => $this->_iniMember->hint->emailInvalid)), 
@@ -210,7 +210,7 @@ class MyFilter extends MemberInterlayer
             'wid' => array(array('StringLength', '10', '10'), 'presence' => 'required'),
             'uid' => array(array('Int'), 'presence' => 'required'),
             'company' => array(
-		        array('Utf8Length', '2', '50'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+		        array('Utf8Length', '6', '50'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->companyError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->companyError)), 
             'startDate' => array(

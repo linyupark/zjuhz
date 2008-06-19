@@ -36,7 +36,7 @@ class MyController extends Zend_Controller_Action
 	private $_iniCommon = null;
 
 	/**
-     * 会员模块配置
+     * 项目模块配置
      * 
      * @var object
      */

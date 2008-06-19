@@ -39,6 +39,8 @@ Zend_Registry::set('aclMember', new Zend_Acl());
 
 /** constants */
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('REQUEST_TIME', $_SERVER['REQUEST_TIME']);
+
 define('DOCUMENT_CACHE', "../../cache/member/");
 define('USER_UID', Zend_Registry::get('sessCommon')->login['uid']);
 define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(USER_UID, '*'));

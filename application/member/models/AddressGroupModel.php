@@ -94,6 +94,7 @@ class AddressGroupModel
      * 更新名片组资料
      * 
      * @param array $args
+	 * @param string $gid
      * @return integer
      */
 	public function update($args, $gid)

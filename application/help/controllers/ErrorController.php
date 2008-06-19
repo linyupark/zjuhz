@@ -32,7 +32,8 @@ class ErrorController extends Zend_Controller_Action
     {
         $errors = $this->getRequest()->getParam('error_handler');
 
-        switch ($errors->type) {
+        switch ($errors->type)
+        {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
 
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
@@ -45,7 +46,7 @@ class ErrorController extends Zend_Controller_Action
                 $log->debug($exception->getMessage()."\n".$exception->getTraceAsString()."\n");
         }
 
-        $this->_redirect('/');
+        $this->_redirect('/', array('exit'));
     }
 
     /**
