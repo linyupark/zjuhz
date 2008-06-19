@@ -7,7 +7,6 @@
 .table th{ background:#f5f5f5; }
 .table p{ margin-top:5px; }
 
-
 li{ margin-top:10px;}
 
 /* Links */
@@ -23,106 +22,98 @@ a:hover {
 .overhide{ overflow:hidden }
 
 #passport{
-	position:absolute;
-	right:0;
-	top:0;
-	font-size:14px;
-	background:#f5f5f5;
-	padding:9px;
-	font-size:13px;
-	border-bottom:1px solid #666;
-	color:#ccc;
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:14px;
+  background:#f5f5f5;
+  padding:9px;
+  font-size:13px;
+  border-bottom:1px solid #666;
+  color:#ccc;
 }
 #passport td{ padding:5px 9px;}
 
 #wrap{
-position: relative;
-	width:960px;
-	margin:0 auto;
-	padding-top:35px;
+  position: relative;
+  width:960px;
+  margin:0 auto;
+  padding-top:35px;
 }
 
 #header h1{
-	 font-size:30px; color:#444; padding:15px 30px; font-family:Georgia, "Times New Roman", Times, serif ;
-	 font-weight:bold
+  font-size:30px; color:#444; padding:15px 30px; font-family:Georgia, "Times New Roman", Times, serif ;
+  font-weight:bold
 }
 
 #header #logo{
-	background: url(/static/images/company/zjuhz.gif) no-repeat left center;
-	height: 90px;
-	width:410px;
-	display:block;
+  background: url(/static/images/company/zjuhz.gif) no-repeat left center;
+  height: 90px;
+  width:410px;
+  display:block;
 }
 
 h2{
-font-weight:bold;
-font-size:16px;
-padding:20px 0 10px 20px
+  font-weight:bold;
+  font-size:16px;
+  padding:20px 0 10px 20px
 }
 
 #menu-box, #menu-box-sub{
-clear:both;
-	height:34px;
+  clear:both;
+  height:34px;
 }
 
 
 #menu-box{
-	background:#83B4D8;
-	padding:8px 0 0 10px;
+  background:#83B4D8;
+  padding:8px 0 0 10px;
 }
 #menu-box a{
-display:block;
-padding:10px;
-float:left;
-color:#1D405C;
-font-weight:bold;
-border-bottom:none;
-text-decoration:none;
+  display:block;
+  padding:10px;
+  float:left;
+  color:#1D405C;
+  font-weight:bold;
+  border-bottom:none;
+  text-decoration:none;
 }
 #menu-box a:hover{
-text-decoration:underline
+  text-decoration:underline
 }
 #menu-box a.here{
-background:#333;
-color:#fff
+  background:#333;
+  color:#fff
 }
 
-
-#menu-box-sub{
-background:#333;
-border:4px solid #83B4D8;
-border-top:none;
-
+#menu-box-sub{   
+  background:#333;
+  border:4px solid #83B4D8;
+  border-top:none;
 }
 #menu-box-sub a{
-display:block;
-padding:10px;
-float:left;
-color:#999;
-font-weight:bold;
-border-bottom:none;
-text-decoration:none;
-font-size:13px;
-margin-left:5px;
+  display:block;
+  padding:10px;
+  float:left;
+  color:#999;
+  font-weight:bold;
+  border-bottom:none;
+  text-decoration:none;
+  font-size:13px;
+  margin-left:5px;
 }
 #menu-box-sub a:hover{
-text-decoration:underline;
+  text-decoration:underline;
 }
 #menu-box-sub a.here{
-color:#FFFFCC;
-text-decoration:underline;
+  color:#FFFFCC;
+  text-decoration:underline;
 }
-
-
-
-
 
 .content{
-width:960px;
-float:left;
+  width:960px;
+  float:left;
 }
-
-
 
 label {
   float: left;
@@ -163,8 +154,8 @@ input.button, input.buttonGreen {
 }
 
 input.buttonGreen{
-	background: #64AD1B;
-	border-color: #E6F7D4 #3D6B11 #3D6B11 #E6F7D4;
+  background: #64AD1B;
+  border-color: #E6F7D4 #3D6B11 #3D6B11 #E6F7D4;
 }
 
 input.radio {
