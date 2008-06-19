@@ -1,69 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="Content-Language" content="zh-CN" />
-<?= $this->headMeta(); ?>
-<script type="text/javascript" src="/static/scripts/jquery.js"></script>
-<script type="text/javascript" src="/static/scripts/common.js"></script>
-<?= $this->headLink().$this->headStyle().$this->render("head.phtml").$this->headScript(); ?>
-<link rel="stylesheet" type="text/css" href="/static/styles/company/screen.css" media="screen" />
-<title>杭州浙江大学校友会 - 创业平台</title>
+<?= $this->render("head.phtml").$this->headLink().$this->headStyle().$this->render("default-head.phtml").$this->headScript(); ?>
 </head>
 
 <body>
-	<div id="wrap">
-		<div id="header">
-			<a href="" id="logo"></a>
-			<div id="passport">
-			<?php if ($this->sessCommon->login) { ?>
-			您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">我的创业</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
-			<?php }	else { ?>
-			<a href="/member/register/">注册</a>|<a href="/member/login/">登录</a>
-			<?php } ?>
-			</div>
-		</div>
-		<div id="menu">
-	
-			<a href="/info/">
-			  <span class="title">资讯</span>
-			  <span class="desc">了解最新校友与母校信息</span></a>
-	
-	
-			<a href="/help/">
-			  <span class="title">互助</span>
-			  <span class="desc style3">给予和得到来自校友的帮助</span></a>
-	
-			<a href="/class/">
-			  <span class="title">班级 <small>&amp;</small> 群组 <small>&amp;</small> 活动</span>
-			  <span class="desc">全力打造校友互动空间</span>
-			</a>
-	
-			<a href="/company/" class="here">
-			  <span class="title">校友 <small>&amp;</small> 企业</span>
-			  <span class="desc">校友人才库与商业合作平台</span>
-			</a>
-		 </div>
+<div id="wrap">
 
-	
-	<div id="container">
-		<?= $this->layout()->content; ?>
-	</div>
-	
-	<div id="footer">
-		<a href="/info/support/help">帮助</a> | 
-			<a href="/info/support/about">关于</a> | 
-			<a href="/info/support/contact_us">联系我们</a> | 
-			<a href="/info/support/privacy_claim">隐私声明</a> | 
-			<a href="http://www.zjuhz.com/old" target="_blank">旧版回顾</a> | 
-			<a href="http://ourzju.uu1001.com" target="_blank">校友论坛</a> 
-			<a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备06052510号</a> 
-			
-			杭州浙江大学校友会(筹)&copy;2008 
-			
-	</div>
-	
-</div>
-	
+    <div id="header">
+        <a href="/company/" id="logo"></a>
+        <div id="passport">
+        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">个人管理</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/company/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+        </div>
+    </div>
+
+    <div id="menu">	
+        <a href="/info/"><span class="title">资讯</span><span class="desc">了解最新校友与母校信息</span></a>
+        <a href="/help/"><span class="title">互助</span><span class="desc style3">给予和得到来自校友的帮助</span></a>
+        <a href="/class/"><span class="title">班级 <small>&amp;</small> 群组 <small>&amp;</small> 活动</span><span class="desc">全力打造校友互动空间</span></a>
+        <a href="/company/" class="here"><span class="title">创业 <small>&amp;</small> 企业</span><span class="desc">校友企业库与商业合作平台</span></a>
+    </div>
+
+    <div id="container"><?= $this->layout()->content; ?></div>
+
+    <?= $this->render("foot.phtml"); ?>
+
+</div>	
 </body>
+
 </html>
