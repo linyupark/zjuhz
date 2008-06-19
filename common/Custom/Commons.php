@@ -232,4 +232,35 @@ class Commons
     	    onerror=this.src="/static/images/default-face.jpg";>' : false
     	);
     }
+
+	/**
+	 * 获取公司文件夹路径(若缺少则自动创建)
+	 * 
+	 * @param integer $uid
+	 * @param string $cid
+     * @return string
+	 */
+    static function getCompanyFolder($uid, $cid)
+    {
+    	$dir = '..'.self::getUserFolder($uid, 'company')."{$cid}/";
+
+    	(!file_exists($dir) ? (mkdir($dir, 0777) ? chmod($dir, 0777) : '') : '');
+
+	    return $dir;
+    }
+
+	/**
+	 * 获取企业头像
+	 * 
+	 * @param integer $uid
+	 * @param string $cid
+	 * @param string $type(small-30*30/medium-54*54/large-200*200/original/square)
+     * @return string or boolean
+	 */
+    static function getCompanyFace($uid, $cid, $type='medium')
+    {
+    	return (0 < $uid && 10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($uid, $cid).$type.'.jpg" 
+    	    onerror=this.src="/static/images/default-face.jpg";>' : false
+    	);
+    }
 }
