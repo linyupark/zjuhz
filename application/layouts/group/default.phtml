@@ -13,19 +13,41 @@
 
 <body>
 	<div id="header" class="container">
-		<div class="span-8">
+		<div class="span-11">
 			<a href="/"><img src="/static/images/group/zjuhz.gif" alt="群组" /></a>
 		</div>
-		<div class="span-16 last">
-			
+		<div class="span-13 last">
+			<div id="passport" class="hrefspan-8 push-1 last">
+				<?php if ($this->passport()): ?>
+				您好！<?= $this->passport('realName') ?>，
+				<a href="/group/my">我的群组</a>
+				<a href="/member/my/">我的账号</a>
+				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
+				<?php else: ?>
+				<a href="/member/register/">注册</a>
+				<a href="/member/login/">登陆</a>
+				<?php endif; ?>
+			</div>
+			<div class="global-nav span-13 last hrefspan-8">
+				<a href="/member/">校友</a>
+				<a href="/info/">资讯</a>
+				<a href="/help/">互助</a>
+				<a href="/class/">班级</a>
+				<a href="/group" class="here">群组</a>
+				<a href="#">活动</a>
+				<a href="#">相册</a>
+			</div>
 		</div>
+		
+			<?= $this->layout()->nav; ?>
+		
 	</div>
 	<div id="container" class="container">
 		<?= $this->layout()->sidebar; ?>
 		<?= $this->layout()->content; ?>
 	</div>
 	
-	<div id="footer" class="container txtr hrefspan-8">
+	<div id="footer" class="container txtr hrefspan-8 pd10">
 		<hr />
 		<a href="/info/support/help">帮助</a>
 		<a href="/info/support/about">关于</a>
@@ -36,10 +58,19 @@
 		<a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备06052510号</a>
 		杭州浙江大学校友会(筹)&copy;2008 
 	</div>
+	<hr class="space" />
 	<script type="text/javascript">
 		$(document).ready(function(){ 
 			$('img[src$="png"]').parent().pngFix(); 
-		}
+			var controller = $('div.sub-nav').attr('rel');
+			$('div.sub-nav a[href*="'+controller+'"]').addClass('here');
+			$('input[type="text"]').focus(function(){
+				$(this).css('border','1px solid #666');
+			});
+			$('input[type="text"]').blur(function(){
+				$(this).css('border','1px solid #bbb');
+			});
+		});
 	</script>
 </body>
 </html>

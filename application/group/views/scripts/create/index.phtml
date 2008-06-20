@@ -1,0 +1,126 @@
+<script type="text/javascript" src="/static/scripts/PCASClass.js"></script>
+<div class="span-24 last oneCol">
+	<h3 class="prepend-1 last"><?= Cmd::icon('group_add.png') ?> 创建群组 (消耗100群组积分)</h3>
+	<hr class="hr-1" />
+	<form class="prepend-3" id="groupForm" method="post" onsubmit="return doCreate()">
+		<p>
+		<label>群组名称<br />
+		<input class="title" type="text" name="name" style="width:530px;" /></label>
+		</p>
+		<p>
+		<label>个性化网址<br />
+		http://www.zjuhz.com/group/home/name/ <input class="text" type="text" name="url" /></label>
+		</p>
+		<p>
+		<label>群组介绍<br />
+		<textarea name="intro" class="text" style="width:530px; height:120px;"></textarea></label><br />
+		<span class="quiet">限200字以内</span>
+		</p>
+		<p>
+		<label>群组分类</label>
+		<ul class="sort span-14">
+			<?php foreach($this->sorts as $k=>$v): ?>
+			<li><input name="sort" id="sel_cate_<?= $k ?>" value="<?= $k ?>" type="radio"><label for="sel_cate_<?= $k ?>"><?= $v ?></label></li>
+			<?php endforeach; ?>
+		</ul>
+		<span id="info_11" class="hide ext span-12">
+			<label>企业信息</label>
+			<ul class="con">
+				<li>所在地域：
+					<select name="corp_province"></select>
+					<select name="corp_city"></select>
+				</li>
+				<li>所属行业：<select name="corp_profession">
+					<option value="">请选择</option>
+					<?php foreach($this->profession as $k=>$v): ?>
+					<option value="<?= $k ?>"><?= $v ?></option>
+					<?php endforeach ?>
+					</select>
+				</li>
+				<li>企业名称：<input name="company" value="" class="text" type="text"></li>
+			</ul>
+		</span>
+		<div id="info_12" class="hide ext span-12">
+			<label>职业信息</label>
+			<ul class="con">
+				<li>所在地域：
+					<select name="job_province"></select>
+					<select name="job_city"></select>
+				</li>
+				<li>所属行业：<select name="job_profession">
+					<option value="">请选择</option>
+					<?php foreach($this->profession as $k=>$v): ?>
+					<option value="<?= $k ?>"><?= $v ?></option>
+					<?php endforeach ?>
+					</select>
+				</li>
+				<li>所属职业：<select name="job_occupation">
+					<option value="">请选择</option>
+					<?php foreach($this->job as $k=>$v): ?>
+					<option value="<?= $k ?>"><?= $v ?></option>
+					<?php endforeach; ?>
+				</select></li>
+			</ul>
+		</div>
+		<div id="info_13" class="hide ext span-12">
+			<label>班级信息</label>
+			<ul class="con">
+				<li>入学年份：<input type="text" class="text" name="class_year" /> <span class="quiet">(格式:2008)</span></li>
+				<li>学院名称：
+				<select name="class_college">
+				<option value="">--- 请选择学院 ---</option>
+				<?php foreach($this->college as $k=>$v): ?>
+				<option value="<?= $k ?>"><?= $v ?></option>
+				<?php endforeach ?>
+				</select>
+				</li>
+			</ul>
+		</div>
+		<div id="info_14" class="hide ext span-12">
+			<label>地域信息</label>
+			<ul class="con">
+				<li>出生地：
+				<select name="born_province"></select>
+				<select name="born_city"></select></li>
+			</ul>
+		</div>
+		</p>
+		<p style="clear:both; padding-top:10px;">
+			<label>群组标签<br />
+			<input class="title" type="text" name="tags" style="width:530px;" /></label><br />
+			<span class="quiet">标签之间请用空格分隔，如：杭州 西湖 旅游</span>
+		</p>
+		<p>
+			<label>群组类型<br />
+			<ul class="con">
+				<li><input id="open_1" name="private" value="1" type="radio"><label for="open_1">公开<span class="quiet prepend-1">(任何人都可以加入群组)</span></label></li>
+				<li><input id="open_2" name="private" value="2" type="radio"><label for="open_2">半公开<span class="quiet prepend-1">(任何人都可以申请加入，需要获得管理员批准)</span></label> </li>
+				<li><input id="open_3" name="private" value="3" type="radio"><label for="open_3">私密<span class="quiet prepend-1">(需要得到该群组成员邀请，方可加入)</span></label> </li>
+			</ul></label>
+		</p>
+		<p class="span-14"><input style="width:100%" class="btn" type="submit" value="信息已经完整，开始创建" /></p>
+		<span id="tips"></span>
+		<hr class="space" />
+	</form>
+</div>
+
+<script type="text/javascript">
+	$('.sort input[type="radio"]').bind('click',function(){
+		var sort_id = $(this).attr('value');
+		$('.hide').hide();
+		$('#info_'+sort_id).css('display','block');
+	});
+	new PCAS("corp_province","corp_city");
+	new PCAS("job_province","job_city");
+	new PCAS("born_province","born_city");
+	new PCAS("local_province","local_city");
+	function doCreate()
+	{
+		$('#tips').html('数据审核中...');
+		$.post('/group/create/do', $('#groupForm').fastSerialize(), function(html){
+			$('#tips').html(html);
+			window.scroll(0,1000);
+		});
+		return false;
+	}
+</script>
