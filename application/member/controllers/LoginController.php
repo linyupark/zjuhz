@@ -72,7 +72,7 @@ class LoginController extends Zend_Controller_Action
 
 					// 名片缓存
 					CacheLogic::setOptions('cache_dir', Commons::getUserCache($result['uid']));
-					CacheLogic::init()->cardSave($this->_sessCommon->login);
+					CacheLogic::init()->cardSave($result);
 
 					echo 'redirect'; // 请求ajax跳转
 				}
