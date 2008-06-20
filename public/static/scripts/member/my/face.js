@@ -21,9 +21,9 @@ function doupload() {
     .ajaxComplete(function(){ $(this).hide(); });
 
     $.ajaxFileUpload ({
-		url:"/member/my/doface/", 
-        secureuri:false, 
-        fileElementId:"fileData", 
+		url: "/member/my/doface/", 
+        secureuri: false, 
+        fileElementId: "fileData", 
         dataType: "json", 
         success: function (data, status) { goToUrl("reload", 0); }, 
         error: function (data, status, e) { goToUrl("reload", 0); }
