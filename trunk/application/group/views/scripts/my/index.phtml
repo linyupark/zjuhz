@@ -1,0 +1,80 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <div class="oneCol pdd10 ">
+        <table class="span-18 last">
+            <tr>
+                <td class="pd10" width="10%"><?= Commons::getUserFace($this->passport('uid')) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    欢迎您：<strong><?= $this->passport('realName') ?></strong>
+                    <select onchange="changeState(this.value)">
+                        <option value="0" <?= $this->state=='0'?'selected="selected"':'' ?>>在线</option>
+                        <option value="1" <?= $this->state=='1'?'selected="selected"':'' ?>>离开</option>
+                        <option value="2" <?= $this->state=='2'?'selected="selected"':'' ?>>隐身</option>
+                    </select>
+                    <span class="f12">
+                        (群组积分:<?= UserModel::fetch($this->passport('uid'), 'group_coin') ?>)
+                        <a href="">如何获取？</a>
+                    </span>
+                    <br />
+                    <a href="/member/my/face/">更换头像</a>
+                    <a href="/group/my/profile">我的群组资料</a>
+                </td>
+            </tr>
+        </table>
+        <div class="extInline mglf10">
+            <strong class="f14">我的群组</strong>
+            <span class="quiet">
+            您已创建<?= GroupModel::createNumByUid($this->passport('uid')) ?>个群组，
+            管理<?= Cmd::managerNum() ?>个群组，
+            总共加入<?= Cmd::joinNum() ?>个群组
+            </span>
+            <span class="prepend-1 hrefspan-8">
+                <?= Cmd::icon('arrow_refresh.png') ?>
+                <a class="f14" href="/group/my?do=refresh">更新我的群组信息</a>
+                <?= Cmd::icon('asterisk_yellow.png') ?>
+                <a class="f14" href="/group/create">创建新群组</a>(消耗100积分)
+            </span>
+        </div>
+        <?php foreach(Zend_Registry::get('sessGroup')->my as $num => $val): ?>
+        <table class="mglf10 span-18 last dashBorder">
+            <tr>
+                <td class="pd10" width="10%"><?= Cmd::groupIcon($val['group_id']) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $val['name'] ?></a>
+                    <span class="quiet">
+                        成员数：<a href=""><?= $val['member_num'] ?></a>
+                        话题数：<a href=""><?= $val['topic_num'] ?></a>
+                        照片数：<a href=""><?= $val['photo_num'] ?></a>
+                    </span>
+                    <p class="f12">
+                    <?php if($val['is_manager'] == 1): //是否显示管理连接 ?>
+                    <a href="/group/manage?gid=<?= $val['group_id'] ?>">管理</a>
+                    <?php endif; ?>
+                    <span>
+                        <?php if($val['update_time'] == null): //是否有活跃内容 ?>
+                        群组还没有任何动静~ 
+                        <?php else: ?>
+                        最后骚动时间：<?= Lp_Date::timespan($val['update_time']) ?> 前
+                        <?php endif; ?>
+                    </span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    function changeState(val)
+    {
+        $.post('/group/my/state', {val:val}, function(html){
+            $.facebox(html);
+        });
+    }
+</script>
+<hr class="space" />

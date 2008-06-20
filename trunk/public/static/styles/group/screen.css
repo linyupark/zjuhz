@@ -1,28 +1,44 @@
 @CHARSET "UTF-8";
-@import url("default/reset.css");
-@import url("default/grid.css");
+@import url("reset.css");
 @import url("default/typography.css");
 @import url("default/forms.css");
+@import url("default/grid.css");
+@import url("default/custom.css");
 
 body{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
 	margin:0; padding:0;
 	background:#fff url('/static/images/group/body_bg.gif') repeat-x top;
 }
 
-img{
-	border:none;
-}
+h1{ font-size:22px; }
+h2{ font-size:18px; }
+h3{ font-size:14px; }
+td{ line-height:150%; }
+img{ border:none; }
 
-.txtr{
-	text-align:right;
-}
-.txtl{
-	text-align:left;
-}
-.txtc{
-	text-align:center;
-}
+p{ padding:10px 0 5px 0; }
+li{ margin-top:5px; }
+strong{ font-weight:bold; }
+.txtr{ text-align:right;}
+.txtl{text-align:left;}
+.txtc{text-align:center;}
+td.vm{ vertical-align:middle; }
+.hrefspan-8 a{margin-right:8px;}
 
-.hrefspan-8 a{
-	margin-right:8px;
-}
+.errMsg th{ padding:10px; color:#CC0033 }
+.sucMsg th{ padding:10px; color:#649E0A }
+.errMsg td,.sucMsg td{ padding:3px 10px; }
+.errMsg li{ margin-left:20px; list-style-type:square; }
+
+.pd10{ padding:10px; }
+.pdlf10{ padding:0 10px; }
+.pdu10{ padding-top:10px; }
+.pdd10{ padding-bottom:10px; }
+.mglf10{ margin:0 10px; }
+.mgu10{ margin-top:10px; }
+.mgd10{ margin-bottom:10px; }
+.mg10{ margin:10px; }
+
+.f14{ font-size:14px; }
+.f12{ font-size:12px; }

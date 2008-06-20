@@ -1,24 +1,26 @@
+<hr class="space" />
 <p class="notice large">抱歉~您需要登录后才能继续刚才的操作。<a href="/member/register/">没有帐号，需要注册</a></p>
-<form method="post" id="relogin_form" onsubmit="return relogin();">
-	<table class="push-3">
+<form class="prepend-7" method="post" id="relogin_form" onsubmit="return relogin();">
+	<table>
 		<tr>
-			<td class="txtr">登录账号：</td>
+			<td class="txtr vm">登录账号：</td>
 			<td><input class="text" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></td>
 		</tr>
 		<tr>
-			<td class="txtr">登录密码：</td>
+			<td class="txtr vm">登录密码：</td>
 			<td><input class="text" name="pswd" type="password" maxlength="16" /></td>
 		</tr>
 		<tr>
-			<td class="txtr">记住我的账号：</td>
+			<td class="txtr vm">记住我的账号：</td>
 			<td><input id="alive" type="checkbox" checked="checked" value="0" name="alive" /></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input class="btn" id="btnLogin" type="submit" value="登录" /></td>
+			<td><p class="txtr"><input style="width:100%" class="btn" id="btnLogin" type="submit" value="登 录" /></p></td>
 		</tr>
 	</table>
 </form>
+<br /><br />
 <script type="text/javascript">
 	// 会员登录
 	function relogin() {

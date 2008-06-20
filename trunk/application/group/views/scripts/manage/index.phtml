@@ -1,0 +1,145 @@
+<div class="oneCol span-24 last">
+    <table width="100%">
+            <tr>
+                <td class="pd10" width="5%"><?= Cmd::groupIcon($this->gid) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    <a href="/group/home?gid=<?= $this->gid ?>">
+                        <strong><?= $this->groupInfo['name'] ?></strong>
+                    </a>
+                    <a href="/group/home/name/<?= $this->groupInfo['url'] ?>">
+                        http://www.zjuhz.com/group/home/name/<?= $this->groupInfo['url'] ?>
+                    </a>
+                    <p class="f12">
+                        <?= stripcslashes($this->escape($this->groupInfo['intro'])) ?>
+                    </p>
+                </td>
+            </tr>
+        </table>
+</div>
+
+<div class="span-24 last">
+    <!-- 边栏 //////////////////////////////////////////// -->
+    <div class="span-5">
+        <div class="sideBar mgu10">
+            <?= $this->managebar($this->gid, 'manage') ?>
+        </div>
+        <div class="sideBar mgu10">
+            <?= $this->groupbar($this->groupInfo) ?>
+        </div>
+        <div class="sideBar mgu10">
+            <?= $this->clickbar($this->groupInfo) ?>
+        </div>
+    </div>
+    <!--  //////////////////////////////////////////// 边栏 -->
+    <div class="span-19 last mgu10">
+        <div class="oneCol">
+            <?= $this->managetab($this->action_name) ?>
+            <form class="prepend-1" id="groupForm" method="post" onsubmit="return doModify()">
+            <p>
+            <label>群组名称<br />
+            <input value="<?= $this->groupInfo['name'] ?>" class="title" type="text" name="name" style="width:530px;" /></label>
+            </p>
+            <p>
+            <label>群组介绍<br />
+            <textarea name="intro" class="text" style="width:530px; height:120px;"><?= $this->groupInfo['intro'] ?></textarea></label><br />
+            <span class="quiet">限200字以内</span>
+            </p>
+            <p>
+            <label>群组分类</label>
+            <ul class="sort span-14">
+                <?php foreach($this->sorts as $k=>$v): ?>
+                <li><input name="sort" id="sel_cate_<?= $k ?>" value="<?= $k ?>" type="radio"><label for="sel_cate_<?= $k ?>"><?= $v ?></label></li>
+                <?php endforeach; ?>
+            </ul>
+            <span id="info_11" class="hide ext span-12">
+                <label>企业信息</label>
+                <ul class="con">
+                    <li>所在地域：
+                        <select name="corp_province"></select>
+                        <select name="corp_city"></select>
+                    </li>
+                    <li>所属行业：<select name="corp_profession">
+                        <option value="">请选择</option>
+                        <?php foreach($this->profession as $k=>$v): ?>
+                        <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach ?>
+                        </select>
+                    </li>
+                    <li>企业名称：<input name="company" value="" class="text" type="text"></li>
+                </ul>
+            </span>
+            <div id="info_12" class="hide ext span-12">
+                <label>职业信息</label>
+                <ul class="con">
+                    <li>所在地域：
+                        <select name="job_province"></select>
+                        <select name="job_city"></select>
+                    </li>
+                    <li>所属行业：<select name="job_profession">
+                        <option value="">请选择</option>
+                        <?php foreach($this->profession as $k=>$v): ?>
+                        <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach ?>
+                        </select>
+                    </li>
+                    <li>所属职业：<select name="job_occupation">
+                        <option value="">请选择</option>
+                        <?php foreach($this->job as $k=>$v): ?>
+                        <option value="<?= $k ?>"><?= $v ?></option>
+                        <?php endforeach; ?>
+                    </select></li>
+                </ul>
+            </div>
+            <div id="info_13" class="hide ext span-12">
+                <label>班级信息</label>
+                <ul class="con">
+                    <li>入学年份：<input type="text" class="text" name="class_year" /> <span class="quiet">(格式:2008)</span></li>
+                    <li>学院名称：
+                    <select name="class_college">
+                    <option value="">--- 请选择学院 ---</option>
+                    <?php foreach($this->college as $k=>$v): ?>
+                    <option value="<?= $k ?>"><?= $v ?></option>
+                    <?php endforeach ?>
+                    </select>
+                    </li>
+                </ul>
+            </div>
+            <div id="info_14" class="hide ext span-12">
+                <label>地域信息</label>
+                <ul class="con">
+                    <li>出生地：
+                    <select name="born_province"></select>
+                    <select name="born_city"></select></li>
+                </ul>
+            </div>
+            </p>
+            <p style="clear:both; padding-top:10px;">
+                <label>群组标签<br />
+                <input class="title" value="<?= $this->groupInfo['tags'] ?>" type="text" name="tags" style="width:530px;" /></label><br />
+                <span class="quiet">标签之间请用空格分隔，如：杭州 西湖 旅游</span>
+            </p>
+            <p>
+            <input style="width:530px;" class="btn" type="submit" value="确定信息正确，保存" />
+            </p>
+            <hr class="space">
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/scripts/PCASClass.js"></script>            
+<script type="text/javascript">
+	$('.sort input[type="radio"]').bind('click',function(){
+		var sort_id = $(this).attr('value');
+		$('.hide').hide();
+		$('#info_'+sort_id).css('display','block');
+	});
+	new PCAS("corp_province","corp_city");
+	new PCAS("job_province","job_city");
+	new PCAS("born_province","born_city");
+	new PCAS("local_province","local_city");
+	function doModify()
+	{
+		
+		return false;
+	}
+</script>
