@@ -167,7 +167,7 @@ class Commons
     static function getUserFolder($uid, $sub='')
     {
     	// 用户文件夹下各子文件夹
-    	$subArray = array('' => '', '*' => '', 'albums' => 'albums/', 'cache' => 'cache/', 'company' => 'company/');
+    	$subArray = array('' => '', '*' => '', 'albums' => 'albums/', 'cache' => 'cache/');
 
     	if (0 < $uid && array_key_exists($sub, $subArray))
     	{
@@ -215,7 +215,7 @@ class Commons
 	 */
     static function getUserCache($arg)
     {
-    	return (0 < $arg ? $_SERVER['DOCUMENT_ROOT'].Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
+    	return (0 < $arg ? DOCUMENT_ROOT.Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**
@@ -234,32 +234,61 @@ class Commons
     }
 
 	/**
-	 * 获取公司文件夹路径(若缺少则自动创建)
+	 * 获取企业文件夹路径(若缺少则自动创建)
 	 * 
-	 * @param integer $uid
 	 * @param string $cid
+	 * @param string $sub
      * @return string
 	 */
-    static function getCompanyFolder($uid, $cid)
+    static function getCompanyFolder($cid, $sub='')
     {
-    	$dir = '..'.self::getUserFolder($uid, 'company')."{$cid}/";
+    	// 企业文件夹下各子文件夹
+    	$subArray = array('' => '', 'albums' => 'albums/', 'cache' => 'cache/');
 
-    	(!file_exists($dir) ? (mkdir($dir, 0777) ? chmod($dir, 0777) : '') : '');
+    	if (10 == strlen($cid) && array_key_exists($sub, $subArray))
+    	{
+    		$folder      = "/static/companies/".substr($cid, 0, 1)."/{$cid}/{$subArray[$sub]}";
+            $folderArray = explode('/', $folder);
 
-	    return $dir;
+            if(!file_exists("..{$folder}"))
+	        {
+	        	foreach ($folderArray as $value)
+                {
+                	$path .= "{$value}/";
+            	    $dir  = "..$path";
+
+            	    (0 <= $value && !file_exists($dir) ? (mkdir($dir, 0777) ? 
+            	        chmod($dir, 0777) : '') : '' );
+		        }
+	        }
+
+	        return $folder;
+    	}
+
+    	return false;
+    }
+
+	/**
+	 * 获取企业缓存文件夹路径(传企业编号或企业根目录)
+	 * 
+	 * @param integer | string $arg
+     * @return string
+	 */
+    static function getCompanyCache($arg)
+    {
+    	return (10 == strlen($arg) ? DOCUMENT_ROOT.Commons::getCompanyFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**
 	 * 获取企业头像
 	 * 
-	 * @param integer $uid
 	 * @param string $cid
 	 * @param string $type(small-30*30/medium-54*54/large-200*200/original/square)
      * @return string or boolean
 	 */
-    static function getCompanyFace($uid, $cid, $type='medium')
+    static function getCompanyFace($cid, $type='medium')
     {
-    	return (0 < $uid && 10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($uid, $cid).$type.'.jpg" 
+    	return (10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($cid).$type.'.jpg" 
     	    onerror=this.src="/static/images/default-face.jpg";>' : false
     	);
     }
