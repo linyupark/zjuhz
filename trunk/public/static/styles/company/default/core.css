@@ -39,7 +39,7 @@ a img {border: 0;}
 
 /* layout-------------------------------- */
 #wrap{
-	position: relative;
+	/* position: relative; */
 	width:960px;
 	margin:0 auto;
 }

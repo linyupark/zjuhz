@@ -35,7 +35,7 @@ a:hover {
 #passport td{ padding:5px 9px;}
 
 #wrap{
-  position: relative;
+  /* position: relative; */
   width:960px;
   margin:0 auto;
   padding-top:35px;
