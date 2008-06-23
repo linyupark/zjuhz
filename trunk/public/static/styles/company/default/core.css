@@ -1,4 +1,4 @@
-/* element------------------------------- */
+/* element */
 
 body {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
@@ -12,8 +12,7 @@ p,td,th{ line-height:150%; }
 small{ font-size:9px; }
 strong{ font-weight:bold }
 
-
-/* class ------------------------------ */
+/* class */
 
 .txtr{ text-align:right}
 .dark{color: #353E47;}
@@ -37,7 +36,7 @@ a:hover {color: #111; text-decoration:underline}
 
 a img {border: 0;}
 
-/* layout-------------------------------- */
+/* layout */
 #wrap{
 	/* position: relative; */
 	width:960px;
