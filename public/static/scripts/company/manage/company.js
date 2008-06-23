@@ -101,7 +101,7 @@ function dobiz() {
 function dologo() {
 	$("#btnLogo").attr("disabled", true);
 
-	$("#loading")
+    $("#loading")
     .ajaxStart(function(){ $(this).show(); })
     .ajaxComplete(function(){ $(this).hide(); });
 
@@ -112,7 +112,7 @@ function dologo() {
         dataType: "json", 
         success: function (data, status) { goToUrl("reload", 0); }, 
         error: function (data, status, e) { goToUrl("reload", 0); }
-	})
+    })
 
     return false;
 }
