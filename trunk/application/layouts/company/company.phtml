@@ -16,9 +16,9 @@
         </table>
 	
         <div id="banner">
-            <img src="" class="floatLeft" height="100" />
-            <h1><?= $this->company['name']; ?></h1>
-            <p>独立地址：<a href="">http://</a></p>
+            <p class="floatLeft"><?= $this->Companyface($this->dataCid, 'large'); ?></p>
+            <h1><?= $this->dataCompany['name']; ?></h1>
+            <p><a href="http://www.zjuhz.com/company/detail/index/cid/<?= $this->dataCid; ?>/" title="<?= $this->dataCompany['name']; ?>">http://www.zjuhz.com/company/detail/index/cid/<?= $this->dataCid; ?>/</a></p>
         </div>
     </div>
 
