@@ -1,39 +1,56 @@
 <?php
 
-date_default_timezone_set('Asia/Shanghai');
+/**
+ * @category   zjuhz.com
+ * @package    company
+ * @copyright  Copyright(c)2008 zjuhz.com
+ * @author     wangyumin
+ * @version    Id:bootstrap.php
+ */
+
+
+/** set error_reporting */
+//error_reporting('ALL');
+
+/** set gzip output */
+//(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') ? ob_start('ob_gzhandler') : ob_start());
 
 /** set_include_path */
-set_include_path(get_include_path().
-					 PATH_SEPARATOR.'../../common/Custom/'.
-					 PATH_SEPARATOR.'../../application/company/models/');
+set_include_path(get_include_path().PATH_SEPARATOR.
+                 '../../common/Custom/'.PATH_SEPARATOR.
+                 '../../application/company/interlayers/'.PATH_SEPARATOR.
+                 '../../application/company/models/');
 
-/** Zend_Controller_Front */
-require_once('Zend/Controller/Front.php');
-
+/** Zend_Loader */
+require_once('Zend/Loader.php');
 /** Zend_Loader autoloader callback */
 Zend_Loader::registerAutoload();
 
-$iniCompany = new Zend_Config_Ini('Ini/Company.ini');
-$iniDb = new Zend_Config_Ini('Ini/Db.ini');
-$params = $iniDb->default->params->toArray();
-$params['dbname'] = 'zjuhz_company';
-$dbCompany = Zend_Db::factory($iniDb->default->adapter, $params);
-Zend_Registry::set('dbCompany', $dbCompany);
-Zend_Registry::set('iniCompany', $iniCompany);
-Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));
-Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
+/** Config */
+Zend_Registry::set('iniCommon', new Zend_Config_Ini('../../common/Ini/Config.ini'));
+Zend_Registry::set('iniCompany', new Zend_Config_Ini('../../common/Ini/Company.ini'));
+
+/** Session */
+Zend_Registry::set('sessCommon', new Zend_Session_Namespace('common'));
 Zend_Registry::set('sessCompany', new Zend_Session_Namespace('company'));
 
-/* Layout */
-Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/company', 'layout' => 'default'));
+/** ACL */
+Zend_Registry::set('aclCompany', new Zend_Acl());
 
-define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
+/** constants */
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('REQUEST_TIME', $_SERVER['REQUEST_TIME']);
 
+define('DOCUMENT_CACHE', "../../cache/company/");
+define('USER_UID', Zend_Registry::get('sessCommon')->login['uid']);
+define('USER_ROOT', DOCUMENT_ROOT.Commons::getUserFolder(USER_UID, '*'));
+define('USER_CACHE', Commons::getUserCache(USER_ROOT));
 
 /** run */
-$info_front = Zend_Controller_Front::getInstance();
-$info_front->setDefaultModule('company')
-           ->throwExceptions(true)
-           ->registerPlugin(new companyAcl())
-           ->setControllerDirectory('../../application/company/controllers/')
-           ->dispatch();
+Zend_Controller_Front::getInstance()
+    ->registerPlugin(new CompanyPreAjaxPlugin())
+    ->registerPlugin(new CompanyAclPlugin())
+	->setDefaultModule('company')
+    ->setControllerDirectory('../../application/company/controllers/')
+    ->throwExceptions(false)
+    ->dispatch();

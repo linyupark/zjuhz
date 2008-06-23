@@ -1,12 +1,12 @@
 <div id="menu-box">
-	<a href="?m=mycompany" <?= $this->mtab == 'mycompany' ? 'class="here"':'' ?>>我的企业</a>
-	<a href="?m=myfav" <?= $this->mtab == 'myfav' ? 'class="here"':'' ?>>我的收藏</a>
-	<a href="?m=myword" <?= $this->mtab == 'myword' ? 'class="here"':'' ?>>我的留言</a>
+    <a href="/company/my/company/" <?= 'company' == $this->action ? 'class="here"' : '' ?>>我的企业</a>
 </div>
+
 <div id="menu-box-sub">
-	<?php if($this->mtab == 'mycompany'): ?>
-	<a href="?m=mycompany&s=index" <?= $this->stab == 'index' ? 'class="here"':'' ?>>申请新企业</a>
-	<a href="?m=mycompany&s=wait" <?= $this->stab == 'wait' ? 'class="here"':'' ?>>待审核企业</a>
-	<a href="?m=mycompany&s=done" <?= $this->stab == 'done' ? 'class="here"':'' ?>>已审核企业</a>
-	<?php endif; ?>
+    <?php if('company' == $this->action): ?>
+        <a href="/company/my/company/type/join/" <?= 'join' == $this->type ? 'class="here"' : '' ?>>申请加入</a>
+        <a href="/company/my/company/type/valid/" <?= 'valid' == $this->type ? 'class="here"' : '' ?>>已发布上网(<?= $this->sessCompany->login['valid']; ?>)</a>
+        <a href="/company/my/company/type/auditing/" <?= 'auditing' == $this->type ? 'class="here"' : '' ?>>审核中(<?= $this->sessCompany->login['auditing']; ?>)</a>
+        <a href="/company/my/company/type/untread/" <?= 'untread' == $this->type ? 'class="here"' : '' ?>>未通过审核(<?= $this->sessCompany->login['untread']; ?>)</a>
+    <?php endif; ?>
 </div>

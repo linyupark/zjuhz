@@ -1,0 +1,35 @@
+<table class="table" cellpadding="0" cellspacing="0" style="background:#fff; border:none;" width="100%">
+    <tr>
+        <th width="10%">企业标志</th>
+        <th width="40%">企业名称</th>
+        <th width="15%">加入时间</th>
+        <th width="10%">总浏览量</th>				
+        <th width="10%">站内推荐</th>
+        <th width="15%">选项</th>		
+    </tr>
+<?php foreach ($this->companies as $value) { ?>
+    <tr>
+        <td><a href="/company/manage/login/cid/<?= $value['cid']; ?>/?redirect=/company/manage/company/type/logo/" title="修改标志图片"><?= $this->Companyface($value['cid']); ?></a></td>
+        <td><a href="/company/manage/login/cid/<?= $value['cid']; ?>/" title="进入企业管理" style="word-break:break-all;"><?= $value['name']; ?></a></td>
+        <td><?= date('Y-m-d', strtotime($value['regTime'])); ?></td>
+		<td><?= $value['pageview']; ?> 次</td>
+		<td><?= ($value['recmd'] ? '已推荐' : '未推荐'); ?></td>
+        <td>
+		<a href="/company/detail/index/cid/<?= $value['cid']; ?>/" title="浏览企业主页" target="_blank"><img src="/static/images/icon/mini_icon_csdnnavigation.gif">浏览主页</a><br />
+		<a href="/company/manage/login/cid/<?= $value['cid']; ?>/" title="进入企业管理"><img src="/static/images/icon/folder.gif">企业管理</a>
+		</td>
+    </tr>
+<?php } ?>
+</table>
+
+<?php if (!$this->companies) { ?>
+<table width="100%" border="0" cellspacing="0" cellpadding="1" class="tx_box">
+    <tr>
+        <td width="60" rowspan="2"><img src="/static/images/icon/edit-b.gif" /></td>
+        <td class="tx_title"><b>共有 0 个企业资料已发布上网！</td>
+    </tr>
+    <tr>
+        <td class="tx_content"><a href="/company/my/company/type/join/">现在就去提交新的企业加入申请 >></a></td>
+    </tr>
+</table>
+<?php } ?>

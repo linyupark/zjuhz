@@ -1,76 +1,91 @@
 <?php
 
 /**
- * IndexController
- * 
- * @author
- * @version 
+ * @category   zjuhz.com
+ * @package    company
+ * @copyright  Copyright(c)2008 zjuhz.com
+ * @author     wangyumin
+ * @version    Id:IndexController.php
  */
 
 
-class IndexController extends Zend_Controller_Action {
+/**
+ * 校友企业-主控程序
+ */
+class IndexController extends Zend_Controller_Action
+{
+	/**
+     * 公用Session
+     *
+     * @var object
+     */
+	private $_sessCommon = null;
 
+	/**
+     * 项目Session
+     *
+     * @var object
+     */
+	private $_sessCompany = null;
+
+	/**
+     * 项目模块配置
+     *
+     * @var object
+     */
+	private $_iniCompany = null;
+
+	/**
+     * 初始化
+     *
+     * @return void
+     */
 	public function init()
 	{
-		$this->view->sessCommon = Zend_Registry::get('sessCommon');
-		$this->view->title = "企业留言本";
-		$this->view->company_name = "xxxx企业";
-		$this->view->company_logo = "/static/users/...";
-		$this->view->company_url = "http://xxxx.cccc.mmm";
+		$this->_sessCommon  = Zend_Registry::get('sessCommon');
+		$this->_sessCompany = Zend_Registry::get('sessCompany');
+		$this->_iniCompany  = Zend_Registry::get('iniCompany');
+
+		$this->view->sessCommon = $this->_sessCommon;
 	}
 
+	/**
+     * company验证码
+     * 
+     * @return void
+     */
+	public function verifyAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
+		ImageHandle::verify('common');
+	}
+
+    /**
+     * 弹窗信息提示
+     * 
+     * @return void
+     */
+    public function messageAction()
+    {
+		$this->_helper->layout->disableLayout();
+
+		$this->view->message = $this->_sessCompany->message;
+    }
+
+	/**
+     * 校友企业首页
+     * 
+     * @return void
+     */
 	public function indexAction()
 	{
-		
-	}
-	
-	# 企业展示页面
-	public function showAction()
-	{
-		$this->_helper->layout->setLayout('show'); // 更换使用的布局
-	}
-	
-	# 留言本
-	public function guestbookAction()
-	{
-		$this->_helper->layout->setLayout('show');
-	}
-	
-	# 行业分类
-	public function tradeAction()
-	{
-	}
-	
-	# 搜索结果页
-	public function searchAction()
-	{
-		
-	}
-	
-	# 个人平台管理
-	public function myAction()
-	{
-		$request = $this->getRequest();
-		$mtab = $request->getParam('m', 'mycompany');
-		$stab = $request->getParam('s', 'index');
-		$this->view->mtab = $mtab;
-		$this->view->stab = $stab;
-		$this->_helper->layout->setLayout('admin');
-		$this->getResponse()->insert('nav', $this->view->render('my-nav.phtml'));
-		$this->render($mtab.'-'.$stab);
-	}
-	
-	# 管理页
-	public function adminAction()
-	{
-		$request = $this->getRequest();
-		$mtab = $request->getParam('m', 'admininfo');
-		$stab = $request->getParam('s', 'index');
-		$this->view->mtab = $mtab;
-		$this->view->stab = $stab;
-		// 菜单判断部分参考个人平台的 my-nav
-		$this->_helper->layout->setLayout('admin');
-		$this->getResponse()->insert('nav', $this->view->render('admin-nav.phtml'));
-		$this->render($mtab.'-'.$stab);
+		$this->view->headTitle($this->_iniCompany->head->titleIndex);
+		//$this->view->headScript()->appendFile('/static/scripts/company/index/index.js');
+
+		$this->view->rand     = CorpCompanyLogic::init()->selectRandList(20);
+		$this->view->join     = CorpCompanyLogic::init()->selectJoinAll();
+		$this->view->industry = CorpIndustryLogic::init()->selectPairs();
 	}
 }

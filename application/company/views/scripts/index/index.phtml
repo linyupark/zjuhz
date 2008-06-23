@@ -1,160 +1,64 @@
+    <div class="side-box floatLeft">
+	    <div class="side-box-title">企业推荐</div>
+        <ul>
+		    <?php foreach ($this->rand as $key => $value) { ?>
+            <li><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank"><?= $this->Companyface($value['cid']); ?><br /><?= $value['name']; ?></a></li>
+			<?php } ?>
+        </ul>
+    </div>
+	<div class="side-box floatRight">
+	    <div class="side-box-title">企业分类</div>
+        <ul>
+            <?php foreach ($this->industry() as $key => $value) { ?>
+            <li><a href=""><?= $value; ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)</a></li>
+			<?php } ?>
+        </ul>
+    </div>
 
-	  <div class="side-box floatLeft">
-			<div class="side-box-title">推荐企业</div>
-			<ul>
-				<li><a href=""><img src="images/upload/user/1/company/01.jpg" /><br />什么企业的名字</a></li>
-				<li><img src="images/upload/user/1/company/02.jpg" /></li>
-				<li><a href="">什么企业的名字</a></li>
-				<li><img src="images/upload/user/1/company/03.jpg" /></li>
-				<li><a href="">什么企业的名字</a></li>
-				<li><a href=""><img src="images/upload/user/1/company/01.jpg" /><br />什么企业的名字</a></li>
-				<li><img src="images/upload/user/1/company/02.jpg" /></li>
-				<li><a href="">什么企业的名字</a></li>
-				<li><img src="images/upload/user/1/company/03.jpg" /></li>
-				<li><a href="">什么企业的名字</a></li>
-			</ul>
-		</div>
-		<div class="side-box floatRight">
-			
-			<div class="side-box-title">企业分类</div>
-			<ul>
-				<li><a href="">包装、纸 (1604)</a></li>
-				<li><a href="">办公文教 (421)</a></li>
-				<li><a href="">纺织、皮革 (308)</a></li>
-				<li><a href="">化工 (1270)</a></li>
-				<li><a href="">家用电器 (396)</a></li>
-				<li><a href="">礼品、工艺品 (839)</a></li>
-				<li><a href="">食品、饮料、烟酒 (472) </a></li>
-				<li><a href="">玩具 (116) </a></li>
-				<li><a href="">运动、娱乐 (295) </a></li>
-				<li><a href="">商业服务 (1541) </a></li>
-				<li><a href="">医疗、保健 (417)</a></li>
-				<li><a href="">仪器、仪表 (565) </a></li>
-				<li><a href="">五金制品、工具 (785) </a></li>
-				<li><a href="">能源、治金、矿产 (842) </a></li>
-				<li><a href="">建筑、装饰 (1029) </a></li>
-				<li><a href="">公共设施、环保 (346) </a></li>
-				<li><a href="">服装服饰 (469) </a></li>
-				<li><a href="">电脑与软件 (384) </a></li>
-				<li><a href="">电子电工 (1576) </a></li>
-				<li><a href="">机械设备 (2345) </a></li>
-				<li><a href="">家居用品 (647) </a></li>
-				<li><a href="">交通运输 (513) </a></li>
-				<li><a href="">农林渔牧 (590)  </a></li>
-				<li><a href="">通讯 (471) </a></li>
-				<li><a href="">印刷、出版 (351) </a></li>
-			</ul>
-		</div>
-		
-		<div class="mid-box">
-			<div class="mid-box-intro">
-				这里为校友创办的企业提供一个形象展示、产品/服务推广、英才猎聘的平台。
-				无论企业规模大小和员工多寡，它都寄托了校友自主创业的一番
-				雄心壮志。相信，只要每天都在朝着目标而努力，世界终有一天会被你改变！
-				<input type="button" class="buttonGreen" value="申请加入" />
-			</div>
-			<h2 class="mid-box-title">企业信息
-				<input type="text" value="" /> 
-				<input type="button" class="button" value="企业搜索" />
-				
-			</h2>
-			<table class="table" cellpadding="0" cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th colspan="2" class="table-top-left" width="60%">最新加入公司</th>
-						<th>所属行业</th>
-						<th class="table-top-right">访问人数</th>
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<td class="table-bottom-left"></td>
-						<td colspan="2"></td>
-						<td class="table-bottom-right"></td>
-					</tr>
-				</tfoot>
-				<tbody>
-					<tr>
-						<td class="left" colspan="4" style="border-right:1px solid #D7D7D7"><img class="floatLeft pdr10" width="100" src="images/xddjd.jpeg" /><a href="" class="f16"><strong>新东大酒店</strong></a><br />
+    <div class="mid-box">
+	    <div class="mid-box-intro">这里为校友创办的企业提供一个形象展示、产品/服务推广、英才猎聘的平台。无论企业规模大小和员工多寡，它都寄托了校友自主创业的一番雄心壮志。相信，只要每天都在朝着目标而努力，世界终有一天会被你改变！<input type="button" class="buttonGreen" value="将我的企业展示在这里" onclick="window.location.href='/company/my/company/type/join/'" /></div>
+        <h2 class="mid-box-title"><!--企业信息 <input type="text" value="" /><input type="button" class="button" value="企业搜索" />--></h2>
+        <table class="table" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th colspan="2" class="table-top-left" width="60%">最新加入的公司</th>
+                <th>所处行业</th>
+            </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td class="table-bottom-left"></td>
+                    <td colspan="2"></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <!--<tr>
+                    <td class="left" colspan="4" style="border-right:1px solid #D7D7D7"><img class="floatLeft pdr10" width="100" src="images/xddjd.jpeg" /><a href="" class="f16"><strong>新东大酒店</strong></a><br />
 新东大酒店是按四星级酒店硬件标准投资兴建的豪华涉外酒店，位于青岛市福州南路22号，毗邻繁华的购物中心——佳世客，家乐福，紧邻汇集各种菜系的云霄路美食街... 
 </td>
-					</tr>
-					<tr class="even">
-						<td class="left" colspan="2"><a href="">青岛合众煤气化技术有限公司</a></td>
-						<td>化工</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr>
-						<td class="left" colspan="2"><a href="">青岛阿迪丽达家具有限公司</a></td>
-						<td>家居用品</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr class="even">
-						<td class="left" colspan="2"><a href="">青岛天通机械有限</a></td>
-						<td>机械设备</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr>
-						<td class="left" colspan="2"><a href="">新东大酒店</a></td>
-						<td>商业服务</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr class="even">
-						<td class="left" colspan="2"><a href="">新东大酒店</a></td>
-						<td>商业服务</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr>
-						<td class="left" colspan="2"><a href="">新东大酒店</a></td>
-						<td>商业服务</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr class="even">
-						<td class="left" colspan="2"><a href="">新东大酒店</a></td>
-						<td>商业服务</td>
-						<td class="right">231 次</td>
-					</tr>
-					<tr>
-						<td class="left" colspan="2"><a href="">新东大酒店</a></td>
-						<td>商业服务</td>
-						<td class="right">231 次</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="corner-box floatLeft" style="width:252px; margin-right:10px;">
-			<h2 class="corner-box-title"><img src="/static/images/company/sub-4.gif" class="floatLeft pdr10" /> 菜鸟创业指南</h2>
-			<ul style=" padding-left:20px;">
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-			</ul>
-			</div>
-			<div class="corner-box floatLeft" style="width:252px;">
-			<h2 class="corner-box-title"><img src="/static/images/company/sub-5.gif" class="floatLeft pdr10" /> 创业互助</h2>
-			<ul style=" padding-left:20px;">
-				<li><a href="">紧急：如何做外贸SOHO？</a></li>
-				<li><a href="">紧急：如何做外贸SOHO？</a></li>
-				<li><a href="">紧急：如何做外贸SOHO？</a></li>
-				<li><a href="">紧急：如何做外贸SOHO？</a></li>
-			</ul>
-			</div>
-			<div class="corner-box floatLeft" style="width:252px; margin-right:10px;">
-			<h2 class="corner-box-title"><img src="/static/images/company/sub-7.gif" class="floatLeft pdr10" /> 创业知识库</h2>
-			<ul style=" padding-left:20px;">
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-			</ul>
-			</div>
-			<div class="corner-box floatLeft" style="width:252px;">
-			<h2 class="corner-box-title"><img src="/static/images/company/sub-8.gif" class="floatLeft pdr10" /> 创业知识库</h2>
-			<ul style=" padding-left:20px;">
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-				<li><a href="">AATCC标准转筒烘干机</a></li>
-			</ul>
-			</div>
+                </tr>-->
+				<?php foreach ($this->join as $key => $value) { ?>
+                <tr class="even">
+                    <td class="left" colspan="2"><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank"><?= $value['name']; ?></a></td>
+                    <td><?= $this->industry($value['industry']); ?></td>
+                </tr>
+				<?php } ?>
+            </tbody>
+		</table>
+        <!--<div class="corner-box floatLeft" style="width:252px; margin-right:10px;">
+		    <h2 class="corner-box-title"><img src="/static/images/company/sub-4.gif" class="floatLeft pdr10" /> 菜鸟创业指南</h2>
+		    <ul style=" padding-left:20px;"><li><a href=""></a></li></ul>
+        </div>
+        <div class="corner-box floatLeft" style="width:252px;">
+		    <h2 class="corner-box-title"><img src="/static/images/company/sub-5.gif" class="floatLeft pdr10" /> 创业互助</h2>
+            <ul style=" padding-left:20px;"><li><a href=""></a></li></ul>
 		</div>
+        <div class="corner-box floatLeft" style="width:252px; margin-right:10px;">
+            <h2 class="corner-box-title"><img src="/static/images/company/sub-7.gif" class="floatLeft pdr10" /> 创业知识库</h2>
+			<ul style=" padding-left:20px;"><li><a href=""></a></li></ul>
+	    </div>
+		<div class="corner-box floatLeft" style="width:252px;">
+		    <h2 class="corner-box-title"><img src="/static/images/company/sub-8.gif" class="floatLeft pdr10" /> 创业知识库</h2>
+			<ul style=" padding-left:20px;"><li><a href=""></a></li></ul>
+		</div>-->
+    </div>
