@@ -65,6 +65,8 @@ class LoginController extends Zend_Controller_Action
 					// 登录成功
 					$this->_sessCommon->role  = 'member';
 					$this->_sessCommon->login = $result;
+					// only for card cache
+					$result['lastLogin'] = REQUEST_TIME;
 
 					// 记住账号
 					((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
