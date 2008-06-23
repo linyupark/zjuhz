@@ -215,7 +215,7 @@ class Commons
 	 */
     static function getUserCache($arg)
     {
-    	return (0 < $arg ? DOCUMENT_ROOT.Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
+    	return (0 < $arg ? $_SERVER['DOCUMENT_ROOT'].Commons::getUserFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**
@@ -276,7 +276,7 @@ class Commons
 	 */
     static function getCompanyCache($arg)
     {
-    	return (10 == strlen($arg) ? DOCUMENT_ROOT.Commons::getCompanyFolder($arg, 'cache') : $arg.'cache/');
+    	return (10 == strlen($arg) ? $_SERVER['DOCUMENT_ROOT'].Commons::getCompanyFolder($arg, 'cache') : $arg.'cache/');
     }
 
 	/**
