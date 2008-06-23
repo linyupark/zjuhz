@@ -107,7 +107,7 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
 	public function selectRandList($limit)
     {
 		return $this->_dao->fetchAll("SELECT * FROM tbl_corp_company 
-		    WHERE recmd = 1 ORDER BY rand() LIMIT {$limit};", array()
+		    WHERE status = 1 AND recmd = 1 ORDER BY rand() LIMIT {$limit};", array()
 		);
     }
 
