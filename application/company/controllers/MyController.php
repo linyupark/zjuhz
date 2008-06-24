@@ -10,7 +10,7 @@
 
 
 /**
- * 校友企业-我的账号
+ * 校友企业-我的...
  */
 class MyController extends Zend_Controller_Action
 {

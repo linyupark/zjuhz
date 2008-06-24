@@ -1,10 +1,10 @@
 /* element */
 
 body {
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	background:url(/static/images/company/body.jpg) repeat-x top;
-  	color: #444;
-  	font-size:14px;
+  font-family:Verdana, Arial, Helvetica, sans-serif;
+  background:url(/static/images/company/body.jpg) repeat-x top;
+  color: #444;
+  font-size:14px;
 }
 
 hr{ border:none; border-bottom:1px solid #ccc; height:1px; }
@@ -17,8 +17,11 @@ strong{ font-weight:bold }
 .txtr{ text-align:right}
 .dark{color: #353E47;}
 .f16{ font-size:16px }
-.quiet {color:#666;}
+.f15{ font-size:15px }
+.f14{ font-size:14px }
+.f13{ font-size:13px }
 .f12{ font-size:12px }
+.quiet {color:#666;}
 .lh150{ line-height:150%; }
 .pd10{ padding:10px; }
 .pdr10{ padding-right:10px; }

@@ -44,7 +44,7 @@ create table zjuhz_corp.tbl_corp_company
    status               tinyint(1) unsigned not null default 0,
    recmd                tinyint(1) unsigned not null default 0,
    regTime              timestamp not null default CURRENT_TIMESTAMP,
-   lastModi             int(10) unsigned not null default 0,
+   face                 enum('Y','N') not null default 'N',
    primary key (cid)
 )
 type = MYISAM;

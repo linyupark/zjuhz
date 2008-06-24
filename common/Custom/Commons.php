@@ -142,6 +142,37 @@ class Commons
         unlink($file);
     }
 
+	/**
+	 * utf8字符截取
+	 * 
+	 * @param string $str
+	 * @param integer $len
+     * @return string
+	 */
+    static function utfSubStr($str, $len)
+    {
+    	for($i=0; $i<$len; $i++)
+        {
+        	$tmp_str = substr($str, 0, 1);
+            if(ord($tmp_str) > 127)
+            {
+            	$i++;
+            	if($i<$len)
+            	{
+            		$new_str[] = substr($str, 0, 3);
+                    $str = substr($str, 3);
+                }
+            }
+            else
+            {
+            	$new_str[] = substr($str, 0, 1);
+            	$str=substr($str, 1);
+            }
+        }
+
+        return join($new_str);
+    }
+
     /**
      * 文本字符转换
      * 

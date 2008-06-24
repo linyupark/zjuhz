@@ -53,11 +53,13 @@ class ManageController extends Zend_Controller_Action
 		$this->_sessCompany = Zend_Registry::get('sessCompany');
 		$this->_iniCompany  = Zend_Registry::get('iniCompany');
 
+        // 获取动作名称
+        $actionName = $this->getRequest()->getActionName();
 		// 判断管理权限
-		(!$this->_sessCompany->manageCid && 'login' != $this->getRequest()->getActionName() ? 
+		(!$this->_sessCompany->manageCid && 'login' != $actionName ? 
 		    $this->_redirect('/company/my/company/type/valid/', array('exit')) : '');
 		// 载入企业资料
-		$this->_dataCompany = (!$this->_sessCompany->manageCid || 'login' == $this->getRequest()->getActionName() ? '' : 
+		$this->_dataCompany = (!$this->_sessCompany->manageCid || 'login' == $actionName ? '' : 
 		    CacheLogic::init()->companyLoad($this->_sessCompany->manageCid));
 
 		$this->view->sessCommon  = $this->_sessCommon;
@@ -143,8 +145,8 @@ class ManageController extends Zend_Controller_Action
 
 			if ($basicArgs = ManageFilter::init()->basic($postArgs))
 			{
-				(CorpCompanyLogic::init()->updateBasic($basicArgs) ? 
-				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $basicArgs), $basicArgs['cid']) : '');
+				(!CorpCompanyLogic::init()->updateBasic($basicArgs) ? '' : 
+				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $basicArgs), $basicArgs['cid']));
 
 				$this->_sessCompany->message = $this->_iniCompany->hint->updateSuccess;
 
@@ -168,8 +170,8 @@ class ManageController extends Zend_Controller_Action
 
 			if ($contactArgs = ManageFilter::init()->contact($postArgs))
 			{
-				(CompanyContactLogic::init()->updateContact($contactArgs) ? 
-				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $contactArgs), $contactArgs['cid']) : '');
+				(!CompanyContactLogic::init()->updateContact($contactArgs) ? '' : 
+				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $contactArgs), $contactArgs['cid']));
 
 				$this->_sessCompany->message = $this->_iniCompany->hint->updateSuccess;
 
@@ -193,8 +195,8 @@ class ManageController extends Zend_Controller_Action
 
 			if ($bizArgs = ManageFilter::init()->biz($postArgs))
 			{
-				(CompanyBizLogic::init()->updateBiz($bizArgs) ? 
-				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $bizArgs), $bizArgs['cid']) : '');
+				(!CompanyBizLogic::init()->updateBiz($bizArgs) ? '' : 
+				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $bizArgs), $bizArgs['cid']));
 
 				$this->_sessCompany->message = $this->_iniCompany->hint->updateSuccess;
 
@@ -229,6 +231,10 @@ class ManageController extends Zend_Controller_Action
 			$image->abs_resize(54, 54, $companyRoot.'medium'); // 中图
 			$image->init($companyRoot.'square.jpg');
 			$image->abs_resize(100, 100, $companyRoot.'large'); // 大图
+
+			// 标记企业标志已上传,可读取标志图片
+			(!CorpCompanyLogic::init()->updateFace($this->_sessCompany->manageCid) ? '' : 
+			    CacheLogic::init()->companySave(array_merge($this->_dataCompany, array('face' => 'Y')), $this->_sessCompany->manageCid));
 
 			echo 'message';
 

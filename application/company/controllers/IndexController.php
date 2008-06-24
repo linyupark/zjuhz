@@ -16,28 +16,28 @@ class IndexController extends Zend_Controller_Action
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessCompany = null;
 
 	/**
      * 项目模块配置
-     *
+     * 
      * @var object
      */
 	private $_iniCompany = null;
 
 	/**
      * 初始化
-     *
+     * 
      * @return void
      */
 	public function init()
@@ -85,7 +85,7 @@ class IndexController extends Zend_Controller_Action
 		//$this->view->headScript()->appendFile('/static/scripts/company/index/index.js');
 
 		$this->view->rand     = CorpCompanyLogic::init()->selectRandList(20);
-		$this->view->join     = CorpCompanyLogic::init()->selectJoinAll();
+		$this->view->join     = CorpCompanyLogic::init()->selectJoinAll(10);
 		$this->view->industry = CorpIndustryLogic::init()->selectPairs();
 	}
 }
