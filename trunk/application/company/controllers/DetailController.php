@@ -81,7 +81,6 @@ class DetailController extends Zend_Controller_Action
 		}
 
 		$this->view->headTitle($this->_dataCompany['name']);
-		$this->view->headMeta()->appendMeta('keywords', $this->_dataCompany['product']);
 		$this->_helper->layout->setLayout('company');
 	}
 }
