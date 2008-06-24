@@ -9,38 +9,31 @@
 	<div class="side-box floatRight">
 	    <div class="side-box-title">企业分类</div>
         <ul>
-            <?php foreach ($this->industry() as $key => $value) { ?>
-            <li><a href=""><?= $value; ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)</a></li>
+            <?php foreach ($this->industry as $key => $value) { ?>
+            <li><a href=""><?= $this->industry($key); ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)</a></li>
 			<?php } ?>
         </ul>
     </div>
 
     <div class="mid-box">
-	    <div class="mid-box-intro">这里为校友创办的企业提供一个形象展示、产品/服务推广、英才猎聘的平台。无论企业规模大小和员工多寡，它都寄托了校友自主创业的一番雄心壮志。相信，只要每天都在朝着目标而努力，世界终有一天会被你改变！<input type="button" class="buttonGreen" value="将我的企业展示在这里" onclick="window.location.href='/company/my/company/type/join/'" /></div>
+	    <div class="mid-box-intro">这里为校友创办的企业提供一个形象展示、产品/服务推广、英才猎聘的平台。无论企业规模大小和员工多寡，它都寄托了校友自主创业的一番雄心壮志。相信，只要每天都在朝着目标而努力，世界终有一天会被你改变！<input type="button" class="buttonGreen" value="申请展示我的企业" onclick="window.location.href='/company/my/company/type/join/'" /></div>
         <h2 class="mid-box-title"><!--企业信息 <input type="text" value="" /><input type="button" class="button" value="企业搜索" />--></h2>
         <table class="table" cellpadding="0" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th colspan="2" class="table-top-left" width="60%">最新加入的公司</th>
-                <th>所处行业</th>
+                <th class="table-top-left" width="60%">新加入的企业</th>
             </tr>
             </thead>
             <tfoot>
                 <tr>
                     <td class="table-bottom-left"></td>
-                    <td colspan="2"></td>
                 </tr>
             </tfoot>
             <tbody>
-                <!--<tr>
-                    <td class="left" colspan="4" style="border-right:1px solid #D7D7D7"><img class="floatLeft pdr10" width="100" src="images/xddjd.jpeg" /><a href="" class="f16"><strong>新东大酒店</strong></a><br />
-新东大酒店是按四星级酒店硬件标准投资兴建的豪华涉外酒店，位于青岛市福州南路22号，毗邻繁华的购物中心——佳世客，家乐福，紧邻汇集各种菜系的云霄路美食街... 
+                <?php foreach ($this->join as $key => $value) { ?>
+				<tr>
+                    <td class="left" colspan="4" style="border-right:1px solid #D7D7D7"><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13"><?= $this->industry($value['industry']); ?>&nbsp;&nbsp;<?= $this->property($value['property']); ?>&nbsp;&nbsp;<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr($value['intro'], 200); ?>...</p><hr />
 </td>
-                </tr>-->
-				<?php foreach ($this->join as $key => $value) { ?>
-                <tr class="even">
-                    <td class="left" colspan="2"><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank"><?= $value['name']; ?></a></td>
-                    <td><?= $this->industry($value['industry']); ?></td>
                 </tr>
 				<?php } ?>
             </tbody>

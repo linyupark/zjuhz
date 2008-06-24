@@ -74,12 +74,14 @@ class DetailController extends Zend_Controller_Action
      */
 	public function indexAction()
 	{
-		$this->_helper->layout->setLayout('company');
-
 		if (!$this->_sessCompany->pageview[$this->_dataCid])
 		{
 			CorpCompanyLogic::init()->updatePageview($this->_dataCid); // 更新页面浏览量
 			$this->_sessCompany->pageview[$this->_dataCid] = REQUEST_TIME; // 浏览时间
 		}
+
+		$this->view->headTitle($this->_dataCompany['name']);
+		$this->view->headMeta()->appendMeta('keywords', $this->_dataCompany['product']);
+		$this->_helper->layout->setLayout('company');
 	}
 }

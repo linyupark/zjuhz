@@ -186,6 +186,13 @@ class CacheLogic extends CompanyInterlayer
     {
     	$this->companyInit($cid);
 
-    	return $this->_cache->load("company{$cid}");
+    	if(!$data = $this->_cache->load("company{$cid}"))
+    	{
+    		$data = CorpCompanyLogic::init()->selectCidRow($cid);
+
+    	    $this->companySave($data, $cid);
+    	}
+
+    	return $data;
     }
 }

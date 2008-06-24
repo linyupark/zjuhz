@@ -62,9 +62,7 @@ class MyFilter extends CompanyInterlayer
 		Zend_Loader::loadFile('IsPhone.php');
 
 		// 设置过滤规则
-		$filters = array(
-		    '*' => array('StringTrim', 'StripTags')
-		);
+		$filters = array('*' => array('StripTags'));
 
     	// 设置验证规则
 		$validators = array(
@@ -82,9 +80,13 @@ class MyFilter extends CompanyInterlayer
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniCompany->hint->propertyError)), 
 		    'province' => array('allowEmpty' => true), 
 			'city' => array('allowEmpty' => true), 
+            'content' => array(
+       	        array('Utf8Length', '50', '2000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+              	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->introError,
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->introError)), 
             'phone' => array(
 			    array('IsPhone'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-               	    Zend_Validate_IsPhone::NOT_PHONE => $this->_iniCompany->hint->phoneError)), 
+               	    Zend_Validate_IsPhone::NOT_PHONE => $this->_iniCompany->hint->phoneError))
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);
@@ -99,7 +101,9 @@ class MyFilter extends CompanyInterlayer
 			    'cid' => $input->getUnescaped('cid'), 'uid' => $input->getUnescaped('uid'), 
 		  		'name' => $input->getUnescaped('name'), 'industry' => $input->getUnescaped('industry'), 
 		  		'property' => $input->getUnescaped('property'), 'province' => $input->getUnescaped('province'), 
-		  		'city' => $input->getUnescaped('city'), 'phone' => $input->getUnescaped('phone')
+		  		'city' => $input->getUnescaped('city'), 'intro' => $input->getUnescaped('content'), 
+		  		'phone' => $input->getUnescaped('phone')
+		  		
 			);
 		}
 

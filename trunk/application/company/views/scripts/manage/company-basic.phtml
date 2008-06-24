@@ -31,9 +31,10 @@
 		<td><select tabindex="3" name="province" id="province"></select>&nbsp;<select tabindex="4" name="city" id="city"></select><br /></td>
 	  </tr>
 	  <tr>
-		<td class="txtr">企业简介：</td>
-		<td><input type="hidden" name="content" id="content" value="<?= htmlspecialchars($this->dataCompany['intro']) ;?>" /><?= $this->kindeditor('100%','300px'); ?></td>
-	  </tr>
+		<td class="txtr">企业简介：<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></td>
+		<td><textarea name="content" cols="70" rows="15" id="content"><?= $this->dataCompany['intro'] ;?></textarea>
+		<p><span class="quiet f12">请详细介绍贵企业的发展历史、基本概况、行业优势等，50-1000字。</span></p></td>
+	  </tr>	  
 	  <tr>
 		<td>&nbsp;</td>
 		<td><input type="submit" id="btnBasic" tabindex="5" value=" 提 交 修 改 " class="buttonGreen" /></td>

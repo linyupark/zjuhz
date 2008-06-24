@@ -60,9 +60,7 @@ class ManageFilter extends CompanyInterlayer
 		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
-		$filters = array(
-		    '*' => array('StringTrim')
-		);
+		$filters = array('*' => array('StripTags'));
 
     	// 设置验证规则
 		$validators = array(
@@ -77,9 +75,9 @@ class ManageFilter extends CompanyInterlayer
 		    'province' => array('allowEmpty' => true), 
 			'city' => array('allowEmpty' => true), 
             'content' => array(
-       	        array('Utf8Length', '0', '3000'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
+       	        array('Utf8Length', '50', '2000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
               	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->introError,
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->introError)), 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->introError))
         );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args);

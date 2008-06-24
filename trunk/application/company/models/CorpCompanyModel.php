@@ -62,7 +62,7 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
 	public function callInsert($args)
     {
 		$this->_dao->prepare('CALL sp_company_insert(:cid, :uid, :name, :industry, 
-		    :property, :province, :city, :phone);')->execute($args);
+		    :property, :province, :city, :intro, :phone);')->execute($args);
 
 		return true;
     }
@@ -131,12 +131,13 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
      * 
      * @param string $orderField
      * @param string $orderType
+     * @param string $limit
      * @return array
      */
-	public function selectAll($orderField='cid', $orderType='')
+	public function selectAll($orderField='cid', $orderType='', $limit='10')
     {
 		return $this->_dao->fetchAll("SELECT * FROM {$this->_name} 
-		    WHERE status = 1 ORDER BY {$orderField} {$orderType};", array()
+		    WHERE status = 1 ORDER BY {$orderField} {$orderType} LIMIT {$limit};", array()
 	    );
     }
 

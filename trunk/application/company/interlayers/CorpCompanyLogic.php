@@ -108,11 +108,12 @@ class CorpCompanyLogic extends CompanyInterlayer
     /**
      * 查找最新加入的全部企业
      * 
+     * @param string $limit
      * @return array
      */
-	public function selectJoinAll()
+	public function selectJoinAll($limit)
 	{
-		return $this->_CorpCompanyModel->selectAll('regTime', 'DESC');
+		return $this->_CorpCompanyModel->selectAll('regTime', 'DESC', $limit);
 	}
 
     /**
@@ -138,16 +139,29 @@ class CorpCompanyLogic extends CompanyInterlayer
 	}
 
 	/**
-     * 更新cid企业的页面访问量
+     * 更新cid企业的页面浏览量
      * 
      * @param string $cid
      * @return integer
      */
 	public function updatePageview($cid)
     {
-    	$args = array('cid' => $cid, 'pageview' => new Zend_Db_Expr('pageview + 1'));
+		return $this->_CorpCompanyModel->update(array(
+		    'cid' => $cid, 'pageview' => new Zend_Db_Expr('pageview + 1'))
+		);
+    }
 
-		return $this->_CorpCompanyModel->update($args);
+	/**
+     * 更新cid企业的页面访问量
+     * 
+     * @param string $cid
+     * @return integer
+     */
+	public function updateFace($cid)
+    {
+		return $this->_CorpCompanyModel->update(array(
+			'cid' => $cid, 'face' => 'Y')
+		);
     }
 
 	/**
