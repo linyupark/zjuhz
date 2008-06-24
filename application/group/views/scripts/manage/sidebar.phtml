@@ -1,0 +1,33 @@
+<div class="oneCol span-24 last">
+    <table width="100%">
+            <tr>
+                <td class="pd10" width="5%"><?= Cmd::groupIcon($this->gid) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    <a href="/group/home?gid=<?= $this->gid ?>">
+                        <strong><?= $this->groupInfo['name'] ?></strong>
+                    </a>
+                    <a href="/group/home/name/of/<?= $this->groupInfo['url'] ?>">
+                        http://www.zjuhz.com/group/home/name/of/<?= $this->groupInfo['url'] ?>
+                    </a>
+                    <p class="f12">
+                        <?= stripcslashes($this->escape($this->groupInfo['intro'])) ?>
+                    </p>
+                </td>
+            </tr>
+        </table>
+</div>
+
+<div class="span-24 last">
+    <!-- 边栏 //////////////////////////////////////////// -->
+    <div class="span-5">
+        <div class="sideBar mgu10">
+            <?= $this->managebar($this->gid, $this->controller_name) ?>
+        </div>
+        <div class="sideBar mgu10">
+            <?= $this->groupbar($this->groupInfo) ?>
+        </div>
+        <div class="sideBar mgu10">
+            <?= $this->clickbar($this->groupInfo) ?>
+        </div>
+    </div>
+    <!--  //////////////////////////////////////////// 边栏 -->

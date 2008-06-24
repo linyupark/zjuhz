@@ -1,0 +1,57 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <div class="oneCol pdd10 ">
+        <div class="extInline mg10 f14">
+            <a href="/group/my/">我的群组</a> &gt; 
+            <strong class="f14">邀请函</strong>
+            <span class="quiet">
+            有如下(<?= UserModel::inviteNum($this->passport('uid')) ?>)个群组邀请您加入。
+            </span>
+            <span class="hrefspan-8">
+                <!-- <a href="">不再提示邀请信息</a> -->
+            </span>
+        </div>
+        
+        <!-- 群组列表 -->
+        <?php if($this->invites != null) : foreach($this->invites as $gid): ?>
+        <table class="mglf10 span-18 last dashBorder">
+            <?php $info = GroupModel::info($gid); ?>
+            <tr>
+                <td class="pd10" width="10%"><?= Cmd::groupIcon($gid) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $info['name'] ?></a>
+                    <span class="quiet">
+                        成员数：<a href=""><?= $info['member_num'] ?></a>
+                        话题数：<a href=""><?= $info['topic_num'] ?></a>
+                        照片数：<a href=""><?= $info['photo_num'] ?></a>
+                    </span>
+                </td>
+                <td class="vm f14" id="group_<?= $gid ?>">
+                    <button class="btn" onclick="accept(<?= $gid ?>)">加入</button> &nbsp;
+                    <button class="btn" onclick="reject(<?= $gid ?>)">拒绝</button>
+                </td>
+            </tr>
+        </table>
+        <?php endforeach; endif; ?>
+    </div>
+</div>
+<hr class="space" />
+<script type="text/javascript">
+    function accept(gid)
+    {
+        $.post('/group/my/invite?do=accept',{gid:gid},function(html){
+            $('#group_'+gid).html(html);
+        });
+    }
+    function reject(gid)
+    {
+        $.post('/group/my/invite?do=reject',{gid:gid},function(html){
+            $('#group_'+gid).html(html);
+        });
+    }
+</script>

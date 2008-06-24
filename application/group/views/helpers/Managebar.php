@@ -13,18 +13,19 @@ class Zend_View_Helper_Managebar
             <a href="/group/album?gid='.$gid.'"{album}>'.Cmd::icon('photo.png').' 相册</a>
             <a href="/group/member?gid='.$gid.'"{member}>'.Cmd::icon('group.png').' 成员</a>';
         // 是否是管理员
-        if(Zend_Registry::get('sessGroup')->my[$gid]['is_manager'] == 1)
+        if(Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'manager' ||
+           Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'creater')
         {
             $str .= '<a href="/group/manage?gid='.$gid.'"{manage}>'.Cmd::icon('wrench.png').' 管理</a>';
         }
         // 是否为成员
-        if(GroupMemberModel::isMember(Zend_Registry::get('sessCommon')->login['uid'], $gid))
+        if(Zend_Registry::get('sessGroup')->my[$gid]['role'] != null)
         {
-            $str .= '<a href="">'.Cmd::icon('emoticon_grin.png').' 邀请</a>';
+            $str .= '<a href="/group/invite?gid='.$gid.'"{invite}>'.Cmd::icon('emoticon_grin.png').' 邀请</a>';
         }
         $str .= '</div>';
         $str = str_replace('{'.$controller.'}', ' class="here"', $str);
-        $str = preg_replace('/\{(.*)\}/i', '', $str);
+        $str = preg_replace('/\{([a-z])\}/i', '', $str);
         return $str;
     }
 }

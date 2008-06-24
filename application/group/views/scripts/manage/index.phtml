@@ -1,39 +1,7 @@
-<div class="oneCol span-24 last">
-    <table width="100%">
-            <tr>
-                <td class="pd10" width="5%"><?= Cmd::groupIcon($this->gid) ?></td>
-                <td class="vm f14 txtl hrefspan-8">
-                    <a href="/group/home?gid=<?= $this->gid ?>">
-                        <strong><?= $this->groupInfo['name'] ?></strong>
-                    </a>
-                    <a href="/group/home/name/<?= $this->groupInfo['url'] ?>">
-                        http://www.zjuhz.com/group/home/name/<?= $this->groupInfo['url'] ?>
-                    </a>
-                    <p class="f12">
-                        <?= stripcslashes($this->escape($this->groupInfo['intro'])) ?>
-                    </p>
-                </td>
-            </tr>
-        </table>
-</div>
-
-<div class="span-24 last">
-    <!-- 边栏 //////////////////////////////////////////// -->
-    <div class="span-5">
-        <div class="sideBar mgu10">
-            <?= $this->managebar($this->gid, 'manage') ?>
-        </div>
-        <div class="sideBar mgu10">
-            <?= $this->groupbar($this->groupInfo) ?>
-        </div>
-        <div class="sideBar mgu10">
-            <?= $this->clickbar($this->groupInfo) ?>
-        </div>
-    </div>
-    <!--  //////////////////////////////////////////// 边栏 -->
+<!-- <div class="span-24 last"> -->
     <div class="span-19 last mgu10">
         <div class="oneCol">
-            <?= $this->managetab($this->action_name) ?>
+            <?= $this->managetab($this->action_name, $this->gid)  // 管理TAB连接 ?>
             <form class="prepend-1" id="groupForm" method="post" onsubmit="return doModify()">
             <p>
             <label>群组名称<br />
@@ -121,6 +89,7 @@
             <p>
             <input style="width:530px;" class="btn" type="submit" value="确定信息正确，保存" />
             </p>
+            <span id="tips"></span>
             <hr class="space">
             </form>
         </div>
@@ -139,7 +108,11 @@
 	new PCAS("local_province","local_city");
 	function doModify()
 	{
-		
+		$('#tips').html('数据审核中...');
+		$.post('/group/manage/mod_baseinfo?gid=<?= $this->gid ?>', $('#groupForm').fastSerialize(), function(html){
+			$('#tips').html(html);
+			window.scroll(0,1000);
+		});
 		return false;
 	}
 </script>

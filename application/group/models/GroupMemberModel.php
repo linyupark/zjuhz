@@ -2,22 +2,42 @@
 
 class GroupMemberModel
 {
-    # 判断是否为管理员
-    static function isManager($uid, $group_id)
+    # 加入群组
+    static function join($uid, $gid, $data)
+    {
+        if(false == self::isJoin($uid, $gid))
+        {
+            return self::insert($data);
+        }
+        return false;
+    }
+    
+    # 是否已经加入gid群组
+    static function isJoin($uid, $gid)
     {
         $db = Zend_Registry::get('dbGroup');
         return $db->fetchRow('SELECT `group_id` FROM `tbl_group_member`
-                      WHERE `user_id`=? AND `is_manager`=1 AND `group_id`=?', array($uid, $group_id));
+                             WHERE `user_id`=? AND `group_id`=?', array($uid,$gid));
     }
     
-    # 判断是否为成员
-    static function isMember($uid, $group_id)
+    # 罗列群组成员列表
+    static function fetchAll($gid)
     {
         $db = Zend_Registry::get('dbGroup');
-        return $db->fetchRow('SELECT `group_id` FROM `tbl_group_member`
-                             WHERE `user_id`=? AND `group_id`=?', array($uid, $group_id));
+        return $db->fetchAll('SELECT `active`,`role`,`last_access`,`user_id`,`realName`,`sex`,`join_time` 
+                             FROM `vi_group_member` WHERE `group_id` = ?', $gid);
     }
     
+    # 判断角色
+    static function role($uid, $group_id)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        $row = $db->fetchRow('SELECT `role` FROM `tbl_group_member`
+                      WHERE `user_id`=? AND `group_id`=?', array($uid, $group_id));
+        return $row['role'];
+    }
+    
+    # 加入新的群组成员信息
     static function insert($data)
     {
         $db = Zend_Registry::get('dbGroup');

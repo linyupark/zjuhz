@@ -18,13 +18,14 @@ div.managebar a{
 	padding:5px 0;
 }
 div.managebar a.here{
-	background:#F7F4E5;
+	background:#E9DBC0;
 }
 
 /* 分类菜单 */
 ul.sortbar{
 	padding:0 10px 10px 10px;
 }
+ul.sortbar b{ color:#333 }
 ul.sortbar a{
 	color:#4B630B
 }
@@ -42,7 +43,7 @@ div.tab a.here{
 
 #passport{
 	font-size:14px;
-	padding-top:10px;
+	padding:10px 0 3px 0;
 }
 
 .global-nav{
@@ -133,3 +134,9 @@ ul.con label{ font-weight:normal; }
 	border-width:1px;
 	cursor:pointer;
 }
+
+/* 分页 */
+.pagination{ padding:10px 0; font-size:12px;}
+.pagination a{  display:block; float:left; padding:2px 5px; border:1px solid #fff; background:#eee; text-decoration:none; color:#444;   }
+.pagination a:hover{ border:1px solid #ccc; }
+.pagination b{ display:block; float:left; padding:2px 5px; }

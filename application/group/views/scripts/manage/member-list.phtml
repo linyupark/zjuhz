@@ -1,0 +1,43 @@
+
+    <div class="span-19 last mgu10">
+        <div class="oneCol">
+            <?= $this->managetab($this->action_name, $this->gid)  // 管理TAB连接 ?>
+            <div class="mglf10">
+            <p class="txtr">群组角色名称：
+                <?= GroupRoleModel::icon('creater') ?> <?= GroupRoleModel::name('creater', $this->gid) ?>
+                <?= GroupRoleModel::icon('manager') ?> <?= GroupRoleModel::name('manager', $this->gid) ?>
+                <?= GroupRoleModel::icon('member') ?> <?= GroupRoleModel::name('member', $this->gid) ?>
+                <a href="/group/manage/role?gid=<?= $this->gid ?>">自定义</a>
+            </p>
+            <p>群组共有<strong><?= $this->groupInfo['member_num'] ?></strong>名成员</p>
+            <table width="100%">
+                <tr class="extInline" style="font-weight:bold;">
+                    <th class="txtc" style="padding:5px">头像</th>
+                    <th class="txtc" style="padding:5px">姓名</th>
+                    <th class="txtc" style="padding:5px">性别</th>
+                    <th class="txtc" style="padding:5px">角色</th>
+                    <th class="txtc" style="padding:5px">最后登陆</th>
+                </tr>
+                <?php foreach($this->members as $v): ?>
+                <tr class="dashBorder">
+                    <td class="pd10 txtc" width="10%"><?= Commons::getUserFace($v['user_id']) ?></td>
+                    <td class="vm txtc">
+                        <a href="/member/profile?uid=<?= $v['user_id'] ?>"><?= $v['realName'] ?></a>
+                    </td>
+                    <td class="vm txtc"><?= $v['sex'] ?></td>
+                    <td class="vm txtc">
+                        <?= GroupRoleModel::icon($v['role']).' '.GroupRoleModel::name($v['role'], $this->gid) ?>
+                    </td>
+                    <td class="vm txtc"><?= Lp_Date::timespan($v['last_access']) ?>前</td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+                
+                
+                
+                
+                

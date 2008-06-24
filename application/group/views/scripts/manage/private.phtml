@@ -1,0 +1,34 @@
+<div class="span-19 last mgu10">
+        <div class="oneCol">
+            <?= $this->managetab($this->action_name, $this->gid)  // 管理TAB连接 ?>
+            <form class="prepend-1" id="groupForm" method="post" onsubmit="return modPrivate()">
+            <p>
+            <input type="hidden" value="<?= $this->gid ?>" name="gid" />
+			<label>群组类型<br />
+			<ul class="con">
+				<li><input id="open_1" name="private" value="1" type="radio"><label for="open_1">公开<span class="quiet prepend-1">(任何人都可以加入群组)</span></label></li>
+				<li><input id="open_2" name="private" value="2" type="radio"><label for="open_2">半公开<span class="quiet prepend-1">(任何人都可以申请加入，需要获得管理员批准)</span></label> </li>
+				<li><input id="open_3" name="private" value="3" type="radio"><label for="open_3">私密<span class="quiet prepend-1">(需要得到该群组成员邀请，方可加入)</span></label> </li>
+			</ul></label>
+            </p>
+            <p>
+            <input style="width:530px;" class="btn" type="submit" value="确定群组使用此类型，保存" />
+            </p>
+            <span id="tips"></span>
+            <hr class="space" />
+            </form>
+        </div>
+</div>
+</div>
+            
+<script type="text/javascript">
+    $('input[value="<?= $this->groupInfo['private'] ?>"]').click();
+    function modPrivate()
+	{
+		$('#tips').html('数据审核中...');
+		$.post('/group/manage/private', $('#groupForm').fastSerialize(), function(html){
+			$('#tips').html(html);
+		});
+		return false;
+	}
+</script>

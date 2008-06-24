@@ -1,0 +1,28 @@
+<?= $this->render('manage/sidebar.phtml') ?>
+    
+    <div class="span-19 last mgu10">
+        <div class="extInline2" style="margin:0;" id="group_notice">
+            <h3 class="pd5">群组公告</h3>
+            <?= stripslashes(GroupModel::info($this->gid, 'notice')); ?>
+            <?php if($this->role == 'creater' || $this->role == 'manager'): ?>
+            <p class="txtr"><?= Cmd::icon('page_white_edit.png') ?>
+            <a href="javascript:modNotice()">编辑群组公告</a></p>
+            <?php endif; ?>
+        </div>
+        <div class="hide" style="margin:0;" id="notice_editor">
+            <input type="hidden" name="content" value="<?= htmlspecialchars(stripslashes(GroupModel::info($this->gid, 'notice'))); ?>" />
+            <?= $this->editor($this->gid,'100%','150px') ?>
+            <p><input type="button" onclick="save()" class="btn" value="保存" />
+            <input type="button" onclick="cancel()" class="btn" value="取消" /></p>
+        </div>
+        <!-- 论坛 -->
+        <div class="oneCol mgu10">
+            <?= $this->topiclist($this->gid, 10, 1); ?>
+        </div>
+    </div>    
+</div>
+<script>
+    function modNotice(){ $('#group_notice').hide(); $('#notice_editor').show(); }
+    function cancel(){ $('#notice_editor').hide(); $('#group_notice').show(); }
+    function save(){ $.post('/group/manage/notice?gid=<?= $this->gid ?>', {content:editor.data()}, function(){history.go(0)}); }
+</script>

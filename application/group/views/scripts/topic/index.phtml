@@ -1,0 +1,9 @@
+<?= $this->render('manage/sidebar.phtml') ?>
+    
+    <div class="span-19 last mgu10">
+        <!-- 论坛 -->
+        <div class="oneCol">
+            <?= $this->topiclist($this->gid, 10, $this->page, true); ?>
+        </div>
+    </div>    
+</div>
