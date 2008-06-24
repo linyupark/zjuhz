@@ -43,6 +43,7 @@
 		
 	</div>
 	<div id="container" class="container">
+		<span id="top_tip"></span>
 		<?= $this->layout()->sidebar; ?>
 		<?= $this->layout()->content; ?>
 	</div>
@@ -60,7 +61,11 @@
 	</div>
 	<hr class="space" />
 	<script type="text/javascript">
-		$(document).ready(function(){ 
+		$(document).ready(function(){
+			$('.btn').hover(
+				function(){$(this).css('background','#E2FBAD')},
+				function(){$(this).css('background','#D4D0C8')}
+			);
 			$('img[src$="png"]').parent().pngFix(); 
 			var controller = $('div.sub-nav').attr('rel');
 			$('div.sub-nav a[href*="'+controller+'"]').addClass('here');
@@ -70,7 +75,16 @@
 			$('input[type="text"]').blur(function(){
 				$(this).css('border','1px solid #bbb');
 			});
+			$('#top_tip').load('/group/index/toptip');
+			$.get('/group/index/click?gid=<?= $this->gid ?>'); // 统计访问量
 		});
+		
+		function notip()
+		{
+			$('#top_tip').load('/group/index/toptip?close=1',null,function(){
+				$('#top_tip').remove();	
+			});
+		}
 	</script>
 </body>
 </html>

@@ -23,6 +23,7 @@ class ErrorController extends Zend_Controller_Action {
      */
     public function errorAction()
     {
+		$this->getResponse()->insert('sidebar','');
         $errors = $this->_getParam('error_handler');
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:

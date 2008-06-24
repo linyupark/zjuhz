@@ -1,7 +1,7 @@
 <?php
 
 class Cmd
-{
+{	
 	# 通过sort_id返回其名称
 	static function sortName($sort_id)
 	{
@@ -50,7 +50,7 @@ class Cmd
 			$num = 0;
 			foreach($my_group as $k => $v)
 			{
-				if($v['is_manager'] == 1)
+				if($v['role'] == 'manager' || $v['role'] == 'creater' )
 				$num ++ ;
 			}
 			return $num;

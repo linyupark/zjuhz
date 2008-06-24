@@ -30,7 +30,7 @@ define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 /** run */
 $info_front = Zend_Controller_Front::getInstance();
 $info_front->setDefaultModule('group')
-           ->throwExceptions(true)
+           ->throwExceptions(false)
            ->registerPlugin(new GroupPreLoad())
            ->setControllerDirectory('../../application/group/controllers/')
            ->dispatch();

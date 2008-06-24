@@ -21,7 +21,7 @@ class CreateController extends Zend_Controller_Action {
 		else
 		{
 			$this->view->headTitle('创建新群组');
-			$this->view->state = UserModel::fetch($this->passport('uid'), 'group_state');
+			$this->view->state = UserModel::fetch($this->view->passport('uid'), 'group_state');
 			$this->view->sorts = Zend_Registry::get('iniGroup')->sort->name->toArray();
 			$this->view->college = Zend_Registry::get('iniConfig')->college->name->toArray();
 			$this->view->profession = Zend_Registry::get('iniGroup')->profession->name->toArray();
@@ -84,6 +84,11 @@ class CreateController extends Zend_Controller_Action {
 				$this->_helper->layout->setLayout('error');
 				echo '<ul class="error span-13"><li>个性化网址 '.$url.'已经被占用,请重新选择~</li></ul>';
 			}
+			elseif(false != GroupModel::nameExist($name))
+			{
+				$this->_helper->layout->setLayout('error');
+				echo '<ul class="error span-13"><li>该群组名称 '.$name.'已经被占用,请重新选择~</li></ul>';
+			}
 			else // 开始建立群组
 			{
 				$location = null;
@@ -93,7 +98,7 @@ class CreateController extends Zend_Controller_Action {
 				}
 				$data = array(
 					'sort_id' => $sort,
-					'master' => $user_id,
+					'creater' => $user_id,
 					'name' => $name,
 					'url' => $url,
 					'create_time' => time(),
@@ -116,10 +121,13 @@ class CreateController extends Zend_Controller_Action {
 						'user_id' => $user_id,
 						'join_time' => time(),
 						'last_access' => time(),
-						'is_manager' => 1
+						'role' => 'creater'
 					);
 					GroupMemberModel::insert($data);
 					GroupTagModel::insert($sort, $tags);
+					GroupRoleModel::insert(array(
+						'group_id' => $group_id
+					));
 					UserModel::haveGroup($user_id);
 					UserModel::coinMod($user_id, '-100');
 					Cmd::createFolder($group_id);

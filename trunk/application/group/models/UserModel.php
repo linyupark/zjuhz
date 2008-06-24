@@ -2,6 +2,95 @@
 
 class UserModel
 {
+	# 拒绝邀请
+	static function delInvite($uid, $gid)
+	{
+		$invites = self::fetch($uid, 'group_invite');
+		if($invites == null) return false;
+		else
+		{
+			$invite_arr = explode(',', $invites);
+			if(!in_array($gid, $invite_arr)) return false;
+			else
+			{
+				$k = array_search($gid, $invite_arr);
+				unset($invite_arr[$k]);
+				array_values($invite_arr);
+				if(count($invite_arr)>0)
+				$invites = implode(',', $invite_arr);
+				else
+				$invites = null;
+			}
+			$db = Zend_Registry::get('dbGroup');
+			$db->update('tbl_group_user', array('group_invite'=>$invites),'uid='.$uid);
+			return true;
+		}
+	}
+	
+	# 被邀请数
+	static function inviteNum($uid)
+	{
+		$invites = self::fetch($uid, 'group_invite');
+		if($invites == null) return 0;
+		else
+		{
+			$invite_arr = explode(',', $invites);
+			return count($invite_arr);
+		}
+	}
+	
+	# 邀请
+	static function invite($gid, $uid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$invites = self::fetch($uid, 'group_invite');
+		if($invites == null)
+		return $db->update('tbl_group_user', array('group_invite'=>$gid), 'uid='.$uid);
+		else
+		{
+			$invite_arr = explode(',', $invites);
+			if(!in_array($gid, $invite_arr) || $invite_arr != $gid)
+			{
+				$invites .= ','.$gid;
+				return $db->update('tbl_group_user', array('group_invite'=>$invites), 'uid='.$uid);
+			}
+		}
+	}
+	
+	/**
+	 * 是否已经被该gid群组邀请过
+	 * */
+	static function isInvited($gid, $uid)
+	{
+		$invites = self::fetch($uid, 'group_invite');
+		if($invites != null)
+		{
+			$invite_arr = explode(',', $invites);
+			if($invite_arr == $gid) return true;
+			else return in_array($gid, $invite_arr);
+		}
+	}
+	
+	/**
+	 * 没加入任何群组的用户显示
+	 * */
+	static function vag($pagesize, $page)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		
+		// 获取总游民数
+		$row = $db->fetchRow('SELECT COUNT(`uid`) AS `numrows` FROM `tbl_group_user`
+					  WHERE `no_group` = 1');
+		
+		$result['numrows'] = $row['numrows'];
+		$offset = ($page-1)*$pagesize;
+		
+		$rows = $db->fetchAll('SELECT * FROM `tbl_group_user`
+					  WHERE `no_group` = 1 LIMIT '.$offset.','.$pagesize);
+		$result['rows'] = $rows;
+		
+		return $result;
+	}
 	
 	/**
 	 * 改变用户状态

@@ -1,0 +1,32 @@
+<?= $this->render('manage/sidebar.phtml') ?>
+    
+    <div class="span-19 last mgu10">
+        <!-- 新话题 -->
+        <div class="oneCol">
+            <span id="tip"></span>
+            <?php if($this->role == false): ?>
+            <div class="notice mg10">抱歉，非本群组成员不能发表话题。<a href="">申请加入</a></div>
+            <?php else: ?>
+            <h3 class="pd10">发布新主题</h3>
+            <form class="mg10" id="topic_form" method="post" onsubmit="return doPost()">
+            <p><label>标题 <input type="text" name="title" class="text" maxlength="200" style="width:80%" /></label> (限200字)</p>
+            <input type="hidden" value="" name="content" />
+            <?= $this->editor($this->gid, '100%', '400px'); ?>
+            <p><label>标签 <input type="text" name="tags" class="text" style="width:60%" /></label> (用空格分隔，如：西湖 杭州)</p>
+            <p><input type="submit" class="btn" value="已经写完，发表我的主题" style="width:100%" /></p>
+            </form>
+            <?php endif; ?>
+        </div>
+    </div>    
+</div>
+            
+<script type="text/javascript">
+    function doPost()
+    {
+        $.post('/group/topic/new?gid=<?= $this->gid ?>',
+               $('#topic_form').fastSerialize(),
+               function(html){
+                    
+        });
+    }
+</script>
