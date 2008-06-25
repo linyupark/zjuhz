@@ -51,15 +51,15 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 </p>
 
 <!-- 主体 ////////////////////////////////////////////// -->
+<div class="f14 span-24 last" style="overflow:hidden">
 <?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
 <p class="error">您需要登录后才能阅读这篇文章。</p>
 <?php else: ?>
-<table class="oneCol">
-	<tr>
-		<td style="line-height:180%; padding:25px" class="f14"><?= stripslashes($this->entity['entity_content']) ?></td>
-	</tr>
-</table>
+<div class="oneCol" style="padding:25px">
+<?= stripslashes($this->entity['entity_content']) ?>
+</div>
 <?php endif; ?>
+</div>
 
 
 <!-- 同类上下篇 ////////////////////////////////////////////// -->
