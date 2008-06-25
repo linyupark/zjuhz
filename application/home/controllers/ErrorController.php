@@ -1,13 +1,18 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
-{
-	
-	function init()
+/**
+ * 错误处理 ErrorController
+ * 
+ * @author
+ * @version 
+ */
+
+
+class ErrorController extends Zend_Controller_Action {
+
+	public function reloginAction()
 	{
-		// 注册全局SESSION
-		$this->_sessCommon = Zend_Registry::get('sessCommon');
-		$this->view->login = Zend_Registry::get('sessCommon')->login;
+		$this->view->uname = $_COOKIE['zjuhz_member']['alive']; // 记住账号
 	}
 	
     /**
@@ -18,26 +23,23 @@ class ErrorController extends Zend_Controller_Action
      */
     public function errorAction()
     {
+		$this->getResponse()->insert('sidebar','');
         $errors = $this->_getParam('error_handler');
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found                
                 $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
-                $this->view->title = 'HTTP/1.1 404 Not Found';
-                $this->view->message = '请求网页不存在~！';
+                $this->view->title = '404 错误!';
+                $this->view->message = '请求网页不存在';
                 break;
             default:
                 // application error; display error page, but don't change                
                 // status code
-                $this->view->title = 'Application Error';
-                 $this->view->message = '程序出现错误~！';
+                $this->view->title = '应用程序出错!';
+                 $this->view->message = $errors->exception;
                 break;
         }
     }
-    
-    function reloginAction()
-    {
-    	
-    }
+
 }

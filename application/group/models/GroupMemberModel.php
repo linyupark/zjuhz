@@ -2,6 +2,13 @@
 
 class GroupMemberModel
 {
+    # 更新
+    static function update($uid, $data)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        return $db->update('tbl_group_member', $data, 'WHERE `user_id` = '.$uid);
+    }
+    
     # 加入群组
     static function join($uid, $gid, $data)
     {

@@ -12,6 +12,32 @@
 			$this->_helper->ViewRenderer->setNoRender();
 		}
 		
+		/* 首页调用相关 ///////////////////////////////////////////////////// */
+		
+		// 我的班级
+		function myclassAction()
+		{
+			$request = $this->getRequest();
+			if($request->isXmlHttpRequest())
+			{
+				$uid = $this->_getParam('uid');
+				$db = Zend_Registry::get('dbClass');
+				$classes = $db->fetchAll('SELECT `class_name`,`class_id` FROM `vi_class_member`
+							  WHERE `class_member_id` = ?',$uid);
+				$str = '';
+				if(count($classes) > 0)
+				{
+					foreach($classes as $class)
+					{
+						$str .= '<a href="/class/home?c='.$class['class_id'].'">'.$class['class_name'].'</a>,';
+					}
+					echo substr($str, 0,-1);
+				}
+				else echo '您还没有加入任何班级。';
+			}
+		}
+		
+		
 		/* 相册相关 //////////////////////////////////////////////////////////*/
 		
 		function changeclassnameAction()

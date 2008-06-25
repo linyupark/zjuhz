@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" type="text/css" href="/static/styles/group/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/styles/home/screen.css" media="screen" />
 <script type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script type="text/javascript" src="/static/scripts/jquery.pngFix.pack.js"></script>
 <script type="text/javascript" src="/static/scripts/common.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="zh-CN" />
-<?php $this->headTitle('互动群组_杭州浙江大学校友会')->setSeparator('_'); ?>
+<?php $this->headTitle('欢迎访问_杭州浙江大学校友会')->setSeparator('_'); ?>
 <?= $this->headTitle(); ?>
 </head>
 
@@ -20,7 +20,6 @@
 			<div id="passport" class="hrefspan-8 push-1 last">
 				<?php if ($this->passport()): ?>
 				您好！<?= $this->passport('realName') ?>，
-				<a href="/group/my">我的群组</a>
 				<a href="/member/my/">我的账号</a>
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
@@ -29,13 +28,13 @@
 				<?php endif; ?>
 			</div>
 			<div class="global-nav span-13 last hrefspan-8">
+                <a href="/biz/">创业</a>
 				<a href="/member/">校友</a>
 				<a href="/info/">资讯</a>
 				<a href="/help/">互助</a>
 				<a href="/class/">班级</a>
-				<a href="/group" class="here">群组</a>
+				<a href="/group">群组</a>
 				<a href="#">活动</a>
-				<a href="#">相册</a>
 			</div>
 		</div>
 		
@@ -75,16 +74,11 @@
 			$('input[type="text"]').blur(function(){
 				$(this).css('border','1px solid #bbb');
 			});
-			$('#top_tip').load('/group/index/toptip');
-			$.get('/group/index/click?gid=<?= $this->gid ?>'); // 统计访问量
+            $('table td').parent().hover(
+                function(){$(this).css('background','#F9FBFA')},
+				function(){$(this).css('background','#FFFFFF')}
+            );
 		});
-		
-		function notip()
-		{
-			$('#top_tip').load('/group/index/toptip?close=1',null,function(){
-				$('#top_tip').remove();	
-			});
-		}
 	</script>
 </body>
 </html>

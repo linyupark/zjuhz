@@ -58,11 +58,7 @@
                     <a href="/group/manage?gid=<?= $val['group_id'] ?>">管理</a>
                     <?php endif; ?>
                     <span>
-                        <?php if($val['update_time'] == null): //是否有活跃内容 ?>
-                        群组还没有任何动静~ 
-                        <?php else: ?>
-                        最后骚动时间：<?= Lp_Date::timespan($val['update_time']) ?> 前
-                        <?php endif; ?>
+                       
                     </span>
                     </p>
                 </td>
