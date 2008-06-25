@@ -319,7 +319,7 @@ class Commons
 	 */
     static function getCompanyFace($cid, $type='medium')
     {
-    	return (10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($cid).$type.'.jpg" 
+    	return (10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($cid).$type.'.gif" 
     	    onerror=this.src="/static/images/default-company.gif";>' : false
     	);
     }

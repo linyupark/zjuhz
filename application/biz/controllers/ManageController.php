@@ -216,21 +216,32 @@ class ManageController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 
 		$companyRoot = DOCUMENT_ROOT.Commons::getCompanyFolder($this->_sessCompany->manageCid);
-		Upload::init(array('max_size' => 55, 'cust_name' => 'original.jpg', 
-		    'allow_type' => 'jpg|jpeg|gif|png', 'overwrite' => true, 'upload_path' => $companyRoot));
+		Upload::init(array('max_size' => 55, 'cust_name' => 'original', 'overwrite' => true, 
+		    'allow_type' => 'jpg|jpeg|gif|png', 'upload_path' => $companyRoot));
 
 		if(Upload::handle('fileData')) // 上传成功
 		{
-			// 以最小边切成正方形
-			$image = new ImageHandle($companyRoot.'original.jpg');
-			$image->square($companyRoot.'square');
-			// 再以正方形强制切割
-			$image->init($companyRoot.'square.jpg');
-			$image->abs_resize(30, 30, $companyRoot.'small'); // 小图
-			$image->init($companyRoot.'square.jpg');
-			$image->abs_resize(54, 54, $companyRoot.'medium'); // 中图
-			$image->init($companyRoot.'square.jpg');
-			$image->abs_resize(100, 100, $companyRoot.'large'); // 大图
+			$ext   = Upload::fetchParam('file_ext'); // 获取扩展名,带.
+			$image = new ImageHandle("{$companyRoot}original{$ext}"); // 原图
+			$image->abs_resize(150, 60, $companyRoot.'medium'); // 中图
+
+            // 若是jpg/jpeg则强制转换类型
+            if ('.jpg' == $ext || '.jpeg' == $ext)
+			{
+				$image = new ImageHandle("{$companyRoot}original{$ext}");
+                $image->output($companyRoot.'original', 'gif');
+                $image->init("{$companyRoot}medium{$ext}");
+                $image->output($companyRoot.'medium', 'gif');
+			}
+
+            // 若是png则强制转换类型
+            if ('.png' == $ext)
+			{
+				$image = new ImageHandle("{$companyRoot}original{$ext}");
+                $image->output($companyRoot.'original', 'gif');
+                $image->init("{$companyRoot}medium{$ext}");
+                $image->output($companyRoot.'medium', 'gif');
+			}
 
 			// 标记企业标志已上传,可读取标志图片
 			(!CorpCompanyLogic::init()->updateFace($this->_sessCompany->manageCid) ? '' : 
