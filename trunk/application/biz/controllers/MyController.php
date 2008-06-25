@@ -70,7 +70,7 @@ class MyController extends Zend_Controller_Action
                 {
                 	if ($logic->updateStatusValid($cid)) // 更改企业状态为已审
             	    {
-            	    	// 更改会员所有企业总数
+            	    	// 更改会员拥有企业总数
             		    CorpLogic::init()->update(array('valid' => new Zend_Db_Expr('valid + 1'), 
             		        'auditing' => new Zend_Db_Expr('auditing - 1'), 'uid' => $row['uid'])
             		    );

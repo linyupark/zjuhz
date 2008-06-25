@@ -74,7 +74,9 @@ class CorpIndustryModel //extends Zend_Db_Table_Abstract
      */
 	public function selectPairs()
     {
-    	return $this->_dao->fetchPairs("SELECT * FROM {$this->_name} ORDER BY count DESC;", array());
+    	return $this->_dao->fetchPairs("SELECT * FROM {$this->_name} 
+    	    WHERE count > 0 ORDER BY count DESC;", array()
+    	);
     }
 
     /**
