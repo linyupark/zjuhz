@@ -1,17 +1,17 @@
     <div class="side-box floatLeft">
 	    <div class="side-box-title">企业推荐</div>
         <ul>
-		    <?php foreach ($this->rand as $key => $value) { ?>
+		    <?php foreach ($this->recmd as $key => $value) { ?>
             <li><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank"><?= $this->Companyface($value['cid']); ?><br /><?= $value['name']; ?></a></li>
 			<?php } ?>
         </ul>
     </div>
 	<div class="side-box floatRight">
-	    <div class="side-box-title">企业分类</div>
+	    <div class="side-box-title">行业分类</div>
         <ul>
             <?php foreach ($this->industry as $key => $value) { ?>
-            <li><a href=""><?= $this->industry($key); ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)</a></li>
-			<?php } ?>
+            <li><a href="/company/index/industry/iid/<?= $key; ?>/"><?= $this->industry($key); ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)</a></li>
+            <?php } ?>
         </ul>
     </div>
 
@@ -21,21 +21,20 @@
         <table class="table" cellpadding="0" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th class="table-top-left" width="60%">新加入的企业</th>
+                <th class="table-top-left" width="100%">新加入的企业</th>
             </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td class="table-bottom-left"></td>
+                    <td></td>
                 </tr>
             </tfoot>
             <tbody>
-                <?php foreach ($this->join as $key => $value) { ?>
-				<tr>
-                    <td class="left" colspan="4" style="border-right:1px solid #D7D7D7"><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13"><?= $this->industry($value['industry']); ?>&nbsp;&nbsp;<?= $this->property($value['property']); ?>&nbsp;&nbsp;<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr($value['intro'], 200); ?>...</p><hr />
-</td>
-                </tr>
-				<?php } ?>
+            <?php foreach ($this->list as $key => $value) { ?>
+            <tr>
+                <td class="left" style="border-right:1px solid #D7D7D7"><a href="/company/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13">行业：<?= $this->industry($value['industry']); ?>&nbsp;&nbsp;性质：<?= $this->property($value['property']); ?>&nbsp;&nbsp;地区：<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr($value['intro'], 200); ?>...</p><hr /></td>
+            </tr>
+            <?php } ?>
             </tbody>
 		</table>
         <!--<div class="corner-box floatLeft" style="width:252px; margin-right:10px;">

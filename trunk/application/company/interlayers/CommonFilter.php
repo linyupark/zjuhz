@@ -62,4 +62,20 @@ class CommonFilter extends CompanyInterlayer
         // Filter the $arg
         return $filterChain->filter($cid);
 	}
+
+	/**
+     * 分类编号过滤
+     * 
+     * @param integer $iid
+     * @return string
+     */
+	public static function iid($iid)
+	{
+		$filterChain = new Zend_Filter();
+		$filterChain->addFilter(new Zend_Filter_StripTags())
+		            ->addFilter(new Zend_Filter_Int());
+
+        // Filter the $arg
+        return $filterChain->filter($iid);
+	}
 }
