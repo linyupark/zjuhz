@@ -15,7 +15,7 @@
                 <tbody>
                 <?php foreach ($this->industry as $key => $value) { $i++; if (1 == $i % 3) { echo '<tr>'; } ?>
                     <td width="33%"><?php if ($this->iid != $key) { ?><a href="/biz/index/industry/iid/<?= $key; ?>/"><?php } ?><?= $this->industry($key); ?> (<?= ($this->industry[$key] ? $this->industry[$key] : 0); ?>)<?php if ($this->iid == $key) { ?></a></td><?php } ?>
-                <?php if (0 == $i % 2) { echo '</tr>'; } } ?>
+                <?php if (0 == $i % 3) { echo '</tr>'; } } ?>
                 </tbody>
           </table>
         </div>
