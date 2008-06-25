@@ -117,6 +117,18 @@ class CorpCompanyLogic extends CompanyInterlayer
 	}
 
     /**
+     * 查找最新加入的行业企业
+     * 
+     * @param integer $industry
+     * @param string $limit
+     * @return array
+     */
+	public function selectIndustryJoinAll($industry, $limit)
+	{
+		return $this->_CorpCompanyModel->selectIndustryJoinAll('regTime', 'DESC', $industry, $limit);
+	}
+
+    /**
      * 查找已发布上网的企业
      * 
      * @param integer $uid

@@ -1,34 +1,30 @@
 <table class="global_search">
-	<tr>
-	<td class="nav">
-    <?php if ($this->sessCommon->login) { ?>
-		您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/help/my/">我的互助</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/help/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
-	<?php }	else { ?>
-		<a href="/member/register/">注册</a>|<a href="/member/login/">登录</a>
-	<?php } ?>
-	</td>
-	</tr>
+    <tr>
+    <td class="nav">
+        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/help/my/">我的互助</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/help/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php } else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+    </td>
+    </tr>
 </table>
 
 <table class="global_search">
-	<tr>
-	<td class="models">
-	<a href="/company/">企业</a>
+    <tr>
+    <td class="models">
+        <a href="/company/">创业</a>
 	<a href="/member/">校友</a>
 	<a href="/info/">资讯</a>
 	<a href="/help/" class="on">互助</a>
 	<a href="/class/">班级</a>
-	<a href="/help/#/">群组</a>
-	<a href="/help/#/">活动</a>
-	</td>
-	</tr>
-	<tr>
-	<td class="search_form" colspan="2">
-	<form method="get" action="/help/search/">
+	<a href="/group/">群组</a>
+	<a href=#"">活动</a>
+    </td>
+    </tr>
+    <tr>
+    <td class="search_form" colspan="2">
+    <form method="get" action="/help/search/">
         <input class="input" type="text" onfocus="input_focus('input')" onblur="input_blur('input')" value="<?= $this->wd; ?>" name="wd" id="wd" maxlength="20" />
         <input class="btn" type="submit" value="搜索" />
-		<input class="btn" type="button" value="提问" onclick="goToHelp('question_insert');return false;" />		
+        <input class="btn" type="button" value="提问" onclick="goToHelp('question_insert');return false;" />		
     </form>
-	</td>
-	</tr>
+    </td>
+  </tr>
 </table>

@@ -11,8 +11,8 @@
         <a href="/company/" id="logo" title="返回首页"></a>
         <table id="passport" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-                <td style="text-align:left"><a href="/member/">校友</a> | <a href="/info/">资讯</a> | <a href="/help/">互助</a> | <a href="/class/">班级</a> | <a href="/company/"><b>企业</b></a> | <a href="#">群组</a> | <a href="#">活动</a> </td>
-                <td style="text-align:right" class="pdr10"><?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">个人管理</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/company/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php } else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?></td>
+                <td style="text-align:left"><a href="/company/"><b>创业</b></a> | <a href="/member/">校友</a> | <a href="/info/">资讯</a> | <a href="/help/">互助</a> | <a href="/class/">班级</a> | <a href="/group/">群组</a> | <a href="#">活动</a> </td>
+                <td style="text-align:right" class="pdr10"><?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">我的创业</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/company/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php } else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?></td>
             </tr>
         </table>
         <h1></h1>

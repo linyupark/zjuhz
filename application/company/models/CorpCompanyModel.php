@@ -142,6 +142,23 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
     }
 
     /**
+     * 查找最新加入的行业企业
+     * 
+     * @param string $orderField
+     * @param string $orderType
+     * @param integer $industry
+     * @param string $limit
+     * @return array
+     */
+	public function selectIndustryJoinAll($orderField='cid', $orderType='', $industry, $limit='10')
+    {
+		return $this->_dao->fetchAll("SELECT * FROM {$this->_name} 
+		    WHERE status = 1 AND industry = :industry ORDER BY {$orderField} {$orderType} LIMIT {$limit};", 
+		    array('industry' => $industry)
+	    );
+    }
+
+    /**
      * 查找uid按status的全部企业
      * 
      * @param integer $uid

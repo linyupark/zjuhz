@@ -58,7 +58,7 @@ class DetailController extends Zend_Controller_Action
 		$this->_dataCompany = (!$this->_dataCid ? '' : 
 		    CacheLogic::init()->companyLoad($this->_dataCid));
         // 判断数据可用
-		($this->_dataCid === $this->_dataCompany['cid'] ? '' :
+		($this->_dataCid === $this->_dataCompany['cid'] ? '' : 
 		    $this->_redirect('/company/', array('exit')));
 
 		$this->view->sessCommon  = $this->_sessCommon;

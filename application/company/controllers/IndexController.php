@@ -84,8 +84,27 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headTitle($this->_iniCompany->head->titleIndex);
 		//$this->view->headScript()->appendFile('/static/scripts/company/index/index.js');
 
-		$this->view->rand     = CorpCompanyLogic::init()->selectRandList(20);
-		$this->view->join     = CorpCompanyLogic::init()->selectJoinAll(10);
-		$this->view->industry = CorpIndustryLogic::init()->selectPairs();
+		$this->view->recmd    = CorpCompanyLogic::init()->selectRandList(20); // 随机显示全部推荐企业
+		$this->view->list     = CorpCompanyLogic::init()->selectJoinAll(10); // 按新加入显示全部企业
+		$this->view->industry = CorpIndustryLogic::init()->selectPairs(); // 显示全部行业分类目录
+	}
+
+	/**
+     * 校友企业分类
+     * 
+     * @return void
+     */
+	public function industryAction()
+	{
+		// 获取企业编号
+		$iid   = CommonFilter::iid(($this->getRequest()->getParam('iid')));
+        $iname = $this->view->industry($iid);
+
+		$this->view->headTitle($iname);
+		$this->view->iid      = $iid;
+		$this->view->iname    = $iname;
+		$this->view->recmd    = CorpCompanyLogic::init()->selectIndustryRandList($iid, 20); // 随机显示行业推荐企业
+		$this->view->list     = CorpCompanyLogic::init()->selectIndustryJoinAll($iid, 10); // 按新加入显示行业企业
+		$this->view->industry = CorpIndustryLogic::init()->selectPairs(); // 显示全部行业分类目录
 	}
 }

@@ -10,7 +10,7 @@
     <div id="header">
         <a href="/company/" id="logo"></a>
         <div id="passport">
-        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">个人管理</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/company/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/company/my/">我的创业</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/company/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
         </div>
     </div>
 

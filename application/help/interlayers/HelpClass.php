@@ -59,7 +59,7 @@ class HelpClass extends HelpInterlayer
 		{
 			if ($sid == $value['sid'])
 			{
-				$path = '<a href="/help/sort/browse/sid/'.$value['sid'].'/" title="'.$value['name'].'">'.$value['name'].'</a>'.'&nbsp;>&nbsp;'.$path;
+				$path = '<a href="/help/sort/browse/sid/'.$value['sid'].'/" title="'.$value['name'].'">'.$value['name'].'</a>'.'&nbsp;»&nbsp;'.$path;
 
 				if ('0' !== $value['parent']) {	$path = self::getSortPath($sort, $value['parent'], $path); }
 

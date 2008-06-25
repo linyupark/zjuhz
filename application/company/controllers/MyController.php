@@ -88,7 +88,7 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
-     * 个人管理首页
+     * 我的创业首页
      * 
      * @return void
      */
