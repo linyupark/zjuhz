@@ -148,6 +148,19 @@ class ManageController extends Zend_Controller_Action
 				(!CorpCompanyLogic::init()->updateBasic($basicArgs) ? '' : 
 				    CacheLogic::init()->companySave(array_merge($this->_dataCompany, $basicArgs), $basicArgs['cid']));
 
+				if ($basicArgs['industry'] != $this->_dataCompany['industry'])
+				{
+					// 减少旧选行业企业总数
+            		CorpIndustryLogic::init()->insertOrUpdate(array(
+            		    'count' => new Zend_Db_Expr('count - 1'), 'iid' => $this->_dataCompany['industry'])
+            		);
+
+					// 增加新选行业企业总数
+            		CorpIndustryLogic::init()->insertOrUpdate(array(
+            		    'count' => new Zend_Db_Expr('count + 1'), 'iid' => $basicArgs['industry'])
+            		);
+				}
+
 				$this->_sessCompany->message = $this->_iniCompany->hint->updateSuccess;
 
 				echo 'message'; // 请求ajax弹出提示
