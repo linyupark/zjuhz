@@ -179,7 +179,7 @@
 	    //custom file name
 	    if (self::$upConfig['cust_name'] != "")
 	    {
-	      self::$upConfig['file_name'] = self::$upConfig['cust_name'];
+	      self::$upConfig['file_name'] = self::$upConfig['cust_name'].self::getExt(self::$upConfig['file_name']);
 	    }
 	
 	    //

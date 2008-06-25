@@ -51,12 +51,12 @@
               <td width="80" bgcolor="#F0F3E5"><strong>办公地址：</strong></td>
               <td colspan="3">&nbsp;<?= $this->dataCompany['address']; ?></td>
             </tr>
-			<?php if ($this->dataCompany['other']) { ?>
+            <?php if ($this->dataCompany['other']) { ?>
             <tr>
               <td width="80" bgcolor="#F0F3E5"><strong>其它方式：</strong></td>
               <td colspan="3">&nbsp;<?= $this->dataCompany['other']; ?></td>
             </tr>
-			<?php } ?>
+	    <?php } ?>
           </table>
           <table class="detail" cellspacing="0" cellpadding="0" width="737">
             <tr>
@@ -75,6 +75,6 @@
               <td colspan="3">&nbsp;寻觅如下合作：<?= ($this->dataCompany['cooperate'] ? $this->dataCompany['cooperate'] : '暂无' ); ?></td>
             </tr>
           </table>
-		</td>
+        </td>
       </tr>
     </table>

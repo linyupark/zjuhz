@@ -16,7 +16,7 @@
         </table>
 	
         <div id="banner">
-            <p class="floatLeft"><?= ('Y' === $this->dataCompany['face'] ? $this->Companyface($this->dataCid, 'large') : ''); ?></p>
+            <p class="floatLeft"><?= ('Y' === $this->dataCompany['face'] ? $this->Companyface($this->dataCid) : ''); ?></p>
             <h1><?= $this->dataCompany['name']; ?></h1>
             <p style="padding:0 0 0 30px;"><a href="http://www.zjuhz.com/biz/detail/index/cid/<?= $this->dataCid; ?>/" title="<?= $this->dataCompany['name']; ?>">http://www.zjuhz.com/biz/detail/index/cid/<?= $this->dataCid; ?>/</a></p>
         </div>
