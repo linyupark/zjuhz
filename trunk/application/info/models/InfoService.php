@@ -14,6 +14,32 @@
 		}
 		
 		/**
+		 * 资讯总数
+		 *
+		 * @return string
+		 */
+		function howmany()
+		{
+			$row = $this->_db->fetchRow('SELECT
+				COUNT(`entity_id`) AS `numrows` FROM `tbl_entity`
+			');
+			return $row['numrows'];
+		}
+		
+		/**
+		 * 返回最新的资讯
+		 *
+		 * @return array
+		 */
+		function get_new()
+		{
+			return $this->_db->fetchAll('SELECT
+				`entity_id`,`entity_title`,`category_id`,`entity_pub_time`,`category_icon`,`category_name`
+				FROM `vi_entity`
+				WHERE `entity_pub` = 1 ORDER BY `entity_pub_time` DESC LIMIT 10');
+		}
+		
+		/**
 		 * 返回需要在首页显示的目录列 pub = 1
 		 *
 		 * @return array

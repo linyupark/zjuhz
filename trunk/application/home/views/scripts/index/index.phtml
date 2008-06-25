@@ -1,106 +1,93 @@
-<div id="main">
+<div class="span-24 last oneCol">
+	<p class="extInline2 mg10" style="line-height:150%">
+		<?= Cmd::icon('emoticon_grin.png') ?>
+		欢迎来到杭州浙江大学校友会网站。我们的
+		<b>目标：</b>校友沟通、互助的平台和助手 
+		<b>宗旨：</b>联络校友、帮助校友、回报母校
+	</p>
+	
+	<div class="span-11">
+		<form class="prepend-1" method="post" id="relogin_form" onsubmit="return relogin();">
+			<table>
+				<tr>
+					<td class="txtr vm">账号：</td>
+					<td><input class="text" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></td>
+				</tr>
+				<tr>
+					<td class="txtr vm">密码：</td>
+					<td><input class="text" name="pswd" type="password" maxlength="16" /></td>
+				</tr>
+				<tr>
+					<td class="txtr vm"></td>
+					<td><label for="alive"><input id="alive" type="checkbox" checked="checked" value="0" name="alive" /> 记住我的账号</label></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><p class="txtr"><input style="width:100%" class="btn" id="btnLogin" type="submit" value="登 录" /></p></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<div class="span-6">
+		<h3>杭州浙大校友在这里可以:</h3>
+		<ul class="f14">
+			<li><?= Cmd::icon('bullet_blue.png') ?> 拥有只属于浙大校友的互动空间</li>
+			<li><?= Cmd::icon('bullet_blue.png') ?> 给予和得到来自校友的帮助</li>
+			<li><?= Cmd::icon('bullet_blue.png') ?> 组建或参与校友的各种俱乐部</li>
+			<li><?= Cmd::icon('bullet_blue.png') ?> 体验高质量的社交环境</li>
+			<li><?= Cmd::icon('bullet_blue.png') ?> 自由安全地控制个人隐私</li>
+		</ul>
+	</div>
+	
+	<div class="prepend-1 span-4 last">
+		<EMBED src=http://sports.sohu.com/upload/20061110daojishi2008/aoyun_djs.swf width=200 height=150 type=application/x-shockwave-flash wmode="transparent" allowNetworking="internal" allowScriptAccess="never"></EMBED>
+	</div>
+	
+	<hr class="space" />
+</div>
 
-<div class="sidebar" style="width:250px;">
-<form method="post" onsubmit="return login()">
-<div id="login_form">
-<p class="account">
-登陆账号:<br />
-<input value="<?= $this->uname ?>" tabindex="1" name="uname" type="text" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
-</p>
-<p class="password">
-密码: (<a href="">忘记了?</a>)<br />
-<input tabindex="2" name="pswd" type="password" class="login_input" onfocus="input_focus('login_input')" onblur="input_blur('login_input')" />
-</p>
-<p>
-<input name="rememberme" type="hidden" value="0" />
-<label for="alive"><input tabindex="3" id="alive" type="checkbox" checked="checked" value="0" name="alive" /> 记住我的登录账号</label>
-</p>
-<br />
-<table>
-<tr>
-<td><input tabindex="4" type="image" src="/static/images/btn/login.gif" /></td>
-<td valign="middle"><a href="/member/register/" class="registry">我要注册</a></td>
-</tr>
-</table>
+
+<div class="span-17 mgu10">
+		<table width="100%" class="table-1">
+			<tr>
+				<th colspan="2" class="f14 txtl pd5"><strong>最新资讯</strong></th>
+				<th class="f14 txtl"><strong><a href="/info/">查看更多</a></strong></th>
+			</tr>
+<?php if(!$this->cache->start('homepage')): ?>
+		<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new'); ?>
+		<?php foreach($rows as $row): ?>
+		<tr>
+			<td class="dashBorder pd5 f12">
+				<?= Cmd::icon('bullet_black.png') ?>
+				<strong><a href="/info/?category=<?= $row['category_id'] ?>"><?= $row['category_name'] ?></a></strong>
+			</td>
+			<td class="dashBorder pd5 f14 txtl">
+				<a href="/info/view/detail/id/<?= $row['entity_id'] ?>"><?= $row['entity_title'] ?></a>
+			</td>
+			<td class="dashBorder pd5 quiet">
+				<?= Lp_Date::timespan($row['entity_pub_time']) ?> 前
+			</td>
+		</tr>
+		<?php endforeach; ?>
+<?php $this->cache->end(); endif; ?>
+		</table>
 </div>
-</form>
-</div>
+				
+<?= $this->render('home-sub.phtml') ?>
+
 
 <script type="text/javascript">
-function login()
-{
-	$.post('/member/login/dologin/',
-			$("#login_form").fastSerialize(),
-			function(data){
-				if(data == 'redirect')
-				location.href="/home/welcome/";
-				else $.facebox('<img src="/static/images/icon/stop.gif" align="absmiddle" /> 登陆失败！')
+	// 会员登录
+	function relogin() {
+		var formdata = $("#relogin_form").fastSerialize();
+	
+		$.post("/member/login/dologin/", formdata, function(msg) {
+			if ("redirect" == msg) {
+				history.go(0);
 			}
-		);
-	return false;
-}
+			else alert(msg);
+		});
+		return false;
+	}
 </script>
-<!-- 宣传+快捷连接 -->
-<div class="sidebar">
-<div class="intro">
-<p class="notice">
-	<b>目标：</b>校友沟通、互助的平台和助手<br />
-	<b>宗旨：</b>联络校友、帮助校友、回报母校
-</p>
-
-<h2>杭州浙大校友在这里可以:</h2>
-<ul>
-<li>拥有只属于浙大校友的互动空间</li>
-<li>给予和得到来自校友的帮助</li>
-<li>组建或参与校友的各种俱乐部</li>
-<li>体验高质量的社交环境</li>
-<li>自由安全地控制个人隐私</li>
-</ul>
-</div>
-</div>
-<embed style="cursor:text;overflow:hidden;width:155px;height:37px; float:right; margin-top:-30px; margin-right:30px;" src="/static/swfs/2008lite.swf" width="155" height="37" type="application/x-shockwave-flash"></embed>
-<!-- 专题区 -->
-<div class="sidebar subject">
-<h2 class='clearfloat'>活动</h2>
-<a href="/info/?category=9">暑期走访校友行 <img src="/static/images/icon/new.gif" /></a>
-<a target="_blank" href="http://www.zju.zj.cn/Details/DongTaiDetail_532.html">“心系灾区，大爱无垠”——浙江大学企业家经理人高级研修班爱心捐款</a>
-<h2>专题</h2>
-<a target="_blank" href="http://www.zjuhz.com/info/view/detail/id/186">杭州校友会筹备工作一览<img src="/static/images/icon/new.gif" /></a>
-<a href="/info/subject/index/of/qiushixungen-jiangxi">浙江大学求是寻根 - 江西段</a>
-</div>
-
-<?php 
-if(!$this->cache->start('homepage')):
-?>
-<!-- 显示在首页的信息目录列 -->
-<div class="sidebar" style="clear:left; width:172px;">
-<div id="news_list">
-<?php 
-$cat_rows = $this->info_xmlrpc->call('rpcInfo.get_public_categories');
-foreach ($cat_rows as $k => $v): ?>
-<a href="/info/?category=<?= $v['category_id'] ?>" onmouseover="show_news(<?= $k+1 ?>)"><img src="/static/images/icon/<?= $v['category_icon'] ?>.gif" /><?= $v['category_name'] ?></a>
-<?php endforeach; ?>
-</div>
-</div>
-
-<!-- 相应的内容快照 -->
-<div class="sidebar" style="width:667px; height:210px; margin-top:15px;">
-<?php 
-foreach ($cat_rows as $k => $v):
-//获取相应文章快照
-$art_rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array((int)$v['category_id']));
-?>			
-<table class="news_page" id="num_<?= $k+1 ?>">
-<tr>
-<td valign="top">							
-<?php foreach ($art_rows as $k2 => $v): ?>
-<a href="/info/view/detail/id/<?= $v['entity_id'] ?>" title="[<?= Commons::date($v['entity_pub_time']) ?>] <?= $v['entity_title'] ?>"><?= substr($v['entity_title'],0,60).'..' ?></a>
-<?php endforeach; ?>
-</td>
-<td width="253"><img src="/static/images/pics/<?= $k+1 ?>.jpg" /></td>
-</tr>
-</table>
-<?php endforeach; $this->cache->end(); endif; ?>
-</div>
-
-<script type="text/javascript">show_news(1)</script>

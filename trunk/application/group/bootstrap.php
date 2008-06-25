@@ -28,10 +28,10 @@ Zend_Registry::set('sessGroup', new Zend_Session_Namespace('group'));
 define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /** run */
-$info_front = Zend_Controller_Front::getInstance();
-$info_front->setDefaultModule('group')
-           ->throwExceptions(false)
-           ->registerPlugin(new GroupPreLoad())
-           ->setControllerDirectory('../../application/group/controllers/')
-           ->dispatch();
+$front = Zend_Controller_Front::getInstance();
+$front->setDefaultModule('group')
+      ->throwExceptions(false)
+      ->registerPlugin(new GroupPreLoad())
+      ->setControllerDirectory('../../application/group/controllers/')
+      ->dispatch();
 

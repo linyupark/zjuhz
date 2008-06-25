@@ -4,7 +4,6 @@ class WelcomeController extends Zend_Controller_Action
 {
 	function init()
 	{
-		$this->_helper->layout()->setLayout('main');
 		$this->view->headScript()->appendFile('/static/scripts/home.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen');
 		$this->_sessCommon = Zend_Registry::get('sessCommon');

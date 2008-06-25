@@ -3,7 +3,6 @@
     <div class="span-19 last mgu10">
         <!-- 新话题 -->
         <div class="oneCol">
-            <span id="tip"></span>
             <?php if($this->role == false): ?>
             <div class="notice mg10">抱歉，非本群组成员不能发表话题。<a href="">申请加入</a></div>
             <?php else: ?>
@@ -14,6 +13,7 @@
             <?= $this->editor($this->gid, '100%', '400px'); ?>
             <p><label>标签 <input type="text" name="tags" class="text" style="width:60%" /></label> (用空格分隔，如：西湖 杭州)</p>
             <p><input type="submit" class="btn" value="已经写完，发表我的主题" style="width:100%" /></p>
+            <span id="tip"></span>
             </form>
             <?php endif; ?>
         </div>
@@ -26,7 +26,9 @@
         $.post('/group/topic/new?gid=<?= $this->gid ?>',
                $('#topic_form').fastSerialize(),
                function(html){
-                    
+                    $('#tip').html(html);
+                    window.scroll(0,1000);
         });
+        return false;
     }
 </script>

@@ -1,63 +1,60 @@
-<div id="main">
-
-<table width="100%" style="margin:0 10px;">
-	<tr>
-		<td>
-			<div style="width:600px;height:200px;" class="txtc">
-				<div style="padding:20px;">
-				<img src="/static/images/icon/success.gif" />
-				<h3>您已经成功登陆！</h3><br />
-				（个性化信息显示...待定）
-				</div>
-			</div>
-		</td>
-		<td>
-		<embed style="position:absolute; margin-left:60px; margin-top:-30px;" src="/static/swfs/2008lite.swf" width="155" height="37" type="application/x-shockwave-flash"></embed>
-			<!-- 专题区 -->
-<div class="sidebar subject">
-<h2 class='clearfloat'>活动</h2>
-		<a href="/info/?category=9">暑期走访校友行 <img src="/static/images/icon/new.gif" /></a>
-<a target="_blank" href="http://www.zju.zj.cn/Details/DongTaiDetail_532.html">“心系灾区，大爱无垠”——浙江大学企业家经理人高级研修班爱心捐款</a>
-<h2>专题</h2>
-<a target="_blank" href="http://www.zjuhz.com/info/view/detail/id/186">杭州校友会筹备工作一览<img src="/static/images/icon/new.gif" /></a>
-<a href="/info/subject/index/of/qiushixungen-jiangxi">浙江大学求是寻根 - 江西段</a>
-</div>
-		</td>
-	</tr>
-</table>
-		
-<?php 
-if(!$this->cache->start('homepage')):
-?>
-<!-- 显示在首页的信息目录列 -->
-<div class="sidebar" style="clear:left; width:172px;">
-<div id="news_list">
-<?php 
-$cat_rows = $this->info_xmlrpc->call('rpcInfo.get_public_categories');
-foreach ($cat_rows as $k => $v): ?>
-<a href="/info/?category=<?= $v['category_id'] ?>" onmouseover="show_news(<?= $k+1 ?>)"><img src="/static/images/icon/<?= $v['category_icon'] ?>.gif" /><?= $v['category_name'] ?></a>
-<?php endforeach; ?>
-</div>
+<div class="span-24 last oneCol">
+	<p class="success mg10" style="line-height:150%">
+		<?= Cmd::icon('emoticon_grin.png') ?>
+		<?= $this->passport('realName') ?> 校友欢迎您回来，您上一次登陆本站是在___年_月_日_:_ <small class="quiet f12">(注:下横线内的信息尚未关联)</small>
+	</p>
+	
+	<div class="mglf10">
+		<table>
+			<tr>
+				<td class="pd10"><?= Commons::getUserFace($this->passport('uid')) ?></td>
+				<td class="vm f14 pdd10">
+					<p>
+						当前在线校友___人，
+						截止今天本站已有资讯<strong><?= $this->info_xmlrpc->call('rpcInfo.howmany') ?></strong>条，
+						校友企业___家，<a href="/biz/my/company/type/join/">申请加入</a>。
+					</p>
+					<p>您的班级：<span id="myclass"></span>，您的群组：_____有了新内容。</p>
+					<p>快速链接：
+						<a href="/member/my/address/">通讯录</a>、
+						<a href="/my/user/">我的资料</a>、
+						<a href="/help/my/">我的互助</a>、
+						<a href="/info/admin/">资讯投稿</a>
+					</p>
+				</td>
+			</tr>
+		</table>	
+	</div>
 </div>
 
-<!-- 相应的内容快照 -->
-<div class="sidebar" style="width:667px; height:210px; margin-top:15px;">
-<?php 
-foreach ($cat_rows as $k => $v):
-//获取相应文章快照
-$art_rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array((int)$v['category_id']));
-?>			
-<table class="news_page" id="num_<?= $k+1 ?>">
-<tr>
-<td valign="top">							
-<?php foreach ($art_rows as $k2 => $v): ?>
-<a href="/info/view/detail/id/<?= $v['entity_id'] ?>" title="[<?= Commons::date($v['entity_pub_time']) ?>] <?= $v['entity_title'] ?>"><?= substr($v['entity_title'],0,60).'..' ?></a>
-<?php endforeach; ?>
-</td>
-<td width="253"><img src="/static/images/pics/<?= $k+1 ?>.jpg" /></td>
-</tr>
-</table>
-<?php endforeach; $this->cache->end(); endif; ?>
+<div class="span-17 mgu10">
+		<table width="100%" class="table-1">
+			<tr>
+				<th colspan="2" class="f14 txtl pd5"><strong>最新资讯</strong></th>
+				<th class="f14 txtl"><strong><a href="/info/">查看更多</a></strong></th>
+			</tr>
+<?php if(!$this->cache->start('homepage')): ?>
+		<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new'); ?>
+		<?php foreach($rows as $row): ?>
+		<tr>
+			<td class="dashBorder pd5 f12">
+				<?= Cmd::icon('bullet_black.png') ?>
+				<strong><a href="/info/?category=<?= $row['category_id'] ?>"><?= $row['category_name'] ?></a></strong>
+			</td>
+			<td class="dashBorder pd5 f14 txtl">
+				<a href="/info/view/detail/id/<?= $row['entity_id'] ?>"><?= $row['entity_title'] ?></a>
+			</td>
+			<td class="dashBorder pd5 quiet">
+				<?= Lp_Date::timespan($row['entity_pub_time']) ?> 前
+			</td>
+		</tr>
+		<?php endforeach; ?>
+<?php $this->cache->end(); endif; ?>
+		</table>
 </div>
+				
+<?= $this->render('home-sub.phtml') ?>
 
-<script type="text/javascript">show_news(1)</script>
+<script>
+	$('#myclass').load('/class/ajax/myclass/?uid=<?= $this->passport('uid') ?>');
+</script>

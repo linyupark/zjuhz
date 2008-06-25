@@ -1,9 +1,12 @@
 <?php
 
+date_default_timezone_set('Asia/Shanghai');
+
 /** set_include_path */
 set_include_path(get_include_path().
-					 PATH_SEPARATOR.'../../common/Custom/'.
-					 PATH_SEPARATOR.'../../application/info/models/');
+				 PATH_SEPARATOR.'../../common/'.
+				 PATH_SEPARATOR.'../../common/Custom/'.
+				 PATH_SEPARATOR.'../../application/home/models/');
 
 /** Zend_Controller_Front */
 require_once('Zend/Controller/Front.php');
@@ -17,11 +20,10 @@ Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'
 /** 公用SESSION,包含如验证码,用户基本资料等 */
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
 
-Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/'));
-
 /** run */
-	$info_front = Zend_Controller_Front::getInstance();
-	$info_front->setDefaultModule('home');
-	$info_front->throwExceptions(true);
-	$info_front->setControllerDirectory('../../application/home/controllers/');
-	$info_front->dispatch();
+	$front = Zend_Controller_Front::getInstance();
+	$front->setDefaultModule('home');
+	$front->throwExceptions(false);
+    $front->registerPlugin(new HomePreLoad());
+	$front->setControllerDirectory('../../application/home/controllers/');
+	$front->dispatch();
