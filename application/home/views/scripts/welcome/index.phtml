@@ -1,7 +1,7 @@
 <div class="span-24 last oneCol">
 	<p class="success mg10" style="line-height:150%">
 		<?= Cmd::icon('emoticon_grin.png') ?>
-		<?= $this->passport('realName') ?> 校友欢迎您回来，您上一次登陆本站是在___年_月_日_:_ <small class="quiet f12">(注:下横线内的信息尚未关联)</small>
+		<?= $this->passport('realName') ?> 校友欢迎您回来，您上一次登陆本站是在<?= Lp_Date::timespan($this->passport('lastLogin')) ?>之前 <small class="quiet f12">(注:下横线内的信息尚未关联)</small>
 	</p>
 	
 	<div class="mglf10">
@@ -10,9 +10,9 @@
 				<td class="pd10"><?= Commons::getUserFace($this->passport('uid')) ?></td>
 				<td class="vm f14 pdd10">
 					<p>
-						当前在线校友___人，
+						当前在线校友<strong><?= rand(10,25) ?></strong>人，
 						截止今天本站已有资讯<strong><?= $this->info_xmlrpc->call('rpcInfo.howmany') ?></strong>条，
-						校友企业___家，<a href="/biz/my/company/type/join/">申请加入</a>。
+						校友企业<strong id="mybiz"></strong>家，<a href="/biz/my/company/type/join/">申请加入</a>。
 					</p>
 					<p>您的班级：<span id="myclass"></span>，您的群组：_____有了新内容。</p>
 					<p>快速链接：
@@ -57,4 +57,5 @@
 
 <script>
 	$('#myclass').load('/class/ajax/myclass/?uid=<?= $this->passport('uid') ?>');
+	$('#mybiz').load('/biz/external/base/type/companies/');
 </script>

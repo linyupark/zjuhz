@@ -24,7 +24,7 @@
 	Zend_Db_Table::setDefaultAdapter($dbInfo);
 	
 	/* Layout */
-	Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layout' => 'main'));
+	Zend_Layout::startMvc(array('layoutPath' => '../../application/layouts/', 'layout' => 'info'));
 	
 	/** run */
 	$front = Zend_Controller_Front::getInstance();
