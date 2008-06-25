@@ -2,7 +2,7 @@
 
 /**
  * @category   zjuhz.com
- * @package    company
+ * @package    biz
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
  * @version    Id:CompanyBizModel.php

@@ -142,8 +142,76 @@ class CacheLogic extends BizInterlayer
     }
 
     /**
+     * 初始基础数据缓存
+     * 
+     * @return void
+     */
+	public function baseInit()
+    {
+    	if (!isset($this->_cache))
+    	{
+    		// 固定变更项写入
+    	    self::$_options['cache_dir'] = DOCUMENT_CACHE;
+    	    self::$_options['lifeTime']  = 43200;
+    	    // 参数变更初始化
+    	    $this->_setFrontendOptions();
+    	    $this->_setBackendOptions();
+
+    	    $this->_cache = Zend_Cache::factory('Core', 'File', 
+    	        $this->_frontendOptions, $this->_backendOptions
+	        );
+    	}
+    }
+
+    /**
+     * 保存基础数据缓存
+     * 
+     * @param array $data
+     * @return boolean True if no problem
+     */
+	public function baseSave($data)
+    {
+    	$this->baseInit();
+
+    	return $this->_cache->save($data, 'base');
+    }
+
+    /**
+     * 载入基础数据缓存
+     * 
+     * @return string|false cached datas
+     */
+	public function baseLoad()
+    {
+    	$this->baseInit();
+
+    	if(!$data = $this->_cache->load('base'))
+    	{
+    		$data = BaseLogic::init()->selectRow();
+
+    	    $this->baseSave($data);
+    	}
+
+    	return $data;
+    }
+
+    /**
+     * 刷新基础数据缓存
+     * 
+     * @return void
+     */
+	public function baseRefresh()
+    {
+    	$this->baseInit();
+
+    	$this->baseSave(BaseLogic::init()->selectRow());
+    }
+
+
+    /**
      * 初始企业缓存
      * 
+     * @param string $cid
      * @return void
      */
 	public function companyInit($cid)
