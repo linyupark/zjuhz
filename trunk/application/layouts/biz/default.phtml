@@ -8,7 +8,7 @@
 <div id="wrap">
 
     <div id="header">
-        <a href="/biz/" id="logo"></a>
+        <a href="/" id="logo" title="返回网站首页"></a>
         <div id="passport">
         <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/biz/my/">我的创业</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/biz/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
         </div>
