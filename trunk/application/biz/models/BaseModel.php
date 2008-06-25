@@ -5,27 +5,27 @@
  * @package    biz
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:CorpModel.php
+ * @version    Id:BaseModel.php
  */
 
 
 /**
- * 校友企业-tbl_corp
+ * 校友企业-tbl_base
  * 表级操作类,含单表读/写/改等方法
  */
-class CorpModel //extends Zend_Db_Table_Abstract
+class BaseModel //extends Zend_Db_Table_Abstract
 {
     /**
      * 数据表名
      * @var string
      */
-    protected $_name = 'tbl_corp';
+    protected $_name = 'tbl_base';
 
     /**
      * 数据表主键
      * @var string
      */
-    protected $_primary = 'uid';
+    protected $_primary = '';
 
     /**
      * 数据表访问
@@ -54,39 +54,23 @@ class CorpModel //extends Zend_Db_Table_Abstract
     }
 
     /**
-     * 查找uid的模块资料
+     * 查找基础数据资料
      * 
-     * @param integer $uid
      * @return array
      */
-	public function selectUidRow($uid)
+	public function selectRow()
     {
-    	return $this->_dao->fetchRow("SELECT * FROM {$this->_name} 
-    	    WHERE uid = :uid;", array('uid' => $uid)
-    	);
-    }
-
-    /**
-     * 插入uid的模块记录
-     * 
-     * @param array $args
-     * @return integer
-     */
-	public function insert($args)
-    {
-		return $this->_dao->insert($this->_name, $args);
+    	return $this->_dao->fetchRow("SELECT * FROM {$this->_name};", array());
     }
 
 	/**
-     * 更新uid的模块资料
+     * 更新基础数据资料
      * 
      * @param array $args
      * @return integer
      */
 	public function update($args)
     {
-		return $this->_dao->update($this->_name, $args, 
-		    $this->_dao->quoteInto("{$this->_primary} = ?", $args['uid'])
-		);
+		return $this->_dao->update($this->_name, $args, '');
     }
 }

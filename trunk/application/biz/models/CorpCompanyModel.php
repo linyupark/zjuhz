@@ -2,7 +2,7 @@
 
 /**
  * @category   zjuhz.com
- * @package    company
+ * @package    biz
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
  * @version    Id:CorpCompanyModel.php
@@ -65,6 +65,20 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
 		    :property, :province, :city, :intro, :phone);')->execute($args);
 
 		return true;
+    }
+
+    /**
+     * 查找字段存在数量
+     * 
+     * @param string $field
+     * @param mixed $value
+     * @return integer
+     */
+	public function selectFieldCount($field, $value)
+    {
+    	return $this->_dao->fetchOne("SELECT COUNT({$this->_primary}) FROM {$this->_name} 
+    	    WHERE {$field} = :field;", array('field' => $value)
+    	);
     }
 
     /**

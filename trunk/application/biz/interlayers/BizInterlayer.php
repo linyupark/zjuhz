@@ -24,43 +24,50 @@ abstract class BizInterlayer
 	protected $_iniCompany = null;
 
 	/**
+     * BaseModel
+     * 
+     * @var object
+     */
+	protected $_BaseModel = null;
+
+	/**
      * CompanyBizModel
-     *
+     * 
      * @var object
      */
 	protected $_CompanyBizModel = null;
 
 	/**
      * CompanyContactModel
-     *
+     * 
      * @var object
      */
 	protected $_CompanyContactModel = null;
 
 	/**
      * CompanyLinkModel
-     *
+     * 
      * @var object
      */
 	protected $_CompanyLinkModel = null;
 
 	/**
      * CorpCompanyModel
-     *
+     * 
      * @var object
      */
 	protected $_CorpCompanyModel = null;
 
 	/**
      * CorpIndustryModel
-     *
+     * 
      * @var object
      */
 	protected $_CorpIndustryModel = null;
 
 	/**
      * CorpModel
-     *
+     * 
      * @var object
      */
 	protected $_CorpModel = null;

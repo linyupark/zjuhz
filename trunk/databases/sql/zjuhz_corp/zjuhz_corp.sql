@@ -14,6 +14,17 @@ create database zjuhz_corp;
 use zjuhz_corp;
 
 /*==============================================================*/
+/* Table: tbl_base                                              */
+/*==============================================================*/
+create table zjuhz_corp.tbl_base
+(
+   companies            int(10) unsigned not null default 0
+)
+type = MYISAM;
+
+INSERT INTO `zjuhz_corp`.`tbl_base` (`companies`) VALUES ('9');
+
+/*==============================================================*/
 /* Table: tbl_corp                                              */
 /*==============================================================*/
 create table zjuhz_corp.tbl_corp

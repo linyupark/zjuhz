@@ -80,6 +80,12 @@ class MyController extends Zend_Controller_Action
             		        'count' => new Zend_Db_Expr('count + 1'), 'iid' => $row['industry'])
             		    );
 
+            		    // 更改创业基础数据资料
+            		    BaseLogic::init()->update(array('companies' => new Zend_Db_Expr('companies + 1')));
+
+            		    // 刷新基础数据资料缓存
+            		    CacheLogic::init()->baseRefresh();
+
             		    echo 'message';
             	    }
                 }
