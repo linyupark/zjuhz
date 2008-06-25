@@ -34,6 +34,7 @@
 			
 			$row = $Db->fetchRow('SELECT COUNT(`entity_id`) AS `numrows` FROM `tbl_entity` WHERE `category_id` = ?', $categoryId);
 			
+			Page::$pagesize = 15;
 			//按页获取信息列表
 			Page::create(array(
 			"href_open" => "<a href='/info/?category={$categoryId}&p=%d'>", 

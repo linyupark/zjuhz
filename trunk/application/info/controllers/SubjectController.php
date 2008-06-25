@@ -11,12 +11,9 @@ class SubjectController extends Zend_Controller_Action {
 	
 	function init()
 	{
-		$this->view->headLink()->appendStylesheet('/static/styles/home.css','screen')
-							   ->appendStylesheet('/static/styles/info_front.css','screen');
 		$this->view->headScript()->appendFile('/static/scripts/thickbox-compressed.js')
 								 ->appendFile('/static/scripts/info/action.js');
-		// 分配角色详细信息
-		$this->view->login = Zend_Registry::get('sessCommon')->login;
+
 	}
 	
 	# 通用显示页

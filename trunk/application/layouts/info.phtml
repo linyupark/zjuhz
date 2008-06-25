@@ -1,26 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" type="text/css" href="/static/styles/home/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/styles/info/screen.css" media="screen" />
 <script type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script type="text/javascript" src="/static/scripts/jquery.pngFix.pack.js"></script>
 <script type="text/javascript" src="/static/scripts/common.js"></script>
+<script type="text/javascript" src="/static/scripts/info/action.js"></script>
+<script type="text/javascript" src="/static/scripts/thickbox-compressed.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="zh-CN" />
-<?php $this->headTitle('欢迎访问_杭州浙江大学校友会')->setSeparator('_'); ?>
+<?php $this->headTitle('新闻资讯_杭州浙江大学校友会')->setSeparator('_'); ?>
 <?= $this->headTitle(); ?>
 </head>
 
 <body>
 	<div id="header" class="container">
 		<div class="span-11">
-			<a href="/"><img src="/static/images/group/zjuhz.gif" alt="首页" /></a>
+			<a href="/"><img src="/static/images/group/zjuhz.gif" alt="新闻资讯" /></a>
 		</div>
 		<div class="span-13 last">
 			<div id="passport" class="hrefspan-8 push-1 last">
 				<?php if ($this->passport()): ?>
 				您好！<?= $this->passport('realName') ?>，
-				<a href="/member/my/">我的账号</a>
+				<a href="/member/my/">我的账号</a>，
+				资讯积分(<?= $this->Coin($this->login['uid']) ?>)，
+				<a href="/info/admin">投稿</a>，
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
 				<a href="/member/register/">注册</a>
@@ -30,7 +34,7 @@
 			<div class="global-nav span-13 last hrefspan-8">
                 <a href="/biz/">创业</a>
 				<a href="/member/">校友</a>
-				<a href="/info/">资讯</a>
+				<a href="/info/" class="here">资讯</a>
 				<a href="/help/">互助</a>
 				<a href="/class/">班级</a>
 				<a href="#">群组</a>
@@ -38,7 +42,12 @@
 			</div>
 		</div>
 		
-			<?= $this->layout()->nav; ?>
+		<div class="sub-nav span-13 last">
+			<form method="POST" action="/info/search/look/">
+			<input name="for" class="text" type="text" value="" />
+			<input class="btn" type="submit" value="资讯搜索" /> 
+			</form>
+		</div>
 		
 	</div>
 	<div id="container" class="container">

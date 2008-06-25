@@ -33,7 +33,7 @@
 					}
 					echo substr($str, 0,-1);
 				}
-				else echo '您还没有加入任何班级。';
+				else echo '您还没有加入任何班级';
 			}
 		}
 		

@@ -5,21 +5,17 @@ $this->headTitle($this->escape($this->entity['entity_title']));
 // 分配 meta 关键字
 $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_tag']));
 ?>
-
-<div id="global_pos">
-<img src="/static/images/icon/newspaper.gif" />
-<a href="/info/">信息资讯</a> / 
-<a href="/info/?category=<?= $this->escape($this->entity['category_id']) ?>"><?= $this->escape($this->entity['category_name']) ?></a> / 
-<?= $this->escape($this->entity['entity_title']) ?> 
+<div class="extInline" style="margin:0;">
+	<a href="/info/">信息资讯</a> &gt; 
+	<a href="/info/?category=<?= $this->escape($this->entity['category_id']) ?>"><?= $this->escape($this->entity['category_name']) ?></a> &gt;  
+	<?= $this->escape($this->entity['entity_title']) ?> 
 </div>
-
-<div class="sidebar">
 
 <!-- 标题 ////////////////////////////////////////////// -->
 <?php if(!$this->entity): ?>
-<h2 class="entity_none">您所请求的信息不存在!</h2>
+<h2 class="txtc">您所请求的信息不存在!</h2>
 <?php else: ?>
-<h2 class="print entity_title">
+<h2 class="print txtc">
 <?= $this->escape($this->entity['entity_title']) ?>
 </h2>
 
@@ -27,14 +23,14 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <table width="100%">
 <tr>
 <?php if($this->sibling['previous']): ?>
-<td class="sibling_previous"><img src="/static/images/icon/previous.gif" /> 
+<td width="50%" class="txtl"><img src="/static/images/icon/previous.gif" /> 
 <a href="/info/view/detail/id/<?= $this->escape($this->sibling['previous']['entity_id']) ?>">
 <?= $this->escape($this->sibling['previous']['entity_title']) ?></a>
 </td>
 <?php endif; ?>
 
 <?php if($this->sibling['next']): ?>
-<td class="sibling_next">
+<td width="50%" class="txtr">
 <a href="/info/view/detail/id/<?= $this->escape($this->sibling['next']['entity_id']) ?>">
 <?= $this->escape($this->sibling['next']['entity_title']) ?></a> 
 <img src="/static/images/icon/next.gif" /> 
@@ -43,7 +39,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 </tr>
 </table>
 
-<p class="toolbar" style="text-align:center">
+<p class="txtc quiet">
     已被阅读(<?= $this->entity['entity_view_num'] ?>)&nbsp;&nbsp;&nbsp;
     <?php if($this->role == 'member'): ?>
     发布人:<?= $this->entity['realName'] ?>(<?= $this->entity['role_nickname'] ?>)&nbsp;&nbsp;&nbsp;
@@ -54,47 +50,30 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
     <?php endif; ?>
 </p>
 
-
-
 <!-- 主体 ////////////////////////////////////////////// -->
-<div class="print entity" style="margin-top:5px;">
 <?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
-<p class="err_message">您需要登录后才能阅读这篇文章。</p>
+<p class="error">您需要登录后才能阅读这篇文章。</p>
 <?php else: ?>
-<?= stripslashes($this->entity['entity_content']) ?>
+<table class="oneCol">
+	<tr>
+		<td style="line-height:180%; padding:25px" class="f14"><?= stripslashes($this->entity['entity_content']) ?></td>
+	</tr>
+</table>
 <?php endif; ?>
-</div>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.entity img').each(function(){
-			$(this).width('auto');
-			$(this).height('auto');
-		});
-		
-		var t = window.setInterval(function(){
-			$('.entity img').each(function(){
-				if($(this).width()>780)
-				{
-					$(this).width(780);
-				}
-			});
-		},1000);
-	});
-</script>
 
 <!-- 同类上下篇 ////////////////////////////////////////////// -->
 <table width="100%">
 <tr>
 <?php if($this->sibling['previous']): ?>
-<td class="sibling_previous"><img src="/static/images/icon/previous.gif" /> 
+<td width="50%" class="txtl"><img src="/static/images/icon/previous.gif" /> 
 <a href="/info/view/detail/id/<?= $this->escape($this->sibling['previous']['entity_id']) ?>">
 <?= $this->escape($this->sibling['previous']['entity_title']) ?></a>
 </td>
 <?php endif; ?>
 
 <?php if($this->sibling['next']): ?>
-<td class="sibling_next">
+<td width="50%" class="txtr">
 <a href="/info/view/detail/id/<?= $this->escape($this->sibling['next']['entity_id']) ?>">
 <?= $this->escape($this->sibling['next']['entity_title']) ?></a> 
 <img src="/static/images/icon/next.gif" /> 
@@ -104,7 +83,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 </table>
 
 <!-- 工具栏 ////////////////////////////////////////////// -->
-<p class="toolbar">
+<p class="extInline2 txtr">
 已被阅读(<?= $this->entity['entity_view_num'] ?>)&nbsp;&nbsp;&nbsp;
 <?php if($this->tag): ?>本文标签: 
 <?php foreach ($this->tag as $k => $v): ?>
@@ -115,34 +94,35 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 </p>
 
 
-<div id="sub_container">
+<div class="span-12 mgu10">
 	<!-- 相关文章 ////////////////////////////////////////////// -->
-	<table class="similarity" style="float:left">
-	<tr><th colspan="2">:: 相关文章 ::</th></tr>
+	<table width="100%" class="table-1">
+	<tr><th>:: 相关文章 ::</th></tr>
 	<?php if(!$this->similarity): ?>
-	<tr><td colspan="2">没有找到</td></tr>
+	<tr><td class="pd5">没有找到</td></tr>
 	<?php else: foreach ($this->similarity as $k2 => $v2): ?>
 	<tr>
-	<td class="f12">&raquo; <a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
-	<td class="f9"><?= Commons::date($v2['entity_pub_time']) ?></td>
+	<td class="f12 pd5 dashBorder">&raquo; <a href="/info/view/detail/id/<?= $v2['entity_id'] ?>"><?= $this->escape($v2['entity_title']) ?></a></td>
 	</tr>
 	<?php endforeach; endif; ?>
 	</table>
-	<table class="similarity" style="float:right">
+</div>
+
+<div class="span-12 last mgu10">
+	<table class="table-1" width="100%">
 	<tr><th colspan="2">:: <a href="javascript:toggle()" id="toggleBtn">查看回复</a> :: 
 	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">回复主题</a></th></tr>
 	<tr>
 		<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
-		<td>需要登陆后才能查看回复</td>
+		<td class="pd5">需要登陆后才能查看回复</td>
 		<?php else: ?>
-		<td id="commentList" class="hide"></td>
+		<td id="commentList" class="hide dashBorder pd10"></td>
 		<?php endif; ?>
 	</tr>
 	</table>
 </div>
 
 <?php endif; ?>
-</div>
 
 <script type="text/javascript">
 	function toggle()
@@ -174,4 +154,22 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 	
 	commentView(<?= $this->entity['entity_id'] ?>,1);
 	toggle();
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.entity img').each(function(){
+			$(this).width('auto');
+			$(this).height('auto');
+		});
+		
+		var t = window.setInterval(function(){
+			$('.entity img').each(function(){
+				if($(this).width()>780)
+				{
+					$(this).width(780);
+				}
+			});
+		},1000);
+	});
 </script>
