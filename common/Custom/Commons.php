@@ -320,7 +320,7 @@ class Commons
     static function getCompanyFace($cid, $type='medium')
     {
     	return (10 == strlen($cid) ? '<img src="'.self::getCompanyFolder($cid).$type.'.jpg" 
-    	    onerror=this.src="/static/images/default-face.jpg";>' : false
+    	    onerror=this.src="/static/images/default-company.gif";>' : false
     	);
     }
 }

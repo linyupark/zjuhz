@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?= $this->render("head.phtml").$this->headLink().$this->headStyle().$this->render("default-head.phtml").$this->headScript(); ?>
+</head>
+
+<body>
+<div id="wrap">
+
+    <div id="header">
+        <a href="/biz/" id="logo"></a>
+        <div id="passport">
+        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a href="/biz/my/">我的创业</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/biz/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a><?php }	else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+        </div>
+    </div>
+
+    <div id="menu">	
+        <a href="/info/"><span class="title">资讯</span><span class="desc">了解最新校友与母校信息</span></a>
+        <a href="/help/"><span class="title">互助</span><span class="desc style3">给予和得到来自校友的帮助</span></a>
+        <a href="/class/"><span class="title">班级 <small>&amp;</small> 群组 <small>&amp;</small> 活动</span><span class="desc">全力打造校友互动空间</span></a>
+        <a href="/biz/" class="here"><span class="title">创业 <small>&amp;</small> 企业</span><span class="desc">校友企业库与商业合作平台</span></a>
+    </div>
+
+    <div id="container"><?= $this->layout()->content; ?></div>
+
+    <?= $this->render("foot.phtml"); ?>
+
+</div>	
+</body>
+
+</html>

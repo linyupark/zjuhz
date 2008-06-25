@@ -13,7 +13,7 @@
  * 校友企业-缓存
  * 控制器附属层:模型层操作入口
  */
-class CacheLogic extends CompanyInterlayer
+class CacheLogic extends BizInterlayer
 {
 	/**
      * Zend_Cache

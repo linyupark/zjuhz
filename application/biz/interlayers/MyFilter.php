@@ -15,7 +15,7 @@
  * 纯安全处理(验证过滤) 返回安全字符(串)
  * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class MyFilter extends CompanyInterlayer
+class MyFilter extends BizInterlayer
 {
     /**
      * 构造方法
