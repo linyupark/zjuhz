@@ -1,0 +1,80 @@
+    <table>
+      <tr>
+        <td style="vertical-align:top;">
+		  <div class="menu-box">
+		  <ul>
+            <li><span style="font-size:14px;">自定义内容链接</span></li>
+            <li><a href="#info">企业详细资料</a></li>
+            <li><a href="#biz">企业商务供求</a></li>			
+          </ul>
+          </div>
+          <div class="corner-box" style="width:170px;">
+            <h2 class="corner-box-title"></h2>
+            <!--<p><a href="">姓名</a> <small>日期</small>: <br />内容</
+            <br />
+            <p class="floatRight"><a href="">企业留言本...</a></p>p>-->
+          </div>
+		</td>
+		<td class="pd10"><div class="mid-box-right">
+          <h2 class="mid-box-right-title">公司简介</h2>
+          <div class="mid-box-right-content"><?= $this->txtcode($this->dataCompany['intro']); ?></div>
+          </div>
+          <table class="detail" cellspacing="0" cellpadding="0" width="737">
+            <tr>
+              <th colspan="4">详细资料<a name="info" id="info"></a></th>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>所处行业：</strong></td>
+              <td width="288">&nbsp;<?= $this->industry($this->dataCompany['industry']); ?></td>
+              <td width="80" bgcolor="#F0F3E5"><strong>企业性质：</strong></td>
+              <td width="288">&nbsp;<?= $this->property($this->dataCompany['property']); ?></td>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>所在城市：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['province']; ?>&nbsp;<?= $this->dataCompany['city']; ?></td>
+              <td width="80" bgcolor="#F0F3E5"><strong>邮政编码：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['postcode']; ?></td>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>企业电话：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['phone']; ?></td>
+              <td width="80" bgcolor="#F0F3E5"><strong>企业传真：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['fax']; ?></td>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>电子邮箱：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['eMail']; ?></td>
+              <td width="80" bgcolor="#F0F3E5"><strong>企业网站：</strong></td>
+              <td width="288">&nbsp;<?= $this->dataCompany['url']; ?></td>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>办公地址：</strong></td>
+              <td colspan="3">&nbsp;<?= $this->dataCompany['address']; ?></td>
+            </tr>
+			<?php if ($this->dataCompany['other']) { ?>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>其它方式：</strong></td>
+              <td colspan="3">&nbsp;<?= $this->dataCompany['other']; ?></td>
+            </tr>
+			<?php } ?>
+          </table>
+          <table class="detail" cellspacing="0" cellpadding="0" width="737">
+            <tr>
+              <th colspan="4">商务供求<a name="biz" id="biz"></a></th>
+            </tr>
+            <tr>
+              <td width="75" bgcolor="#F0F3E5"><strong>产品服务：</strong></td>
+              <td colspan="3">&nbsp;我公司能提供：<?= ($this->dataCompany['product'] ? $this->dataCompany['product'] : '暂无' ); ?></td>
+            </tr>
+            <tr>
+              <td width="75" bgcolor="#F0F3E5"><strong>人才需求：</strong></td>
+              <td colspan="3">&nbsp;我公司要招聘：<?= ($this->dataCompany['job'] ? $this->dataCompany['job'] : '暂无' ); ?></td>
+            </tr>
+            <tr>
+              <td width="75" bgcolor="#F0F3E5"><strong>合作意向：</strong></td>
+              <td colspan="3">&nbsp;寻觅如下合作：<?= ($this->dataCompany['cooperate'] ? $this->dataCompany['cooperate'] : '暂无' ); ?></td>
+            </tr>
+          </table>
+		</td>
+      </tr>
+    </table>

@@ -1,0 +1,62 @@
+<div class="corner-box floatLeft">
+    <b class="corner-box-title">审核的标准：</b>
+	<ul style="padding-bottom:10px;">
+	  <li>必须是您亲自创办的企业</li>
+	  <li>您企业资料必须真实有效</li>	  
+	</ul>
+	<br />
+    <b class="corner-box-title">加入后可以：</b>
+	<ul style="padding-bottom:10px;">
+	  <li>让10万校友找到您的企业</li>
+	  <li>让其他校友与您展开合作</li>
+	  <li>让您招纳浙大学子和校友</li>	  
+	</ul>
+</div>
+
+<div class="floatLeft" style="padding-bottom:30px;">
+  <h2>申请加入校友企业库</h2>
+  <form name="frmJoin" id="frmJoin" autocomplete="off">
+    <table class="table" style="margin:0 0 0 20px;" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td width="80" class="txtr">企业名称：</td>
+		<td><input type="text" tabindex="1" maxlength="30" size="50" name="name" id="name">&nbsp;&nbsp;&nbsp;&nbsp;<p><span class="quiet f12">请填写完整的企业名称，一旦审核通过不能修改。</span></p></td>
+	  </tr>
+	  <tr>
+		<td class="txtr">创&nbsp;办&nbsp;&nbsp;人：</td>
+		<td><?= $this->sessCommon->login['realName']; ?></td>
+	  </tr>
+	  <tr>
+		<td class="txtr">所处行业：</td>
+		<td><select name="industry" id="industry" tabindex="2"><option>--请选择--</option><?php foreach ($this->industry() as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select></td>
+	  </tr>
+	  <tr>
+		<td class="txtr">企业性质：</td>
+		<td><select name="property" id="property" tabindex="3"><option>--请选择--</option><?php foreach ($this->property() as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select></td>
+	  </tr>
+      <?= $this->pcas(); ?>
+	  <tr>
+		<td class="txtr">所在城市：</td>
+		<td><select tabindex="4" name="province" id="province"></select>&nbsp;<select tabindex="5" name="city" id="city"></select><br /></td>
+	  </tr>
+	  <tr>
+		<td class="txtr">企业电话：</td>
+		<td><input type="text" tabindex="7" maxlength="13" size="25" name="phone" id="phone"><p><span class="quiet f12">格式为区号-电话，如0571-89988185。</span></p></td>
+	  </tr>
+	  <tr>
+		<td class="txtr">企业简介：<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></td>
+		<td><textarea name="content" cols="70" rows="15" id="content"></textarea>
+		<p><span class="quiet f12">请详细介绍贵企业的发展历史、基本概况、行业优势等，50-1000字。</span></p></td>
+	  </tr>
+	  <tr>
+		<td>&nbsp;</td>
+		<td><input type="submit" id="btnJoin" tabindex="8" value=" 提 交 申 请 " class="buttonGreen" /> <input type="reset" tabindex="9" value="重新填过" class="button" /></td>
+	  </tr>
+	  <tr>
+		<td>&nbsp;</td>
+		<td><div id="ajaxhint" style="width:300px"></div></td>
+	  </tr>
+	</table>
+  </form>
+</div>
+
+<script language="javascript" type="text/javascript">new PCAS("province","city","<?= $this->sessCommon->login['location_p']; ?>","<?= $this->sessCommon->login['location_c']; ?>");</script>
