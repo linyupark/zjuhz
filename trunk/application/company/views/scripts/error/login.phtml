@@ -1,9 +1,0 @@
-<p class="err_message">为保护校友信息，您需要登录后才能继续刚才的操作。</p>
-<form method="post" id="relogin_form" onsubmit="return dologin();">
-<p>登录账号：<input tabindex="1" class="inputtxt" id="uname" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></p>
-<p>登录密码：<input tabindex="2" class="inputtxt" id="pswd" name="pswd" type="password" maxlength="16" /></p>
-<p>记住我的账号：<input tabindex="3" id="alive" type="checkbox" checked="checked" value="0" name="alive" /></p>
-<p></p>
-<input tabindex="5" class="button" type="button" value="注册账号" onclick="location.href='/member/register/'" />&nbsp;<input tabindex="4" class="buttonGreen" id="btnLogin" type="submit" value="登录" />
-</form>
-<script type="text/javascript">onLoadToInputFocus("uname");</script>

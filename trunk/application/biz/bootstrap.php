@@ -48,9 +48,9 @@ define('USER_CACHE', Commons::getUserCache(USER_ROOT));
 
 /** run */
 Zend_Controller_Front::getInstance()
-    ->registerPlugin(new CompanyPreAjaxPlugin())
-    ->registerPlugin(new CompanyAclPlugin())
-	->setDefaultModule('company')
+    ->registerPlugin(new BizPreAjaxPlugin())
+    ->registerPlugin(new BizAclPlugin())
+	->setDefaultModule('biz')
     ->setControllerDirectory('../../application/biz/controllers/')
     ->throwExceptions(false)
     ->dispatch();

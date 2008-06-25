@@ -5,7 +5,7 @@
  * @package    biz
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:CompanyClass.php
+ * @version    Id:BizClass.php
  */
 
 
@@ -13,7 +13,7 @@
  * 校友企业
  * Biz子系统-通用类库
  */
-class BizClass extends CompanyInterlayer
+class BizClass extends BizInterlayer
 {
     /**
      * 构造方法

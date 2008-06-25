@@ -13,7 +13,7 @@
  * 校友企业-tbl_corp_company_link
  * 控制器附属层:模型层操作入口
  */
-class CompanyLinkLogic extends CompanyInterlayer
+class CompanyLinkLogic extends BizInterlayer
 {
     /**
      * 构造方法

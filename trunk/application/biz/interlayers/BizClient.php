@@ -5,16 +5,24 @@
  * @package    biz
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
- * @version    Id:CompanyContactLogic.php
+ * @version    Id:BizClient.php
  */
 
 
 /**
- * 校友企业-tbl_corp_company_concact
- * 控制器附属层:模型层操作入口
+ * 校友企业_XML-RPC客户端
+ * 控制器附属层:数据库操作入口
+ * 介于控制器和模型之间,是控制器访问模型的唯一入口
  */
-class CompanyContactLogic extends BizInterlayer
+class BizClient extends BizInterlayer
 {
+	/**
+     * 校友中心RPC调用接口
+     *
+     * @var object
+     */
+	private $_rpcMember = null;
+
     /**
      * 构造方法
      * 
@@ -23,9 +31,9 @@ class CompanyContactLogic extends BizInterlayer
     public function __construct()
     {
     	parent::__construct();
-    	parent::_initLogic();
 
-    	$this->_load('CompanyContactModel');
+		$this->_rpcMember = new Zend_XmlRpc_Client('http://xmlrpc/MemberServer.php');
+		//print_r($this->_rpcMember->call('system.listMethods',array()));exit;
     }
 
     /**
@@ -46,16 +54,5 @@ class CompanyContactLogic extends BizInterlayer
 	public static function init()
     {
     	return parent::_getInstance(__CLASS__);
-    }
-
-	/**
-     * 更新cid和uid的企业联系资料
-     * 
-     * @param array $args
-     * @return integer
-     */
-	public function updateContact($args)
-    {
-		return $this->_CompanyContactModel->updateContact($args);
     }
 }
