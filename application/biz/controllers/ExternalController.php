@@ -36,5 +36,6 @@ class ExternalController extends Zend_Controller_Action
         $type = $this->getRequest()->getParam('type');
 		$base = CacheLogic::init()->baseLoad();
 		echo $base[$type];
+		exit;
 	}
 }
