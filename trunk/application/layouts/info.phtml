@@ -45,7 +45,7 @@
 		
 		<div class="sub-nav span-13 last">
 			<form method="POST" action="/info/search/look/">
-			<input name="for" class="text" type="text" value="" />
+			<input name="for" class="text" type="text" value="<?= $this->escape($this->keywords) ?>" />
 			<input class="btn" type="submit" value="资讯搜索" /> 
 			</form>
 		</div>

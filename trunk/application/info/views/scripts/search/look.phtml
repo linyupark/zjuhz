@@ -1,9 +1,8 @@
-<div id="global_pos">
+<div class="extInline" style="margin:0;">
 <?php if($this->keywords): ?>
-<img src="/static/images/icon/newspaper.gif" />
-搜索关键字 <b>&quot; <?= $this->escape($this->keywords) ?> &quot;</b>
+<a href="/info/">资讯中心</a> &gt; 搜索关键字 <b>&quot; <?= $this->escape($this->keywords) ?> &quot;</b>
 <?php if($this->rows): ?>
-<span style="text-align:right">
+<span class="txtr">
 共找到 <b>&quot; <?= $this->numrows ?> &quot;</b> 条记录，
 以下是第<b>&quot; <?= ($this->p*10-9).'-'.($this->p*10) ?> &quot;</b>条
 </span>
@@ -14,14 +13,17 @@
 请输入要查找资讯的关键字
 <?php endif; ?>
 </div>
-<div class="pagination clearfloat" style="padding-left:10px;"><?= $this->pagination ?></div>
-<div class="sidebar clearfloat"" style="width:600px; margin:10px 0 0 10px">
+<div class="pagination mglf10"><?= $this->pagination ?></div>
+<div class="oneCol mgu10" style="padding:20px;">
 <?php if($this->rows): foreach ($this->rows as $v): ?>
-<div class="search_result_box">
-<a href="/info/view/detail/id/<?= $v['entity_id']?>"><?= Commons::highlight($this->escape($this->keywords), $v['entity_title'])?></a>
+<h3><?= Cmd::icon('bullet_go.png') ?>
+	<a href="/info/view/detail/id/<?= $v['entity_id']?>">
+		<?= Commons::highlight($this->escape($this->keywords), $v['entity_title'])?>
+	</a>
+</h3>
 <p><?= Commons::highlight($this->escape($this->keywords), strip_tags($v['entity_snapshot'])) ?></p>
-</div>
+<hr class="dashBorder" />
 <?php endforeach; endif; ?>
 </div>
 
-<div class="pagination clearfloat" style="padding-left:10px;"><?= $this->pagination ?></div>
+<div class="pagination mglf10"><?= $this->pagination ?></div>
