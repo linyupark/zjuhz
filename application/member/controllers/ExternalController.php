@@ -25,6 +25,7 @@ class ExternalController extends Zend_Controller_Action
 
 	/**
      * 外部调用-在线人数 online number
+     * 包括游客及已登录会员的所有在线人员
      * 
      * @return void
      */
@@ -33,8 +34,23 @@ class ExternalController extends Zend_Controller_Action
 		//$this->_helper->viewRenderer->setNoRender();
 		//$this->_helper->layout->disableLayout();
 
-		//print_r(CacheLogic::init()->onlineLoad());		
+		//print_r(CacheLogic::init()->onlineLoad());
 		echo CacheLogic::init()->onlineLoad('num');
+		exit;
+	}
+
+	/**
+     * 外部调用-在线详情(json) online detail
+     * 只显示已登录会员不包括游客
+     * 
+     * @return void
+     */
+	public function oljsonAction()
+	{
+		//$this->_helper->viewRenderer->setNoRender();
+		//$this->_helper->layout->disableLayout();
+
+		echo Zend_Json::encode(CacheLogic::init()->onlineLoad());
 		exit;
 	}
 }

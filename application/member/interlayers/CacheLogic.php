@@ -262,6 +262,8 @@ class CacheLogic extends MemberInterlayer
 
     /**
      * 载入在线缓存
+     * 注意：每次访问或离去(指php自动删除session)都会自动刷新,但若
+     *      需要再加速以提高在线情况精确度,可修改php.ini中相关配置
      * 
      * @param string $name
      * @return array|false cached datas
