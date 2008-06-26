@@ -30,8 +30,8 @@ class ExternalController extends Zend_Controller_Action
      */
 	public function baseAction()
 	{
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
+		//$this->_helper->viewRenderer->setNoRender();
+		//$this->_helper->layout->disableLayout();
 
         $type = $this->getRequest()->getParam('type');
 		$base = CacheLogic::init()->baseLoad();
