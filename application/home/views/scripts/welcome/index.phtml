@@ -38,7 +38,7 @@
 		<?php foreach($rows as $row): ?>
 		<tr>
 			<td class="dashBorder pd5 f12">
-				<?= Cmd::icon('bullet_black.png') ?>
+				<img border="0" src="/static/images/icon/<?= $row['category_icon'] ?>.gif" />
 				<strong><a href="/info/?category=<?= $row['category_id'] ?>"><?= $row['category_name'] ?></a></strong>
 			</td>
 			<td class="dashBorder pd5 f14 txtl">
