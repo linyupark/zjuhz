@@ -10,7 +10,7 @@
 				<td class="pd10"><?= Commons::getUserFace($this->passport('uid')) ?></td>
 				<td class="vm f14 pdd10">
 					<p>
-						当前在线校友<strong><?= rand(10,25) ?></strong>人，
+						当前在线校友<strong id="online"></strong>人，
 						截止今天本站已有资讯<strong><?= $this->info_xmlrpc->call('rpcInfo.howmany') ?></strong>条，
 						校友企业<strong id="mybiz"></strong>家，<a href="/biz/my/company/type/join/">申请加入</a>。
 					</p>
@@ -58,4 +58,5 @@
 <script>
 	$('#myclass').load('/class/ajax/myclass/?uid=<?= $this->passport('uid') ?>');
 	$('#mybiz').load('http://www.zjuhz.com/biz/external/base/type/companies/');
+	$('#online').load('http://www.zjuhz.com/member/external/olnum/');
 </script>
