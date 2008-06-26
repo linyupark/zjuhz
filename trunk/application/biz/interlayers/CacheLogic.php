@@ -179,7 +179,7 @@ class CacheLogic extends BizInterlayer
     /**
      * 载入基础数据缓存
      * 
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function baseLoad()
     {
@@ -248,7 +248,7 @@ class CacheLogic extends BizInterlayer
      * 载入企业缓存
      * 
      * @param string $cid
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function companyLoad($cid)
     {

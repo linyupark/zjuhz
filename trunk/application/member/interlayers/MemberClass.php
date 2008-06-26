@@ -44,4 +44,43 @@ class MemberClass extends MemberInterlayer
     {
     	return parent::_getInstance(__CLASS__);
     }
+
+    /**
+     * 转换sess内的字符串为数组
+     * see manual with function session_decode()
+     * 
+     * @param string $sess_string
+     * @return boolean|array
+     */
+    public static function decodeSession($sess_string)
+    {
+    	// save current session data
+        //   and flush $_SESSION array
+        $old = $_SESSION;
+        $_SESSION = array();
+
+        // try to decode passed string
+        $ret = session_decode($sess_string);
+        if (!$ret)
+        {
+        	// if passed string is not session data,
+            //   retrieve saved (old) session data
+            //   and return false
+            $_SESSION = array();
+            $_SESSION = $old;
+
+            return false;
+        }
+
+        // save decoded session data to sess_array
+        //   and flush $_SESSION array
+        $sess_array = $_SESSION;
+        $_SESSION = array();
+
+        // restore old session data
+        $_SESSION = $old;
+
+        // return decoded session data
+        return $sess_array;
+    }
 }

@@ -2,7 +2,7 @@
 
 /**
  * @category   zjuhz.com
- * @package    biz
+ * @package    member
  * @copyright  Copyright(c)2008 zjuhz.com
  * @author     wangyumin
  * @version    Id:ExternalController.php
@@ -10,7 +10,7 @@
 
 
 /**
- * 校友企业-外部调用
+ * 校友中心-外部调用
  */
 class ExternalController extends Zend_Controller_Action
 {
@@ -24,18 +24,17 @@ class ExternalController extends Zend_Controller_Action
 	}
 
 	/**
-     * 外部调用-基础数据
+     * 外部调用-在线人数 online number
      * 
      * @return void
      */
-	public function baseAction()
+	public function olnumAction()
 	{
 		//$this->_helper->viewRenderer->setNoRender();
 		//$this->_helper->layout->disableLayout();
 
-        $type = $this->getRequest()->getParam('type', 'companies');
-		$base = CacheLogic::init()->baseLoad();
-		echo $base[$type];
+		echo CacheLogic::init()->onlineLoad('num');
+		print_r(CacheLogic::init()->onlineLoad());
 		exit;
 	}
 }
