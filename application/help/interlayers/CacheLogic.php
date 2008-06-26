@@ -188,7 +188,7 @@ class CacheLogic extends HelpInterlayer
      * 载入json方式的分类缓存
      * 
      * @param integer $sid
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function jsonLoad($sid)
     {
@@ -249,7 +249,7 @@ class CacheLogic extends HelpInterlayer
      * 载入用于统计tbl_ask的榜单缓存
      * 
      * @param string $type
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function rankAskLoad($type)
     {

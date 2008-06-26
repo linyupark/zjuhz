@@ -143,6 +143,7 @@ class CacheLogic extends MemberInterlayer
     	return array_intersect_key($data, array_flip($this->_hoppers[$name]));
     }
 
+
     /**
      * 初始名片缓存
      * 
@@ -180,7 +181,7 @@ class CacheLogic extends MemberInterlayer
     /**
      * 载入名片缓存
      * 
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function cardLoad()
     {
@@ -188,6 +189,7 @@ class CacheLogic extends MemberInterlayer
 
     	return $this->_cache->load('card');
     }
+
 
     /**
      * 初始班级缓存
@@ -213,12 +215,103 @@ class CacheLogic extends MemberInterlayer
     /**
      * 载入班级缓存
      * 
-     * @return string|false cached datas
+     * @return array|false cached datas
      */
 	public function classLoad()
     {
     	$this->classInit();
 
     	return $this->_cache->load('classCache');
+    }
+
+
+    /**
+     * 初始在线缓存
+     * 
+     * @return void
+     */
+	public function onlineInit()
+    {
+    	if (!isset($this->_cache))
+    	{
+    		// 固定变更项写入
+    	    self::$_options['cache_dir'] = DOCUMENT_CACHE;
+    	    // 参数变更初始化
+    	    $this->_setFrontendOptions();
+    	    $this->_setBackendOptions();
+
+    	    $this->_cache = Zend_Cache::factory('Core', 'File', 
+    	        $this->_frontendOptions, $this->_backendOptions
+	        );
+    	}
+    }
+
+    /**
+     * 保存在线缓存
+     * 
+     * @param array $data
+     * @param string $name
+     * @return boolean True if no problem
+     */
+	public function onlineSave($data, $name='')
+    {
+    	$this->onlineInit();
+
+    	return $this->_cache->save($data, "online{$name}");
+    }
+
+    /**
+     * 载入在线缓存
+     * 
+     * @param string $name
+     * @return array|false cached datas
+     */
+	public function onlineLoad($name='')
+    {
+    	$this->onlineInit();
+
+    	$cache = (int)$this->_cache->load('onlinenum'); // 获取缓存中的在线数
+    	$facts = count(scandir(session_save_path())) - 2; // 实际sess文件存有数
+
+    	// 若上述两值不相等则刷新缓存,反之则返回对应缓存
+    	return ($cache == $facts ? $this->_cache->load("online{$name}") : 
+    	    $this->onlineRefresh($name)
+    	);
+    }
+
+    /**
+     * 刷新在线缓存
+     * 
+     * @param string $name
+     * @return array
+     */
+	public function onlineRefresh($name)
+    {
+    	$this->onlineInit();
+
+    	$path  = session_save_path(); // 读取php.ini中的sess保存路径
+    	$files = scandir($path); // 获取sess保存路径所有sess文件
+    	foreach ($files as $value)
+    	{
+    		$file = "{$path}\\{$value}";
+    		if (is_file($file))
+    		{
+    			// 将每一个sess读取并转换为数组格式
+    		    $sess   = MemberClass::DecodeSession(file_get_contents($file));
+    		    // 若登录sess数组结构有变化则需改变
+    		    $data[] = array('uid' => $sess['common']['login']['uid'], 
+    		        'realName' => $sess['common']['login']['realName']
+    		    );
+    		}
+    	}
+
+    	// 统计在线人数(含游客即未登录)
+    	// 此值放值位置决定统计精确度
+        $num = count($files) - 2; // 减去"."和".."
+
+    	$this->onlineSave($data); // 保存在线会员详情
+    	$this->onlineSave($num, 'num'); // 保存总的在线人数
+
+    	return ('num' == $name ? $num : $data);
     }
 }

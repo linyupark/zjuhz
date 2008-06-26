@@ -77,6 +77,7 @@ class MemberAclPlugin extends Zend_Controller_Plugin_Abstract
 	{
 		$this->_aclHelp->add(new Zend_Acl_Resource('alumni'))
 		               ->add(new Zend_Acl_Resource('error'))
+		               ->add(new Zend_Acl_Resource('external'))
 		               ->add(new Zend_Acl_Resource('index'))
 		               ->add(new Zend_Acl_Resource('login'))
 		               ->add(new Zend_Acl_Resource('logout'))
@@ -87,13 +88,13 @@ class MemberAclPlugin extends Zend_Controller_Plugin_Abstract
 
     /**
      * 设置Acl访问权限
-     *
+     * 
      * @return void
      */
 	private function _setAclPriv()
 	{
 		$this->_aclHelp->deny('guest')
-			           ->allow('guest', array('index', 'login', 'register'))
+			           ->allow('guest', array('external', 'index', 'login', 'register'))
 		               ->allow('member');
 	}
 

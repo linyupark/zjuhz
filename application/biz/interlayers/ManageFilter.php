@@ -72,8 +72,14 @@ class ManageFilter extends BizInterlayer
             'property' => array(
 			    array('Between', '1', '99'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniCompany->hint->propertyError)), 
-		    'province' => array('allowEmpty' => true), 
-			'city' => array('allowEmpty' => true), 
+		    'province' => array(
+                array('Utf8Length', '2', '8'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->provinceError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->provinceError)), 
+			'city' => array(
+                array('Utf8Length', '2', '11'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->cityError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->cityError)), 
             'content' => array(
        	        array('Utf8Length', '50', '2000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
               	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->introError,
