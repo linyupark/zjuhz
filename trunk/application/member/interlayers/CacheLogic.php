@@ -294,8 +294,6 @@ class CacheLogic extends MemberInterlayer
     	foreach ($files as $value)
     	{
     		$file = "{$path}\\{$value}";echo $file.'<br>';
-    		 echo file_get_contents($file);
-    		 exit;
     		if (is_file($file))
     		{
     			// 将每一个sess读取并转换为数组格式
