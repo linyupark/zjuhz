@@ -2,6 +2,23 @@
 
 class Cmd
 {	
+	# 从session中获取是否是游客
+	static function isGuest($gid)
+	{
+		if(Zend_Registry::get('sessGroup')->my[$gid]['role'] == null)
+		return true;
+		else return false;
+	}
+	
+	#　从session中获取是否可管理群组
+	static function isManager($gid)
+	{
+		if(Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'manager' ||
+           Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'creater')
+         return true;
+         else return false;
+	}
+	
 	# 通过sort_id返回其名称
 	static function sortName($sort_id)
 	{

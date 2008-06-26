@@ -49,9 +49,9 @@
                 <td class="vm f14 txtl hrefspan-8">
                     <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $val['name'] ?></a>
                     <span class="quiet">
-                        成员数：<a href=""><?= $val['member_num'] ?></a>
-                        话题数：<a href=""><?= $val['topic_num'] ?></a>
-                        照片数：<a href=""><?= $val['photo_num'] ?></a>
+                        成员数：<a href="/group/member?gid=<?= $val['group_id'] ?>"><?= $val['member_num'] ?></a>
+                        话题数：<a href="/group/topic?gid=<?= $val['group_id'] ?>"><?= $val['topic_num'] ?></a>
+                        照片数：<a href="/group/album?gid=<?= $val['group_id'] ?>"><?= $val['photo_num'] ?></a>
                     </span>
                     <p class="f12">
                     <?php if($val['role'] == 'manager' || $val['role'] == 'creater'): //是否显示管理连接 ?>

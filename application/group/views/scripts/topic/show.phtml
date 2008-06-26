@@ -1,0 +1,131 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<div class="extInline" style="padding:0;">
+		<h3 class="mglf10">
+			<a href="/group/">校友群组</a> &gt;
+			<a href="/group/sort?id=<?= $this->groupInfo['sort_id'] ?>"><?= Cmd::sortName($this->groupInfo['sort_id'])?></a> &gt;
+			<a href="/group/home?gid=<?= $this->gid ?>"><?= $this->groupInfo['name'] ?></a> &gt;
+			<a href="/group/topic?gid=<?= $this->gid ?>">论坛</a>
+		</h3>
+	</div>
+</div>
+
+<div class="span-24 last">
+	<div class="oneCol pd10">
+		<table width="100%">
+			<tr>
+				<td class="txtl">
+					<?php if(count($this->pages) > 0): ?>
+					<div class="pagination"><?= $this->pagination ?></div>
+					<?php endif; ?>
+				</td>
+				<td class="txtr">
+					<button class="btn" onclick="location.href='/group/topic/new?gid=<?= $this->gid ?>'">发新主题</button> 
+					<button class="btn" onclick="window.scroll(0,10000)">回复主题</button> 
+					<?php if(Cmd::isGuest($this->gid)): ?>
+					<button class="btn" onclick="location.href='/group/join/new?gid=<?= $this->gid ?>'">加入群组</button>
+					<?php endif; ?> 
+				</td>
+			</tr>
+		</table>
+		<?php if($this->page == 1): // 第一页显示主题内容 ?>
+		<table class="table-topic mgu10" width="100%">
+			<tr>
+				<td rowspan="2" class="photo txtc">
+					<?= Commons::getUserFace($this->topic['pub_user']) ?>
+					<p class="txtc" id="topic_user_0">
+						<a href=""><?= $this->topic['pub_user_name'] ?></a>
+					</p>
+				</td>
+				<td class="title">
+					<?= $this->topic['title'] ?>
+					<span class="f12 hrefspan-8">
+						<a href="javascript:quote(0)">#回复该帖</a>
+						<a href="javascript:window.scroll(0,0)">#返回顶部</a>
+						<?= Commons::date($this->topic['pub_time']) ?>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td id="topic_content_0" class="content" style="word-break:break-all;">
+					<?= stripslashes($this->topic['content']); ?>
+				</td>
+			</tr>
+		</table>
+		<?php endif; ?>
+		
+		<?php if(count($this->replies) == 0): //回复部分 ?>
+		<div class="extInline">还没有人回复哦～还不赶快抢占沙发？</div>
+		<?php else: foreach($this->replies as $reply): ?>
+			<table class="table-topic mgu10" width="100%">
+				<tr>
+					<td rowspan="2" class="photo txtc">
+						<?= Commons::getUserFace($reply['user_id']) ?>
+						<p class="txtc" id="topic_user_<?= $reply['reply_id'] ?>">
+							<a href=""><?= $reply['realName'] ?></a>
+						</p>
+					</td>
+					<td class="title">&nbsp;
+						<?= $reply['title'] ?>
+						<span class="f12 hrefspan-8">
+							<a href="javascript:quote(<?= $reply['reply_id'] ?>)">#回复该帖</a>
+							<a href="javascript:window.scroll(0,0)">#返回顶部</a>
+							<?= Commons::date($reply['reply_time']) ?>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td id="topic_content_<?= $reply['reply_id'] ?>" class="content" style="word-break:break-all;">
+						<?= stripslashes($reply['content']); ?>
+					</td>
+				</tr>
+			</table>
+		<?php endforeach; ?>
+		<?php if(count($this->pages) > 0): ?>
+				<div class="pagination"><?= $this->pagination ?></div>
+		<?php endif; ?>
+		<?php endif;　//回复部分结束 ?>
+		
+		<div class="mgu10">
+		<?php if(Cmd::isGuest($this->gid)): ?>	
+			<div class="extInline2 txtr">提醒：只有该群组成员才能回帖~<a href="">加入群组</a>。如果您还没有登陆，请先<a href="/member/login/">登陆</a></div>
+		<?php else: ?>	
+		<form id="reply_form" method="post" onsubmit="return doReply()">
+		<p class="mglf10"><label>回复标题：
+			<input type="text" name="title" class="text" value="" style="width:88%" /></label></p>
+		<input type="hidden" name="content" />
+		<input type="hidden" name="gid" value="<?= $this->gid ?>" />
+		<input type="hidden" name="tid" value="<?= $this->tid ?>" />
+		<input type="hidden" name="to" value="<?= $this->to_page ?>" />
+		<?= $this->editor($this->gid, '100%', '300px'); ?>
+		<p><input type="submit" class="btn" style="width:100%" value="回 复" /></p>
+		</form>
+		<span id="tip"></span>
+		<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	<?php if($this->hash != null): ?>
+		window.location.hash = 'topic_content_<?= $this->hash ?>';
+	<?php endif; ?>
+	
+	function doReply()
+	{
+		var data = $('#reply_form').fastSerialize();
+		data.push({name:"content", value:editor.data()});
+		$.post('/group/reply/new', data, function(html){
+			$('#tip').html(html);
+			window.scroll(0,10000);
+		});
+		return false;
+	}
+	function quote(id)
+	{
+		KE_CUSTOM_STR('<div class="quote"><h3>引用：'+$('#topic_user_'+id).html()+'</h3>'+$('#topic_content_'+id).html()+'</div><br /><br />');
+		window.scroll(0,10000);
+	}
+</script>

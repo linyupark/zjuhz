@@ -24,13 +24,49 @@ class TopicController extends Zend_Controller_Action
 	# 列表
 	public function indexAction() 
 	{
-		
 	}
 	
 	# 详细帖
 	public function showAction()
 	{
-		
+		$this->view->topic = GroupTopicModel::fetch($this->view->tid);
+		// 没有主题就转向错误提示
+		if($this->view->topic == FALSE) 
+		{
+			$this->_forward('error', 'error');
+		}
+		else
+		{
+			Page::$pagesize = 10;
+			$reply = GroupReplyModel::topicIndex($this->view->tid, Page::$pagesize, $this->view->page);
+			Page::create(array(
+				'href_open' => '<a href="/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid.'&p=%d">',
+				'href_close' => '</a>',
+				'num_rows' => $reply['numrows'],
+				'cur_page' => $this->view->page
+			));
+			if(Page::$num_pages == 0) $to_page = 1;
+			else 
+			{ 
+				$to_page = Page::$num_pages;
+				if(Page::$num_pages*Page::$pagesize == $reply['numrows'])
+				$to_page += 1;
+			}
+			$this->view->to_page = $to_page; // 回帖后转到的页
+			$this->view->replies = $reply['rows'];
+			$this->view->pages = Page::$num_pages;
+			$this->view->pagination = Page::$page_str;
+			$this->view->hash = $this->getRequest()->getParam('hash', null);
+			
+			// 增加点击判断
+			if(Zend_Registry::get('sessGroup')->topic[$this->view->tid] == null)
+			{
+				GroupTopicModel::update(array(
+					'click_num' => new Zend_Db_Expr('click_num + 1')
+				), $this->view->tid);
+				Zend_Registry::get('sessGroup')->topic[$this->view->tid] = 1;
+			}
+		}
 	}
 	
 	# 发布帖
@@ -41,7 +77,7 @@ class TopicController extends Zend_Controller_Action
 		{
 			$V = new Lp_Valid();
 			$title = $V->of($request->getPost('title'), 'title', '话题标题', 'trim|strip_tags|str_between[2,200]');
-			$content = $V->of($request->getPost('title'), 'content', '话题内容', 'trim|required|str_between[20,20000]');
+			$content = $V->of($request->getPost('content'), 'content', '话题内容', 'trim|required');
 			$tags = $V->of($request->getPost('tags'), 'tags', '话题标签', 'trim|required');
 			if($V->getMessages() != false)
 			{
@@ -51,6 +87,7 @@ class TopicController extends Zend_Controller_Action
 			else
 			{
 				$data = array(
+					'group_id' => $this->view->gid,
 					'pub_time' => time(),
 					'reply_time' =>time(),
 					'pub_user' => $this->view->uid,

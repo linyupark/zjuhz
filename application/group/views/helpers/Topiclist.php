@@ -12,22 +12,28 @@ class Zend_View_Helper_Topiclist
         if($result['numrows'] == 0) $str .= '<p class="mglf10">论坛中没有主题</p>';
         else
         {
-            $str .= '<table>
+            $str .= '<table class="table-1 mglf10" width="97%">
             <tr>
-                <th>标题</th>
-                <th>点击</th>
-                <th>回复</th>
-                <th>作者</th>
-                <th>最后更新</th>
+                <th width="50%">标题</th>
+                <th width="10%" class="txtc">点击</th>
+                <th width="10%" class="txtc">回复</th>
+                <th width="10%" class="txtc">作者</th>
+                <th width="20%" class="txtc">最后更新</th>
             </tr>';
             foreach($result['rows'] as $topic)
             {
                 $str .= '<tr>
-                            <td>'.$topic['title'].'</td>
-                            <td>'.$topic['click_num'].'</td>
-                            <td>'.$topic['reply_num'].'</td>
-                            <td>'.$topic['pub_user_name'].'</td>
-                            <td>'.$topic['reply_time'].'</td>
+                            <td class="pd10 dashBorder f14">
+                            	<a href="/group/topic/show?gid='.$gid.'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
+                            </td>
+                            <td class="txtc dashBorder">'.$topic['click_num'].'</td>
+                            <td class="txtc dashBorder">'.$topic['reply_num'].'</td>
+                            <td class="txtc dashBorder"><a href="">'.$topic['pub_user_name'].'</a></td>
+                            <td class="txtc dashBorder quiet">
+                            	<a href="">'.$topic['reply_user_name'].'</a> '.
+                				Lp_Date::timespan($topic['reply_time']).'前 
+                				
+                			</td>
                         </tr>';
             }
             $str .= '</table>';

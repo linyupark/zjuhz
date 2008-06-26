@@ -13,8 +13,7 @@ class Zend_View_Helper_Managebar
             <a href="/group/album?gid='.$gid.'"{album}>'.Cmd::icon('photo.png').' 相册</a>
             <a href="/group/member?gid='.$gid.'"{member}>'.Cmd::icon('group.png').' 成员</a>';
         // 是否是管理员
-        if(Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'manager' ||
-           Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'creater')
+        if(true == Cmd::isManager($gid))
         {
             $str .= '<a href="/group/manage?gid='.$gid.'"{manage}>'.Cmd::icon('wrench.png').' 管理</a>';
         }
