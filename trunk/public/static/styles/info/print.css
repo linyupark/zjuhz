@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+@import url("reset.css");
+
+*{ display:none; }
+.print{ display:block; }
