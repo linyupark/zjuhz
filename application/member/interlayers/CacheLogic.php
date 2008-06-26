@@ -291,7 +291,6 @@ class CacheLogic extends MemberInterlayer
 
     	$path  = session_save_path(); // 读取php.ini中的sess保存路径
     	$files = scandir($path); // 获取sess保存路径所有sess文件
-    	print_r($files);exit;
     	foreach ($files as $value)
     	{
     		$file = "{$path}\\{$value}";
