@@ -11,6 +11,8 @@ body{
 	background:#fff url('/static/images/group/body_bg.gif') repeat-x top;
 }
 
+.entity *{ line-height:170%; }
+
 h1{ font-size:22px; }
 h2{ font-size:18px; }
 h3{ font-size:14px; }
