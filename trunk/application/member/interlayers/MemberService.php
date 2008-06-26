@@ -70,4 +70,16 @@ class MemberService extends MemberInterlayer
 	{
 		return AddressCardLogic::init()->selectGidAll($gid, $uid);
 	}
+
+    /**
+     * 网站在线详情 online detail
+     * 只显示已登录会员不包括游客
+     * 
+     * @param string $name
+     * @return array
+     */
+	public function CacheOnlineLoad($name='')
+	{
+		return CacheLogic::init()->onlineLoad($name='');
+	}
 }
