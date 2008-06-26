@@ -33,8 +33,8 @@ class ExternalController extends Zend_Controller_Action
 		//$this->_helper->viewRenderer->setNoRender();
 		//$this->_helper->layout->disableLayout();
 
+		//print_r(CacheLogic::init()->onlineLoad());		
 		echo CacheLogic::init()->onlineLoad('num');
-		print_r(CacheLogic::init()->onlineLoad());
 		exit;
 	}
 }
