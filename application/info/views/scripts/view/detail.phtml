@@ -55,7 +55,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
 <p class="error">您需要登录后才能阅读这篇文章。</p>
 <?php else: ?>
-<div class="oneCol print" style="padding:25px">
+<div class="oneCol print" style="padding:25px; line-height:170%">
 <?= stripslashes($this->entity['entity_content']) ?>
 </div>
 <?php endif; ?>
