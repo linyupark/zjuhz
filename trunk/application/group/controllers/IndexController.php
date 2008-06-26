@@ -13,6 +13,12 @@ class IndexController extends Zend_Controller_Action
 	{
 	}
 	
+	#　更新用户最后在线时间 -----------------------------------------
+	public function useractiveAction()
+	{
+		
+	}
+	
 	# 首页展示
 	public function indexAction() 
 	{

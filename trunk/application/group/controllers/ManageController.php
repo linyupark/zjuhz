@@ -11,8 +11,8 @@ class ManageController extends Zend_Controller_Action
         $this->view->controller_name = $this->getRequest()->getControllerName();
         $this->view->action_name = $this->getRequest()->getActionName();
         // 非管理员权限直接跳转
-        if(GroupMemberModel::role($this->view->uid, $this->view->gid) != 'manager'
-           && GroupMemberModel::role($this->view->uid, $this->view->gid) != 'creater')
+        // 是否是管理员
+        if(false == Cmd::isManager($this->view->gid))
         {
             $this->_redirect('/');
         }
@@ -21,12 +21,7 @@ class ManageController extends Zend_Controller_Action
             $this->view->groupInfo = GroupModel::info($this->view->gid);
         }
     }
-    
-    function preDispatch()
-    {
-        if(!$this->getRequest()->isXmlHttpRequest())
-        $this->getResponse()->insert('sidebar', $this->view->render('manage/sidebar.phtml'));
-    }
+
     
     # 群组公告
     public function noticeAction()

@@ -7,7 +7,7 @@ class GroupEventModel
     # 获取群组多少小时内的事件
     static function num($hour, $gid, $type)
     {
-        $time = time() - $hour*3600
+        $time = time() - $hour*3600;
         $db = Zend_Registry::get('dbGroup');
         $row = $db->fetchRow('SELECT COUNT(`event_id`) AS `numrows`
                       FROM `tbl_group_event`

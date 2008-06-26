@@ -24,12 +24,6 @@ class InviteController extends Zend_Controller_Action
             $this->view->groupInfo = GroupModel::info($this->view->gid);
         }
     }
-    
-    function preDispatch()
-    {
-        if(!$this->getRequest()->isXmlHttpRequest())
-        $this->getResponse()->insert('sidebar', $this->view->render('manage/sidebar.phtml'));
-    }
 	
     # 邀请操作
     public function doAction()

@@ -1,5 +1,6 @@
-<?= $this->render('manage/sidebar.phtml') ?>
-    
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
     <div class="span-19 last mgu10">
         <div class="extInline2" style="margin:0;" id="group_notice">
             <h3 class="pd5">群组公告</h3>
@@ -18,6 +19,7 @@
         <!-- 论坛 -->
         <div class="oneCol mgu10">
             <?= $this->topiclist($this->gid, 10, 1); ?>
+			<p class="txtr mg10"><a href="/group/topic?gid=<?= $this->gid ?>">更多话题</a></p>
         </div>
     </div>    
 </div>

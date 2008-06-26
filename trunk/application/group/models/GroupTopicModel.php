@@ -2,6 +2,21 @@
 
 class GroupTopicModel
 {
+	static function update($data, $tid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->update('tbl_group_topic', $data, 'topic_id = '.$tid);
+	}
+	
+	# 获取话题信息
+	static function fetch($tid, $col = '*')
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT '.$col.' FROM `vi_group_topic` WHERE `topic_id` = ?', $tid);
+		if($col != '*') return $row[$col];
+		else return $row;
+	}
+	
 	# 增加新的话题
 	static function add($uid, $gid, $data)
 	{
@@ -16,8 +31,7 @@ class GroupTopicModel
 			$topic_id = $db->lastInsertId();
 			// 更新群组话题数
 			GroupModel::update(array(
-				'topic_num'=>new Zend_Db_Expr('topic_num + 1'),
-				'update_time'=>time()	
+				'topic_num'=>new Zend_Db_Expr('topic_num + 1')
 			), $gid);
 			// 更新个人群组积分
 			UserModel::coinMod($uid, '+1');
@@ -47,7 +61,7 @@ class GroupTopicModel
 		
 		$rows = $db->fetchAll('SELECT * FROM `vi_group_topic` 
 					  WHERE `group_id` = '.$gid.'
-                      ORDER BY `is_top` DESC, `pub_time` DESC
+                      ORDER BY `is_top` DESC, `reply_time` DESC
                       LIMIT '.$offset.','.$pagesize);
 		$result['rows'] = $rows;
 		
