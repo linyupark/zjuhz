@@ -295,7 +295,10 @@ class CacheLogic extends MemberInterlayer
     	{
     		$file = "{$path}\\{$value}";echo $file.'<br>';
     		if (is_file($file))
-    		{
+    		{echo $file.'<br>';
+    		 echo file_get_contents($file);
+    		 echo '-------------------------------------------------------------';
+    		 exit;
     			// 将每一个sess读取并转换为数组格式
     		    $sess   = MemberClass::DecodeSession(file_get_contents($file));
     		    // 若登录sess数组结构有变化则需改变
