@@ -270,8 +270,10 @@ class CacheLogic extends MemberInterlayer
     {
     	$this->onlineInit();
 
-    	$cache = (int)$this->_cache->load('onlinenum'); // 获取缓存中的在线数
-    	$facts = count(scandir(session_save_path())) - 2; // 实际sess文件存有数
+    	 // 获取缓存中的在线数
+    	$cache = (int)$this->_cache->load('onlinenum');
+    	//实际sess文件存有数 此值必须与下方统一否则缓存无法生效
+    	$facts = count(scandir(session_save_path())) - 2;
 
     	// 若上述两值不相等则刷新缓存,反之则返回对应缓存
     	return ($cache == $facts ? $this->_cache->load("online{$name}") : 
@@ -294,7 +296,7 @@ class CacheLogic extends MemberInterlayer
     	foreach ($files as $value)
     	{
     		$file = "{$path}/{$value}";
-    		if (is_file($file))
+    		if (is_file($file) && 1000 <= filesize($file)) // 去除filesize会包括游客
     		{
     			// 将每一个sess读取并转换为数组格式
     		    $sess   = MemberClass::DecodeSession(file_get_contents($file));
