@@ -51,6 +51,23 @@ class MyController extends Zend_Controller_Action
 	}
 
 	/**
+     * 临时功能-查看审核
+     * 
+     * @return void
+     */
+	public function auditAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+
+		if (3 == USER_UID || 4 == USER_UID || 5 == USER_UID || 6 == USER_UID)
+		{
+			print_r(CorpCompanyLogic::init()->selectAuditingAll());
+			exit;
+		}
+	}
+
+	/**
      * 临时功能-审核通过
      * 
      * @return void
@@ -60,7 +77,7 @@ class MyController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender();
 		$this->_helper->layout->disableLayout();
 
-		if (3 == USER_UID || 6 == USER_UID)
+		if (3 == USER_UID || 4 == USER_UID || 5 == USER_UID || 6 == USER_UID)
 		{
 			$cid = CommonFilter::cid(($this->getRequest()->getParam('cid')));
             if (10 == strlen($cid))

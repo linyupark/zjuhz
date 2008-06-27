@@ -150,6 +150,16 @@ class CorpCompanyLogic extends BizInterlayer
 		return $this->_CorpCompanyModel->selectUidStatusAll($uid, 0, 'regTime');
 	}
 
+    /**
+     * 查找待审核的企业
+     * 
+     * @return array
+     */
+	public function selectAuditingAll()
+	{
+		return $this->_CorpCompanyModel->selectStatusAll(0);
+	}
+
 	/**
      * 更新cid企业的页面浏览量
      * 

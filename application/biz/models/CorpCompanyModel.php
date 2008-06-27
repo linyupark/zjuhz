@@ -189,6 +189,20 @@ class CorpCompanyModel //extends Zend_Db_Table_Abstract
 	    );
     }
 
+    /**
+     * 查找按status的全部企业
+     * 
+     * @param integer $status
+     * @return array
+     */
+	public function selectStatusAll($status)
+    {
+		return $this->_dao->fetchAll("SELECT company.cid, corp.uid, corp.realName, company.name, company.province, company.city 
+		    FROM tbl_corp_company AS company, tbl_corp AS corp 
+		    WHERE company.status = :status AND company.uid = corp.uid;", array('status' => $status)
+	    );
+    }
+
 	/**
      * 更新cid的页面浏览量
      * 
