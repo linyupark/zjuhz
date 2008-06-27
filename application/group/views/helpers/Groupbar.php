@@ -23,7 +23,7 @@ class Zend_View_Helper_Groupbar
             <li>话题：'.$row['topic_num'].'</li>
             <li>照片：'.$row['photo_num'].'</li>
             <li>分类：<a href="/group/sort?id='.$row['sort_id'].'">'.Cmd::sortName($row['sort_id']).'</a></li>
-            <li>标签：<a href="/group/tag?q='.urlencode($tag_query).'">'.$row['tags'].'</a></li>
+            <li>标签：'.Cmd::tagLink($row['tags']).'</li>
         </ul>';
         return $str;
     }

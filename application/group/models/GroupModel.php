@@ -2,6 +2,69 @@
 
 class GroupModel
 {
+    
+    /**
+     * 群组列表,从群组分类获取
+     * */
+    static function getListBySortId($sort_id, $pagesize, $page, $orderby = 'create_time')
+    {
+        $db = Zend_Registry::get('dbGroup');
+        // 获取群组总数
+        $row = $db->fetchRow('SELECT COUNT(`group_id`) AS `numrows`
+                             FROM `tbl_group` WHERE `sort_id` = ?', $sort_id);
+        
+        $result['numrows'] = $row['numrows'];
+        $offset = ($page-1)*$pagesize;
+        
+        $rows = $db->fetchAll('SELECT ');
+    }
+    
+    // 删除邀请
+    static function delApply($uid, $gid)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        $apply_str = self::info($gid, 'apply');
+        if($apply_str == null) return false;
+        if($apply_str == $uid) $data = null;
+        else
+        {
+            $apply_arr = explode(',', $apply_str);
+            if(!in_array($gid, $apply_arr)) return false;
+			else
+			{
+				$k = array_search($uid, $apply_arr);
+				unset($apply_arr[$k]);
+				array_values($apply_arr);
+				$data = implode(',', $apply_arr);
+			}
+        }
+        $db->update('tbl_group', array('apply'=>$data), 'group_id ='.$gid);
+    }
+    
+    /**
+     * 群组有新的加入申请
+     * */
+    static function joinApply($uid, $gid)
+    {
+        if(!GroupMemberModel::isJoin($uid, $gid))
+        {
+            $db = Zend_Registry::get('dbGroup');
+            $apply_list = self::info($gid, 'apply');
+            if($apply_list == null)
+            $data = array('apply'=>$uid);
+            else
+            {
+                $apply_list = explode(',', $apply_list);
+                if(!in_array($uid, $apply_list))
+                {
+                    $data = array('apply'=>','.$uid);
+                }
+                else return false;
+            }
+            return $db->update('tbl_group', $data, 'group_id ='.$gid);
+        }
+    }
+    
     # url获取gid
     static function url2gid($url)
     {
@@ -42,18 +105,27 @@ class GroupModel
         return $db->update('tbl_group', $data, 'group_id = '.$gid);
     }
     
+    /**
+     * 群组的url是否存在
+     * */
     static function urlExist($url)
     {
         $db = Zend_Registry::get('dbGroup');
         return $db->fetchRow('SELECT `group_id` FROM `tbl_group` WHERE `url` = ?', $url);
     }
     
+    /**
+     * 群组名是否存在
+     * */
     static function nameExist($name)
     {
         $db = Zend_Registry::get('dbGroup');
         return $db->fetchRow('SELECT `group_id` FROM `tbl_group` WHERE `name` = ?', $name);
     }
     
+    /**
+     * 群组名是否已经存在（修改时）
+     * */
     static function nameExistMod($name, $gid)
     {
         $db = Zend_Registry::get('dbGroup');

@@ -14,17 +14,18 @@
                 <th class="txtc pd5">性别</th>
                 <th></th>
             </tr>
-            <?php if($this->vogs): foreach($this->vogs as $v): ?>
-            <tr>
+            <?php if($this->applies): foreach($this->applies as $uid): ?>
+            <tr id="apply_<?= $uid ?>">
                 <!--<td class="vm txtc"><input type="checkbox" /></td>-->
-                <td class="pd5 txtc dashBorder" width="10%"><?= Commons::getUserFace($v['uid']) ?></td>
+                <td class="pd5 txtc dashBorder" width="10%"><?= Commons::getUserFace($uid) ?></td>
                 <td class="vm txtc dashBorder">
-                    <a href="/member/profile?uid=<?= $v['uid'] ?>"><?= $v['realName'] ?></a>
+                    <a href="/member/profile?uid=<?= $uid ?>"><?= UserModel::fetch($uid, 'realName') ?></a>
                 </td>
-                <td class="vm txtc dashBorder"><?= $v['sex'] ?></td>
+                <td class="vm txtc dashBorder"><?= UserModel::fetch($uid, 'sex') ?></td>
                 <td class="vm txtc dashBorder">
-                    <?php if(!UserModel::isInvited($this->gid, $v['uid'])): ?>
-                    <button onclick="doInvite(<?= $v['uid'].','.$this->gid ?>)" class="btn">邀请</button>
+                    <?php if(!UserModel::isInvited($this->gid, $uid)): ?>
+                    <button onclick="doInvite(<?= $uid.','.$this->gid ?>)" class="btn">邀请</button>
+                    <button onclick="doDel(<?= $uid.','.$this->gid ?>)" class="btn">删除</button>
                     <?php else: ?>
                     已经邀请
                     <?php endif; ?>
@@ -32,27 +33,28 @@
             </tr>
             <?php endforeach; else: ?>
             <tr>
-                <td colspan="5" class="pd5">目前没有无组人士..</td>
+                <td colspan="5" class="pd5">目前没有想加入本群组的校友..</td>
             </tr>
             <?php endif; ?>
         </table>
         </form>
-        <p class="txtc">
-            共找到<?= $this->vog_num ?>名，
-            现在显示<?= $this->offset ?>到<?= ($this->offset+$this->pagesize-1) ?>
-        </p>
-        <p class="pagination mglf10">
-            <?= $this->pagination ?>
-        </p>
     </div>
 </div>
 </div>
 
 <script type="text/javascript">
+    function doDel(uid, gid)
+    {
+        $.post('/group/invite/apply?do=del', {uid:uid, gid:gid}, function(html){
+            $('#apply_'+uid).fadeOut();
+        });
+    }
+    
     function doInvite(uid, gid)
     {
         $.post('/group/invite/do', {uid:uid, gid:gid}, function(html){
             $('#tip').html(html);
+            doDel(uid, gid);
         });
     }
 </script>

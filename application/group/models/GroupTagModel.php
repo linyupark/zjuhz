@@ -2,6 +2,15 @@
 
 class GroupTagModel
 {
+    # 获取执行分类下热门的标签
+    static function getList($sort_id, $limit = 30)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        return $db->fetchAll('SELECT * FROM `tbl_group_tag` 
+                              WHERE `sort_id` = '.$sort_id.' 
+                              ORDER BY `rate` DESC LIMIT '.$limit);
+    }
+    
     static function insert($sort_id, $tags)
     {
         $db = Zend_Registry::get('dbGroup');

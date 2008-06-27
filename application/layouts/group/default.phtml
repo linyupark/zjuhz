@@ -75,7 +75,7 @@
 			$('input[type="text"]').blur(function(){
 				$(this).css('border','1px solid #bbb');
 			});
-			$('#top_tip').load('/group/index/toptip');
+			$('#top_tip').load('/group/index/toptip?gid=<?= $this->gid ?>');
 			$.get('/group/index/click?gid=<?= $this->gid ?>'); // 统计访问量
 		});
 		

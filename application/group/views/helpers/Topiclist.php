@@ -8,7 +8,8 @@ class Zend_View_Helper_Topiclist
     {
         $result = GroupTopicModel::index($gid, $pagesize, $page);
         $str = '<h3 class="pd5 mg10">论坛
-        <a style="margin-left:620px" href="/group/topic/new?gid='.$gid.'">发新主题</a></h3>';
+        <small class="f12" style="font-weight:normal">共'.$result['numrows'].'个主题</small>
+        <a style="margin-left:550px" href="/group/topic/new?gid='.$gid.'">发新主题</a></h3>';
         if($result['numrows'] == 0) $str .= '<p class="mglf10">论坛中没有主题</p>';
         else
         {
@@ -41,7 +42,7 @@ class Zend_View_Helper_Topiclist
             if($pagination != false)
             {
                 Page::create(array(
-                    'href_open' => '<a href="">',
+                    'href_open' => '<a href="/group/topic?gid='.$gid.'&p=%d">',
                     'href_close' => '</a>',
                     'num_rows' => $result['numrows'],
                     'cur_page' => $page

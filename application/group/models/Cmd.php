@@ -1,7 +1,19 @@
 <?php
 
 class Cmd
-{	
+{
+    # 标签字符串转连接
+    static function tagLink($tags)
+    {
+        $tag_arr = explode(' ', $tags);
+        $str = '';
+        foreach($tag_arr as $tag)
+        {
+            $str .= '<a href="/group/tag?q='.urlencode($tag).'">'.$tag.'</a> ,';
+        }
+        return substr($str, 0, -1);
+    }
+    
 	# 从session中获取是否是游客
 	static function isGuest($gid)
 	{

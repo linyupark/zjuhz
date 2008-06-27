@@ -14,7 +14,7 @@ class Zend_View_Helper_Sortbar
             if($k == 41) $temp .= '<hr class="hr-2" /><b>'.Cmd::icon('music.png').' 娱乐</b>';
             if($k == 51) $temp .= '<hr class="hr-2" /><b>'.Cmd::icon('heart.png').' 交友</b>';
             if($k == 99) $temp .= '<hr class="hr-2" />';
-            $temp .= '<li><a href="/group/?sort='.$k.'">'.$v.'</a><span class="quiet">('.GroupModel::totalNum($k).')</span></li>';
+            $temp .= '<li><a href="/group/sort?id='.$k.'">'.$v.'</a><span class="quiet">('.GroupModel::totalNum($k).')</span></li>';
         }
         $str = '<h3 class="pd10">按分类浏览</h3>';
         $str .= '<div class="extInline2 mglf10">目前共有'.$group_num.'个群组</div>';

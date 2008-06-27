@@ -38,12 +38,25 @@ class JoinController extends Zend_Controller_Action
 	            GroupModel::update(array('member_num'=>new Zend_Db_Expr('member_num+1')), $gid);
 	            UserModel::haveGroup($uid);
 	            Cmd::flushGroupSession();
-	            $this->view->message = '<div class="success">成功加入该群组，返回<a href="/group/home?gid='.$gid.'">群组首页</a></div>';
+	            $this->view->message = '<div class="success f14">成功加入该群组，
+				返回<a href="/group/home?gid='.$gid.'">群组首页</a></div>';
 			}
 			
 			// 针对半公开群组 2
-			
+			if($private == 2)
+			{
+				if(!GroupModel::joinApply($uid, $gid))
+				$this->view->message = '<div class="error f14">递交申请失败，可能您已经申请过了。
+					<button class="btn" onclick="history.back()">知道了，返回上一页</button></div>';
+				else $this->view->message = '<div class="success f14">加入申请已经递交，请耐心等待审核。
+				<button class="btn" onclick="history.back()">知道了，返回上一页</button></div>';
+			}
 			// 针对私密群组 3
+			if($private == 3)
+			{
+				$this->view->message = '<div class="error f14">抱歉，该群组为私密群组，只有被该群组邀请才能加入。 
+					<button class="btn" onclick="history.back()">知道了，返回上一页</button></div>';
+			}
 		}
 	}
 }
