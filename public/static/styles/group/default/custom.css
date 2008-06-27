@@ -20,6 +20,7 @@
 }
 .table-topic td.title span{ float:right; font-weight:normal; margin-top:-14px; }
 .table-topic td.content{ padding:30px 20px; line-height:170%; font-size:14px; }
+.table-topic td.content *{ line-height:170%; }
 
 .quote{ background:#f5f5f5; border:1px dashed #ccc; padding:8px; font-size:12px; margin-bottom:10px; }
 
