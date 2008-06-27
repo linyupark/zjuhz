@@ -24,6 +24,7 @@ class TopicController extends Zend_Controller_Action
 	# 列表
 	public function indexAction() 
 	{
+        $this->view->pagesize = 30;
 	}
 	
 	# 详细帖

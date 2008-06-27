@@ -3,17 +3,21 @@
 /**
  * 群组分类 SortController
  * 
- * @author
+ * @author zjuhz.com
  * @version 
  */
 
 
-class SortController extends Zend_Controller_Action {
-	/**
-	 * The default action - show the home page
-	 */
-	public function indexAction() {
-		// TODO Auto-generated SortController::indexAction() default action
+class SortController extends Zend_Controller_Action
+{
+	function init()
+	{
+		$this->view->sort_id = $this->_getParam('id'); // 群组分类记号
+	}
+	
+	public function indexAction()
+	{
+		
 	}
 
 }

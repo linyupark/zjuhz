@@ -27,12 +27,26 @@ class GroupMemberModel
                              WHERE `user_id`=? AND `group_id`=?', array($uid,$gid));
     }
     
-    # 罗列群组成员列表
-    static function fetchAll($gid)
+    
+    
+    # 罗列群组所有成员列表(新加入在前)
+    static function fetchAll($gid, $pagesize, $page)
     {
         $db = Zend_Registry::get('dbGroup');
-        return $db->fetchAll('SELECT `active`,`role`,`last_access`,`user_id`,`realName`,`sex`,`join_time` 
-                             FROM `vi_group_member` WHERE `group_id` = ?', $gid);
+        // 成员总数
+        $row = $db->fetchRow('SELECT COUNT(`user_id`) AS `numrows`
+                                FROM `tbl_group_member`
+                                WHERE `group_id` = ?',$gid);
+        
+        $result['numrows'] = $row['numrows'];
+        $offset = ($page-1)*$pagesize;
+        
+        $rows = $db->fetchAll('SELECT `active`,`role`,`last_access`,`user_id`,`realName`,`sex`,`join_time` 
+                               FROM `vi_group_member`WHERE `group_id` = '.$gid.' ORDER BY `join_time` DESC 
+                               LIMIT '.$offset.','.$pagesize);
+        
+		$result['rows'] = $rows;
+		return $result;
     }
     
     # 判断角色

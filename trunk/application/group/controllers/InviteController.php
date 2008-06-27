@@ -25,12 +25,31 @@ class InviteController extends Zend_Controller_Action
         }
     }
 	
+    # 请求加入列表
+    public function applyAction()
+    {
+        if(!Cmd::isManager($this->view->gid)) $this->_redirect('/');
+        
+        if($this->_getParam('do') == 'del')
+        {
+            $request = $this->getRequest();
+            $uid = $request->getPost('uid');
+            $gid = $request->getPost('gid');
+            GroupModel::delApply($uid, $gid);
+        }
+        
+        $apply_str = GroupModel::info($this->view->gid, 'apply');
+        if($apply_str == null) $this->view->applies = false;
+        else $this->view->applies = explode(',', $apply_str);
+    }
+    
     # 邀请操作
     public function doAction()
     {
         $request = $this->getRequest();
         $uid = $request->getPost('uid');
         $group_id = $request->getPost('gid');
+        
         if(UserModel::isInvited($group_id, $uid))
         {
             $this->_helper->layout->setLayout('error');

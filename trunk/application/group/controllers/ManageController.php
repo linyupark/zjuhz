@@ -54,10 +54,20 @@ class ManageController extends Zend_Controller_Action
     public function memberAction()
     {
         $type = $this->_getParam('type', 'list');
+        $page = $this->_getParam('p', 1);
         if($type == 'list')
         {
             // 罗列成员列表
-            $this->view->members = GroupMemberModel::fetchAll($this->view->gid);
+            Page::$pagesize = 10;
+            $result = GroupMemberModel::fetchAll($this->view->gid, Page::$pagesize, $page);
+            Page::create(array(
+                'href_open' => '<a href="/group/manage/member?gid='.$this->view->gid.'&type=list&p=%d">',
+                'href_close' => '</a>',
+                'num_rows' => $result['numrows'],
+                'cur_page' => $page
+            ));
+            $this->view->members = $result['rows'];
+            $this->view->pagination = Page::$page_str;
             $this->render('member-list');
         }
         if($type == 'downgrade')

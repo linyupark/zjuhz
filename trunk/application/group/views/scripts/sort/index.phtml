@@ -1,0 +1,15 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <div class="extInline pd10" style="margin:0">
+        <a href="">校友群组</a> &gt;
+        <?= Cmd::sortName($this->sort_id) ?>
+    </div>
+    <div class="oneCol mgu10">
+        <?= $this->taglist($this->sort_id) ?>
+    </div>
+</div>
