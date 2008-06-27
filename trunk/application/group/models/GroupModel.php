@@ -2,7 +2,6 @@
 
 class GroupModel
 {
-    
     /**
      * 群组列表,从群组分类获取
      * */
@@ -16,7 +15,10 @@ class GroupModel
         $result['numrows'] = $row['numrows'];
         $offset = ($page-1)*$pagesize;
         
-        $rows = $db->fetchAll('SELECT ');
+        $result['rows'] = $db->fetchAll('SELECT `name`,`group_id`,`member_num`,`intro`,`tags`
+                              FROM `tbl_group` WHERE `sort_id`='.$sort_id.'
+                              ORDER BY `'.$orderby.'` DESC LIMIT '.$offset.','.$pagesize);
+        return $result;
     }
     
     // 删除邀请

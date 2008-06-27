@@ -26,7 +26,7 @@ class GroupPreLoad extends Zend_Controller_Plugin_Abstract
       // 默认权限规则
       $Acl->allow(array('guest', 'member', 'admin'));
       // 设置控制规则 ....
-      $Acl->deny('guest', array('group_create','group_my'));
+      $Acl->deny('guest', null, null);
       
       Zend_Registry::set('zendAcl', $Acl);
     }

@@ -35,6 +35,10 @@ class GroupTopicModel
 			), $gid);
 			// 更新个人群组积分
 			UserModel::coinMod($uid, '+1');
+			// 增加成员在群组的活跃度
+			GroupMemberModel::update($this->view->uid, array(
+				'active' => new Zend_Db_Expr('active + 1')
+			)); 
 			// 更新最新事件
 			GroupEventModel::insert(array(
 				'group_id' => $gid,
