@@ -53,9 +53,9 @@ class ReplyController extends Zend_Controller_Action
 						'reply_user' => $this->view->uid
 					), $topic_id);
 					UserModel::coinMod($this->view->uid, '+1');
-					GroupMemberModel::update($this->view->uid, array(
-						'active' => new Zend_Db_Expr('active + 1')
-					)); // 增加成员在群组的活跃度
+					//GroupMemberModel::update($this->view->uid, array(
+					//	'active' => new Zend_Db_Expr('active + 1')
+					//)); // 增加成员在群组的活跃度
 					echo '<div class="success">回复帖子成功！</div>';
 					echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$topic_id.'&p='.$to_page.'&hash='.$reply_id, 1);
 				}
