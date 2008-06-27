@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action
 	# 首页展示
 	public function indexAction() 
 	{
-		
+		Cmd::flushGroupSession();
 	}
 	
 	# 统计访问量 -------------------------------------------------
