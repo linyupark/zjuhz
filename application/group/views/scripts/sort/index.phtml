@@ -12,4 +12,32 @@
     <div class="oneCol mgu10">
         <?= $this->taglist($this->sort_id) ?>
     </div>
+    
+    <div class="oneCol mgu10">
+        <p class="mglf10">共找到 <?= $this->group_num ?> 个相关群组</p>
+        <?php if(count($this->groups) == 0): ?>
+        <div class="mglf10">空</div>
+        <?php else: ?>
+        <table class="table-1" width="100%">
+            <?php foreach($this->groups as $g): ?>
+            <tr>
+                <td class="vm pd10 dashBorder"><?= Cmd::groupIcon($g['group_id']) ?></td>
+                <td class="vm dashBorder">
+                    <a class="f14" href="/group/home?gid=<?= $g['group_id'] ?>"><strong><?= $g['name'] ?></strong></a><br />
+                    <?= $g['intro'] ?><br />
+                    <span class="quiet">分类：</span>
+                    <a href="/group/sort?id=<?= $this->sort_id ?>"><?= Cmd::sortName($this->sort_id) ?></a> &gt;
+                    <?= Cmd::tagLink($g['tags']); ?>
+                </td>
+                <td class="vm dashBorder txtc" width="10%">
+                    <?php if(Cmd::isGuest($g['group_id'])): ?>
+                    <a href="/group/join/new?gid=<?= $g['group_id'] ?>">申请加入</a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </table>
+        <div class="pagination"><?= $this->pagination ?></div>
+        <?php endif; ?>
+    </div>
 </div>

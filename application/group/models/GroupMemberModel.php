@@ -27,8 +27,6 @@ class GroupMemberModel
                              WHERE `user_id`=? AND `group_id`=?', array($uid,$gid));
     }
     
-    
-    
     # 罗列群组所有成员列表(新加入在前)
     static function fetchAll($gid, $pagesize, $page)
     {
