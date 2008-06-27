@@ -301,7 +301,7 @@ class CacheLogic extends MemberInterlayer
     		if (is_file($file) && 1000 <= filesize($file)) // 去除filesize会包括游客
     		{
     			// 将每一个sess读取并转换为数组格式
-    		    $sess   = MemberClass::DecodeSession(file_get_contents($file));
+    		    $sess   = MemberClass::decodeSession(file_get_contents($file));
     		    // 若登录sess数组结构有变化则需改变
     		    $data[] = array('uid' => $sess['common']['login']['uid'], 
     		        'realName' => $sess['common']['login']['realName']
