@@ -21,7 +21,7 @@
         <table class="table-1" width="100%">
             <?php foreach($this->groups as $g): ?>
             <tr>
-                <td class="vm pd10 dashBorder"><?= Cmd::groupIcon($g['group_id']) ?></td>
+                <td class="vm pd10 dashBorder" width="10%"><?= Cmd::groupIcon($g['group_id']) ?></td>
                 <td class="vm dashBorder">
                     <a class="f14" href="/group/home?gid=<?= $g['group_id'] ?>"><strong><?= $g['name'] ?></strong></a><br />
                     <?= $g['intro'] ?><br />
