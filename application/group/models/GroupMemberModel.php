@@ -6,7 +6,7 @@ class GroupMemberModel
     static function update($uid, $data)
     {
         $db = Zend_Registry::get('dbGroup');
-        return $db->update('tbl_group_member', $data, 'WHERE `user_id` = '.$uid);
+        return $db->update('tbl_group_member', $data, 'user_id = '.$uid);
     }
     
     # 加入群组
