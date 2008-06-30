@@ -32,7 +32,6 @@ class GroupTagModel
                     'name' => $v
                 );
                 $db->insert('tbl_group_tag', $data);
-                return $db->lastInsertId();
             }
         }
     }
