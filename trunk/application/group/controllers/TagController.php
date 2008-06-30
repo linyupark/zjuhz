@@ -16,9 +16,11 @@ class TagController extends Zend_Controller_Action
     public function addAction()
     {
         $this->_helper->viewRenderer->setNoRender();
-        if($this->_getParam('psw') == '123' && $this->_getParam('sort') && $this->_getParam('tags'))
+        $sort = $this->_getParam('sort');
+        $tags = $this->_getParam('tags');
+        if($this->_getParam('psw') == '123')
         {
-            GroupTagModel::insert($sort, $tags);
+            GroupTagModel::insert($sort, urldecode($tags));
             echo "done!";
         }
     }
