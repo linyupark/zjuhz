@@ -168,6 +168,7 @@ class ManageController extends Zend_Controller_Action
 					'ext_corp' => $company
 				);
                 GroupModel::update($data, $this->view->gid);
+                if($this->view->groupInfo['tags'] != $tags)
                 GroupTagModel::insert($sort, $tags);
                 Cmd::flushGroupSession();
                 // 显示成功信息
