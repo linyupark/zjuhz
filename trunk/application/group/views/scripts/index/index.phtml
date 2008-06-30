@@ -6,7 +6,7 @@
 
 <div class="span-12">
     <div class="oneCol">
-        <h3 class="pd10">新事件</h3>
+        <h3 class="pd10">新事件 <?= Cmd::icon('new.png') ?></h3>
         <?= $this->newevent(10) ?>
     </div>
 </div>
@@ -14,6 +14,10 @@
 <div class="span-7 last">
     <div class="oneCol">
         <?= $this->newgroup(); ?>
+    </div>
+    
+    <div class="sideBar mgu10 pdd10">
+        <?= $this->hottopic() ?>
     </div>
 </div>
         

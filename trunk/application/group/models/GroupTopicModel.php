@@ -2,6 +2,14 @@
 
 class GroupTopicModel
 {
+	static function hot($limit)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->fetchAll('SELECT `topic_id`,`group_id`,`title` 
+					  FROM `tbl_group_topic` 
+					  ORDER BY `reply_num` DESC LIMIT '.(int)$limit);
+	}
+	
 	static function update($data, $tid)
 	{
 		$db = Zend_Registry::get('dbGroup');
@@ -51,7 +59,7 @@ class GroupTopicModel
 		}
 	}
 	
-	# 话题索引
+	# 群组内部话题索引
     static function index($gid, $pagesize, $page)
     {
         $db = Zend_Registry::get('dbGroup');
@@ -65,7 +73,7 @@ class GroupTopicModel
 		$offset = ($page-1)*$pagesize;
 		
 		$rows = $db->fetchAll('SELECT * FROM `vi_group_topic` 
-					  WHERE `group_id` = '.$gid.'
+					  WHERE `group_id` = '.$gid.' 
                       ORDER BY `is_top` DESC, `reply_time` DESC
                       LIMIT '.$offset.','.$pagesize);
 		$result['rows'] = $rows;
