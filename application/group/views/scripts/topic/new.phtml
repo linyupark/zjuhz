@@ -10,6 +10,7 @@
             <h3 class="pd10">发布新主题</h3>
             <form class="mg10" id="topic_form" method="post" onsubmit="return doPost()">
             <p><label>标题 <input type="text" name="title" class="text" maxlength="200" style="width:80%" /></label> (限200字)</p>
+            <span id="upload_form"></span>
             <input type="hidden" value="" name="content" />
             <?= $this->editor($this->gid, '99%', '400px'); ?>
             <p><label>标签 <input type="text" name="tags" class="text" style="width:60%" /></label> (用空格分隔，如：西湖 杭州)</p>
@@ -31,5 +32,10 @@
             window.scroll(0,1000);
         });
         return false;
+    }
+    $('#upload_form').load('/group/file/upload?gid=<?= $this->gid ?>');
+    function test()
+    {
+        alert('do');
     }
 </script>
