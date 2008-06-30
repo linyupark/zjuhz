@@ -32,9 +32,11 @@
 .table-1 td a:hover{ text-decoration:underline; }
 .table-1 th{ background:#D7E4EA; padding:10px; }
 
-.sidebar a{
+.sideBar a:link, .sideBar a:visited{
 	color:#4B630B;
+	text-decoration:none;
 }
+.sideBar a:hover{ text-decoration:underline; }
 
 /* 管理菜单 */
 div.managebar{
