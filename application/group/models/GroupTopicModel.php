@@ -45,7 +45,8 @@ class GroupTopicModel
 				'user_id' => $uid,
 				'time' => time(),
 				'type' => 1, //类型1为话题
-				'url' => '/group/topic/show?gid='.$gid.'&tid='.$topic_id // 转到事件地址
+				'url' => '/group/topic/show?gid='.$gid.'&tid='.$topic_id, // 转到事件地址
+				'name' => $data['title']
 			));
 		}
 	}
