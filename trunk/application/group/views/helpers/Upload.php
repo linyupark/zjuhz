@@ -12,7 +12,7 @@ class Zend_View_helper_Upload
 				<input type="submit" value="上传" /> 
 				<span class="quiet">(有效类型:'.$allowtype.', 大小限制:'.$maxsize.'KB)</span></p>
 				</form>
-                <span id="file_list"></span>
+                <p id="file_list"></p>
 				<iframe id="doUpload" class="hide" name="doUpload"></iframe>
 				';
 		}
@@ -34,7 +34,10 @@ class Zend_View_helper_Upload
             }
             else
             {
-                return '<script type="text/javascript">parent.KE_CUSTOM_STR("<a href=\'/static/groups/'.$gid.'/files/'.$file_name.'\'>下载文件：'.$file_name.'</a>")</script>';
+                return '<script type="text/javascript">
+                    parent.KE_CUSTOM_STR("<a href=\'/static/groups/'.$gid.'/files/'.$file_name.'\'>下载文件：'.$file_name.'</a>");
+                    parent.file_list("<a href=\'/static/groups/'.$gid.'/files/'.$file_name.'\'>'.$file_name.'</a>");
+                </script>';
             }
 		}
     }

@@ -1,1 +1,8 @@
 <?= $this->upload('group_file',2000,'zip|rar',$this->gid); ?>
+
+<script type="text/javascript">
+    function file_list(str)
+    {
+        $('#file_list').append(str+', ');
+    }
+</script>
