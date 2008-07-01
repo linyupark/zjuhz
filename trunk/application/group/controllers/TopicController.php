@@ -108,7 +108,40 @@ class TopicController extends Zend_Controller_Action
 	# 编辑帖
 	public function editAction()
 	{
-		
+		if(!Cmd::isMyTopic($this->view->tid))
+        $this->_forward('error', 'error');
+        else
+        {
+        	$request = $this->getRequest();
+			if($request->isPost())
+			{
+				$V = new Lp_Valid();
+				$title = $V->of($request->getPost('title'), 'title', '话题标题', 'trim|strip_tags|str_between[2,200]');
+				$content = $V->of($request->getPost('content'), 'content', '话题内容', 'trim|required');
+				$tags = $V->of($request->getPost('tags'), 'tags', '话题标签', 'trim|required');
+				if($V->getMessages() != false)
+				{
+					$this->_helper->layout->setLayout('error');
+					echo '<ul class="error">'.$V->getMessages('<li>','</li>').'</ul>';
+				}
+				else
+				{
+					$data = array(
+						'title' => $title,
+						'content' => $content,
+						'tags' => $tags,
+						'mod_time' => time()
+					);
+					GroupTopicModel::update($data, $this->view->tid);
+					$this->_helper->layout->setLayout('success');
+					echo '<div class="success">主题修改成功！
+					<a href="/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid.'">查看主题</a></div>';
+				}
+			}
+			
+            //提取主题内容，加入表单
+            $this->view->topic = GroupTopicModel::fetch($this->view->tid);
+        }
 	}
 	
 	# 删除帖

@@ -2,6 +2,17 @@
 
 class Cmd
 {
+    # 是否为自己的话题
+    static function isMyTopic($tid)
+    {
+        $owner = GroupTopicModel::fetch($tid, 'pub_user');
+        if(Zend_Registry::get('sessCommon')->login['uid'] == $owner)
+        {
+            return true;
+        }
+        else return false;
+    }
+    
     # 标签字符串转连接
     static function tagLink($tags)
     {
