@@ -31,7 +31,7 @@
                 </td>
                 <td class="vm dashBorder txtc" width="10%">
                     <?php if(Cmd::isGuest($g['group_id'])): ?>
-                    <a href="/group/join/new?gid=<?= $g['group_id'] ?>">申请加入</a>
+                    <?= Cmd::icon('door_in.png') ?> <a href="/group/join/new?gid=<?= $g['group_id'] ?>">申请加入</a>
                     <?php endif; ?>
                 </td>
             </tr>
