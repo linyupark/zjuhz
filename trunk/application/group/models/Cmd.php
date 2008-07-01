@@ -33,6 +33,14 @@ class Cmd
 		else return false;
 	}
 	
+	# 是否为创建者
+	static function isCreater($gid)
+	{
+		if(Zend_Registry::get('sessGroup')->my[$gid]['role'] == 'creater')
+		return true;
+		else return false;
+	}
+	
 	#　从session中获取是否可管理群组
 	static function isManager($gid)
 	{

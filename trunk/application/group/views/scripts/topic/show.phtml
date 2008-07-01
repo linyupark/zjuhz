@@ -38,11 +38,10 @@
 					</p>
 				</td>
 				<td class="title">
-					<?= $this->topic['title'] ?>
 					<span class="f12 hrefspan-8">
 						<?php if(Cmd::isMyTopic($this->topic['topic_id'])): ?>
-						<?= Cmd::icon('page_white_edit.png') ?>
-						<a href="/group/topic/edit?gid=<?= $this->gid ?>&tid=<?= $this->topic['topic_id'] ?>">编辑</a>
+						
+						<a href="/group/topic/edit?gid=<?= $this->gid ?>&tid=<?= $this->topic['topic_id'] ?>"><?= Cmd::icon('page_white_edit.png') ?>编辑</a>
 						<?php endif; ?>
 						<a href="javascript:quote(0)">#回复该帖</a>
 						<a href="javascript:window.scroll(0,0)">#返回顶部</a>
@@ -52,6 +51,7 @@
 			</tr>
 			<tr>
 				<td id="topic_content_0" class="content" style="word-break:break-all;">
+					<h2 style="margin-top:-30px;"><?= $this->topic['title'] ?></h2>
 					<?= stripslashes($this->topic['content']); ?>
 					<?php if($this->topic['mod_time']): ?>
 					<p class="quiet f12 txtr" style="margin-bottom:-25px">***主题在<?= Lp_Date::timespan($this->topic['mod_time']) ?>前做了修改***</p>

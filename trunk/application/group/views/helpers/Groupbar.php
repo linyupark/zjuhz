@@ -13,8 +13,6 @@ class Zend_View_Helper_Groupbar
             case '3': $private = '私秘' ; break;
             default : $private = '公开' ; break;
         }
-        $tag_arr = explode(' ',$row['tags']);
-        $tag_query = implode('+',$tag_arr);
         $str = '<h3 class="pd10">群组信息</h3>';
         $str .= '<ul class="mglf10 pdd10 sidebar">
             <li>创建于：'.Commons::date($row['create_time']).'</li>
