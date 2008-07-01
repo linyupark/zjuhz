@@ -27,6 +27,7 @@ class SortController extends Zend_Controller_Action
 			'num_rows' => $result['numrows'],
 			'cur_page' => $page
 		));
+		$this->view->orderby = $orderby;
 		$this->view->groups = $result['rows'];
 		$this->view->pagination = Page::$page_str;
 		$this->view->group_num = $result['numrows'];

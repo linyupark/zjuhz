@@ -5,25 +5,49 @@
 </div>
 
 <div class="span-19 last">
-    <div class="extInline pd10" style="margin:0">
-        <a href="/group/">校友群组</a> &gt;
-        <?= Cmd::sortName($this->sort_id) ?>
-    </div>
+	<table width="100%" class="extInline" style="margin:0">
+		<tr>
+			<td class="f14 vm pd5" width="40%">
+				<a href="/group/">校友群组</a> &gt; 
+				<strong><?= Cmd::sortName($this->sort_id) ?></strong>
+			</td>
+			<td class="vm pd5" width="60%">
+				<form action="/group/search/g" method="get" class="txtr">
+        			<input type="text" name="q" /> 
+        			<input type="submit" value="搜索群组" />
+        		</form>
+			</td>
+		</tr>
+	</table>
     <div class="oneCol mgu10">
         <?= $this->taglist($this->sort_id) ?>
     </div>
     
     <div class="oneCol mgu10">
-        <p class="mglf10">共找到 <?= $this->group_num ?> 个相关群组</p>
+        <table width="100%">
+        	<tr>
+        		<td class="vm pd10">共找到 <span style="color:red"><?= $this->group_num ?></span> 个相关群组</td>
+        		<td class="txtr pd10">
+        			<select onchange="location.href='/group/sort?id=<?= $this->sort_id ?>&o='+this.value">
+        				<option value="create_time" <?= $this->orderby == 'create_time' ?  'selected="selected"' : '' ?>>创建时间(新到老)</option>
+		        		<option value="member_num" <?= $this->orderby == 'member_num' ?  'selected="selected"' : '' ?>>成员数(多到少)</option>
+		        		<option value="topic_num" <?= $this->orderby == 'topic_num' ?  'selected="selected"' : '' ?>>主题数(多到少)</option>
+		        		<option value="photo_num" <?= $this->orderby == 'photo_num' ?  'selected="selected"' : '' ?>>图片数(多到少)</option>
+		        	</select>
+        		</td>
+        	</tr>
+        </table>
         <?php if(count($this->groups) == 0): ?>
-        <div class="mglf10">空</div>
+        <div class="mglf10"></div>
         <?php else: ?>
         <table class="table-1" width="100%">
             <?php foreach($this->groups as $g): ?>
             <tr>
                 <td class="vm pd10 dashBorder" width="10%"><?= Cmd::groupIcon($g['group_id']) ?></td>
                 <td class="vm dashBorder">
-                    <a class="f14" href="/group/home?gid=<?= $g['group_id'] ?>"><strong><?= $g['name'] ?></strong></a><br />
+                    <a class="f14" href="/group/home?gid=<?= $g['group_id'] ?>"><strong><?= $g['name'] ?></strong></a>
+                    <span class="f12 quiet">(<?= $g['member_num'] ?>人)</span>
+                    <br />
                     <?= $g['intro'] ?><br />
                     <span class="quiet">分类：</span>
                     <a href="/group/sort?id=<?= $this->sort_id ?>"><?= Cmd::sortName($this->sort_id) ?></a> &gt;

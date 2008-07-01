@@ -15,9 +15,8 @@ class JoinController extends Zend_Controller_Action
 	{
 		// 获取群组类型
 		$gid = $this->getRequest()->getParam('gid',null);
-		$uid = $this->view->passport('uid', null);
+		$uid = $this->view->passport('uid');
 		$private = GroupModel::info($gid, 'private');
-		
 		if($gid == null || $uid == null)
 		{
 			$this->_forward('error', 'error');

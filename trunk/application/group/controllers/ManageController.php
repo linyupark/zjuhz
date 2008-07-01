@@ -217,7 +217,6 @@ class ManageController extends Zend_Controller_Action
 					'sort_id' => $sort,
 					'name' => $name,
 					'intro' => $intro,
-					'private' => $private,
 					'tags' => $tags,
 					'ext_location' => $location,
 					'ext_trade' => $profession,
