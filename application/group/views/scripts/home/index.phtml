@@ -12,7 +12,7 @@
         </div>
         <div class="hide" style="margin:0;" id="notice_editor">
             <input type="hidden" name="content" value="<?= htmlspecialchars(stripslashes(GroupModel::info($this->gid, 'notice'))); ?>" />
-            <?= $this->editor($this->gid,'100%','150px') ?>
+            <?= $this->editor($this->gid,'99%','150px') ?>
             <p><input type="button" onclick="save()" class="btn" value="保存" />
             <input type="button" onclick="cancel()" class="btn" value="取消" /></p>
         </div>
