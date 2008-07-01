@@ -25,6 +25,17 @@ class Zend_View_Helper_Managebar
         $str .= '</div>';
         $str = str_replace('{'.$controller.'}', ' class="here"', $str);
         $str = preg_replace('/\{([a-z])\}/i', '', $str);
+        $str .= '<p class="txtc" style="margin:0; padding:0 0 10px 0">';
+        if(!Cmd::isGuest($gid))
+        {
+        	
+        	$str .='<a href="/group/topic/new?gid='.$gid.'">发表主题</a> | 
+        		<a href="/group/album/new?gid='.$gid.'">上传图片</a></p>';
+        }
+        else 
+        {
+        	$str .= Cmd::icon('door_in.png').' <a href="/group/join/new?gid='.$gid.'">加入群组</a></p>';
+        }
         return $str;
     }
 }

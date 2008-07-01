@@ -6,7 +6,7 @@ class Zend_View_Helper_Taglist
     {
         $str = '<h3 class="pd10">'.Cmd::sortName($sort_id).'
         <small style="font-size:12px; font-weight:normal">下最热门的标签</small></h3>';
-        $str .= '<ul style="padding:0 20px 10px 20px; overflow:hidden;">'.$this->tags_link($sort_id).'</ul>';
+        $str .= '<ul style="padding:0 20px 10px 20px;">'.$this->tags_link($sort_id).'</ul>';
         return $str;
     }
     
@@ -22,7 +22,7 @@ class Zend_View_Helper_Taglist
         {
             foreach($tags_arr as $tag)
             {
-                $str .= '<li style="float:left" class="prepend-1"><nobr><a href="/group/tag?q='.urlencode($tag['name']).'">'.$tag['name'].'</a> <em>('.$tag['rate'].')</em></nobr></li>';
+                $str .= '<li style="display:inline" class="append-1"><nobr><a href="/group/tag?q='.urlencode($tag['name']).'">'.$tag['name'].'</a> <em>('.$tag['rate'].')</em></nobr></li>';
             }
             return $str;
         }
