@@ -22,6 +22,65 @@ class ManageController extends Zend_Controller_Action
         }
     }
 
+    /**
+     * 修改群组论坛主题属性
+     *
+     */
+    public function topicAction()
+    {
+    	$type = $this->_getParam('type');
+    	$topic_arr = $this->_getParam('t', null);
+    	if($topic_arr == null) return ;
+    	switch ($type)
+    	{
+    		case 'top': //置顶
+    			foreach ($topic_arr as $topic_id)
+    			{
+    				GroupTopicModel::update(array(
+    					'is_top' => 1
+    				), $topic_id);
+    			}
+    			echo '成功置顶，<a href="javascript:history.go(0)">刷新查看</a>';
+    			break;
+    		
+    		case 'no_top': // 取消置顶
+    			foreach ($topic_arr as $topic_id)
+    			{
+    				GroupTopicModel::update(array(
+    					'is_top' => 0
+    				), $topic_id);
+    			}
+    			echo '成功取消置顶，<a href="javascript:history.go(0)">刷新查看</a>';
+    			
+    		case 'elite': //加精
+    			foreach ($topic_arr as $topic_id)
+    			{
+    				GroupTopicModel::update(array(
+    					'is_elite' => 1
+    				), $topic_id);
+    			}
+    			echo '成功加精，<a href="javascript:history.go(0)">刷新查看</a>';
+    			break;
+    		
+    		case 'no_elite': // 取消加精
+    			foreach ($topic_arr as $topic_id)
+    			{
+    				GroupTopicModel::update(array(
+    					'is_elite' => 0
+    				), $topic_id);
+    			}
+    			echo '成功取消加精，<a href="javascript:history.go(0)">刷新查看</a>';
+    			
+    		case 'delete': // 删除
+    			foreach ($topic_arr as $topic_id)
+    			{
+    				GroupTopicModel::delete($this->view->gid, $topic_id);
+    			}
+    			echo '成功取消加精，<a href="javascript:history.go(0)">刷新查看</a>';
+    		default:
+    			break;
+    	}
+    }
     
     # 群组公告
     public function noticeAction()

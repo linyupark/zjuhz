@@ -25,6 +25,19 @@ class GroupTopicModel
 		else return $row;
 	}
 	
+	/**
+	 * 删除主题以及连带
+	 */
+	static function delete($gid, $tid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$db->delete('tbl_group_topic','topic_id = '.$tid);
+		// 更新群组话题数
+		GroupModel::update(array(
+			'topic_num'=>new Zend_Db_Expr('topic_num - 1')
+		), $gid);
+	}
+	
 	# 增加新的话题
 	static function add($uid, $gid, $data)
 	{

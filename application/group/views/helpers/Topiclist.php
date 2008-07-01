@@ -13,9 +13,9 @@ class Zend_View_Helper_Topiclist
         if($result['numrows'] == 0) $str .= '<p class="mglf10">论坛中没有主题</p>';
         else
         {
-            $str .= '<table class="table-1 mglf10" width="97%">
+            $str .= '<table class="table-1 mglf10" width="97%" id="topic_list">
             <tr>
-                <th width="50%">标题</th>
+                <th width="50%" colspan="2">标题</th>
                 <th width="10%" class="txtc">点击</th>
                 <th width="10%" class="txtc">回复</th>
                 <th width="10%" class="txtc">作者</th>
@@ -23,9 +23,15 @@ class Zend_View_Helper_Topiclist
             </tr>';
             foreach($result['rows'] as $topic)
             {
+            	$icon = '';
+            	if($topic['is_top'] == 1)
+            	$icon .= Cmd::icon('bbs_top.jpg');
+            	if($topic['is_elite'] == 1)
+            	$icon .= Cmd::icon('ruby.png');
                 $str .= '<tr>
-                            <td class="pd10 dashBorder f14">
-                            	<a href="/group/topic/show?gid='.$gid.'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
+                			<td width="10px"><input class="hide" type="checkbox" name="t[]" value="'.$topic['topic_id'].'" /></td>
+                            <td class="pd10 dashBorder f12">
+                            	'.$icon.' <a href="/group/topic/show?gid='.$gid.'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
                             </td>
                             <td class="txtc dashBorder">'.$topic['click_num'].'</td>
                             <td class="txtc dashBorder">'.$topic['reply_num'].'</td>

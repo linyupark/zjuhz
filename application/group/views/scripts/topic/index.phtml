@@ -5,6 +5,50 @@
         <!-- 论坛 -->
         <div class="oneCol">
             <?= $this->topiclist($this->gid, $this->pagesize, $this->page, true); ?>
+			<?php if(Cmd::isManager($this->gid)): ?>
+			<table width="100%">
+				<tr>
+					<td width="15%">
+						<button onclick="selectAll()" class="btn">全选</button> 
+						<button onclick="unselectAll()" class="btn">取消</button>
+					</td>
+					<td id="tip" class="txtc" width="45%">
+						
+					</td>
+					<td width="40%">
+						<button onclick="doWhat('delete')" class="btn">删帖</button> 
+						<button onclick="doWhat('top')" class="btn">置顶</button> 
+						<button onclick="doWhat('no_top')" class="btn">取消置顶</button> 
+						<button onclick="doWhat('elite')" class="btn">加精</button> 
+						<button onclick="doWhat('no_elite')" class="btn">取消加精</button> 
+					</td>
+				</tr>				
+			</table>
+			<script type="text/javascript">
+				$('input.hide').show();
+				function selectAll()
+				{
+					$('input[type="checkbox"]').attr('checked',true);
+				}
+				function unselectAll()
+				{
+					$('input[type="checkbox"]').attr('checked',false);
+				}
+				function doWhat(t)
+				{
+					if(t == 'delete')
+					{
+						var c = confirm('确定删除所选的主题？');
+						if(c == false) return false;
+					}
+					$.post('/group/manage/topic?gid=<?= $this->gid ?>&type='+t, 
+					$('#topic_list').fastSerialize(), 
+					function(html){
+						$('#tip').html(html);
+					});
+				}
+			</script>
+			<?php endif; ?>
         </div>
     </div>    
 </div>
