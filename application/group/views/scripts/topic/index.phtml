@@ -36,11 +36,10 @@
 				}
 				function doWhat(t)
 				{
+                    var c = true;
 					if(t == 'delete')
-					{
-						var c = confirm('确定删除所选的主题？');
-						if(c == false) return false;
-					}
+					c = confirm('确定删除所选的主题？');
+					if(c == true)
 					$.post('/group/manage/topic?gid=<?= $this->gid ?>&type='+t, 
 					$('#topic_list').fastSerialize(), 
 					function(html){

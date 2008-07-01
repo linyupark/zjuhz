@@ -21,7 +21,46 @@ class ManageController extends Zend_Controller_Action
             $this->view->groupInfo = GroupModel::info($this->view->gid);
         }
     }
-
+    
+    /**
+     * 修改群组角色
+     *
+     */
+    public function roleAction()
+    {
+    	if(!Cmd::isCreater($this->view->gid))
+    	{
+            $this->_helper->layout->setLayout('error');
+            echo '<ul class="error"><li>只有群组创建者才能修改角色名称。</li></ul>';
+        }
+    	else
+    	{
+    		$request = $this->getRequest();
+    		if($request->isPost()) // 修改
+    		{
+    			$V = new Lp_Valid();
+                $creater = $V->of($request->getPost('creater'), 'creater', '创建人', 'trim|strip_tags|str_between[2,6]');
+                $manager = $V->of($request->getPost('manager'), 'creater', '管理人', 'trim|strip_tags|str_between[2,6]');
+                $member = $V->of($request->getPost('member'), 'creater', '成员', 'trim|strip_tags|str_between[2,6]');
+                if($V->getMessages())
+                {
+                    $this->_helper->layout->setLayout('error');
+                    echo '<ul class="error">'.$V->getMessages('<li>','</li>').'</ul>';
+                }
+                else
+                {
+                    $data = array(
+                        'creater' => $creater,
+                        'manager' => $manager,
+                        'member' => $member
+                    );
+                    GroupRoleModel::update($data, $this->view->gid);
+                    echo Commons::js_jump('/group/manage/member?gid='.$this->view->gid, 0);
+                }
+    		}
+    	}
+    }
+    
     /**
      * 修改群组论坛主题属性
      *
@@ -114,6 +153,7 @@ class ManageController extends Zend_Controller_Action
     {
         $type = $this->_getParam('type', 'list');
         $page = $this->_getParam('p', 1);
+        $member_id = $this->_getParam('uid');
         if($type == 'list')
         {
             // 罗列成员列表
@@ -131,11 +171,21 @@ class ManageController extends Zend_Controller_Action
         }
         if($type == 'downgrade')
         {
-            // 降级
+            // 革职
+            GroupMemberModel::update($member_id, array('role'=>'member'));
+            echo '<script>$("#member_'.$member_id.' a[href*=downgrade]").text("成功革职")</script>';
         }
         if($type == 'upgrade')
         {
-            // 升级
+            // 提拔
+            GroupMemberModel::update($member_id, array('role'=>'manager'));
+            echo '<script>$("#member_'.$member_id.' a[href*=upgrade]").text("成功提拔")</script>';
+        }
+        if($type == 'kickout')
+        {
+            // 踢出
+            GroupMemberModel::kickout($member_id, $this->view->gid);
+            echo '<script>$("#member_'.$member_id.' a[href*=kickout]").text("成功踢出")</script>';
         }
     }
     

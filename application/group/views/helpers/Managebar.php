@@ -24,7 +24,7 @@ class Zend_View_Helper_Managebar
         }
         $str .= '</div>';
         $str = str_replace('{'.$controller.'}', ' class="here"', $str);
-        $str = preg_replace('/\{([a-z])\}/i', '', $str);
+        $str = preg_replace('/\{([^\}]*)\}/i', '', $str);
         $str .= '<p class="txtc" style="margin:0; padding:0 0 10px 0">';
         if(!Cmd::isGuest($gid))
         {

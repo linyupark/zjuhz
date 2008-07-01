@@ -2,6 +2,12 @@
 
 class GroupRoleModel
 {
+    static function update($data, $gid)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        return $db->update('tbl_group_role', $data, 'group_id = '.$gid);
+    }
+    
     static function insert($data)
     {
         $db = Zend_Registry::get('dbGroup');

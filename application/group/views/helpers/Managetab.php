@@ -13,7 +13,7 @@ class Zend_View_Helper_Managetab
             <a href="/group/manage/link?gid='.$gid.'"{link}>友情链接</a>
         </div>';
         $str = str_replace('{'.$action.'}', ' class="here"', $str);
-        $str = preg_replace('/\{(.*)\}/i', '', $str);
+        $str = preg_replace('/\{([^\}]*)\}/i', '', $str);
         return $str;
     }
 }

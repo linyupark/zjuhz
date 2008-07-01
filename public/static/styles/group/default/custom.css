@@ -18,7 +18,7 @@
 	font-weight:bolder;
 	font-size:14px;
 }
-.table-topic td.title span{ float:right; font-weight:normal; margin-top:-14px; }
+.table-topic td.title span{ font-weight:normal; margin-top:-14px; }
 .table-topic td.content{ padding:30px 20px; line-height:170%; font-size:14px; }
 .table-topic td.content *{ line-height:170%; }
 

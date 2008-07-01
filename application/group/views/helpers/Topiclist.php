@@ -38,7 +38,7 @@ class Zend_View_Helper_Topiclist
                             <td class="txtc dashBorder"><a href="">'.$topic['pub_user_name'].'</a></td>
                             <td class="txtc dashBorder quiet">
                             	<a href="">'.$topic['reply_user_name'].'</a> '.
-                				Lp_Date::timespan($topic['reply_time']).'前 
+                				Lp_Date::timespan($topic['reply_time']).'前
                 				
                 			</td>
                         </tr>';

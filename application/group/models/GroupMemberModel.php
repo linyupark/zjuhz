@@ -19,6 +19,14 @@ class GroupMemberModel
         return false;
     }
     
+    # 踢出群组
+    static function kickout($uid, $gid)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        $db->delete('tbl_group_member', 'user_id = '.$uid.' AND group_id = '.$gid);
+        GroupModel::update(array('member_num'=>new Zend_Db_Expr('member_num - 1')), $gid);
+    }
+    
     # 是否已经加入gid群组
     static function isJoin($uid, $gid)
     {

@@ -5,32 +5,49 @@
         <div class="oneCol">
             <?= $this->managetab($this->action_name, $this->gid)  // 管理TAB连接 ?>
             <div class="mglf10">
-            <p class="txtr">群组角色名称：
+            <p class="txtr" id="role_result">群组角色名称：
                 <?= GroupRoleModel::icon('creater') ?> <?= GroupRoleModel::name('creater', $this->gid) ?>
                 <?= GroupRoleModel::icon('manager') ?> <?= GroupRoleModel::name('manager', $this->gid) ?>
                 <?= GroupRoleModel::icon('member') ?> <?= GroupRoleModel::name('member', $this->gid) ?>
-                <a href="/group/manage/role?gid=<?= $this->gid ?>">自定义</a>
+                <a href="javascript:void(0)" onclick="changeRole()">自定义</a>
             </p>
+            <form method="post" id="role_form" class="hide extInline2" onsubmit="return doChange()">
+                定制群组内的角色名称：
+                <?= Cmd::icon('medal_gold_1.png'); ?><input name="creater" size="12" type="text" value="<?= GroupRoleModel::name('creater',$this->gid) ?>">
+                <?= Cmd::icon('medal_gold_2.png'); ?><input name="manager" size="12" type="text" value="<?= GroupRoleModel::name('manager',$this->gid) ?>">
+                <?= Cmd::icon('medal_gold_3.png'); ?><input name="member" size="12" type="text" value="<?= GroupRoleModel::name('member',$this->gid) ?>">
+                <input type="submit" value="保存" />
+                <input type="button" onclick="cancel()" value="取消" /><span id="tip"></span>
+            </form>
             <p>群组共有<strong><?= $this->groupInfo['member_num'] ?></strong>名成员</p>
             <table width="100%">
                 <tr class="extInline" style="font-weight:bold;">
                     <th class="txtc" style="padding:5px">头像</th>
-                    <th class="txtc" style="padding:5px">姓名</th>
-                    <th class="txtc" style="padding:5px">性别</th>
-                    <th class="txtc" style="padding:5px">角色</th>
-                    <th class="txtc" style="padding:5px">最后登陆</th>
+                    <th class="txtc">姓名</th>
+                    <th class="txtc">性别</th>
+                    <th class="txtc">角色</th>
+                    <th class="txtc">最后登陆</th>
+                    <th></th>
                 </tr>
                 <?php foreach($this->members as $v): ?>
                 <tr class="dashBorder">
                     <td class="pd10 txtc" width="10%"><?= Commons::getUserFace($v['user_id']) ?></td>
-                    <td class="vm txtc">
+                    <td class="vm txtc" width="10%">
                         <a href="/member/profile?uid=<?= $v['user_id'] ?>"><?= $v['realName'] ?></a>
                     </td>
-                    <td class="vm txtc"><?= $v['sex'] ?></td>
-                    <td class="vm txtc">
+                    <td class="vm txtc" width="10%"><?= $v['sex'] ?></td>
+                    <td class="vm txtc" width="10%">
                         <?= GroupRoleModel::icon($v['role']).' '.GroupRoleModel::name($v['role'], $this->gid) ?>
                     </td>
-                    <td class="vm txtc"><?= Lp_Date::timespan($v['last_access']) ?>前</td>
+                    <td class="vm txtc" width="40%"><?= Lp_Date::timespan($v['last_access']) ?>前</td>
+                    <td class="vm txtc f14" id="member_<?= $v['user_id'] ?>">
+                        <?php if($v['role'] == 'member'): ?>
+                            <a href="javascript:role('upgrade',<?= $v['user_id'] ?>)">提拔</a>
+                            <a href="javascript:role('kickout',<?= $v['user_id'] ?>)">踢出</a>
+                        <?php elseif($v['role'] == 'manager'): ?>
+                            <a href="javascript:role('downgrade',<?= $v['user_id'] ?>)">革职</a>
+                        <?php endif; ?>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
@@ -39,8 +56,41 @@
         </div>
     </div>
 </div>
-                
-                
+
+<script type="text/javascript">
+<!--
+function role(type, uid)
+{
+    var c = true;
+    if(type == 'kickout')
+    c = confirm('真的要这么做吗？');
+    if(c == true)
+    $.post('/group/manage/member?gid=<?= $this->gid ?>&type='+type, {uid:uid},
+    function(html){
+        $('#tip').html(html);
+    });
+}
+function changeRole()
+{
+	$('#role_result').hide();
+	$('#role_form').show();
+}
+function cancel()
+{
+    $('#role_form').hide();
+	$('#role_result').show();
+}
+function doChange()
+{
+    $.post('/group/manage/role?gid=<?= $this->gid ?>', $('#role_form').fastSerialize(),
+    function(html){
+        $('#tip').html(html);
+    })
+    return false;
+}
+//-->
+</script>    
+            
                 
                 
                 
