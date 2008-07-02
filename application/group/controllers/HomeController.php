@@ -32,6 +32,7 @@ class HomeController extends Zend_Controller_Action
     	}
     	// 将用户最后所到群组id放入群组表
     	$comefrom = UserModel::fetch($this->view->uid, 'come_from');
+        if($comefrom != null)
     	GroupModel::associate($comefrom, $this->view->gid);
     	// 更新用户最后所到的群组信息
     	UserModel::comefrom($this->view->uid, $this->view->gid);
