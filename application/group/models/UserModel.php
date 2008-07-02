@@ -2,10 +2,14 @@
 
 class UserModel
 {
-	/**
-	 * 最后达到哪个群组
-	 *
-	 */
+	# 最后活动时间更新
+	static function lastActive($uid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$db->update('tbl_group_user', array('last_active'=>time()), 'uid='.$uid);
+	}
+	
+	#
 	static function comefrom($uid, $gid)
 	{
 		$db = Zend_Registry::get('dbGroup');

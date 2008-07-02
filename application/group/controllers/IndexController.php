@@ -16,7 +16,7 @@ class IndexController extends Zend_Controller_Action
 	#　更新用户最后在线时间 -----------------------------------------
 	public function useractiveAction()
 	{
-		
+		// 更新用户表的last_active
 	}
 	
 	# 首页展示

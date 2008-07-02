@@ -178,7 +178,7 @@ class ManageController extends Zend_Controller_Action
         if($type == 'upgrade')
         {
             // 提拔
-            GroupMemberModel::update($member_id, array('role'=>'manager'), $this->view->gid));
+            GroupMemberModel::update($member_id, array('role'=>'manager'), $this->view->gid);
             echo '<script>$("#member_'.$member_id.' a[href*=upgrade]").text("成功提拔")</script>';
         }
         if($type == 'kickout')
