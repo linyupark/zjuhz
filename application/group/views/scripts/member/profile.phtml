@@ -37,7 +37,7 @@
                             <td class="dashBorder pd5"><?php
                                 $last_active = UserModel::fetch($this->uid, 'last_active');
                                 $state = UserModel::fetch($this->uid, 'group_state');
-                                if($state == 1 && Cmd::isOnline($last_active))
+                                if($state == 0 && Cmd::isOnline($last_active))
                                 echo '在线';
                                 else echo '离线';
                             ?></td>
