@@ -172,13 +172,13 @@ class ManageController extends Zend_Controller_Action
         if($type == 'downgrade')
         {
             // 革职
-            GroupMemberModel::update($member_id, array('role'=>'member'));
+            GroupMemberModel::update($member_id, array('role'=>'member'), $this->view->gid);
             echo '<script>$("#member_'.$member_id.' a[href*=downgrade]").text("成功革职")</script>';
         }
         if($type == 'upgrade')
         {
             // 提拔
-            GroupMemberModel::update($member_id, array('role'=>'manager'));
+            GroupMemberModel::update($member_id, array('role'=>'manager'), $this->view->gid));
             echo '<script>$("#member_'.$member_id.' a[href*=upgrade]").text("成功提拔")</script>';
         }
         if($type == 'kickout')
