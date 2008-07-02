@@ -258,8 +258,10 @@ class Commons
 	 */
     static function getUserFace($uid, $type='medium')
     {
+		$resize = '';
+		if($type == 'small') $resize = ' width="30px" height="30px"';
     	// if uid = 1 then <img src="/static/users/0/1/medium.jpg" onerror=this.src="/static/images/default-face.jpg";>
-    	return (0 < $uid ? '<img src="'.self::getUserFolder($uid).$type.'.jpg" 
+    	return (0 < $uid ? '<img'.$resize.' src="'.self::getUserFolder($uid).$type.'.jpg" 
     	    onerror=this.src="/static/images/default-face.jpg";>' : false
     	);
     }

@@ -6,7 +6,7 @@ class UserModel
 	static function lastActive($uid)
 	{
 		$db = Zend_Registry::get('dbGroup');
-		$db->update('tbl_group_user', array('last_active'=>time()), 'uid='.$uid);
+		return $db->update('tbl_group_user', array('last_active'=>time()), 'uid='.$uid);
 	}
 	
 	#

@@ -1,13 +1,13 @@
 <div class="span-5">
     <div class="sideBar">
-        <?= $this->sortbar() ?>
+        <?= $this->sortbar(); ?>
     </div>
 </div>
 
 <div class="span-12">
     <div class="oneCol">
         <h3 class="pd10">新事件 <?= Cmd::icon('new.png') ?></h3>
-        <?= $this->newevent(10) ?>
+        <?= $this->newevent(10); ?>
     </div>
 </div>
 
@@ -17,7 +17,11 @@
     </div>
     
     <div class="sideBar mgu10 pdd10">
-        <?= $this->hottopic() ?>
+        <?= $this->hottopic(); ?>
+    </div>
+    
+    <div class="oneCol mgu10" style="overflow:hidden">
+        <?= $this->online(); ?>
     </div>
 </div>
         
