@@ -76,7 +76,8 @@ class GroupMemberModel
     static function fetchByUid($uid)
     {
         $db = Zend_Registry::get('dbGroup');
-        return $db->fetchAll('SELECT * FROM `vi_group_member` WHERE `user_id` = ?', $uid);
+        return $db->fetchAll('SELECT `name`,`member_num`,`topic_num`,`photo_num`,`group_id`,`role`,`join_time`,`last_access` 
+                             FROM `vi_group_member` WHERE `user_id` = ?', $uid);
     }
 }
 
