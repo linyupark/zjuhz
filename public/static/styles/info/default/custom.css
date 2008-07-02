@@ -13,7 +13,6 @@
 	line-height:150%;
 }
 .sideBar a:hover{ text-decoration:underline; }
-.sideBar li{ margin-top:8px;}
 
 /* 管理菜单 */
 div.managebar{
@@ -40,7 +39,7 @@ ul.sortbar b{ color:#333 }
 ul.sortbar a{
 	color:#4B630B
 }
-ul.sortbar li{ margin-top:10px; list-style-type:square; list-style-position:inside; color:#E9DBC0 }
+ul.sortbar li{ list-style-type:square; list-style-position:inside; color:#E9DBC0 }
 
 /* tab */
 div.tab a.here{
