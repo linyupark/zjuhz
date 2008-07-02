@@ -8,26 +8,35 @@ class Zend_View_Helper_Online
 {
     function online()
     {
-        $str = '<h3 class="pd10">群组在线校友</h3>';
         $db = Zend_Registry::get('dbGroup');
-        $users = $db->fetchAll('SELECT `uid`,`realName` FROM `tbl_group_user`
+        $row = $db->fetchRow('SELECT COUNT(`uid`) AS `numrows`  FROM `tbl_group_user`
                         WHERE `group_state` = 0 AND `last_active` > '.(time()-900));
+        
+        $users = $db->fetchAll('SELECT `uid`,`realName` FROM `tbl_group_user`
+                        WHERE `group_state` = 0 AND `last_active` > '.(time()-900).' LIMIT 10');
+        
+        $str = '<h3 class="pd10">群组在线校友 <small class="f12 quiet">共'.$row['numrows'].'人</small></h3>
+        <table>';
         
         if(count($users) == 0)
         {
-            $str .= '<p>没有人在线</p>';
+            $str .= '<tr><p>没有人在线</p></tr>';
         }
         else
         {
-            foreach($users as $u)
+            foreach($users as $k => $u)
             {
-                 $str .= '<div style="float:left; display:block; padding:5px 10px;" class="txtc">
+                if($k%5 == 0)
+                $str .= '<tr>';
+                 $str .= '<td class="txtc pd10">
                 <a href="/group/member/profile?id='.$u['uid'].'">'.Commons::getUserFace($u['uid'],'small').'</a><br />
-                <a href="/group/member/profile?id='.$u['uid'].'">'.$u['realName'].'</a></div>';
+                <a href="/group/member/profile?id='.$u['uid'].'">'.$u['realName'].'</a></td>';
+                if($k%5 == 4)
+                $str .= '</tr>';
             }
         }
         
-        return $str;
+        return $str.'</table>';
     }
 }
 
