@@ -26,9 +26,9 @@
                 <td class="vm f14 txtl hrefspan-8">
                     <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $info['name'] ?></a>
                     <span class="quiet">
-                        成员数：<a href=""><?= $info['member_num'] ?></a>
-                        话题数：<a href=""><?= $info['topic_num'] ?></a>
-                        照片数：<a href=""><?= $info['photo_num'] ?></a>
+                        成员数：<a href="/group/member?gid=<?= $gid ?>"><?= $info['member_num'] ?></a>
+                        话题数：<a href="/group/topic?gid=<?= $gid ?>"><?= $info['topic_num'] ?></a>
+                        照片数：<a href="/group/album?gid=<?= $gid ?>"><?= $info['photo_num'] ?></a>
                     </span>
                 </td>
                 <td class="vm f14" id="group_<?= $gid ?>">

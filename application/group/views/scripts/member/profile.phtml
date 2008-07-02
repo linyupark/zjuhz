@@ -1,0 +1,103 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <!-- 用户资料 -->
+    <div class="oneCol pdd10">
+        <table width="100%">
+            <tr>
+                <th colspan="2"><h3 class="mglf10">用户资料</h3></th>
+            </tr>
+            <tr>
+                <td width="15%" class="pd10 txtc" style="vertical-align:top">
+                    <?= Commons::getUserFace($this->uid) ?>
+                    <p class="txtc">
+                        <?= Cmd::icon('user_add.png') ?> <a href="">加为好友</a><br />
+                        <?= Cmd::icon('email_go.png') ?> <a href="">发站内信</a>
+                    </p>
+                </td>
+                <td>
+                    <table width="98%">
+                        <tr>
+                            <td width="12%" class="quiet txtr pd5">姓名:</td>
+                            <td width="12%" class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'realName') ?></td>
+                            <td width="12%" class="quiet txtr pd5">性别:</td>
+                            <td width="25%" class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'sex') ?></td>
+                            <td width="12%" class="quiet txtr pd5">出生日期:</td>
+                            <td class="dashBorder pd5"><?php $bday = UserModel::fetch($this->uid, 'birthday');
+                            if($bday != null) echo date('Y-m-d', $bday) ?></td>
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">群组积分:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'group_coin') ?></td>
+                            <td class="quiet txtr pd5">目前状态:</td>
+                            <td class="dashBorder pd5"><?php
+                                $last_active = UserModel::fetch($this->uid, 'last_active');
+                                $state = UserModel::fetch($this->uid, 'group_state');
+                                if($state == 1 && Cmd::isOnline($last_active))
+                                echo '在线';
+                                else echo '离线';
+                            ?></td>
+                            <td class="quiet txtr pd5">最近活跃:</td>
+                            <td class="dashBorder pd5"><?= ($last_active == 0) ? '从未活跃过' : Lp_Date::timespan($last_active).'前' ?></td>
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">所在省:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'location_p') ?></td>
+                            <td class="quiet txtr pd5">所在市:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'location_c') ?></td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">入学年份:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'year') ?></td>
+                            <td class="quiet txtr pd5">所读学院:</td>
+                            <td class="dashBorder pd5"><?= Cmd::getCollege(UserModel::fetch($this->uid, 'college')) ?></td>
+                            
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- / 用户资料 -->
+    
+    <div class="oneCol mgu10">
+        <h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>加入了以下群组</h3>
+        <?php if(count($this->groups) == 0): ?>
+        <p class="mglf10">没有相关信息</p>
+        <?php else: foreach($this->groups as $val): ?>
+        <table class="mglf10 span-18 last dashBorder">
+            <tr>
+                <td class="pd10" width="10%"><?= Cmd::groupIcon($val['group_id']) ?></td>
+                <td class="vm f14 txtl hrefspan-8">
+                    <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $val['name'] ?></a>
+                    <span class="quiet">
+                        成员数：<a href="/group/member?gid=<?= $val['group_id'] ?>"><?= $val['member_num'] ?></a>
+                        话题数：<a href="/group/topic?gid=<?= $val['group_id'] ?>"><?= $val['topic_num'] ?></a>
+                        照片数：<a href="/group/album?gid=<?= $val['group_id'] ?>"><?= $val['photo_num'] ?></a>
+                    </span>
+                    <p class="f12">
+                    <?php if(Cmd::isGuest($val['group_id'])): ?>
+                    <?= Cmd::icon('door_in.png') ?> <a href="/group/join/new?gid=<?= $val['group_id'] ?>">申请加入</a>
+                    <?php endif; ?>
+                    <span>
+                       <?php
+                        $result = GroupEventModel::fetchInTime($this->passport('lastLogin'), $val['group_id']);
+                        if( $result['numrows'] == 0)
+                        {
+                            echo '自从上次登陆后就没动静';
+                        }
+                        else echo '新增了<span style="color:red">'.$result['topic_num'].'</span>个话题。';
+                       ?>
+                    </span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <?php endforeach; endif; ?>
+    </div>
+</div>

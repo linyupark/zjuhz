@@ -177,7 +177,19 @@ class UserModel
 				'sex' => $data['sex']
 			));
 		}
-		return $db->lastInsertId();
+		else /* 临时增加的，要求保持更新其最新的个人信息到群组资料 */
+		{
+			$db->update('tbl_group_user', array(
+				'hometown_p' => $data['hometown_p'],
+				'hometown_c' => $data['hometown_c'],
+				'location_p' => $data['location_p'],
+				'location_c' => $data['location_c'],
+				'birthday' => strtotime($data['birthday']),
+				'year' => $data['year'],
+				'college' => $data['college']
+			), 'uid = '.$data['uid']);
+		}
+		return true;
 	}
 }
 
