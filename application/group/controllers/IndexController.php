@@ -16,7 +16,10 @@ class IndexController extends Zend_Controller_Action
 	#　更新用户最后在线时间 -----------------------------------------
 	public function useractiveAction()
 	{
+		$this->_helper->viewRenderer->setNoRender(true);
 		// 更新用户表的last_active
+		if($this->view->passport('uid'))
+		UserModel::lastActive($this->view->passport('uid'));
 	}
 	
 	# 首页展示
