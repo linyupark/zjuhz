@@ -42,7 +42,7 @@
         </div>
         <?php
             if(Zend_Registry::get('sessGroup')->my) :
-            foreach(Zend_Registry::get('sessGroup')->my as $num => $val): ?>
+            foreach(Zend_Registry::get('sessGroup')->my as $val): ?>
         <table class="mglf10 span-18 last dashBorder">
             <tr>
                 <td class="pd10" width="10%"><?= Cmd::groupIcon($val['group_id']) ?></td>

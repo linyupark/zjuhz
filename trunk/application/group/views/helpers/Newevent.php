@@ -18,7 +18,7 @@ class Zend_View_Helper_Newevent
 			{
 				if($e['type'] == 1) //话题
 				{
-					$str .= '<li class="dashBorder pd5" style="line-height:150%"><a href="/group/member/profile?id='.$e['user_id'].'">'.UserModel::fetch($e['user_id'], 'realName').'</a>
+					$str .= '<li class="dashBorder pd5" style="line-height:150%"><a href="/group/member/profile?uid='.$e['user_id'].'">'.UserModel::fetch($e['user_id'], 'realName').'</a>
 					<span class="quiet">'.Lp_Date::timespan($e['time']).'前</span><br />
 					<a href="/group/home?gid='.$e['group_id'].'">'.GroupModel::info($e['group_id'], 'name').'</a> &gt;
 					<a href="/group/topic?gid='.$e['group_id'].'">论坛</a> &gt; 

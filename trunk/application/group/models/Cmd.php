@@ -2,6 +2,17 @@
 
 class Cmd
 {
+    static function isOnline($active_time)
+    {
+        return (time()-$active_time) < 900 ? true : false;
+    }
+    
+    # 获取学院名称
+    static function getCollege($id)
+    {
+        return Zend_Registry::get('iniConfig')->college->name->$id;
+    }
+    
     # 是否为自己的话题
     static function isMyTopic($tid)
     {

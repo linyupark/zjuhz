@@ -1,7 +1,7 @@
 <?php
 
 class GroupMemberModel
-{
+{   
     # 更新
     static function update($uid, $data, $gid)
     {

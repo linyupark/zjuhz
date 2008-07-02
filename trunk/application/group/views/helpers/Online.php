@@ -29,8 +29,8 @@ class Zend_View_Helper_Online
                 if($k%5 == 0)
                 $str .= '<tr>';
                  $str .= '<td class="txtc pd10">
-                <a href="/group/member/profile?id='.$u['uid'].'">'.Commons::getUserFace($u['uid'],'small').'</a><br />
-                <a href="/group/member/profile?id='.$u['uid'].'">'.$u['realName'].'</a></td>';
+                <a href="/group/member/profile?uid='.$u['uid'].'">'.Commons::getUserFace($u['uid'],'small').'</a><br />
+                <a href="/group/member/profile?uid='.$u['uid'].'">'.$u['realName'].'</a></td>';
                 if($k%5 == 4)
                 $str .= '</tr>';
             }
