@@ -2,6 +2,26 @@
 
 class GroupModel
 {
+	
+	/**
+	 * 处理群组最近访问数据
+	 */
+	static function associate($gid, $cur_gid)
+	{
+		if($gid == $cur_gid) return false; // 是本群组就忽略
+		$gids = self::info($cur_gid, 'associate');
+		if($gids == null) $gids = $gid;
+		else
+		{
+			$gid_arr = explode(',', $gids);
+			if(in_array($gid, $gid_arr)) return false; // 已经包含就忽略
+			else $gid_arr[] = $gid;
+			if(count($gid_arr) > 6) array_shift($gid_arr); // 只保留6条数据
+			$gids = implode(',', $gid_arr);
+		}
+		return self::update(array('associate'=>$gids), $cur_gid);
+	}
+	
     /**
      * 群组列表,从群组分类获取
      * */

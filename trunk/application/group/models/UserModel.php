@@ -2,6 +2,16 @@
 
 class UserModel
 {
+	/**
+	 * 最后达到哪个群组
+	 *
+	 */
+	static function comefrom($uid, $gid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->update('tbl_group_user', array('come_from'=>$gid), 'uid='.$uid);
+	}
+	
 	# 拒绝邀请
 	static function delInvite($uid, $gid)
 	{
