@@ -59,7 +59,7 @@ class GroupTopicModel
 			// 增加成员在群组的活跃度
 			GroupMemberModel::update($uid, array(
 				'active' => new Zend_Db_Expr('active + 1')
-			)); 
+			), $gid); 
 			// 更新最新事件
 			GroupEventModel::insert(array(
 				'group_id' => $gid,

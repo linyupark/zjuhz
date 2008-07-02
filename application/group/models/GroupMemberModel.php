@@ -3,10 +3,10 @@
 class GroupMemberModel
 {
     # 更新
-    static function update($uid, $data)
+    static function update($uid, $data, $gid)
     {
         $db = Zend_Registry::get('dbGroup');
-        return $db->update('tbl_group_member', $data, 'user_id = '.$uid);
+        return $db->update('tbl_group_member', $data, 'user_id = '.$uid.' AND group_id = '.$gid);
     }
     
     # 加入群组
