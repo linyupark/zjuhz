@@ -10,7 +10,7 @@ class Zend_View_helper_Upload
 				<form enctype="multipart/form-data" target="doUpload" action="/group/file/upload?gid='.$gid.'" method="post">
 				<p><label>附件</label> <input type="file" name="'.$userfile.'" />
 				<input type="submit" value="上传" /> 
-				<span class="quiet">(有效类型:'.$allowtype.', 大小限制:'.$maxsize.'KB)</span></p>
+				<span class="quiet">(文件名禁用中文，有效类型:'.$allowtype.', 大小限制:'.$maxsize.'KB)</span></p>
 				</form>
                 <p id="file_list"></p>
 				<iframe id="doUpload" class="hide" name="doUpload"></iframe>
