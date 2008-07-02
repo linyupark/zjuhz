@@ -28,7 +28,7 @@ class HomeController extends Zend_Controller_Action
     	// 如果是用户成员则记录最后登陆该群组的时间
     	if(!Cmd::isGuest($this->view->gid))
     	{
-    		//
+    		GroupMemberModel::update($this->view->uid, array('last_access'=>time()), $this->view->gid);
     	}
     	// 将用户最后所到群组id放入群组表
     	$comefrom = UserModel::fetch($this->view->uid, 'come_from');
