@@ -2,6 +2,34 @@
 
 class Cmd
 {
+	/**
+	 * 直接返回当前访问用户的id
+	 *
+	 * @return int
+	 */
+	static function myid()
+	{
+		return Zend_Registry::get('sessCommon')->login['uid'];
+	}
+	
+	/**
+	 * 判断某个txt是否在txt,txt,txt中
+	 *
+	 * @param string $str
+	 * @param string/int $key
+	 * @return boolean
+	 */
+	static function isInString($str ,$key)
+	{
+		if($str == null) return false;
+		else 
+		{
+			$str_arr = explode(',', $str);
+			if(!in_array($key, $str_arr)) return false;
+			else return true;
+		}
+	}
+	
     static function isOnline($active_time)
     {
         return (time()-$active_time) < 900 ? true : false;
