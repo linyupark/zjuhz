@@ -2,6 +2,31 @@
 
 class UserModel
 {
+	/* ---------- 好友块 --------*/
+	
+	# 是否已经是
+	static function isFriend($myid, $uid)
+	{
+		$frineds = self::fetch($myid, 'friends');
+		return Cmd::isInString($frineds, $uid);
+	}
+	
+	# 加
+	static function addFriend($myid, $friendid)
+	{
+		$frineds = self::fetch($myid, 'friends');
+		if($frineds == null) $frineds = $friendid;
+		else
+		{
+			$frineds .= ','.$friendid;
+		}
+		$db = Zend_Registry::get('dbGroup');
+		return $db->update('tbl_group_user', array('friends' => $frineds), 'uid = '.$myid);
+	}
+	
+	
+	/* //////////好友块/////////// */
+	
 	# 最后活动时间更新
 	static function lastActive($uid)
 	{
@@ -77,12 +102,7 @@ class UserModel
 	static function isInvited($gid, $uid)
 	{
 		$invites = self::fetch($uid, 'group_invite');
-		if($invites != null)
-		{
-			$invite_arr = explode(',', $invites);
-			if($invite_arr == $gid) return true;
-			else return in_array($gid, $invite_arr);
-		}
+		return Cmd::isInString($invites, $gid);
 	}
 	
 	/**

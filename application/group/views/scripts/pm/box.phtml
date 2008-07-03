@@ -1,0 +1,112 @@
+<style>
+    a.here{ text-decoration:none; font-size:14px; color:#000; }
+</style>
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-14">
+	<div class="oneCol">
+		<h3 class="mg10 f12">
+            <a href="/group/pm/box?type=receive" <?= ($this->type=='receive') ? 'class="here"':'' ?>>
+                收件箱(共:<?= $this->receive_num ?>,未读:<?= $this->no_read_num ?>)</a> - 
+            <a href="/group/pm/box?type=send" <?= ($this->type=='send') ? 'class="here"':'' ?>>
+                发件箱(<?= $this->send_num ?>)</a>
+        </h3>
+        <?php if($this->type=='receive'): // 收件箱 ------------------------------------------------- ?>
+            <table id="pm_form" width="100%" class="table-1">
+            <tr>
+                <td class="pd5 dashBorder" width="5%" style="background:#D7E4EA">
+                    <input onclick="selector()" type="checkbox" id="selector" /></td>
+                <td class="pd5 dashBorder" width="65%" style="background:#D7E4EA">标题</td>
+                <td class="pd5 txtc quiet dashBorder" style="background:#D7E4EA" width="30%">发件人 | 接收时间</td>    
+            </tr>
+            <?php if($this->receive_num == 0): ?>
+            <tr><td class="pd5" colspan="3">没有内容</td></tr>
+            <?php else: foreach($this->receives as $receive): ?>
+            <tr>
+                <td class="pd5 dashBorder">
+                    <input type="checkbox" name="pm[]" value="<?= $receive->pm_id ?>" />
+                </td>
+                <td class="pd5 dashBorder f14">
+                    <a href="javascript:read(<?= $receive->pm_id ?>,1)"><?= $receive->title ?></a>
+                    <?php if($receive->is_read == 0) echo '(未读)' ?>
+                </td>
+                <td class="pd5 txtc quiet dashBorder" width="20%">
+                    <a href="/group/member/profile?uid=<?= $receive->from ?>"><?= UserModel::fetch($receive->from, 'realName') ?></a>
+                    (<a href="/group/pm/member?uid=<?= $receive->from ?>&title=<?= urlencode('re:'.$receive->title) ?>">回复</a>)
+                    <?= Lp_Date::timespan($receive->time) ?>
+                </td>
+            </tr>
+            <?php endforeach; endif; ?>
+            </table>
+            <div class="pagination">
+                <button class="btn mglf10">清除记录</button><?= $this->pagination ?>
+                <button class="btn mglf10">彻底删除</button><?= $this->pagination ?>
+            </div>
+        <?php elseif($this->type=='send'): // 发件箱 ------------------------------------------------ ?>
+            <table id="pm_form" width="100%" class="table-1">
+            <tr>
+                <td class="pd5 dashBorder" width="5%" style="background:#D7E4EA">
+                    <input onclick="selector()" type="checkbox" id="selector" /></td>
+                <td class="pd5 dashBorder" width="65%" style="background:#D7E4EA">标题</td>
+                <td class="pd5 txtc quiet dashBorder" style="background:#D7E4EA">收件人 | 发送时间</td>    
+            </tr>
+            <?php if($this->send_num == 0): ?>
+            <tr><td class="pd5" colspan="3">没有内容</td></tr>
+            <?php else: foreach($this->sends as $send): ?>
+            <tr>
+                <td class="pd5 dashBorder">
+                    <input type="checkbox" name="pm[]" value="<?= $send->pm_id ?>" />
+                </td>
+                <td class="pd5 dashBorder f14">
+                    <a href="javascript:read(<?= $send->pm_id ?>,0)"><?= $send->title ?></a>
+                    <?php if($send->is_read == 0) echo '(未读)' ?>
+                </td>
+                <td class="pd5 txtc quiet dashBorder" width="20%">
+                    <a href="/group/member/profile?uid=<?= $send->to ?>"><?= UserModel::fetch($send->to, 'realName') ?></a>
+                    <?= Lp_Date::timespan($send->time) ?>
+                </td>
+            </tr>
+            <?php endforeach; endif; ?>
+            </table>
+            <div class="pagination">
+                <button class="btn mglf10">清除记录</button><?= $this->pagination ?>
+                <button class="btn mglf10">彻底删除</button><?= $this->pagination ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+        
+<div class="span-5 last">
+	<div class="extInline" style="margin-top:0">
+		<h4>发信息给你的好友：</h4>
+		<ul>
+		<?php if(count($this->friends) == 0): ?>
+		<li>没有好友</li>
+		<?php else: foreach($this->friends as $f): ?>
+		<a href="/group/pm/member?uid=<?= $f ?>"><?= UserModel::fetch($f, 'realName') ?></a> , 
+		<?php endforeach; endif; ?>
+		</ul>
+	</div>
+</div>
+        
+<script type="text/javascript">
+    function selector()
+    {
+        if($('#selector').attr('checked') == true)
+        {
+            $('input[name*=pm]').attr('checked',true);
+        }
+        else $('input[name*=pm]').attr('checked',false);
+    }
+    
+    function read(id,is_read)
+    {
+        $.post('/group/pm/show?read='+is_read, {id:id}, function(html){
+            $.facebox(html);
+        });
+    }
+</script>

@@ -15,8 +15,10 @@
                 <td width="15%" class="pd10 txtc" style="vertical-align:top">
                     <?= Commons::getUserFace($this->uid) ?>
                     <p class="txtc">
-                        <?= Cmd::icon('user_add.png') ?> <a href="">加为好友</a><br />
-                        <?= Cmd::icon('email_go.png') ?> <a href="">发站内信</a>
+                        <?= Cmd::icon('user_add.png') ?> 
+						<a href="javascript:beFriendsWith(<?= $this->uid ?>)">加为好友</a><br />
+                        <?= Cmd::icon('email_go.png') ?> 
+						<a href="/group/pm/member?uid=<?= $this->uid ?>">发站内信</a>
                     </p>
                 </td>
                 <td>
@@ -101,3 +103,12 @@
         <?php endforeach; endif; ?>
     </div>
 </div>
+
+<script type="text/javascript">
+	function beFriendsWith(uid)
+	{
+		$.get('/group/member/befriendwith?uid='+uid,null,function(html){
+			$.facebox(html);
+		});
+	}
+</script>

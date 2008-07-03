@@ -21,6 +21,7 @@
 				<?php if ($this->passport()): ?>
 				您好！<?= $this->passport('realName') ?>，
 				<a href="/group/my">我的群组</a>
+				<a href="/group/pm/box">站内信(<?= GroupPmModel::no_read_num(Cmd::myid()); ?>)</a> 
 				<a href="/member/my/">我的账号</a>
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>

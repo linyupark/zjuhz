@@ -1,0 +1,46 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-14">
+	<div class="oneCol">
+		<h3 class="mg10" style="letter-spacing:2px">给<?= $this->username ?>发送站内信息</h3>
+		<form id="pm_form" class="mglf10" method="post" onsubmit="return sendMessage()">
+			<p class="txtc">标题 <input type="text" name="title" class="text" value="<?= $this->title ?>" /></p>
+			<p class="txtc"><textarea class="text" name="content"></textarea></p>
+			<p class="txtc">
+				<input type="submit" class="btn" value="发送信息" />
+				<input type="button" onclick="history.back()" class="btn" value="不发送了，返回" />
+				
+				<input type="hidden" name="to[]" value="<?= $this->uid ?>" />
+			</p>
+			<p id="tip"></p>
+		</form>
+	</div>
+</div>
+
+<div class="span-5 last">
+	<div class="extInline" style="margin-top:0">
+		<h4>还可以转发给你的好友：</h4>
+		<ul>
+		<?php if(count($this->friends) == 0): ?>
+		<li>没有好友</li>
+		<?php else: foreach($this->friends as $f): if($f != $this->uid): ?>
+		<label for="to_<?= $f ?>"><input type="checkbox" id="to_<?= $f ?>" name="to[]" value="<?= $f ?>" /><?= UserModel::fetch($f, 'realName') ?></label>
+		<?php endif; endforeach; endif; ?>
+		</ul>
+	</div>
+</div>
+		
+<script type="text/javascript">
+	function sendMessage()
+	{
+		var data = $('.container').fastSerialize();
+		$.post('/group/pm/send', data, function(html){
+			$('#tip').html(html);
+		});
+		return false;
+	}
+</script>
