@@ -1,0 +1,11 @@
+<p>校友<span style="color:red"><?= UserModel::fetch(Cmd::myid(), 'realName') ?></span>将你加为了好友。</p>
+<p><a href="javascript:beFriendsWith(<?= Cmd::myid(); ?>)">将<?= UserModel::fetch(Cmd::myid(), 'realName') ?>加为好友</a></p>
+
+<script type="text/javascript">
+	function beFriendsWith(uid)
+	{
+		$.get('/group/member/befriendwith?uid='+uid,null,function(html){
+			$.facebox(html);
+		});
+	}
+</script>

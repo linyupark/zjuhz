@@ -24,13 +24,15 @@ class MemberController extends Zend_Controller_Action
 	{
 		if(UserModel::isFriend(Cmd::myid(), $this->view->uid))
 		{
-			echo '<p class="notice">已经是好朋友拉~</p>';
+			echo '<p class="notice">已经加为好友</p>';
 		}
 		
 		else
 		{
 			 UserModel::addFriend(Cmd::myid(), $this->view->uid);
-			 echo '<p class="success">添加成功</p>';
+			 echo '<p class="success">添加成功</p>
+			 <iframe src="/group/pm/system?type=friend&uid='.$this->view->uid.'" class="hide"></iframe>
+			 ';
 		}
 	}
 	
