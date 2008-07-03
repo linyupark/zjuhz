@@ -14,10 +14,29 @@ class PmController extends Zend_Controller_Action {
 		$this->view->uid = $this->_getParam('uid', null);
 	}
 	
-	# 系统发送信息
+	# 系统自动发送信息
 	public function systemAction()
 	{
-		
+		$PM = new GroupPmModel('dbGroup');
+		$type = $this->_getParam('type');
+		$this->_helper->layout->disableLayout();
+		$this->getResponse()->insert('nav','');
+		$this->_helper->viewRenderer->setNoRender(false);
+		switch($type)
+		{
+			case 'friend' : // 加为好友
+				$data = array(
+					'title' => '(系统发送) - '.UserModel::fetch(Cmd::myid(), 'realName').'将您加为了好友',
+					'content' => $this->view->render('pm/system-friend.phtml'),
+					'from' => 0,
+					'to' => $this->view->uid,
+					'time' => time()
+				);
+				$PM->createRow($data)->save();
+				break;
+			default :
+				break;
+		}
 	}
 	
 	# 信件展示
