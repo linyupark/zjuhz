@@ -41,7 +41,7 @@ class MemberController extends Zend_Controller_Action
 	{
 		if($this->view->uid == Cmd::myid()) // 是自己转到我的群组资料
 		{
-			$this->_forward('profile','my');
+			$this->_forward('profile', 'my');
 		}
 		else
 		{

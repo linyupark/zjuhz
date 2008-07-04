@@ -2,6 +2,13 @@
 
 class UserModel
 {
+	# 个人资料更新
+	static function update($data, $uid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->update('tbl_group_user', $data, 'uid = '.$uid);
+	}
+	
 	/* ---------- 好友块 --------*/
 	
 	# 是否已经是

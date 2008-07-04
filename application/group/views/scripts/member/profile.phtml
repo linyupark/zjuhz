@@ -9,7 +9,7 @@
     <div class="oneCol pdd10">
         <table width="100%">
             <tr>
-                <th colspan="2"><h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>的个人资料</h3></th>
+                <th colspan="2"><h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>的基本资料</h3></th>
             </tr>
             <tr>
                 <td width="15%" class="pd10 txtc" style="vertical-align:top">
@@ -51,14 +51,22 @@
                             <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'location_p') ?></td>
                             <td class="quiet txtr pd5">所在市:</td>
                             <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'location_c') ?></td>
-                            
+                            <td class="quiet txtr pd5">从事职业:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'ext_job') ?></td>
                         </tr>
                         <tr>
                             <td class="quiet txtr pd5">入学年份:</td>
                             <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'year') ?></td>
                             <td class="quiet txtr pd5">所读学院:</td>
                             <td class="dashBorder pd5"><?= Cmd::getCollege(UserModel::fetch($this->uid, 'college')) ?></td>
-                            
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">个人介绍:</td>
+                            <td class="dashBorder pd5" colspan="5"><?= UserModel::fetch($this->uid, 'ext_intro') ?></td>
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">兴趣爱好:</td>
+                            <td class="dashBorder pd5" colspan="5"><?= UserModel::fetch($this->uid, 'ext_interest') ?></td>
                         </tr>
                     </table>
                 </td>
@@ -67,8 +75,32 @@
     </div>
     <!-- / 用户资料 -->
     
+    <!-- 联系方式 -->
+    <div class="oneCol pdd10 mgu10">
+        <table width="98%">
+            <tr>
+                <th colspan="6"><h3 class="mglf10">联系方式</h3></th>
+            </tr>
+            <?php
+            $private = UserModel::fetch($this->uid, 'ext_private');
+            if($private == 0 || !UserModel::isFriend($this->uid, Cmd::myid())): ?>
+                <td colspan="6 pd10">你无权查看此信息</td>
+            <?php else: ?>
+            <tr>
+                <td width="12%" class="quiet txtr pd5">手机号码:</td>
+                <td width="12%" class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'ext_phone') ?></td>
+                <td width="12%" class="quiet txtr pd5">电子邮箱:</td>
+                <td width="25%" class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'ext_email') ?></td>
+                <td width="12%" class="quiet txtr pd5">即时通讯:</td>
+                <td class="dashBorder pd5"><?= UserModel::fetch($this->uid, 'ext_im') ?></td>
+            </tr>
+            <?php endif; ?>
+        </table>
+    </div>
+    <!-- / 联系方式 -->
+    
     <div class="oneCol mgu10">
-        <h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>加入了以下群组</h3>
+        <h3 class="mglf10">加入了以下群组</h3>
         <?php if(count($this->groups) == 0): ?>
         <p class="mglf10">没有相关信息</p>
         <?php else: foreach($this->groups as $val): ?>
