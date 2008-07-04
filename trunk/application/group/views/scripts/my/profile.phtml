@@ -1,0 +1,133 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <!-- 用户资料 -->
+    <div class="oneCol pdd10">
+        <table width="100%">
+            <tr>
+                <th colspan="2"><h3 class="mglf10">我的基本资料</h3></th>
+            </tr>
+            <tr>
+                <td width="15%" class="pd10 txtc" style="vertical-align:top">
+                    <?= Commons::getUserFace(Cmd::myid()) ?>
+                </td>
+                <td>
+                    <table width="98%">
+                        <tr>
+                            <td width="12%" class="quiet txtr pd5">姓名:</td>
+                            <td width="12%" class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'realName') ?></td>
+                            <td width="12%" class="quiet txtr pd5">性别:</td>
+                            <td width="25%" class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'sex') ?></td>
+                            <td width="12%" class="quiet txtr pd5">出生日期:</td>
+                            <td class="dashBorder pd5"><?php $bday = UserModel::fetch(Cmd::myid(), 'birthday');
+                            if($bday != null) echo date('Y-m-d', $bday) ?></td>
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">群组积分:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'group_coin') ?></td>
+                            <td class="quiet txtr pd5">目前状态:</td>
+                            <td class="dashBorder pd5"><?php
+                                $last_active = UserModel::fetch(Cmd::myid(), 'last_active');
+                                $state = UserModel::fetch(Cmd::myid(), 'group_state');
+                                if($state == 0 && Cmd::isOnline($last_active))
+                                echo '在线';
+                                else echo '离线';
+                            ?></td>
+                            <td class="quiet txtr pd5">最近活跃:</td>
+                            <td class="dashBorder pd5"><?= ($last_active == 0) ? '从未活跃过' : Lp_Date::timespan($last_active).'前' ?></td>
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">所在省:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'location_p') ?></td>
+                            <td class="quiet txtr pd5">所在市:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'location_c') ?></td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="quiet txtr pd5">入学年份:</td>
+                            <td class="dashBorder pd5"><?= UserModel::fetch(Cmd::myid(), 'year') ?></td>
+                            <td class="quiet txtr pd5">所读学院:</td>
+                            <td class="dashBorder pd5"><?= Cmd::getCollege(UserModel::fetch(Cmd::myid(), 'college')) ?></td>
+                            <td class="txtc" colspan="2"><?= Cmd::icon('page_white_edit.png') ?>
+                            <a href="/member/my">修改我的基本资料</a><span class="quiet">(下次登陆生效)</span></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- / 用户资料 -->
+    
+    <!-- 群组个性资料 -->
+    <div class="oneCol pdd10 mgu10">
+        <form id="ext_form" method="post" onsubmit="return extSave()">
+        <table width="100%">
+            <tr>
+                <td colspan="2"><h3 class="mglf10">个性化资料(全为选填) <span class="f12 quiet">只适用于群组内</span></h3></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">手机号码:</td>
+                <td><input type="text" name="phone" class="text" value="<?= UserModel::fetch(Cmd::myid(), 'ext_phone') ?>" /></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">电子邮箱:</td>
+                <td><input type="text" name="email" class="text" value="<?= UserModel::fetch(Cmd::myid(), 'ext_email') ?>" /></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">即时通讯:</td>
+                <td><input type="text" name="im" class="text" value="<?= UserModel::fetch(Cmd::myid(), 'ext_im') ?>" /><br />
+                <span class="quiet">(格式 QQ:17867xxxx 或 MSN:xxxx@msn.com)</span></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">从事职业:</td>
+                <td><input type="text" name="job" class="text" value="<?= UserModel::fetch(Cmd::myid(), 'ext_job') ?>" /></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">个人介绍:</td>
+                <td><textarea name="intro" class="text" style="height:100px;"><?= strip_tags(stripslashes(UserModel::fetch(Cmd::myid(), 'ext_intro'))) ?></textarea><br />
+                <span class="quiet">(限200字)</span></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">兴趣爱好:</td>
+                <td><textarea name="interest" class="text" style="height:100px;"><?= strip_tags(stripslashes(UserModel::fetch(Cmd::myid(), 'ext_interest'))) ?></textarea><br />
+                <span class="quiet">(限200字)</span></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">个性签名:</td>
+                <td><textarea name="sign" class="text" style="height:100px;"><?= strip_tags(stripslashes(UserModel::fetch(Cmd::myid(), 'ext_sign'))) ?></textarea><br />
+                <span class="quiet">(限200字)</span></td>
+            </tr>
+            <tr>
+                <td class="pd5 txtr vm">联系方式:</td>
+                <td class="pd10 txtl vm">
+                    <label><input type="radio" value="0" name="private" <?= (UserModel::fetch(Cmd::myid(), 'ext_private')) == 0 ? 'checked="checked"':'' ?> /> 完全保密 &nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="radio" value="1" name="private" <?= (UserModel::fetch(Cmd::myid(), 'ext_private')) == 1 ? 'checked="checked"':'' ?> /> 仅好友可见 &nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="radio" value="2" name="private" <?= (UserModel::fetch(Cmd::myid(), 'ext_private')) == 2 ? 'checked="checked"':'' ?> /> 完全公开 &nbsp;&nbsp;&nbsp;</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="pd5 txtc vm" colspan="2">
+                    <input type="submit" class="btn" value="确定无误，保存我的群组资料" style="width:80%" />
+                </td>
+            </tr>
+        </table>
+                    <p id="tip" class="mglf10"></p>
+        </form>
+    </div>
+    <!-- / 群组个性资料 -->
+</div>
+                    
+<script type="text/javascript">
+    function extSave()
+    {
+        $.post('/group/my/profile?do=save', $('#ext_form').fastSerialize(), function(html){
+            $('#tip').html(html);
+            window.scroll(0,10000);
+        });
+        return false;
+    }
+</script>
