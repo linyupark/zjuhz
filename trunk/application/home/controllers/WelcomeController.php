@@ -14,7 +14,9 @@ class WelcomeController extends Zend_Controller_Action
 	
     function indexAction()
     {
-    	$this->view->cache = CacheModel::init(null,99999);
+		$this->view->Group = new Group();
+        $this->view->Biz = new Biz();
+    	$this->view->cache = CacheModel::init(null,600);
     	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
     }
 }

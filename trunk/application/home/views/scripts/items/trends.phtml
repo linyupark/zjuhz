@@ -1,0 +1,10 @@
+		<div class="sideBar list-1 mgu10">
+			<h3 class="tt mglf10"><?= Cmd::icon('plugin.png') ?> 本会动态</h3>
+			<ul class="mg10">
+				<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>2)); ?>
+                    <?php foreach($rows as $r): ?>
+                    <li><a class="lk-1" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+                        <?= Commons::utfSubStr($r['entity_title'],35).'..' ?></a></li>
+                    <?php endforeach; ?>
+			</ul>
+		</div>

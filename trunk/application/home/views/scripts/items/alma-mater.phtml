@@ -1,0 +1,46 @@
+<div class="sideBar2 list-1">     
+    <h3 class="tt2 mglf10"><?= Cmd::icon('heart.png') ?> 情系母校</h3>
+    <table width="95%" class="mglf10">
+		<tr>
+			<td class="pd5 vm" style="width:5px; font-weight:bold">
+                <a href="http://www.zjuhz.com/group/home/name/of/venture" style="color:#CA1D60; text-decoration:none">
+                    新闻资讯</a>
+            </td>
+			<td class="list-2">
+                <ul>
+                    <?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>1)); ?>
+                    <?php foreach($rows as $r): ?>
+                    <li><a class="lk-2" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+		</tr>
+        <tr>
+            <td class="pd5 vm" style="border-top:1px solid #E6BECF; width:5px; font-weight:bold">
+                <a href="/biz/" style="color:#CA1D60; text-decoration:none">
+                    活动讲座</a>
+            </td>
+            <td style="border-top:1px solid #E6BECF" class="list-2 pdu10">
+                <ul>
+                    <?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>4)); ?>
+                    <?php foreach($rows as $r): ?>
+                    <li><a class="lk-2" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="pd5 vm" style="border-top:1px solid #E6BECF; width:5px; font-weight:bold">
+                <a href="/biz/" style="color:#CA1D60; text-decoration:none">
+                    浙大校史</a>
+            </td>
+            <td style="border-top:1px solid #E6BECF" class="list-2 pdu10">
+                <ul>
+                    <li>整理中..</li>
+                </ul>
+            </td>
+        </tr>
+	</table>
+</div>

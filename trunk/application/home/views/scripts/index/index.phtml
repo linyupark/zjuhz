@@ -47,35 +47,27 @@
 	<hr class="space" />
 </div>
 
-
-<div class="span-17 mgu10">
-		<table width="100%" class="table-1">
-			<tr>
-				<th colspan="2" class="f14 txtl pd5"><strong>最新资讯</strong></th>
-				<th class="f14 txtl"><strong><a href="/info/">查看更多</a></strong></th>
-			</tr>
 <?php if(!$this->cache->start('homepage')): ?>
-		<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new'); ?>
-		<?php foreach($rows as $row): ?>
-		<tr>
-			<td class="dashBorder pd5 f12" width="15%">
-				<img border="0" src="/static/images/icon/<?= $row['category_icon'] ?>.gif" />
-				<strong><a href="/info/?category=<?= $row['category_id'] ?>"><?= $row['category_name'] ?></a></strong>
-			</td>
-			<td class="dashBorder pd5 f14 txtl">
-				<a href="/info/view/detail/id/<?= $row['entity_id'] ?>"><?= $row['entity_title'] ?></a>
-			</td>
-			<td class="dashBorder pd5 quiet" width="20%">
-				<?= Lp_Date::timespan($row['entity_pub_time']) ?> 前
-			</td>
-		</tr>
-		<?php endforeach; ?>
-<?php $this->cache->end(); endif; ?>
-		</table>
+<div class="span-17 mgu10">
+	<div class="span-7">
+		<?= $this->render('items/notice.phtml'); ?>
+		<?= $this->render('items/trends.phtml'); ?>
+		<?= $this->render('items/zjuorg.phtml'); ?>
+		<?= $this->render('items/teacher.phtml'); ?>
+		<?= $this->render('items/dev.phtml'); ?>
+	</div>
+	<div class="span-10 last">
+		<?= $this->render('items/biz.phtml'); ?>
+		<?= $this->render('items/groups.phtml'); ?>
+	</div>
 </div>
-				
-<?= $this->render('home-sub.phtml') ?>
 
+<div class="span-7 mgu10 last">
+	<?= $this->render('items/alma-mater.phtml'); ?>
+	<?= $this->render('items/active.phtml'); ?>
+	<?= $this->render('items/subject.phtml'); ?>
+</div>
+<?php $this->cache->end(); endif; ?>
 
 <script type="text/javascript">
 	// 会员登录

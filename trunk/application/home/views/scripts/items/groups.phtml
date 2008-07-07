@@ -1,0 +1,53 @@
+<div class="oneCol mgu10">
+    <h3 class="mglf10"><?= Cmd::icon('group.png') ?> 群组俱乐部</h3>
+    <table width="95%" class="mglf10">
+		<tr>
+			<td class="pd5 vm" style="width:5px; font-weight:bold">
+                <a href="http://www.zjuhz.com/group/home/name/of/jrz" style="color:#7EA918; text-decoration:none">
+                    金融俱乐部</a>
+            </td>
+			<td class="list-2">
+                <ul class="f14">
+                    <?php
+                    $topics = $this->Group->getTopicFrom(2, 5);
+                    foreach($topics as $t): ?>
+                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=2&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+		</tr>
+        <tr>
+            <td class="pd5 vm pdu10" style="border-top:1px solid #D7E4EC; width:5px; font-weight:bold">
+                <a href="http://www.zjuhz.com/group/home/name/of/law" style="color:#7EA918; text-decoration:none">
+                    法律人俱乐部</a>
+            </td>
+            <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
+                <ul class="f14">
+                    <?php
+                    $topics = $this->Group->getTopicFrom(14, 5);
+                    foreach($topics as $t): ?>
+                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=14&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="pd5 vm pdu10" style="border-top:1px solid #D7E4EC; width:5px; font-weight:bold">
+                <a href="http://www.zjuhz.com/group/home/name/of/badminton" style="color:#7EA918; text-decoration:none">
+                    羽毛球俱乐部</a>
+            </td>
+            <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
+                <ul class="f14">
+                    <?php
+                    $topics = $this->Group->getTopicFrom(15, 5);
+                    foreach($topics as $t): ?>
+                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=15&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
+	</table>
+</div>
