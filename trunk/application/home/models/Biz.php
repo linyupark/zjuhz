@@ -14,6 +14,7 @@ class Biz
     
     function get($limit)
     {
+        $this->_db->query('SET NAMES "utf8"');
         return $this->_db->fetchAll('SELECT `cid`,`name` FROM `tbl_corp_company` 
                                     ORDER BY RAND() LIMIT '.$limit);
     }
