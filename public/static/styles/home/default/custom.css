@@ -1,5 +1,13 @@
 @import url('../../facebox.css');
 
+/* 连接 1 */
+.lk-1:link, .lk-1:visited { color:#995700; text-decoration:none; }
+.lk-1:hover{ text-decoration:underline; }
+
+/* 连接 2 */
+.lk-2:link, .lk-2:visited { color:#8B3558; text-decoration:none; }
+.lk-2:hover{ text-decoration:underline; }
+
 /* 表格1 */
 .table-1 td a:link, .table-1 td a:visited{
 	text-decoration:none;
@@ -7,13 +15,6 @@
 }
 .table-1 th{ background:#D7E4EA; padding:10px; }
 
-.sideBar a:link, .sideBar a:visited{
-	color:#4B630B;
-	text-decoration:none;
-	line-height:150%;
-}
-.sideBar a:hover{ text-decoration:underline; }
-.sideBar li{ margin-top:8px;}
 
 /* 管理菜单 */
 div.managebar{
@@ -115,6 +116,46 @@ div.tab a.here{
 	background:#FFFAF4 url(/static/images/group/s_bg.gif) repeat-x top;
 	border:1px solid #E9DBC0;
 }
+/* 边栏样式(淡红色) */
+.sideBar2{
+	background:#F9F1F4;
+	border:1px solid #E6BECF;
+}
+
+/* 列表 1*/
+.list-1 ul{
+	list-style-position:inside;
+	list-style-type:square;
+}
+	.list-1 li{
+		margin-bottom:5px;
+		line-height:150%;
+		color:#444;
+	}
+	.list-1 .tt2{
+		color:#8B3558;
+	}
+	.list-1 .tt{
+		color:#7A5F2C;
+	}
+
+/* 列表 2*/
+.list-2 ul{
+	list-style:none;
+	padding-bottom:15px;
+}
+	.list-2 li{
+		line-height:150%;
+		color:#444;
+		margin-left:10px;
+	}
+	.list-2 .tt2{
+		color:#8B3558;
+	}
+	.list-2 .tt{
+		color:#7A5F2C;
+	}
+
 
 .hr-1{
 	border-bottom-color:#D7E4EA;
