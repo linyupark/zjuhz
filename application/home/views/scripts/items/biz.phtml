@@ -26,7 +26,7 @@
                     <?php
                     $bizs = $this->Biz->get(3);
                     foreach($bizs as $b): ?>
-                    <li><a title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['topic_id'] ?>">
+                    <li><a title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['cid'] ?>">
                         <?= $b['name'] ?></a></li>
                     <?php endforeach; ?>
                 </ul>
