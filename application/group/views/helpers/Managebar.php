@@ -28,9 +28,14 @@ class Zend_View_Helper_Managebar
         $str .= '<p class="txtc" style="margin:0; padding:0 0 10px 0">';
         if(!Cmd::isGuest($gid))
         {
-        	
-        	$str .='<a href="/group/topic/new?gid='.$gid.'">发表主题</a> | 
-        		<a href="/group/album/new?gid='.$gid.'">上传图片</a></p>';
+        	$str .= '<a href="/group/topic/new?gid='.$gid.'">发表主题</a> | 
+        		<a href="/group/album/new?gid='.$gid.'">上传图片</a>';
+                        
+                if(!Cmd::isCreater($gid))        
+                $str .= '<br /><br />'.
+                        Cmd::icon('door_out.png').' <a href="javascript:leave('.$gid.')">退出群组</a></p>
+                        <script>function leave(gid){ var c = confirm("确定离开此群组?");
+                        if(c == true){ $.get("/group/leave?gid="+gid,null,function(html){ if(html=="done") location.href="/group/my" }); } }</script>';
         }
         else 
         {

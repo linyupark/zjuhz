@@ -155,6 +155,7 @@ class Cmd
 	# 重新分配自己的群组session
 	static function flushGroupSession()
 	{
+		Zend_Registry::get('sessGroup')->my = null;
 		$user_id = Zend_Registry::get('sessCommon')->login['uid'];
 		$groups = GroupMemberModel::fetchByUid($user_id);
 		foreach($groups as $k => $v)

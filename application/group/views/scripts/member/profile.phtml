@@ -84,7 +84,7 @@
             <?php
             $private = UserModel::fetch($this->uid, 'ext_private');
             if($private == 0 || !UserModel::isFriend($this->uid, Cmd::myid())): ?>
-                <td colspan="6 pd10">你无权查看此信息</td>
+                <td colspan="6 pd10 mglf10">你无权查看此信息</td>
             <?php else: ?>
             <tr>
                 <td width="12%" class="quiet txtr pd5">手机号码:</td>

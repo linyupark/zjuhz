@@ -118,7 +118,6 @@ class MyController extends Zend_Controller_Action
         // 更新群组信息
         if($request->getParam('do') == 'refresh')
         {
-            Cmd::flushGroupSession();
             $this->_redirect('/group/my');
         }
     }
