@@ -28,14 +28,6 @@ class InviteController extends Zend_Controller_Action
 	# 搜索校友
 	public function searchAction()
 	{
-		// 目前已经在群组内的uid,做排除(1,2,3,4,....)
-		$uid_str = '';
-		$uids = GroupMemberModel::fetchIds($this->view->gid);
-		foreach($uids as $k => $v)
-		{
-			if($k == 0) $uid_str = $v['user_id'];
-			else $uid_str .= ','.$v['user_id'];
-		}
 		if($this->getRequest()->isPost()) // 处理搜索提交
 		{
 			$R = $this->getRequest();
@@ -47,7 +39,55 @@ class InviteController extends Zend_Controller_Action
 			$city = $R->getPost('city');
 			$temp = $name.$sex.$college.$year.$city;
 			if(empty($temp))
-			echo '<div class="error txtc">请最少填写一项，否则不会执行搜索操作</div>';
+			echo '<div class="error">请最少填写一项，否则不会执行搜索操作</div>';
+            else // 进行匹配搜索
+            {
+                // 获取匹配总数
+                $db = Zend_Registry::get('dbGroup');
+                $select = $db->select()->from('tbl_group_user');
+                if($name) $select->where('realName = ?', $name);
+                if($sex) $select->where('sex = ?', $sex);
+                if($college) $select->where('college = ?', $college);
+                if($year) $select->where('year = ?', $year);
+                if($city) $select->where('location_c = ?', $city);
+                $rows = $db->query($select)->fetchAll();
+                $num_rows = count($rows);
+                if($num_rows > 0) //找到数据则进行罗列显示
+                {
+                    $this->view = $this->_helper->viewRenderer->view;
+                    $this->view->gid = $this->getRequest()->getParam('gid');
+                    // 目前已经在群组内的uid,做排除(1,2,3,4,....)
+                    $uid_str = '';
+                    $uids = GroupMemberModel::fetchIds($this->view->gid);
+                    foreach($uids as $k => $v)
+                    {
+                        if($k == 0) $uid_str = $v['user_id'];
+                        else $uid_str .= ','.$v['user_id'];
+                    }
+                    $page = $this->_getParam('p', 1);
+                    Page::$pagesize = 9;
+                    Page::create(array(
+                        'href_open' => '<a href="javascript:void(0)" onclick="return doSearch(%d)">',
+                        'href_close' => '</a>',
+                        'num_rows' => $num_rows,
+                        'cur_page' => $page
+                    ));
+                    $select->limit(Page::$pagesize, Page::$offset);
+                    //$this->view->sql = $select->__toString();
+                    $rows = $db->query($select)->fetchAll();
+                    // 分配数据
+                    $this->view->members = $uid_str;
+                    $this->view->pagination = Page::$page_str;
+                    $this->view->page = $page;
+                    $this->view->rows = $rows;
+                    $this->view->numrows = $num_rows;
+                    $this->render('search-result');
+                }
+                else
+                {
+                    echo '<div class="notice txtc">没有找到相匹配的校友</div>';
+                }
+            }
 		}
 		else // 显示搜索表单
 		{
@@ -82,13 +122,11 @@ class InviteController extends Zend_Controller_Action
         
         if(UserModel::isInvited($group_id, $uid))
         {
-            $this->_helper->layout->setLayout('error');
             echo '<div class="notice">'.UserModel::fetch($uid,'realName').'已经邀请过了~</div>';
         }
         else
         {
             UserModel::invite($group_id, $uid);
-            $this->_helper->layout->setLayout('success');
             echo '<div class="success">成功邀请'.UserModel::fetch($uid,'realName').'</div>';
         }
     }
