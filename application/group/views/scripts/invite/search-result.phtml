@@ -1,0 +1,40 @@
+<p>找到相关校友<span style="color:red"><?= $this->numrows ?></span>人</p>
+<span id="invite_tip"></span>
+<div class="extInline" style="float:left; overflow:hidden; width:95%;">
+    <?php foreach($this->rows as $u): ?>
+        <table style="float:left;" width="75px" class="mgu10">
+            <tr>
+                <td class="txtc"><?= Commons::getUserFace($u['uid'], 'small') ?></td>
+            </tr>
+            <tr>
+                <td class="txtc">
+                    <a href="/group/member/profile?uid=<?= $u['uid'] ?>" target="_blank">
+                        <?= $u['realName'] ?>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="txtc pd5">
+                    <?php if(!Cmd::isInString($this->members, $u['uid']) && $u['uid'] != Cmd::myid()): ?>
+                        <?php if(!UserModel::isInvited($this->gid, $u['uid'])): ?>
+                        <a href="javascript:void(0)" onclick="doInvite(<?= $u['uid'].','.$this->gid ?>)">邀请</a>
+                        <?php else: ?>
+                        已经邀请
+                        <?php endif; ?>
+                    <?php else: ?>
+                        成员
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+    <?php endforeach; ?>
+    <div class="pagination" style="float:none; clear:both"><?= $this->pagination ?></div>
+</div>
+<script type="text/javascript">
+    function doInvite(uid, gid)
+    {
+        $.post('/group/invite/do', {uid:uid, gid:gid}, function(html){
+            $('#invite_tip').html(html);
+        });
+    }
+</script>

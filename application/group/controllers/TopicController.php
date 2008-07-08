@@ -38,6 +38,7 @@ class TopicController extends Zend_Controller_Action
 		}
 		else
 		{
+			Cmd::flushGroupSession();
 			Page::$pagesize = 10;
 			$reply = GroupReplyModel::topicIndex($this->view->tid, Page::$pagesize, $this->view->page);
 			Page::create(array(
