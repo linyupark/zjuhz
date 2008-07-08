@@ -134,6 +134,16 @@ function onLoadToInputFocus(objname){
 	getObject(objname).focus();
 }
 
+// 滚动
+function AutoScroll(obj){
+    $(obj).find("ul:first").animate({
+            marginTop:"-25px"
+    },500,function(){
+        $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+    });
+}
+
+
 // 载入用户名片
 function ucard(uid) {
 
