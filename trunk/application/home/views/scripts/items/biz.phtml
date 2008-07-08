@@ -21,16 +21,22 @@
             <td class="pd5 vm" style="border-top:1px solid #D7E4EC; width:5px; font-weight:bold">
                 <a href="/biz/" style="color:#186DA9; text-decoration:none">校友企业</a>
             </td>
-            <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
+            <td style="border-top:1px solid #D7E4EC;" class="list-2 pdu10" id="cps">
+                <div style="height:80px; overflow:hidden; margin-bottom:10px;">
                 <ul class="f14">
                     <?php
-                    $bizs = $this->Biz->get(3);
+                    $bizs = $this->Biz->get(8);
                     foreach($bizs as $b): ?>
                     <li><a title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['cid'] ?>">
                         <?= $b['name'] ?></a></li>
                     <?php endforeach; ?>
                 </ul>
+                </div>
             </td>
         </tr>
 	</table>
 </div>
+
+<script type="text/javascript">
+    setInterval('AutoScroll("#cps")',5000)
+</script>
