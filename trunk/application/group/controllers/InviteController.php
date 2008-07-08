@@ -25,6 +25,36 @@ class InviteController extends Zend_Controller_Action
         }
     }
 	
+	# 搜索校友
+	public function searchAction()
+	{
+		// 目前已经在群组内的uid,做排除(1,2,3,4,....)
+		$uid_str = '';
+		$uids = GroupMemberModel::fetchIds($this->view->gid);
+		foreach($uids as $k => $v)
+		{
+			if($k == 0) $uid_str = $v['user_id'];
+			else $uid_str .= ','.$v['user_id'];
+		}
+		if($this->getRequest()->isPost()) // 处理搜索提交
+		{
+			$R = $this->getRequest();
+			// 一些可匹配的属性
+			$name = $R->getPost('name');
+			$sex = $R->getPost('sex');
+			$college = $R->getPost('college');
+			$year = $R->getPost('year');
+			$city = $R->getPost('city');
+			$temp = $name.$sex.$college.$year.$city;
+			if(empty($temp))
+			echo '<div class="error txtc">请最少填写一项，否则不会执行搜索操作</div>';
+		}
+		else // 显示搜索表单
+		{
+			$this->view->college = Zend_Registry::get('iniConfig')->college->name->toArray();
+		}
+	}
+	
     # 请求加入列表
     public function applyAction()
     {

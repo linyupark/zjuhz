@@ -48,24 +48,23 @@
 </div>
 
 <?php if(!$this->cache->start('homepage')): ?>
-<div class="span-17 mgu10">
-	<div class="span-7">
+<div class="span-24 last">
+	<div class="span-7 mgu10">
 		<?= $this->render('items/notice.phtml'); ?>
 		<?= $this->render('items/trends.phtml'); ?>
 		<?= $this->render('items/zjuorg.phtml'); ?>
 		<?= $this->render('items/teacher.phtml'); ?>
 		<?= $this->render('items/dev.phtml'); ?>
 	</div>
-	<div class="span-10 last">
+	<div class="span-10 mgu10">
 		<?= $this->render('items/biz.phtml'); ?>
 		<?= $this->render('items/groups.phtml'); ?>
 	</div>
-</div>
-
-<div class="span-7 mgu10 last">
-	<?= $this->render('items/alma-mater.phtml'); ?>
-	<?= $this->render('items/active.phtml'); ?>
-	<?= $this->render('items/subject.phtml'); ?>
+	<div class="span-7 mgu10 last">
+		<?= $this->render('items/alma-mater.phtml'); ?>
+		<?= $this->render('items/active.phtml'); ?>
+		<?= $this->render('items/subject.phtml'); ?>
+	</div>
 </div>
 <?php $this->cache->end(); endif; ?>
 
