@@ -43,6 +43,13 @@ class DetailController extends Zend_Controller_Action
 	private $_dataCompany = array();
 
 	/**
+     * 当前企业个人资料
+     * 
+     * @var array
+     */
+	private $_dataCorp = array();
+
+	/**
      * 初始化
      * 
      * @return void
@@ -60,11 +67,15 @@ class DetailController extends Zend_Controller_Action
         // 判断数据可用
 		($this->_dataCid === $this->_dataCompany['cid'] ? '' : 
 		    $this->_redirect('/biz/', array('exit')));
+		// 仅登录后可见
+		$this->_dataCorp = ('member' !== $this->_sessCommon->role ? '' : 
+			CorpLogic::init()->selectUidRow($this->_dataCompany['uid']));
 
 		$this->view->sessCommon  = $this->_sessCommon;
 		$this->view->sessCompany = $this->_sessCompany;
-		$this->view->dataCompany = $this->_dataCompany;
 		$this->view->dataCid     = $this->_dataCid;
+		$this->view->dataCompany = $this->_dataCompany;
+		$this->view->dataCorp    = $this->_dataCorp;
 	}
 
 	/**

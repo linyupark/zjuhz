@@ -82,11 +82,18 @@ class IndexController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$this->view->headTitle($this->_iniCompany->head->titleIndex);
+		$this->view->headLink()->appendStylesheet('/static/styles/paging.css', 'screen');
 		//$this->view->headScript()->appendFile('/static/scripts/biz/index/index.js');
 
 		$this->view->recmd    = CorpCompanyLogic::init()->selectRandList(20); // 随机显示全部推荐企业
-		$this->view->list     = CorpCompanyLogic::init()->selectJoinAll(10); // 按新加入显示全部企业
 		$this->view->industry = CorpIndustryLogic::init()->selectPairs(); // 显示全部行业分类目录
+
+		$base      = CacheLogic::init()->baseLoad(); // 载入基础数据缓存
+		$companies = $base['companies']; // 基础数据中的企业总数
+		$paging    = new Paging(array('totalRs' => $companies, 'perPage' => 10));
+		$this->view->list      = CorpCompanyLogic::init()->selectJoinAll($paging->limit()); // 按新加入显示全部企业
+		$this->view->companies = $companies;
+		$this->view->paging    = $paging->show();
 	}
 
 	/**

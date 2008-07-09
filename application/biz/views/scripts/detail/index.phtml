@@ -15,13 +15,18 @@
             <p class="floatRight"><a href="">企业留言本...</a></p>p>-->
           </div>
 		</td>
-		<td class="pd10"><div class="mid-box-right">
+		<td class="pd10">
+		  <div class="mid-box-right">
           <h2 class="mid-box-right-title">公司简介</h2>
-          <div class="mid-box-right-content"><?= $this->txtcode($this->dataCompany['intro']); ?></div>
+          <div class="mid-box-right-content"><?= str_replace('\"', '"', $this->dataCompany['intro']); ?></div>
           </div>
           <table class="detail" cellspacing="0" cellpadding="0" width="737">
             <tr>
               <th colspan="4">详细资料<a name="info" id="info"></a></th>
+            </tr>
+            <tr>
+              <td width="80" bgcolor="#F0F3E5"><strong>创办校友：</strong></td>
+              <td colspan="3">&nbsp;<?= ($this->dataCorp['realName'] ? $this->card($this->dataCorp['uid'], $this->dataCorp['realName']) : '<a href="/member/login/">登录</a>后显示此项内容'); ?></td>
             </tr>
             <tr>
               <td width="80" bgcolor="#F0F3E5"><strong>所处行业：</strong></td>
@@ -78,3 +83,5 @@
         </td>
       </tr>
     </table>
+
+<script>ucardInit();</script>	

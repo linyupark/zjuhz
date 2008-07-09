@@ -130,10 +130,10 @@ class Paging
     {
     	$show = '<div class="paging" id="paging">';
 
-    	/*
-    	$show .= '<span class="num">'.$this->_totalRs.
-    	         '</span>条数据&nbsp;-&nbsp;共分<span class="num">'.
-    	         $this->_totalPage.'</span>页&nbsp;&nbsp;'; //*/
+    	//*
+    	$show .= '共<span class="num">'.$this->_totalRs.
+    	         '</span>条数据&nbsp;-&nbsp;分<span class="num">'.
+    	         $this->_totalPage.'</span>页显示&nbsp;&nbsp;'; //*/
 
     	$show .= ($this->_perPage < $this->_totalRs ? $this->_preBar().$this->_mainBar().$this->_nextBar().$this->_jumpBar() : '');
 

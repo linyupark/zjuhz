@@ -32,7 +32,7 @@ function dobasic() {
 	ajaxloading(true);
 	$("#btnBasic").attr("disabled", true);
 	var formdata = $("#frmBasic").fastSerialize();
-	//formdata.push({name:'content', value:editor.data()});
+	formdata.push({name:'content', value:editor.data()});
 
 	$.post("/biz/manage/dobasic/", formdata, function(msg) {
 		ajaxloading();

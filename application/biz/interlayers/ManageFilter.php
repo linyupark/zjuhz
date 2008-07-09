@@ -60,7 +60,7 @@ class ManageFilter extends BizInterlayer
 		Zend_Loader::loadFile('Utf8Length.php');
 
 		// 设置过滤规则
-		$filters = array('*' => array('StripTags'));
+		$filters = array();
 
     	// 设置验证规则
 		$validators = array(
@@ -81,7 +81,7 @@ class ManageFilter extends BizInterlayer
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->cityError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->cityError)), 
             'content' => array(
-       	        array('Utf8Length', '50', '2000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+       	        array('Utf8Length', '50', '5000'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
               	    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniCompany->hint->introError,
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniCompany->hint->introError))
         );
