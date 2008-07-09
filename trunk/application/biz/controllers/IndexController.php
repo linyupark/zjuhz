@@ -90,7 +90,7 @@ class IndexController extends Zend_Controller_Action
 
 		$base      = CacheLogic::init()->baseLoad(); // 载入基础数据缓存
 		$companies = $base['companies']; // 基础数据中的企业总数
-		$paging    = new Paging(array('totalRs' => $companies, 'perPage' => 15));
+		$paging    = new Paging(array('totalRs' => $companies, 'perPage' => 12));
 		$this->view->list      = CorpCompanyLogic::init()->selectJoinAll($paging->limit()); // 按新加入显示全部企业
 		$this->view->companies = $companies;
 		$this->view->paging    = $paging->show();
