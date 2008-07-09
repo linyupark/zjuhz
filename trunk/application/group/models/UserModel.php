@@ -31,6 +31,24 @@ class UserModel
 		return $db->update('tbl_group_user', array('friends' => $frineds), 'uid = '.$myid);
 	}
 	
+	# 删除
+	static function delFriend($myid, $uid)
+	{
+		$friends = self::fetch($myid, 'friends');
+		$arr = explode(',', $friends);
+		if(in_array($uid, $arr))
+		{
+			$k = array_search($uid, $arr);
+			unset($arr[$k]);
+			array_values($arr);
+			$data = implode(',', $arr);
+			$db = Zend_Registry::get('dbGroup');
+			$db->update('tbl_group_user', array('friends' => $data), 'uid = '.$myid);
+			return true;
+		}
+		else return false;
+	}
+	
 	
 	/* //////////好友块/////////// */
 	

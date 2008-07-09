@@ -10,6 +10,14 @@ class MyController extends Zend_Controller_Action
         Cmd::flushGroupSession();
     }
     
+    # 自己的好友列表
+    public function friendsAction()
+    {
+        $friends = UserModel::fetch(Cmd::myid(), 'friends');
+        if($friends != null)
+        $this->view->friends = explode(',', $friends);
+    }
+    
     # 自己的群组资料(个人补充信息,隐私设置)
     public function profileAction()
     {
