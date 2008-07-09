@@ -1,0 +1,20 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
+<div class="span-19 last mgu10">
+        <div class="oneCol">
+            <?= $this->managetab($this->action_name, $this->gid)  // 管理TAB连接 ?>
+            <form class="mglf10" method="post" enctype="multipart/form-data">
+                <h3 class="mglf10">定制群组标志图</h3>
+                <div class="mglf10 pdd10">
+                    <?= Cmd::groupIcon($this->gid) ?>
+                    <p style="line-height:220%">
+                    <input type="file" name="icon" />
+                    &nbsp;&nbsp;&nbsp;<input class="btn" type="submit" value="上传" /><br />
+                    <span class="quiet">(最后显示的尺寸为60x60象素,允许格式:jpg,gif,png)</span>  
+                    </p>
+                </div>
+            </form>
+        </div>
+</div>
+</div>

@@ -23,6 +23,38 @@ class ManageController extends Zend_Controller_Action
     }
     
     /**
+     * 上传群组图标
+     * 
+     */
+    public function customAction()
+    {
+        $folder = $_SERVER['DOCUMENT_ROOT'].'static/groups/'.$this->view->gid.'/';
+        if(isset($_FILES['icon'])) // 执行上传操作
+        {
+            $dest_im = 'icon'.Lp_Upload::getExt($_FILES['icon']['name']);
+            Lp_Upload::init(array(
+				'max_size' => 100,
+				'allow_type' => 'jpg|jpeg|png|gif',
+				'upload_path' => $folder,
+                'cust_name' => $dest_im
+			));
+            if(Lp_Upload::handle('icon'))
+            {
+                $im = new Lp_Image($folder.$dest_im);
+                $im->abs_resize(60, 60, $folder.'icon', 'gif');
+                $this->_redirect('/manage/custom?gid=3');
+            }
+            else
+            {
+                echo '<script>alert("'.Lp_Upload::getTip().'");</script>';
+            }
+        }
+        else // 显示上传表单
+        {
+        }
+    }
+    
+    /**
      * 修改群组角色
      *
      */

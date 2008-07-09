@@ -108,7 +108,7 @@ class Cmd
 	{
 		$file = $_SERVER['DOCUMENT_ROOT'].'static/groups/'.$gid.'/icon.gif';
 		if(!file_exists($file)) return '<img src="/static/images/group/default_60_60.gif" />';
-		else return '<img src="/static/groups/'.$gid.'/icon.gif" />';
+		else return '<img src="/static/groups/'.$gid.'/icon.gif?'.time().'" />';
 	}
 	
 	# 创建群组gid相应文件夹
