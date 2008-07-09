@@ -17,6 +17,15 @@ class MemberController extends Zend_Controller_Action
 	}
 	
 	/**
+	 * 删除好友
+	 * */
+	public function removefriendAction()
+	{
+		if(!UserModel::delFriend(Cmd::myid(), $this->_getParam('uid', null)))
+		echo '执行失败';
+	}
+	
+	/**
 	 * 加为好友
 	 *
 	 */

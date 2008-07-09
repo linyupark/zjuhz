@@ -35,9 +35,11 @@
                     <?php if($receive->is_read == 0) echo '(未读)' ?>
                 </td>
                 <td class="pd5 txtc quiet dashBorder" width="20%">
+					<?php if($receive->from != 0): ?>
                     <a href="/group/member/profile?uid=<?= $receive->from ?>"><?= UserModel::fetch($receive->from, 'realName') ?></a>
                     (<a href="/group/pm/member?uid=<?= $receive->from ?>&title=<?= urlencode('re:'.$receive->title) ?>">回复</a>)
-                    <?= Lp_Date::timespan($receive->time) ?>
+                    <?php endif; ?>
+					<?= Lp_Date::timespan($receive->time) ?>
                 </td>
             </tr>
             <?php endforeach; endif; ?>
