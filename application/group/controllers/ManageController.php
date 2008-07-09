@@ -147,7 +147,7 @@ class ManageController extends Zend_Controller_Action
     			{
     				GroupTopicModel::delete($this->view->gid, $topic_id);
     			}
-    			echo '成功取消加精，<a href="javascript:history.go(0)">刷新查看</a>';
+    			echo '成功删除，<a href="javascript:history.go(0)">刷新查看</a>';
     		default:
     			break;
     	}
