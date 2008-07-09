@@ -54,7 +54,7 @@ class IndexController extends Zend_Controller_Action
 					{
 						GroupModel::update(array(
 							'y_m_d' => $today,
-							'yesterday_click' => GroupModel::info($gid, 'total_click'),
+							'yesterday_click' => GroupModel::info($gid, 'today_click'),
 							'total_click' => new Zend_Db_Expr('total_click + 1'),
 							'today_click' => 1
 						),$gid);
