@@ -1,14 +1,16 @@
 <table>
   <tr>
-	<td><form class="home_form" name="frmFind" id="frmFind" autocomplete="off"><select name="gid" id="gid"><option>所有组</option><?php foreach ($this->group as $value)  { ?><option value="<?= $value['gid']; ?>" <?= ($this->gid == $value['gid'] ? 'selected' : ''); ?>><?= $value['gname']; ?></option><?php } ?></select>&nbsp;<?= $this->formSelect('field', $this->field, null, $this->find) ?>&nbsp;<input type="text" class="inputtxt" name="wd" id="wd" value="<?= $this->wd; ?>" />&nbsp;<input type="submit" class="btn" value="查找" /></form></td>
-	<td><button class="btn" onclick="location.href='/member/my/address/type/docard/'">新建名片</button></td>		
+	<td><form class="home_form" name="frmFind" id="frmFind" autocomplete="off"><?= $this->formSelect('gid', $this->gid, null, $this->group) ?>&nbsp;<?= $this->formSelect('field', $this->field, null, $this->find) ?>&nbsp;<input type="text" class="inputtxt" name="wd" id="wd" value="<?= $this->wd; ?>" />&nbsp;<input type="submit" class="btn" value="查找" /></form></td>
+	<td>
+	<button class="btn" onclick="location.href='/member/my/address/'">显示全部</button>&nbsp;
+	<button class="btn" onclick="location.href='/member/my/address/type/docard/'">新建名片</button>
+	</td>
   </tr>
 </table>
 
+&nbsp;<img src="/static/images/icon/lightbulb.gif"> 在<strong> <?= ($this->group[$this->gid] ? $this->group[$this->gid] : '所有'); ?> </strong>组内<?= ($this->wd ? '<strong> '.$this->find[$this->field].' </strong>关键字<strong> '.$this->wd.' </strong>' : ''); ?>共找到<strong> <?= $this->total; ?> </strong>张名片
+
 <?php if ($this->card) { ?>
-
-<p class="tip"><img src="/static/images/icon/info.gif" align="absmiddle" />&nbsp;&nbsp;将名片与校友关联便可更方便地查看资料；关联分为邀请(若校友未注册)和直接输校友UID(已注册)。</p>
-
 <table class="control_list">
 <tr>
 <th class="txtl" width="27%">(状态) 姓名</th>

@@ -6,7 +6,7 @@
 			<?php } ?>
         </ul>
     </div>
-	<div class="side-box floatRight">
+	<div class="side-box floatRight">	
 	    <div class="side-box-title">行业分类</div>
         <ul>
             <?php foreach ($this->industry as $key => $value) { ?>
@@ -21,7 +21,7 @@
         <table class="table" cellpadding="0" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th class="table-top-left" width="100%">新加入的企业</th>
+                <th class="table-top-left" width="100%">新加入的企业(已收录<?= $this->companies; ?>家校友企业)</th>
             </tr>
             </thead>
             <tfoot>
@@ -29,13 +29,19 @@
                     <td></td>
                 </tr>
             </tfoot>
-            <tbody>
+            <tbody>            
             <?php foreach ($this->list as $key => $value) { ?>
             <tr>
-                <td class="left" style="border-right:1px solid #D7D7D7"><a href="/biz/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13">行业：<?= $this->industry($value['industry']); ?>&nbsp;&nbsp;性质：<?= $this->property($value['property']); ?>&nbsp;&nbsp;地区：<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr($value['intro'], 200); ?>...</p><hr /></td>
+                <td class="left" style="border-right:1px solid #D7D7D7"><a href="/biz/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13">行业：<?= $this->industry($value['industry']); ?>&nbsp;&nbsp;性质：<?= $this->property($value['property']); ?>&nbsp;&nbsp;地区：<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr(strip_tags($value['intro']), 250); ?>...</p><hr /></td>
             </tr>
             <?php } ?>
             </tbody>
+		</table>
+
+        <table class="table" cellpadding="0" cellspacing="0">
+            <tr>
+                <td><?= $this->paging; ?></td>				
+            </tr>
 		</table>
         <!--<div class="corner-box floatLeft" style="width:252px; margin-right:10px;">
 		    <h2 class="corner-box-title"><img src="/static/images/biz/sub-4.gif" class="floatLeft pdr10" /> 菜鸟创业指南</h2>

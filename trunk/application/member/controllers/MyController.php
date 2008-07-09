@@ -86,7 +86,7 @@ class MyController extends Zend_Controller_Action
 		$this->view->headTitle($this->_iniMember->head->titleMyUser);
 		$this->view->headScript()->appendFile('/static/scripts/member/my/user.js');
 		$this->view->headLink()->appendStylesheet('/static/styles/calendar-blue.css', 'screen');
-        $this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');		
+        $this->view->headLink()->appendStylesheet('/static/styles/swfupload.css','screen');
 
     	$type = $this->getRequest()->getParam('type');
 		switch ($type)
@@ -167,7 +167,8 @@ class MyController extends Zend_Controller_Action
 		{
 			case 'group':  // 组管理
 			{
-				$this->view->gid = Commons::getRandomStr($this->_sessUid, 5);
+				$this->view->gid   = Commons::getRandomStr($this->_sessUid, 5);
+				$this->view->group = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
 
     			break;
 			}
@@ -201,11 +202,14 @@ class MyController extends Zend_Controller_Action
 
 				$findArgs = MyFilter::init()->find($getArgs);
                 $logic    = AddressCardLogic::init();
-				$paging   = new Paging(array('totalRs' => $logic->selectFind('count', $findArgs, '')));
+                $total    = $logic->selectFind('count', $findArgs, '');
+				$paging   = new Paging(array('totalRs' => $total));
 
 			    $this->view->find   = $this->_iniMember->find->addressCard->toArray();
 			    $this->view->status = $this->_iniMember->status->invite->toArray();
+			    $this->view->total  = $total;
 			    $this->view->gid    = $findArgs['gid'];
+			    $this->view->group  = AddressGroupLogic::init()->selectUidPairs($this->_sessUid);
 			    $this->view->field  = $findArgs['field'];
                 $this->view->wd     = $findArgs['wd'];
 			    $this->view->paging = $paging->show();
@@ -214,8 +218,7 @@ class MyController extends Zend_Controller_Action
 		}
 
 		$this->view->ctrl  = 'address';
-		$this->view->type  = $type;
-		$this->view->group = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
+		$this->view->type  = $type;		
 	}
 
 	/**

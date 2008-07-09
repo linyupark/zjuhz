@@ -34,7 +34,7 @@
             <tbody>
 			<?php foreach ($this->list as $key => $value) { ?>
             <tr>
-                <td class="left" style="border-right:1px solid #D7D7D7"><a href="/biz/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13">行业：<?= $this->industry($value['industry']); ?>&nbsp;&nbsp;性质：<?= $this->property($value['property']); ?>&nbsp;&nbsp;地区：<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr($value['intro'], 200); ?>...</p><hr /></td>
+                <td class="left" style="border-right:1px solid #D7D7D7"><a href="/biz/detail/index/cid/<?= $value['cid']; ?>/" target="_blank" class="f15"><strong><?= $value['name']; ?></strong></a><p style="padding-top:8px"><span class="quiet f13">行业：<?= $this->industry($value['industry']); ?>&nbsp;&nbsp;性质：<?= $this->property($value['property']); ?>&nbsp;&nbsp;地区：<?= $value['province']; ?>&nbsp;<?= $value['city']; ?></span></p><p style="padding-top:5px"><?= Commons::utfSubStr(strip_tags($value['intro']), 250); ?>...</p><hr /></td>
             </tr>
 			<?php } ?>
             </tbody>

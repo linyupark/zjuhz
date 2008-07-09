@@ -93,6 +93,7 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 		$this->_aclCompany->add(new Zend_Acl_Resource('detail'))
 		                  ->add(new Zend_Acl_Resource('error'))
 		                  ->add(new Zend_Acl_Resource('external'))
+		                  ->add(new Zend_Acl_Resource('guestbook'))
 		                  ->add(new Zend_Acl_Resource('index'))
 		                  ->add(new Zend_Acl_Resource('manage'))
 		                  ->add(new Zend_Acl_Resource('my'));
@@ -100,13 +101,13 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 
     /**
      * 设置Acl访问权限
-     *
+     * 
      * @return void
      */
 	private function _setAclPriv()
 	{
 		$this->_aclCompany->deny('guest')
-		                  ->allow('guest', array('detail', 'external'))
+		                  ->allow('guest', array('detail', 'external', 'index'))
 		                  ->allow('member');
 	}
 

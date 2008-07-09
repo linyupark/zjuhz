@@ -80,6 +80,19 @@ class AddressGroupModel
     }
 
     /**
+     * 查找uid对应的名片组
+     * 
+     * @param integer $uid
+     * @return array
+     */
+	public function selectUidPairs($uid)
+    {
+    	return $this->_dao->fetchPairs("SELECT gid, gname FROM {$this->_name} 
+    	    WHERE uid = :uid;", array('uid' => $uid)
+    	);
+    }
+
+    /**
      * 插入名片组记录
      * 
      * @param array $args
