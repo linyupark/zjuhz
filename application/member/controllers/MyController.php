@@ -194,7 +194,7 @@ class MyController extends Zend_Controller_Action
 
     			break;
 			}
-			default:       // 名片管理
+			default: // 名片管理
 			{
     			$type = 'card';
 
@@ -219,7 +219,7 @@ class MyController extends Zend_Controller_Action
 		}
 
 		$this->view->ctrl  = 'address';
-		$this->view->type  = $type;		
+		$this->view->type  = $type;
 	}
 
 	/**
