@@ -1,10 +1,12 @@
 <table>
   <tr>
-	<td><form class="home_form" name="frmFind" id="frmFind" autocomplete="off"><?= $this->formSelect('gid', $this->gid, null, $this->group) ?>&nbsp;<?= $this->formSelect('field', $this->field, null, $this->find) ?>&nbsp;<input type="text" class="inputtxt" name="wd" id="wd" value="<?= $this->wd; ?>" />&nbsp;<input type="submit" class="btn" value="查找" /></form></td>
-	<td>
-	<button class="btn" onclick="location.href='/member/my/address/'">显示全部</button>&nbsp;
+    <td>
+        <form class="home_form" name="frmFind" id="frmFind" autocomplete="off"><?php $this->group[0] = '所有组';ksort($this->group); echo $this->formSelect('gid', $this->gid, null, $this->group); ?>&nbsp;<?= $this->formSelect('field', $this->field, null, $this->find) ?>&nbsp;<input type="text" class="inputtxt" name="wd" id="wd" value="<?= $this->wd; ?>" />&nbsp;<input type="submit" class="btn" value="查找" /></form>
+    </td>
+    <td>
+        <button class="btn" onclick="location.href='/member/my/address/'">显示全部</button>&nbsp;
 	<button class="btn" onclick="location.href='/member/my/address/type/docard/'">新建名片</button>
-	</td>
+    </td>
   </tr>
 </table>
 
