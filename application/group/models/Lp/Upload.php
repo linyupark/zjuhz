@@ -1,12 +1,12 @@
 <?php
 
 	/**
-	 * 文件上传专用类
+	 * 文件上传专用类(支持多文件上传)
 	 *
 	 */
 	class Lp_Upload
 	{
-		private static $upConfig = array(
+		public static $upConfig = array(
 			"max_size" => 100,  //* 允许文件大小,kb
   			"file_type" => "", 
   			"file_temp" => "", 
@@ -82,8 +82,140 @@
 			return self::$upConfig[$key];
 		}
 		
+        
+        static function multi($field)
+        {
+            if (!isset($_FILES[$field]))
+            {
+              //self::tip('upload_userfile_not_set');
+              self::tip('无法找到变量为'.$field.'的 POST.');
+              return false;
+            }
+            if (!self::validateUploadPath())
+            {
+              return false;
+            }
+            
+            foreach($_FILES[$field]['name'] as $k => $v)
+            {
+                if($_FILES[$field]['name'][$k] == '' && $k != 0) continue;
+                
+                $index = ($k+1);
+                
+                if (!is_uploaded_file($_FILES[$field]['tmp_name'][$k]))
+                {
+                  $error = (!isset($_FILES[$field]['error'][$k])) ? 4 : $_FILES[$field]['error'][$k];
+            
+                  switch ($error)
+                  { 
+                    case 1:
+                      //self::tip('upload_file_exceeds_limit');
+                      self::tip('第'.$index.'个上传的文件大小超过了指定的最大限制('.self::fetchParam('max_size').'kb)');
+                      break;
+                    case 3:
+                      //self::tip('upload_file_partial');
+                      self::tip('第'.$index.'个只上传了部分文件');
+                      break;
+                    case 4:
+                      //self::tip('upload_no_file_selected');
+                      self::tip('第'.$index.'个请选择要上传的文件');
+                      break;
+                    default:
+                      //self::tip('upload_no_file_selected');
+                      self::tip('第'.$index.'个请选择要上传的文件');
+                      break;
+                  }
+                  break;
+                }
+            
+                //将值传入设置变量
+                self::$upConfig['file_temp'][$index] = $_FILES[$field]['tmp_name'][$k];
+                self::$upConfig['file_name'][$index] = $_FILES[$field]['name'][$k];
+                self::$upConfig['file_size'][$index] = $_FILES[$field]['size'][$k];
+                self::$upConfig['file_type'][$index] = strtolower(preg_replace("/^(.+?);.*$/", "\\1", $_FILES[$field]['type'][$k]));
+                self::$upConfig['file_ext'][$index] = self::getExt($_FILES[$field]['name'][$k]);
+                
+                // Convert the file size to kilobytes
+                if (self::$upConfig['file_size'][$index] > 0)
+                {
+                  self::$upConfig['file_size'][$index] = round(self::$upConfig['file_size'][$index] / 1024, 2);
+                }
+                // Is the file type allowed to be uploaded?
+                if (self::isAllowedType($index) === false)
+                {
+                  //self::tip('upload_invalid_filetype');
+                  self::tip('第'.$index.'个你所尝试上传的文件类型无效');
+                  break;
+                }
+                if (!self::isAllowedFileSize($index))
+                {
+                  //self::tip('upload_invalid_filesize');
+                  self::tip('第'.$index.'上传的文件大小超过了指定的最大限制('.self::fetchParam('max_size').'kb)');
+                  break;
+                }
+                //	Clean the file name for security
+                self::$upConfig['file_name'][$index] = self::cleanFileName(self::$upConfig['file_name'][$index]);
+            
+                // Remove white spaces in the name
+                if (self::$upConfig['no_spaces'] == true)
+                {
+                  self::$upConfig['file_name'][$index] = preg_replace("/\s+/", "_", self::$upConfig['file_name'][$index]);
+                }
+            
+                //
+                // Validate the file name
+                // This function appends an number onto the end of
+                // the file if one with the same name already exists.
+                // If it returns false there was a problem.
+                //
+                self::$upConfig['orig_name'] = self::$upConfig['file_name'][$index];
+            
+                if (self::$upConfig['overwrite'] == false)
+                {
+                  self::$upConfig['file_name'][$index] = self::setFileName(self::$upConfig['upload_path'], self::$upConfig['file_name'][$index], $index);
+            
+                  if (self::$upConfig['file_name'][$index] === false)
+                  {
+                    return false;
+                  }
+                }
+            
+                //custom file name *设置的时候要注意*
+                if (self::$upConfig['cust_name'] != "")
+                {
+                  self::$upConfig['file_name'][$index] = self::$upConfig['cust_name'][$index];
+                }
+            }
+            if(self::getTip())
+            {
+                return false;
+            }
+            else //所有文件符合要求，开始传输
+            {
+                foreach($_FILES[$field]['name'] as $k => $v)
+                {
+                    if( $_FILES[$field]['name'][$k] == '' ) continue;
+                    
+                    $index = ($k+1);
+                    if (!@copy(self::$upConfig['file_temp'][$index], self::$upConfig['upload_path'].self::$upConfig['file_name'][$index]))
+                    {
+                      if (!@move_uploaded_file(self::$upConfig['file_temp'][$index], self::$upConfig['upload_path'].self::$upConfig['file_name'][$index]))
+                      {
+                        //self::tip('upload_destination_error');
+                        self::tip('第'.$index.'个在文件上传并转移的时候发出现了问题');
+                        break;
+                      }
+                    }
+                }
+                if(self::getTip())
+                {
+                    return false;
+                } else return true;
+            }
+        }
+        
 	  /**	-------------------------------------------------------------------------------------
-	   *	Handle upload file
+	   *	Handle upload file 单文件处理
 	   */
 	  static function handle($field = 'userfile')
 	  {
@@ -201,7 +333,7 @@
 	    return true;
 	  }
 	  
-	  
+      
 	  /**	---------------------------------------------------------------------------------
 	   * Set the file name
 	   *
@@ -214,29 +346,44 @@
 	   * @param	string
 	   * @return	string
 	   */
-	  static function setFileName($path, $filename)
+	  static function setFileName($path, $filename, $index = 'one')
 	  {
 	    if (self::$upConfig['random'] == true)
 	    {
 	      mt_srand();
-	      $filename = md5(uniqid(mt_rand())).self::$upConfig['file_ext'];
+          if($index != 'one')
+          $filename = md5(uniqid(mt_rand())).self::$upConfig['file_ext'][$index];
+	      else $filename = md5(uniqid(mt_rand())).self::$upConfig['file_ext'];
 	    }
 	
 	    if (!file_exists($path.$filename))
 	    {
 	      return $filename;
 	    }
-	
-	    $filename = str_replace(self::$upConfig['file_ext'], '', $filename);
+        
+        if($index != 'one')
+	    $filename = str_replace(self::$upConfig['file_ext'][$index], '', $filename);
+        else $filename = str_replace(self::$upConfig['file_ext'], '', $filename);
 	
 	    $new_filename = '';
 	    for ($i = 1; $i < 100; $i++)
 	    {
-	      if (!file_exists($path.$filename.$i.self::$upConfig['file_ext']))
-	      {
-	        $new_filename = $filename.$i.self::$upConfig['file_ext'];
-	        break;
-	      }
+            if($index != 'one')
+            {
+                if (!file_exists($path.$filename.$i.self::$upConfig['file_ext'][$index]))
+                {
+                  $new_filename = $filename.$i.self::$upConfig['file_ext'][$index];
+                  break;
+                }
+            }
+            else
+            {
+                if (!file_exists($path.$filename.$i.self::$upConfig['file_ext']))
+                {
+                  $new_filename = $filename.$i.self::$upConfig['file_ext'];
+                  break;
+                }
+            }
 	    }
 	
 	    if ($new_filename == '')
@@ -288,16 +435,20 @@
 	   * @access	public
 	   * @return	bool
 	   */
-	  static function isAllowedFileSize()
+	  static function isAllowedFileSize($index = 'one')
 	  {
-	    if (self::$upConfig['max_size'] != 0 && self::$upConfig['file_size'] > self::$upConfig['max_size'])
-	    {
-	      return false;
-	    }
-	    else
-	    {
-	      return true;
-	    }
+        if (self::$upConfig['max_size'] <= 0) return false;
+        else
+        {
+            if ($index != 'one')
+            {
+                return (self::$upConfig['file_size'][$index] > self::$upConfig['max_size']) ? false : true;
+            }
+            else
+            {
+                return (self::$upConfig['file_size'] > self::$upConfig['max_size']) ? false : true;
+            }
+        }
 	  }
 	
 	  /** ------------------------------------------------------------------------------
@@ -306,7 +457,7 @@
 	   * @access	public
 	   * @return	bool
 	   */
-	  static function isAllowedType()
+	  static function isAllowedType($index = 'one')
 	  {
 	    if (self::$upConfig['allow_type'] == "")
 	    {
@@ -315,10 +466,9 @@
 	      return false;
 	    }
 	    $typeArr = explode("|", self::$upConfig['allow_type']);
-	    if (!in_array(strtolower(substr(self::$upConfig['file_ext'], 1)), $typeArr))
-	      return false;
-	    else
-	      return true;
+        if($index != 'one')
+        return in_array(strtolower(substr(self::$upConfig['file_ext'][$index], 1)), $typeArr);
+        else return in_array(strtolower(substr(self::$upConfig['file_ext'], 1)), $typeArr);
 	  }
 	
 	  /**	-------------------------------------------------------------------------------

@@ -1,0 +1,10 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
+    <div class="span-19 last mgu10">
+        <!-- 图片 -->
+        <div class="oneCol" style="float:left">
+            <?= $this->piclist($this->gid, 20, $this->page, true) ?>
+        </div>
+    </div>
+</div>
