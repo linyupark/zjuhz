@@ -10,6 +10,7 @@ function dojoin() {
 	ajaxloading(true);
 	$("#btnJoin").attr("disabled", true);
 	var formdata = $("#frmJoin").fastSerialize();
+	formdata.push({name:'content', value:editor.data()});
 
 	$.post("/biz/my/dojoin/", formdata, function(msg) {
 		ajaxloading();
