@@ -62,7 +62,7 @@ class MyFilter extends BizInterlayer
 		Zend_Loader::loadFile('IsPhone.php');
 
 		// 设置过滤规则
-		$filters = array('*' => array('StripTags'));
+		$filters = array();
 
     	// 设置验证规则
 		$validators = array(
