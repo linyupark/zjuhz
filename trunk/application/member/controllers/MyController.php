@@ -179,6 +179,7 @@ class MyController extends Zend_Controller_Action
 
                 $this->view->cid    = (10 == strlen($detail['cid']) ? $detail['cid'] : 
                     Commons::getRandomStr($this->_sessUid, 10));
+                $this->view->group  = AddressGroupLogic::init()->selectUidAll($this->_sessUid);
                 $this->view->detail = $detail;
 
     			break;
