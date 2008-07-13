@@ -22,7 +22,7 @@ create table zjuhz_corp.tbl_base
 )
 type = MYISAM;
 
-INSERT INTO `zjuhz_corp`.`tbl_base` (`companies`) VALUES ('9');
+INSERT INTO `zjuhz_corp`.`tbl_base` (`companies`) VALUES ('0');
 
 /*==============================================================*/
 /* Table: tbl_corp                                              */
@@ -34,6 +34,7 @@ create table zjuhz_corp.tbl_corp
    valid                tinyint(1) unsigned not null default 0,
    auditing             tinyint(1) unsigned not null default 0,
    untread              tinyint(1) unsigned not null default 0,
+   msgs                 int unsigned not null default 0,
    primary key (uid)
 )
 type = MYISAM;
@@ -56,6 +57,7 @@ create table zjuhz_corp.tbl_corp_company
    recmd                tinyint(1) unsigned not null default 0,
    regTime              timestamp not null default CURRENT_TIMESTAMP,
    face                 enum('Y','N') not null default 'N',
+   msgs                 int unsigned not null default 0,
    primary key (cid)
 )
 type = MYISAM;
@@ -183,3 +185,43 @@ create table zjuhz_corp.tbl_corp_industry
    primary key (iid)
 )
 type = MYISAM;
+
+/*==============================================================*/
+/* Table: tbl_corp_company_msg                                  */
+/*==============================================================*/
+create table zjuhz_corp.tbl_corp_company_msg
+(
+   mid                  int unsigned not null auto_increment,
+   cid                  char(10) not null,
+   uid                  int(10) unsigned not null,
+   message              varchar(220) not null,
+   reply                varchar(220) default NULL,
+   addTime              timestamp not null default CURRENT_TIMESTAMP,
+   status               tinyint unsigned not null default 0,
+   primary key (mid)
+)
+type = MYISAM;
+
+/*==============================================================*/
+/* Index: idx_cid                                               */
+/*==============================================================*/
+create index idx_cid on tbl_corp_company_msg
+(
+   cid
+);
+
+/*==============================================================*/
+/* Index: idx_uid                                               */
+/*==============================================================*/
+create index idx_uid on tbl_corp_company_msg
+(
+   uid
+);
+
+/*==============================================================*/
+/* Index: idx_status                                            */
+/*==============================================================*/
+create index idx_status on tbl_corp_company_msg
+(
+   status
+);

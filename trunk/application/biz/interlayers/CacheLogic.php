@@ -220,6 +220,7 @@ class CacheLogic extends BizInterlayer
     	{
     		// 固定变更项写入
     	    self::$_options['cache_dir'] = Commons::getCompanyCache($cid);
+			self::$_options['lifeTime']  = 604800;
     	    // 参数变更初始化
     	    $this->_setFrontendOptions();
     	    $this->_setBackendOptions();

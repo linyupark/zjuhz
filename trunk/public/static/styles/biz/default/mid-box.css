@@ -1,12 +1,12 @@
 
 .mid-box{
 	width:540px;
-	margin: 10px 0 0 210px;
+	margin:10px 0 0 210px;
 }
 
 .mid-box-with-left{
 	width:740px;
-	margin: 10px 0 0 0;
+	margin:10px 0 0 0;
 }
 
 .mid-box-intro{
@@ -17,9 +17,8 @@
 	line-height:220%;
 }
 
-
 .mid-box-title{
-	font-size: 14px;
+	font-size:14px;
 	font-weight:bold;
 	padding:10px 0;
 	color:#3B5D77;
@@ -27,11 +26,14 @@
 
 /* detail */
 .mid-box-right{
-	background: url(/static/images/biz/default/mid-box/mid-box.jpg) no-repeat top left;
+	background:url(/static/images/biz/default/mid-box/mid-box.jpg) no-repeat top left;
 	width:740px;
 }
 
-.mid-box-right-title{ padding:8px 10px; font-weight:bold}
+.mid-box-right-title{
+    padding:8px 10px;
+	font-weight:bold;
+}
 
 .mid-box-right-content{
 	border:1px solid #B5C481;

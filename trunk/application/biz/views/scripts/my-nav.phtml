@@ -1,5 +1,6 @@
 <div id="menu-box">
     <a href="/biz/my/company/" <?= 'company' == $this->action ? 'class="here"' : '' ?>>我的企业</a>
+    <a href="/biz/my/message/" <?= 'message' == $this->action ? 'class="here"' : '' ?>>我发表的留言</a>
 </div>
 
 <div id="menu-box-sub">
@@ -8,5 +9,9 @@
         <a href="/biz/my/company/type/valid/" <?= 'valid' == $this->type ? 'class="here"' : '' ?>>已发布上网(<?= $this->sessCompany->login['valid']; ?>)</a>
         <a href="/biz/my/company/type/auditing/" <?= 'auditing' == $this->type ? 'class="here"' : '' ?>>审核中(<?= $this->sessCompany->login['auditing']; ?>)</a>
         <a href="/biz/my/company/type/untread/" <?= 'untread' == $this->type ? 'class="here"' : '' ?>>未通过审核(<?= $this->sessCompany->login['untread']; ?>)</a>
+    <?php endif; ?>
+
+    <?php if('message' == $this->action): ?>
+        <a href="/biz/my/message/type/all/" <?= 'all' == $this->type ? 'class="here"' : '' ?>>全部留言(<?= $this->sessCompany->login['msgs']; ?>)</a>
     <?php endif; ?>
 </div>

@@ -1,23 +1,32 @@
     <table>
       <tr>
         <td style="vertical-align:top;">
-		  <div class="menu-box">
-		  <ul>
+          <div class="menu-box">
+          <ul>
             <li><span style="font-size:14px;">自定义内容链接</span></li>
-            <li><a href="#info">企业详细资料</a></li>
-            <li><a href="#biz">企业商务供求</a></li>			
+            <?= $this->render('company-leftnav.phtml'); ?>
           </ul>
           </div>
           <div class="corner-box" style="width:170px;">
-            <h2 class="corner-box-title"></h2>
-            <!--<p><a href="">姓名</a> <small>日期</small>: <br />内容</
+            <h2 class="corner-box-title">企业最新留言</h2>
+			<?php if ('member' == $this->sessCommon->role) { ?>
+			<?php foreach($this->message as $value) { ?>
+            <p>
+			<?= $this->card($value['uid'], $value['realName']) ?> <small><?= $value['addTime']; ?></small> 
+			<br /><?= Commons::utfSubStr($value['message'], 50); ?>...
+			</p>
             <br />
-            <p class="floatRight"><a href="">企业留言本...</a></p>p>-->
+			<?php } ?>
+			<?php } else { ?>
+            <p><a href="/member/login/">登录</a>后显示此项内容</p>
+            <br />			
+			<?php } ?>
+            <p class="floatRight"><a href="/biz/message/index/cid/<?= $this->dataCompany['cid']; ?>/#add">发表新留言</a>&nbsp;<a href="/biz/message/index/cid/<?= $this->dataCompany['cid']; ?>/">进入留言簿</a></p>
           </div>
 		</td>
 		<td class="pd10">
 		  <div class="mid-box-right">
-          <h2 class="mid-box-right-title">公司简介</h2>
+          <h2 class="mid-box-right-title">企业简介</h2>
           <div class="mid-box-right-content"><?= str_replace('\"', '"', $this->dataCompany['intro']); ?></div>
           </div>
           <table class="detail" cellspacing="0" cellpadding="0" width="737">
@@ -69,19 +78,19 @@
             </tr>
             <tr>
               <td width="75" bgcolor="#F0F3E5"><strong>产品服务：</strong></td>
-              <td colspan="3">&nbsp;我公司能提供：<?= ($this->dataCompany['product'] ? $this->dataCompany['product'] : '暂无' ); ?></td>
+              <td colspan="3">&nbsp;我公司能提供：<?= ($this->dataCompany['product'] ? $this->txtcode($this->dataCompany['product']) : '暂无' ); ?></td>
             </tr>
             <tr>
               <td width="75" bgcolor="#F0F3E5"><strong>人才需求：</strong></td>
-              <td colspan="3">&nbsp;我公司要招聘：<?= ($this->dataCompany['job'] ? $this->dataCompany['job'] : '暂无' ); ?></td>
+              <td colspan="3">&nbsp;我公司要招聘：<?= ($this->dataCompany['job'] ? $this->txtcode($this->dataCompany['job']) : '暂无' ); ?></td>
             </tr>
             <tr>
               <td width="75" bgcolor="#F0F3E5"><strong>合作意向：</strong></td>
-              <td colspan="3">&nbsp;寻觅如下合作：<?= ($this->dataCompany['cooperate'] ? $this->dataCompany['cooperate'] : '暂无' ); ?></td>
+              <td colspan="3">&nbsp;寻觅如下合作：<?= ($this->dataCompany['cooperate'] ? $this->txtcode($this->dataCompany['cooperate']) : '暂无' ); ?></td>
             </tr>
           </table>
         </td>
       </tr>
     </table>
 
-<script>ucardInit();</script>	
+<script>ucardInit();</script>

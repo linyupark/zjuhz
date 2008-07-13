@@ -64,7 +64,7 @@ a img {border: 0;}
 
 #footer a { margin:0 10px; }
 
-#gb-box { float:left; }
+#gb-box { float:left;width:98% }
 .gb-item { padding:5px;margin-top:10px; }	
 .gb-title { padding:5px; }
 .gb-content {

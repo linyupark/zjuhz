@@ -161,6 +161,17 @@ class CorpCompanyLogic extends BizInterlayer
 	}
 
 	/**
+     * 更新cid的企业资料
+     * 
+     * @param array $args
+     * @return integer
+     */
+	public function update($args)
+	{
+		return $this->_CorpCompanyModel->update($args);
+	}
+
+	/**
      * 更新cid企业的页面浏览量
      * 
      * @param string $cid

@@ -16,14 +16,14 @@ class DetailController extends Zend_Controller_Action
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessCompany = null;
@@ -59,6 +59,17 @@ class DetailController extends Zend_Controller_Action
 		$this->_sessCommon  = Zend_Registry::get('sessCommon');
 		$this->_sessCompany = Zend_Registry::get('sessCompany');
 
+		$this->view->sessCommon  = $this->_sessCommon;
+		$this->view->sessCompany = $this->_sessCompany;
+	}
+
+	/**
+     * 企业展示首页
+     * 
+     * @return void
+     */
+	public function indexAction()
+	{
 		// 获取企业编号
 		$this->_dataCid = CommonFilter::cid(($this->getRequest()->getParam('cid')));
 		// 载入企业资料
@@ -71,27 +82,17 @@ class DetailController extends Zend_Controller_Action
 		$this->_dataCorp = ('member' !== $this->_sessCommon->role ? '' : 
 			CorpLogic::init()->selectUidRow($this->_dataCompany['uid']));
 
-		$this->view->sessCommon  = $this->_sessCommon;
-		$this->view->sessCompany = $this->_sessCompany;
-		$this->view->dataCid     = $this->_dataCid;
-		$this->view->dataCompany = $this->_dataCompany;
-		$this->view->dataCorp    = $this->_dataCorp;
-	}
-
-	/**
-     * 企业展示首页
-     * 
-     * @return void
-     */
-	public function indexAction()
-	{
 		if (!$this->_sessCompany->pageview[$this->_dataCid])
 		{
 			CorpCompanyLogic::init()->updatePageview($this->_dataCid); // 更新页面浏览量
 			$this->_sessCompany->pageview[$this->_dataCid] = REQUEST_TIME; // 浏览时间
 		}
 
-		$this->view->headTitle($this->_dataCompany['name']);
 		$this->_helper->layout->setLayout('company');
+		$this->view->headTitle($this->_dataCompany['name']);
+		$this->view->message     = CompanyMsgLogic::init()->selectCidNotDeletedAll($this->_dataCid, '5');
+		$this->view->dataCid     = $this->_dataCid;
+		$this->view->dataCompany = $this->_dataCompany;
+		$this->view->dataCorp    = $this->_dataCorp;
 	}
 }
