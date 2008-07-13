@@ -1,0 +1,25 @@
+<table class="table" cellpadding="0" cellspacing="0" style="background:#fff; border:none;" width="100%">
+    <tr>
+        <th width="70%">我的留言及企业主回复(预览)</th>		
+        <th width="15%">留言时间</th>	
+        <th width="15%">选项</th>			
+    </tr>
+<?php foreach ($this->message as $value) { ?>
+    <tr>	
+        <td><strong>我</strong>：<?= Commons::utfSubStr($value['message'], 100); ?>... <br /><strong><?= $value['name']; ?></strong>：<?= (0 == $value['status'] ? '<img src="/static/images/icon/icn_status_0.gif">暂时未作回复' : (2 == $value['status'] ? '<img src="/static/images/icon/cross.gif">已删除该留言' : '<img src="/static/images/icon/icn_status_1.gif"><a href="#" onClick="doshow('.$value['mid'].');return false;">点此查看回复</a> <div id="reply'.$value['mid'].'" style="display:none;">'.$value['reply'].'</div>') ); ?></td>        <td><?= $value['addTime']; ?></td>
+        <td><a href="/biz/detail/index/cid/<?= $value['cid']; ?>/" title="浏览企业主页" target="_blank"><img src="/static/images/icon/mini_icon_csdnnavigation.gif">浏览主页</a><br /><a href="/biz/message/index/cid/<?= $value['cid']; ?>/#add" title="再给企业留言" target="_blank"><img src="/static/images/icon/talk.gif">发表留言</a></td>		
+    </tr>
+<?php } ?>
+</table>
+
+<?php if (!$this->message) { ?>
+<table width="100%" border="0" cellspacing="0" cellpadding="1" class="tx_box">
+    <tr>
+        <td width="60" rowspan="2"><img src="/static/images/icon/edit-b.gif" /></td>
+        <td class="tx_title"><b>共有 0 个留言资料已发布上网！</td>
+    </tr>
+    <tr>
+        <td class="tx_content">您未发表过任何留言</td>
+    </tr>
+</table>
+<?php }  else { echo $this->paging; } ?>

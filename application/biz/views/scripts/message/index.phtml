@@ -1,0 +1,53 @@
+    <table>
+      <tr>
+        <td style="vertical-align:top;">
+		  <div class="menu-box">
+		  <ul>
+            <li><span style="font-size:14px;">自定义内容链接</span></li>
+            <?= $this->render('company-leftnav.phtml'); ?>
+          </ul>
+          </div>
+		</td>
+		<td class="pd10">
+		  <div class="mid-box-right">
+              <h2 class="mid-box-right-title">企业留言簿(已有<?= $this->dataCompany['msgs']; ?>条留言)</h2><br />
+&nbsp;&nbsp;这里可以提您对企业的建议，咨询企业的产品，或者也可以向企业发布您的供求、产品、合作信息。<a href="#add">立即发表留言>></a><hr>
+          </div>
+          <div id="gb-box">
+
+			  <?php foreach($this->message as $value) { ?>
+		      <div class="gb-item" id="msg<?= $value['mid']; ?>">
+                  <div class="gb-title"><?= $this->card($value['uid'], $value['realName']) ?> <small><?= $value['addTime']; ?></small>&nbsp;&nbsp;<?php if ($this->sessCommon->login['uid'] == $this->dataCompany['uid']) { ?><a href="#" onClick="doshow('<?= $value['mid']; ?>');return false;">回复</a> <a href="#" onClick="dodeleteBefore('<?= $value['mid']; ?>', '<?= $value['cid']; ?>');return false;">删除</a><?php } ?></div>
+                  <div class="gb-content">
+				      <?= $value['message']; ?>
+				      <?php if (1 == $value['status']) { ?>
+					  <div class="gb-reply">回复：<?= $value['reply']; ?></div>
+					  <?php } ?>
+				      <div id="reply<?= $value['mid']; ?>" style="display:none;">
+					  <br />
+					  <form name="frmReply<?= $value['mid']; ?>" id="frmReply<?= $value['mid']; ?>" onsubmit="javascript:return doreply('<?= $value['mid']; ?>')">
+					  <textarea name="reply" id="reply" style="height:60px;width:400px"><?= $value['reply']; ?></textarea>					
+					  <input type="hidden" name="mid" id="mid" value="<?= $value['mid']; ?>">
+					  <input type="hidden" name="cid" id="cid" value="<?= $value['cid']; ?>">
+					  <br /><br />
+					  <input id="btnReply<?= $value['mid']; ?>" type="submit" value="回复留言" class="buttonGreen" />
+					  </form>
+					  </div>
+                  </div>
+              </div>
+		      <?php } ?>
+
+              <?= (0 < $this->dataCompany['msgs'] ? $this->paging : ''); ?>
+
+              <a name="add" id="add"></a>
+              <div class="gb-reply-box">
+			      <form name="frmInsert" id="frmInsert">			        
+			        <textarea name="message" id="message" style="width:60%; height:100px;"></textarea><br /><br /><input id="btnInsert" type="submit" value="发表留言" class="buttonGreen" /><input type="hidden" name="cid" id="cid" value="<?= $this->dataCompany['cid']; ?>"></form><br />
+			  </div>
+	      </div>
+		  <div id="ajaxhint" style="width:300px"></div>
+        </td>
+      </tr>
+    </table>
+
+<script>ucardInit();</script>

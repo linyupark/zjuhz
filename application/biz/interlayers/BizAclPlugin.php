@@ -17,14 +17,14 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 {
 	/**
      * 公用Session
-     *
+     * 
      * @var object
      */
 	private $_sessCommon = null;
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessCompany = null;
@@ -93,7 +93,7 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 		$this->_aclCompany->add(new Zend_Acl_Resource('detail'))
 		                  ->add(new Zend_Acl_Resource('error'))
 		                  ->add(new Zend_Acl_Resource('external'))
-		                  ->add(new Zend_Acl_Resource('guestbook'))
+		                  ->add(new Zend_Acl_Resource('message'))
 		                  ->add(new Zend_Acl_Resource('index'))
 		                  ->add(new Zend_Acl_Resource('manage'))
 		                  ->add(new Zend_Acl_Resource('my'));
@@ -133,7 +133,7 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 		    // 子系统登录兼初始
 		    if (REQUEST_TIME >= $this->_sessCompany->login['refresh'])
 		    {
-		    	if (0 < USER_UID && !$row = CorpLogic::init()->selectUidRow($this->_sessCommon->login['uid']))
+		    	if (0 < USER_UID && !$row = CorpLogic::init()->selectUidRow(USER_UID))
 		    	{
 		    		$row = array(
 		    		    'uid' => USER_UID, 'realName' => $this->_sessCommon->login['realName'], 
@@ -143,7 +143,7 @@ class BizAclPlugin extends Zend_Controller_Plugin_Abstract
 		    		CorpLogic::init()->insert($row);
 		    	}
 
-		    	$row['refresh'] = 600 + REQUEST_TIME; // 下次刷新子系统session在600秒后
+		    	$row['refresh'] = (!$row ? 0 : 600) + REQUEST_TIME; // 下次刷新子系统session在600秒后
 		    	$this->_sessCompany->login = $row;
 		    }
 		}

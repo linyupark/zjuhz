@@ -1,5 +1,6 @@
 <div id="menu-box">
     <a href="/biz/manage/company/" <?= 'company' == $this->action ? 'class="here"' : '' ?>>企业资料</a>
+    <a href="/biz/message/index/cid/<?= $this->dataCompany['cid'] ;?>/" target="_blank">企业留言簿</a>
     <a href="/biz/detail/index/cid/<?= $this->dataCompany['cid'] ;?>/" target="_blank">浏览我的企业</a>
 </div>
 

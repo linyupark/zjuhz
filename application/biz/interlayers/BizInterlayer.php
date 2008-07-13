@@ -52,6 +52,13 @@ abstract class BizInterlayer
 	protected $_CompanyLinkModel = null;
 
 	/**
+     * CompanyMsgModel
+     * 
+     * @var object
+     */	
+	protected $_CompanyMsgModel = null;
+
+	/**
      * CorpCompanyModel
      * 
      * @var object

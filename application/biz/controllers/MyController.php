@@ -23,14 +23,14 @@ class MyController extends Zend_Controller_Action
 
 	/**
      * 项目Session
-     *
+     * 
      * @var object
      */
 	private $_sessCompany = null;
 
 	/**
      * 项目模块配置
-     *
+     * 
      * @var object
      */
 	private $_iniCompany = null;
@@ -144,6 +144,7 @@ class MyController extends Zend_Controller_Action
 			}
 			case 'untread': // 审核未通过
 			{
+				$this->_sessCompany->login['untread'] = 0;
 				$this->view->companies = array();
 
     			break;
@@ -190,5 +191,44 @@ class MyController extends Zend_Controller_Action
 				}
 			}
 		}
+	}
+
+	/**
+     * 我的留言
+     * 
+     * @return void
+     */
+	public function messageAction()
+	{
+		$type = $this->getRequest()->getParam('type');
+		switch ($type)
+		{
+			case 'notreply': // 未回复
+			{
+    			break;
+			}
+			case 'hasreply': // 已回复
+			{
+    			break;
+			}
+			default: // 全部
+			{
+				$type = 'all';
+			}
+		}
+
+        // 显示留言簿内容列表
+        $paging  = new Paging(array('totalRs' => $this->_sessCompany->login['msgs'], 'perPage' => 10));
+        $message = CompanyMsgLogic::init()->selectUidAll(USER_UID, $paging->limit());
+        $this->view->message = $message;
+        $this->view->paging  = $paging->show();
+
+		$this->view->headTitle($this->_iniCompany->head->titleMyCompany);
+		$this->view->headLink()->appendStylesheet('/static/styles/paging.css', 'screen');
+		$this->view->action = 'message';
+		$this->view->type   = $type;
+		$this->_helper->layout->setLayout('my');
+		$this->getResponse()->insert('nav', $this->view->render('my-nav.phtml'));
+		$this->render("message-{$type}");
 	}
 }
