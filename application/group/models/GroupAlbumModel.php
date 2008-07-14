@@ -2,6 +2,12 @@
 
 class GroupAlbumModel
 {
+	static function del($aid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$db->delete('tbl_group_album', 'album_id = '.$aid);
+	}
+	
 	# 获取下一张图
 	static function next($gid, $cur_aid, $col = '*')
 	{

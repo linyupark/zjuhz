@@ -18,7 +18,7 @@ class AlbumController extends Zend_Controller_Action {
 		$this->view->controller_name = $this->getRequest()->getControllerName();
         $this->view->action_name = $this->getRequest()->getActionName();
         $this->view->groupInfo = GroupModel::info($this->view->gid);
-		$this->view->target = $target = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/'.date('y_m_d').'/';
+		$this->view->target = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/'.date('y_m_d').'/';
 	}
 	
 	function clean()
@@ -27,6 +27,26 @@ class AlbumController extends Zend_Controller_Action {
 		$this->getHelper('layout')->disableLayout();
 		$this->getResponse()->insert('nav', '');
 		$this->getHelper('viewRenderer')->setNoRender();
+	}
+	
+	/**
+	 * 图片删除
+	*/
+	public function deleteAction()
+	{
+		$aid = $this->_getParam('aid');
+		$pic = GroupAlbumModel::fetch($aid);
+		if($pic['user_id'] == Cmd::myid() || Cmd::isManager($this->view->gid))
+		{
+			$dir = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/'.date('y_m_d', $pic['pubtime']).'/';
+			GroupModel::update(array('photo_num' => new Zend_Db_Expr('photo_num - 1')), $this->view->gid);
+			GroupAlbumModel::del($aid);
+			unlink($dir.$pic['file']);
+			unlink($dir.'sample_'.$pic['file']);
+			echo '<div class="success">成功删除~</div>';
+			echo Commons::js_jump('/group/album?gid='.$this->view->gid, 1);
+		}
+		else { echo '<div class="error">没有权力删除该图片</div>'; }
 	}
 	
 	/**
@@ -77,7 +97,7 @@ class AlbumController extends Zend_Controller_Action {
 			$id_arr = $R->getPost('ablum_id');
 			$title_arr = $R->getPost('title');
 			$tags_arr = $R->getPost('tags');
-			$intro_arr = $R->getPost('intro_arr');
+			$intro_arr = $R->getPost('intro');
 			$V = new Lp_Valid();
 			foreach($id_arr as $k => $id)
 			{
