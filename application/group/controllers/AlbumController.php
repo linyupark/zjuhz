@@ -21,6 +21,48 @@ class AlbumController extends Zend_Controller_Action {
 		$this->view->target = $target = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/'.date('y_m_d').'/';
 	}
 	
+	function clean()
+	{
+		// 清除布局元素
+		$this->getHelper('layout')->disableLayout();
+		$this->getResponse()->insert('nav', '');
+		$this->getHelper('viewRenderer')->setNoRender();
+	}
+	
+	/**
+	 * 照片比例化显示
+	*/
+	public function picAction()
+	{
+		// 清除布局元素
+		$this->clean();
+		$aid = $this->_getParam('aid'); //图片id
+		// 获取图片信息
+		$pic = GroupAlbumModel::fetch($aid);
+		// 路径
+		$root = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/'.date('y_m_d', $pic['pubtime']).'/';
+		$im = new Lp_Image($root.$pic['file']);
+		if($im->width > 600) // 超过了显示的范围
+		{
+			$height = (600/$im->width)*$im->height;
+			$im->abs_resize(600, $height, $root.'temp', null, true);
+		}
+		else // 原图输出
+		{
+			$im->output($root.'temp', null, null, true);
+		}
+	}
+	
+	# 图片展示页
+	public function showAction()
+	{
+		$aid = $this->_getParam('aid');
+		$this->view->aid = $aid;
+		$this->view->pic = GroupAlbumModel::fetch($aid);
+		$this->view->next = GroupAlbumModel::next($this->view->gid, $aid);
+		$this->view->previous = GroupAlbumModel::previous($this->view->gid, $aid);
+	}
+	
 	public function setAction()
 	{
 		// 同批图片识别字段
@@ -72,9 +114,7 @@ class AlbumController extends Zend_Controller_Action {
 	public function uploadAction()
 	{
 		// 清除布局元素
-		$this->getHelper('layout')->disableLayout();
-		$this->getResponse()->insert('nav', '');
-		$this->getHelper('viewRenderer')->setNoRender();
+		$this->clean();
 		
 		$root = $_SERVER['DOCUMENT_ROOT'].'/static/groups/'.$this->view->gid.'/images/';
 		if(!file_exists($root))

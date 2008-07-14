@@ -1,0 +1,83 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="oneCol span-24 last" style="margin-top:10px;">
+    <h3 class="mg10">
+        <a href="/group/album?gid=<?= $this->gid ?>">&lt;&lt; 返回<?= $this->groupInfo['name'] ?>相册</a>
+    </h3>
+    <div class="span-16 extInline mg10" style="background:#fff">
+        <table width="100%">
+            <tr>
+                <td class="txtl pd10" style="width:450px"><h3><?= $this->pic['title'] ?></h3></td>
+                <td class="txtr pd10" style="width:150px">
+                    <a target="_blank" href="<?= Cmd::imSrc($this->gid, $this->pic['pubtime']).$this->pic['file'] ?>">查看原图</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="txtc">
+                    <?php
+                        $next_file = '#';
+                        $next_title = '没有了';
+                        if($this->next != false)
+                        {
+                            $next_file = '/group/album/show?gid='.$this->gid.'&aid='.$this->next['album_id'];
+                            $next_title = '下一张';
+                        }
+                    ?>
+                    <a href="<?= $next_file ?>" title="<?= $next_title ?>">
+                        <img src="/group/album/pic?gid=<?= $this->gid ?>&aid=<?= $this->aid ?>" />
+                    </a>
+                    <div style="margin:10px 36px; padding:10px; background:#f5f5f5;">
+                        <?= stripslashes($this->pic['intro']) ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="span-7 last">
+        <table width="100%">
+            <tr>
+                <td style="vertical-align:top">
+                    <?= Commons::getUserFace($this->pic['user_id']) ?>
+                </td>
+                <td class="pd10">
+                    <a href="/group/member/profile?uid=<?= $this->pic['user_id'] ?>"><?= UserModel::fetch($this->pic['user_id'], 'realName') ?></a>
+                    <p>上传于: <span class="quiet"><?= Commons::date($this->pic['pubtime']) ?></span></p>
+                    <p>图片大小: <span class="quiet"><?= sprintf("%.1f", $this->pic['size']/1000) ?>KB</span></p>
+                    <p>图片尺寸: <span class="quiet"><?= $this->pic['width'] ?> * <?= $this->pic['height'] ?></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="extInline2" colspan="2">
+                    <?php
+                        $previous_file = '#';
+                        $previous_title = '没有了';
+                        if($this->previous != false)
+                        {
+                            $previous_file = '/group/album/show?gid='.$this->gid.'&aid='.$this->previous['album_id'];
+                            $previous_title = '上一张';
+                        }
+                    ?>
+                    <table>
+                        <tr>
+                            <td class="txtc pd5">
+                                <?php if($this->previous != false): ?>
+                                <a style="text-decoration:none" href="<?= $previous_file ?>">
+                                    <img src="<?= Cmd::imSrc($this->gid, $this->previous['pubtime']).'sample_'.$this->previous['file'] ?>" />
+                                    <br /><?= $previous_title ?>
+                                </a>
+                                <?php endif; ?>
+                            </td>
+                            <td class="txtc pd5">
+                                <?php if($this->next != false): ?>
+                                <a style="text-decoration:none" href="<?= $next_file ?>">
+                                    <img src="<?= Cmd::imSrc($this->gid, $this->next['pubtime']).'sample_'.$this->next['file'] ?>" />
+                                    <br /><?= $next_title ?>
+                                </a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

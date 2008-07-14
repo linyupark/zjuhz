@@ -2,6 +2,12 @@
 
 class Cmd
 {
+	
+	static function imSrc($gid, $pubtime)
+	{
+		return '/static/groups/'.$gid.'/images/'.date('y_m_d', $pubtime).'/';
+	}
+	
 	/**
 	 * 直接返回当前访问用户的id
 	 *

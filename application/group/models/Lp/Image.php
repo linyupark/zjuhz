@@ -98,14 +98,13 @@ class Lp_Image
 			$dest_im = $this->create($length, $length);
 			imagecopy($dest_im, $this->_im, 0, 0, 0, 0, $length, $length);
 			$this->_im = $dest_im;
-			//$this->destroy($dest_im);
 			$this->output($dest_im_name, $dest_im_ext, 85);
 			$this->destroy();
 		}
 	}
 
 	#绝对宽高缩略
-	function abs_resize($w, $h, $dest_im_name, $dest_im_ext = null)
+	function abs_resize($w, $h, $dest_im_name, $dest_im_ext = null, $stream = false)
 	{
 		if ($this->_im == null)
 		throw new Exception("IMAGE HANDLE IS NOT CREATE YET!");
@@ -119,8 +118,7 @@ class Lp_Image
 			imagecopyresized($dest_im, $this->_im, 0, 0, 0, 0, $w, $h, $this->width, $this->height);
 		}
 		$this->_im = $dest_im;
-		//$this->destroy($dest_im);
-		$this->output($dest_im_name, $dest_im_ext, 85);
+		$this->output($dest_im_name, $dest_im_ext, 85, $stream);
 		$this->destroy();
 	}
 
@@ -176,7 +174,6 @@ class Lp_Image
 				break;
 		}
 		imagecopymerge($this->_im, $dest_im, $dest_x, $dest_y, 0, 0, $dest_w, $dest_h, $pct);
-		//$this->destroy($dest_im);
 		$this->output($this->name, $this->ext, 85);
 		$this->destroy();
 	}
@@ -243,7 +240,7 @@ class Lp_Image
 	}
 
 	#图片输出
-	function output($name, $ext = null, $quality = null)
+	function output($name, $ext = null, $quality = null, $stream = false)
 	{
 		if ($this->_im == null)
 		throw new Exception("NO IMAGE CAN BE OUTPUT!");
@@ -253,14 +250,24 @@ class Lp_Image
 		$ext = $this->ext;
 		$output_im = array("jpg" => "imagejpeg", "jpeg" => "imagejpeg", "png" => "imagepng", "gif" => "imagegif"
 		);
+		$output_stream = array("jpg" => "image/jpeg", "jpeg" => "image/jpeg", "png" => "image/png", "gif" => "image/gif"
+		);
 		if (!isset($output_im[$ext]))
 		{
 			throw new Exception("THIS FILE EXTENSION IS NOT ALLOWED : ".$ext);
 		}
-		if ($ext == "jpg" || $ext == "jpeg")
-		$output_im[$ext]($this->_im, $name.".".$ext, $quality);
+		if($stream == true)
+		{
+			header("Content-type: {$output_stream[$ext]}");
+			$output_im[$ext]($this->_im);
+		}
 		else
-		$output_im[$ext]($this->_im, $name.".".$ext);
+		{
+			if ($ext == "jpg" || $ext == "jpeg")
+			$output_im[$ext]($this->_im, $name.".".$ext, $quality);
+			else
+			$output_im[$ext]($this->_im, $name.".".$ext);
+		}
 	}
 
 	# 销毁

@@ -65,7 +65,13 @@
                         {
                             echo '自从上次登陆后就没动静';
                         }
-                        else echo '新增了<span style="color:red">'.$result['topic_num'].'</span>个话题。';
+                        else
+                        {
+                            if($result['topic_num'] > 0)
+                            echo '新增了<span style="color:red">'.$result['topic_num'].'</span>个话题。';
+                            if($result['photo_num'] > 0)
+                            echo '新增了<span style="color:red">'.$result['photo_num'].'</span>张图片。';
+                        }
                        ?>
                     </span>
                     </p>

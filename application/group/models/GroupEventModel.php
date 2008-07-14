@@ -21,11 +21,14 @@ class GroupEventModel
                       WHERE `group_id` = ? AND `time` > ?',array($gid, $lastLogin));
         $result['numrows'] = count($rows); // 总事件数
         $result['topic_num'] = 0;
+        $result['photo_num'] = 0;
         
         foreach($rows as $row)
         {
             if($row['type'] == 1)
             $result['topic_num'] ++; // 增加主题数
+            if($row['type'] == 2)
+            $result['photo_num'] ++; // 增加图片数
         }
         
         return $result;
