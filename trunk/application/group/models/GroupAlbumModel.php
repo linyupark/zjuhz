@@ -2,6 +2,38 @@
 
 class GroupAlbumModel
 {
+	# 获取下一张图
+	static function next($gid, $cur_aid, $col = '*')
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT '.$col.' FROM `tbl_group_album`
+							 WHERE `group_id` = '.$gid.' AND `album_id` < '.$cur_aid. ' ORDER BY `album_id` DESC');
+		if($col == '*')
+		return $row;
+		else return $row[$col];
+	}
+	
+	# 获取上一张图
+	static function previous($gid, $cur_aid, $col = '*')
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT '.$col.' FROM `tbl_group_album`
+							 WHERE `group_id` = '.$gid.' AND `album_id` > '.$cur_aid. ' ORDER BY `album_id` ASC');
+		if($col == '*')
+		return $row;
+		else return $row[$col];
+	}
+	
+	# 获取单张图片
+	static function fetch($aid, $col = '*')
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT '.$col.' FROM `tbl_group_album` WHERE `album_id` = '.$aid);
+		if($col == '*')
+		return $row;
+		else return $row[$col];
+	}
+	
     # 获取同组图片
     static function fetchBatch($bc)
     {
