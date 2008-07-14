@@ -9,16 +9,19 @@ class Zend_View_Helper_Piclist
         $result = GroupAlbumModel::index($gid, $pagesize, $page);
         $str = '<h3 class="pd5 mg10">相册图片列表
         <small class="f12" style="font-weight:normal">共
-        <span style="color:red">'.$result['numrows'].'</span>张图片</small>
+        <span style="color:red">'.$result['numrows'].'</span> 张图片</small>
         <a style="margin-left:650px" href="/group/album/new?gid='.$gid.'">发新图片</a></h3>';
         if($result['numrows'] == 0) $str .= '<p class="mglf10">相册中没有图片</p>';
         else
         {
             foreach($result['rows'] as $pic)
             {
+                $new = '';
+                if((time() - $pic['pubtime']) < 3600*18)
+                $new = Cmd::icon('new.png');
             	$str .= '<div style="float:left; padding:30px;">
                 <a href="/group/album/show?gid='.$gid.'&aid='.$pic['album_id'].'"><img src="'.$this->getPic($gid, 'sample_'.$pic['file'], $pic['pubtime']).'" /></a>
-                <p>发布人: <a href="/group/member/profile?uid='.$pic['user_id'].'">'.UserModel::fetch($pic['user_id'], 'realName').'</a></p></div>
+                <p>'.$new.' 发布人: <a href="/group/member/profile?uid='.$pic['user_id'].'">'.UserModel::fetch($pic['user_id'], 'realName').'</a></p></div>
                 ';
             }
             
