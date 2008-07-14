@@ -49,6 +49,23 @@ class AlbumController extends Zend_Controller_Action {
 		else { echo '<div class="error">没有权力删除该图片</div>'; }
 	}
 	
+    /**
+     * 照片信息修改
+     */ 
+    public function modAction()
+    {
+        $aid = $this->_getParam('aid'); //图片id
+        // 获取图片信息
+		$pic = GroupAlbumModel::fetch($aid);
+        $title = $this->_getParam('title', $pic['title']);
+        $intro = $this->_getParam('intro', stripcslashes($pic['intro']));
+        GroupAlbumModel::update($aid, array(
+            'title' => $title,
+            'intro' => $intro
+        ));
+        echo Commons::js_jump('/group/album/show?gid='.$this->view->gid.'&aid='.$aid);
+    }
+    
 	/**
 	 * 照片比例化显示
 	*/
