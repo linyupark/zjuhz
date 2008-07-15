@@ -8,8 +8,10 @@ class Zend_View_Helper_Topiclist
     {
         $result = GroupTopicModel::index($gid, $pagesize, $page);
         $str = '<h3 class="pd5 mg10">论坛
-        <small class="f12" style="font-weight:normal">共'.$result['numrows'].'个主题</small>
-        <a style="margin-left:550px" href="/group/topic/new?gid='.$gid.'">发新主题</a></h3>';
+        <small class="f12" style="font-weight:normal">共<span style="color:red">'.$result['numrows'].'</span>个主题 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="">精华区</a>
+        </small>
+        <a style="float:right; margin-top:-15px;" href="/group/topic/new?gid='.$gid.'">发新主题</a></h3>';
         if($result['numrows'] == 0) $str .= '<p class="mglf10">论坛中没有主题</p>';
         else
         {

@@ -10,7 +10,7 @@ class Zend_View_Helper_Piclist
         $str = '<h3 class="pd5 mg10">相册图片列表
         <small class="f12" style="font-weight:normal">共
         <span style="color:red">'.$result['numrows'].'</span> 张图片</small>
-        <a style="margin-left:650px" href="/group/album/new?gid='.$gid.'">发新图片</a></h3>';
+        <a style="float:right; margin-top:-15px;" href="/group/album/new?gid='.$gid.'">发新图片</a></h3>';
         if($result['numrows'] == 0) $str .= '<p class="mglf10">相册中没有图片</p>';
         else
         {
