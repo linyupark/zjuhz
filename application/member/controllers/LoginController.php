@@ -71,6 +71,9 @@ class LoginController extends Zend_Controller_Action
 					// 记住账号
 					((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
 					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
+					
+					// 记住登陆状态
+					Zend_Session::rememberMe();
 
 					// 名片缓存
 					CacheLogic::setOptions('cache_dir', Commons::getUserCache($result['uid']));
