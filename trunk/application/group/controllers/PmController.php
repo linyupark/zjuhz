@@ -14,6 +14,47 @@ class PmController extends Zend_Controller_Action {
 		$this->view->uid = $this->_getParam('uid', null);
 	}
 	
+	# 删除
+	public function deleteAction()
+	{
+		$type = $this->_getParam('type');
+		$pmArr = $this->_getParam('pm', array());
+		$Pm = new GroupPmModel('dbGroup');
+		if(count($pmArr) > 0)
+		{
+			foreach($pmArr as $id)
+			{
+				$row = $Pm->fetchRow('pm_id = '. $id);
+				$row->delete();
+			}
+		}
+		echo '<div class="success">成功删除</div>';
+		echo Commons::js_jump('/group/pm/box?type='.$type, 1);
+	}
+	
+	# 清除
+	public function removeAction()
+	{
+		$type = $this->_getParam('type');
+		$pmArr = $this->_getParam('pm', array());
+		$Pm = new GroupPmModel('dbGroup');
+		if(count($pmArr) > 0)
+		{
+			foreach($pmArr as $id)
+			{
+				$row = $Pm->fetchRow('pm_id = '. $id);
+				if($type == 'receive')
+				$row->to_del = 1;
+				if($type == 'send')
+				$row->from_del = 1;
+				
+				$row->save();
+			}
+		}
+		echo '<div class="success">成功清除</div>';
+		echo Commons::js_jump('/group/pm/box?type='.$type, 1);
+	}
+	
 	# 系统自动发送信息
 	public function systemAction()
 	{
