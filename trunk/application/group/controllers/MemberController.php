@@ -17,6 +17,14 @@ class MemberController extends Zend_Controller_Action
 	}
 	
 	/**
+	 * 成员列表
+	 * */
+	public function indexAction()
+	{
+		
+	}
+	
+	/**
 	 * 删除好友
 	 * */
 	public function removefriendAction()
