@@ -73,7 +73,7 @@ class LoginController extends Zend_Controller_Action
 					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 					
 					// 记住登陆状态
-					Zend_Session::rememberMe();
+					Zend_Session::rememberMe(3600*24*7);
 
 					// 名片缓存
 					CacheLogic::setOptions('cache_dir', Commons::getUserCache($result['uid']));
