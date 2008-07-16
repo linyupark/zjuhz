@@ -22,7 +22,7 @@ class Zend_View_Helper_Taglist
         {
             foreach($tags_arr as $tag)
             {
-                $str .= '<li style="display:inline" class="append-1 pd10"><nobr><a href="/group/tag?q='.urlencode($tag['name']).'">'.$tag['name'].'</a> <em>('.$tag['rate'].')</em></nobr></li>';
+                $str .= '<li style="display:inline; line-height:180%" class="prepend-1"><nobr><a href="/group/tag?q='.urlencode($tag['name']).'">'.$tag['name'].'</a> <em>('.$tag['rate'].')</em></nobr></li>';
             }
             return $str;
         }
