@@ -97,11 +97,12 @@ class TopicController extends Zend_Controller_Action
 					'content' => $content,
 					'tags' => $tags
 				);
-				GroupTopicModel::add($this->view->uid, $this->view->gid, $data);
+				$id = GroupTopicModel::add($this->view->uid, $this->view->gid, $data);
 				$this->_helper->layout->setLayout('success');
 				echo '<div class="success">成功发布话题，增加1点群组积分。
-				<a href="javascript:history.go(0)">继续发表</a>，
-				<a href="/group/topic?gid='.$this->view->gid.'">返回论坛首页</a></div>';
+				<a href="javascript:history.go(0)">继续发表</a>，2秒后自动跳转
+				<a href="/group/topic/show?gid='.$this->view->gid.'&tid='.$id.'">刚发表的话题</a></div>';
+                echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$id, 2);
 			}
 		}
 	}

@@ -69,6 +69,7 @@ class GroupTopicModel
 				'url' => '/group/topic/show?gid='.$gid.'&tid='.$topic_id, // 转到事件地址
 				'name' => $data['title']
 			));
+			return $topic_id;
 		}
 	}
 	
