@@ -76,12 +76,12 @@ class LoginController extends Zend_Controller_Action
 					if($postArgs['alive'] != null)
                     {
                         setcookie('zjuhz_member[uname]', $postArgs['uname'], time() + 3600*24*30, '/');
-                        setcookie('zjuhz_member[pswd]', $postArgs['pswd'], time() + 3600*24*30, '/');
+                        setcookie('zjuhz_member[pswd]', Commons::encrypy($postArgs['pswd']), time() + 3600*24*30, '/');
                     }
                     else
                     {
-                        setcookie('zjuhz_member[uname]', $postArgs['uname'], time() - 3600*24*30, '/');
-                        setcookie('zjuhz_member[pswd]', $postArgs['pswd'], time() - 3600*24*30, '/');
+                        setcookie('zjuhz_member[uname]', null, time() - 3600*24*30, '/');
+                        setcookie('zjuhz_member[pswd]', null, time() - 3600*24*30, '/');
                     }
 
 					// 名片缓存
