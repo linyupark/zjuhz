@@ -69,11 +69,20 @@ class LoginController extends Zend_Controller_Action
 					$result['lastLogin'] = REQUEST_TIME;
 
 					// 记住账号
-					((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
-					    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
+					//((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
+					//    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 					
 					// 记住登陆状态
-					Zend_Session::rememberMe(3600*24*7);
+					if($postArgs['alive'] != null)
+                    {
+                        setcookie('zjuhz_member[uname]', $postArgs['uname'], time() + 3600*24*30, '/');
+                        setcookie('zjuhz_member[pswd]', $postArgs['pswd'], time() + 3600*24*30, '/');
+                    }
+                    else
+                    {
+                        setcookie('zjuhz_member[uname]', $postArgs['uname'], time() - 3600*24*30, '/');
+                        setcookie('zjuhz_member[pswd]', $postArgs['pswd'], time() - 3600*24*30, '/');
+                    }
 
 					// 名片缓存
 					CacheLogic::setOptions('cache_dir', Commons::getUserCache($result['uid']));

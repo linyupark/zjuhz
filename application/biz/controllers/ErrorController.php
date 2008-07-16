@@ -57,6 +57,7 @@ class ErrorController extends Zend_Controller_Action
     public function loginAction()
     {
     	$this->view->headTitle(Zend_Registry::get('iniCompany')->head->titleLogin);
-    	$this->view->uname = $_COOKIE['zjuhz_member']['alive']; // 记住账号
+    	$this->view->uname = $_COOKIE['zjuhz_member']['uname']; // 记住账号
+        $this->view->pswd = $_COOKIE['zjuhz_member']['pswd']; // 记住账号
     }
 }

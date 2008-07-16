@@ -15,7 +15,7 @@
 				</tr>
 				<tr>
 					<td class="txtr vm">密码：</td>
-					<td><input class="text" name="pswd" type="password" maxlength="16" /></td>
+					<td><input class="text" name="pswd" type="password" maxlength="16" value="<?= $this->pswd; ?>" /></td>
 				</tr>
 				<tr>
 					<td class="txtr vm"></td>
@@ -69,6 +69,9 @@
 <?php $this->cache->end(); endif; ?>
 
 <script type="text/javascript">
+	<?php if($this->uname && $this->pswd): ?>
+    relogin();
+    <?php endif; ?>
 	// 会员登录
 	function relogin() {
 		var formdata = $("#relogin_form").fastSerialize();
