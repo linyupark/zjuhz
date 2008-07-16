@@ -27,7 +27,7 @@ class MemberController extends Zend_Controller_Action
 	 * */
 	public function indexAction()
 	{
-		$this->view->pagesize = 30;
+		$this->view->pagesize = 32;
 	}
 	
 	/**
