@@ -34,7 +34,7 @@ class Zend_View_Helper_Memberlist
                 'num_rows' => $result['numrows'],
                 'cur_page' => $page
             ));
-            $str .= '<div class="pagination">'.Page::$page_str.'</div>';
+            $str .= '<div class="pagination" style="float:none;clear:both">'.Page::$page_str.'</div>';
         }
         return $str;
     }
