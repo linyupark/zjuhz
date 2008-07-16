@@ -13,7 +13,7 @@ class ErrorController extends Zend_Controller_Action {
 	public function reloginAction()
 	{
 		$this->view->uname = $_COOKIE['zjuhz_member']['uname']; // 记住账号
-        $this->view->pswd = $_COOKIE['zjuhz_member']['pswd']; // 记住账号
+        $this->view->pswd = Commons::decrypt($_COOKIE['zjuhz_member']['pswd']); // 记住账号
 	}
 	
     /**
