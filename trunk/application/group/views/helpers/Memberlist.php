@@ -28,6 +28,7 @@ class Zend_View_Helper_Memberlist
         // 是否显示分页
         if($pagination != false)
         {
+            Page::$pagesize = $pagesize;
             Page::create(array(
                 'href_open' => '<a href="/group/member?gid='.$gid.'&p=%d">',
                 'href_close' => '</a>',
