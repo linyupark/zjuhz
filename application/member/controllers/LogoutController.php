@@ -31,7 +31,8 @@ class LogoutController extends Zend_Controller_Action
 	public function indexAction()
     {
     	Zend_Session::destroy(true);
-
+		setcookie('zjuhz_member[uname]', null, time() - 3600*24*30, '/');
+        setcookie('zjuhz_member[pswd]', null, time() - 3600*24*30, '/');
     	$this->_redirect('../', array('exit'));
     }
 }
