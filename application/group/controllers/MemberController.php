@@ -13,7 +13,13 @@ class MemberController extends Zend_Controller_Action
 	public function init()
 	{
 		// 默认获取用户id到视图
+		$this->view->gid = $this->getRequest()->getParam('gid');
 		$this->view->uid = $this->_getParam('uid', null);
+		$this->view->role = GroupMemberModel::role($this->view->uid, $this->view->gid);
+		$this->view->controller_name = $this->getRequest()->getControllerName();
+        $this->view->action_name = $this->getRequest()->getActionName();
+		$this->view->groupInfo = GroupModel::info($this->view->gid);
+		$this->view->page = $this->_getParam('p', 1);
 	}
 	
 	/**
@@ -21,7 +27,7 @@ class MemberController extends Zend_Controller_Action
 	 * */
 	public function indexAction()
 	{
-		
+		$this->view->pagesize = 30;
 	}
 	
 	/**
