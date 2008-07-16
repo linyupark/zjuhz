@@ -1,0 +1,10 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
+    <div class="span-19 last mgu10">
+        <!-- 成员 -->
+        <div class="oneCol last" style="float:left; overflow:hidden; width:99.5%">
+            <?= $this->memberlist($this->gid, $this->pagesize, $this->page, true); ?>
+        </div>
+    </div>
+</div>

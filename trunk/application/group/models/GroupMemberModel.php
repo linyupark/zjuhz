@@ -1,7 +1,14 @@
 <?php
 
 class GroupMemberModel
-{   
+{
+    # 获取群组组长和副组长
+    static function leaders($gid)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        return $db->fetchAll('SELECT `user_id`,`role`,`realName` FROM `vi_group_member` WHERE `group_id` = ? AND `role` != "member"', $gid);
+    }
+    
     # 更新
     static function update($uid, $data, $gid)
     {
