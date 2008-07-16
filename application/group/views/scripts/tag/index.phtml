@@ -8,8 +8,11 @@
 	<table width="100%" class="extInline" style="margin:0">
 		<tr>
 			<td class="f14 vm pd5" width="40%">
-				<a href="/group/">校友群组</a> &gt; 
-				<strong><?= Cmd::sortName($this->sort_id) ?></strong>
+				<a href="/group/">校友群组</a>
+                <?php if($this->sort_id): ?>
+				 &gt; <a href="/group/sort?id=<?= $this->sort_id ?>"><?= Cmd::sortName($this->sort_id) ?></a>
+                <?php endif; ?>
+                 &gt; <span style="font-weight:bold"><?= $this->query ?></span>
 			</td>
 			<td class="vm pd5" width="60%">
 				<form action="/group/tag" method="get" class="txtr">
@@ -19,21 +22,17 @@
 			</td>
 		</tr>
 	</table>
+    <?php if($this->sort_id): ?>
     <div class="oneCol mgu10">
         <?= $this->taglist($this->sort_id) ?>
     </div>
+    <?php endif; ?>
     
     <div class="oneCol mgu10">
         <table width="100%">
         	<tr>
         		<td class="vm pd10">共找到 <span style="color:red"><?= $this->group_num ?></span> 个相关群组</td>
         		<td class="txtr pd10">
-        			<select onchange="location.href='/group/sort?id=<?= $this->sort_id ?>&o='+this.value">
-        				<option value="create_time" <?= $this->orderby == 'create_time' ?  'selected="selected"' : '' ?>>创建时间(新到老)</option>
-		        		<option value="member_num" <?= $this->orderby == 'member_num' ?  'selected="selected"' : '' ?>>成员数(多到少)</option>
-		        		<option value="topic_num" <?= $this->orderby == 'topic_num' ?  'selected="selected"' : '' ?>>主题数(多到少)</option>
-		        		<option value="photo_num" <?= $this->orderby == 'photo_num' ?  'selected="selected"' : '' ?>>图片数(多到少)</option>
-		        	</select>
         		</td>
         	</tr>
         </table>
