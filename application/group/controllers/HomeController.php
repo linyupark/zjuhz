@@ -36,6 +36,7 @@ class HomeController extends Zend_Controller_Action
     	GroupModel::associate($comefrom, $this->view->gid);
     	// 更新用户最后所到的群组信息
     	UserModel::comefrom($this->view->uid, $this->view->gid);
+        $this->view->elite = $this->_getParam('elite');
     }
 }
 

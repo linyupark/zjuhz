@@ -4,12 +4,12 @@
 
 class Zend_View_Helper_Topiclist
 {
-    function topiclist($gid, $pagesize, $page, $pagination = false)
+    function topiclist($gid, $pagesize, $page, $pagination = false, $elite)
     {
-        $result = GroupTopicModel::index($gid, $pagesize, $page);
+        $result = GroupTopicModel::index($gid, $pagesize, $page, $elite);
         $str = '<h3 class="pd5 mg10">论坛
         <small class="f12" style="font-weight:normal">共<span style="color:red">'.$result['numrows'].'</span>个主题 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="">精华区</a>
+            <a href="/group/topic?gid='.$gid.'&elite=1">精华帖</a>
         </small>
         <a style="float:right; margin-top:-15px;" href="/group/topic/new?gid='.$gid.'">发新主题</a></h3>';
         if($result['numrows'] == 0) $str .= '<p class="mglf10">论坛中没有主题</p>';
@@ -30,6 +30,8 @@ class Zend_View_Helper_Topiclist
             	$icon .= Cmd::icon('bbs_top.jpg');
             	if($topic['is_elite'] == 1)
             	$icon .= Cmd::icon('ruby.png');
+                if(time() - $topic['reply_time'] < 3600*24)
+                $icon .= Cmd::icon('new.png');
                 $str .= '<tr>
                 			<td width="10px"><input class="hide" type="checkbox" name="t[]" value="'.$topic['topic_id'].'" /></td>
                             <td class="pd10 dashBorder f12">
