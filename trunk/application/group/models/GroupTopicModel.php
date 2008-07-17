@@ -74,7 +74,7 @@ class GroupTopicModel
 	}
 	
 	# 群组内部话题索引
-    static function index($gid, $pagesize, $page)
+    static function index($gid, $pagesize, $page , $elite = null)
     {
         $db = Zend_Registry::get('dbGroup');
 		
@@ -86,9 +86,13 @@ class GroupTopicModel
 		$result['numrows'] = $row['numrows'];
 		$offset = ($page-1)*$pagesize;
 		
+		$order = 'is_top';
+		if($elite != null)
+		$order = 'is_elite';
+		
 		$rows = $db->fetchAll('SELECT * FROM `vi_group_topic` 
 					  WHERE `group_id` = '.$gid.' 
-                      ORDER BY `is_top` DESC, `reply_time` DESC
+                      ORDER BY '.$order.' DESC, `reply_time` DESC
                       LIMIT '.$offset.','.$pagesize);
 		$result['rows'] = $rows;
 		

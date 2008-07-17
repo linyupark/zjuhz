@@ -4,7 +4,7 @@
     <div class="span-19 last mgu10">
         <!-- 论坛 -->
         <div class="oneCol">
-            <?= $this->topiclist($this->gid, $this->pagesize, $this->page, true); ?>
+            <?= $this->topiclist($this->gid, $this->pagesize, $this->page, true, $this->elite); ?>
 			<?php if(Cmd::isManager($this->gid)): ?>
 			<table width="100%">
 				<tr>
