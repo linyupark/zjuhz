@@ -85,7 +85,7 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headLink()->appendStylesheet('/static/styles/paging.css', 'screen');
 		//$this->view->headScript()->appendFile('/static/scripts/biz/index/index.js');
 
-		$this->view->recmd    = CorpCompanyLogic::init()->selectRandList(20); // 随机显示全部推荐企业
+		$this->view->recmd    = CorpCompanyLogic::init()->selectRandList(15); // 随机显示全部推荐企业
 		$this->view->industry = CorpIndustryLogic::init()->selectPairs(); // 显示全部行业分类目录
 
 		$base      = CacheLogic::init()->baseLoad(); // 载入基础数据缓存
