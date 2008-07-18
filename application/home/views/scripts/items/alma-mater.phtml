@@ -11,7 +11,7 @@
                     <?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>1)); ?>
                     <?php foreach($rows as $r): ?>
                     <li><a class="lk-2" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
-                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a></li>
+                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
@@ -26,7 +26,7 @@
                     <?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>4)); ?>
                     <?php foreach($rows as $r): ?>
                     <li><a class="lk-2" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
-                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a></li>
+                        <?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
