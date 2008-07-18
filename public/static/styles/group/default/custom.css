@@ -1,5 +1,11 @@
 @import url('../../facebox.css');
 
+.color-1{ color:#787878; }
+.color-2{ color:#236B84; }
+.color-3{ color:#8E4519; }
+.color-4{ color:#8E8E19; }
+.color-5{ color:#5B2285; }
+
 /* 连接 2 */
 .lk-2:link, .lk-2:visited { color:#8B3558; text-decoration:none; }
 .lk-2:hover{ text-decoration:underline; }
