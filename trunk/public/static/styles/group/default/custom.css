@@ -1,5 +1,9 @@
 @import url('../../facebox.css');
 
+/* 连接 2 */
+.lk-2:link, .lk-2:visited { color:#8B3558; text-decoration:none; }
+.lk-2:hover{ text-decoration:underline; }
+
 /* 论坛表格 */
 .table-topic{ background:#fff }
 .table-topic td{
@@ -137,6 +141,12 @@ div.tab a.here{
 .sideBar{
 	background:#FFFAF4 url(/static/images/group/s_bg.gif) repeat-x top;
 	border:1px solid #E9DBC0;
+}
+
+/* 边栏样式(淡红色) */
+.sideBar2{
+	background:#F9F1F4;
+	border:1px solid #E6BECF;
 }
 
 .hr-1{

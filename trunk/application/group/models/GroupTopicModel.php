@@ -2,11 +2,21 @@
 
 class GroupTopicModel
 {
+	# 流量排行 - 根据点击数
+	static function click($limit)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->fetchAll('SELECT `topic_id`,`group_id`,`title` 
+					  FROM `tbl_group_topic` WHERE `pub_time` > '.(time()-3600*24*8).' 
+					  ORDER BY `click_num` DESC LIMIT '.(int)$limit);
+	}
+	
+	# 热帖排行 - 根据回复数
 	static function hot($limit)
 	{
 		$db = Zend_Registry::get('dbGroup');
 		return $db->fetchAll('SELECT `topic_id`,`group_id`,`title` 
-					  FROM `tbl_group_topic` 
+					  FROM `tbl_group_topic` WHERE `pub_time` > '.(time()-3600*24*8).' 
 					  ORDER BY `reply_num` DESC LIMIT '.(int)$limit);
 	}
 	
