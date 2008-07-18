@@ -36,6 +36,9 @@
 				$this->view->sibling = $Db->getSibling($entity['entity_pub_time'], $entity['category_id']);
 				//相关tag+title模糊查询
 				$this->view->similarity = $Db->getSimilarity($entity['entity_id'], $entity['entity_tag']);
+				
+				$this->view->uname = $_COOKIE['zjuhz_member']['uname']; // 记住账号
+				$this->view->pswd = Commons::decrypt($_COOKIE['zjuhz_member']['pswd']); // 记住账号
 			}
 		}
 	}
