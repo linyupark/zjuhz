@@ -169,7 +169,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 					$(this).width('auto');
 					$(this).height('auto');
 				}
-                $(this).wrap('<a href="'+$(this).attr('src')+'">','</a>');
+                $(this).wrap('<a target="_blank" href="'+$(this).attr('src')+'"></a>');
 				$(this).parent().css('text-align','center');
 			});
 		},1000);
