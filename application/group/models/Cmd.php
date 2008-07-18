@@ -110,11 +110,11 @@ class Cmd
 	}
 	
 	# 获取指定gid的图标
-	static function groupIcon($gid)
+	static function groupIcon($gid ,$attr = null)
 	{
 		$file = $_SERVER['DOCUMENT_ROOT'].'static/groups/'.$gid.'/icon.gif';
-		if(!file_exists($file)) return '<img src="/static/images/group/default_60_60.gif" />';
-		else return '<img src="/static/groups/'.$gid.'/icon.gif?'.time().'" />';
+		if(!file_exists($file)) return '<img src="/static/images/group/default_60_60.gif" '.$attr.' />';
+		else return '<img src="/static/groups/'.$gid.'/icon.gif?'.time().'" '.$attr.' />';
 	}
 	
 	# 创建群组gid相应文件夹

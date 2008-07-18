@@ -14,7 +14,7 @@ class Zend_View_Helper_Newgroup
         {
             foreach($groups as $group)
             {
-                $str .= '<td class="txtc pd10" width="33%">
+                $str .= '<td class="txtc pd10" width="33%" style="line-height:150%">
                 <a href="/group/home?gid='.$group['group_id'].'">'.Cmd::groupIcon($group['group_id']).'</a><br />
                 <a href="/group/home?gid='.$group['group_id'].'">'.$group['name'].'</a><br />
                 主题数:'.$group['topic_num'].'</td>';

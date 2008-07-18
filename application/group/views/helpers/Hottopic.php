@@ -6,7 +6,7 @@ class Zend_View_Helper_Hottopic
 {
     function hottopic($limit = 5)
     {
-        $str = '<h3 class="mglf10" style="color:#B32308">近期热门话题</h3>';
+        $str = '<h3 class="mglf10" style="color:#B32308">热帖排行</h3>';
         $hot_list = GroupTopicModel::hot($limit);
         foreach($hot_list as $topic)
         {
