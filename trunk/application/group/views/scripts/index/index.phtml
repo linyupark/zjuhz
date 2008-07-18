@@ -13,6 +13,32 @@
         <h3 class="pd10">新事件 <?= Cmd::icon('new.png') ?></h3>
         <?= $this->newevent(5); ?>
     </div>
+    <div class="pd10" style="background:#f5f5f5">
+        <?= Cmd::icon('user_gray.png') ?>
+        <a href="/group/sort?id=12">同行会</a> <?= $this->sortgroup(12,5); ?>
+    </div>
+    <div class="pd10" style="background:#eee">
+        <?= Cmd::icon('cup.png') ?>
+        <a href="/group/sort?id=14">同乡会</a> <?= $this->sortgroup(14,5); ?>
+    </div>
+    <div class="pd10" style="background:#f5f5f5">
+        <?= Cmd::icon('coins.png') ?> 财富 
+        <?= $this->sortgroup(21,5); ?> ,
+        <?= $this->sortgroup(22,5); ?>
+    </div>
+    <div class="pd10" style="background:#eee">
+        <?= Cmd::icon('sport_soccer.png') ?> 体育 
+        <?= $this->sortgroup(31,5); ?> ,
+        <?= $this->sortgroup(32,5); ?>
+    </div>
+    <div class="pd10" style="background:#f5f5f5">
+        <?= Cmd::icon('heart.png') ?> 交友 
+        <?= $this->sortgroup(51,5); ?>
+    </div>
+    <div class="pd10" style="background:#eee">
+        <?= Cmd::icon('folder.png') ?> 其他 
+        <?= $this->sortgroup(99,5); ?>
+    </div>
 </div>
 
 <div class="span-7 last">
