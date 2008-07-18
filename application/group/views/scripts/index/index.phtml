@@ -5,9 +5,13 @@
 </div>
 
 <div class="span-12">
-    <div class="oneCol">
+    <div class="oneCol pdd10">
+        <h3 class="pd10">最近我的主题</h3>
+        <?= $this->mytopic(5); ?>
+    </div>
+    <div class="oneCol mgu10">
         <h3 class="pd10">新事件 <?= Cmd::icon('new.png') ?></h3>
-        <?= $this->newevent(10); ?>
+        <?= $this->newevent(5); ?>
     </div>
 </div>
 
