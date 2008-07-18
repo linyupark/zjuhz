@@ -110,7 +110,7 @@ class IndexController extends Zend_Controller_Action
 		$this->view->headTitle($iname);
 		$this->view->iid      = $iid;
 		$this->view->iname    = $iname;
-		$this->view->recmd    = CorpCompanyLogic::init()->selectIndustryRandList($iid, 20); // 随机显示行业推荐企业
+		$this->view->recmd    = CorpCompanyLogic::init()->selectIndustryRandList($iid, 15); // 随机显示行业推荐企业
 		$this->view->list     = CorpCompanyLogic::init()->selectIndustryJoinAll($iid, 10); // 按新加入显示行业企业
 		$this->view->industry = CorpIndustryLogic::init()->selectPairs(); // 显示全部行业分类目录
 	}
