@@ -25,7 +25,7 @@ class HomeController extends Zend_Controller_Action
     
     public function indexAction()
     {
-    	// 如果是用户成员则记录最后登陆该群组的时间
+    	// 如果是用户成员则记录最后登录该群组的时间
     	if(!Cmd::isGuest($this->view->gid))
     	{
     		GroupMemberModel::update($this->view->uid, array('last_access'=>time()), $this->view->gid);

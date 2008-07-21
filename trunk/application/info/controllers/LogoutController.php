@@ -4,7 +4,7 @@
 	{
 		function init()
 		{
-			$this->view->headTitle('后台登陆');
+			$this->view->headTitle('后台登录');
 			$this->view->headLink()->appendStylesheet('/static/styles/info_console.css','screen');
 			
 			// 获取全局SESSION 
@@ -17,7 +17,7 @@
 			$this->_helper->layout->setLayout('info-console');	
 		}
 		
-		#后台登陆入口 --------------------------------
+		#后台登录入口 --------------------------------
 		function indexAction()
 		{
 			Zend_Session::destroy();

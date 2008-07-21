@@ -123,7 +123,7 @@
                         $result = GroupEventModel::fetchInTime($this->passport('lastLogin'), $val['group_id']);
                         if( $result['numrows'] == 0)
                         {
-                            echo '自从上次登陆后就没动静';
+                            echo '自从上次登录后就没动静';
                         }
                         else echo '新增了<span style="color:red">'.$result['topic_num'].'</span>个话题。';
                        ?>

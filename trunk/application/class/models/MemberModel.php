@@ -76,10 +76,10 @@
 		}
 		
 		/**
-		 * 获取在24内登陆过的班级成员
+		 * 获取在24内登录过的班级成员
 		 *
 		 * @param int $class_id 班级id
-		 * @param int $time_range 秒数内登陆
+		 * @param int $time_range 秒数内登录
 		 * @return array 对应的成员姓名和id
 		 */
 		static function getActivity($class_id, $time_range= 86400)

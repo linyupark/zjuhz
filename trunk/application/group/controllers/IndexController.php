@@ -34,7 +34,7 @@ class IndexController extends Zend_Controller_Action
 		
 		$this->_helper->viewRenderer->setNoRender(true);
 		
-		if($this->view->passport('uid')) // 是登陆的会员才能统计
+		if($this->view->passport('uid')) // 是登录的会员才能统计
 		{			
 			$gid = $this->_getParam('gid',null);
 			$today = date('Y-m-d');

@@ -4,7 +4,7 @@
 	{
 		function init()
 		{
-			$this->view->headTitle('后台登陆');
+			$this->view->headTitle('后台登录');
 			$this->view->headLink()->appendStylesheet('/static/styles/info_console.css','screen');
 			
 			// 获取全局SESSION 
@@ -17,10 +17,10 @@
 			$this->_helper->layout->setLayout('info-console');	
 		}
 		
-		#后台登陆入口 --------------------------------
+		#后台登录入口 --------------------------------
 		function indexAction()
 		{
-			//强制转换用户身份,重新登陆
+			//强制转换用户身份,重新登录
 			$this->_sessCommon->role = 'guest';
 				
 			if($this->getRequest()->isPost())
@@ -60,7 +60,7 @@
 						$this->_sessInfo->inited = TRUE;
 						$this->_sessInfo->user_id = $row->user_id; //用户名输入session
 						Zend_Session::rememberMe(3600*24);
-						$this->view->error_tips = '* 登陆成功~2秒后自动转向<a href="/info/admin/">控制页</a>';
+						$this->view->error_tips = '* 登录成功~2秒后自动转向<a href="/info/admin/">控制页</a>';
 						echo Commons::js_jump('/info/admin/',2);
 					}
 				}
