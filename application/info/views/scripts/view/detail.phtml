@@ -134,7 +134,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <div class="span-12 mgu10">
 	<!-- 相关文章 ////////////////////////////////////////////// -->
 	<table width="100%" class="table-1">
-	<tr><th>:: 相关文章 ::</th></tr>
+	<tr><th class="txtl">:: 相关文章 ::</th></tr>
 	<?php if(!$this->similarity): ?>
 	<tr><td class="pd5">没有找到</td></tr>
 	<?php else: foreach ($this->similarity as $k2 => $v2): ?>
@@ -147,7 +147,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 
 <div class="span-12 last mgu10">
 	<table class="table-1" width="100%">
-	<tr><th colspan="2">:: <a href="javascript:toggle()" id="toggleBtn">查看回复</a> :: 
+	<tr><th colspan="2" class="txtl">:: <a href="javascript:toggle()" id="toggleBtn">查看回复</a> :: 
 	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">回复主题</a></th></tr>
 	<tr>
 		<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>

@@ -30,7 +30,7 @@ class Zend_View_Helper_Online
                 $str .= '<tr>';
                  $str .= '<td class="txtc pd10">
                 <a href="/group/member/profile?uid='.$u['uid'].'">'.Commons::getUserFace($u['uid'],'small').'</a><br />
-                <a href="/group/member/profile?uid='.$u['uid'].'">'.$u['realName'].'</a></td>';
+                <a onclick="/group/member/profile?uid='.$u['uid'].'" href="javascript:ucard('.$u['uid'].')">'.$u['realName'].'</a></td>';
                 if($k%5 == 4)
                 $str .= '</tr>';
             }

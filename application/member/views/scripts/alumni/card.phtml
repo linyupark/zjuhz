@@ -6,22 +6,25 @@
 <style>
 #ucard { margin:10px;text-align:left; }
 #ucard u{ text-decoration:none; border-bottom:1px solid #666; }
+#ucard td { line-height:180%; }
 </style>
 </head>
 
 <body>
-<?php if($this->card) { ?>
-<p>
+<p style="padding:0; margin:0; text-align:left">
 <img style="cursor:pointer;" src="/static/images/icon/close.gif" onclick="$('.cardContainer').remove()" />
 </p>
+<?php if($this->card) { ?>
 <table id="ucard">
   <tr>
-    <td valign="top"><?= $this->face($this->card['uid']); ?></td>
-    <td style="padding:0 0 0 5px" valign="bottom">
-    <p>性别：<u><?= $this->card['sex']; ?></u></p>
-    <p>最近上线：<u><?= date('m月d日', $this->card['lastLogin']); ?></u></p>	
-    <p>入学年份：<u><?= (1900 < $this->card['year'] ? "{$this->card['year']}年" : ''); ?></u></p>
-    <p>所在院系：<u><?= (0 < $this->card['college'] ? $this->college($this->card['college']) : ''); ?></u></p>
+    <td><?= $this->face($this->card['uid']); ?></td>
+    <td class="vm" style="padding:0 0 0 5px">
+    性别：<u><?= $this->card['sex']; ?></u><br />
+    最近上线：<u><?= date('m月d日', $this->card['lastLogin']); ?></u><br />
+    入学年份：<u><?= (1900 < $this->card['year'] ? "{$this->card['year']}年" : ''); ?></u><br />
+    所在院系：<u><?= (0 < $this->card['college'] ? $this->college($this->card['college']) : ''); ?></u><br />
+    <a href="javascript:beFriendsWith(<?= $this->card['uid'] ?>)">加为好友</a> 
+    <a href="/group/pm/member?uid=<?= $this->card['uid'] ?>">发站内信</a>
     </td>
   </tr>
 </table>
@@ -31,14 +34,15 @@
   </tr>
 </table>
 <?php } else { ?>
-<p>
-<img style="cursor:pointer;" src="/static/images/icon/close.gif" onclick="$('.cardContainer').remove()" />
-</p>
-<table align="center">
-  <tr>
-    <td>&nbsp;抱歉，该校友暂未完善个人资料。</td>
-  </tr>
-</table>
+<p>抱歉，该校友暂未完善个人资料。</p>
 <?php } ?>
 </body>
 </html>
+<script type="text/javascript">
+	function beFriendsWith(uid)
+	{
+		$.get('/group/member/befriendwith?uid='+uid,null,function(html){
+			$.facebox(html);
+		});
+	}
+</script>
