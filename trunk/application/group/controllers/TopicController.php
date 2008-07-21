@@ -101,13 +101,37 @@ class TopicController extends Zend_Controller_Action
 				$id = GroupTopicModel::add($this->view->uid, $this->view->gid, $data);
 				$this->_helper->layout->setLayout('success');
 				echo '<div class="success">成功发布话题，增加1点群组积分。
-				<a href="javascript:history.go(0)">继续发表</a>，2秒后自动跳转
+				<a href="javascript:history.go(0)">继续发表</a>，1秒后自动跳转
 				<a href="/group/topic/show?gid='.$this->view->gid.'&tid='.$id.'">刚发表的话题</a></div>';
-                echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$id, 2);
+                echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$id, 1);
 			}
 		}
 	}
 	
+    # 编辑回复
+    public function replyeditAction()
+    {
+        $page = $this->_getParam('p', 1);
+        $reply_id = $this->_getParam('rid');
+        $reply = GroupReplyModel::fetch($reply_id);
+        if($reply['user_id'] != Cmd::myid()) $this->_redirect('/');
+        
+        $R = $this->getRequest();
+        if($R->isPost()) // 修改
+        {
+            $data = array(
+                'title' => $R->getPost('title'),
+                'content' => $R->getPost('content')
+            );
+            GroupReplyModel::update($data, $reply_id);
+            echo $R->getPost('content');
+            $this->_redirect('/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid.'&p='.$page.'#topic_title_'.$reply_id);
+        }
+
+        $this->view->reply = $reply;
+        $this->render('reply-edit');
+    }
+    
 	# 编辑帖
 	public function editAction()
 	{
@@ -136,9 +160,7 @@ class TopicController extends Zend_Controller_Action
 						'mod_time' => time()
 					);
 					GroupTopicModel::update($data, $this->view->tid);
-					$this->_helper->layout->setLayout('success');
-					echo '<div class="success">主题修改成功！
-					<a href="/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid.'">查看主题</a></div>';
+					echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid);
 				}
 			}
 			

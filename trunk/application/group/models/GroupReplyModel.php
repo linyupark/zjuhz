@@ -2,6 +2,12 @@
 
 class GroupReplyModel
 {
+	static function update($data, $rid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->update('tbl_group_reply', $data, 'reply_id = '.(int)$rid);
+	}
+	
 	static function insert($data)
 	{
 		$db = Zend_Registry::get('dbGroup');
@@ -30,6 +36,12 @@ class GroupReplyModel
 		
 		return $result;
     }
+	
+	static function fetch($rid, $col = '*')
+	{
+		$db = Zend_Registry::get('dbGroup');
+		return $db->fetchRow('SELECT '.$col.' FROM `tbl_group_reply` WHERE `reply_id` = ?', $rid);
+	}
 }
 
 ?>

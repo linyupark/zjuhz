@@ -24,7 +24,7 @@
 					<button class="btn" onclick="window.scroll(0,10000)">回复主题</button> 
 					<?php if(Cmd::isGuest($this->gid)): ?>
 					<button class="btn" onclick="location.href='/group/join/new?gid=<?= $this->gid ?>'">加入群组</button>
-					<?php endif; ?> 
+					<?php endif; ?>
 				</td>
 			</tr>
 		</table>
@@ -37,11 +37,12 @@
 						<a href="/group/member/profile?uid=<?= $this->topic['pub_user'] ?>"><?= $this->topic['pub_user_name'] ?></a>
 					</p>
 				</td>
-				<td class="title">
+				<td class="title txtr">
 					<span class="f12 hrefspan-8">
 						<?php if(Cmd::isMyTopic($this->topic['topic_id'])): ?>
 						
-						<a href="/group/topic/edit?gid=<?= $this->gid ?>&tid=<?= $this->topic['topic_id'] ?>"><?= Cmd::icon('page_white_edit.png') ?>编辑</a>
+						<a href="/group/topic/edit?gid=<?= $this->gid ?>&tid=<?= $this->topic['topic_id'] ?>"><?= Cmd::icon('page_white_edit.png') ?>
+						编辑</a>
 						<?php endif; ?>
 						<a href="javascript:quote(0)">#回复该帖</a>
 						<a href="javascript:window.scroll(0,0)">#返回顶部</a>
@@ -73,8 +74,12 @@
 						</p>
 					</td>
 					<td class="title">&nbsp;
-						<?= $reply['title'] ?>
-						<span class="f12 hrefspan-8">
+						<b id="topic_title_<?= $reply['reply_id'] ?>"><?= $reply['title'] ?></b>
+						<span class="f12 hrefspan-8 txtr" style="float:right">
+							<?php if($reply['user_id'] == Cmd::myid()): ?>
+							<a href="/group/topic/replyedit?gid=<?= $this->gid ?>&tid=<?= $this->tid ?>&rid=<?= $reply['reply_id'] ?>&p=<?= $this->page ?>">
+							<?= Cmd::icon('page_white_edit.png') ?>编辑</a>
+							<?php endif; ?>
 							<a href="javascript:quote(<?= $reply['reply_id'] ?>)">#回复该帖</a>
 							<a href="javascript:window.scroll(0,0)">#返回顶部</a>
 							<?= Commons::date($reply['reply_time']) ?>
