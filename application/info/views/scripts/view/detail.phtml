@@ -53,7 +53,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 <!-- 主体 ////////////////////////////////////////////// -->
 <div class="f14 span-24 last" style="overflow:hidden">
 <?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
-<h2 class="txtc">抱歉~需要登陆才能访问该信息</h2>
+<h2 class="txtc">抱歉~需要登录才能访问该信息</h2>
 <form class="prepend-7" method="post" id="relogin_form" onsubmit="return relogin();">
 	<table>
 		<tr>
@@ -151,7 +151,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 	<a href="javascript:commentForm(<?= $this->entity['entity_id'] ?>)">回复主题</a></th></tr>
 	<tr>
 		<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
-		<td class="pd5">需要登陆后才能查看回复</td>
+		<td class="pd5">需要登录后才能查看回复</td>
 		<?php else: ?>
 		<td id="commentList" class="hide dashBorder pd10"></td>
 		<?php endif; ?>

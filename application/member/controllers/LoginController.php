@@ -72,7 +72,7 @@ class LoginController extends Zend_Controller_Action
 					//((null == $postArgs['alive']) ? setcookie('zjuhz_member[alive]', $result['username'], time() - 2592000, '/') : 
 					//    setcookie('zjuhz_member[alive]', $result['username'], time() + 2592000, '/'));
 					
-					// 记住登陆状态
+					// 记住登录状态
 					if($postArgs['alive'] != null)
                     {
                         setcookie('zjuhz_member[uname]', $postArgs['uname'], time() + 3600*24*30, '/');

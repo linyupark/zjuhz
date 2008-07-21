@@ -13,7 +13,7 @@
 	if($v['class_member_charge'] == 1) echo '管理员'; 
 	elseif($v['class_charge'] == $v['class_member_id']) echo '创建人'; 
 	else echo '成员' ?></td>
-<td class="quiet f9"><?= $v['class_member_last_access'] != '' ? Commons::date($v['class_member_last_access']) : '未登陆过' ?>
+<td class="quiet f9"><?= $v['class_member_last_access'] != '' ? Commons::date($v['class_member_last_access']) : '未登录过' ?>
 </td>
 </tr>
 <?php endforeach; ?>

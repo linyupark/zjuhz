@@ -27,7 +27,7 @@
 			if($this->_sessCommon->role == 'guest')
 			{
 				$this->_helper->layout->setLayout('error');
-				$this->view->err_tip = '只有登陆后才能进行回复!';
+				$this->view->err_tip = '只有登录后才能进行回复!';
 			}
 		}
 		
