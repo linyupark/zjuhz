@@ -34,7 +34,7 @@
 				<td rowspan="2" class="photo txtc">
 					<?= Commons::getUserFace($this->topic['pub_user']) ?>
 					<p class="txtc" id="topic_user_0">
-						<a href="/group/member/profile?uid=<?= $this->topic['pub_user'] ?>"><?= $this->topic['pub_user_name'] ?></a>
+						<a onclick="location.href='/group/member/profile?uid=<?= $this->topic['pub_user'] ?>'" href="javascript:ucard(<?= $this->topic['pub_user'] ?>)"><?= $this->topic['pub_user_name'] ?></a>
 					</p>
 				</td>
 				<td class="title txtr">
@@ -70,7 +70,7 @@
 					<td rowspan="2" class="photo txtc">
 						<?= Commons::getUserFace($reply['user_id']) ?>
 						<p class="txtc" id="topic_user_<?= $reply['reply_id'] ?>">
-							<a href="/group/member/profile?uid=<?= $reply['user_id'] ?>"><?= $reply['realName'] ?></a>
+							<a onclick="/group/member/profile?uid=<?= $reply['user_id'] ?>" href="javascript:ucard(<?= $reply['user_id'] ?>)"><?= $reply['realName'] ?></a>
 						</p>
 					</td>
 					<td class="title">&nbsp;
