@@ -14,6 +14,8 @@ class ManageController extends Zend_Controller_Action
         // 是否是管理员
         if(false == Cmd::isManager($this->view->gid))
         {
+            Cmd::flushGroupSession();
+            if(false == Cmd::isManager($this->view->gid))
             $this->_redirect('/');
         }
         else // 获取群组的详细信息
