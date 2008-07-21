@@ -144,3 +144,23 @@
 		window.scroll(0,10000);
 	}
 </script>
+		
+<script type="text/javascript">
+	$(document).ready(function(){
+		var t = window.setTimeout(function(){
+			$('.entity img').each(function(){
+				if($(this).width()>720)
+				{
+					$(this).width(720);
+				}
+				else
+				{
+					$(this).width('auto');
+					$(this).height('auto');
+				}
+                $(this).wrap('<a target="_blank" href="'+$(this).attr('src')+'"></a>');
+				$(this).parent().css('text-align','center');
+			});
+		},2000);
+	});
+</script>
