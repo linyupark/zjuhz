@@ -39,9 +39,9 @@ class Zend_View_Helper_Topiclist
                             </td>
                             <td class="txtc dashBorder">'.$topic['click_num'].'</td>
                             <td class="txtc dashBorder">'.$topic['reply_num'].'</td>
-                            <td class="txtc dashBorder"><a href="/group/member/profile?uid='.$topic['pub_user'].'">'.$topic['pub_user_name'].'</a></td>
+                            <td class="txtc dashBorder"><a onclick="location.href=\'/group/member/profile?uid='.$topic['pub_user'].'\'" href="javascript:ucard('.$topic['pub_user'].')">'.$topic['pub_user_name'].'</a></td>
                             <td class="txtc dashBorder quiet">
-                            	<a href="/group/member/profile?uid='.$topic['reply_user'].'">'.$topic['reply_user_name'].'</a> '.
+                            	<a onclick="location.href=\'/group/member/profile?uid='.$topic['reply_user'].'\'" href="javascript:ucard('.$topic['reply_user'].')">'.$topic['reply_user_name'].'</a> '.
                 				Lp_Date::timespan($topic['reply_time']).'前
                 				
                 			</td>

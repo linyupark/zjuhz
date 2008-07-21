@@ -9,12 +9,12 @@
     <div class="oneCol pdd10">
         <table width="100%">
             <tr>
-                <th colspan="2"><h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>的基本资料</h3></th>
+                <th colspan="2" class="txtl"><h3 class="mglf10"><?= UserModel::fetch($this->uid, 'realName') ?>的基本资料</h3></th>
             </tr>
             <tr>
                 <td width="15%" class="pd10 txtc" style="vertical-align:top">
                     <?= Commons::getUserFace($this->uid) ?>
-                    <p class="txtc">
+                    <p class="txtc" id="member_action">
                         <?= Cmd::icon('user_add.png') ?> 
 						<a href="javascript:beFriendsWith(<?= $this->uid ?>)">加为好友</a><br />
                         <?= Cmd::icon('email_go.png') ?> 

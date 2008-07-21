@@ -21,7 +21,7 @@ class Zend_View_Helper_Memberlist
         {
             $str .= '<div style="float:left; padding:15px;">
                 <a href="/group/member/profile?uid='.$member['user_id'].'">'.Commons::getUserFace($member['user_id']).'</a>
-                <p class="txtc"><a href="/group/member/profile?uid='.$member['user_id'].'">'.$member['realName'].'</a></p>
+                <p class="txtc"><a onclick="/group/member/profile?uid='.$member['user_id'].'" href="javascript:ucard('.$member['user_id'].')">'.$member['realName'].'</a></p>
             </div>';
         }
         
@@ -48,7 +48,8 @@ class Zend_View_Helper_Memberlist
         {
             $str .= '<div style="float:left; padding:15px;">
                 <a href="/group/member/profile?uid='.$leader['user_id'].'">'.Commons::getUserFace($leader['user_id']).'</a>
-                <p class="txtc">'.GroupRoleModel::name($leader['role'], $gid).':<a href="/group/member/profile?uid='.$leader['user_id'].'">'.$leader['realName'].'</a></p>
+                <p class="txtc">'.GroupRoleModel::name($leader['role'], $gid).':
+                <a onclick="/group/member/profile?uid='.$leader['user_id'].'" href="javascript:ucard('.$leader['user_id'].')">'.$leader['realName'].'</a></p>
             </div>';
         }
         return $str.'<hr class="hr-1" />';
