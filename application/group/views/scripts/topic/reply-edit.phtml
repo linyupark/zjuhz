@@ -1,0 +1,24 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
+    <div class="span-19 last mgu10">
+        <!-- 编辑回帖 -->
+        <div class="oneCol">
+            <h3 class="pd10"><a href="/group/topic?gid=<?= $this->gid ?>">论坛</a> &gt; 修改回帖</h3>
+            <form class="mg10" id="topic_form" method="post" onsubmit="javascript:KindSubmit();">
+            <p><label>标题 <input value="<?= stripcslashes($this->reply['title']) ?>" type="text" name="title" class="text" maxlength="200" style="width:80%" /></label></p>
+            <span id="upload_form"></span>
+            <input type="hidden" value="<?= htmlspecialchars(stripcslashes($this->reply['content'])) ?>" name="content" />
+            <?= $this->editor($this->gid, '99%', '400px'); ?>
+            <p><input type="submit" class="btn" value="已经修改完，保存我的回帖" style="width:100%" /></p>
+            <span id="tip"></span>
+            </form>
+        </div>
+    </div>    
+</div>
+            
+<script>
+function KindSubmit() {
+	editor.data();
+}
+</script>
