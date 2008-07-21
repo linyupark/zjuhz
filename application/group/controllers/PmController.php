@@ -169,10 +169,7 @@ class PmController extends Zend_Controller_Action {
 				);
 				$PM->createRow($data)->save();
 			}
-			
-			$this->_helper->layout->setLayout('success');
-			echo '<div class="success">发送成功!
-			<a href="/group/pm/box?type=send">查看发件箱</a></div>';
+			echo Commons::js_jump('/group/pm/member?uid='.$this->view->uid.'&msg=success');
 		}
 	}
 	
@@ -186,6 +183,8 @@ class PmController extends Zend_Controller_Action {
 		$this->_forward('error', 'error');
 		else 
 		{
+			if($this->_getParam('msg') == 'success')
+			$this->view->msg = '<div class="success mglf10">您的信件已经成功发送，可进入<a href="/group/pm/box?type=send">发件箱</a>查看</div>';
 			$this->view->title = $this->_getParam('title');
 			$this->view->username = UserModel::fetch($this->view->uid, 'realName');
 			$friends = UserModel::fetch(Cmd::myid(), 'friends');

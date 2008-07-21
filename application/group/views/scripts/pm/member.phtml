@@ -7,6 +7,7 @@
 <div class="span-14">
 	<div class="oneCol">
 		<h3 class="mg10" style="letter-spacing:2px">给<?= $this->username ?>发送站内信息</h3>
+		<?= $this->msg ?>
 		<form id="pm_form" class="mglf10" method="post" onsubmit="return sendMessage()">
 			<p class="txtc">标题 <input type="text" name="title" class="text" value="<?= $this->title ?>" /></p>
 			<p class="txtc"><textarea class="text" name="content"></textarea></p>
@@ -38,7 +39,7 @@
 	function sendMessage()
 	{
 		var data = $('.container').fastSerialize();
-		$.post('/group/pm/send', data, function(html){
+		$.post('/group/pm/send?uid=<?= $this->uid ?>', data, function(html){
 			$('#tip').html(html);
 		});
 		return false;
