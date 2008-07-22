@@ -28,18 +28,35 @@ class MemberController extends Zend_Controller_Action
     public function inviteAction()
     {
         $this->view = $this->getHelper('viewRenderer')->view;
-        // 邀请对方已经加入的群组
-        $uid = (int)$this->_getParam('uid');
-        $user_groups = GroupMemberModel::fetchByUid($uid);
-        $filter_groups = array();
-        foreach($filter_groups as $g)
+        
+        $R = $this->getRequest();
+        if($R->isPost()) // 批量邀请
         {
-            $filter_groups[] = $g['group_id']; // 需要过滤掉的群组
+            $uid = $R->getPost('uid');
+            $gids = $R->getPost('gid');
+            foreach($gids as $g)
+            {
+                UserModel::invite($g, $uid);
+            }
+            echo '<div class="success">成功邀请'.UserModel::fetch($uid,'realName').'</div>';
         }
         
-        // 获取我加入的群组
-        $this->view->my_groups = GroupMemberModel::fetchByUid(Cmd::myid());
-        $this->render('invite');
+        else
+        {
+            // 邀请对方已经加入的群组
+            $uid = (int)$this->_getParam('uid');
+            $user_groups = GroupMemberModel::fetchByUid($uid);
+            $filter_groups = array();
+            foreach($user_groups as $g)
+            {
+                $filter_groups[] = $g['group_id']; // 需要过滤掉的群组
+            }
+            // 获取我加入的群组
+            $this->view->uid = $uid;
+            $this->view->filter_group = $filter_groups;
+            $this->view->my_groups = GroupMemberModel::fetchByUid(Cmd::myid());
+            $this->render('invite');
+        }
     }
     
 	/**

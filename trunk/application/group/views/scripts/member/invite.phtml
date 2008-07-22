@@ -1,0 +1,25 @@
+<?php if($this->my_groups): ?>
+<h3>邀请加入以下群组</h3>
+<form id="invite_form">
+<input type="hidden" name="uid" value="<?= $this->uid ?>" />
+<?php foreach($this->my_groups as $g): ?>
+<?php if(!in_array($g['group_id'], $this->filter_group) && !UserModel::isInvited($g['group_id'], $this->uid)): ?>
+<label for="g_<?= $g['group_id'] ?>"><input name="gid[]" value="<?= $g['group_id'] ?>" id="g_<?= $g['group_id'] ?>" type="checkbox" /><?= $g['name'] ?></label> 
+<?php endif; ?>
+<?php endforeach; ?>
+<p class="txtr"><input onclick="doInvite()" class="btn" type="button" value="发送邀请" /></p>
+</form>
+<?php endif; ?>
+
+<script type="text/javascript">
+    function doInvite()
+    {   if($('input[name*="gid"]').size > 0)
+        $.post('/group/member/invite', $('#invite_form').fastSerialize(), function(html){
+            $.facebox(html);
+        });
+        else
+        {
+            $.facebox.close();
+        }
+    }
+</script>
