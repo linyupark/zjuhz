@@ -46,7 +46,7 @@
             foreach(Zend_Registry::get('sessGroup')->my as $val): ?>
         <table class="mglf10 span-18 last dashBorder">
             <tr>
-                <td class="pd10" width="10%"><?= Cmd::groupIcon($val['group_id']) ?></td>
+                <td class="pd10" width="10%"><?= Cmd::groupIcon($val['group_id'], 'height="40" width="40"') ?></td>
                 <td class="vm f14 txtl hrefspan-8">
                     <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $val['name'] ?></a>
                     <span class="quiet">
