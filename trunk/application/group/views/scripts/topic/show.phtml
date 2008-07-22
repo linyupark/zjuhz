@@ -70,7 +70,7 @@
 					<td rowspan="2" class="photo txtc">
 						<?= Commons::getUserFace($reply['user_id']) ?>
 						<p class="txtc" id="topic_user_<?= $reply['reply_id'] ?>">
-							<a onclick="/group/member/profile?uid=<?= $reply['user_id'] ?>" href="javascript:ucard(<?= $reply['user_id'] ?>)"><?= $reply['realName'] ?></a>
+							<a onclick="location.href='/group/member/profile?uid=<?= $reply['user_id'] ?>'" href="javascript:ucard(<?= $reply['user_id'] ?>)"><?= $reply['realName'] ?></a>
 						</p>
 					</td>
 					<td class="title">&nbsp;
