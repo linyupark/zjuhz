@@ -4,7 +4,7 @@
 <input type="hidden" name="uid" value="<?= $this->uid ?>" />
 <?php foreach($this->my_groups as $g): ?>
 <?php if(!in_array($g['group_id'], $this->filter_group) && !UserModel::isInvited($g['group_id'], $this->uid)): ?>
-<label for="g_<?= $g['group_id'] ?>"><input name="gid[]" value="<?= $g['group_id'] ?>" id="g_<?= $g['group_id'] ?>" type="checkbox" /><?= $g['name'] ?></label> 
+<li style="list-style:none; margin-left:20px;"><label style="font-weight:normal" for="g_<?= $g['group_id'] ?>"><input name="gid[]" value="<?= $g['group_id'] ?>" id="g_<?= $g['group_id'] ?>" type="checkbox" /><?= $g['name'] ?></label></li>
 <?php endif; ?>
 <?php endforeach; ?>
 <p class="txtr"><input onclick="doInvite()" class="btn" type="button" value="发送邀请" /></p>
