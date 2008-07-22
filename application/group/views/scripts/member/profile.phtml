@@ -18,7 +18,9 @@
                         <?= Cmd::icon('user_add.png') ?> 
 						<a href="javascript:beFriendsWith(<?= $this->uid ?>)">加为好友</a><br />
                         <?= Cmd::icon('email_go.png') ?> 
-						<a href="/group/pm/member?uid=<?= $this->uid ?>">发站内信</a>
+						<a href="/group/pm/member?uid=<?= $this->uid ?>">发站内信</a><br />
+                        <?= Cmd::icon('emoticon_grin.png') ?>
+                        <a href="javascript:invite(<?= $this->uid ?>)">邀请入群</a>
                     </p>
                 </td>
                 <td>
@@ -79,12 +81,12 @@
     <div class="oneCol pdd10 mgu10">
         <table width="98%">
             <tr>
-                <th colspan="6"><h3 class="mglf10">联系方式</h3></th>
+                <th colspan="6" class="txtl"><h3 class="mglf10">联系方式</h3></th>
             </tr>
             <?php
             $private = UserModel::fetch($this->uid, 'ext_private');
             if($private == 0 || !UserModel::isFriend($this->uid, Cmd::myid())): ?>
-                <td colspan="6 pd10 mglf10">你无权查看此信息</td>
+                <td colspan="6" class="pd10">你无权查看此信息</td>
             <?php else: ?>
             <tr>
                 <td width="12%" class="quiet txtr pd5">手机号码:</td>
@@ -143,4 +145,10 @@
 			$.facebox(html);
 		});
 	}
+    function invite(uid)
+    {
+        $.get('/group/member/invite?uid='+uid, null, function(html){
+            $.facebox(html);
+        });
+    }
 </script>

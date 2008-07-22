@@ -22,6 +22,26 @@ class MemberController extends Zend_Controller_Action
 		$this->view->page = $this->_getParam('p', 1);
 	}
 	
+    /**
+     * 发送邀请到我加入的群组
+     * */
+    public function inviteAction()
+    {
+        $this->view = $this->getHelper('viewRenderer')->view;
+        // 邀请对方已经加入的群组
+        $uid = (int)$this->_getParam('uid');
+        $user_groups = GroupMemberModel::fetchByUid($uid);
+        $filter_groups = array();
+        foreach($filter_groups as $g)
+        {
+            $filter_groups[] = $g['group_id']; // 需要过滤掉的群组
+        }
+        
+        // 获取我加入的群组
+        $this->view->my_groups = GroupMemberModel::fetchByUid(Cmd::myid());
+        $this->render('invite');
+    }
+    
 	/**
 	 * 成员列表
 	 * */
