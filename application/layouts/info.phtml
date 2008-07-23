@@ -22,10 +22,11 @@
 		<div class="span-13 last">
 			<div id="passport" class="hrefspan-8 push-1 last">
 				<?php if ($this->passport()): ?>
-				您好！<?= $this->passport('realName') ?>，
-				<a href="/member/my/">我的账号</a>，
-				资讯积分(<?= $this->Coin($this->login['uid']) ?>)，
-				<a href="/info/admin">投稿</a>，
+				您好！<?= $this->passport('realName') ?>
+                <a style="color:green" href="javascript:fastInvite()">邀请校友</a> 
+				<a href="/member/my/">我的账号</a> 
+				资讯积分(<?= $this->Coin($this->login['uid']) ?>) 
+				<a href="/info/admin">投稿</a> 
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
 				<a href="/member/register/">注册</a>
@@ -57,7 +58,7 @@
 		<?= $this->layout()->content; ?>
 	</div>
 	
-	<div id="footer" class="container txtr hrefspan-8 pd10">
+	<div id="footer" class="container txtc hrefspan-8 pd10">
 		<hr />
 		<a href="/info/support/help">帮助</a>
 		<a href="/info/support/about">关于</a>
