@@ -108,6 +108,7 @@
 		<form id="reply_form" method="post" onsubmit="return doReply()">
 		<p class="mglf10"><label>回复标题：
 			<input type="text" name="title" class="text" value="" style="width:88%" /></label></p>
+		<span id="upload_form"></span>
 		<input type="hidden" name="content" />
 		<input type="hidden" name="gid" value="<?= $this->gid ?>" />
 		<input type="hidden" name="tid" value="<?= $this->tid ?>" />
@@ -143,9 +144,6 @@
 		KE_CUSTOM_STR('<div class="quote"><h3>引用：'+$('#topic_user_'+id).html()+'</h3>'+$('#topic_content_'+id).html()+'</div><br /><br />');
 		window.scroll(0,10000);
 	}
-</script>
-		
-<script type="text/javascript">
 	$(document).ready(function(){
 		var t = window.setTimeout(function(){
 			$('.content img').each(function(){
@@ -162,4 +160,5 @@
 			});
 		},2000);
 	});
+	$('#upload_form').load('/group/file/upload?gid=<?= $this->gid ?>');
 </script>
