@@ -25,9 +25,9 @@ imgtext[1]='教育专家朱棣云于本周四为校友作讲座';
 imgLink[1]='http://www.zjuhz.com/info/view/detail/id/460';
 imgAlt[1]='教育专家朱棣云于本周四为校友作讲座';
 imgUrl[2]='/static/images/pics/02.jpg';
-imgtext[2]='7月22日羽毛球活动报名';
-imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=15&tid=107';
-imgAlt[2]='7月22日羽毛球活动报名';
+imgtext[2]='2008年7月22日羽毛球活动照片';
+imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=15&tid=129&p=1';
+imgAlt[2]='2008年7月22日羽毛球活动照片';
 
 function changeimg(n)
 {

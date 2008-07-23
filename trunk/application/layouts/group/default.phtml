@@ -19,7 +19,8 @@
 		<div class="span-13 last">
 			<div id="passport" class="hrefspan-8 push-1 last">
 				<?php if ($this->passport()): ?>
-				您好！<?= $this->passport('realName') ?>，
+				您好！<?= $this->passport('realName') ?> 
+				<a style="color:green" href="javascript:fastInvite()">邀请校友</a> 
 				<a href="/group/my">我的群组</a>
 				<a href="/group/pm/box">站内信(<?= GroupPmModel::no_read_num(Cmd::myid()); ?>)</a> 
 				<a href="/member/my/">我的账号</a>
@@ -49,7 +50,7 @@
 		<?= $this->layout()->content; ?>
 	</div>
 	
-	<div id="footer" class="container txtr hrefspan-8 pd10">
+	<div id="footer" class="container txtc hrefspan-8 pd10">
 		<hr />
 		<a href="/info/support/help">帮助</a>
 		<a href="/info/support/about">关于</a>

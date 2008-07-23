@@ -1,0 +1,34 @@
+<form id="fast_invite_form" onsubmit="return doFastInvite()">
+<p>校友姓名：<input class="text" type="text" name="cname" id="cname" maxlength="6" value="" /></p>
+<p><input class="btn" type="submit" value="生成邀请码">
+<span id="ikey"></span>
+</p>
+</form>
+<script type="text/javascript">
+    function doFastInvite()
+    {   
+        $('.btn').attr("disabled", true);
+        var cardname = $('#cname').val();
+        // 看看名片里有没有这个人
+        $.getJSON("/home/invite/card?cname="+cardname, function(data){
+            if(data['new'] == true) //新名片
+            {
+                $.post("/member/my/docard/", {cid:data['cid'], gid:data['gid'], cname:cardname, memo:null}, function(html){
+                    if(html == 'message')
+                    {
+                        $('#ikey').html('邀请码：'+data['cid']);
+                    }
+                });
+            }
+            else
+            {
+                if(data['success'] == true)
+                $('#ikey').html(cardname+'已经成功被您邀请');
+                else
+                $('#ikey').html('邀请码：'+data['cid']);
+            }
+        });
+        
+        return false;
+    }
+</script>

@@ -1,3 +1,10 @@
+function fastInvite()
+{
+    $.get('/home/invite/form', null, function(html){
+        $.facebox(html);
+    });
+}
+
 // 获取DOM对象
 function getObject(obj){
 	if (document.getElementById(obj))	{
