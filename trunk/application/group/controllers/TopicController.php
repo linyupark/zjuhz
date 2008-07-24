@@ -25,7 +25,7 @@ class TopicController extends Zend_Controller_Action
 	public function indexAction() 
 	{
         $this->view->elite = $this->_getParam('elite');
-        $this->view->pagesize = 30;
+        $this->view->pagesize = 20;
 	}
 	
 	# 详细帖
