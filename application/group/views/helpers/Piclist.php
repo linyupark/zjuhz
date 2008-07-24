@@ -20,7 +20,7 @@ class Zend_View_Helper_Piclist
                 if((time() - $pic['pubtime']) < 3600*18)
                 $new = Cmd::icon('new.png');
             	$str .= '<div style="float:left; padding:10px 30px;">
-                <a href="/group/album/show?gid='.$gid.'&aid='.$pic['album_id'].'"><img src="'.$this->getPic($gid, 'sample_'.$pic['file'], $pic['pubtime']).'" /></a>
+                <a href="/group/album/show?gid='.$gid.'&aid='.$pic['album_id'].'"><img src="'.$this->getPic($gid, 'sample_'.$this->tolower($pic['file']), $pic['pubtime']).'" /></a>
                 <p>'.$new.' 发布人: <a href="/group/member/profile?uid='.$pic['user_id'].'">'.UserModel::fetch($pic['user_id'], 'realName').'</a></p></div>
                 ';
             }
@@ -44,6 +44,13 @@ class Zend_View_Helper_Piclist
     function getPic($gid, $file, $time)
     {
         return '/static/groups/'.$gid.'/images/'.date('y_m_d', $time).'/'.$file;
+    }
+    
+    function tolower($str)
+    {
+        $EXT = array('JPG','JPEG','PNG','GIF');
+        $ext = array('jpg','jpeg','png','gif');
+        return str_replace($EXT, $ext, $str);
     }
 }
 
