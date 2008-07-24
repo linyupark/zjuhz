@@ -1,19 +1,77 @@
 <form id="fast_invite_form" onsubmit="return doFastInvite()">
 <p>校友姓名：<input class="text" type="text" name="cname" id="cname" maxlength="6" value="" /></p>
-<p><input class="btn" type="submit" value="生成邀请码">
+<p>电子邮箱：<input class="text" type="text" name="eMail" id="eMail" maxlength="50" value="" />
+</p>
+<p>
+<input onclick="doFastEmail()" class="btn" type="button" value="发送邀请邮件" />    
+<input class="btn" type="submit" value="获取邀请码">
 <span id="ikey"></span>
 </p>
 </form>
 <script type="text/javascript">
+    function doFastEmail()
+    {
+        if($('#cname').val() == '' || $('#eMail').val() == '') return false;
+        
+        $('input[type="button"]').attr("disabled", true);
+        var cardname = $('#cname').val();
+        var email = $('#eMail').val();
+        
+        $('input[type="button"]').val('发送中..请等待');
+        
+        $.getJSON("/home/invite/card?cname="+cardname, function(data){
+            if(data['new'] == true) //新名片
+            {
+                $.post("/member/my/docard/", {cid:data['cid'], gid:data['gid'], cname:cardname, eMail:email, memo:''}, function(html){
+                    if(html == 'message')
+                    {
+                        var text = '我是<?= $this->passport('realName') ?>，我在杭州浙江大学校友会网站(www.zjuhz.com)内找到了很多浙大同学，这里还创建了我们的班级，也有同学们的照片和话题帖子，只要注册就能看到！:)\
+杭州浙江大学校友会网站是一个真实可靠的浙大校友社区，你可以第一时间了解母校动态、与同学(或校友)们交流，还能组织(或参加)丰富的线下活动呢！\
+只要在浏览器内打开下面的链接即可注册：\
+http://zjuhz/member/register/invite/ikey/'+data['cid']+'/\
+你也可以先打开主页逛逛，想要加入时在注册页面内输入邀请码：'+data['cid']+'\
+http://www.zjuhz.com/\
+大家都在等你哦！^_^\
+(此邮件不需要回复)';
+                    
+                    $.post("/member/my/doemail/", {cid:data['cid'], eMail:email, bodyText:text }, function(html){
+                        $('input[type="button"]').val('发送完毕');
+                    });
+                    }
+                });
+            }
+            else
+            {
+                if(data['success'] == true)
+                $('#ikey').html(cardname+'已经成功被您邀请');
+                else
+                {
+                    var text = '我是<?= $this->passport('realName') ?>，我在杭州浙江大学校友会网站(www.zjuhz.com)内找到了很多浙大同学，这里还创建了我们的班级，也有同学们的照片和话题帖子，只要注册就能看到！:)\
+杭州浙江大学校友会网站是一个真实可靠的浙大校友社区，你可以第一时间了解母校动态、与同学(或校友)们交流，还能组织(或参加)丰富的线下活动呢！\
+只要在浏览器内打开下面的链接即可注册：\
+http://zjuhz/member/register/invite/ikey/'+data['cid']+'/\
+你也可以先打开主页逛逛，想要加入时在注册页面内输入邀请码：'+data['cid']+'\
+http://www.zjuhz.com/\
+大家都在等你哦！^_^\
+(此邮件不需要回复)';
+                    $.post("/member/my/doemail/", {cid:data['cid'], eMail:email, bodyText:text }, function(html){
+                        $('input[type="button"]').val('发送完毕');
+                    });
+                }
+            }
+        });
+    }
+
     function doFastInvite()
-    {   
-        $('.btn').attr("disabled", true);
+    {
+        if($('#cname').val() == '') return false;
+        $('input[type="submit"]').attr("disabled", true);
         var cardname = $('#cname').val();
         // 看看名片里有没有这个人
         $.getJSON("/home/invite/card?cname="+cardname, function(data){
             if(data['new'] == true) //新名片
             {
-                $.post("/member/my/docard/", {cid:data['cid'], gid:data['gid'], cname:cardname, memo:null}, function(html){
+                $.post("/member/my/docard/", {cid:data['cid'], gid:data['gid'], cname:cardname, memo:''}, function(html){
                     if(html == 'message')
                     {
                         $('#ikey').html('邀请码：'+data['cid']);
