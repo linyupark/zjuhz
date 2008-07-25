@@ -41,6 +41,13 @@ class GroupEventModel
         $db->insert('tbl_group_event', $data);
         return $db->lastInsertId();
     }
+    
+    # 事件修改
+    static function update($data, $url)
+    {
+        $db = Zend_Registry::get('dbGroup');
+        $db->update('tbl_group_event', $data, 'url = "'.$url.'"');
+    }
 }
 
 ?>
