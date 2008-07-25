@@ -19,44 +19,10 @@
 			
 		}
 		
-		#每个栏目的详细列表
+		# 资讯首页
 		function indexAction()
 		{
-			//创建对象
-			$Category = new CategoryModel();
-			$Db = Zend_Registry::get('dbInfo');
-			
-			//获取当前需要显示的分类列表
-			$categoryId = (int)$this->_getParam('category',0);
-			if($categoryId == 0) $categoryId = $Category->fetchRow()->category_id;
-			
-			$this->view->categoryId = $categoryId;
-			
-			$row = $Db->fetchRow('SELECT COUNT(`entity_id`) AS `numrows` FROM `tbl_entity` WHERE `category_id` = ?', $categoryId);
-			
-			Page::$pagesize = 15;
-			//按页获取信息列表
-			Page::create(array(
-			"href_open" => "<a href='/info/?category={$categoryId}&p=%d'>", 
-			"href_close" => "</a>", 
-			"num_rows" => $row['numrows'],
-			"cur_page" => $this->_getParam('p',1)));
-			
-			// 一些统计
-			$this->view->numrows = $row['numrows'];
-			$this->view->numpages = Page::$num_pages;
-			$this->view->curPage = Page::$_set['cur_page'];
-			
-			$this->view->pagination = Page::$page_str;
-												  
-			$this->view->rows = $Db->fetchAll('SELECT `entity_id`,`entity_title`,`entity_pub_time`,`entity_top`,`user_name`,`realName`,`entity_view_num` 
-			                                   FROM `vi_entity` WHERE `category_id` = ? AND `entity_pub` = 1 
-			                                   ORDER BY `entity_top` DESC ,`entity_pub_time` DESC, `entity_id` DESC 
-			                                   LIMIT '.Page::$offset.','.Page::$pagesize, $categoryId);
-												  
-			//分类列表
-			$this->view->categories = $Category->fetchAll();
-			
+			$this->view->db = new EntityModel();
 		}
 		
 		#验证图片

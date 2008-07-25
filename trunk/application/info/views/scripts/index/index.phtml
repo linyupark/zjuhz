@@ -1,49 +1,165 @@
-<div class="span-4">
-	<div class="sideBar pdd10">
-		<h3 class="mg10">资讯中心</h3>
+<style type="text/css">
+	img.pt { float:left; padding:0 15px; }
+	.extend h2{ padding:20px 0 10px 20px; font-size:14px; }
+	.extend ul{ padding-left:10px; }
+	.extend li{ line-height:150%; font-size:12px; }
+	.extend a{ text-decoration:none; color:#094B90 }
+	.extend a:hover{ text-decoration:underline; }
+</style>
+<div class="oneCol span-24 extend last">
+	<div class="span-8 pdd10">
+		<?php $mxzx = $this->block($this->db, 1, 10); ?>
+		<h2><a href="/info/sort/?category=1">母校资讯</a></h2>
+		<img class="pt" src="/static/images/info/1.jpeg" width="80" />
+		<ul class="mglf10">
+		<?php foreach($mxzx as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+		
+	<div class="span-8">
+		<?php $bhdt = $this->block($this->db, 2, 10); ?>
+		<h2><a href="/info/sort/?category=2">本会动态</a></h2>
+		<img class="pt" src="/static/images/info/2.jpeg" width="80" />
 		<ul>
-			<?php if($this->categories): foreach ($this->categories as $cate): ?>
-			<li class="mglf10">
-			<a class="disblock pd3" href="?category=<?= $cate->category_id ?>"<?php if($this->categoryId == $cate->category_id) echo ' style="background:#F7F4E5"' ?>>
-			<img border="0" src="/static/images/icon/<?= $cate->category_icon ?>.gif" />
-			<?= $cate->category_name ?></a></li>
-			<?php endforeach; endif; ?>
+		<?php foreach($bhdt as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+	
+	<div class="span-8 last">
+		<?php $hdjz = $this->block($this->db, 4, 10); ?>
+		<h2><a href="/info/sort/?category=4">活动讲座</a></h2>
+		<img class="pt" src="/static/images/info/3.jpeg" width="80" />
+		<ul>
+		<?php foreach($hdjz as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
 		</ul>
 	</div>
 </div>
-
-<div class="span-20 last">
-	<table class="table-1" cellspacing="0" width="100%">
-		<tr>
-			<th width="70%">
-				<strong class="f14"><?= Cmd::getCateName($this->categoryId) ?></strong> 共：
-				<small> <?= $this->numrows ?>篇 , 
-				<?= $this->numpages ?>页</small>
-			</th>
-			<th width="20%">发布时间</th>
-			<th width="10%" class="txtc">点击数</th>
-		</tr>
-		<?php if(!count($this->rows)): ?>
-		<tr><td colspan="3">该类尚未发布任何信息</td></tr>
-		<?php else: foreach ($this->rows as $k => $v): ?>
-		<tr>
-			<td class="pd5 f14 dashBorder">
-				<?php if($v['entity_top'] == 1): ?>
-				<img src="/static/images/bullet/red.gif" align="absmiddle" /> 
-				<?php else : ?>
-				<img src="/static/images/bullet/green.gif" align="absmiddle" /> 
-				<?php endif; ?>
-				<a href="/info/view/detail/id/<?= $v['entity_id'] ?>"><?= $v['entity_title'] ?></a>
-				<?php if(time()-$v['entity_pub_time'] < (12*3600)): ?>
-				<img src="/static/images/icon/new.gif" />
-				<?php endif; ?>
-			</td>
-			<td class="f12 dashBorder"><?= Lp_Date::timespan($v['entity_pub_time']) ?>前</td>
-			<td class="f12 dashBorder txtc"><?= $v['entity_view_num'] ?></td>
-		</tr>
-		<?php endforeach; endif; ?>
-	</table>
-	<div class="pagination"><?= $this->pagination ?></div>
+		
+		
+<div class="sideBar extend span-24 last pdd10" style="margin-top:10px;">
+	<div class="span-8">
+		<?php $zjxy = $this->block($this->db, 9, 10); ?>
+		<h2><a href="/info/sort/?category=9">走近校友</a></h2>
+		<img class="pt" src="/static/images/info/4.jpeg" width="80" />
+		<ul>
+		<?php foreach($mxzx as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_orange.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+		
+	<div class="span-8">
+		<?php $bhgg = $this->block($this->db, 7, 10); ?>
+		<h2><a href="/info/sort/?category=7">本会公告</a></h2>
+		<img class="pt" src="/static/images/info/5.jpeg" width="80" />
+		<ul>
+		<?php foreach($bhgg as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_orange.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+		
+	<div class="span-8 last">
+		<?php $hzhb = $this->block($this->db, 3, 10); ?>
+		<h2><a href="/info/sort/?category=3">合作伙伴</a></h2>
+		<img class="pt" src="/static/images/info/6.jpeg" width="80" />
+		<ul>
+		<?php foreach($hzhb as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_orange.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
 </div>
+		
+<div class="oneCol span-24 mgu10 extend last" style="margin-top:10px;">
+	<div class="span-8 pdd10">
+		<?php $mxzx = $this->block($this->db, 10, 10); ?>
+		<h2><a href="/info/sort/?category=10">投资泰和</a></h2>
+		<img class="pt" src="/static/images/info/7.jpeg" width="80" />
+		<ul class="mglf10">
+		<?php foreach($mxzx as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+		
+	<div class="span-8">
+		<?php $bhdt = $this->block($this->db, 8, 10); ?>
+		<h2><a href="/info/sort/?category=8">开心一刻</a></h2>
+		<ul>
+		<?php foreach($bhdt as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
 	
-	
+	<div class="span-8 last">
+		<?php $hdjz = $this->block($this->db, 6, 10); ?>
+		<h2><a href="/info/sort/?category=6">知识大全</a></h2>
+		<ul>
+		<?php foreach($hdjz as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+</div>
