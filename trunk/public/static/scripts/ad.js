@@ -20,10 +20,10 @@ document.write('#imgTitle{width:'+imgWidth+';top:-'+(textFromHeight+14)+'px;heig
 document.write('</style>');
 document.write('<div id="focuseFrom">');
 //焦点字框高度样式表 结束
-imgUrl[1]='/static/images/pics/01.jpg';
-imgtext[1]='教育专家朱棣云于本周四为校友作讲座';
-imgLink[1]='http://www.zjuhz.com/info/view/detail/id/460';
-imgAlt[1]='教育专家朱棣云于本周四为校友作讲座';
+imgUrl[1]='/static/groups/23/images/200807241216912764343.jpg';
+imgtext[1]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
+imgLink[1]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
+imgAlt[1]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
 imgUrl[2]='/static/images/pics/02.jpg';
 imgtext[2]='2008年7月22日羽毛球活动照片';
 imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=15&tid=129&p=1';
