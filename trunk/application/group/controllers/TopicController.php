@@ -160,7 +160,9 @@ class TopicController extends Zend_Controller_Action
 						'mod_time' => time()
 					);
 					GroupTopicModel::update($data, $this->view->tid);
-					echo Commons::js_jump('/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid);
+                    $url = '/group/topic/show?gid='.$this->view->gid.'&tid='.$this->view->tid;
+                    GroupEventModel::update(array('name'=>$title), $url);
+					echo Commons::js_jump($url);
 				}
 			}
 			
