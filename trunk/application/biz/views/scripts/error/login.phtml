@@ -2,7 +2,7 @@
 <form method="post" id="relogin_form" name="relogin_form" onsubmit="return dologin();">
 <p>登录账号：<input tabindex="1" class="inputtxt" id="uname" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></p>
 <p>登录密码：<input tabindex="2" class="inputtxt" id="pswd" name="pswd" type="password" maxlength="16" value="<?= $this->pswd; ?>" /></p>
-<p><label for="alive">下次自动登录：<input id="alive" type="checkbox" value="0" name="alive" /></label></p>
+<p><label for="alive">下次自动登录：<input id="alive" type="checkbox" <?= ($this->uname) ? 'checked="checked"':'' ?> value="0" name="alive" /></label></p>
 <p></p>
 <button class="btn" onclick="location.href='/member/register/'">注册账号</button>&nbsp;<input tabindex="3" class="btn" id="btnLogin" name="btnLogin" type="submit" value="登录" />
 </form>
