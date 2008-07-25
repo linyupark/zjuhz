@@ -35,10 +35,11 @@
 				    ->add(new Zend_Acl_Resource('login'))
 				    ->add(new Zend_Acl_Resource('logout'))
 				    ->add(new Zend_Acl_Resource('search'))
+					->add(new Zend_Acl_Resource('sort'))
 				    ->add(new Zend_Acl_Resource('admin'));
 				// 权限设置
 				$acl->deny(array('guest','member'))
-					->allow(array('guest','member'), array('view','login','logout','support','index','search','subject','comment'))
+					->allow(array('guest','member'), array('view','login','logout','support','index','search','subject','comment','sort'))
 				    ->allow('member', 'admin', array('entity_add', 'entity_mod','index'))
 				    ->allow('admin');
 				// 寄存
