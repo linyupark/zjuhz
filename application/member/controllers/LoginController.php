@@ -42,7 +42,8 @@ class LoginController extends Zend_Controller_Action
     	    $this->_redirect(($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : '../'), array('exit')));
 
     	$this->view->headTitle(Zend_Registry::get('iniMember')->head->titleLogin);
-    	$this->view->uname    = $_COOKIE['zjuhz_member']['alive']; // 记住账号
+    	$this->view->uname = $_COOKIE['zjuhz_member']['uname']; // 记住账号
+        $this->view->pswd = Commons::decrypt($_COOKIE['zjuhz_member']['pswd']); // 记住账号
     	$this->view->redirect = $_SERVER['HTTP_REFERER']; // 上页来源
     }
 
