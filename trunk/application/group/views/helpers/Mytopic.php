@@ -10,7 +10,7 @@
             $topics = $db->fetchAll('SELECT `topic_id`,`group_id`,`title`,`reply_num`
                           FROM `tbl_group_topic`
                           WHERE `pub_user` = '.Cmd::myid().'
-                          ORDER BY `pub_time`
+                          ORDER BY `pub_time` DESC 
                           LIMIT '.(int)$limit);
             
             if(count($topics) == 0) return '您还没有发布过任何话题';
