@@ -8,7 +8,7 @@
 </style>
 <div class="oneCol span-24 extend last">
 	<div class="span-8 pdd10">
-		<?php $mxzx = $this->block($this->db, 1, 10); ?>
+		<?php $mxzx = $this->block($this->db, 1, 5); ?>
 		<h2><a href="/info/sort/?category=1">母校资讯</a></h2>
 		<img class="pt" src="/static/images/info/1.jpeg" width="80" />
 		<ul class="mglf10">
@@ -25,10 +25,10 @@
 	</div>
 		
 	<div class="span-8">
-		<?php $bhdt = $this->block($this->db, 2, 10); ?>
+		<?php $bhdt = $this->block($this->db, 2, 5); ?>
 		<h2><a href="/info/sort/?category=2">本会动态</a></h2>
 		<img class="pt" src="/static/images/info/2.jpeg" width="80" />
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($bhdt as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -42,10 +42,10 @@
 	</div>
 	
 	<div class="span-8 last">
-		<?php $hdjz = $this->block($this->db, 4, 10); ?>
+		<?php $hdjz = $this->block($this->db, 4, 5); ?>
 		<h2><a href="/info/sort/?category=4">活动讲座</a></h2>
 		<img class="pt" src="/static/images/info/3.jpeg" width="80" />
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($hdjz as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -62,10 +62,10 @@
 		
 <div class="sideBar extend span-24 last pdd10" style="margin-top:10px;">
 	<div class="span-8">
-		<?php $zjxy = $this->block($this->db, 9, 10); ?>
+		<?php $zjxy = $this->block($this->db, 9, 5); ?>
 		<h2><a href="/info/sort/?category=9">走近校友</a></h2>
 		<img class="pt" src="/static/images/info/4.jpeg" width="80" />
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($zjxy as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -79,10 +79,10 @@
 	</div>
 		
 	<div class="span-8">
-		<?php $bhgg = $this->block($this->db, 7, 10); ?>
+		<?php $bhgg = $this->block($this->db, 7, 5); ?>
 		<h2><a href="/info/sort/?category=7">本会公告</a></h2>
 		<img class="pt" src="/static/images/info/5.jpeg" width="80" />
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($bhgg as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -96,10 +96,10 @@
 	</div>
 		
 	<div class="span-8 last">
-		<?php $hzhb = $this->block($this->db, 3, 10); ?>
+		<?php $hzhb = $this->block($this->db, 3, 5); ?>
 		<h2><a href="/info/sort/?category=3">合作伙伴</a></h2>
 		<img class="pt" src="/static/images/info/6.jpeg" width="80" />
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($hzhb as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -115,7 +115,7 @@
 		
 <div class="oneCol span-24 mgu10 extend last" style="margin-top:10px;">
 	<div class="span-8 pdd10">
-		<?php $thtz = $this->block($this->db, 10, 10); ?>
+		<?php $thtz = $this->block($this->db, 10, 5); ?>
 		<h2><a href="/info/sort/?category=10">投资泰和</a></h2>
 		<img class="pt" src="/static/images/info/7.jpeg" width="80" />
 		<ul class="mglf10">
@@ -132,9 +132,9 @@
 	</div>
 		
 	<div class="span-8">
-		<?php $kxyk = $this->block($this->db, 8, 10); ?>
+		<?php $kxyk = $this->block($this->db, 8, 5); ?>
 		<h2><a href="/info/sort/?category=8">开心一刻</a></h2>
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($kxyk as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
@@ -148,10 +148,44 @@
 	</div>
 	
 	<div class="span-8 last">
-		<?php $zsdq = $this->block($this->db, 6, 10); ?>
+		<?php $zsdq = $this->block($this->db, 6, 5); ?>
 		<h2><a href="/info/sort/?category=6">知识大全</a></h2>
-		<ul>
+		<ul class="mglf10">
 		<?php foreach($zsdq as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+</div>
+		
+<div class="sideBar extend span-24 last pdd10" style="margin-top:10px;">
+	<div class="span-8 pdd10">
+		<?php $zsdq = $this->block($this->db, 6, 5); ?>
+		<h2><a href="/info/sort/?category=10">知识大全</a></h2>
+		<ul class="mglf10">
+		<?php foreach($zsdq as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+		
+	<div class="span-8">
+		<?php $dnjq = $this->block($this->db, 5, 5); ?>
+		<h2><a href="/info/sort/?category=8">电脑技巧</a></h2>
+		<ul class="mglf10">
+		<?php foreach($dnjq as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
 		<img src="/static/images/icon/new.gif" /> 
