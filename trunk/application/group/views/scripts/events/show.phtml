@@ -1,0 +1,150 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar(); ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <div class="oneCol pd10">
+        <h3><a href="/group/events/list">群组活动</a> / <?= $this->event->title ?></h3>
+        <p>发起人：<a class="f14" onclick="location.href='/group/member/profile?uid=<?= $this->event->founder ?>'" href="javascript:ucard(<?= $this->event->founder ?>)"><?= UserModel::fetch($this->event->founder, 'realName') ?></a></p>
+        <p><?= Cmd::icon('clock_2.png') ?>
+            <span class="quiet" style="font-size:22px; font-weight:bold">
+                <?= $this->event_life ?>
+            </span>
+        </p>
+        
+        <p>地点：<span class="f14"><?= $this->event->location ?></span></p>
+        <?php if(trim($this->event->intro) != ''): ?>
+            <div class="extInline f14">
+            <?= stripslashes($this->event->intro) ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if($this->event->event_start > time()): // 活动还没开始 ?>
+        
+            <?php if(Cmd::myid() == $this->event->founder): ?>
+            <p class="f14">
+            <a href="/group/events/edit?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_edit.png') ?> 编辑</a>
+            <a target="_blank" href="/group/events/members?eid=<?= $this->eid ?>"><?= Cmd::icon('printer.png') ?> 打印联络方式</a>
+            </p>
+            <?php endif; ?>
+        
+            <p>活动状态：<span style="color:green; font-size:14px;">尚未开始</span>
+            <span class="quiet">(离开始还有：<?= Lp_Date::timespan(time()-($this->event->event_start-time())) ?>)</span>
+            </p>
+            <p id="m_list">报名成员(<?= $this->event->member_num ?>人)：
+        <?php if($this->members): foreach($this->members as $m): ?>
+            <a id="m_<?= $m['member'] ?>" onclick="location.href='/group/member/profile?uid=<?= $m['member'] ?>'" href="javascript:ucard(<?= $m['member'] ?>)"><?= UserModel::fetch($m['member'], 'realName') ?></a> 
+        <?php endforeach; else: ?>
+            -
+        <?php endif; ?>
+        </p>
+        
+        
+            <?php if($this->event->sign_close > time()): // 活动报名期内 ?>
+                <br />
+                <div class="success">
+                <span class="f14">可报名</span>(<?= Lp_Date::timespan(time()-($this->event->sign_close-time())) ?>后报名结束)
+                <input id="joinOrGetOut" class="btn" type="button" value="<?= $this->isJoin['value'] ?>" onclick="<?= $this->isJoin['func'] ?>" />
+                </div>
+            <?php else: ?>
+                <div class="notice">报名结束</div>
+            <?php endif; ?>
+        
+        
+        <?php else: // 活动开始了 ?>
+            <p class="hrefspan-8">参与成员(<?= $this->event->member_num ?>人)：
+            <?php if($this->members): foreach($this->members as $m): ?>
+            <a id="m_<?= $m['member'] ?>" onclick="location.href='/group/member/profile?uid=<?= $m['member'] ?>'" href="javascript:ucard(<?= $m['member'] ?>)"><?= UserModel::fetch($m['member'], 'realName') ?></a> 
+            <?php endforeach; else: ?>
+            -
+            <?php endif; ?>
+            </p>
+            <?php if($this->event->event_close > time()): // 活动ing.. ?>
+                <p>活动状态：<span style="color:orange">进行中...</span></p>
+            <?php else: ?>
+                <p>活动状态：<span style="color:red">结束了</span></p>
+                <!-- 活动感言 -->
+                <div class="extInline2 f14" id="review" style="line-height:180%">
+                    <?php if(Cmd::myid() == $this->event->founder): ?>
+                    <div><a class="quiet" href="javascript:review()">[组织者活动感言]</a></div>
+                    <?php endif; ?>
+                <?= stripcslashes($this->event->review) ?>
+                </div>
+                <div id="review_content" class="hide">
+                    <input name="content" type="hidden" value="<?= htmlspecialchars(stripcslashes($this->event->review)) ?>" />
+                    <?= $this->editor(0); ?>
+                    <p class="txtc">
+                        <input onclick="cancel()" class="btn" type="button" value="取消" />
+                        <input onclick="reviewSave()" class="btn" type="button" value="保存" />
+                    </p>
+                </div>
+                
+                <?php foreach($this->reviews as $uid => $r): ?>
+                <div class="extInline" style="background:#f5f5f5; border:1px dashed #ccc; line-height:180%;">
+                    <span class="f14"><?= UserModel::fetch($uid, 'realName') ?></span> :
+                    <?= stripslashes($r) ?>
+                </div>
+                <?php endforeach; ?>
+                
+                <?php if($this->isJoin['value'] == '取消报名'): ?>
+                <div class="pd10 f14">
+                    <a href="javascript:member_review()"><?= Cmd::icon('page_white_text.png') ?>发表活动感言</a>
+                </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    //成员活动感言
+    function member_review()
+    {
+        $.post('/group/events/review?eid=<?= $this->eid ?>', null, function(html){
+            $.facebox(html);
+        });
+    }
+    function reviewSave()
+    {
+        $.post('/group/events/show?eid=<?= $this->eid ?>',{content:editor.data()}, function(){
+            history.go(0);
+        });
+    }
+
+    function review()
+    {
+        $('#review').hide();
+        $('#review_content').show();
+    }
+    
+    function cancel()
+    {
+        $('#review').show();
+        $('#review_content').hide();
+    }
+
+    function join()
+    {
+        $.post('/group/events/join?eid=<?= $this->eid ?>',null,function(html){
+            if(html == 'success')
+            {
+                history.go(0);
+            }
+            else
+            {
+               $.facebox(html);
+            }
+        });
+    }
+    
+    function getOut()
+    {
+        $.post('/group/events/getout?eid=<?= $this->eid ?>',null,function(html){
+            if(html == 'success')
+            {
+                history.go(0);
+            }
+        });
+    }
+</script>

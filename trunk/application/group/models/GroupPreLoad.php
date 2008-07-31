@@ -54,6 +54,7 @@ class GroupPreLoad extends Zend_Controller_Plugin_Abstract
 			<a href="/group/index">群组首页</a>
 			<a href="/group/my">我的群组</a>
 			<a href="/group/create">创建新群组</a>
+            <a href="/group/events/list">群组活动</a>
 		</div>
 		');
 	}

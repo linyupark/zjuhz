@@ -1,0 +1,43 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar(); ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <div class="oneCol pd10">
+        <h2>修改活动 <span class="f12">(*为必填内容)</span></h2>
+        <form id="event_form" onsubmit="return pubEvent()">
+            <p>活动名称* <input value="<?= $this->event->title ?>" type="text" class="text" name="title" style="width:500px" /><br />
+            <span class="quiet">(请尽量将活动的内容概括出来)</span></p>
+            <p>报名截止* <input value="<?= date('y-m-d H:i', $this->event->sign_close) ?>" type="text" class="text" name="sign_close" /></p>
+            <p>活动开始* <input value="<?= date('y-m-d H:i', $this->event->event_start) ?>" type="text" class="text" name="event_start" /></p>
+            <p>活动结束* <input value="<?= date('y-m-d H:i', $this->event->event_close) ?>" type="text" class="text" name="event_close" /></p>
+            <p>活动地点* <input style="width:500px" value="<?= $this->event->location ?>" type="text" class="text" name="location" /></p>
+            <p>活动介绍 <span class="quiet">(要求，费用等备注信息)</span>
+                <input type="hidden" name="intro" value="<?= htmlspecialchars(stripcslashes($this->event->intro)) ?>" />
+                <?= $this->editor($this->gid, null, '130px', 'intro') ?>
+            </p>
+            <p class="txtc">
+                <input type="submit" class="btn" value="确定保存修改信息" style="width:60%" />
+				<input type="button" class="btn" value="取消" onclick="history.back()" />
+            </p>
+            <span id="event_form_tip"></span>
+        </form>
+    </div>
+</div>
+            
+<script>
+    function pubEvent()
+    {
+        $('.btn').attr('disable',true);
+        var data = $('#event_form').fastSerialize();
+		data.push({name:"intro", value:editor.data()});
+        $.post('/group/events/edit?eid=<?= $this->eid ?>', data, function(html){
+            $('#event_form_tip').html(html);
+            window.scroll(0,10000);
+            $('.btn').attr('disable',false);
+        });
+        return false;
+    }
+</script>

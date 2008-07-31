@@ -1,0 +1,21 @@
+<form id="ext_form" onsubmit="return saveExt()">
+    <h3>完善您的联系资料</h3>
+    <p>手机号码：<input type="text" class="text" name="ext_phone" /></p>
+    <span id="ext_tip"></span>
+    <p class="txtr"><input type="submit" class="btn" value="提交" /></p>
+</form>
+
+<script>
+    function saveExt()
+    {
+        $.post('/group/events/ext_save', $('#ext_form').fastSerialize(), function(html){
+            if(html == 'success')
+            {
+                join();
+            }
+            else
+            $('#ext_tip').html(html);
+        });
+        return false;
+    }
+</script>
