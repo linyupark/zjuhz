@@ -1,0 +1,12 @@
+<h2>
+    <?= $this->event->title ?>成员联系方式
+</h2>
+<ul>
+    <?php foreach($this->members as $m): ?>
+    <li><?= UserModel::fetch($m['member'],'realName') ?> - <?= UserModel::fetch($m['member'],'ext_phone') ?></li>
+    <?php endforeach; ?>
+</ul>
+    
+<script>
+    window.print();
+</script>

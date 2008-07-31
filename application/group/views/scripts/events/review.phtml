@@ -1,0 +1,17 @@
+
+    <h3>活动感言</h3>
+    <textarea id="member_review_cont" class="text"><?= strip_tags(stripcslashes($this->review['review'])) ?></textarea>
+    <p class="txtc"><input onclick="memberReviewSave()" style="width:100px;" class="btn" type="button" value="发表" /></p>
+
+<script>
+    function memberReviewSave()
+    {
+        var member_review_cont = $('#member_review_cont').val();
+        $.post('/group/events/reviewsave?eid=<?= $this->review['event_id'] ?>',
+               {content:member_review_cont},
+               function(html){
+            if(html=='ok')
+            history.go(0);
+        });
+    }
+</script>
