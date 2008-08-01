@@ -17,7 +17,7 @@ h3{ font-size:14px; }
 td{ line-height:150%; }
 img{ border:none; }
 
-p{ padding:10px 0 5px 0; }
+p{ padding:10px 0 5px 0; line-height:180%; }
 li{ margin-top:5px; }
 strong{ font-weight:bold; }
 .txtr{ text-align:right;}

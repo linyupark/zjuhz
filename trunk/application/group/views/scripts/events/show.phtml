@@ -4,10 +4,6 @@
     </div>
 </div>
 
-<style>
-    .e_cont *{  line-height:180% }
-</style>
-
 <div class="span-19 last">
     <div class="oneCol pd10">
         <h3><a href="/group/events/list">群组活动</a> / <?= $this->event->title ?></h3>
@@ -20,7 +16,7 @@
         
         <p>地点：<span class="f14"><?= $this->event->location ?></span></p>
         <?php if(trim($this->event->intro) != ''): ?>
-            <div class="extInline f14" class="e_cont">
+            <div class="extInline f14">
             <?= stripslashes($this->event->intro) ?>
             </div>
         <?php endif; ?>
