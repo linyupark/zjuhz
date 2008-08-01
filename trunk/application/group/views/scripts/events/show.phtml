@@ -16,7 +16,7 @@
         
         <p>地点：<span class="f14"><?= $this->event->location ?></span></p>
         <?php if(trim($this->event->intro) != ''): ?>
-            <div class="extInline f14">
+            <div class="extInline f14" style="line-height:180%">
             <?= stripslashes($this->event->intro) ?>
             </div>
         <?php endif; ?>
