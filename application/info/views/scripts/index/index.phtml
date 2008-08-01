@@ -166,10 +166,10 @@
 		
 <div class="sideBar extend span-24 last pdd10" style="margin-top:10px;">
 	<div class="span-8 pdd10">
-		<?php $zsdq = $this->block($this->db, 6, 5); ?>
-		<h2><a href="/info/sort/?category=10">知识大全</a></h2>
+		<?php $xyfx = $this->block($this->db, 12, 5); ?>
+		<h2><a href="/info/sort/?category=12">校友分享</a></h2>
 		<ul class="mglf10">
-		<?php foreach($zsdq as $i): ?>
+		<?php foreach($xyfx as $i): ?>
 		<li>
 		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
 		<img src="/static/images/icon/new.gif" /> 
@@ -183,7 +183,7 @@
 		
 	<div class="span-8">
 		<?php $dnjq = $this->block($this->db, 5, 5); ?>
-		<h2><a href="/info/sort/?category=8">电脑技巧</a></h2>
+		<h2><a href="/info/sort/?category=5">电脑技巧</a></h2>
 		<ul class="mglf10">
 		<?php foreach($dnjq as $i): ?>
 		<li>
