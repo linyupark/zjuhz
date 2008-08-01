@@ -196,4 +196,20 @@
 		<?php endforeach; ?>
 		</ul>
 	</div>
+		
+	<div class="span-8">
+		<?php $bysn = $this->block($this->db, 11, 5); ?>
+		<h2><a href="/info/sort/?category=11">毕业十年</a></h2>
+		<ul class="mglf10">
+		<?php foreach($bysn as $i): ?>
+		<li>
+		<?php if(time()-$i->entity_pub_time < (12*3600)): ?>
+		<img src="/static/images/icon/new.gif" /> 
+		<?php else: ?>
+		<?= Cmd::icon('bullet_blue.png') ?> 
+		<?php endif; ?>
+		<a title="<?= Commons::utfSubStr($i->entity_title,35).'..' ?>" href="/info/view/detail/id/<?= $i->entity_id ?>"><?= Commons::utfSubStr($i->entity_title,35).'..' ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
 </div>
