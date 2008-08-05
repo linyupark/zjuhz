@@ -21,8 +21,11 @@ $params['dbname'] = 'zjuhz_group'; // 群组
 $dbGroup = Zend_Db::factory($iniDb->default->adapter, $params);
 $params['dbname'] = 'zjuhz_events'; // 活动
 $dbEvent = Zend_Db::factory($iniDb->default->adapter, $params);
+$params['dbname'] = 'zjuhz_devote'; // 热心度
+$dbDevote = Zend_Db::factory($iniDb->default->adapter, $params);
 Zend_Registry::set('dbEvent', $dbEvent);
 Zend_Registry::set('dbGroup', $dbGroup);
+Zend_Registry::set('dbDevote', $dbDevote);
 Zend_Registry::set('iniGroup', $iniGroup);
 Zend_Registry::set('iniConfig',new Zend_Config_Ini('../../common/Ini/Config.ini'));
 Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));

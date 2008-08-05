@@ -1,0 +1,95 @@
+
+    
+    <!-- 列表 -->
+    <div class="span-10">
+        <p>姓名 <input id="name" style="width:80px;" name="name" type="text" class="text" />
+            <button class="btn" onclick="devoteSearch()">查找</button>
+            <button class="btn" onclick="devoteCreate('no')">创建</button>
+        </p>
+        <table class="table-1" width="100%">
+            <tr>
+                <th class="txtl">id</th>
+                <th class="txtl">姓名</th>
+                <th class="txtc">热心度</th>
+                <th class="txtc"></th>
+            </tr>
+            <?php if($this->rows == null): ?>
+            <tr>
+                <td colspan="4" class="pd10 f14">还没有任何信息</td>
+            </tr>
+            <?php else: foreach($this->rows as $r): ?>
+            <tr>
+                <td class="dashBorder">
+                    <input name="member_id" value="<?= $r['member_id'] ?>" type="text" class="text" style="width:12px;" />
+                </td>
+                <td class="dashBorder">
+                    <input name="name" value="<?= $r['name'] ?>" type="text" class="text" style="width:42px;" />
+                </td>
+                <td class="dashBorder txtc">
+                    <?= $r['point'] ?>
+                </td>
+                <td class="dashBorder txtr">
+                    <?php if($r['member_id'] != 0): ?>
+                    <a href="/group/member/profile?uid=<?= $r['member_id'] ?>">个人信息</a>
+                    <?php endif; ?>
+                    <button class="btn" onclick="modSave(<?= $r['uid'] ?>)">保存</button>
+                    <button class="btn" onclick="grade(<?= $r['uid'] ?>,1)">加分</button>
+                </td>
+            </tr>
+            <?php endforeach; endif; ?>
+        </table>
+        <div class="pagination"><?= $this->pagination ?></div>
+    </div>
+    
+    <!-- 详细增加的资料 -->
+    <div class="span-14 last">
+        <div class="extInline" id="grade"></div>
+    </div>
+    
+
+<script type="text/javascript">
+    
+    function devoteSearch()
+    {
+        var name = $('#name').val();
+        location.href="/group/devote?s="+name;
+    }
+    
+    function grade(uid,page)
+    {
+        $('#grade').fadeTo("fast",0.3);
+        $('#grade').load('/group/devote/grade?uid='+uid+'&p='+page,null,function(){
+            $('#grade').fadeTo("fast",1);
+        });
+    }
+
+    function modSave(uid)
+    {
+        $.post('/group/devote/mod?uid='+uid, $('#u_'+uid).fastSerialize(),function(data){
+            if(data == 'success')
+            {
+                alert('保存成功');
+            }
+        });
+    }
+
+    function devoteCreate(realy)
+    {
+        var name = $('#name').val();
+        $.post('/group/devote/create?realy='+realy,{name:name}, function(data){
+            if(data == 'realy')
+            {
+                var c = confirm(name+'已经存在热心度表单中，确定新建？');
+                if(c == true)
+                {
+                    devoteCreate('yes');
+                }
+            }
+            else if(data == 'success')
+            {
+                window.history.go(0);
+            }
+            else alert(data);
+        });
+    }
+</script>

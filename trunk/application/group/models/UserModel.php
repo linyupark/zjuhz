@@ -2,6 +2,7 @@
 
 class UserModel
 {
+	
 	# 个人资料更新
 	static function update($data, $uid)
 	{
