@@ -16,6 +16,7 @@
 		private $packs = array(
 			// 中文包
 			'cn' => array(
+				'valid_timeformat' => '%0%必须为有效的时间格式',
 				'valid_exact' => '%0%的长度必须为%1%',
 				'valid_required' => '%0%不能为空',
 				'valid_numeric' => '%0%必须为数字',
@@ -178,6 +179,13 @@
 	     * -----------------------------------------------------------------
 	     */
 	    
+		# 时间格式
+		private function timeformat($value, $name, $alias)
+		{
+			if(strtotime($value) == null)
+			$this->addMessage($name, 'valid_timeformat', array($alias));
+		}
+		
         # 必填
 	    private function required($value, $name, $alias)
 	    {
