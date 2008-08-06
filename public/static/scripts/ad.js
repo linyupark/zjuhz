@@ -20,14 +20,14 @@ document.write('#imgTitle{width:'+imgWidth+';top:-'+(textFromHeight+14)+'px;heig
 document.write('</style>');
 document.write('<div id="focuseFrom">');
 //焦点字框高度样式表 结束
-imgUrl[1]='/static/groups/23/images/200807241216912764343.jpg';
-imgtext[1]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
-imgLink[1]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
-imgAlt[1]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
-imgUrl[2]='/static/images/pics/02.jpg';
-imgtext[2]='2008年7月22日羽毛球活动照片';
-imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=15&tid=129&p=1';
-imgAlt[2]='2008年7月22日羽毛球活动照片';
+imgUrl[1]='static/groups/10/images/200808061217984557765.jpg';
+imgtext[1]='2008年8月2日首次创业沙龙成功举行';
+imgLink[1]='http://www.zjuhz.com/group/topic/show?gid=10&tid=159';
+imgAlt[1]='2008年8月2日首次创业沙龙成功举行';
+imgUrl[2]='/static/groups/23/images/200807241216912764343.jpg';
+imgtext[2]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
+imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
+imgAlt[2]='教育专家朱棣云同家长俱乐部分享家庭教育理念';
 
 function changeimg(n)
 {
