@@ -34,10 +34,14 @@
 		<?= $this->render('items/notice.phtml'); ?>
 		<?= $this->render('items/trends.phtml'); ?>
 		<?= $this->render('items/zjuorg.phtml'); ?>
-		<?= $this->render('items/teacher.phtml'); ?>
 		<?= $this->render('items/dev.phtml'); ?>
+		<?= $this->render('items/teacher.phtml'); ?>
 	</div>
 	<div class="span-10 mgu10">
+                <div class="oneCol mgd10">
+                    <h3 class="mglf10">群组活动</h3>
+                    <?= $this->newevents(5) ?>
+                </div>
 		<?= $this->render('items/biz.phtml'); ?>
 		<?= $this->render('items/groups.phtml'); ?>
 	</div>
@@ -49,8 +53,7 @@
 </div>
 <?php $this->cache->end(); endif; ?>
 
-
-<script>
+<script type="text/javascript">
 	$('#myclass').load('/class/ajax/myclass/?uid=<?= $this->passport('uid') ?>');
 	$('#mybiz').load('http://www.zjuhz.com/biz/external/base/type/companies/');
 	$('#online').load('http://www.zjuhz.com/member/external/olnum/');
