@@ -6,11 +6,13 @@ class Zend_View_Helper_Newevents
 {
     function newevents($limit)
     {
-        $E = new EventsModel('dbEvent');
-        $select = $E->select()->order('sign_close DESC')->where('sign_close > '.time())->limit($limit);
-        $events = $E->fetchAll($select);
-        
-        $str = '<table class="table-1" width="100%" id="events_table">
+        $E = new Events();
+        $events = $E->_db->fetchAll('SELECT * FROM `tbl_events`
+                               WHERE `sign_close` > '.time().'
+                               ORDER BY `sign_close`
+                               DESC LIMIT '.$limit);
+
+        $str = '<table class="table-1" width="100%">
         <tr>
             <th class="txtl">活动名称</th>
             <th class="txtc">报名截止</th>
@@ -21,8 +23,8 @@ class Zend_View_Helper_Newevents
             foreach($events as $e)
             {
                 $str .= '<tr>';
-                $str .= '<td class="pd10"><a href="/group/events/show?eid='.$e->event_id.'">'.stripcslashes($e->title).'</a></td>';
-                $str .= '<td class="pd10 txtc quiet">'.Lp_Date::timespan(time() - ($e->sign_close - time())).'后</td>';
+                $str .= '<td class="pd10"><a href="/group/events/show?eid='.$e['event_id'].'">'.stripcslashes($e['title']).'</a></td>';
+                $str .= '<td class="pd10 txtc quiet">'.Lp_Date::timespan(time() - ($e['sign_close'] - time())).'后</td>';
                 $str .= '</tr>';
             }
             
