@@ -8,12 +8,12 @@
 body{
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	margin:0; padding:0;
-	background:#fff url('/static/images/bodybg.png') repeat-x top;
+	/*background:#fff url('/static/images/group/body_bg.gif') repeat-x top;*/
+	background:#fff;
 }
 
 .container{
-	background:#fff;
-	padding:10px;
+	background:url(/static/images/f2_olympics1_bg.jpg) no-repeat center top;
 }
 
 .entity *{ line-height:170%; }
