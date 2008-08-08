@@ -3,8 +3,8 @@
 <p>电子邮箱：<input class="text" type="text" name="eMail" id="eMail" maxlength="50" value="" />
 </p>
 <p>
-<input onclick="doFastEmail()" class="btn" type="button" value="发送邀请邮件" />    
-<input class="btn" type="submit" value="获取邀请码">
+<input onclick="doFastEmail()" class="btn fastbt" type="button" value="发送邀请邮件" />    
+<input class="btn fastbt" type="submit" value="获取邀请码">
 <span id="ikey"></span>
 </p>
 </form>
@@ -13,7 +13,7 @@
     {
         if($('#cname').val() == '' || $('#eMail').val() == '') return false;
         
-        $('input[type="button"]').attr("disabled", true);
+        $('input.fastbt').attr("disabled", true);
         var cardname = $('#cname').val();
         var email = $('#eMail').val();
         
@@ -65,7 +65,7 @@ http://www.zjuhz.com/\
     function doFastInvite()
     {
         if($('#cname').val() == '') return false;
-        $('input[type="submit"]').attr("disabled", true);
+        $('input.fastbt').attr("disabled", true);
         var cardname = $('#cname').val();
         // 看看名片里有没有这个人
         $.getJSON("/home/invite/card?cname="+cardname, function(data){
