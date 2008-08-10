@@ -7,7 +7,7 @@
             $db = Zend_Registry::get('dbGroup');
             $groups = $db->fetchAll('SELECT `group_id`,`name`,`total_click`
                           FROM `tbl_group` ORDER BY `total_click` DESC LIMIT '.(int)$limit);
-            $str = '<h3 class="pd10">流量排行</h3>';
+            $str = '<h3 class="pd10">热门群组</h3>';
             foreach($groups as $k => $g)
             {
                 $str .= '<div class="mglf10" style="line-height:150%; padding:3px 0 0 0">

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎2008届留杭校友 - 杭州浙江大学校友会（筹）</title>
+<link rel="stylesheet" type="text/css" href="/static/styles/group/subject/2008.css">
+</head>
+
+<body>
+	<div class="body_inner">
+		<div class="big_head">
+			<div class="header">
+				<a href="/member/register" title="注册" class="reg"></a>
+				<a href="/member/login" title="登录" class="login"></a>
+				<a href="/member/register" title="加入我们" class="join"></a>
+			</div>
+			<div class="body">
+				<div class="wrapper">
+					<table class="container" cellspacing="12" width="100%">
+						<tr>
+							<td rowspan="2" valign="top" class="module module_blue module_2008_intro" width="300">
+								<h1>杭州校友会介绍</h1>
+								<img src="/static/images/subject/2008/intro.jpg">
+								<p>本网站由杭州市浙江大学校友会（筹）运营，是专为在杭浙大校友之间加强交流、沟通而建设的。杭州市浙江大学校友会（以下简称“校友会”）是在母校领导和校友总会关怀下，由一群在杭的热心校友自发组成的非营利性群众组织。校友会的常务办公地点设在杭州市西溪路525号浙大科技园内。目前筹备工作的负责人是恒生电子董事陈鸿校友。</p>
+								<a href="/info/support/about" class="more">详细介绍 &gt;&gt;</a>
+							</td>
+							<td valign="top" class="module module_yellow" width="300">
+								<h1>深造在杭州</h1>
+								<ul>
+									
+								</ul>
+							</td>
+							<td rowspan="2" valign="top" class="module module_blue module_group_list">
+								<?= $this->hotgroup(5) ?>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top" class="module module_yellow">
+								<?php
+								
+								$str = '<h1>热帖排行</h1><ul>';
+								$hot_list = GroupTopicModel::hot(5);
+								foreach($hot_list as $topic)
+								{
+									$str .= '<li><a class="sideBarLink" href="/group/topic/show?gid='.$topic['group_id'].'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a></li>';
+								}
+								echo $str.'</ul>';
+								
+								?>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top" class="module module_blue">
+								<h1>初入职场</h1>
+								<ul>
+									
+								</ul>
+							</td>
+							<td valign="top" class="module module_blue">
+								<h1>生活在杭州</h1>
+								<ul>
+									
+								</ul>
+							</td>
+							<td valign="top" class="module module_blue module_insert_logo">
+								<a href="http://www.liubros.com/" target="_blank"><img src="/static/images/subject/liubros.gif" /></a>
+								<a href="#" target="_blank"><img src="/static/images/subject/liubros.gif" /></a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="wrapper">
+					<span><a href="/info/support/help">帮助</a>|<a href="/info/support/about">关于</a>|<a href="/info/support/contact_us">联系我们</a>|<a href="/info/support/privacy_claim">隐私声明</a>|<a href="/old">旧版回顾</a>|<a href="http://ourzju.uu1001.com/">校友论坛</a></span>
+					<span>浙ICP备06052510号 杭州浙江大学校友会(筹) &copy 2008</span>
+					<span>设计合作：<a href="http://www.liubros.com/" target="_blank">刘氏兄弟 LiuBros</a></span>
+				</div>
+			</div>
+			<div class="bottom">
+			</div>
+		</div>
+
+	</div>
+
+
+		
+
+</body>
+</html>
