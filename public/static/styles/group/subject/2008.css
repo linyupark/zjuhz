@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(common.css);
+
+body { background: #d6ceb5; }
+.body_inner { background: url(/static/images/subject/2008/home_02.gif) repeat-y top center #d6ceb5; }
+.big_head { background: url(/static/images/subject/2008/home_01.jpg) no-repeat top center; }
+
+.header { height: 320px; }
+		.header a { display: block; position: relative; margin-left: auto; margin-right: auto; }
+		.header .reg { width: 76px; height: 32px; top: 0; left: 321px; }
+		.header .login { width: 76px; height: 32px; top: -32px; left: 416px; }
+		.header .join { width: 100px; height: 30px; top: 186px; left: 32px; }
+
+.bottom { background: url(/static/images/subject/2008/home_04.gif) no-repeat top center #d6ceb5; height: 66px; }
+
+.footer .wrapper { border-top: 1px solid #eee; margin-top: 10px; padding-top: 15px; }
+.footer * { color: #767676; text-decoration: none; }
+	.footer span { margin-left: 20px; }
+	.footer a { padding: 0 5px; }
+	
+	
+.module_2008_intro { }
+	.module_2008_intro img { padding: 2px; border: 1px solid #d2d3d2; }
+	.module_2008_intro p {  margin: 10px 0 0 0; }
+	
+.module_insert_logo { text-align: center; }
+	.module_insert_logo img { padding: 2px; border: 1px solid #d2d3d2; }
+	
+.module_group_list { }
+	.module_group_list .item { display: block; width: 100%; margin: 25px 0; text-decoration: none; }
+	.module_group_list .item img { border: 0; float: left; margin-right: 10px; }
+	.module_group_list .item h2 { font-size: 14px; color: #094b90; margin: 0; }
+	.module_group_list .item .score { font-size: 24px; color: #d7e4ea; font-family: SimHei; padding-top: 5px; }

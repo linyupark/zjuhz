@@ -41,7 +41,10 @@
 	</div>
 	
 	<div class="prepend-1 span-4 last">
-		<EMBED src=http://sports.sohu.com/upload/20061110daojishi2008/aoyun_djs.swf width=200 height=150 type=application/x-shockwave-flash wmode="transparent" allowNetworking="internal" allowScriptAccess="never"></EMBED>
+		<!--奥运信息 开始-->
+<iframe src="http://2008.ifeng.com/jiangpai/medal_gray.html" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="auto" width="201" height="190"></iframe>
+<!--奥运信息 结束--> 
+
 	</div>
 	
 	<hr class="space" />
@@ -58,6 +61,7 @@
 		<?= $this->render('items/dev.phtml'); ?>
 	</div>
 	<div class="span-10 mgu10">
+		<a href="/group/subject/zju2008"><img src="/static/images/subject/ad_1.jpg" class="pdd10" /></a>
 		<div class="oneCol mgd10">
                     <h3 class="mglf10">群组活动</h3>
                     <?= $this->newevents(5) ?>
