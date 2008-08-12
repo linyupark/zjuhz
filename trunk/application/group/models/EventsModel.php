@@ -23,8 +23,12 @@
         public static function join($eid)
         {
             $db = self::_dao();
-            $db->insert('tbl_events_member', array('event_id' => $eid, 'member' => Cmd::myid()));
-            $db->update('tbl_events',array('member_num'=>new Zend_Db_Expr('member_num + 1')), 'event_id = '.$eid);
+            $row = $db->fetchRow('SELECT `event_id` FROM `tbl_events_member` WHERE `event_id` = '.(int)$eid.' AND `member` = '.Cmd::myid());
+            if($row == false)
+            {
+                $db->insert('tbl_events_member', array('event_id' => $eid, 'member' => Cmd::myid()));
+                $db->update('tbl_events',array('member_num'=>new Zend_Db_Expr('member_num + 1')), 'event_id = '.$eid);
+            }
         }
         
         public static function getOut($eid)
