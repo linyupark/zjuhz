@@ -1,7 +1,17 @@
 <?php
 
 class Cmd
-{		
+{
+	/**
+	 * 直接返回当前访问用户的id
+	 *
+	 * @return int
+	 */
+	static function myid()
+	{
+		return Zend_Registry::get('sessCommon')->login['uid'];
+	}
+	
 	static function getCateName($cid)
 	{
 		$db = Zend_Registry::get('dbInfo');

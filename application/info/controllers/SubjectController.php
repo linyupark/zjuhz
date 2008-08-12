@@ -19,7 +19,7 @@ class SubjectController extends Zend_Controller_Action {
 	# 通用显示页
 	function indexAction()
 	{
-		$name = $this->getRequest()->getParam('of',FALSE);
+		$name = $this->getRequest()->getParam('of');
 		$this->render($name);
 	}
 	
@@ -69,6 +69,7 @@ class SubjectController extends Zend_Controller_Action {
 	# AJAX图片展示
 	function albumAction()
 	{
+		
 		$this->_helper->layout->disableLayout();
 		
 		$request = $this->_request;
@@ -106,6 +107,7 @@ class SubjectController extends Zend_Controller_Action {
 			$this->view->page = $page;
 			$this->view->pagination = $page_str;
 			$this->view->samples = $samples;
+													
 		}
 	}
 }

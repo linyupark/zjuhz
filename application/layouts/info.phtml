@@ -25,7 +25,7 @@
 				您好！<?= $this->passport('realName') ?>
                 <a style="color:green" href="javascript:fastInvite()">邀请校友</a> 
 				<a href="/member/my/">我的账号</a> 
-				资讯积分(<?= $this->Coin($this->login['uid']) ?>) 
+				资讯积分(<?= Cmd::myid() ?>) 
 				<a href="/info/admin">投稿</a> 
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
