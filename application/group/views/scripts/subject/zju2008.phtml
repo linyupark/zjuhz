@@ -28,9 +28,9 @@
 							<td valign="top" class="module module_yellow" width="300">
 								<h1>深造在杭州</h1>
 								<ul>
-									<?php $sz = GroupTopicModel::index(29, 5, 1, 0); ?>
-									<?php foreach($sz as $i): ?>
-									<li><a href="/group/topic/show?gid=15&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<?php $sz = GroupTopicModel::index(29, 8, 1, null); ?>
+									<?php foreach($sz['rows'] as $i): ?>
+									<li><a href="/group/topic/show?gid=3&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</td>
@@ -57,9 +57,9 @@
 							<td valign="top" class="module module_blue">
 								<h1>初入职场</h1>
 								<ul>
-									<?php $work = GroupTopicModel::index(28, 5, 1, 0); ?>
-									<?php foreach($work as $i): ?>
-									<li><a href="/group/topic/show?gid=15&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<?php $wk = GroupTopicModel::index(28, 5, 1, null); ?>
+									<?php foreach($wk['rows'] as $i): ?>
+									<li><a href="/group/topic/show?gid=28&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</td>
