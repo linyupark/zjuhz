@@ -10,6 +10,7 @@
         
         function zju2008Action()
         {
-            
+            $this->view->cache = CacheModel::init(null, 600);
+            $this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
         }
     }

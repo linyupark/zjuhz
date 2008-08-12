@@ -28,7 +28,10 @@
 							<td valign="top" class="module module_yellow" width="300">
 								<h1>深造在杭州</h1>
 								<ul>
-									
+									<?php $sz = GroupTopicModel::index(29, 5, 1, 0); ?>
+									<?php foreach($sz as $i): ?>
+									<li><a href="/group/topic/show?gid=15&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<?php endforeach; ?>
 								</ul>
 							</td>
 							<td rowspan="2" valign="top" class="module module_blue module_group_list">
@@ -54,13 +57,22 @@
 							<td valign="top" class="module module_blue">
 								<h1>初入职场</h1>
 								<ul>
-									
+									<?php $work = GroupTopicModel::index(28, 5, 1, 0); ?>
+									<?php foreach($work as $i): ?>
+									<li><a href="/group/topic/show?gid=15&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<?php endforeach; ?>
 								</ul>
 							</td>
 							<td valign="top" class="module module_blue">
 								<h1>生活在杭州</h1>
 								<ul>
-									
+									<?php if(!$this->cache->start('liveinhz')): ?>
+									<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>13)); ?>
+									<?php foreach($rows as $r): ?>
+									<li><a class="lk-1" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+										<?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></li>
+									<?php endforeach; ?>
+									<?php $this->cache->end(); endif; ?>
 								</ul>
 							</td>
 							<td valign="top" class="module module_blue module_insert_logo">
@@ -83,9 +95,5 @@
 		</div>
 
 	</div>
-
-
-		
-
 </body>
 </html>
