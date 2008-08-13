@@ -75,7 +75,7 @@ class LoginFilter extends MemberInterlayer
 		 */
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^[.]{2,16}+$/i'), 'breakChainOnFailure' => true, 'messages' => array(
+		   	    array('Regex', '/^(.*){2,16}+$/i'), 'breakChainOnFailure' => true, 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError)),  
           	'pswd' => array(
        	        array('StringLength', '6', '16'), 'breakChainOnFailure' => true, 'messages' => array(

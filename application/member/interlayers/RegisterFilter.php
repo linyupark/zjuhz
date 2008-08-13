@@ -152,7 +152,7 @@ class RegisterFilter extends MemberInterlayer
         );*/
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^[.]{2,16}$/i'), 'breakChainOnFailure' => true, 
+		   	    array('Regex', '/^(.*){2,16}$/i'), 'breakChainOnFailure' => true, 
 		   	    'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError))
         );
