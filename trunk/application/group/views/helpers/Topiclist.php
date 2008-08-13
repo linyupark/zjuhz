@@ -35,7 +35,7 @@ class Zend_View_Helper_Topiclist
                 $str .= '<tr>
                 			<td width="10px"><input class="hide" type="checkbox" name="t[]" value="'.$topic['topic_id'].'" /></td>
                             <td class="pd10 dashBorder f12">
-                            	'.$icon.' <a href="/group/topic/show?gid='.$gid.'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
+                            	'.$icon.' <a target="_blank" href="/group/topic/show?gid='.$gid.'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
                             </td>
                             <td class="txtc dashBorder">'.$topic['click_num'].'</td>
                             <td class="txtc dashBorder">'.$topic['reply_num'].'</td>
