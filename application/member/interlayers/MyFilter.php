@@ -574,7 +574,8 @@ class MyFilter extends MemberInterlayer
 		Zend_Loader::loadFile('NotEquals.php');
 
 		// 设置过滤规则
-		$filters = array('*' => array('StringTrim', 'StringToLower'));
+		//$filters = array('*' => array('StringTrim', 'StringToLower'));
+		$filters = array('*' => array('StringTrim'));
 
     	// 设置验证规则
 		$validators = array(

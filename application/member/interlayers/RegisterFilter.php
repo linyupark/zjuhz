@@ -139,12 +139,20 @@ class RegisterFilter extends MemberInterlayer
 	public function check($args)
 	{
 		// 设置过滤规则
-		$filters = array('*' => 'StringTrim', 'uname' => 'StringToLower');
+		//$filters = array('*' => 'StringTrim', 'uname' => 'StringToLower');
+		$filters = array('*' => 'StringTrim');
 
     	// 设置验证规则
+		/*
 		$validators = array(
 		    'uname' => array(
-		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 
+		   	    array('Regex', '/^[a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 
+		   	    'presence' => 'required', 'messages' => array(
+		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError))
+        );*/
+		$validators = array(
+		    'uname' => array(
+		   	    array('Regex', '/^[.]{0,14}$/i'), 'breakChainOnFailure' => true, 
 		   	    'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError))
         );
