@@ -30,7 +30,7 @@
 								<ul>
 									<?php $sz = GroupTopicModel::index(29, 8, 1, null); ?>
 									<?php foreach($sz['rows'] as $i): ?>
-									<li><a href="/group/topic/show?gid=3&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<li><a target="_blank" href="/group/topic/show?gid=3&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</td>
@@ -46,7 +46,7 @@
 								$hot_list = GroupTopicModel::hot(5);
 								foreach($hot_list as $topic)
 								{
-									$str .= '<li><a class="sideBarLink" href="/group/topic/show?gid='.$topic['group_id'].'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a></li>';
+									$str .= '<li><a target="_blank" class="sideBarLink" href="/group/topic/show?gid='.$topic['group_id'].'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a></li>';
 								}
 								echo $str.'</ul>';
 								
@@ -59,7 +59,7 @@
 								<ul>
 									<?php $wk = GroupTopicModel::index(28, 5, 1, null); ?>
 									<?php foreach($wk['rows'] as $i): ?>
-									<li><a href="/group/topic/show?gid=28&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
+									<li><a target="_blank" href="/group/topic/show?gid=28&tid=<?= $i['topic_id'] ?>"><?= $i['title'] ?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</td>
@@ -69,7 +69,7 @@
 									<?php if(!$this->cache->start('liveinhz')): ?>
 									<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_arts_snapshot', array('cat_id'=>13)); ?>
 									<?php foreach($rows as $r): ?>
-									<li><a class="lk-1" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+									<li><a target="_blank" class="lk-1" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
 										<?= Commons::utfSubStr($r['entity_title'],30).'..' ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></li>
 									<?php endforeach; ?>
 									<?php $this->cache->end(); endif; ?>
@@ -77,7 +77,6 @@
 							</td>
 							<td valign="top" class="module module_blue module_insert_logo">
 								<a href="http://www.liubros.com/" target="_blank"><img src="/static/images/subject/liubros.gif" /></a>
-								<a href="#" target="_blank"><img src="/static/images/subject/liubros.gif" /></a>
 							</td>
 						</tr>
 					</table>
