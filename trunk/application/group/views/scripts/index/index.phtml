@@ -5,10 +5,7 @@
 </div>
 
 <div class="span-12">
-    <div class="oneCol pdd10">
-        <h3 class="pd10">最近我的主题</h3>
         <?= $this->mytopic(5); ?>
-    </div>
     <div class="oneCol mgu10">
         <h3 class="pd10">近期活动</h3>
         <?= $this->newevents(5); ?>
@@ -48,6 +45,15 @@
 <div class="span-7 last">
     <div class="oneCol">
         <?= $this->newgroup(); ?>
+    </div>
+    
+    <div class="oneCol mgu10 pdd10">
+        <!-- 我的群组快速连接 -->
+        <p class="f12 mglf10"><b>参与的群组</b>: 
+        <?php if(Zend_Registry::get('sessGroup')->my) : foreach(Zend_Registry::get('sessGroup')->my as $val): ?>
+        <a href="/group/home?gid=<?= $val['group_id'] ?>"><?= $val['name'] ?></a> - 
+        <?php endforeach; endif; ?>
+        </p>
     </div>
     
     <div class="oneCol mgu10 pdd10">
