@@ -139,7 +139,7 @@ class RegisterFilter extends MemberInterlayer
 	public function check($args)
 	{
 		// 设置过滤规则
-		$filters = array('uname' => array('StringTrim', 'StringToLower'));
+		$filters = array('*' => 'StringTrim', 'uname' => 'StringToLower');
 
     	// 设置验证规则
 		$validators = array(
