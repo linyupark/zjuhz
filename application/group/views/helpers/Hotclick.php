@@ -11,7 +11,7 @@ class Zend_View_Helper_Hotclick
         foreach($hot_list as $topic)
         {
             $str .= '<p class="mglf10" style="line-height:150%; padding:3px 0 0 0">
-                '.Cmd::icon('bullet_red.png').' <a class="sideBarLink lk-2" href="/group/topic/show?gid='.$topic['group_id'].'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
+                '.Cmd::icon('bullet_red.png').' <a target="_blank" class="sideBarLink lk-2" href="/group/topic/show?gid='.$topic['group_id'].'&tid='.$topic['topic_id'].'">'.$topic['title'].'</a>
             </p>';
         }
         return $str;
