@@ -62,17 +62,22 @@ class RegisterFilter extends MemberInterlayer
 		Zend_Loader::loadFile('NotEquals.php');
 
 		// 设置过滤规则
+        /*
 		$filters = array(
 		    '*' => array('StringTrim', 'StripTags', 'StringToLower'), 
 	    	'ikey' => 'Alnum'
+    	);*/
+        $filters = array(
+		    '*' => array('StringTrim', 'StripTags')
     	);
 
     	// 设置验证规则
 		$validators = array(
+            /*
           	'ikey' => array(
                 array('StringLength', '10', '10'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->ikeyError, 
-                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), 
+                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), */
 		    'uname' => array(
 		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError)), 
