@@ -110,14 +110,16 @@ class RegisterController extends Zend_Controller_Action
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
 				$this->_sessMember->register = null;
+                Zend_Debug::dump(UserLogic::init()->register($regArgs));
 				if ($uid = UserLogic::init()->register($regArgs))
 				{
+                    Zend_Debug::dump(UserLogic::init()->register($regArgs));
 					$this->_sessMember->register            = $regArgs;
 					$this->_sessMember->register['uid']     = $uid;
 				    $this->_sessMember->register['classes'] = $postArgs['classes'];
 				}
 
-				echo 'redirect'; // 请求ajax跳转
+				//echo 'redirect'; // 请求ajax跳转
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 <!-- 状态信息 /////////////////////////////////////////// -->
 	<td class="nav">
 	    <?php if ($this->passport()) { ?>
-	    您好，<?= $this->passport('realName') ?>|
+	    您好，<?= $this->passport('realName') ?>|<a style="color:green" href="javascript:fastInvite()">邀请校友</a>|
 	    <?php if(false != DbModel::hasClass($this->passport('uid'))) :?>
 	    <a href="/class/home">我的班级</a>|
 	    <?php endif; ?><a href="/member/my/">我的账号</a>|
@@ -22,7 +22,7 @@
 	<a href="/help/">互助</a>
 	<a href="/class/" class="on">班级</a>
 	<a href="/group/">群组</a>
-	<a href="#">活动</a>
+	<a href="/group/events/list">活动</a>
 	</td>
 	</tr>
 	<tr>
