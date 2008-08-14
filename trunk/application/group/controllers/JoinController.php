@@ -37,9 +37,8 @@ class JoinController extends Zend_Controller_Action
 	            GroupModel::update(array('member_num'=>new Zend_Db_Expr('member_num+1')), $gid);
 	            UserModel::haveGroup($uid);
 	            Cmd::flushGroupSession();
-	            $this->view->message = '<div class="success f14">成功加入该群组，系统将自动跳转到
-				<a href="/group/home?gid='.$gid.'">群组首页</a></div>';
-				echo Commons::js_jump('/group/home?gid='.$gid.',1);
+	            $this->view->message = '<div class="success f14">成功加入该群组，系统将自动跳转到<a href="/group/home?gid='.$gid.'">群组首页</a></div>';
+				echo Commons::js_jump('/group/home?gid='.$gid,1);
 			}
 			
 			// 针对半公开群组 2
