@@ -117,7 +117,7 @@ class RegisterController extends Zend_Controller_Action
 				    $this->_sessMember->register['classes'] = $postArgs['classes'];
 				}
 
-				//echo 'redirect'; // 请求ajax跳转
+				echo 'redirect'; // 请求ajax跳转
 			}
 		}
 	}
