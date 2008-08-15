@@ -2,6 +2,14 @@
 
 class GroupReplyModel
 {
+	# 获取某用户所有回复数量
+	static function count($uid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$rows = $db->fetchAll('SELECT DISTINCT `topic_id` FROM `tbl_group_reply` WHERE `user_id` = ?', $uid);
+		return count($rows);
+	}
+	
 	static function update($data, $rid)
 	{
 		$db = Zend_Registry::get('dbGroup');

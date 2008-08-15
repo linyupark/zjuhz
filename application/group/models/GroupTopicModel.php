@@ -2,6 +2,14 @@
 
 class GroupTopicModel
 {
+	# 获取某用户所有发表数量
+	static function count($uid)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT COUNT(`topic_id`) AS `numrows` FROM `tbl_group_topic` WHERE `pub_user` = ?', $uid);
+		return $row['numrows'];
+	}
+	
 	# 流量排行 - 根据点击数
 	static function click($limit)
 	{

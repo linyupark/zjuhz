@@ -10,6 +10,64 @@ class MyController extends Zend_Controller_Action
         Cmd::flushGroupSession();
     }
     
+    # 我的话题管理列表
+    public function topicsAction()
+    {
+        $type = $this->_getParam('type', 'create'); // 默认为自己创建的帖子
+        $page = $this->_getParam('p', 1);
+        
+        $pagesize = Page::$pagesize = 30;
+        
+        // 计算创建帖子总数和回复总数
+        $reply_num = GroupReplyModel::count(Cmd::myid());
+        $topic_num = GroupTopicModel::count(Cmd::myid());
+        
+        $db = Zend_Registry::get('dbGroup');
+        
+        if($type == 'create') // 罗列我发表的所有帖子
+        {
+            Page::create(array(
+                'href_open' => '<a href="/group/my/topics?type='.$type.'&p=%d">',
+                'href_close' => '</a>',
+                'num_rows' => $topic_num,
+                'cur_page' => $page
+            ));
+            
+            $rows = $db->fetchAll('SELECT `topic_id`,`group_id`,`title`,`reply_num`,`reply_time`
+                                    FROM `tbl_group_topic`
+                                    WHERE `pub_user` = '.Cmd::myid().'
+                                    ORDER BY `pub_time` DESC 
+                                    LIMIT '.Page::$offset.','.$pagesize);
+        }
+        
+        if($type == 'join') // 罗列我参与的所有帖子
+        {
+            Page::create(array(
+                'href_open' => '<a href="/group/my/topics?type='.$type.'&p=%d">',
+                'href_close' => '</a>',
+                'num_rows' => $reply_num,
+                'cur_page' => $page
+            ));
+            
+            $rows = $db->fetchAll('SELECT DISTINCT `tbl_group_reply`.`topic_id`,
+                                             `tbl_group_topic`.`group_id`,
+                                             `tbl_group_topic`.`title`,
+                                             `tbl_group_topic`.`reply_num`,
+                                             `tbl_group_topic`.`reply_time` 
+                                    FROM `tbl_group_reply`
+                                    LEFT JOIN `tbl_group_topic` ON `tbl_group_reply`.`topic_id` = `tbl_group_topic`.`topic_id`
+                                    WHERE `tbl_group_reply`.`user_id` = '.Cmd::myid().'
+                                    ORDER BY `tbl_group_reply`.`reply_time` DESC 
+                                    LIMIT '.Page::$offset.','.$pagesize);
+        }
+        
+        $this->view->rows = $rows;
+        $this->view->pagination = Page::$page_str;
+        $this->view->topic_num = $topic_num;
+        $this->view->reply_num = $reply_num;
+        $this->view->type = $type;
+    }
+    
     # 自己的好友列表
     public function friendsAction()
     {
