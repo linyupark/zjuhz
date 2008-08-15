@@ -4,10 +4,10 @@
 
     class Zend_View_Helper_Mytopic
     {
-        function mytopic($limit)
+        function mytopic($lastLogin, $limit)
         {
             $db = Zend_Registry::get('dbGroup');
-            $topics = $db->fetchAll('SELECT `topic_id`,`group_id`,`title`,`reply_num`
+            $topics = $db->fetchAll('SELECT `topic_id`,`group_id`,`title`,`reply_num`,`reply_time`
                                     FROM `tbl_group_topic`
                                     WHERE `pub_user` = '.Cmd::myid().'
                                     ORDER BY `pub_time` DESC 
@@ -29,8 +29,11 @@
             </tr>';
             foreach($topics as $t)
             {
+                $temp = '';
+                if($lastLogin < $t['reply_time'])
+                $temp = Cmd::icon('new.png');
                 $str .= '<tr>';
-                $str .= '<td class="pd5 dashBorder"><a target="_blank" class="f12" href="/group/topic/show?gid='.$t['group_id'].'&tid='.$t['topic_id'].'">'.stripslashes($t['title']).'</a></td>';
+                $str .= '<td class="pd5 dashBorder"><a target="_blank" class="f12" href="/group/topic/show?gid='.$t['group_id'].'&tid='.$t['topic_id'].'">'.stripslashes($t['title']).'</a> '.$temp.'</td>';
                 $str .= '<td class="dashBorder txtc quiet">回复('.$t['reply_num'].')</td>';
                 $str .= '</tr>';
             }
