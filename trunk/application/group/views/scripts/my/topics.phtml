@@ -1,0 +1,48 @@
+<div class="span-5">
+    <div class="sideBar">
+        <?= $this->sortbar() ?>
+    </div>
+</div>
+
+<div class="span-19 last">
+    <!-- 帖子列表 -->
+    <div class="oneCol pdd10">
+        <h2 class="mglf10">我的帖子列表</h2>
+        <h3 class="mglf10 f12">
+            <a href="/group/my">我的群组</a> &gt; 
+            <a href="/group/my/topics?type=create"<?= ($this->type == 'create') ? 'style="font-size:14px;color:#000"':'' ?>>我发表的(<?= $this->topic_num ?>)</a> :: 
+            <a href="/group/my/topics?type=join"<?= ($this->type == 'join') ? 'style="font-size:14px;color:#000"':'' ?>>我参与的(<?= $this->reply_num ?>)</a>
+        </h3>
+        <table class="table-1" width="100%">
+            <tr>
+                <th width="70%">标题</th>
+                <th width="10%" class="txtc">回复</th>
+                <th width="20%" class="txtc">最后更新</th>
+            </tr>
+            <?php if(count($this->rows) > 0): foreach($this->rows as $r):
+                $temp = '';
+                if($this->passport('lastLogin') < $r['reply_time'])
+                $temp = Cmd::icon('new.png'); ?>
+            <tr>
+                <td class="pd5 dashBorder">
+                    <a href="/group/topic/show?gid=<?= $r['group_id'] ?>&tid=<?= $r['topic_id'] ?>" target="_blank">
+                        <?= ($r['title'] == null) ? '<span style="color:red">此帖已被删除</sapn>' : $r['title'] ?>
+                    </a>
+                    <?= $temp; ?>
+                </td>
+                <td class="pd5 dashBorder quiet txtc">
+                    <?= $r['reply_num'] ?>
+                </td>
+                <td class="pd5 dashBorder quiet txtc">
+                    <?= date('y-m-d H:i:m', $r['reply_time']) ?>
+                </td>
+            </tr>
+            <?php endforeach; else: ?>
+            <tr>
+                <td colspan="3" class="pd10">没有相关信息</td>
+            </tr>
+            <?php endif; ?>
+        </table>
+        <div class="pagination"><?= $this->pagination ?></div>
+    </div>
+</div>
