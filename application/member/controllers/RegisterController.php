@@ -112,7 +112,6 @@ class RegisterController extends Zend_Controller_Action
 				$this->_sessMember->register = null;
 				if ($uid = UserLogic::init()->register($regArgs))
 				{
-                    Zend_Debug::dump(UserLogic::init()->register($regArgs));
 					$this->_sessMember->register            = $regArgs;
 					$this->_sessMember->register['uid']     = $uid;
 				    $this->_sessMember->register['classes'] = $postArgs['classes'];
