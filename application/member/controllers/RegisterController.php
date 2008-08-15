@@ -110,7 +110,6 @@ class RegisterController extends Zend_Controller_Action
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
 				$this->_sessMember->register = null;
-                Zend_Debug::dump(UserLogic::init()->register($regArgs));
 				if ($uid = UserLogic::init()->register($regArgs))
 				{
                     Zend_Debug::dump(UserLogic::init()->register($regArgs));
