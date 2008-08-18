@@ -31,11 +31,11 @@ class AlumniController extends Zend_Controller_Action
 	public function cardAction()
     {
     	$this->_helper->viewRenderer->setRender();
+        $uid = (int)$this->getRequest()->getParam('uid');
 
-    	CacheLogic::setOptions('cache_dir', Commons::getUserCache(
-    	    (int)$this->getRequest()->getParam('uid')));
+    	CacheLogic::setOptions('cache_dir', Commons::getUserCache($uid));
 
     	$this->view->card = CacheLogic::init()->cardLoad();
-		$this->view->qq = Zend_Registry::get('sessCommon')->login['qq'];
+        $this->view->qq = UserContactLogic::init()->fetchCol($uid, 'qq');
     }
 }
