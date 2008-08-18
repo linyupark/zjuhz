@@ -36,5 +36,6 @@ class AlumniController extends Zend_Controller_Action
     	    (int)$this->getRequest()->getParam('uid')));
 
     	$this->view->card = CacheLogic::init()->cardLoad();
+		$this->view->qq = Zend_Registry::get('sessCommon')->login['qq'];
     }
 }
