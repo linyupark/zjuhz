@@ -48,6 +48,11 @@ class UserContactLogic extends MemberInterlayer
     	return parent::_getInstance(__CLASS__);
     }
 
+    public function fetchCol($uid, $col='*')
+    {
+        return $this->_UserContactModel->fetchCol($uid, $col);
+    }
+
     /**
      * 更新会员联络资料
      * 

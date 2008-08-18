@@ -53,6 +53,13 @@ class UserContactModel
     	$this->_dao->closeConnection();
     }
 
+    public function fetchCol($uid, $col)
+    {
+        $row = $this->_dao->fetchRow('SELECT `'.$col.'` FROM `tbl_user_contact` WHERE `uid` = '.$uid);
+        if($col != '*') return $row[$col];
+        else return $row;
+    }
+    
     /**
      * 更新会员联络资料
      * 
