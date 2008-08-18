@@ -24,7 +24,11 @@
     入学年份：<u><?= (1900 < $this->card['year'] ? "{$this->card['year']}年" : ''); ?></u><br />
     所在院系：<u><?= (0 < $this->card['college'] ? $this->college($this->card['college']) : ''); ?></u><br />
     <a href="javascript:beFriendsWith(<?= $this->card['uid'] ?>)">加为好友</a> 
-    <a href="/group/pm/member?uid=<?= $this->card['uid'] ?>">发站内信</a>
+    <a href="/group/pm/member?uid=<?= $this->card['uid'] ?>">发站内信</a><br />
+	
+	<?php if($this->qq != null) : ?>
+	<a href="tencent://Message/?Uin=<?= $this->qq ?>&websiteName=q-zone.qq.com&Menu=yes"><img border="0" SRC='http://wpa.qq.com/pa?p=1:<?= $this->qq ?>:5' /></a>
+	<?php endif; ?>
     </td>
   </tr>
 </table>
