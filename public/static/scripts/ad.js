@@ -28,7 +28,10 @@ imgUrl[2]='static/groups/10/images/200808061217984557765.jpg';
 imgtext[2]='2008年8月2日首次创业沙龙成功举行';
 imgLink[2]='http://www.zjuhz.com/group/topic/show?gid=10&tid=159';
 imgAlt[2]='2008年8月2日首次创业沙龙成功举行';
-
+imgUrl[3]='static/groups/23/images/200807241216912764343.jpg';
+imgtext[3]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
+imgLink[3]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
+imgAlt[3]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
 function changeimg(n)
 {
 adNum=n;
