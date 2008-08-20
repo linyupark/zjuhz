@@ -7,20 +7,24 @@
 	<div class="mglf10">
 		<table>
 			<tr>
-				<td class="pd10"><?= Commons::getUserFace($this->passport('uid')) ?></td>
-				<td class="vm f14 pdd10">
-					<p>
+				<td class="pd5"><?= Commons::getUserFace($this->passport('uid')) ?></td>
+				<td class="vm f12">
 						当前在线校友<strong id="online"></strong>人，
 						截止今天本站已有资讯<strong><?= $this->info_xmlrpc->call('rpcInfo.howmany') ?></strong>条，
 						校友企业<strong id="mybiz"></strong>家，<a href="/biz/my/company/type/join/">申请加入</a>。
-					</p>
-					<p>您的班级：<span id="myclass"></span>，您的群组：_____有了新内容。</p>
-					<p>快速链接：
+					<br />
+					您的班级：<span id="myclass"></span>; 您的群组：
+					<?php $groups = $this->Group->groupNews(); ?>
+					<?php if($groups): foreach($groups as $g): ?>
+					<a target="_blank" href="/group/home?gid=<?= $g['gid'] ?>"><?= $g['name'] ?></a>
+					<?php endforeach; echo '有新内容'; endif; ?>
+					<br />
+					快速链接：
 						<a href="/member/my/address/">通讯录</a>、
 						<a href="/member/my/">我的资料</a>、
 						<a href="/help/my/">我的互助</a>、
-						<a href="/info/admin/">资讯投稿</a>
-					</p>
+						<a href="/info/admin/">资讯投稿</a>、
+						<a href="/group/my">我的群组</a>
 				</td>
 			</tr>
 		</table>	
