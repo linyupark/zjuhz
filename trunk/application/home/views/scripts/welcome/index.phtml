@@ -16,7 +16,7 @@
 					您的班级：<span id="myclass"></span>; 您的群组：
 					<?php $groups = $this->Group->groupNews(); ?>
 					<?php if($groups): foreach($groups as $g): ?>
-					<a target="_blank" href="/group/home?gid=<?= $g['gid'] ?>"><?= $g['name'] ?></a>
+					<a target="_blank" href="/group/home?gid=<?= $g['gid'] ?>"><?= $g['name'] ?></a> , 
 					<?php endforeach; echo '有新内容'; endif; ?>
 					<br />
 					快速链接：
