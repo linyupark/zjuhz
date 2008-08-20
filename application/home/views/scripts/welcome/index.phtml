@@ -1,10 +1,5 @@
-<div class="span-24 last oneCol">
-	<p class="success mg10" style="line-height:150%">
-		<?= Cmd::icon('emoticon_grin.png') ?>
-		<?= $this->passport('realName') ?> 校友欢迎您回来，您上一次登录本站是在<?= Lp_Date::timespan($this->passport('lastLogin')) ?>之前 <small class="quiet f12">(注:下横线内的信息尚未关联)</small>
-	</p>
-	
-	<div class="mglf10">
+<div class="span-24 last oneCol">	
+	<div>
 		<table>
 			<tr>
 				<td class="pd5"><?= Commons::getUserFace($this->passport('uid')) ?></td>
