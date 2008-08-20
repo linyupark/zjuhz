@@ -15,28 +15,28 @@
     </div>
     <div class="pd10" style="background:#f5f5f5; line-height:150%">
         <?= Cmd::icon('user_gray.png') ?>
-        <a href="/group/sort?id=12">同行会</a> <?= $this->sortgroup(12,5); ?>
+        <a href="/group/sort?id=12"><b>同行会</b></a> <?= $this->sortgroup(12,5); ?>
     </div>
     <div class="pd10" style="background:#eee; line-height:150%">
         <?= Cmd::icon('cup.png') ?>
-        <a href="/group/sort?id=14">同乡会</a> <?= $this->sortgroup(14,5); ?>
+        <a href="/group/sort?id=14"><b>同乡会</b></a> <?= $this->sortgroup(14,5); ?>
     </div>
     <div class="pd10" style="background:#f5f5f5; line-height:150%">
-        <?= Cmd::icon('coins.png') ?> 财富 
+        <?= Cmd::icon('coins.png') ?> <b>财富</b> 
         <?= $this->sortgroup(21,5); ?> ,
         <?= $this->sortgroup(22,5); ?>
     </div>
     <div class="pd10" style="background:#eee; line-height:150%">
-        <?= Cmd::icon('sport_soccer.png') ?> 体育 
+        <?= Cmd::icon('sport_soccer.png') ?> <b>体育</b> 
         <?= $this->sortgroup(31,5); ?> ,
         <?= $this->sortgroup(32,5); ?>
     </div>
     <div class="pd10" style="background:#f5f5f5; line-height:150%">
-        <?= Cmd::icon('heart.png') ?> 交友 
+        <?= Cmd::icon('heart.png') ?> <b>交友</b>
         <?= $this->sortgroup(51,5); ?>
     </div>
     <div class="pd10" style="background:#eee; line-height:150%">
-        <?= Cmd::icon('folder.png') ?> 其他 
+        <?= Cmd::icon('folder.png') ?> <b>其他</b>
         <?= $this->sortgroup(99,5); ?>
     </div>
 </div>
@@ -55,6 +55,10 @@
         </p>
     </div>
     
+    <div class="oneCol mgu10" style="overflow:hidden;">
+        <?= $this->online(); ?>
+    </div>
+    
     <div class="oneCol mgu10 pdd10">
         <?= $this->hotgroup(); ?>
     </div>
@@ -65,10 +69,6 @@
     
     <div class="sideBar2 mgu10 pdd10">
         <?= $this->hotclick(); ?>
-    </div>
-    
-    <div class="oneCol mgu10" style="overflow:hidden;">
-        <?= $this->online(); ?>
     </div>
 </div>
         
