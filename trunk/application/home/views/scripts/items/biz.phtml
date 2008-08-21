@@ -7,12 +7,12 @@
 					创业俱乐部</a>
             </td>
 			<td class="list-2">
-                <ul class="f14">
+                <ul class="f12">
                     <?php
                     $topics = $this->Group->getTopicFrom(10, 5);
                     foreach($topics as $t): ?>
-                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=10&tid=<?= $t['topic_id'] ?>">
-                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <li><a class="lk-4" title="<?= $t['title'] ?>" href="/group/topic/show?gid=10&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],50).'..' ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
@@ -22,12 +22,12 @@
                 <a href="/biz/" style="color:#186DA9; text-decoration:none">校友企业</a>
             </td>
             <td style="border-top:1px solid #D7E4EC;" class="list-2 pdu10" id="cps">
-                <div style="height:80px; overflow:hidden; margin-bottom:10px;">
-                <ul class="f14">
+                <div style="height:75px; overflow:hidden; margin-bottom:10px;">
+                <ul class="f12">
                     <?php
                     $bizs = $this->Biz->get(8);
                     foreach($bizs as $b): ?>
-                    <li><a title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['cid'] ?>">
+                    <li><a class="lk-4" title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['cid'] ?>">
                         <?= $b['name'] ?></a></li>
                     <?php endforeach; ?>
                 </ul>

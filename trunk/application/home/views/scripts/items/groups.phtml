@@ -7,28 +7,44 @@
                     金融俱乐部</a>
             </td>
 			<td class="list-2">
-                <ul class="f14">
+                <ul class="f12">
                     <?php
                     $topics = $this->Group->getTopicFrom(2, 5);
                     foreach($topics as $t): ?>
-                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=2&tid=<?= $t['topic_id'] ?>">
-                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <li><a class="lk-4" title="<?= $t['title'] ?>" href="/group/topic/show?gid=2&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],50).'..' ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
 		</tr>
+		<tr>
+            <td class="pd5 vm pdu10" style="border-top:1px solid #D7E4EC; width:5px; font-weight:bold">
+                <a href="http://www.zjuhz.com/group/home/name/of/parents" style="color:#7EA918; text-decoration:none">
+                    家长俱乐部</a>
+            </td>
+            <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
+                <ul class="f12">
+                    <?php
+                    $topics = $this->Group->getTopicFrom(23, 5);
+                    foreach($topics as $t): ?>
+                    <li><a class="lk-4" title="<?= $t['title'] ?>" href="/group/topic/show?gid=23&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],50).'..' ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
         <tr>
             <td class="pd5 vm pdu10" style="border-top:1px solid #D7E4EC; width:5px; font-weight:bold">
                 <a href="http://www.zjuhz.com/group/home/name/of/law" style="color:#7EA918; text-decoration:none">
                     法律人俱乐部</a>
             </td>
             <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
-                <ul class="f14">
+                <ul class="f12">
                     <?php
                     $topics = $this->Group->getTopicFrom(14, 5);
                     foreach($topics as $t): ?>
-                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=14&tid=<?= $t['topic_id'] ?>">
-                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <li><a class="lk-4" title="<?= $t['title'] ?>" href="/group/topic/show?gid=14&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],50).'..' ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
@@ -39,12 +55,12 @@
                     羽毛球俱乐部</a>
             </td>
             <td style="border-top:1px solid #D7E4EC" class="list-2 pdu10">
-                <ul class="f14">
+                <ul class="f12">
                     <?php
                     $topics = $this->Group->getTopicFrom(15, 5);
                     foreach($topics as $t): ?>
-                    <li><a title="<?= $t['title'] ?>" href="/group/topic/show?gid=15&tid=<?= $t['topic_id'] ?>">
-                        <?= Commons::utfSubStr($t['title'],40).'..' ?></a></li>
+                    <li><a class="lk-4" title="<?= $t['title'] ?>" href="/group/topic/show?gid=15&tid=<?= $t['topic_id'] ?>">
+                        <?= Commons::utfSubStr($t['title'],50).'..' ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </td>
