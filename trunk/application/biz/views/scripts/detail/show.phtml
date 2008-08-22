@@ -1,0 +1,30 @@
+    <table>
+      <tr>
+        <td style="vertical-align:top;">
+          <div class="menu-box">
+          <ul>
+            <li><span style="font-size:14px;">自定义内容链接</span></li>
+            <?= $this->render('company-leftnav.phtml'); ?>
+          </ul>
+          </div>
+		</td>
+		<td class="pd10">
+		  <div class="mid-box-right">
+          <h2 class="mid-box-right-title">产品展示</h2>
+          <div class="mid-box-right-content" style="overflow:hidden">
+            <?php foreach($this->prods as $p): ?>
+            <div style="clear:both; padding:15px; border-bottom:1px solid #eee;">
+            <b style="font-size:16px;"><?= $p['name'] ?></b>
+            <img style="margin:5px 0;" src="/static/bizs/<?= $this->dataCompany['cid']; ?>/<?= $p['img'] ?>" />
+            <p style="clear:both" class="f12">介绍：<?= stripslashes($p['intro']) ?></p>
+            </div>
+            <?php endforeach; ?>
+            
+            <div class="pagination"><?= $this->pagination ?></div>
+          </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+<script>ucardInit();</script>
