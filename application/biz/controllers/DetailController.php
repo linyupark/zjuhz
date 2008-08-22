@@ -61,16 +61,8 @@ class DetailController extends Zend_Controller_Action
 
 		$this->view->sessCommon  = $this->_sessCommon;
 		$this->view->sessCompany = $this->_sessCompany;
-	}
-
-	/**
-     * 企业展示首页
-     * 
-     * @return void
-     */
-	public function indexAction()
-	{
-		// 获取企业编号
+        
+        // 获取企业编号
 		$this->_dataCid = CommonFilter::cid(($this->getRequest()->getParam('cid')));
 		// 载入企业资料
 		$this->_dataCompany = (!$this->_dataCid ? '' : 
@@ -81,7 +73,48 @@ class DetailController extends Zend_Controller_Action
 		// 仅登录后可见
 		$this->_dataCorp = ('member' !== $this->_sessCommon->role ? '' : 
 			CorpLogic::init()->selectUidRow($this->_dataCompany['uid']));
+	}
 
+    public function showAction()
+    {
+        /* 分类数据 */
+        $db = CompanyShowModel::_dao();
+        
+        $sort = urldecode($this->_getParam('sort'));
+        $cid = $this->_dataCid;
+        $page = $this->_getParam('p', 1);
+        
+        $row = $db->fetchRow('SELECT COUNT(`pid`) AS `numrows` FROM `tbl_corp_company_show` 
+                             WHERE `cid` = "'.$cid.'" AND `sort` = "'.$sort.'"');
+        
+        //Page::$pagesize = 1;
+        Page::create(array(
+                    'href_open' => '<a href="/biz/detail/show/cid/'.$cid.'/sort/'.$sort.'?p=%d">',
+                    'href_close' => '</a>',
+                    'num_rows' => $row['numrows'],
+                    'cur_page' => $page
+        ));
+
+        $prods = $db->fetchAll('SELECT * FROM `tbl_corp_company_show`
+                               WHERE `cid` = "'.$cid.'" AND `sort` = "'.$sort.'"
+                               ORDER BY `pid` DESC LIMIT '.Page::$offset.','.Page::$pagesize);
+        $this->view->prods = $prods;
+        $this->view->pagination = Page::$page_str;
+        
+        $sorts = $db->fetchAll('SELECT DISTINCT `sort` FROM `tbl_corp_company_show` WHERE `cid` = ?', $this->_dataCid);
+        $this->view->sorts = $sorts;
+        
+        $this->view->headTitle($this->_dataCompany['name']);
+        $this->view->dataCompany = $this->_dataCompany;
+    }
+
+	/**
+     * 企业展示首页
+     * 
+     * @return void
+     */
+	public function indexAction()
+	{
 		if (!$this->_sessCompany->pageview[$this->_dataCid])
 		{
 			CorpCompanyLogic::init()->updatePageview($this->_dataCid); // 更新页面浏览量
@@ -89,6 +122,12 @@ class DetailController extends Zend_Controller_Action
 		}
 
 		$this->_helper->layout->setLayout('company');
+        
+        /* 分类数据 */
+        $db = CompanyShowModel::_dao();
+        $sorts = $db->fetchAll('SELECT DISTINCT `sort` FROM `tbl_corp_company_show` WHERE `cid` = ?', $this->_dataCid);
+        $this->view->sorts = $sorts;
+        
 		$this->view->headTitle($this->_dataCompany['name']);
 		$this->view->message     = CompanyMsgLogic::init()->selectCidNotDeletedAll($this->_dataCid, '5');
 		$this->view->dataCid     = $this->_dataCid;
