@@ -9,6 +9,8 @@
         <a href="/biz/manage/company/type/basic/" <?= 'basic' == $this->type ? 'class="here"' : '' ?>>基础信息</a>
         <a href="/biz/manage/company/type/contact/" <?= 'contact' == $this->type ? 'class="here"' : '' ?>>联系方式</a>
         <a href="/biz/manage/company/type/biz/" <?= 'biz' == $this->type ? 'class="here"' : '' ?>>商务供求</a>
+        <a href="/biz/manage/company/type/production/" <?= 'production' == $this->type ? 'class="here"' : '' ?>>产品上传</a>
+        <a href="/biz/manage/company/type/prodmanage/" <?= 'prodmanage' == $this->type ? 'class="here"' : '' ?>>产品管理(<?= ($this->prod_num == null)?'0':$this->prod_num ?>)</a>
         <a href="/biz/manage/company/type/logo/" <?= 'logo' == $this->type ? 'class="here"' : '' ?>>企业标志</a>
     <?php endif; ?>
 </div>

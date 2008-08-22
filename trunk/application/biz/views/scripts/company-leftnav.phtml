@@ -1,3 +1,17 @@
-<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/">返回企业首页</a></li>
-<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/#info">企业详细资料</a></li>
-<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/#biz">企业商务供求</a></li>
+<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/">企业首页</a></li>
+<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/#info">详细资料</a></li>
+<li><a href="/biz/detail/index/cid/<?= $this->dataCompany['cid']; ?>/#biz">商务供求</a></li>
+<li><a id="expand_handle" href="javascript:void(0)"> - 产品展示</a>
+    <ul id="expand_area">
+        <?php if(count($this->sorts) != 0): foreach($this->sorts as $s): ?>
+        <li><a href="/biz/detail/show/cid/817db369e6/sort/<?= urlencode($s['sort']) ?>"><?= $s['sort'] ?></a></li>
+        <?php endforeach; endif; ?>
+    </ul>
+</li>
+
+<script>
+    $('#expand_handle').toggle(
+        function(){$('#expand_area').hide();$(this).html(' + 产品展示')},
+        function(){$('#expand_area').show();$(this).html(' - 产品展示')}
+    );
+</script>
