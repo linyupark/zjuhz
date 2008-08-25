@@ -1,0 +1,77 @@
+<?php 
+
+/* ------
+
+variables: 
+
+ $blab_time   // selected timezone
+ $blab_lang   // selected language
+ $lang        // language entries [array]
+ $lang_files  // available language files [array]
+ $skin_dir    // skin directory
+ $how_many    // users online [number]
+ $online      // users online [list]
+ $version     // version
+
+------ */
+
+?>
+<body>
+<form action="login.php" method="post" id="fms" style="padding:0px;margin:0px" onsubmit="return q09('<?php print $lang['all_req'];?>')">
+<div style="text-align:center;width:100%">
+<div style="height:100px">&nbsp;</div>
+<div style="width:310px;margin:auto;padding:1px;border:2px solid #fff">
+
+<div class="titles">
+<div id="emms" class="small_font" style="float:right">
+<a href="info.php?why=link" onclick="document.getElementById('uson').style.display='block';return false"><?php print $lang['online'];?></a>: <b><?php print $how_many;?></b>
+</div>
+<div class="capital_font"><?php print $lang['login'];?></div>
+</div>
+
+<div class="cells">
+<div style="float:right;padding:15px;padding-bottom:1px">
+<span class="small_font" style="margin-right:8px"><?php print $lang['name'];?>:</span>
+<input type="text" maxlength="16" style="width:180px" name="name" value="<?= $_SESSION['common']['login']['nickname'] ?>" />
+</div><br style="clear:both" />
+
+<div style="float:right;padding:15px;padding-bottom:1px">
+<span class="small_font" style="margin-right:8px"><?php print $lang['lang'];?>:</span> 
+<select style="width:180px" name="language">
+<?php
+
+for($i=0;$i<count($lang_files);$i++){
+if($i==$blab_lang){$sel=' selected="selected"';}else{$sel='';}
+$the_lang=explode('.',$lang_files[$i]);$the_lang=ucfirst($the_lang[0]);
+print '<option value="'.$i.'"'.$sel.'>'.$the_lang.'</option>';
+}
+?>
+</select></div><br style="clear:both" />
+
+<div style="float:right;padding:15px;padding-bottom:1px">
+<span class="small_font" style="margin-right:8px"><?php print $lang['timezone'];?>:</span> 
+<select style="width:180px" name="offset">
+<?php 
+for($i=-12;$i<=13;$i++){if($i!=0){$gmt='';}else{$gmt=' GMT';}
+if($i==$blab_time){$sel=' selected="selected"';}else{$sel='';}
+$show_time=gmdate('Y-m-d H:i',time()+$i*3600);
+print '<option value="'.$i.'"'.$sel.'>'.$show_time.$gmt.'</option>';}?></select>
+</div><br style="clear:both" />
+
+<div id="uson" class="small_font" style="display:none;float:right;padding:15px;padding-bottom:1px">
+<?php print $lang['online'];?>: <?php print $online;?></div>
+
+<br style="clear:both" />
+<div style="float:right;padding:15px;padding-bottom:1px">
+<a href="info.php?why=link" onclick="if(q09('<?php print $lang['all_req'];?>')){document.forms.fms.submit()};return false"><img src="<?php print $skin_dir;?>/images/submm.png" onmouseover="q08(this,7)" onmouseout="q08(this,10)" alt="" /></a>
+</div><br style="clear:both" /><br style="clear:both" />
+
+</div></div>
+
+<!-- PLEASE KEEP A VISIBLE LINK TO HTTP://HOT-THINGS.NET -->
+<div class="small_font" style="width:310px;margin:auto;text-align:right">
+Powered by <a href="http://hot-things.net" onclick="window.open('http://hot-things.net');return false"><b>BlaB Lite <?php print $version;?></b></a>
+</div>
+<!-- PLEASE KEEP A VISIBLE LINK TO HTTP://HOT-THINGS.NET -->
+</div>
+</form></body></html>

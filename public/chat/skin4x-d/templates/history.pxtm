@@ -1,0 +1,6 @@
+<?php  /* variables: $all_posts  */ ?>
+
+<body>
+<div style="padding:5px">
+<?php print $all_posts;?>
+</div></body></html>

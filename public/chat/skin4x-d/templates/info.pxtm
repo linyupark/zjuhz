@@ -1,0 +1,7 @@
+<?php /* variables: $msg,$version */ ?>
+
+<body>
+<div style="margin:50px">
+<b><a href="http://hot-things.net">BlaB! LITE <?php print $version;?></a></b><br /><br />
+<?php print $msg;?>
+</div></body></html>

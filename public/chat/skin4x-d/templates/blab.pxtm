@@ -1,0 +1,86 @@
+<?php
+
+/* ------
+
+variables: 
+
+ $skin_dir    // skin directory
+ $lang        // language entries [array]
+ $title       // chat title
+ $js_var      // required JS vars
+ $js_arr      // smilies/colors as JS arrays
+
+------ */
+
+?>
+<body>
+<script type="text/javascript">
+sess=q10();ajx_last=0;ajx_line='';ajx_sndd=1;txt='';stlB=0;stlI=0;stlU=0;stlC=0;
+<?php print $js_var;?>
+</script>
+
+<div id="dvx" class="top_area" style="padding-left:4px">
+<div class="butt" onmouseover="e=document.getElementById('mi1');e.src='<?php print $skin_dir;?>/images/sound2.png';return false" onmouseout="e=document.getElementById('mi1');e.src='<?php print $skin_dir;?>/images/sound.png';return false">
+<a href="info.php?why=link" style="color:#fff;text-decoration:none" onclick="q19();return false">
+<img id="mi1" src="<?php print $skin_dir;?>/images/sound.png"  alt="" />
+<span style="position:relative;top:-15px"><?php print $lang['sound'];?></span></a></div>
+
+<div class="butt" onmouseover="e=document.getElementById('mi2');e.src='<?php print $skin_dir;?>/images/tzone2.png';return false" onmouseout="e=document.getElementById('mi2');e.src='<?php print $skin_dir;?>/images/tzone.png';return false">
+<a href="info.php?why=link" style="color:#fff;text-decoration:none" onclick="q21();return false">
+<img id="mi2" src="<?php print $skin_dir;?>/images/tzone.png"  alt="" />
+<span style="position:relative;top:-15px"><?php print $lang['timezone'];?></span></a></div>
+
+<div class="butt" onmouseover="e=document.getElementById('mi3');e.src='<?php print $skin_dir;?>/images/color2.png';return false" onmouseout="e=document.getElementById('mi3');e.src='<?php print $skin_dir;?>/images/color.png';return false">
+<a href="info.php?why=link" style="color:#fff;text-decoration:none" onclick="q18();return false">
+<img id="mi3" src="<?php print $skin_dir;?>/images/color.png"  alt="" />
+<span style="position:relative;top:-15px"><?php print $lang['color'];?></span></a></div>
+
+<div class="butt" onmouseover="e=document.getElementById('mi4');e.src='<?php print $skin_dir;?>/images/smile2.png';return false" onmouseout="e=document.getElementById('mi4');e.src='<?php print $skin_dir;?>/images/smile.png';return false">
+<a href="info.php?why=link" style="color:#fff;text-decoration:none" onclick="q20();return false">
+<img id="mi4" src="<?php print $skin_dir;?>/images/smile.png"  alt="" />
+<span style="position:relative;top:-15px"><?php print $lang['smilies'];?></span></a></div>
+
+<div class="butt" onmouseover="e=document.getElementById('mi5');e.src='<?php print $skin_dir;?>/images/exitt2.png';return false" onmouseout="e=document.getElementById('mi5');e.src='<?php print $skin_dir;?>/images/exitt.png';return false">
+<a href="info.php?why=link" style="color:#fff;text-decoration:none" onclick="q05('login.php');return false">
+<img id="mi5" src="<?php print $skin_dir;?>/images/exitt.png"  alt="" />
+<span style="position:relative;top:-15px"><?php print $lang['exitt'];?></span></a></div>
+
+<br style="clear:both" /></div>
+<div class="history_div"><b><?php print $title;?></b>
+&nbsp;(<a href="info.php?why=link" onclick="pp=window.open('history.php','history','width=400,height=200,resizable=1,scrollbars=1');pp.focus();return false"><?php print $lang['history'];?></a>)
+</div>
+<div id="dvB" class="chat_area"></div>
+<div id="dvC" class="online_area"></div>
+<div id="dvE" class="smilies_div" style="display:none">
+<script type="text/javascript">
+<?php print $js_arr ?>q01();</script></div>
+<div id="dvF" class="smilies_div" style="display:none"><script type="text/javascript">q02();</script></div>
+
+<div id="dvG" class="timezone_div" style="display:none">
+<div class="small_font" style="text-align:center;font-weight:bold">
+&laquo;<script type="text/javascript">q03();</script>&raquo;</div></div>
+
+<div id="dvH" class="smilies_div" style="display:none">
+<div class="small_font" style="text-align:center;font-weight:bold">
+<a href="info.php?why=link" style="text-decoration:none" onclick="q17(1);return false"><?php print $lang['on'];?></a> / 
+<a href="info.php?why=link" style="text-decoration:none" onclick="q17(0);return false"><?php print $lang['off'];?></a></div></div>
+
+<div id="dvz" class="bottom_area">
+<form action="blab.php" style="margin:0px;padding:0px" onsubmit="q14();return false">
+<table cellspacing="2" id="inpt" style="width:100%;margin-top:1px">
+<tr><td valign="top" style="width:3%;white-space:nowrap">
+<img class="biu_inactive" style="margin-top:3px" alt="" src="<?php print $skin_dir;?>/images/bold.png" onclick="r=document.getElementById('ln');if(this.className=='biu_inactive'){this.className='biu_active';r.style.fontWeight='bold';stlB=1}else{this.className='biu_inactive';r.style.fontWeight='normal';stlB=0};q00();" />
+<img class="biu_inactive" style="margin-top:3px" alt="" src="<?php print $skin_dir;?>/images/ital.png" onclick="r=document.getElementById('ln');if(this.className=='biu_inactive'){this.className='biu_active';r.style.fontStyle='italic';stlI=1}else{this.className='biu_inactive';r.style.fontStyle='normal';stlI=0};q00();" />
+<img class="biu_inactive" style="margin-top:3px" alt="" src="<?php print $skin_dir;?>/images/unde.png" onclick="r=document.getElementById('ln');if(this.className=='biu_inactive'){this.className='biu_active';r.style.textDecoration='underline';stlU=1}else{this.className='biu_inactive';r.style.textDecoration='none';stlU=0};q00()" />
+</td><td valign="top" style="width:94%"><input type="text" size="25" style="width:100%;border-width:2px" id="ln" value="" maxlength="127" /></td>
+<td valign="top" style="width:3%">
+<a href="info.php?why=link" onclick="q14();return false"><img src="<?php print $skin_dir;?>/images/submm.png" onmouseover="q08(this,7)" onmouseout="q08(this,10)" alt="" /></a>
+</td></tr>
+</table></form></div>
+<div class="indicator">
+<span onmouseover="q26(1)" onmouseout="q26(0)"><img id="wttin" src="<?php print $skin_dir;?>/images/waitt.png" alt="" /></span>
+&nbsp;<span id="reqt" style="visibility:hidden"></span></div>
+<script type="text/javascript">
+lock=0;q25();q22();q04();window.onresize=q04;
+if(navigator.userAgent.indexOf('Opera/8')!=-1){dvB.style.overflow='auto'}
+</script></body></html>
