@@ -204,7 +204,6 @@ class ManageController extends Zend_Controller_Action
 
     public function douploadAction()
     {
-        $this->getHelper('viewRenderer')->setNoRender();
         $this->getHelper('layout')->disableLayout();
         $R = $this->getRequest();
         if($R->isPost())
