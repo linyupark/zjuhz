@@ -7,7 +7,6 @@ require_once 'incl/main.inc';
 
 if($_SESSION['common']['role']!='member')
 {
-    echo "<h3 style='padding:30px;'>请登录本站后再使用聊天室！</h3>";
     redirect('/',0,0);
 }
 
