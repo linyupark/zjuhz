@@ -11,8 +11,8 @@ error_reporting(1);import_request_variables('gpc');error_reporting(8);
 $db_type='mysql';                    // database type, *lowercase* ( options: mysql, mysqli, postgre, sqlite )
 
 $db_host='localhost';                // database host ( in most cases 'localhost' )
-$db_user='root';                         // database user (not used with sqlite)
-$db_pass='123123';                         // database password  (not used  with sqlite)
+$db_user='zjuhz_mysql_dba';                         // database user (not used with sqlite)
+$db_pass='zjuhz_com_zjuhz_mysql_dba_20080506';                         // database password  (not used  with sqlite)
 $db_name='zjuhz_chat';                         // Database [mysql, postgre]. Note that the installation script cannot create a database for you!
 $db_sqlite='sqlite/blablite.dat';    // Database [sqlite]: 'path/filename', the file must be CHMODed to 777! )
 $skin_dir='skin4x-d';                 // skin directory [no trailing slashes]
