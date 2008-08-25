@@ -3,8 +3,10 @@
 <!-- 状态信息 /////////////////////////////////////////// -->
 	<td class="nav">
 	    <?php if ($this->passport()) { ?>
-	    您好，<?= $this->passport('realName') ?>|<a style="color:green" href="javascript:fastInvite()">邀请校友</a>|
+	    您好，<?= $this->passport('realName') ?>|
 	    <?php if(false != DbModel::hasClass($this->passport('uid'))) :?>
+		<a style="color:green" href="javascript:fastInvite()">邀请校友</a>|
+		<a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a>|
 	    <a href="/class/home">我的班级</a>|
 	    <?php endif; ?><a href="/member/my/">我的账号</a>|
 	    <!-- <a href="">站内信<?= ($this->passport('unRead') > 0) ? "({$this->passport('unRead')})" : ''; ?></a> |  -->

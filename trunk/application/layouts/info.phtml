@@ -24,6 +24,7 @@
 				<?php if ($this->passport()): ?>
 				您好！<?= $this->passport('realName') ?>
                 <a style="color:green" href="javascript:fastInvite()">邀请校友</a> 
+                <a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a> 
 				<a href="/member/my/">我的账号</a> 
 				资讯积分(<?= $this->coin(Cmd::myid()) ?>) 
 				<a href="/info/admin">投稿</a> 
