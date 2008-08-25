@@ -17,14 +17,14 @@ if($act=='upload'){
 		$fileType=array('jpg','gif','bmp','png');
 	}
 	$upfileDir='uploadfile/';
-	$maxSize=500; //单位：KB
+	$maxSize=800; //单位：KB
 	$fileExt=substr(strrchr($_FILES['file1']['name'],'.'),1);
 	if(!in_array(strtolower($fileExt),$fileType))
-		die("<script>alert('不允许上传该类型的文件！-808');window.parent.\$('divProcessing').style.display='none';history.back();</script>");
+		die("<script>alert('This file type is not allowed');window.parent.\$('divProcessing').style.display='none';history.back();</script>");
 	if($_FILES['file1']['size']> $maxSize*1024)
-		die( "<script>alert('文件过大！');window.parent.\$('divProcessing').style.display='none';history.back();</script>");
+		die("<script>alert('File size must less than {$maxSize}KB');window.parent.\$('divProcessing').style.display='none';history.back();</script>");
 	if($_FILES['file1']['error'] !=0)
-		die("<script>alert('未知错误，文件上传失败！');window.parent.$('divProcessing').style.display='none';history.back();</script>");
+		die("<script>alert('Unknow error');window.parent.\$('divProcessing').style.display='none';history.back();</script>");
 	$targetDir=dirname(__FILE__).'/../../'.$upfileDir;
 	$targetFile=date('Ymd').time().strrchr($_FILES['file1']['name'],'.');
 	$realFile=$targetDir.$targetFile;
