@@ -1,0 +1,31 @@
+<?php 
+
+/* ------
+
+variables: 
+ $title             - html title
+ $skin_dir          - skin directory
+ $khtml_workaround  - css hack for khtml based browsers
+
+------ */
+
+print '<?xml version="1.0" encoding="utf-8"?>'; ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title><?php print $title;?></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<?php print $khtml_workaround;?>
+<link rel="stylesheet" type="text/css" href="<?php print $skin_dir;?>/style.css" />
+<script type="text/javascript">
+<!-- 
+ie1rs=145;ie2rs=125;skin_dir='<?php print $skin_dir;?>';
+prli1=new Image();prli1.src='<?php print $skin_dir;?>/images/exitt2.png';
+prli2=new Image();prli2.src='<?php print $skin_dir;?>/images/sound2.png';
+prli3=new Image();prli3.src='<?php print $skin_dir;?>/images/tzone2.png';
+prli4=new Image();prli4.src='<?php print $skin_dir;?>/images/color2.png';
+prli5=new Image();prli5.src='<?php print $skin_dir;?>/images/smile2.png';
+
+// --></script>
+<script type="text/javascript" src="incl/blite.js"></script>
+</head>

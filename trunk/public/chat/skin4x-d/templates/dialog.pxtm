@@ -1,0 +1,15 @@
+<?php /* variables: $url,$msg,$lang */ ?>
+
+<body>
+
+<script type="text/javascript">
+url='<?php print $url;?>';setTimeout('window.location=url',3000);
+</script>
+
+<div style="margin:50px">
+
+<?php if(strlen($msg)>1){print $msg;}?>
+
+<br /><br />
+<a href="info.php?why=link" onclick="return q05('<?php print $url;?>')"><b><?php print $lang['continue'];?></b></a>
+</div></body></html>

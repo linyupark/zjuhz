@@ -1,0 +1,34 @@
+body{padding:0px;margin:auto;color:#000;background-color:#D5E4F1;background-image:url(images/bg.png);background-repeat:repeat-x}
+td,p,div{font-family:'Trebuchet MS',sans-serif;font-size:14px;text-align:left}
+input,select{font-family:'Trebuchet MS',sans-serif;font-size:12px;border:1px solid #6293C1;color:#000;background-color:#fff}
+img{border-width:0px} 
+
+A:link{color:#4D6786;background-color:transparent}
+A:visited{color:#4D6786;background-color:transparent}
+A:hover{color:#a00;background-color:transparent;text-decoration:none}
+A:active{color:#a00;background-color:transparent}
+
+.top_area{color:#000;background-color:#8FB4DA;background-image:url(images/bg2.png);border-top:1px solid #D5E4F1;border-bottom:1px solid #D5E4F1;position:fixed;top:30px;left:0px;width:100%;height:45px;overflow:hidden}
+.chat_area{position:fixed;top:98px;left:1%;width:78%;bottom:50px;overflow:hidden}
+.online_area{position:fixed;top:85px;right:1%;width:18%;bottom:40px;overflow:hidden;background-color:#C9DCED;color:#000;border:1px solid #6293C1;white-space:nowrap}
+.online_title{color:#fff;background-color:#C9DCED;background-image:url(images/bg2.png);font-size:12px;font-weight:bold;padding:12px;}
+.online_list{font-size:13px;font-weight:bold;text-decoration:none;padding:10px}
+.bottom_area{color:#000;background-color:#C9DCED;background-image:url(images/bg2.png);border-top:1px solid #fff;position:fixed;bottom:0px;left:0px;width:100%;height:30px;overflow:hidden}
+
+.butt{cursor:pointer;float:left;font-size:12px;height:28px;font-weight:bold;margin-right:2px;margin-top:1px}
+.history_div{position:fixed;top:80px;left:1%}
+.smilies_div{position:fixed;bottom:40px;width:260px;right:5%;overflow:hidden;background-color:#C9DCED;color:#000;border:1px solid #6293C1;padding:8px}
+.timezone_div{position:fixed;bottom:40px;right:5%;overflow:hidden;background-color:#C9DCED;color:#000;border:1px solid #6293C1;padding:8px;white-space:nowrap}
+
+.login_table{margin:auto;padding:0px;border:1px solid #6293C1}
+.titles{color:#000;background-color:#C9DCED;background-image:url(images/bg2.png);font-size:12px;font-weight:bold;padding:12px}
+.cells{color:#000;background-color:#C9DCED;padding:8px}
+
+.indicator{position:fixed;bottom:30px;left:2px;font-size:13px}
+.emoticons{border:0px solid #fff;width:18px;height:18px;padding:1px}
+.color_squares{width:10px;height:10px;float:left;margin:1px;padding:0px;border:1px solid #000}
+.biu_inactive{border:2px solid #69c}
+.biu_active{border:2px solid #a00}
+
+.small_font{font-size:13px;font-weight:normal}
+.capital_font{text-transform:uppercase}

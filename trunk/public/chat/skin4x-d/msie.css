@@ -1,0 +1,9 @@
+.top_area{position:absolute}
+.chat_area{position:absolute;height:75%}
+.online_area{position:absolute;height:75%}
+.bottom_area{position:absolute}
+
+.history_div{position:absolute}
+.smilies_div{position:absolute}
+.timezone_div{position:absolute}
+.indicator{position:absolute}
