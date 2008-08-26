@@ -5,29 +5,32 @@
 	.extend li{ line-height:150%; font-size:12px; }
 	.extend a{ text-decoration:none; color:#094B90 }
 	.extend a:hover{ text-decoration:underline; }
+	.lk-x{ text-decoration:none; } .lk-x:hover{ text-decoration:underline; }
 </style>
-<div class="oneCol span-24 extend last">
+
 	<div class="span-12">
-		<div style="background:#F7FFE6; border:1px dashed #ccc; padding:10px; margin:10px;">
+		<div style="background:#F7FFE6; border:1px dashed #ccc; padding:10px; ">
 		<h3>最新资讯</h3>
 		<ul class="mglf10">
 		<?php foreach($this->news as $n): ?>
-		<li><a href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
+		<li style="padding:3px;"><a class="lk-x" style="color:#4B630B;" href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
 		<?php endforeach; ?>
 		</ul>
 		</div>
 	</div>
 	
 	<div class="span-12 last">
-		<div style="background:#FFE6EE; border:1px dashed #ccc; padding:10px; margin:10px;">
+		<div style="background:#FFE6EE; border:1px dashed #ccc; padding:10px;">
 		<h3>最热点击</h3>
 		<ul class="mglf10">
 		<?php foreach($this->hots as $n): ?>
-		<li><a href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
+		<li style="padding:3px;"><a class="lk-x" style="color:#7D002A;" href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
 		<?php endforeach; ?>
 		</ul>
 		</div>
 	</div>
+
+<div class="oneCol span-24 extend last" style="margin-top:10px;">
 	
 	<div class="span-8 pdd10">
 		<?php $mxzx = $this->block($this->db, 1, 5); ?>
