@@ -22,7 +22,10 @@
 		# 资讯首页
 		function indexAction()
 		{
-			$this->view->db = new EntityModel();
+			$db = new EntityModel();
+			$this->view->db = $db;
+			$this->view->news = $db->fetchAll($db->select()->where('entity_pub = ?', 1)->order('entity_pub_time DESC')->limit(5));
+			$this->view->hots = $db->fetchAll($db->select()->where('entity_pub = ?', 1)->order('entity_view_num DESC')->limit(5));
 		}
 		
 		#验证图片
