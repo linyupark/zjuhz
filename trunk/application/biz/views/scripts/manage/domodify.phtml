@@ -1,0 +1,20 @@
+<form id="modi_from" onsubmit="return doit()">
+    <input type="hidden" name="pid" value="<?= $this->item['pid'] ?>" />
+    <p class="pd10">分类：<input name="sort" class="f14" type="text" value="<?= $this->item['sort'] ?>" /></p>
+    <p class="pd10">名称：<input name="name" class="f14" type="text" value="<?= $this->item['name'] ?>" size="80" /></p>
+    <p class="pd10">介绍：<textarea name="intro" style="width:800px; height:200px;"><?= stripslashes($this->item['intro']) ?></textarea></p>
+    <p style="text-align:center"><input class="buttonGreen" type="submit" value="保存修改" /></p>
+</form>
+    
+<script>
+    function doit()
+    {
+        $.post('/biz/manage/domodify',$('#modi_from').fastSerialize(),function(data){
+            if(data == 'success')
+            parent.window.history.go(0);
+            else
+            alert(data);
+        });
+        return false;
+    }
+</script>

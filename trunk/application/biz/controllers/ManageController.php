@@ -174,7 +174,7 @@ class ManageController extends Zend_Controller_Action
     }
 
     public function domodifyAction()
-    {
+    {   
         $R = $this->getRequest();
         
         if($R->isPost())
@@ -197,8 +197,17 @@ class ManageController extends Zend_Controller_Action
                     'intro' => $intro
                 );
                 $dao->update('tbl_corp_company_show', $data, '`pid` = '.(int)$R->getPost('pid'));
-                echo '修改成功';
+                echo 'success';
             }
+        }
+        else
+        {
+            $this->view = $this->getHelper('viewRenderer')->view;
+            $dao = CompanyShowModel::_dao();
+            $item = $dao->fetchRow('SELECT * FROM `tbl_corp_company_show`
+                                   WHERE `pid` = '.(int)$this->_getParam('pid'));
+            $this->view->item = $item;
+            $this->render('domodify');
         }
     }
 
