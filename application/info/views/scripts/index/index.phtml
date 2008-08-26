@@ -7,6 +7,28 @@
 	.extend a:hover{ text-decoration:underline; }
 </style>
 <div class="oneCol span-24 extend last">
+	<div class="span-12">
+		<div style="background:#F7FFE6; border:1px dashed #ccc; padding:10px; margin:10px;">
+		<h3>最新资讯</h3>
+		<ul class="mglf10">
+		<?php foreach($this->news as $n): ?>
+		<li><a href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+		</div>
+	</div>
+	
+	<div class="span-12 last">
+		<div style="background:#FFE6EE; border:1px dashed #ccc; padding:10px; margin:10px;">
+		<h3>最热点击</h3>
+		<ul class="mglf10">
+		<?php foreach($this->hots as $n): ?>
+		<li><a href="/info/view/detail/id/<?= $n->entity_id ?>"><?= $n->entity_title ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+		</div>
+	</div>
+	
 	<div class="span-8 pdd10">
 		<?php $mxzx = $this->block($this->db, 1, 5); ?>
 		<h2><a href="/info/sort/?category=1">母校资讯</a></h2>
@@ -24,7 +46,7 @@
 		</ul>
 	</div>
 		
-	<div class="span-8">
+	<div class="span-8 pdd10">
 		<?php $bhdt = $this->block($this->db, 2, 5); ?>
 		<h2><a href="/info/sort/?category=2">本会动态</a></h2>
 		<img class="pt" src="/static/images/info/2.jpeg" width="80" />
@@ -41,7 +63,7 @@
 		</ul>
 	</div>
 	
-	<div class="span-8 last">
+	<div class="span-8 pdd10 last">
 		<?php $hdjz = $this->block($this->db, 4, 5); ?>
 		<h2><a href="/info/sort/?category=4">活动讲座</a></h2>
 		<img class="pt" src="/static/images/info/3.jpeg" width="80" />
