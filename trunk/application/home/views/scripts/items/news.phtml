@@ -1,0 +1,10 @@
+<div class="sideBar list-1">
+	<h3 class="tt mglf10"><?= Cmd::icon('radio.png') ?> 最新资讯</h3>
+	<ul class="mg10">
+		<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new'); ?>
+        <?php foreach($rows as $r): ?>
+        <li><a class="lk-1" title="<?= $r['entity_title'] ?>" href="/info/view/detail/id/<?= $r['entity_id'] ?>">
+        <?= Commons::utfSubStr($r['entity_title'],35).'..' ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
