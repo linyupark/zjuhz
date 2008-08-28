@@ -1,5 +1,5 @@
 <div class="sideBar list-1">
-	<h3 class="tt mglf10"><?= Cmd::icon('radio.png') ?> 最新资讯</h3>
+	<h3 class="tt mglf10">最新资讯</h3>
 	<ul class="mg10">
 		<?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new'); ?>
         <?php foreach($rows as $r): ?>
