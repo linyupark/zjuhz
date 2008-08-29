@@ -69,7 +69,6 @@ class IndexController extends Zend_Controller_Action
 	public function toptipAction()
 	{
 		$this->_helper->viewRenderer->setNoRender(true);
-		$type = $this->_getParam('type', 'group'); // 提示类型
 		
 		if($this->_getParam('close') == 1)
 		{
@@ -78,37 +77,26 @@ class IndexController extends Zend_Controller_Action
 		
 		if(Zend_Registry::get('sessGroup')->notip != true)
 		{
-			$str = '<ul class="notice mgu10">';
+			$output = '';
+			$gid = $this->_getParam('gid', null);
 			
-			if($type == 'profile') // 完善个人资料提示
+			// 邀请函提示
+			if(UserModel::fetch($this->view->passport('uid'), 'group_invite'))
 			{
-				$str .= '<li>请您完善联系方式以便我们与您取得联系.<a href="/member/my/user/type/contact/">点击进入</a>(*电子邮箱必填)</li>';
+				$output .= '<li>有群组邀请您哦~赶快去看看，<a href="/group/my/invite">查看邀请函</a></li>';
 			}
-			elseif($type == 'group') // 群组邀请提示
+			// 完善资料填写
+			if(!$this->view->passport('eMail'))
 			{
-				$gid = $this->_getParam('gid', null);
-				// 邀请函提示
-				$invites = UserModel::fetch($this->view->passport('uid'), 'group_invite');
-				// 群组加入审批提示
-				$apply = null;
-				if($gid != null && Cmd::isManager($gid))
-				{
-					$apply = GroupModel::info($gid, 'apply');
-				}
-				if(null != $invites)
-				{
-					$str .= '<li>有群组邀请您哦~赶快去看看，<a href="/group/my/invite">查看邀请函</a></li>';
-				}
-				if(null != $apply)
-				{
-					$str .= '<li>有校友想加入你所在的群组哦~，<a href="/group/invite/apply?gid='.$gid.'">查看详细</a></li>';
-				}
+				$output .= '<li>完善联系方式以便我们与您取得联系<a href="/member/my/user/type/contact/">点击进入</a>(*电子邮箱必填)</li>';
 			}
-			
-			if($str != '<ul class="notice mgu10">')
+			// 群组加入审批提示
+			if($gid != null && Cmd::isManager($gid))
 			{
-				echo $str.'<p class="txtr"><a href="javascript:notip()">知道了，不再提示我</a></p></ul>';
-			}	
+				$output .= '<li>有校友想加入你所在的群组哦~，<a href="/group/invite/apply?gid='.$gid.'">查看详细</a></li>';
+			}
+			if($output != '')
+			echo '<ul class="notice mgu10">'.$output.'<a style="float:right;margin-top:-15px;" href="javascript:notip()">不再提醒</a></ul>';
 		}
 	}
 }
