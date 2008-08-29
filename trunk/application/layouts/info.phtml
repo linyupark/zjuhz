@@ -91,7 +91,14 @@
                 function(){$(this).css('background','#F9FBFA')},
 				function(){$(this).css('background','#FFFFFF')}
             );
+			$('#top_tip').load('/group/index/toptip?gid=<?= $this->gid ?>');
 		});
+		function notip()
+		{
+			$('#top_tip').load('/group/index/toptip?close=1',null,function(){
+				$('#top_tip').remove();	
+			});
+		}
 	</script>
 </body>
 </html>
