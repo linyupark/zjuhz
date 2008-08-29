@@ -179,6 +179,31 @@ class ManageController extends Zend_Controller_Action
         
         if($R->isPost())
         {
+            $cid = $this->_sessCompany->manageCid;
+            $root = $_SERVER['DOCUMENT_ROOT'].'/static/bizs/'.$cid;
+
+            if($_FILES['img']['name'])
+            {
+                Lp_Upload::init(array(
+                    'max_size' => 500,
+                    'allow_type' => 'jpg|gif|png',
+                    'upload_path' => $root
+                ));
+                if(!Lp_Upload::handle('img'))
+                {
+                    echo '<script>alert("'.Lp_Upload::getTip().'");</script>';
+                }
+                else
+                {
+                    @unlink($root.'/'.$R->getPost('img_n'));
+                    $dao = CompanyShowModel::_dao();
+                    $dao->update('tbl_corp_company_show',
+                                 array('img'=>Lp_Upload::fetchParam('file_name')),
+                                 '`pid` = '.(int)$R->getPost('pid'));
+                }
+            }
+
+            
             // 先对表单数据进行检查
             $V = new Lp_Valid();
             $sort = $V->of($R->getPost('sort'), 'sort', '产品分类', 'trim|strip_tags|required');
@@ -186,7 +211,7 @@ class ManageController extends Zend_Controller_Action
             $intro = $V->of($R->getPost('intro'), 'intro', '产品介绍', 'trim|required');
             if($V->getMessages() != false)
             {
-                echo $V->getMessages('*',"\n");
+                echo '<script>alert("'.$V->getMessages('*',"\n").'");</script>';
             }
             else
             {
@@ -197,8 +222,8 @@ class ManageController extends Zend_Controller_Action
                     'intro' => $intro
                 );
                 $dao->update('tbl_corp_company_show', $data, '`pid` = '.(int)$R->getPost('pid'));
-                echo 'success';
             }
+            echo '<script>parent.history.go(0)</script>';
         }
         else
         {
