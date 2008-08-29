@@ -13,7 +13,8 @@
 
 <script type="text/javascript">
     function doInvite()
-    {   if($('input[name*="gid"]').size > 0)
+    {
+        if($('input[name*="gid"]').size() > 0)
         $.post('/group/member/invite', $('#invite_form').fastSerialize(), function(html){
             $.facebox(html);
         });

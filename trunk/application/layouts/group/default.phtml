@@ -80,13 +80,7 @@
 				$(this).css('border','1px solid #bbb');
 			});
 			
-			<?php if($this->gid): ?>
-			$('#top_tip').load('/group/index/toptip?type=group&gid=<?= $this->gid ?>');
-			<?php endif; ?>
-			
-			<?php if(!$this->passport('eMail')): ?>
-			$('#top_tip').load('/group/index/toptip?type=profile');
-			<?php endif; ?>
+			$('#top_tip').load('/group/index/toptip?gid=<?= $this->gid ?>');
 			
 			$.get('/group/index/click?gid=<?= $this->gid ?>'); // 统计访问量
 			$.get('/group/index/user_active'); // 在线时间更新
