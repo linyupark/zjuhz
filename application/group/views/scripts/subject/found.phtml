@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>08年9月20日杭州浙江大学校友会成立大会</title>
+<script type="text/javascript" src="/static/scripts/jquery.js"></script>
+<script type="text/javascript" src="/static/scripts/jquery.cookie.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/styles/group/subject/found.css">
+</head>
+<body>
+    <div id="container">
+        <div id="header"></div>
+        <div id="nav">
+            <a class="plan" href="javascript:tab('plan')"><img src="/static/images/icon/date.gif" /> 成立大会活动安排</a>
+            <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线报名</a>
+            <a class="intro" href="javascript:tab('intro')"><img src="/static/images/icon/user.gif" /> 理事会成员介绍</a>
+        </div>
+        <div id="content">
+            <?php if($this->listview): // 已经报名的人员 ?>
+            <div class="pdlr10">
+            <h2>已经报名参加的人员</h2>
+            <ol style="list-style-position:inside">
+            <?php foreach($this->listview as $uid => $data): ?>
+            <li><?= $uid ?>:<?= $data['name'] ?>/<?= $data['email'] ?>/<?= $data['mobile'] ?></li>
+            <?php endforeach; ?>
+            </ol>
+            </div>
+            <?php else: ?>
+            <div id="plan" class="item">
+                <h2>杭州浙江大学校友会成立大会活动安排</h2>
+                <div class="pdlr10">
+                    内容建设中...
+                </div>
+            </div>
+    
+            <div id="signup" class="item">
+                <h2>在线报名 <span class="sub">*必须成为本站成员才能进行在线报名</span></h2>
+                <div class="pdlr10">
+                    <?php if(!$this->passport()): ?>
+                    <form method="post" id="relogin_form" onsubmit="return relogin();">
+                        <table id="login_form">
+                            <tr>
+                                <td class="txtr vm">登录账号：</td>
+                                <td><input class="text" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td class="txtr vm">登录密码：</td>
+                                <td><input class="text" name="pswd" type="password" maxlength="16" value="<?= $this->pswd; ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td class="txtr vm">下次自动登录：</td>
+                                <td><input id="alive" type="checkbox" value="0" <?= ($this->uname) ? 'checked="checked"':'' ?> name="alive" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><p class="txtr"><input style="width:100%" class="btn" id="btnLogin" type="submit" value="登 录" /></p></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="sub f14"><p>没有帐号？
+                                <a target="_blank" href="/member/register/">创建新帐号</a></p></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <?php else: if($this->signup != true): ?>
+                    <form id="sign_form" onsubmit="return signup();">
+                        <input name="uid" type="hidden" value="<?= $this->passport('uid') ?>" />
+                        <table style="margin:0 auto; text-align:center">
+                            <tr>
+                                <td>姓名&nbsp;</td>
+                                <td><input readonly="true" class="text" type="text" name="name" value="<?= $this->passport('realName') ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱&nbsp;</td>
+                                <td><input class="text" type="text" id="email" name="email" value="<?= $this->passport('eMail') ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>手机&nbsp;</td>
+                                <td><input class="text" type="text" id="mobile" name="mobile" value="<?= $this->passport('mobile') ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input class="btn" type="submit" value="信息无误，我要报名" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="sign_tip"></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <?php else: ?>
+                    <div class="success">您已经成功报名</div>
+                    <?php endif; endif; ?>
+                </div>
+            </div>
+                
+            <div id="intro" class="item">
+                <h2>理事会成员介绍</h2>
+                <div class="pdlr10">
+                    内容建设中...
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        function relogin() {
+            var formdata = $("#relogin_form").fastSerialize();
+        
+            $.post("/member/login/dologin/", formdata, function(msg) {
+                if ("redirect" == msg) {
+                    history.go(0);
+                }
+                else alert(msg);
+            });
+            return false;
+        }
+        
+        function signup()
+        {
+            $('.btn').attr('disabled',true);
+            $('#sign_tip').html('<img src="/static/images/loading1.gif" /> <span class="sub">报名ing...</span>');
+            $.post('/group/subject/found',
+                   $('#sign_form').fastSerialize(),
+            function(data){
+                if(data == 'success')
+                {
+                    var email = $('#email').val();
+                    var mobile = $('#mobile').val();
+                    $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile});
+                    window.history.go(0);
+                }
+                else
+                {
+                    $('#sign_tip').html(data);
+                    $('.btn').attr('disabled',false);
+                    $('#sign_tip').children().fadeOut(3000);
+                }
+            });
+            return false;
+        }
+        
+        function tab(section)
+        {
+            $('#content div.item').hide();
+            $('#nav a').css('background','none');
+            $('a.'+section).css('background','#EFE0CC');
+            $('#'+section).fadeIn();
+            $.cookie('found_tab',section);
+        }
+        if($.cookie('found_tab') == null) tab('plan');
+        else tab($.cookie('found_tab'));
+        
+        
+        <?php if($this->uname && $this->pswd): ?>
+        relogin();
+        <?php endif; ?>
+    </script>
+</body>
+</html>
