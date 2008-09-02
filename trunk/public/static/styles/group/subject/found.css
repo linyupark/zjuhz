@@ -1,0 +1,95 @@
+*{ padding:0; line-height:150%; font-family:Verdana, Arial, Helvetica, sans-serif; }
+
+body{ background:url(/static/images/subject/found/bg.jpg) repeat-x left top fixed; }
+
+.sub{
+    color:#999;
+    font-size:12px;
+    font-weight:normal;
+}
+.txtc{ text-align:center; }
+.f12{ font-size:12px}.f14{ font-size:14px}
+.btn{
+	height:30px;
+	padding:0 5px;
+	line-height:150%;
+	border-width:1px;
+	cursor:pointer;
+}
+
+.item{ padding:0 10px; font-size:14px; }
+.pdlr10{ padding:0 10px; }
+#container{
+    margin:0 auto;
+    width:960px;
+    background:#fff url(/static/images/subject/found/h_bg.gif) no-repeat top;
+    margin-top:5px; opacity:0.95;
+    filter:alpha(opacity = 95);
+    position:relative;
+}
+#header{ background:url(/static/images/subject/found/header.gif) no-repeat left center; height:164px; }
+/* 导航部分 */
+#nav{
+    position:absolute;
+    top:40px;
+    right:20px;
+    background:#FFFAF4;
+    border:1px solid #E9DBC0;
+    padding:3px;
+    font-size:14px;
+}
+#nav img{
+    border:none;
+}
+#nav a{ color:#995700; text-decoration:none; display:block; width:200px; padding:3px 5px; }
+#nav a:hover{ color:#333; text-decoration:underline; }
+
+#plan,#signup,#intro{ display:none; }
+
+/* 具体内容 */
+#content{
+    margin:10px auto;
+    padding-bottom:40px;
+}
+#content a{ color:#D12054}
+#content h2{
+    background:#F3F1F1;
+    font-size:16px;
+    padding: 5px 18px;
+}
+
+#login_form{
+    font-size:14px;
+    padding:20px;
+}
+
+
+/* Form fields
+-------------------------------------------------------------- */
+
+input.text, input.title,
+textarea, select {
+  margin:0.5em 0;
+  border:1px solid #bbb;
+}
+
+input.text:focus, input.title:focus,
+textarea:focus, select:focus {
+  border:1px solid #666;
+}
+
+input.text, 
+input.title   { width: 300px; padding:5px; }
+input.title   { font-size:1.5em; }
+textarea      { width: 390px; height: 250px; padding:5px; }
+
+.error,
+.notice, 
+.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; }
+
+.error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
+.notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
+.success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
+.error a    { color: #8a1f11; }
+.notice a   { color: #514721; }
+.success a  { color: #264409; }
