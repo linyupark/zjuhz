@@ -5,6 +5,7 @@
 <title>08年9月20日杭州浙江大学校友会成立大会</title>
 <script type="text/javascript" src="/static/scripts/jquery.js"></script>
 <script type="text/javascript" src="/static/scripts/jquery.cookie.pack.js"></script>
+<script type="text/javascript" src="/static/scripts/common.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/styles/group/subject/found.css">
 </head>
 <body>
@@ -153,7 +154,7 @@
         else tab($.cookie('found_tab'));
         
         
-        <?php if($this->uname && $this->pswd): ?>
+        <?php if($this->uname && $this->pswd && !$this->passport()): ?>
         relogin();
         <?php endif; ?>
     </script>
