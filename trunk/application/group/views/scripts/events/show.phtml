@@ -26,7 +26,8 @@
             <?php if(Cmd::myid() == $this->event->founder): ?>
             <p class="f14">
             <a href="/group/events/edit?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_edit.png') ?> 编辑</a>
-            <a target="_blank" href="/group/events/members?eid=<?= $this->eid ?>"><?= Cmd::icon('printer.png') ?> 打印联络方式</a>
+            <a target="_blank" href="/group/events/members?eid=<?= $this->eid ?>"><?= Cmd::icon('printer.png') ?> 打印</a>
+            <a target="_blank" href="/group/events/xls?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_excel.png') ?> Excel</a>
             </p>
             <?php endif; ?>
         

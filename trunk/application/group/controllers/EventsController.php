@@ -85,7 +85,49 @@
             $this->render('review');
         }
         
-        # 参加活动的成员
+        # 导出excel
+        function xlsAction()
+        {
+            $this->getResponse()->insert('nav','');
+            $this->getHelper('layout')->disableLayout();
+            $this->getHelper('viewRenderer')->setNoRender();
+            $E = new EventsModel('dbEvent');
+            $where = $E->select()->where('event_id = ?', $this->view->eid);
+            $event = $E->fetchRow($where);
+            $members = EventsModel::joinMembers($this->view->eid);
+            
+            $objPHPExcel = new PHPExcel();
+            $objPHPExcel->getProperties()->setCreator("zjuhz.com");
+            $objPHPExcel->getProperties()->setLastModifiedBy("zjuhz.com");
+            $objPHPExcel->getProperties()->setTitle($event->title.'活动人员名单');
+            $objPHPExcel->setActiveSheetIndex(0);
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', '姓名');
+            $objPHPExcel->getActiveSheet()->SetCellValue('B1', '学院');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C1', '入学年份');
+            $objPHPExcel->getActiveSheet()->SetCellValue('D1', '手机');
+            $row = 2;
+            foreach($members as $m)
+            {
+                $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, UserModel::fetch($m['member'],'realName'));
+                $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, Cmd::getCollege(UserModel::fetch($m['member'],'college')));
+                $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, UserModel::fetch($m['member'],'year'));
+                $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, UserModel::fetch($m['member'],'ext_phone'));
+                $row++;
+            }
+            $objPHPExcel->getActiveSheet()->setTitle($event->title.'活动人员名单');
+            $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+            header("Pragma: public");
+            header("Expires: 0");
+            header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+            header("Content-Type: application/force-download");
+            header("Content-Type: application/octet-stream");
+            header("Content-Type: application/download");
+            header("Content-Disposition: attachment;filename=hello.xlsx"); 
+            header("Content-Transfer-Encoding: binary ");
+            $objWriter->save('php://output');
+        }
+        
+        # 参加活动的成员打印
         function membersAction()
         {
             $this->getResponse()->insert('nav','');
