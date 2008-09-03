@@ -19,7 +19,7 @@
         <div id="content">
             <?php if($this->listview): // 已经报名的人员 ?>
             <div class="pdlr10">
-            <h2>已经报名参加的人员</h2>
+            <h2>已经报名参加的人员 <a target="_blank" href="/group/subject/found?list=view&export=xls">导出Excel</a></h2>
             <ol style="list-style-position:inside">
             <?php foreach($this->listview as $uid => $data): ?>
             <li><?= $uid ?>:<?= $data['name'] ?>/<?= $data['email'] ?>/<?= $data['mobile'] ?></li>

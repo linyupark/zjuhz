@@ -28,6 +28,31 @@
             if($this->_getParam('list') == 'view')
             {
                 $this->view->listview = $list;
+                if($this->_getParam('export') == 'xls') // 导出xls
+                {
+                    $this->getHelper('viewRenderer')->setNoRender();
+                    $objPHPExcel = new PHPExcel();
+                    $objPHPExcel->getProperties()->setCreator("zjuhz.com");
+                    $objPHPExcel->getProperties()->setLastModifiedBy("zjuhz.com");
+                    $objPHPExcel->getProperties()->setTitle("杭州浙江大学校友会成立大会网上报名人员名单");
+                    $objPHPExcel->getProperties()->setSubject("上报名人员名单");
+                    $objPHPExcel->setActiveSheetIndex(0);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('A1', '姓名');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('B1', '邮箱');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('C1', '手机');
+                    $row = 2;
+                    foreach($list as $data)
+                    {
+                        $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, $data['name']);
+                        $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, $data['email']);
+                        $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $data['mobile']);
+                        $row++;
+                    }
+                    $objPHPExcel->getActiveSheet()->setTitle('杭州浙江大学校友会成立大会网上报名人员名单');
+                    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+                    $objWriter->save($root.'/static/found.xlsx');
+                    header("Location: /static/found.xlsx");
+                }
             }
             
             // 报名提交
