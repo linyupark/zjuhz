@@ -50,8 +50,15 @@
                     }
                     $objPHPExcel->getActiveSheet()->setTitle('杭州浙江大学校友会成立大会网上报名人员名单');
                     $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-                    $objWriter->save($root.'/static/found.xlsx');
-                    header("Location: /static/found.xlsx");
+                    header("Pragma: public");
+                    header("Expires: 0");
+                    header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+                    header("Content-Type: application/force-download");
+                    header("Content-Type: application/octet-stream");
+                    header("Content-Type: application/download");
+                    header("Content-Disposition: attachment;filename=found.xlsx"); 
+                    header("Content-Transfer-Encoding: binary ");
+                    $objWriter->save('php://output');
                 }
             }
             
