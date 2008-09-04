@@ -116,6 +116,7 @@
             }
             $objPHPExcel->getActiveSheet()->setTitle($event->title.'活动人员名单');
             $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+            header("Content-type: text/html; charset=utf-8");
             header("Pragma: public");
             header("Expires: 0");
             header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
