@@ -122,7 +122,7 @@
             header("Content-Type: application/force-download");
             header("Content-Type: application/octet-stream");
             header("Content-Type: application/download");
-            header("Content-Disposition: attachment;filename=hello.xlsx"); 
+            header("Content-Disposition: attachment;filename=contact.xlsx"); 
             header("Content-Transfer-Encoding: binary ");
             $objWriter->save('php://output');
         }

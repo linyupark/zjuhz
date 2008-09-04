@@ -14,7 +14,8 @@
         <div id="nav">
             <a class="plan" href="javascript:tab('plan')"><img src="/static/images/icon/date.gif" /> 成立大会活动安排</a>
             <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线报名</a>
-            <a class="intro" href="javascript:tab('intro')"><img src="/static/images/icon/user.gif" /> 理事会成员介绍</a>
+            <a class="ls_intro" href="javascript:tab('ls_intro')"><img src="/static/images/icon/user.gif" /> 理事成员介绍</a>
+            <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/icon/user.gif" /> 校友总会老师简介</a>
         </div>
         <div id="content">
             <?php if($this->listview): // 已经报名的人员 ?>
@@ -35,7 +36,6 @@
             </div>
     
             <div id="signup" class="item">
-                <h2>在线报名 <span class="sub">*必须成为本站成员才能进行在线报名</span></h2>
                 <div class="pdlr10">
                     <?php if(!$this->passport()): ?>
                     <form method="post" id="relogin_form" onsubmit="return relogin();">
@@ -94,16 +94,209 @@
                 </div>
             </div>
                 
-            <div id="intro" class="item">
-                <h2>理事会成员介绍</h2>
+            <div id="ls_intro" class="item pdlr10">
                 <div class="pdlr10">
-                    内容建设中...
+                    <?php if($this->passport()): ?>
+                    <h2>荣誉会长</h2>
+                    <table>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image001.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">张浚生</h3>
+                                1958年毕业于浙江大学机械系光学机械仪器专业后留校任教。<br />
+                                1983年任杭州市委副书记等职。<br />
+                                1985年起任新华社香港分社宣传部副部长、部长、副社长，新华社香港分社发言人。<br />
+                                1998年3月调回内地任浙江大学、杭州大学、浙江农业大学、浙江医科大学四校合并领导小组副组长，新浙江大学筹建小组组长，浙江省政府特邀顾问。<br />
+                                1998年9月起任浙江大学党委书记。
+                            </td>
+                        </tr>
+                    </table>
+                    <h2>顾问</h2>
+                    <table>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image003.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">陈端</h3>
+                                原杭州市副市长、市政协副主席，现任杭州市关心下一代工作委员会副主任，著名心血管病专家。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">安志云</h3>
+                                杭州市人大原副主任
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">虞荣仁</h3>
+                                杭州市原政协主席
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                               <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">林正范</h3>
+                                杭师大校长
+                            </td>
+                        </tr>
+                    </table>
+                    <h2>预选理事</h2>
+                    <table>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image005.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">陈鸿</h3>
+                                浙江大学89年化工自动化本科毕业，92年工业自动化硕士毕业，03年中欧国际工商管理学院MBA毕业，和多位校友合伙人一起创建恒生电子股份有限公司，公司于03年成功上市，已经成为中国IT业的领先企业。现任公司董事，从公司具体经营工作中抽身转而投入较多精力负责筹建杭州浙江大学校友会，任筹备组组长，酒量不好但是贪杯。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image007.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">刘巍</h3>
+                                2005年浙江大学—香港理工大学国际房地产学系硕士毕业。天禄广告传媒有限公司总经理，旗下有汽车公司、媒体、网吧、信息技术公司等。刘巍用一年时间将一个人的公司发展到一百人，在奢侈品媒体行业发展出一定的品牌影响力。现任杭州浙大校友会筹备组副组长。想追求奢侈品的男士或女士请追随刘巍和天禄。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image009.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">赵巧雅</h3>
+                                96届浙大电机系校友，现任杭州亚恺电子科技有限公司总经理。是北京校友会副秘书长张一春推荐参与校友会工作的。杭州校友会志愿者部负责人。她特别喜欢谈她的儿子，讲她儿子的故事。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image011.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">陈亮</h3>
+                                杭州浙港制衣有限公司总经理，浙大企业家经理人同学会常务副会长。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image013.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">叶志前</h3>
+                                杭州格林蓝德信息技术有限公司董事长，浙大企业家经理人同学会副会长。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image015.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">庞颖</h3>
+                                88届浙大计算机系校友，现为和茶馆总经理，杭州市茶楼业协会副会长，杭州和顺堂茶文化推广有限公司总经理。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image017.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">魏任斌</h3>
+                                浙江大学管理学院校友，原话机世界集团副总裁，现为杭州民建委员、浙江连锁经营协会常务理事，杭州市青年企业家协会常务理事，杭州飞来投资管理有限公司董事长
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image019.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">蒋锋</h3>
+                                杭州市教育局初教处处长
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">钱永红</h3>
+                                杭大新闻系毕业，获博士学位。杭州市文化广电新闻出版局副局长，浙江大学新闻与社会发展研究所硕士生导师。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image021.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">俞锋华</h3>
+                                省科技开发中心主任，长三角科技中介联盟副理事长，浙江省技术经纪人协会副会长
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image023.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">施建基</h3>
+                                77届杭大中文系校友，加拿大烈焰能源有限公司监事会主席，浙江大学校友总会理事，北美浙大校友企业家联谊会召集人
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">王海光</h3>
+                                原杭大哲学系校友，现为万科南都董事长
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/none.gif" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">胡季强</h3>
+                                ８２届浙大医学院校友，现为康恩贝集团有限公司董事长，浙江省企业家协会副会长，全国优秀青年企业家
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image025.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">汪兴</h3>
+                                ９０届浙大计算机校友，浙江省耀江房地产开发有限公司总经理，浙江省耀江集团副总裁，海南海德实业股份有限公司副董事长
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image026.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">潘水苗</h3>
+                                ８９届浙大电机系校友，现为浙江万马电缆股份有限公司董事长
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="txtc"><button class="btn" onclick="window.scroll(0,0)">回到顶部</button></p>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php endif; ?>
         </div>
     </div>
-    
     
     <script type="text/javascript">
         function relogin() {
@@ -149,6 +342,13 @@
             $('a.'+section).css('background','#EFE0CC');
             $('#'+section).fadeIn();
             $.cookie('found_tab',section);
+            
+            if(section == 'ls_intro')
+            {
+                <?php if(!$this->passport()): ?>
+                    $('#signup').fadeIn();
+                <?php endif; ?>
+            }
         }
         if($.cookie('found_tab') == null) tab('plan');
         else tab($.cookie('found_tab'));
