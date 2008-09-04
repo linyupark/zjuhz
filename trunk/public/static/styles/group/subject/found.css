@@ -27,7 +27,7 @@ body{ background:url(/static/images/subject/found/bg.jpg) repeat-x left top fixe
 	cursor:pointer;
 }
 
-.item{ padding:0 10px; font-size:14px; }
+.item{ padding:0 10px; font-size:13px; color:#333; }
 .item img{ border:3px solid #ddd; }
 .pdlr10{ padding:0 10px; }
 #container{
@@ -42,7 +42,7 @@ body{ background:url(/static/images/subject/found/bg.jpg) repeat-x left top fixe
 /* 导航部分 */
 #nav{
     position:absolute;
-    top:40px;
+    top:20px;
     right:20px;
     background:#FFFAF4;
     border:1px solid #E9DBC0;
