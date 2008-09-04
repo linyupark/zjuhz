@@ -115,15 +115,14 @@
                 $row++;
             }
             $objPHPExcel->getActiveSheet()->setTitle($event->title.'活动人员名单');
-            $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-            header("Content-type: text/html; charset=utf-8");
+            $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
             header("Pragma: public");
             header("Expires: 0");
             header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
             header("Content-Type: application/force-download");
             header("Content-Type: application/octet-stream");
             header("Content-Type: application/download");
-            header("Content-Disposition: attachment;filename=contact.xlsx"); 
+            header("Content-Disposition: attachment;filename=contact.xls"); 
             header("Content-Transfer-Encoding: binary ");
             $objWriter->save('php://output');
         }
