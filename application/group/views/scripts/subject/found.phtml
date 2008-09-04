@@ -16,7 +16,7 @@
             <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线报名</a>
             <a class="ls_intro" href="javascript:tab('ls_intro')"><img src="/static/images/icon/user.gif" /> 理事成员简介</a>
             <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/subject/found/photo/user_gray.gif" /> 校友总会老师简介</a>
-            <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/user.gif" /> 筹备组成员简介</a>
+            <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/group.gif" /> 筹备组成员简介</a>
         </div>
         <div id="content">
             <?php if($this->listview): // 已经报名的人员 ?>
@@ -280,16 +280,10 @@
             
             <div id="zh_intro" class="item">
                 <div class="pdlr10">
+                    <?php if($this->passport()): ?>
                     <h2>校友总会老师</h2>
                     <table>
                         <tr>
-                            <td style="padding:10px;" width="15%">
-                                <img src="/static/images/subject/found/photo/image028.jpg" /><br />
-                            </td>
-                            <td valign="top" width="35%">
-                                <h3 class="pos">杨捷</h3>
-                                发展联络办、校友联络部。
-                            </td>
                             <td style="padding:10px;" width="15%">
                                 <img src="/static/images/subject/found/photo/image030.jpg" /><br />
                             </td>
@@ -297,21 +291,12 @@
                                 <h3 class="pos">张美凤</h3>
                                 浙江大学校友总会秘书长，浙大对外联络办主任，浙大教育基金会秘书处主任。充满亲和力，是著名的“美凤姐”。是全球各地浙江大学校友会的“办主任”。
                             </td>
-                        </tr>
-                        <tr>
                             <td style="padding:10px;">
-                                <img src="/static/images/subject/found/photo/image032.jpg" /><br />
+                                <img src="/static/images/subject/found/photo/image038.jpg" /><br />
                             </td>
                             <td valign="top">
-                                <h3 class="pos">包永平</h3>
-                                发展联络办公室综合部主任，校友总会秘书处办公室副主任。按照家谱，包玉刚叫他叔叔。
-                            </td>
-                            <td style="padding:10px;">
-                                <img src="/static/images/subject/found/photo/image034.jpg" /><br />
-                            </td>
-                            <td valign="top">
-                                <h3 class="pos">庄代波</h3>
-                                发展联络办、校友联络部。
+                                <h3 class="pos">吴晨</h3>
+                                浙江大学发展联络办公室校友联络部主任，浙大校友总会秘书处办公室主任。爱开玩笑，酒量超大。
                             </td>
                         </tr>
                         <tr>
@@ -323,14 +308,31 @@
                                 浙江大学教育基金会秘书处办公室主任，校友总会秘书处办公室副主任，发展联络办公室国内部主任。网名：玉树临风。
                             </td>
                             <td style="padding:10px;">
-                                <img src="/static/images/subject/found/photo/image038.jpg" /><br />
+                                <img src="/static/images/subject/found/photo/image032.jpg" /><br />
                             </td>
                             <td valign="top">
-                                <h3 class="pos">吴晨</h3>
-                                浙江大学发展联络办公室校友联络部主任，浙大校友总会秘书处办公室主任。爱开玩笑，酒量超大。
+                                <h3 class="pos">包永平</h3>
+                                发展联络办公室综合部主任，校友总会秘书处办公室副主任。按照家谱，包玉刚叫他叔叔。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image034.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">庄代波</h3>
+                                发展联络办、校友联络部。
+                            </td>
+                            <td style="padding:10px;" width="15%">
+                                <img src="/static/images/subject/found/photo/image028.jpg" /><br />
+                            </td>
+                            <td valign="top" width="35%">
+                                <h3 class="pos">杨捷</h3>
+                                发展联络办、校友联络部。
                             </td>
                         </tr>
                     </table>
+                    <?php endif; ?>
                 </div>
             </div>
                                 
@@ -439,7 +441,7 @@
             $('#'+section).fadeIn();
             $.cookie('found_tab',section);
             
-            if(section == 'ls_intro')
+            if(section == 'ls_intro' || section == 'zh_intro')
             {
                 <?php if(!$this->passport()): ?>
                     $('#signup').fadeIn();
