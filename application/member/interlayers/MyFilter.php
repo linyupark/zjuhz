@@ -67,16 +67,27 @@ class MyFilter extends MemberInterlayer
             'year' => array(
 			    array('Between', '1900', '2050'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->yearNotBetween)), 
+               	    /*
             'college' => array(
 			    array('Between', '1', '50'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->collegeNotBetween)), 
+					*/
+            'college' => array(
+			    array('Between', '1', '50'),'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->collegeNotBetween)), 
             'major' => array(
                 array('Utf8Length', '2', '30'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->majorError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->majorError)), 
 		    'everName' => array('allowEmpty' => true), 
+                  	/*
 			'birthday' => array(
 			    array('Date'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
+               	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
+					*/
+            'birthday' => array(
+			    array('Date'), 'breakChainOnFailure' => true, 'allowEmpty' => true, 'messages' => array(
                	    Zend_Validate_Date::NOT_YYYY_MM_DD => $this->_iniMember->hint->dateTimeError,
                	    Zend_Validate_Date::INVALID => $this->_iniMember->hint->dateTimeError)), 
             'hometown_a' => array('allowEmpty' => true), 
