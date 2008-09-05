@@ -13,7 +13,7 @@
         <div id="header"></div>
         <div id="nav">
             <a class="plan" href="javascript:tab('plan')"><img src="/static/images/icon/date.gif" /> 成立大会活动安排</a>
-            <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线报名</a>
+            <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线索票</a>
             <a class="ls_intro" href="javascript:tab('ls_intro')"><img src="/static/images/icon/user.gif" /> 理事成员简介</a>
             <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/subject/found/photo/user_gray.gif" /> 校友总会老师简介</a>
             <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/group.gif" /> 筹备组成员简介</a>
@@ -171,6 +171,7 @@
                         </table>
                     </form>
                     <?php else: if($this->signup != true): ?>
+                    <h2 style="text-align:center">还剩余<span style="color:red"><?= $this->last ?></span>找票可以在线索取</h2>
                     <form id="sign_form" onsubmit="return signup();">
                         <input name="uid" type="hidden" value="<?= $this->passport('uid') ?>" />
                         <table style="margin:0 auto; text-align:center">
@@ -186,9 +187,33 @@
                                 <td>手机&nbsp;</td>
                                 <td><input class="text" type="text" id="mobile" name="mobile" value="<?= $this->passport('mobile') ?>" /></td>
                             </tr>
+                           	<tr>
+                                <td>入学年份&nbsp;</td>
+                                <td align="left">
+                                	<select name="year" id="year"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option <?= ($i == $this->passport('year') ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>专业&nbsp;</td>
+                                <td><input class="text" type="text" id="major" name="major" value="<?= $this->passport('major') ?>" /></td>
+                            </tr>
+                            <tr>
+                            	<td>邮寄地址&nbsp;</td>
+                            	<td><input class="text" type="text" id="address" name="address" value="<?= $this->passport('address') ?>" /></td>
+                            </tr>
+                            <tr>
+                            	<td>票数&nbsp;</td>
+                            	<td align="left">
+                            		<select name="tnum">
+                            			<option value="1">1张 </option>
+                            			<option value="2">2张 </option>
+                            			<option value="3">3张 </option>
+                            		</select>
+                            	</td>
+                            </tr>
                             <tr>
                                 <td></td>
-                                <td><input class="btn" type="submit" value="信息无误，我要报名" /></td>
+                                <td><input class="btn" type="submit" value="信息无误，我要索票" /></td>
                             </tr>
                             <tr>
                                 <td colspan="2" id="sign_tip"></td>
@@ -542,7 +567,11 @@
                 {
                     var email = $('#email').val();
                     var mobile = $('#mobile').val();
-                    $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile});
+                    var address = $('#address').val();
+                    var year = $('#year').val();
+                    var major = $('#major').val();
+                    $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile, 'address':address});
+                    $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 'birthday':'<?= $this->passport('birthday') ?>'});
                     window.history.go(0);
                 }
                 else
