@@ -565,6 +565,7 @@
             function(data){
                 if(data == 'success')
                 {
+                	<?php if($this->passport()): ?>
                     var email = $('#email').val();
                     var mobile = $('#mobile').val();
                     var address = $('#address').val();
@@ -572,6 +573,7 @@
                     var major = $('#major').val();
                     $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile, 'address':address});
                     $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 'birthday':'<?= $this->passport('birthday') ?>'});
+                    <?php endif; ?>
                     window.history.go(0);
                 }
                 else
