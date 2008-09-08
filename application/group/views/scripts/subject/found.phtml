@@ -15,7 +15,9 @@
             <a class="plan" href="javascript:tab('plan')"><img src="/static/images/icon/date.gif" /> 成立大会活动安排</a>
             <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线索票</a>
             <a class="ls_intro" href="javascript:tab('ls_intro')"><img src="/static/images/icon/user.gif" /> 理事成员简介</a>
-            <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/subject/found/photo/user_gray.gif" /> 校友总会老师简介</a>
+            <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/subject/found/photo/user_gray.gif" /> 校
+
+友总会老师简介</a>
             <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/group.gif" /> 筹备组成员简介</a>
         </div>
         <div id="content">
@@ -40,7 +42,9 @@
                         </tr>
                         <tr>
                             <td rowspan="5" align="center">
-                                <a target="_blank" href="/static/images/subject/found/map.jpg"><img src="/static/images/subject/found/map-small.jpg" /></a>
+                                <a target="_blank" href="/static/images/subject/found/map.jpg"><img 
+
+src="/static/images/subject/found/map-small.jpg" /></a>
                             </td>
                             <td>报到，会议和音乐会</td>
                             <td>浙大紫金港校区，小剧场</td>
@@ -110,7 +114,7 @@
                         <tr>
                             <td><div align="center">6</div></td>
                             <td>
-                               <div align="center">重温校园生活——晚餐</div></td>
+                               <div align="center">晚餐</div></td>
                             <td><div align="center">学生食堂</div></td>
                         </tr>
                     </table>
@@ -137,10 +141,11 @@
                             <th width="15%">地点</th>
                         </tr>
                         <tr>
-                            <td><div align="center">20：30-21：00</div></td>
+                            <td>20：30-21：00</td>
                             <td>
-                            <div align="center">五辆校车（小剧场门口），送校友，活动结束。                            </div></td>
-                            <td><div align="center">小剧场</div></td>
+                               五辆校车（小剧场门口），送校友，活动结束。
+                            </td>
+                            <td>小剧场</td>
                         </tr>
                     </table>
                 </div>
@@ -153,19 +158,27 @@
                         <table id="login_form">
                             <tr>
                                 <td class="txtr vm">登录账号：</td>
-                                <td><input class="text" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" /></td>
+                                <td><input class="text" name="uname" type="text" maxlength="16" value="<?= $this->uname; ?>" 
+
+/></td>
                             </tr>
                             <tr>
                                 <td class="txtr vm">登录密码：</td>
-                                <td><input class="text" name="pswd" type="password" maxlength="16" value="<?= $this->pswd; ?>" /></td>
+                                <td><input class="text" name="pswd" type="password" maxlength="16" value="<?= $this->pswd; ?>" 
+
+/></td>
                             </tr>
                             <tr>
                                 <td class="txtr vm">下次自动登录：</td>
-                                <td><input id="alive" type="checkbox" value="0" <?= ($this->uname) ? 'checked="checked"':'' ?> name="alive" /></td>
+                                <td><input id="alive" type="checkbox" value="0" <?= ($this->uname) ? 'checked="checked"':'' ?> 
+
+name="alive" /></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><p class="txtr"><input style="width:100%" class="btn" id="btnLogin" type="submit" value="登 录" /></p></td>
+                                <td><p class="txtr"><input style="width:100%" class="btn" id="btnLogin" type="submit" value="登 录" 
+
+/></p></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -181,29 +194,41 @@
                         <table style="margin:0 auto; text-align:center">
                             <tr>
                                 <td>姓名&nbsp;</td>
-                                <td><input readonly="true" class="text" type="text" name="name" value="<?= $this->passport('realName') ?>" /></td>
+                                <td><input readonly="true" class="text" type="text" name="name" value="<?= $this->passport
+
+('realName') ?>" /></td>
                             </tr>
                             <tr>
                                 <td>邮箱&nbsp;</td>
-                                <td><input class="text" type="text" id="email" name="email" value="<?= $this->passport('eMail') ?>" /></td>
+                                <td><input class="text" type="text" id="email" name="email" value="<?= $this->passport('eMail') ?>" 
+
+/></td>
                             </tr>
                             <tr>
                                 <td>手机&nbsp;</td>
-                                <td><input class="text" type="text" id="mobile" name="mobile" value="<?= $this->passport('mobile') ?>" /></td>
+                                <td><input class="text" type="text" id="mobile" name="mobile" value="<?= $this->passport('mobile') 
+
+?>" /></td>
                             </tr>
                            	<tr>
                                 <td>入学年份&nbsp;</td>
                                 <td align="left">
-                                	<select name="year" id="year"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option <?= ($i == $this->passport('year') ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>
+                                	<select name="year" id="year"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { 
+
+?><option <?= ($i == $this->passport('year') ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>专业&nbsp;</td>
-                                <td><input class="text" type="text" id="major" name="major" value="<?= $this->passport('major') ?>" /></td>
+                                <td><input class="text" type="text" id="major" name="major" value="<?= $this->passport('major') ?>" 
+
+/></td>
                             </tr>
                             <tr>
                             	<td>邮寄地址&nbsp;</td>
-                            	<td><input class="text" type="text" id="address" name="address" value="<?= $this->passport('address') ?>" /></td>
+                            	<td><input class="text" type="text" id="address" name="address" value="<?= $this->passport
+
+('address') ?>" /></td>
                             </tr>
                             <tr>
                             	<td>票数&nbsp;</td>
@@ -225,7 +250,9 @@
                         </table>
                     </form>
                     <?php else: ?>
-                    <div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访问本网址索票。</div>
+                    <div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访
+
+问本网址索票。</div>
                     <?php endif; endif; ?>
                 </div>
             </div>
@@ -244,7 +271,9 @@
                                 1958年毕业于浙江大学机械系光学机械仪器专业后留校任教。<br />
                                 1983年任杭州市委副书记等职。<br />
                                 1985年起任新华社香港分社宣传部副部长、部长、副社长，新华社香港分社发言人。<br />
-                                1998年3月调回内地任浙江大学、杭州大学、浙江农业大学、浙江医科大学四校合并领导小组副组长，新浙江大学筹建小组组长，浙江省政府特邀顾问。<br />
+                                1998年3月调回内地任浙江大学、杭州大学、浙江农业大学、浙江医科大学四校合并领导小组副组长，新浙江大学
+
+筹建小组组长，浙江省政府特邀顾问。<br />
                                 1998年9月起任浙江大学党委书记。
                             </td>
                         </tr>
@@ -253,27 +282,35 @@
                     <table>
                         <tr>
                             <td style="padding:10px;" width="15%">
-                                <img src="/static/images/subject/found/photo/image003.jpg" /><br />                            </td>
+                                <img src="/static/images/subject/found/photo/image003.jpg" /><br />
+                            </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">陈端</h3>
-                                原杭州市副市长、市政协副主席，现任杭州市关心下一代工作委员会副主任，著名心血管病专家。</td>
+                                原杭州市副市长、市政协副主席，现任杭州市关心下一代工作委员会副主任，著名心血管病专家。
+                            </td>
                             <td style="padding:10px;" width="15%">
-                                <img src="/static/images/subject/found/photo/azy.jpg" width="108" /><br />                            </td>
-                          <td valign="top" width="35%">
+                                <img src="/static/images/subject/found/photo/azy.jpg" width="108" /><br />
+                            </td>
+                            <td valign="top" width="35%">
                                 <h3 class="pos">安志云</h3>
-                              原杭州市人大副主任。</td>
+                                杭州市人大原副主任
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding:10px;">
-                                <img src="/static/images/subject/found/photo/yrr.jpg" width="108" /><br />                            </td>
-                          <td valign="top">
+                                <img src="/static/images/subject/found/photo/yrr.jpg" width="108" /><br />
+                            </td>
+                            <td valign="top">
                                 <h3 class="pos">虞荣仁</h3>
-                              原杭州市政协主席。</td>
+                                杭州市原政协主席
+                            </td>
                             <td style="padding:10px;">
-                               <img src="/static/images/subject/found/photo/lzf.jpg" width="108" /><br />                            </td>
+                               <img src="/static/images/subject/found/photo/lzf.jpg" width="108" /><br />
+                            </td>
                             <td valign="top">
                                 <h3 class="pos">林正范</h3>
-                                杭州师范大学校长。                            </td>
+                                杭师大校长
+                            </td>
                         </tr>
                     </table>
                     <h2>预选理事</h2>
@@ -284,14 +321,22 @@
                             </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">陈鸿</h3>
-                                浙江大学89年化工自动化本科毕业，92年工业自动化硕士毕业，03年中欧国际工商管理学院MBA毕业，和多位校友合伙人一起创建恒生电子股份有限公司，公司于03年成功上市，已经成为中国IT业的领先企业。现任公司董事，从公司具体经营工作中抽身转而投入较多精力负责筹建杭州浙江大学校友会，任筹备组组长，酒量不好但是贪杯。
+                                浙江大学89年化工自动化本科毕业，92年工业自动化硕士毕业，03年中欧国际工商管理学院MBA毕业，和多位校友
+
+合伙人一起创建恒生电子股份有限公司，公司于03年成功上市，已经成为中国IT业的领先企业。现任公司董事，从公司具体经营工作中抽身转而投入
+
+较多精力负责筹建杭州浙江大学校友会，任筹备组组长，酒量不好但是贪杯。
                             </td>
                             <td style="padding:10px;" width="15%">
                                 <img src="/static/images/subject/found/photo/image007.jpg" /><br />
                             </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">刘巍</h3>
-                                2005年浙江大学—香港理工大学国际房地产学系硕士毕业。天禄广告传媒有限公司总经理，旗下有汽车公司、媒体、网吧、信息技术公司等。刘巍用一年时间将一个人的公司发展到一百人，在奢侈品媒体行业发展出一定的品牌影响力。现任杭州浙大校友会筹备组副组长。想追求奢侈品的男士或女士请追随刘巍和天禄。
+                                2005年浙江大学—香港理工大学国际房地产学系硕士毕业。天禄广告传媒有限公司总经理，旗下有汽车公司、媒
+
+体、网吧、信息技术公司等。刘巍用一年时间将一个人的公司发展到一百人，在奢侈品媒体行业发展出一定的品牌影响力。现任杭州浙大校友会筹备
+
+组副组长。想追求奢侈品的男士或女士请追随刘巍和天禄。
                             </td>
                         </tr>
                         <tr>
@@ -300,7 +345,9 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">赵巧雅</h3>
-                                96届浙大电机系校友，现任杭州亚恺电子科技有限公司总经理。是北京校友会副秘书长张一春推荐参与校友会工作的。杭州校友会志愿者部负责人。她特别喜欢谈她的儿子，讲她儿子的故事。
+                                96届浙大电机系校友，现任杭州亚恺电子科技有限公司总经理。是北京校友会副秘书长张一春推荐参与校友会工
+
+作的。杭州校友会志愿者部负责人。她特别喜欢谈她的儿子，讲她儿子的故事。
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image011.jpg" /><br />
@@ -323,7 +370,9 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">庞颖</h3>
-                                88届浙大计算机系校友，现为和茶馆总经理，杭州市茶楼业协会副会长，杭州和顺堂茶文化推广有限公司总经理。
+                                88届浙大计算机系校友，现为和茶馆总经理，杭州市茶楼业协会副会长，杭州和顺堂茶文化推广有限公司总经理
+
+。
                             </td>
                         </tr>
                         <tr>
@@ -332,14 +381,17 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">魏任斌</h3>
-                                浙江大学管理学院校友，原话机世界集团副总裁，现为杭州民建委员、浙江连锁经营协会常务理事，杭州市青年企业家协会常务理事，杭州飞来投资管理有限公司董事长。
+                                浙江大学管理学院校友，原话机世界集团副总裁，现为杭州民建委员、浙江连锁经营协会常务理事，杭州市青年
+
+企业家协会常务理事，杭州飞来投资管理有限公司董事长
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image019.jpg" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">蒋锋</h3>
-                                杭州市教育局初教处处长。</td>
+                                杭州市教育局初教处处长
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding:10px;">
@@ -347,14 +399,16 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">钱永红</h3>
-                                杭大新闻系毕业，获博士学位。杭州市文化广电新闻出版局副局长，浙江大学新闻与社会发展研究所硕士生导师。
+                                杭大新闻系毕业，获博士学位。杭州市文化广电新闻出版局副局长，浙江大学新闻与社会发展研究所硕士生导师
+
+。
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image021.jpg" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">俞锋华</h3>
-                                省科技开发中心主任，长三角科技中介联盟副理事长，浙江省技术经纪人协会副会长。
+                                省科技开发中心主任，长三角科技中介联盟副理事长，浙江省技术经纪人协会副会长
                             </td>
                         </tr>
                         <tr>
@@ -363,13 +417,17 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">施建基</h3>
-                                77届杭大中文系校友，加拿大烈焰能源有限公司监事会主席，浙江大学校友总会理事，北美浙大校友企业家联谊会召集人。</td>
+                                77届杭大中文系校友，加拿大烈焰能源有限公司监事会主席，浙江大学校友总会理事，北美浙大校友企业家联谊
+
+会召集人
+                            </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/whg.jpg" width="108" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">王海光</h3>
-                                原杭大哲学系校友，现为万科南都董事长。</td>
+                                原杭大哲学系校友，现为万科南都董事长
+                            </td>
                         </tr>
                         <tr>
                             <td style="padding:10px;">
@@ -377,13 +435,16 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">胡季强</h3>
-                                82届浙大医学院校友，现为康恩贝集团有限公司董事长，浙江省企业家协会副会长，全国优秀青年企业家。</td>
+                                82届浙大医学院校友，现为康恩贝集团有限公司董事长，浙江省企业家协会副会长，全国优秀青年企业家
+                            </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image025.jpg" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">汪兴</h3>
-                                90届浙大计算机校友，浙江省耀江房地产开发有限公司总经理，浙江省耀江集团副总裁，海南海德实业股份有限公司副董事长。
+                                90届浙大计算机校友，浙江省耀江房地产开发有限公司总经理，浙江省耀江集团副总裁，海南海德实业股份有限
+
+公司副董事长
                             </td>
                         </tr>
                         <tr>
@@ -392,14 +453,18 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">潘水苗</h3>
-                                89届浙大电机系校友，现为浙江万马电缆股份有限公司董事长。
+                                89届浙大电机系校友，现为浙江万马电缆股份有限公司董事长
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/none.gif" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">吴晓农</h3>
-                                现为浙江浙大网新科技股份有限公司人力资源部总监。浙江大学政治系硕士。 1987年--1996年,浙江大学电机系教师、分团委书记、党总支委员、 浙江大学团委常委。 1996年--1999年,浙江大学电机系党总支副书记、 浙江大学工会青工委员会副主席。 1999年--2002年,浙江大学电气工程学院党委副书记。
+                                现为浙江浙大网新科技股份有限公司人力资源部总监。浙江大学政治系硕士。 1987年--1996年,浙江大学电机系
+
+教师、分团委书记、党总支委员、 浙江大学团委常委。 1996年--1999年,浙江大学电机系党总支副书记、 浙江大学工会青工委员会副主席。 1999年
+
+--2002年,浙江大学电气工程学院党委副书记。
                             </td>
                         </tr>
                     </table>
@@ -419,7 +484,9 @@
                             </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">张美凤</h3>
-                                浙江大学校友总会秘书长，浙大发展联络办主任，浙大教育基金会秘书处主任。充满亲和力，是著名的“美凤姐”。是全球各地浙江大学校友会的“办主任”。
+                                浙江大学校友总会秘书长，浙大对外联络办主任，浙大教育基金会秘书处主任。充满亲和力，是著名的“美凤姐
+
+”。是全球各地浙江大学校友会的“办主任”。
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image038.jpg" /><br />
@@ -435,7 +502,9 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">顾玉林</h3>
-                                浙江大学教育基金会秘书处办公室主任，校友总会秘书处办公室副主任，发展联络办公室国内部主任。网名：玉树临风。
+                                浙江大学教育基金会秘书处办公室主任，校友总会秘书处办公室副主任，发展联络办公室国内部主任。网名：玉
+
+树临风。
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image032.jpg" /><br />
@@ -477,22 +546,71 @@
                                 
             <div id="cb_intro" class="item">
                 <div class="pdlr10">
+                    <?php if($this->passport()): ?>
                     <h2>筹备组成员简介</h2>
                     <table>
+                        <tr>
+                            <td style="padding:10px;" width="15%">
+                                <img src="/static/images/subject/found/photo/image005.jpg" /><br />
+                            </td>
+                            <td valign="top" width="35%">
+                                <h3 class="pos">陈鸿</h3>
+                                浙江大学89年化工自动化本科毕业，92年工业自动化硕士毕业，03年中欧国际工商管理学院MBA毕业，和多位校友
+
+合伙人一起创建恒生电子股份有限公司，公司于03年成功上市，已经成为中国IT业的领先企业。现任公司董事，从公司具体经营工作中抽身转而投入
+
+较多精力负责筹建杭州浙江大学校友会，任筹备组组长，酒量不好但是贪杯。
+                            </td>
+                            <td style="padding:10px;" width="15%">
+                                <img src="/static/images/subject/found/photo/image007.jpg" /><br />
+                            </td>
+                            <td valign="top" width="35%">
+                                <h3 class="pos">刘巍</h3>
+                                2005年浙江大学—香港理工大学国际房地产学系硕士毕业。天禄广告传媒有限公司总经理，旗下有汽车公司、媒
+
+体、网吧、信息技术公司等。刘巍用一年时间将一个人的公司发展到一百人，在奢侈品媒体行业发展出一定的品牌影响力。现任杭州浙大校友会筹备
+
+组副组长。想追求奢侈品的男士或女士请追随刘巍和天禄。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image009.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">赵巧雅</h3>
+                                96届浙大电机系校友，现任杭州亚恺电子科技有限公司总经理。是北京校友会副秘书长张一春推荐参与校友会工
+
+作的。杭州校友会志愿者部负责人。她特别喜欢谈她的儿子，讲她儿子的故事。
+                            </td>
+                            <td style="padding:10px;">
+                                <img src="/static/images/subject/found/photo/image052.jpg" /><br />
+                            </td>
+                            <td valign="top">
+                                <h3 class="pos">赵爱桔</h3>
+                                97年浙江大学化工工艺本科毕业，05年入浙江大学攻读化学工程(制药工程方向)硕士研究生。现就职于浙江省食
+
+品药品监督管理局，杭州浙大校友会(筹)副秘书长。
+                            </td>
+                        </tr>
                         <tr>
                             <td style="padding:10px;" width="15%">
                                 <img src="/static/images/subject/found/photo/image042.jpg" /><br />
                             </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">宋常畏</h3>
-                                03年浙大材化学院本科毕业，爱康健康管理公司销售经理，杭州浙江大学校友会副秘书长，负责校友会宣传工作，是最积极的骨干之一。说话时底气十足，似乎每个女生都想追求他。
+                                03年浙大材化学院本科毕业，爱康健康管理公司销售经理，杭州浙江大学校友会副秘书长，负责校友会宣传工作
+
+，是最积极的骨干之一。说话时底气十足，似乎每个女生都想追求他。
                             </td>
                             <td style="padding:10px;" width="15%">
                                 <img src="/static/images/subject/found/photo/image044.jpg" /><br />
                             </td>
                             <td valign="top" width="35%">
                                 <h3 class="pos">殷佳东</h3>
-                                97年浙大管理系本科毕业，03年浙大管理学院MBA毕业。银联商务有限公司浙江分公司的核心骨干。他非常的聪明、直率。
+                                97年浙大管理系本科毕业，03年浙大管理学院MBA毕业。银联商务有限公司浙江分公司的核心骨干。他非常的聪明
+
+、直率。
                             </td>
                         </tr>
                         <tr>
@@ -501,14 +619,18 @@
                             </td>
                             <td valign="top">
                                 <h3 class="pos">方梓欣</h3>
-                                00年浙江大学工学学士毕业，05年浙江大学管理学硕士毕业。在大雪纷飞一票难求的春运时期，他借助人脉居然还能弄到多张卧铺票。走路飞快是他的一大特色。
+                                00年浙江大学工学学士毕业，05年浙江大学管理学硕士毕业。在大雪纷飞一票难求的春运时期，他借助人脉居然
+
+还能弄到多张卧铺票。走路飞快是他的一大特色。
                             </td>
                             <td style="padding:10px;">
                                 <img src="/static/images/subject/found/photo/image048.jpg" /><br />
                             </td>
                             <td valign="top">
                                 <h3 class="pos">王伟强</h3>
-                                05年浙江大学国际经济与贸易本科毕业，现任恒生银行杭州分行优越理财经理，杭州浙大校友会的副秘书长。<br />
+                                05年浙江大学国际经济与贸易本科毕业，现任恒生银行杭州分行优越理财经理，杭州浙大校友会的副秘书长。<br 
+
+/>
                                 户外活动爱好者，装备齐全，但鞋有点破了。
                             </td>
                         </tr>
@@ -520,15 +642,9 @@
                                 <h3 class="pos">陈杰</h3>
                                 05年浙江大学法律硕士毕业，浙江凯富律师事务所合伙人。杭州浙大校友会(筹)副秘书长。
                             </td>
-                            <td style="padding:10px;">
-                                <img src="/static/images/subject/found/photo/image052.jpg" /><br />
-                            </td>
-                            <td valign="top">
-                                <h3 class="pos">赵爱桔</h3>
-                                97年浙江大学化工工艺本科毕业，05年入浙江大学攻读化学工程(制药工程方向)硕士研究生。现就职于浙江省食品药品监督管理局，杭州浙大校友会(筹)副秘书长。
-                            </td>
                         </tr>
                     </table>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php endif; ?>
@@ -564,7 +680,9 @@
                     var year = $('#year').val();
                     var major = $('#major').val();
                     $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile, 'address':address});
-                    $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 'birthday':'<?= $this->passport('birthday') ?>'});
+                    $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 
+
+'birthday':'<?= $this->passport('birthday') ?>'});
                     <?php endif; ?>
                     window.history.go(0);
                 }
@@ -586,7 +704,7 @@
             $('#'+section).fadeIn();
             $.cookie('found_tab',section);
             
-            if(section == 'ls_intro' || section == 'zh_intro')
+            if(section == 'ls_intro' || section == 'zh_intro' || section == 'cb_intro')
             {
                 <?php if(!$this->passport()): ?>
                     $('#signup').fadeIn();
