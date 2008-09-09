@@ -185,8 +185,12 @@ name="alive" /></td>
                             </tr>
                         </table>
                     </form>
-                    <?php else: if($this->signup != true): ?>
+                    <?php else: ?>
                     <h2 style="text-align:center">还剩余<span style="color:red"><?= $this->last ?></span>张票可以在线索取</h2>
+                    <br />
+                    <?php if($this->signup == true): ?>
+					<div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访问本网址索票。</div>
+                    <?php endif; ?>
                     <form id="sign_form" onsubmit="return signup();">
                         <input name="uid" type="hidden" value="<?= $this->passport('uid') ?>" />
                         <table style="margin:0 auto; text-align:center">
@@ -232,26 +236,28 @@ name="alive" /></td>
                             	<td>票数&nbsp;</td>
                             	<td align="left">
                             		<select name="tnum">
-                            			<option value="1">1张 </option>
-                            			<option value="2">2张 </option>
-                            			<option value="3">3张 </option>
+                            			<option value="1" <?= ($this->tnum == 1)?'selected="selected"':'' ?>>1张 </option>
+                            			<option value="2" <?= ($this->tnum == 2)?'selected="selected"':'' ?>>2张 </option>
+                            			<option value="3" <?= ($this->tnum == 3)?'selected="selected"':'' ?>>3张 </option>
                             		</select>
                             	</td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input class="btn" type="submit" value="信息无误，我要索票" /></td>
+                                <td>
+                                	<?php if($this->signup != true): ?>
+                                	<input class="btn" type="submit" value="信息无误，我要索票" />
+                                	<?php else: ?>
+                                	<input class="btn" type="submit" value="修改信息" />
+                                	<?php endif; ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="2" id="sign_tip"></td>
                             </tr>
                         </table>
                     </form>
-                    <?php else: ?>
-                    <div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访
-
-问本网址索票。</div>
-                    <?php endif; endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
                 
@@ -776,9 +782,7 @@ name="alive" /></td>
                     var year = $('#year').val();
                     var major = $('#major').val();
                     $.post("/member/my/docontact",{'eMail':email, 'mobile':mobile, 'address':address});
-                    $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 
-
-'birthday':'<?= $this->passport('birthday') ?>'});
+                    $.post("/member/my/dobasic",{'year':year, 'major':major, 'college':<?= $this->passport('college') ?>, 'birthday':'<?= $this->passport('birthday') ?>'});
                     <?php endif; ?>
                     window.history.go(0);
                 }

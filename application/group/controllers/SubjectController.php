@@ -13,14 +13,16 @@
         {
         	$total_num = 300;
             $root = $_SERVER['DOCUMENT_ROOT'];
+            $myid = Cmd::myid();
             
             $db = file_get_contents($root.'/static/foundb.txt');
             
             if($db != '') // 空的数据
             {
                 $list = unserialize($db);
-                if(@array_key_exists(Cmd::myid(), $list))
+                if(@array_key_exists($myid, $list))
                 $this->view->signup = true;
+                $this->view->tnum = $list[$myid]['tnum'];
             }
             else {
             	$list = null; // 默认名单为空
@@ -126,29 +128,24 @@
                     else // 补充数据
                     {
                         $list = unserialize($db);
-                        if(!@array_key_exists($uid, $list))
-                        {
-                            // 写入数据
-                            $list[$uid] = array(
-                                'name' => $name,
-                                'email' => $email,
-                                'mobile' => $mobile,
-                            	'year' => $year,
-	                        	'major' => $major,
-	                        	'address' => $address,
-	                        	'tnum' => $tnum
-                            );
-                            // 保存进txt
-                            file_put_contents($root.'/static/foundb.txt', serialize($list));
-                            echo 'success';
-                        }
-                        else // 已经报名过了
-                        {
-                            echo '<br /><div class="notice">您已经成功报名</div>';
-                        }
+
+                         // 写入数据
+                         $list[$uid] = array(
+                             'name' => $name,
+                             'email' => $email,
+                             'mobile' => $mobile,
+                           	 'year' => $year,
+	                         'major' => $major,
+	                         'address' => $address,
+	                         'tnum' => $tnum
+                          );
+                          // 保存进txt
+                          file_put_contents($root.'/static/foundb.txt', serialize($list));
+                          echo 'success';
                     }
                 }
             }
+            
             $this->view->uname = $_COOKIE['zjuhz_member']['uname']; // 记住账号
             $this->view->pswd = Commons::decrypt($_COOKIE['zjuhz_member']['pswd']); // 记住账号
         }
