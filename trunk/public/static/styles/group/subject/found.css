@@ -81,6 +81,16 @@ body{ background:url(/static/images/subject/found/bg.jpg) repeat-x left top fixe
     padding:20px;
 }
 
+#footer{
+	padding:30px 0;
+	font-size:14px;
+	border-top:1px dashed #ccc;
+}
+#footer a{
+	font-size:14px; 
+	color:#391DA3;
+	margin-right:8px;
+}
 
 /* Form fields
 -------------------------------------------------------------- */
