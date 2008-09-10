@@ -229,7 +229,7 @@ name="alive" /></td>
                            	<tr>
                                 <td>入学年份&nbsp;</td>
                                 <td align="left">
-                                	<select name="year" id="year"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { 
+                                	<select name="year" id="year"><option>入学年份</option><?php for ($i=1960;$i<=2008;$i++) { 
 
 ?><option <?= ($i == $this->passport('year') ? 'selected' : ''); ?> value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>
                                 </td>
@@ -772,7 +772,6 @@ name="alive" /></td>
     <script type="text/javascript">
         function tab(section)
         {
-            
             $('#content div.item').hide();
             $('#nav a').css('background','none');
             $('a.'+section).css('background','#EFE0CC');
