@@ -11,7 +11,7 @@
         # 成立大会
         function foundAction()
         {
-        	$total_num = 300;
+        	$total_num = 200;
             $root = $_SERVER['DOCUMENT_ROOT'];
             $myid = Cmd::myid();
             

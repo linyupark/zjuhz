@@ -186,7 +186,8 @@ name="alive" /></td>
                         </table>
                     </form>
                     <?php else: ?>
-                    <h2 style="text-align:center">还剩余<span style="color:red"><?= $this->last ?></span>张票可以在线索取
+                    
+                    <h2 style="text-align:center">还剩余<span style="color:red"><?= ($this->last < 0) ? 0 : $this->last ?></span>张票可以在线索取
                         
                         <div style="font-size:12px; text-align:left; font-weight:normal">
                         <b>9月16号</b>将开通四个<b>现场取票点</b>，地址和联系方式如下：<br />
@@ -201,6 +202,8 @@ name="alive" /></td>
                     <?php if($this->signup == true): ?>
 					<div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访问本网址索票。</div>
                     <?php endif; ?>
+                    
+                    <?php if($this->last >= 1 || $this->signup == true): ?>
                     <form id="sign_form" onsubmit="return signup();">
                         <input name="uid" type="hidden" value="<?= $this->passport('uid') ?>" />
                         <table style="margin:0 auto; text-align:center">
@@ -267,7 +270,9 @@ name="alive" /></td>
                             </tr>
                         </table>
                     </form>
-                    <?php endif; ?>
+                    <?php else: ?>            
+                    <div class="notice">在线索票活动结束...您通过现场取票方式参加校友会成立大会的活动。(取票地点请参考上面的联系方式)</div>
+                    <?php endif; endif; ?>
                 </div>
             </div>
                 
