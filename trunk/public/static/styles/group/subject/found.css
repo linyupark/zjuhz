@@ -62,7 +62,7 @@ body{ background:url(/static/images/subject/found/bg.jpg) repeat-x left top fixe
 #nav a{ color:#995700; text-decoration:none; display:block; width:200px; padding:3px 5px; }
 #nav a:hover{ color:#333; text-decoration:underline; }
 
-#plan,#signup,#ls_intro{ display:none; }
+#plan,#signup,#ls_intro,#zh_intro,#cb_intro{ display:none; }
 
 /* 具体内容 */
 #content{

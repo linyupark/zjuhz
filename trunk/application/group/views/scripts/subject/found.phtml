@@ -186,7 +186,17 @@ name="alive" /></td>
                         </table>
                     </form>
                     <?php else: ?>
-                    <h2 style="text-align:center">还剩余<span style="color:red"><?= $this->last ?></span>张票可以在线索取</h2>
+                    <h2 style="text-align:center">还剩余<span style="color:red"><?= $this->last ?></span>张票可以在线索取
+                        
+                        <div style="font-size:12px; text-align:left; font-weight:normal">
+                        <b>9月16号</b>将开通四个<b>现场取票点</b>，地址和联系方式如下：<br />
+                        城西：西溪路525号浙大科技园C楼608杭州浙大校友会(89988185)<br />
+                        城北：莫干山路789号美都广场C座612室浙江建林电子电气有限公司(88979740)<br />
+                        城中：庆春路216号浙江省卫生厅二楼长江证券营业部(87709267)<br />
+                        滨江：滨江区江南大道3880号华荣时代大厦16楼D座浙江凯富律师事务所(87859355)
+                        </div>
+                    
+                    </h2>
                     <br />
                     <?php if($this->signup == true): ?>
 					<div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访问本网址索票。</div>
@@ -754,6 +764,24 @@ name="alive" /></td>
     </div>
     
     <script type="text/javascript">
+        function tab(section)
+        {
+            $('#content div.item').hide();
+            $('#nav a').css('background','none');
+            $('a.'+section).css('background','#EFE0CC');
+            $('#'+section).fadeIn();
+            $.cookie('found_tab',section);
+            
+            if(section == 'ls_intro' || section == 'zh_intro' || section == 'cb_intro')
+            {
+                <?php if(!$this->passport()): ?>
+                    $('#signup').fadeIn();
+                <?php endif; ?>
+            }
+        }
+        if($.cookie('found_tab') == null) tab('plan');
+        else tab($.cookie('found_tab'));
+    
         function relogin() {
             var formdata = $("#relogin_form").fastSerialize();
         
@@ -795,25 +823,6 @@ name="alive" /></td>
             });
             return false;
         }
-        
-        function tab(section)
-        {
-            $('#content div.item').hide();
-            $('#nav a').css('background','none');
-            $('a.'+section).css('background','#EFE0CC');
-            $('#'+section).fadeIn();
-            $.cookie('found_tab',section);
-            
-            if(section == 'ls_intro' || section == 'zh_intro' || section == 'cb_intro')
-            {
-                <?php if(!$this->passport()): ?>
-                    $('#signup').fadeIn();
-                <?php endif; ?>
-            }
-        }
-        if($.cookie('found_tab') == null) tab('plan');
-        else tab($.cookie('found_tab'));
-        
         
         <?php if($this->uname && $this->pswd && !$this->passport()): ?>
         relogin();
