@@ -56,25 +56,29 @@
     	<td><input name="rname" id="rname" tabindex="5" class="inputtxt" type="text" maxlength="6" />&nbsp;<span style="color:red">如不是中文真名本站保留清除帐号的权力</span><br /></td>
     </tr>
     <tr>
+        <td>电子邮箱：<br /><br /></td>
+    	<td><input name="eMail" id="eMail" tabindex="6" class="inputtxt" type="text" /><br /></td>
+    </tr>
+    <tr>
     	<td>您的性别：<br /><br /></td>
-    	<td><label for="male"><input name="sex" id="male" type="radio" tabindex="6" value="男" checked="checked" /> 
+    	<td><label for="male"><input name="sex" id="male" type="radio" tabindex="7" value="男" checked="checked" /> 
     	男</label>&nbsp;<label for="female"><input name="sex" id="female" type="radio" value="女" /> 女</label>&nbsp;<span class="quiet">注册后不可修改。</span><br /></td>
     </tr>
     <tr>
     	<td>入学信息：<br /><br /></td>
-    	<td><select name="year" id="year" tabindex="7"><option>入学年份</option><?php for ($i=1970;$i<=2008;$i++) { ?><option value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;<select name="college" id="college" tabindex="8"><option>院系名称</option><?php foreach ($this->college() as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
+    	<td><select name="year" id="year" tabindex="8"><option>入学年份</option><?php for ($i=1960;$i<=2008;$i++) { ?><option value="<?= $i; ?>"><?= $i; ?>年</option><?php } ?></select>&nbsp;<select name="college" id="college" tabindex="9"><option>院系名称</option><?php foreach ($this->college() as $key => $value) { ?><option value="<?= $key; ?>"><?= $value; ?></option><?php } ?></select>&nbsp;<br /></td>
     </tr>
     <tr>
     	<td>所学专业：<br /><br /></td>
-    	<td><input name="major" id="major" tabindex="9" class="inputtxt" type="text" size="37" maxlength="30" />&nbsp;<br /><span class="quiet">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
+    	<td><input name="major" id="major" tabindex="10" class="inputtxt" type="text" size="37" maxlength="30" />&nbsp;<br /><span class="quiet">输入当时的专业名称(应与入学年份、院系名称相对应，不用含班级名称)。</span><br /></td>
     </tr>
     <tr style="display:none" id="joinClass">
     	<td>加入班级：<br /><br /><br /><br /></td>
-    	<td><select id="selectbox" tabindex="10" size="3" multiple="multiple" style="width:275px; padding:2px;"></select>&nbsp;<input id="btnReselect" type="button" value="重选" /><br /><span class="quiet">邀请您注册的好友加入了以上班级，您也可申请加入。按住Ctrl键再点鼠标可多选。</span><br /></td>
+    	<td><select id="selectbox" tabindex="11" size="3" multiple="multiple" style="width:275px; padding:2px;"></select>&nbsp;<input id="btnReselect" type="button" value="重选" /><br /><span class="quiet">邀请您注册的好友加入了以上班级，您也可申请加入。按住Ctrl键再点鼠标可多选。</span><br /></td>
     </tr>	
     <tr>
     	<td>验&nbsp;证&nbsp;&nbsp;码：<br /><br /></td>
-    	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="11" size="6" maxlength="4">&nbsp;<span id="putVerifyImg"></span>&nbsp;<span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span><br /></td>
+    	<td><input type="text" class="inputtxt" name="vcode" id="vcode" tabindex="12" size="6" maxlength="4">&nbsp;<span id="putVerifyImg"></span>&nbsp;<span class="quiet">请输入您看到的4个数字。点击图片可刷新。</span><br /></td>
     </tr>
     <tr>
     	<td colspan="2"><input type="submit" id="btnRegister" name="btnRegister" tabindex="12" value="同意以下注册协议，提交注册信息" class="btn" /></td>

@@ -56,6 +56,8 @@ class RegisterFilter extends MemberInterlayer
      */
 	public function register($args)
 	{
+        // Zend_Validate_IsEmail
+		Zend_Loader::loadFile('IsEmail.php');
 		// Zend_Validate_Utf8Length
 		Zend_Loader::loadFile('Utf8Length.php');
 		// Zend_Validate_NotEquals
@@ -91,7 +93,12 @@ class RegisterFilter extends MemberInterlayer
             'rname' => array(
                 array('Utf8Length', '2', '6'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->realNameError, 
-                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realNameError)), 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->realNameError)),
+            
+			'eMail' => array(
+			    array('IsEmail'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+               	    Zend_Validate_IsEmail::NOT_EMAIL => $this->_iniMember->hint->emailInvalid)),
+                              				  
             'sex' => array('presence' => 'required'), 
             'year' => array(
 			    array('Between', '1900', '2050'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
@@ -124,10 +131,15 @@ class RegisterFilter extends MemberInterlayer
 		else
 		{
 			return array(
-		    	'username' => $input->getUnescaped('uname'), 'password' => $input->getUnescaped('pswd'), 
-		  		'realName' => $input->getUnescaped('rname'), 'sex' => $input->getUnescaped('sex'), 
-		  		'year' => $input->getUnescaped('year'), 'college' => $input->getUnescaped('college'), 
-		  		'major' => $input->getUnescaped('major'), 'regIp' => $input->getUnescaped('ip'), 
+		    	'username' => $input->getUnescaped('uname'),
+                'password' => $input->getUnescaped('pswd'), 
+		  		'realName' => $input->getUnescaped('rname'),
+                'eMail' => $input->getUnescaped('eMail'),
+                'sex' => $input->getUnescaped('sex'), 
+		  		'year' => $input->getUnescaped('year'),
+                'college' => $input->getUnescaped('college'), 
+		  		'major' => $input->getUnescaped('major'),
+                'regIp' => $input->getUnescaped('ip'), 
 		  		'ikey' => $input->getUnescaped('ikey')
 			);
 		}
