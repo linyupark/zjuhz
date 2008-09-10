@@ -19,6 +19,7 @@
             <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/group.gif" /> 筹备组成员简介</a>
         </div>
         <div id="content">
+            <div style="margin:20px; font-size:14px;" id="loading" class="error txtc">内容加载中请稍等...</div>
             <?php if($this->listview): // 已经报名的人员 ?>
             <div class="pdlr10">
             <h2>已经报名参加的人员 <a target="_blank" href="/group/subject/found?list=view&export=xls">导出Excel</a></h2>
@@ -771,6 +772,7 @@ name="alive" /></td>
     <script type="text/javascript">
         function tab(section)
         {
+            
             $('#content div.item').hide();
             $('#nav a').css('background','none');
             $('a.'+section).css('background','#EFE0CC');
@@ -783,6 +785,7 @@ name="alive" /></td>
                     $('#signup').fadeIn();
                 <?php endif; ?>
             }
+            $('#loading').hide();
         }
         if($.cookie('found_tab') == null) tab('plan');
         else tab($.cookie('found_tab'));
