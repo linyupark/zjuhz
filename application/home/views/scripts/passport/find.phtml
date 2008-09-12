@@ -1,0 +1,45 @@
+<p class="success">填写您的注册帐号和邮箱，初始化密码连接会发送至您的邮箱。</p>
+<br />
+<form id="find_form" method="post" onsubmit="return doFind()">
+    <p>帐号 <input id="account" class="text" name="account" /></p>
+    <p>邮箱 <input id="email" class="text" name="email" /></p>
+    <p><input type="submit" style="width:80px;" class="btn" value="确定" />&nbsp;&nbsp;&nbsp;<span id="loading"></span></p>
+    <span id="err_tip"><p class="error" style="visibility:hidden">&nbsp;</p></span>
+</form>
+
+<script type="text/javascript">
+    function doFind()
+    {
+        $('#loading').html('<img src="/static/images/loading1.gif" /> <span class="sub">上报ing...</span>');
+        $('.btn').attr('disabled',true);
+        var account = $('#account').val();
+        $.post("/member/register/docheck/", {uname:account}, function(msg){
+            if(msg != '账号被占用请更换！')
+            {
+                $('#err_tip').html('<p class="error">输入的帐号'+account+'不存在</p>');
+                $('.error').animate({opacity:0},3000);
+                $('.btn').attr('disabled',false);
+                $('#loading').html('');
+            }
+            else
+            {
+                $.post('/home/passport/find', $('#find_form').fastSerialize(), function(msg){
+                    if(msg != 'success')
+                    {
+                        $('#err_tip').html('<p class="error">'+msg+'</p>');
+                        //$('.error').animate({opacity:0},3000);
+                        $('.btn').attr('disabled',false);
+                        $('#loading').html('');
+                    }
+                    else
+                    {
+                        $('#err_tip').html('<p class="notice">已经发送成功，请及时查看邮箱。</p>');
+                        $('#loading').html('');
+                    }
+                });
+            }
+        });
+        
+        return false;
+    }
+</script>

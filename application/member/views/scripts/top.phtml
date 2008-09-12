@@ -1,7 +1,10 @@
 <table class="global_search">
     <tr>
     <td class="nav">
-        <?php if ($this->sessCommon->login) { ?>您好，<?= $this->sessCommon->login['realName']; ?>|<a style="color:green" href="javascript:fastInvite()">邀请校友</a>|<a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a>|<a href="/member/my/">我的账号</a><!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('您确定要退出吗？');">退出</a><?php } else { ?><a href="/member/register/">注册</a>|<a href="/member/login/">登录</a><?php } ?>
+        <?php if ($this->sessCommon->login) { ?>
+		您好，<?= $this->sessCommon->login['realName']; ?>|<a style="color:green" href="javascript:fastInvite()">邀请校友</a>|<a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a>|<a href="/member/my/">我的账号</a>
+		<!--|<a href="">站内信<?= ($this->sessCommon->login['unRead'] > 0) ? "({$this->sessCommon->login['unRead']})" : ''; ?></a>-->|<a href="/member/">返回首页</a>|<a href="/member/logout/" onClick="return window.confirm('您确定要退出吗？');">退出</a><?php } else { ?>
+		<a href="/member/register/">注册</a>|<a href="/member/login/">登录</a>|<a href="/home/passport/find">找回密码</a><?php } ?>
     </td>
     </tr>
 </table>
