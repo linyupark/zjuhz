@@ -11,7 +11,7 @@
 			$new_pw = $this->_getParam('pw');
 			
 			$User = new User();
-			$User->_db->update('tbl_user', array('password' => md5($new_pw)));
+			$User->_db->update('tbl_user', array('password' => md5($new_pw)), 'username = "'.$account.'"');
 			
 			$this->view->new_pw = $new_pw;
 		}
