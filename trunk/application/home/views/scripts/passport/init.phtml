@@ -1,1 +1,5 @@
+<?php if ($this->passport()): ?>
+<p class="success">已经登陆成功，进入我的帐号<a href="/member/my/account/">修改密码</a></p>
+<?php else: ?>
 <p class="success">您的密码已经成功进行了初始化，新密码为：<b><?= $this->new_pw ?></b> 登陆后请马上修改</p>
+<?php endif; ?>
