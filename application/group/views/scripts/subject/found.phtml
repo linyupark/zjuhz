@@ -13,7 +13,7 @@
         <div id="header"></div>
         <div id="nav">
             <a class="plan" href="javascript:tab('plan')"><img src="/static/images/icon/date.gif" /> 成立大会活动安排</a>
-            <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线索票</a>
+            <a class="signup" href="javascript:tab('signup')"><img src="/static/images/icon/edit.gif" /> 在线订票</a>
             <a class="ls_intro" href="javascript:tab('ls_intro')"><img src="/static/images/icon/user.gif" /> 理事成员简介</a>
             <a class="zh_intro" href="javascript:tab('zh_intro')"><img src="/static/images/subject/found/photo/user_gray.gif" /> 校友总会老师简介</a>
             <a class="cb_intro" href="javascript:tab('cb_intro')"><img src="/static/images/icon/group.gif" /> 筹备组成员简介</a>
@@ -188,20 +188,25 @@ name="alive" /></td>
                     </form>
                     <?php else: ?>
                     
-                    <h2 style="text-align:center">还剩余<span style="color:red"><?= ($this->last < 0) ? 0 : $this->last ?></span>张票可以在线索取
-                        
-                        <div style="font-size:12px; text-align:left; font-weight:normal">
+                    <h2 style="text-align:center">
+                        前<span style="color:red">200</span>张邮寄票已经全部抢完！
+                        还剩余<span style="color:red"><?= ($this->last < 0) ? 0 : $this->last ?></span>张可以在线订票
+                    </h2>
+                    <br />
+                    <div class="notice" style="font-size:13px; text-align:left; font-weight:normal">
                         <b>9月16号</b>将开通四个<b>现场取票点</b>，地址和联系方式如下：<br />
                         城西：西溪路525号浙大科技园C楼608杭州浙大校友会(89988185)<br />
                         城北：莫干山路789号美都广场C座612室浙江建林电子电气有限公司(88979740)<br />
                         城中：庆春路216号浙江省卫生厅二楼长江证券营业部(87709267)<br />
                         滨江：滨江区江南大道3880号华荣时代大厦16楼D座浙江凯富律师事务所(87859355)
-                        </div>
-                    
-                    </h2>
-                    <br />
+                    </div>
+                
                     <?php if($this->signup == true): ?>
-					<div class="success">您已索票成功！门票数量有限，请珍惜，务必到场参加活动，欣赏音乐晚会。同时欢迎邀请其他校友访问本网址索票。</div>
+					<div class="success">
+                        您已经成功预定No.<?php echo $this->t_start; if($this->t_start != $this->t_end) echo '~'.$this->t_end ?>张票
+                        (前200张我们会将票邮寄至您所填地址)
+                        门票数量有限，请珍惜。同时欢迎邀请其他校友访问本网页订票。
+                    </div>
                     <?php endif; ?>
                     
                     <?php if($this->last >= 1 || $this->signup == true): ?>
@@ -241,7 +246,7 @@ name="alive" /></td>
 /></td>
                             </tr>
                             <tr>
-                            	<td>邮寄地址&nbsp;</td>
+                            	<td>住址&nbsp;</td>
                             	<td><input class="text" type="text" id="address" name="address" value="<?= $this->passport
 
 ('address') ?>" /></td>
@@ -260,7 +265,7 @@ name="alive" /></td>
                                 <td></td>
                                 <td>
                                 	<?php if($this->signup != true): ?>
-                                	<input class="btn" type="submit" value="信息无误，我要索票" />
+                                	<input class="btn" type="submit" value="信息无误，我要订票" />
                                 	<?php else: ?>
                                 	<input class="btn" type="submit" value="修改信息" />
                                 	<?php endif; ?>
@@ -272,7 +277,7 @@ name="alive" /></td>
                         </table>
                     </form>
                     <?php else: ?>            
-                    <div class="notice">在线索票活动结束...您通过现场取票方式参加校友会成立大会的活动。(取票地点请参考上面的联系方式)</div>
+                    <div class="notice">在线预票活动结束...您可以通过现场取票方式参加校友会成立大会的活动。(取票地点请参考上面的联系方式)</div>
                     <?php endif; endif; ?>
                 </div>
             </div>

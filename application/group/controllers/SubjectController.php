@@ -11,7 +11,7 @@
         # 成立大会
         function foundAction()
         {
-        	$total_num = 200;
+        	$total_num = 300;
             $root = $_SERVER['DOCUMENT_ROOT'];
             $myid = Cmd::myid();
             
@@ -32,12 +32,16 @@
 	        $tcount = 0;
 	        if($list != FALSE)
 	        {
-	        	foreach($list as $x)
+	        	foreach($list as $uid => $x)
 		        {
+                    if($uid == $myid) // 到了当前用户登记的位置
+                    $my_t_start = $tcount+1; //第X
+                    $my_t_end = $tcount+$x['tnum']; //到y
 		            $tcount += $x['tnum'];
 		        }
 		        $this->view->last = $total_num - $tcount;
-	        
+                $this->view->t_start = $my_t_start;
+                $this->view->t_end = $my_t_end;
 	        }
 	        else $this->view->last = $total_num;
             
