@@ -36,7 +36,7 @@
 		        {
                     if($uid == $myid) // 到了当前用户登记的位置
                     $my_t_start = $tcount+1; //第X
-                    $my_t_end = $tcount+$x['tnum']; //到y
+                    $my_t_end = ($my_t_start+$x['tnum']-1); //到y
 		            $tcount += $x['tnum'];
 		        }
 		        $this->view->last = $total_num - $tcount;
