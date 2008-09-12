@@ -20,6 +20,17 @@ class User
     }
     
     /**
+     * 帐号和邮箱查找
+     **/
+    function check($account, $email)
+    {
+        $row = $this->_db->fetchRow('SELECT `uid` FROM `tbl_user` WHERE `username` = ?', $account);
+        $row2 = $this->_db->fetchRow('SELECT `uid` FROM `tbl_user_contact` WHERE `eMail` = ?', $email);
+        
+        return ($row['uid'] == $row2['uid']) ? true : false ;
+    }
+    
+    /**
      * 看看有没有这个通讯组
      * */
     function findGroupByName($gname)
