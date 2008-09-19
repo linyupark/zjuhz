@@ -177,6 +177,24 @@ src="/static/images/subject/found/map-small.jpg" /></a>
                         <b>停靠：</b>政苑小区、天湖公寓、国力大酒店、古荡公交站、西溪校区、八字桥、武林小广场、延安新村、外文书店、杭高、红会医院
 
                     </p>
+                    <h2>相关印刷品设计</h2>
+                    <div style="margin:20px; auto; text-align:center">
+                        <p class="f14">
+                            <?php for($pic = 1; $pic <= 9; $pic++ ): ?>
+                            <a class="pics" id="pic<?= $pic ?>" style="padding:5px; text-decoration:none" href="javascript:showpic(<?= $pic ?>)"><?= $pic ?></a>
+                            <?php endfor; ?>
+                        </p>
+                        <img id="picroom" src="/static/images/subject/found/pics/1.jpg" />
+                    </div>
+                        <script type="text/javascript">
+                            function showpic(num)
+                            {
+                                $('.pics').css('background','#fff')
+                                $('#pic'+num).css('background','#ccc');
+                                $('#picroom').attr('src','/static/images/subject/found/pics/'+num+'.jpg');
+                            }
+                            showpic(1);
+                        </script>
                 </div>
             </div>
     
