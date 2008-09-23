@@ -14,6 +14,11 @@ class PmController extends Zend_Controller_Action {
 		$this->view->uid = $this->_getParam('uid', null);
 	}
 	
+	public function noreadAction()
+	{
+		echo Zend_Json::encode(array('num'=>GroupPmModel::no_read_num(Cmd::myid())));
+	}
+	
 	# 删除
 	public function deleteAction()
 	{
@@ -192,7 +197,6 @@ class PmController extends Zend_Controller_Action {
 			$this->view->friends = explode(',', $friends);
 		}
 	}
-
 }
 ?>
 
