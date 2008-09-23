@@ -23,6 +23,7 @@
                 <a style="color:green" href="javascript:fastInvite()">邀请校友</a>
                 <a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a> 
                 <a href="/member/my/">我的账号</a>
+                <a href="/group/pm/box">站内信(<span id="pm_no_read"></span>)</a>
 				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
 				<a href="/member/register/">注册</a>
@@ -83,6 +84,13 @@
 				function(){$(this).css('background','#FFFFFF')}
             );
 			$('#top_tip').load('/group/index/toptip?gid=<?= $this->gid ?>');
+                        <?php if($this->passport()): ?>
+                        $.getJSON('/group/pm/noread',function(data){
+                            $('#pm_no_read').html(data['num']);
+                            if(data['num'] > 0)
+                            alert('有新站内信，请点击右上角的"站内信"查收');
+                        });
+                        <?php endif; ?>
 		});
 		function notip()
 		{
