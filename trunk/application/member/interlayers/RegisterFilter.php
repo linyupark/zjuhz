@@ -75,11 +75,11 @@ class RegisterFilter extends MemberInterlayer
 
     	// 设置验证规则
 		$validators = array(
-            /*
+            
           	'ikey' => array(
                 array('StringLength', '10', '10'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_StringLength::TOO_SHORT => $this->_iniMember->hint->ikeyError, 
-                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)), */
+                    Zend_Validate_StringLength::TOO_LONG => $this->_iniMember->hint->ikeyError)),
 		    'uname' => array(
 		   	    array('Regex', '/^[a-z][a-z0-9_]{0,14}[a-z0-9]$/i'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
 		   	        Zend_Validate_Regex::NOT_MATCH => $this->_iniMember->hint->usernameError)), 
@@ -116,10 +116,10 @@ class RegisterFilter extends MemberInterlayer
               	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniMember->hint->verifyError))
         );
 
-        /*$options = array(
+        $options = array(
             'notEmptyMessage' => $this->_iniMember->hint->notEmptyMessage, 
             'missingMessage' => $this->_iniMember->hint->missingMessage, 
-        );*/
+        );
 
 		$input = new Zend_Filter_Input($filters, $validators, $args); //, $options
 
