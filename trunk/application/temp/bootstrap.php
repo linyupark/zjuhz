@@ -24,6 +24,8 @@ Zend_Layout::startMvc(array(
     'layoutPath' => '../../application/layouts/',
     'layout' => 'main'));
 
+echo phpinfo();
+
 /** run */
 Zend_Controller_Front::getInstance()->setDefaultModule('temp')
                                     ->setControllerDirectory('../../application/temp/controllers/')
