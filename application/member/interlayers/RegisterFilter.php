@@ -110,10 +110,11 @@ class RegisterFilter extends MemberInterlayer
                 array('Utf8Length', '2', '30'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                     Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->majorError, 
                     Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->majorError)), 
-            'ip' => array('presence' => 'required'), 
+            'ip' => array('presence' => 'required'),
+            /*
             'scode' => array(
        	        array('NotEquals', md5($args['vcode'])), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
-              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniMember->hint->verifyError))
+              	    Zend_Validate_NotEquals::NOT_EQUALS => $this->_iniMember->hint->verifyError))*/
         );
 
         $options = array(

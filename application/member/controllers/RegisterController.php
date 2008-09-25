@@ -105,7 +105,7 @@ class RegisterController extends Zend_Controller_Action
 		{
 			$postArgs = $this->getRequest()->getPost();
 			$postArgs['ip']    = Commons::getIp();
-			$postArgs['scode'] = $this->_sessCommon->verify;
+			//$postArgs['scode'] = $this->_sessCommon->verify;
             
 			if ($regArgs = RegisterFilter::init()->register($postArgs))
 			{
