@@ -20,22 +20,26 @@ document.write('#imgTitle{width:'+imgWidth+';top:-'+(textFromHeight+14)+'px;heig
 document.write('</style>');
 document.write('<div id="focuseFrom">');
 //焦点字框高度样式表 结束
-imgUrl[1]='/static/editor/sina/uploadfile/200809221222074830.jpg';
-imgtext[1]='杭州浙江大学校友会成立大会成功举行';
-imgLink[1]='/info/view/detail/id/673';
-imgAlt[1]='杭州浙江大学校友会成立大会成功举行';
-imgUrl[2]='static/editor/sina/uploadfile/200808181219052776.jpg';
-imgtext[2]='校友庆奥运联谊会在金溪山庄成功举行';
-imgLink[2]='http://www.zjuhz.com/info/view/detail/id/566';
-imgAlt[2]='校友庆奥运联谊会在金溪山庄成功举行';
-imgUrl[3]='static/groups/10/images/200808061217984557765.jpg';
-imgtext[3]='2008年8月2日首次创业沙龙成功举行';
-imgLink[3]='http://www.zjuhz.com/group/topic/show?gid=10&tid=159';
-imgAlt[3]='2008年8月2日首次创业沙龙成功举行';
-imgUrl[4]='static/groups/23/images/200807241216912764343.jpg';
-imgtext[4]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
-imgLink[4]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
-imgAlt[4]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
+imgUrl[1]='/static/editor/sina/uploadfile/200809261222444618.jpg';
+imgtext[1]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
+imgLink[1]='/info/view/detail/id/610';
+imgAlt[1]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
+imgUrl[2]='/static/editor/sina/uploadfile/200809221222074830.jpg';
+imgtext[2]='杭州浙江大学校友会成立大会成功举行';
+imgLink[2]='/info/view/detail/id/673';
+imgAlt[2]='杭州浙江大学校友会成立大会成功举行';
+imgUrl[3]='static/editor/sina/uploadfile/200808181219052776.jpg';
+imgtext[3]='校友庆奥运联谊会在金溪山庄成功举行';
+imgLink[3]='http://www.zjuhz.com/info/view/detail/id/566';
+imgAlt[3]='校友庆奥运联谊会在金溪山庄成功举行';
+imgUrl[4]='static/groups/10/images/200808061217984557765.jpg';
+imgtext[4]='2008年8月2日首次创业沙龙成功举行';
+imgLink[4]='http://www.zjuhz.com/group/topic/show?gid=10&tid=159';
+imgAlt[4]='2008年8月2日首次创业沙龙成功举行';
+imgUrl[5]='static/groups/23/images/200807241216912764343.jpg';
+imgtext[5]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
+imgLink[5]='http://www.zjuhz.com/group/topic/show?gid=23&tid=134';
+imgAlt[5]='教育专家朱棣云与校友家长俱乐部分享家庭教育心得体会';
 function changeimg(n)
 {
 adNum=n;
