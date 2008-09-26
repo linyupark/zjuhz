@@ -20,14 +20,14 @@ document.write('#imgTitle{width:'+imgWidth+';top:-'+(textFromHeight+14)+'px;heig
 document.write('</style>');
 document.write('<div id="focuseFrom">');
 //焦点字框高度样式表 结束
-imgUrl[1]='/static/editor/sina/uploadfile/200809261222444618.jpg';
-imgtext[1]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
-imgLink[1]='/info/view/detail/id/610';
-imgAlt[1]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
-imgUrl[2]='/static/editor/sina/uploadfile/200809221222074830.jpg';
-imgtext[2]='杭州浙江大学校友会成立大会成功举行';
-imgLink[2]='/info/view/detail/id/673';
-imgAlt[2]='杭州浙江大学校友会成立大会成功举行';
+imgUrl[1]='/static/editor/sina/uploadfile/200809221222074830.jpg';
+imgtext[1]='杭州浙江大学校友会成立大会成功举行';
+imgLink[1]='/info/view/detail/id/673';
+imgAlt[1]='杭州浙江大学校友会成立大会成功举行';
+imgUrl[2]='/static/editor/sina/uploadfile/200809261222444618.jpg';
+imgtext[2]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
+imgLink[2]='/info/view/detail/id/610';
+imgAlt[2]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
 imgUrl[3]='static/editor/sina/uploadfile/200808181219052776.jpg';
 imgtext[3]='校友庆奥运联谊会在金溪山庄成功举行';
 imgLink[3]='http://www.zjuhz.com/info/view/detail/id/566';
