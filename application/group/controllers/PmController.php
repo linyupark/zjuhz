@@ -117,7 +117,7 @@ class PmController extends Zend_Controller_Action {
 			case 'send': // 发件箱
 				Page::$pagesize = 10;
 				Page::create(array(
-					'href_open' => '<a href="/group/box?type=send&p=%d">',
+					'href_open' => '<a href="/group/pm/box?type=send&p=%d">',
 					'href_close' => '</a>',
 					'num_rows' => $this->view->send_num,
 					'cur_page' => $page
@@ -128,7 +128,7 @@ class PmController extends Zend_Controller_Action {
 			case 'receive': // 收件箱
 				Page::$pagesize = 10;
 				Page::create(array(
-					'href_open' => '<a href="/group/box?type=receive&p=%d">',
+					'href_open' => '<a href="/group/pm/box?type=receive&p=%d">',
 					'href_close' => '</a>',
 					'num_rows' => $this->view->send_num,
 					'cur_page' => $page
