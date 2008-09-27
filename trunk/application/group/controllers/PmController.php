@@ -115,25 +115,25 @@ class PmController extends Zend_Controller_Action {
 		switch($type)
 		{
 			case 'send': // 发件箱
-				Page::$pagesize = 20;
+				Page::$pagesize = 10;
 				Page::create(array(
 					'href_open' => '<a href="/group/box?type=send&p=%d">',
 					'href_close' => '</a>',
 					'num_rows' => $this->view->send_num,
 					'cur_page' => $page
 				));
-				$this->view->sends = $PM->fetchAll($PM->select()->where('`from` = ?',Cmd::myid())->where('from_del = ?',0)->order(array('time DESC'))->Limit(Page::$offset,Page::$pagesize));
+				$this->view->sends = $PM->fetchAll($PM->select()->where('`from` = ?',Cmd::myid())->where('from_del = ?',0)->order(array('time DESC'))->Limit(Page::$pagesize,Page::$offset));
 				break;
 			
 			case 'receive': // 收件箱
-				Page::$pagesize = 20;
+				Page::$pagesize = 10;
 				Page::create(array(
-					'href_open' => '<a href="/group/box?type=send&p=%d">',
+					'href_open' => '<a href="/group/box?type=receive&p=%d">',
 					'href_close' => '</a>',
 					'num_rows' => $this->view->send_num,
 					'cur_page' => $page
 				));
-				$this->view->receives = $PM->fetchAll($PM->select()->where('`to` = ?',Cmd::myid())->where('to_del = ?',0)->order(array('time DESC'))->Limit(Page::$offset,Page::$pagesize));
+				$this->view->receives = $PM->fetchAll($PM->select()->where('`to` = ?',Cmd::myid())->where('to_del = ?',0)->order(array('time DESC'))->Limit(Page::$pagesize,Page::$offset));
 				break;
 			
 			default :
