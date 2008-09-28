@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language=JavaScript>
+var imgUrl=new Array();
+var imgLink=new Array();
+var imgtext=new Array();
+var adNum=7;
+
+for (x = 8; x <=28; x++)
+{
+    imgUrl[x]="images/"+x+".jpg";
+    imgtext[x]="成立大会筹备汇报";
+    imgLink[x]="javascript:nextAd2()";
+}
+
+var imgPre=new Array();
+var count=7;
+for (i=8;i<=28;i++) {
+	if( (imgUrl[i]!="") && (imgLink[i]!="") ) {
+		count++;
+	} else {
+		break;
+	}
+}
+function playTran(){
+	if (document.all)
+		imgInit.filters.revealTrans.play();
+}
+var key=7;
+function nextAd(){
+	if(adNum<count)adNum++ ;
+	else adNum=8;
+	
+	if( key==7 ){
+		key=8;
+	} else if (document.all){
+		imgInit.filters.revealTrans.Transition=10;
+		imgInit.filters.revealTrans.apply();
+                   playTran();
+
+	}
+	document.images.imgInit.src=imgUrl[adNum];
+        focustext.innerHTML="<a href="+imgLink[adNum]+"  target=_blank>"+imgtext[adNum]+"</a>";
+		setTimeout("nextAd()", 3000); //控制时间
+}
+
+function nextAd2(){
+	if(adNum<count)adNum++ ;
+	else adNum=7;
+	
+	if( key==7 ){
+		key=8;
+	} else if (document.all){
+		imgInit.filters.revealTrans.Transition=10;
+		imgInit.filters.revealTrans.apply();
+                   playTran();
+
+	}
+	document.images.imgInit.src=imgUrl[adNum];
+        focustext.innerHTML="<a href="+imgLink[adNum]+"   target=_blank>"+imgtext[adNum]+"</a>";
+		
+}
+function prondAd(){
+	if(adNum>1)adNum-- ;
+	else adNum=4;
+	
+	if( key==7 ){
+		key=8;
+	} else if (document.all){
+		imgInit.filters.revealTrans.Transition=10;
+		imgInit.filters.revealTrans.apply();
+                   playTran();
+
+	}
+	document.images.imgInit.src=imgUrl[adNum];
+        focustext.innerHTML="<a href="+imgLink[adNum]+"   target=_blank>"+imgtext[adNum]+"</a>";
+		
+}
+function goUrl(){
+window.open(imgLink[adNum],'_blank');
+}
+</script>
+</head>
+
+<body>
+<a href="javascript:nextAd2()"><img style="FILTER: revealTrans(duration=1,transition=5);border-color:black;color:#000000" src="javascript:nextAd()" width="960" height="720" border="0"  name="imgInit"></a>
+<div class="table_1_1_page"><a href="javascript:prondAd()">上一张</a> | <a href="javascript:nextAd2()">下一张</a></div>
+<script>
+    nextAd2();
+</script>
+</body>
+</html>
