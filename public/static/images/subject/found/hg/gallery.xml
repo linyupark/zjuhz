@@ -1,0 +1,231 @@
+<gallery>
+	<setup>
+		<imgPath>images/</imgPath>
+
+		<slideshowOn>false</slideshowOn>
+
+		<thumbScrollSpeed>15</thumbScrollSpeed>
+		<loadIndicatorOn>true</loadIndicatorOn>
+		<loadIndicatorColor>0xFFFFFF</loadIndicatorColor>
+		<slideshowDelay>4</slideshowDelay>
+		<stopAutoOnClick>true</stopAutoOnClick>
+		<randomImages>false</randomImages>
+		<slideshowLoop>true</slideshowLoop>
+		<bgCorner>10</bgCorner>
+		<bgAlpha>1</bgAlpha>
+		<bgColor>0xFFFFFF</bgColor>
+
+		<imgScaleMode>scaleToAreaWidth</imgScaleMode>
+		<imgScaleAlignVert>top</imgScaleAlignVert>
+		<imgScaleAlignHor>center</imgScaleAlignHor>
+		<imgMaskCorner>10</imgMaskCorner>
+		<imgAlpha>1</imgAlpha>
+		<imgShadowOn>true</imgShadowOn>
+		<imgShadowDistance>4</imgShadowDistance>
+		<imgShadowSize>4</imgShadowSize>
+		<imgShadowAngle>90</imgShadowAngle>
+
+		<imgCaptionFont>Verdana</imgCaptionFont>
+		<imgCaptionColor>0xFFFFFF</imgCaptionColor>
+		<imgCaptionSize>10</imgCaptionSize>
+		<imgCaptionAlpha>0.7</imgCaptionAlpha>
+		<imgCaptionPosition>bottom</imgCaptionPosition>
+		<imgCaptionBgColor>0x000000</imgCaptionBgColor>
+		<imgCaptionBgAlpha>0.7</imgCaptionBgAlpha>
+		<imgCaptionShadowOn>true</imgCaptionShadowOn>
+                <imgCaptionShow>onRollOver</imgCaptionShow>
+
+		<transitionEffect>zoom</transitionEffect>
+		<transitionStartPoint>right</transitionStartPoint>
+		<transitionDirection>horizontal/ccw</transitionDirection>
+		<transitionRotateDegrees>820</transitionRotateDegrees>
+		<transitionIrisShape>square</transitionIrisShape>
+		<transitionPixelDissolveSize>10</transitionPixelDissolveSize>
+		<transitionEasingType>strong</transitionEasingType>
+		<transitionEasingFunction>out</transitionEasingFunction>
+		<transitionTime>1</transitionTime>
+
+		<thumbWidth>120</thumbWidth>
+		<thumbHeight>90</thumbHeight>
+		<thumbMaskCorner>5</thumbMaskCorner>
+
+		<spaceBetweenThumbs>10</spaceBetweenThumbs>
+		<thumbRowsCount>1</thumbRowsCount>
+		<thumbPosition>bottom</thumbPosition>
+		<thumbToImgSpace>15</thumbToImgSpace>
+		<thumbAlpha>0.5</thumbAlpha>
+		<thumbReflectionsOn>true</thumbReflectionsOn>
+		<thumbReflectionsAlpha>0.5</thumbReflectionsAlpha>
+		<thumbReflectionsHeight>40</thumbReflectionsHeight>
+		<thumbPreviewOn>true</thumbPreviewOn>
+		<thumbPreviewMaskCorner>5</thumbPreviewMaskCorner>
+		<thumbPreviewWidth>160</thumbPreviewWidth>
+		<thumbPreviewHeight>120</thumbPreviewHeight>
+		<thumbPreviewDistance>8</thumbPreviewDistance>
+		<thumbPreviewAlpha>0.9</thumbPreviewAlpha>
+		<thumbPreviewDelay>0.5</thumbPreviewDelay>
+		<thumbPreviewShowAnimationTime>1</thumbPreviewShowAnimationTime>
+		<thumbSoundOnRollover>sounds/over.mp3</thumbSoundOnRollover>
+		<thumbSoundOnClick>sounds/click.mp3</thumbSoundOnClick>
+		<thumbOutlineThick>1</thumbOutlineThick> 
+		<thumbOutlineAlpha>1</thumbOutlineAlpha> 
+		<thumbOutlineColor>0x000000</thumbOutlineColor> 
+		<thumbOutlineColorRoll>0xFFFFFF</thumbOutlineColorRoll> 
+		<thumbOutlineColorActive>0x8B0000</thumbOutlineColorActive>
+		<thumbShadowOn>true</thumbShadowOn>
+		<thumbShadowDistance>4</thumbShadowDistance>
+		<thumbShadowSize>4</thumbShadowSize>
+		<thumbShadowAngle>90</thumbShadowAngle>	
+
+		<showButtonsOn>true</showButtonsOn>
+		<buttonsAlignVert>top</buttonsAlignVert>
+		<buttonsAlignHor>right</buttonsAlignHor>
+
+                <backgroundImgPath>images/bg.jpg</backgroundImgPath>
+		<backgroundImgAlpha>1</backgroundImgAlpha>
+
+	</setup>
+
+	<item>
+		<thumb>1.jpg</thumb>
+		<img>1.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>2.jpg</thumb>
+		<img>2.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>3.jpg</thumb>
+		<img>3.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>4.jpg</thumb>
+		<img>4.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>5.jpg</thumb>
+		<img>5.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>6.jpg</thumb>
+		<img>6.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>7.jpg</thumb>
+		<img>7.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>8.jpg</thumb>
+		<img>8.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>9.jpg</thumb>
+		<img>9.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>10.jpg</thumb>
+		<img>10.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>11.jpg</thumb>
+		<img>11.jpg</img>
+		<caption></caption> 
+	</item>
+
+	<item>
+		<thumb>12.jpg</thumb>
+		<img>12.jpg</img>
+		<caption></caption> 
+	</item>
+
+<item><thumb>13.jpg</thumb><img>13.jpg</img><caption></caption></item>
+<item><thumb>14.jpg</thumb><img>14.jpg</img><caption></caption></item>
+<item><thumb>15.jpg</thumb><img>15.jpg</img><caption></caption></item>
+<item><thumb>16.jpg</thumb><img>16.jpg</img><caption></caption></item>
+<item><thumb>17.jpg</thumb><img>17.jpg</img><caption></caption></item>
+<item><thumb>18.jpg</thumb><img>18.jpg</img><caption></caption></item>
+<item><thumb>19.jpg</thumb><img>19.jpg</img><caption></caption></item>
+<item><thumb>20.jpg</thumb><img>20.jpg</img><caption></caption></item>
+<item><thumb>21.jpg</thumb><img>21.jpg</img><caption></caption></item>
+<item><thumb>22.jpg</thumb><img>22.jpg</img><caption></caption></item>
+<item><thumb>23.jpg</thumb><img>23.jpg</img><caption></caption></item>
+<item><thumb>24.jpg</thumb><img>24.jpg</img><caption></caption></item>
+<item><thumb>25.jpg</thumb><img>25.jpg</img><caption></caption></item>
+<item><thumb>26.jpg</thumb><img>26.jpg</img><caption></caption></item>
+<item><thumb>27.jpg</thumb><img>27.jpg</img><caption></caption></item>
+<item><thumb>28.jpg</thumb><img>28.jpg</img><caption></caption></item>
+<item><thumb>29.jpg</thumb><img>29.jpg</img><caption></caption></item>
+<item><thumb>30.jpg</thumb><img>30.jpg</img><caption></caption></item>
+<item><thumb>31.jpg</thumb><img>31.jpg</img><caption></caption></item>
+<item><thumb>32.jpg</thumb><img>32.jpg</img><caption></caption></item>
+<item><thumb>33.jpg</thumb><img>33.jpg</img><caption></caption></item>
+<item><thumb>34.jpg</thumb><img>34.jpg</img><caption></caption></item>
+<item><thumb>35.jpg</thumb><img>35.jpg</img><caption></caption></item>
+<item><thumb>36.jpg</thumb><img>36.jpg</img><caption></caption></item>
+<item><thumb>37.jpg</thumb><img>37.jpg</img><caption></caption></item>
+<item><thumb>38.jpg</thumb><img>38.jpg</img><caption></caption></item>
+<item><thumb>39.jpg</thumb><img>39.jpg</img><caption></caption></item>
+<item><thumb>40.jpg</thumb><img>40.jpg</img><caption></caption></item>
+<item><thumb>41.jpg</thumb><img>41.jpg</img><caption></caption></item>
+<item><thumb>42.jpg</thumb><img>42.jpg</img><caption></caption></item>
+<item><thumb>43.jpg</thumb><img>43.jpg</img><caption></caption></item>
+<item><thumb>44.jpg</thumb><img>44.jpg</img><caption></caption></item>
+<item><thumb>45.jpg</thumb><img>45.jpg</img><caption></caption></item>
+<item><thumb>46.jpg</thumb><img>46.jpg</img><caption></caption></item>
+<item><thumb>47.jpg</thumb><img>47.jpg</img><caption></caption></item>
+<item><thumb>48.jpg</thumb><img>48.jpg</img><caption></caption></item>
+<item><thumb>49.jpg</thumb><img>49.jpg</img><caption></caption></item>
+<item><thumb>50.jpg</thumb><img>50.jpg</img><caption></caption></item>
+<item><thumb>51.jpg</thumb><img>51.jpg</img><caption></caption></item>
+<item><thumb>52.jpg</thumb><img>52.jpg</img><caption></caption></item>
+<item><thumb>53.jpg</thumb><img>53.jpg</img><caption></caption></item>
+<item><thumb>54.jpg</thumb><img>54.jpg</img><caption></caption></item>
+<item><thumb>55.jpg</thumb><img>55.jpg</img><caption></caption></item>
+<item><thumb>56.jpg</thumb><img>56.jpg</img><caption></caption></item>
+<item><thumb>57.jpg</thumb><img>57.jpg</img><caption></caption></item>
+<item><thumb>58.jpg</thumb><img>58.jpg</img><caption></caption></item>
+<item><thumb>59.jpg</thumb><img>59.jpg</img><caption></caption></item>
+<item><thumb>60.jpg</thumb><img>60.jpg</img><caption></caption></item>
+<item><thumb>61.jpg</thumb><img>61.jpg</img><caption></caption></item>
+<item><thumb>62.jpg</thumb><img>62.jpg</img><caption></caption></item>
+<item><thumb>63.jpg</thumb><img>63.jpg</img><caption></caption></item>
+<item><thumb>64.jpg</thumb><img>64.jpg</img><caption></caption></item>
+<item><thumb>65.jpg</thumb><img>65.jpg</img><caption></caption></item>
+<item><thumb>66.jpg</thumb><img>66.jpg</img><caption></caption></item>
+<item><thumb>67.jpg</thumb><img>67.jpg</img><caption></caption></item>
+<item><thumb>68.jpg</thumb><img>68.jpg</img><caption></caption></item>
+<item><thumb>69.jpg</thumb><img>69.jpg</img><caption></caption></item>
+<item><thumb>70.jpg</thumb><img>70.jpg</img><caption></caption></item>
+<item><thumb>71.jpg</thumb><img>71.jpg</img><caption></caption></item>
+<item><thumb>72.jpg</thumb><img>72.jpg</img><caption></caption></item>
+<item><thumb>73.jpg</thumb><img>73.jpg</img><caption></caption></item>
+<item><thumb>74.jpg</thumb><img>74.jpg</img><caption></caption></item>
+<item><thumb>75.jpg</thumb><img>75.jpg</img><caption></caption></item>
+<item><thumb>76.jpg</thumb><img>76.jpg</img><caption></caption></item>
+<item><thumb>77.jpg</thumb><img>77.jpg</img><caption></caption></item>
+<item><thumb>78.jpg</thumb><img>78.jpg</img><caption></caption></item>
+<item><thumb>79.jpg</thumb><img>79.jpg</img><caption></caption></item>
+
+</gallery>
+
+
