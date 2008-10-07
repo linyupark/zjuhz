@@ -12,6 +12,24 @@
             }
         }
         
+        function fixAction()
+        {
+            $this->getHelper('viewRenderer')->setNoRender();
+            $User = new User(); // 打开数据库连接
+            for($s = 943; $s <= 1014; $s++)
+            {
+                $rows = $User->_db->fetchAll('SELECT * FROM `tbl_user_ext` WHERE `uid` = '.$s);
+                if(count($rows) == 0)
+                $User->_db->insert('tbl_user_ext', array(
+                    'uid' => $s,
+                    'status' => 2,
+                    'lastLogin' => '127..0.0.1',
+                    'editNick' => 'N',
+                    'initAsk' => 'N'
+                ));
+            }
+        }
+        
         # 批量注册 :::::::::::::::::::::::::::::::::::::::::
         function fastregAction()
         {
@@ -42,7 +60,19 @@
                         'college'  => trim($v[6]),
                         'major'    => trim($v[7])
                     ));
+                    
                     $uid = $User->_db->lastInsertId();
+                    
+                    // tbl_user_ext
+                    $User->_db->insert('tbl_user_ext', array(
+                        'uid' => $uid,
+                        'status' => 2,
+                        'lastIp' => '127.0.0.1',
+                        'lastLogin' => '127.0.0.1',
+                        'editNick' => 'N',
+                        'initAsk' => 'N'
+                    ));
+                    
                     // tbl_user_contact
                     $User->_db->insert('tbl_user_contact', array(
                         'uid' => $uid,
