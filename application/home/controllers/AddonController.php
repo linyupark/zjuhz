@@ -18,7 +18,7 @@
             $this->view->headTitle('快速注册');
             $request = $this->getRequest();
             
-            if(isset($_FILES['ms']['tmp_name']))
+            if(isset($_FILES['ms']))
             {
                 $User = new User(); // 打开数据库连接
                 $Class = new Zclass();
