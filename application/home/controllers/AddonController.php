@@ -12,24 +12,6 @@
             }
         }
         
-        function fixAction()
-        {
-            $this->getHelper('viewRenderer')->setNoRender();
-            $User = new User(); // 打开数据库连接
-            for($s = 943; $s <= 1014; $s++)
-            {
-                $rows = $User->_db->fetchAll('SELECT * FROM `tbl_user_ext` WHERE `uid` = '.$s);
-                if(count($rows) == 0)
-                $User->_db->insert('tbl_user_ext', array(
-                    'uid' => $s,
-                    'status' => 2,
-                    'lastLogin' => '127..0.0.1',
-                    'editNick' => 'N',
-                    'initAsk' => 'N'
-                ));
-            }
-        }
-        
         # 批量注册 :::::::::::::::::::::::::::::::::::::::::
         function fastregAction()
         {
