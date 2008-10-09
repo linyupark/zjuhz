@@ -272,6 +272,18 @@
             $this->view->isJoin = $isJoin;
         }
         
+        # 删除活动 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        function delAction()
+        {
+            $eid = $this->getRequest()->getPost('eid');
+            $E = new EventsModel('dbEvent');
+            $row = $E->fetchRow('event_id = '.$eid);
+            if($row->founder == Cmd::myid())
+            {
+                $E->delete('event_id = '.$eid);
+            }
+        }
+        
         # 发起活动
         function createAction()
         {
@@ -289,6 +301,15 @@
                 if($V->getMessages() != false)
                 {
                     echo '<div class="error">'.$V->getMessages('* ','<br />').'</div>';
+                }
+                
+                elseif(strtotime($sign_close) <= time())
+                {
+                    echo '<div class="error">* 报名结束时间应该再设置的长一些</div>';
+                }
+                elseif(strtotime($event_start) < strtotime($sign_close))
+                {
+                    echo '<div class="error">* 活动开始时间应该在报名截止时间之后</div>';
                 }
                 
                 else
