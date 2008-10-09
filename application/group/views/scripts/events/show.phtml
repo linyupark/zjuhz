@@ -21,16 +21,16 @@
             </div>
         <?php endif; ?>
         
-        <?php if($this->event->event_start > time()): // 活动还没开始 ?>
-        
-            <?php if(Cmd::myid() == $this->event->founder): ?>
+        <?php if(Cmd::myid() == $this->event->founder): ?>
             <p class="f14">
-            <a href="/group/events/edit?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_edit.png') ?> 编辑</a>
-            <a target="_blank" href="/group/events/members?eid=<?= $this->eid ?>"><?= Cmd::icon('printer.png') ?> 打印</a>
-            <a target="_blank" href="/group/events/xls?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_excel.png') ?> Excel</a>
+            <a href="javascript:deleteit(<?= $this->eid ?>)"><?= Cmd::icon('cancel.png') ?> 取消活动</a>&nbsp;&nbsp;&nbsp;
+            <a href="/group/events/edit?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_edit.png') ?> 编辑活动</a>&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="/group/events/members?eid=<?= $this->eid ?>"><?= Cmd::icon('printer.png') ?> 打印报名成员</a>&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="/group/events/xls?eid=<?= $this->eid ?>"><?= Cmd::icon('page_white_excel.png') ?> Excel导出</a>
             </p>
-            <?php endif; ?>
+        <?php endif; ?>
         
+        <?php if($this->event->event_start > time()): // 活动还没开始 ?>
             <p>活动状态：<span style="color:green; font-size:14px;">尚未开始</span>
             <span class="quiet">(离开始还有：<?= Lp_Date::timespan(time()-($this->event->event_start-time())) ?>)</span>
             </p>
@@ -117,6 +117,18 @@
     {
         $('#review').hide();
         $('#review_content').show();
+    }
+    
+    function deleteit(eid)
+    {
+        var c = confirm('确定将此次活动取消(删除)?');
+        if(c == true)
+        {
+            $.post('/group/events/del',{eid:<?= $this->eid ?>},function(){
+                alert('已经取消本次活动,点击确定回到活动列表');
+                window.location.href = '/group/events/list';
+            });
+        }
     }
     
     function cancel()
