@@ -2,12 +2,6 @@ html, body, div, span,applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquo
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	line-height: 1;
-	font-family: inherit;
-	vertical-align: baseline;
 }
 a img, :link img, :visited img { border: 0; }
 table { border-collapse: collapse; border-spacing: 0; }
