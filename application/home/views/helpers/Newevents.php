@@ -10,7 +10,7 @@ class Zend_View_Helper_Newevents
         $events = $E->_db->fetchAll('SELECT * FROM `tbl_events`
                                WHERE `sign_close` > '.time().'
                                ORDER BY `sign_close`
-                               DESC LIMIT '.$limit);
+                               ASC LIMIT '.$limit);
 
         $str = '<table class="table-1" width="100%">
         <tr>
