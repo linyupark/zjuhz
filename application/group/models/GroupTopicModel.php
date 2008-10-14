@@ -2,6 +2,16 @@
 
 class GroupTopicModel
 {
+	# 是否有重复的标题
+	static function isposted($title)
+	{
+		$db = Zend_Registry::get('dbGroup');
+		$row = $db->fetchRow('SELECT `topic_id` FROM `tbl_group_topic` WHERE `title` = ?', $title);
+		if($row['topic_id'] > 0)
+		return true;
+		else return false;
+	}
+	
 	# 获取某用户所有发表数量
 	static function count($uid)
 	{

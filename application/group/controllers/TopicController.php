@@ -87,6 +87,11 @@ class TopicController extends Zend_Controller_Action
 				$this->_helper->layout->setLayout('error');
 				echo '<ul class="error">'.$V->getMessages('<li>','</li>').'</ul>';
 			}
+			elseif(GroupTopicModel::isposted($title) == true)
+			{
+				$this->_helper->layout->setLayout('error');
+				echo '<ul class="error"><li>有相同的标题已经存在，请更换标题</li></ul>';
+			}
 			else
 			{
 				$data = array(
