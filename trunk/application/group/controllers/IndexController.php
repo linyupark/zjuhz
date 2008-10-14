@@ -91,7 +91,7 @@ class IndexController extends Zend_Controller_Action
 				$output .= '<li>完善联系方式以便我们与您取得联系<a href="/member/my/user/type/contact/">点击进入</a>(*电子邮箱必填)</li>';
 			}
 			// 群组加入审批提示
-			if($gid != null && Cmd::isManager($gid))
+			if($gid != null && Cmd::isManager($gid) && GroupModel::info($gid, 'apply') != null)
 			{
 				$output .= '<li>有校友想加入你所在的群组哦~，<a href="/group/invite/apply?gid='.$gid.'">查看详细</a></li>';
 			}
