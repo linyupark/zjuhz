@@ -1,0 +1,89 @@
+
+	<div class="span-24 oneCol">
+        <p class="pd10">
+		<?= Cmd::icon('emoticon_grin.png') ?>
+		欢迎来到杭州浙江大学校友会网站。我们的
+		<b>目标：</b>校友沟通 互助的平台和助手 
+		<b>宗旨：</b>联络校友 帮助校友 回报母校 建设杭州
+        </p>
+        <div class="span-7">
+            <?= $this->render('index/form.phtml'); ?>
+        </div>
+        <div class="span-14 pd10" style="font-size:13px;">
+            <div class="span-7 last">
+                <ul>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 及时了解母校的最新动态</li>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 拥有只属于浙大校友的互动空间</li>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 给予和得到来自校友的帮助</li>
+                </ul>
+            </div>
+            <div class="span-7 last">
+                <ul>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 组建或参与校友的各种俱乐部</li>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 体验高质量的社交环境</li>
+                <li><?= Cmd::icon('bullet_blue.png') ?> 自由安全地控制个人隐私</li>
+                </ul>
+            </div>
+        </div>
+	</div>
+    <div class="span-7 mgu10">
+        <iframe frameborder="0" height="215" width="270" src="/ad.html"></iframe>
+        <div class="sideBar list-1">
+			<h3 class="tt mglf10"><img src="/static/images/group/icons/plugin.png" /> 特色群组</h3>
+			<ul class="span-3 mglf10" style="float:left">
+                <li><a class="lk-1" href="/group/home?gid=10">创业俱乐部</a></li>
+                <li><a class="lk-1" href="/group/home?gid=2">金融俱乐部</a></li>
+                <li><a class="lk-1" href="/group/home?gid=23">家长俱乐部</a></li>
+                
+            </ul>
+            <ul class="span-3" style="float:left">
+                <li><a class="lk-1" href="/group/home?gid=14">法律人俱乐部</a></li>
+                <li><a class="lk-1" href="/group/home?gid=15">羽毛球爱好者</a></li>
+                <li><a class="lk-1" href="/group/home?gid=21">期货交流空间</a></li>
+            </ul>
+        </div>
+        <div class="sideBar list-1" style="clear:both">
+			<h3 class="tt mglf10"><img src="/static/images/group/icons/chart_line.png" /> 校友企业</h3>
+			<div id="cps" style="height:75px; overflow:hidden; margin-bottom:10px;">
+                <ul class="mglf10">
+                    <?php
+                    $bizs = $this->Biz->get(8);
+                    foreach($bizs as $b): ?>
+                    <li><a class="lk-1" title="<?= $b['name'] ?>" href="/biz/detail/index/cid/<?= $b['cid'] ?>">
+                        <?= $b['name'] ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+		<?= $this->render('items/subject.phtml'); ?>
+    </div>
+    <div class="span-17 last">
+        <?= $this->newevents(10) ?>
+        <?= $this->render('items/v2_news.phtml'); ?>
+        <?= $this->render('items/v2_topics.phtml'); ?>
+    </div>
+
+
+<script type="text/javascript">
+// 会员登录
+function relogin() {
+	var formdata = $("#relogin_form").fastSerialize();
+	
+	$.post("/member/login/dologin/", formdata, function(msg) {
+		if ("redirect" == msg) {
+			history.go(0);
+		}
+		else alert(msg);
+	});
+	return false;
+}
+$(document).ready(function(){
+$.NiceJForms.build({
+		imagesPath:"/static/styles/nicejform/images/default/"
+	})
+<?php if($this->uname && $this->pswd): ?>
+    relogin();
+<?php endif; ?>
+});
+setInterval('AutoScroll("#cps")',5000);
+</script>

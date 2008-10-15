@@ -73,12 +73,6 @@
 			$('img[src$="png"]').parent().pngFix(); 
 			var controller = $('div.sub-nav').attr('rel');
 			$('div.sub-nav a[href*="'+controller+'"]').addClass('here');
-			$('input[type="text"]').focus(function(){
-				$(this).css('border','1px solid #666');
-			});
-			$('input[type="text"]').blur(function(){
-				$(this).css('border','1px solid #bbb');
-			});
             $('.table-1 td').parent().hover(
                 function(){$(this).css('background','#F9FBFA')},
 				function(){$(this).css('background','#FFFFFF')}

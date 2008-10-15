@@ -1,0 +1,16 @@
+<?php $rows = $this->Group->getNewTopic(); ?>
+<table class="table-1" width="100%">
+    <th width="80%" colspan="2">
+		<strong class="f14">群组24小时新帖</strong> 
+	</th>
+	<th width="20%" class="txtc">发布时间</th>
+    <?php foreach($rows as $r): ?>
+    <tr>
+        <td class="pd5 dashBorder">
+            [<a style="color:#666" href="/group/home?gid=<?= $r['group_id'] ?>"><?= $r['group_name'] ?></a>]
+        </td>
+        <td class="f14 dashBorder"><a href="/group/topic/show?gid=<?= $r['group_id'] ?>&tid=<?= $r['topic_id'] ?>"><?= stripslashes($r['title']) ?></a></td>
+        <td class="quiet dashBorder txtc"><?= date('y-m-d',$r['pub_time']) ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,3 +1,4 @@
+document.write("<script type=\"text/javascript\" src=\"/static/scripts/nicejforms.js\"></script>");
 function fastInvite()
 {
     $.get('/home/invite/form', null, function(html){

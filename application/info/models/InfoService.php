@@ -29,14 +29,15 @@
 		/**
 		 * 返回最新的资讯
 		 *
+		 * @param integer $limit
 		 * @return array
 		 */
-		function get_new()
+		function get_new($limit = 5)
 		{
 			return $this->_db->fetchAll('SELECT
 				`entity_id`,`entity_title`,`category_id`,`entity_pub_time`,`category_icon`,`category_name`
 				FROM `vi_entity`
-				WHERE `entity_pub` = 1 ORDER BY `entity_pub_time` DESC LIMIT 5');
+				WHERE `entity_pub` = 1 ORDER BY `entity_pub_time` DESC LIMIT '.$limit);
 		}
 		
 		/**
