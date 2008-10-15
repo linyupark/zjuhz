@@ -23,8 +23,8 @@ class Zend_View_Helper_Newevents
             foreach($events as $e)
             {
                 $str .= '<tr>';
-                $str .= '<td class="pd10"><a href="/group/events/show?eid='.$e['event_id'].'">'.stripcslashes($e['title']).'</a></td>';
-                $str .= '<td class="pd10 txtc quiet">'.Lp_Date::timespan(time() - ($e['sign_close'] - time())).'后</td>';
+                $str .= '<td class="dashBorder pd5"><a href="/group/events/show?eid='.$e['event_id'].'">'.stripcslashes($e['title']).'</a></td>';
+                $str .= '<td class="dashBorder pd5 txtc quiet">'.Lp_Date::timespan(time() - ($e['sign_close'] - time())).'后</td>';
                 $str .= '</tr>';
             }
             
