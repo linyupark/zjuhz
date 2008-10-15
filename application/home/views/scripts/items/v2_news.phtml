@@ -1,6 +1,6 @@
 <?php $rows = $this->info_xmlrpc->call('rpcInfo.get_new', array('limit'=>12)); ?>
 <table class="table-1" width="100%">
-    <th width="80%" colspan="2">
+    <th colspan="2">
 		<strong class="f14">最新资讯</strong> 
 	</th>
 	<th width="20%" class="txtc">发布时间</th>
@@ -9,7 +9,7 @@
         <td class="pd5 dashBorder">
             [<a style="color:#666" href="/info/sort/?category=<?= $r['category_id'] ?>"><?= $r['category_name'] ?></a>]
         </td>
-        <td class="f14 dashBorder"><a href="/info/view/detail/id/<?= $r['entity_id'] ?>"><?= stripslashes($r['entity_title']) ?></a><?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></td>
+        <td class="f14 dashBorder"><a href="/info/view/detail/id/<?= $r['entity_id'] ?>"><?= stripslashes($r['entity_title']) ?></a> <?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></td>
         <td class="quiet dashBorder txtc"><?= date('y-m-d',$r['entity_pub_time']) ?></td>
     </tr>
     <?php endforeach; ?>
