@@ -14,8 +14,8 @@ class Zend_View_Helper_Newevents
 
         $str = '<table class="table-1" width="100%">
         <tr>
-            <th width="80%" class="txtl f14"><strong>近期活动</strong></th>
-            <th width="20%" class="txtc">报名截止</th>
+            <th class="txtl f14"><strong>近期活动</strong></th>
+            <th width="30%" class="txtc">报名截止</th>
         </tr>';
         
         if(count($events) > 0)
