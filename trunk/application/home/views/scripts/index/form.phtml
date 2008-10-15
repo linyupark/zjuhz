@@ -1,0 +1,25 @@
+<form class="niceform" style="margin:10px 0 5px 20px;" method="post" id="relogin_form" onsubmit="return relogin();">
+    <table>
+        <tr>
+            <td class="txtr vm">账号：</td>
+            <td><input name="uname" size="16" type="text" maxlength="16" value="<?= $this->uname; ?>" /></td>
+        </tr>
+        <tr>
+            <td class="txtr vm">密码：</td>
+            <td><input name="pswd" size="16" type="password" maxlength="16" value="<?= $this->pswd; ?>" /></td>
+        </tr>
+        <tr>
+            <td class="txtr vm"></td>
+            <td><input id="alive" type="checkbox" <?= ($this->uname) ? 'checked="checked"':'' ?> value="0" name="alive" /><label for="alive">下次自动登录</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p class="txtr">
+                    <input id="btnLogin" type="submit" value="登 录" />
+                    <input onclick="location.href='/member/register/'" type="button" value="注册" />
+                </p>
+            </td>
+        </tr>
+    </table>
+</form>

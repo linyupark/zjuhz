@@ -21,5 +21,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->pswd = Commons::decrypt($_COOKIE['zjuhz_member']['pswd']); // 记住账号
 		$this->view->cache = CacheModel::init(null,600);
     	$this->view->info_xmlrpc = new Zend_XmlRpc_Client('http://xmlrpc/InfoServer.php');
+		$this->render('v2');
     }
 }

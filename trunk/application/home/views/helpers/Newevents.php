@@ -14,8 +14,8 @@ class Zend_View_Helper_Newevents
 
         $str = '<table class="table-1" width="100%">
         <tr>
-            <th class="txtl">活动名称</th>
-            <th class="txtc">报名截止</th>
+            <th width="80%" class="txtl f14"><strong>近期活动</strong></th>
+            <th width="20%" class="txtc">报名截止</th>
         </tr>';
         
         if(count($events) > 0)
@@ -31,7 +31,7 @@ class Zend_View_Helper_Newevents
         }
         else
         {
-            $str .= '<tr><td class="pd10">目前没有可报名的活动</td></tr>';
+            $str .= '<tr><td colspan="2" class="pd10">目前没有可报名的活动</td></tr>';
         }
         
         $str .= '</table>';

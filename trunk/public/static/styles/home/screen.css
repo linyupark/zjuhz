@@ -4,6 +4,7 @@
 @import url("default/forms.css");
 @import url("default/grid.css");
 @import url("default/custom.css");
+@import url("/static/styles/nicejform/niceforms-default.css");
 
 body{
 	font-family:Verdana, Arial, Helvetica, sans-serif;
