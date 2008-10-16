@@ -9,7 +9,8 @@
     <div class="oneCol pd10">
         <h3>群组活动 <span class="f12">(找到<?= $this->numrows ?>个)</span></h3>
         <p style="float:right; margin-top:-35px;">
-            <a href="/group/events/list" <?= ($this->where == null)?'style="font-weight:bold"':'' ?>>所有活动</a> , 
+            <a href="/group/events/list" <?= ($this->where == null)?'style="font-weight:bold"':'' ?>>未开始的</a> ,
+            <a href="/group/events/list?where=close" <?= ($this->where == 'close')?'style="font-weight:bold"':'' ?>>已结束的</a> , 
             <a href="/group/events/list?where=join" <?= ($this->where == 'join')?'style="font-weight:bold"':'' ?>>我参与的</a> ,
             <a href="/group/events/list?where=founder" <?= ($this->where == 'founder')?'style="font-weight:bold"':'' ?>>我发起的</a>
             <button onclick="location.href='/group/events/create'" class="btn">发起新活动</button>

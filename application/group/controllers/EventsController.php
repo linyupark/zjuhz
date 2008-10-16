@@ -17,10 +17,14 @@
             $where = $this->_getParam('where');
             $page = $this->_getParam('p', 1);
             
-            $select = $E->select()->order($order.' DESC');
+            $select = $E->select()->order($order.' ASC');
             
             switch($where)
             {
+                case 'close' : // 结束的
+                    $select->where('event_close < '.time());
+                break;
+                    
                 case 'join' : // 我参与的
                     $join_events = EventsModel::_dao()->fetchAll('SELECT `event_id`
                                                                FROM `tbl_events_member`
@@ -35,7 +39,8 @@
                     $select->where('founder = ?', Cmd::myid());
                 break;
                 
-                default :
+                default : // 未开始的
+                    $select->where('event_close > '.time());
                 break;
             }
             
