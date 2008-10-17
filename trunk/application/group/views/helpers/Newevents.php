@@ -7,7 +7,7 @@ class Zend_View_Helper_Newevents
     function newevents($limit)
     {
         $E = new EventsModel('dbEvent');
-        $select = $E->select()->order('sign_close DESC')->where('sign_close > '.time())->limit($limit);
+        $select = $E->select()->order('sign_close ASC')->where('sign_close > '.time())->limit($limit);
         $events = $E->fetchAll($select);
         
         $str = '<table class="table-1" width="100%" id="events_table">
