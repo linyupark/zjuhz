@@ -37,7 +37,9 @@ class InviteController extends Zend_Controller_Action
 			$college = $R->getPost('college');
 			$year = $R->getPost('year');
 			$city = $R->getPost('city');
-			$temp = $name.$sex.$college.$year.$city;
+            $interest = $R->getPost('interest');
+            $job = $R->getPost('job');
+			$temp = $name.$sex.$college.$year.$city.$interest.$job;
 			if(empty($temp))
 			echo '<div class="error">请最少填写一项，否则不会执行搜索操作</div>';
             else // 进行匹配搜索
@@ -45,11 +47,13 @@ class InviteController extends Zend_Controller_Action
                 // 获取匹配总数
                 $db = Zend_Registry::get('dbGroup');
                 $select = $db->select()->from('tbl_group_user');
-                if($name) $select->where('realName = ?', $name);
+                if($name) $select->where('realName LIKE "%'.$name.'%"');
                 if($sex) $select->where('sex = ?', $sex);
                 if($college) $select->where('college = ?', $college);
                 if($year) $select->where('year = ?', $year);
                 if($city) $select->where('location_c = ?', $city);
+                if($interest) $select->where('ext_interest LIKE "%'.$interest.'%"');
+                if($job) $select->where('ext_job LIKE "%'.$job.'%"');
                 $rows = $db->query($select)->fetchAll();
                 $num_rows = count($rows);
                 if($num_rows > 0) //找到数据则进行罗列显示
