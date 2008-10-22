@@ -139,6 +139,7 @@
 	
 	function doReply()
 	{
+		$('.btn').attr("disabled", true);
 		var data = $('#reply_form').fastSerialize();
 		data.push({name:"content", value:editor.data()});
 		$.post('/group/reply/new', data, function(html){
