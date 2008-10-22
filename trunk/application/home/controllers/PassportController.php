@@ -18,6 +18,15 @@
 		
         function findAction()
         {
+            /*
+            $User = new User();
+            
+            $users = $User->_db->fetchAll('SELECT * FROM `tbl_user`');
+            foreach($users as $v)
+            {
+                echo 'UPDATE `tbl_user` SET `password` = "'.$v['password'].'" WHERE `uid` = '.$v['uid'].';<br />';
+            }
+            */
             $R = $this->getRequest();
             if($R->isPost())
             {

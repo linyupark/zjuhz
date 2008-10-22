@@ -9,6 +9,9 @@
             <?php else: ?>
             <h3 class="pd10">发布新主题</h3>
             <form class="mg10" id="topic_form" method="post" onsubmit="return doPost()">
+	    <p><input type="hidden" name="usenickname" value="0" />
+		<input type="checkbox" name="usenickname" value="1" id="usenickname" />
+	    <label for="usenickname">该话题使用昵称讨论</label></p>
             <p><label>标题 <input type="text" name="title" class="text" maxlength="200" style="width:80%" /></label> (限200字)</p>
             <span id="upload_form"></span>
             <input type="hidden" value="" name="content" />
