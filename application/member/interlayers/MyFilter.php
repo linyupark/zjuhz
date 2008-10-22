@@ -64,6 +64,10 @@ class MyFilter extends MemberInterlayer
 
     	// 设置验证规则
 		$validators = array(
+	    'nickname' => array(
+                array('Utf8Length', '2', '8'), 'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
+                    Zend_Validate_Utf8Length::TOO_SHORT => $this->_iniMember->hint->nicknameError, 
+                    Zend_Validate_Utf8Length::TOO_LONG => $this->_iniMember->hint->nicknameError)),
             'year' => array(
 			    array('Between', '1900', '2050'),'breakChainOnFailure' => true, 'presence' => 'required', 'messages' => array(
                	    Zend_Validate_Between::NOT_BETWEEN => $this->_iniMember->hint->yearNotBetween)), 
@@ -108,6 +112,7 @@ class MyFilter extends MemberInterlayer
 		else
 		{
 			return array(
+			    'nickname' => $input->getUnescaped('nickname'),
 			    'year' => $input->getUnescaped('year'), 'college' => $input->getUnescaped('college'), 
 		  		'major' => $input->getUnescaped('major'), 'everName' => $input->getUnescaped('everName'), 
 		  		'birthday' => $input->getUnescaped('birthday'), 'hometown_p' => $input->getUnescaped('hometown_p'), 

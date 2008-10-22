@@ -32,9 +32,13 @@
 		<table class="table-topic mgu10" width="100%">
 			<tr>
 				<td rowspan="2" class="photo txtc">
-					<?= Commons::getUserFace($this->topic['pub_user']) ?>
+					<?= ($this->topic['is_nickname'] == 0) ? Commons::getUserFace($this->topic['pub_user']):'' ?>
 					<p class="txtc" id="topic_user_0">
+						<?php if($this->topic['is_nickname']!=1): ?>
 						<a onclick="location.href='/group/member/profile?uid=<?= $this->topic['pub_user'] ?>'" href="javascript:ucard(<?= $this->topic['pub_user'] ?>)"><?= $this->topic['pub_user_name'] ?></a>
+						<?php else: ?>
+						<?= $this->topic['pub_nickname'] ?>
+						<?php endif; ?>
 					</p>
 				</td>
 				<td class="title txtr">
@@ -68,9 +72,13 @@
 			<table class="table-topic mgu10" width="100%">
 				<tr>
 					<td rowspan="2" class="photo txtc">
-						<?= Commons::getUserFace($reply['user_id']) ?>
+						<?= ($this->topic['is_nickname'] == 0)?Commons::getUserFace($reply['user_id']):'' ?>
 						<p class="txtc" id="topic_user_<?= $reply['reply_id'] ?>">
+							<?php if($this->topic['is_nickname'] == 0): ?>
 							<a onclick="location.href='/group/member/profile?uid=<?= $reply['user_id'] ?>'" href="javascript:ucard(<?= $reply['user_id'] ?>)"><?= $reply['realName'] ?></a>
+							<?php else: ?>
+							<?= $reply['nickname'] ?>
+							<?php endif; ?>
 						</p>
 					</td>
 					<td class="title">&nbsp;

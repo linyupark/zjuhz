@@ -76,7 +76,7 @@ class Group
 	 * 进行基础用户数据初始化
 	 *
 	 * @param array $data
-	 */
+	 
 	function init($data)
 	{
 		if(!is_array($data)) return FALSE;
@@ -89,7 +89,7 @@ class Group
 				'sex' => $data['sex']
 			));
 		}
-		else /* 临时增加的，要求保持更新其最新的个人信息到群组资料 */
+		else //临时增加的，要求保持更新其最新的个人信息到群组资料 
 		{
 			$db->update('tbl_group_user', array(
 				'hometown_p' => $data['hometown_p'],
@@ -103,6 +103,7 @@ class Group
 		}
 		return true;
 	}
+	*/
 }
 
 ?>

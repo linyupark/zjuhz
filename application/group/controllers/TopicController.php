@@ -82,6 +82,7 @@ class TopicController extends Zend_Controller_Action
 			$title = $V->of($request->getPost('title'), 'title', '话题标题', 'trim|strip_tags|str_between[2,200]');
 			$content = $V->of($request->getPost('content'), 'content', '话题内容', 'trim|required');
 			$tags = $V->of($request->getPost('tags'), 'tags', '话题标签', 'trim|required');
+			$usenickname = (int)$request->getPost('usenickname'); // 是否使用匿名
 			if($V->getMessages() != false)
 			{
 				$this->_helper->layout->setLayout('error');
@@ -95,6 +96,7 @@ class TopicController extends Zend_Controller_Action
 			else
 			{
 				$data = array(
+					'is_nickname' => $usenickname,
 					'group_id' => $this->view->gid,
 					'pub_time' => time(),
 					'reply_time' =>time(),

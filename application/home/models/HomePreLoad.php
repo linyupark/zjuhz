@@ -75,6 +75,7 @@ class HomePreLoad extends Zend_Controller_Plugin_Abstract
     // 必要的用户数据初始化
     else 
     {
+      /*
         $passport = Zend_Registry::get('sessCommon')->login;
 		$isInit = Zend_Registry::get('sessCommon')->initGroup;
     	if(NULL == $isInit)
@@ -82,6 +83,7 @@ class HomePreLoad extends Zend_Controller_Plugin_Abstract
 		  $G = new Group();
     	  Zend_Registry::get('sessCommon')->initGroup = $G->init($passport);
     	}
+      */
     }
   }
 }

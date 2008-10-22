@@ -264,6 +264,7 @@ class MyController extends Zend_Controller_Action
 				if (UserLogic::init()->update($basicArgs, $this->_sessUid))
 				{
 					Commons::modiSess('common', 'login', $basicArgs); // 同步Session
+					$_SESSION['group']['initGroup'] = null; // 需要重新同步group数据
 		            CacheLogic::init()->cardSave($this->_sessCommon->login); // 同步名片
 
 					$this->_sessMember->message = $this->_iniMember->hint->insertSuccess;
@@ -327,6 +328,7 @@ class MyController extends Zend_Controller_Action
 				if (UserContactLogic::init()->update($contactArgs, $this->_sessUid))
 				{
 					Commons::modiSess('common', 'login', $contactArgs); // 同步Session
+					$_SESSION['group']['initGroup'] = null; // 需要重新同步group数据
 
 					$this->_sessMember->message = $this->_iniMember->hint->insertSuccess;
 

@@ -32,6 +32,16 @@ class Zend_View_Helper_Topiclist
             	$icon .= Cmd::icon('ruby.png');
                 if(time() - $topic['reply_time'] < 3600*24)
                 $icon .= Cmd::icon('new.png');
+                if($topic['is_nickname'] == 1)
+                {
+                	$puber = $topic['pub_nickname'];
+                	$replyer = $topic['reply_nickname'];
+                }
+                if($topic['is_nickname'] == 0)
+                {
+                	$puber = '<a onclick="location.href=\'/group/member/profile?uid='.$topic['pub_user'].'\'" href="javascript:ucard('.$topic['pub_user'].')">'.$topic['pub_user_name'].'</a>';
+                	$replyer = '<a onclick="location.href=\'/group/member/profile?uid='.$topic['reply_user'].'\'" href="javascript:ucard('.$topic['reply_user'].')">'.$topic['reply_user_name'].'</a>';
+                }
                 $str .= '<tr>
                 			<td width="10px"><input class="hide" type="checkbox" name="t[]" value="'.$topic['topic_id'].'" /></td>
                             <td class="pd10 dashBorder f12">
@@ -39,12 +49,8 @@ class Zend_View_Helper_Topiclist
                             </td>
                             <td class="txtc dashBorder">'.$topic['click_num'].'</td>
                             <td class="txtc dashBorder">'.$topic['reply_num'].'</td>
-                            <td class="txtc dashBorder"><a onclick="location.href=\'/group/member/profile?uid='.$topic['pub_user'].'\'" href="javascript:ucard('.$topic['pub_user'].')">'.$topic['pub_user_name'].'</a></td>
-                            <td class="txtc dashBorder quiet">
-                            	<a onclick="location.href=\'/group/member/profile?uid='.$topic['reply_user'].'\'" href="javascript:ucard('.$topic['reply_user'].')">'.$topic['reply_user_name'].'</a> '.
-                				Lp_Date::timespan($topic['reply_time']).'前
-                				
-                			</td>
+                            <td class="txtc dashBorder">'.$puber.'</td>
+                            <td class="txtc dashBorder quiet">'.$replyer.Lp_Date::timespan($topic['reply_time']).'前</td>
                         </tr>';
             }
             $str .= '</table>';
