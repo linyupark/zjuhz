@@ -23,7 +23,7 @@ Zend_Registry::set('sessCommon',new Zend_Session_Namespace('common'));
 /** run */
 	$front = Zend_Controller_Front::getInstance();
 	$front->setDefaultModule('home');
-	$front->throwExceptions(true);
+	$front->throwExceptions(false);
     $front->registerPlugin(new HomePreLoad());
 	$front->setControllerDirectory('../../application/home/controllers/');
 	$front->dispatch();
