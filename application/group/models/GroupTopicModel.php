@@ -88,12 +88,17 @@ class GroupTopicModel
 			GroupMemberModel::update($uid, array(
 				'active' => new Zend_Db_Expr('active + 1')
 			), $gid); 
+			
+			$type = 1;
+			if($data['is_nickname'] == 1)
+			$type = 4;
+			
 			// 更新最新事件
 			GroupEventModel::insert(array(
 				'group_id' => $gid,
 				'user_id' => $uid,
 				'time' => time(),
-				'type' => 1, //类型1为话题
+				'type' => $type, //类型1为话题,4为昵称话题
 				'url' => '/group/topic/show?gid='.$gid.'&tid='.$topic_id, // 转到事件地址
 				'name' => $data['title']
 			));
