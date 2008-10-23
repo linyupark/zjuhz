@@ -106,6 +106,15 @@ class ManageController extends Zend_Controller_Action
         $row = $db->fetchRow('SELECT COUNT(`pid`) AS `numrows` FROM `tbl_corp_company_show` WHERE `cid` = ?', $cid);
 		switch ($type)
 		{
+			case 'promodify': //产品修改
+			{
+				$dao = CompanyShowModel::_dao();
+            	$item = $dao->fetchRow('SELECT * FROM `tbl_corp_company_show`
+                                   WHERE `pid` = '.(int)$this->_getParam('pid'));
+            	$this->view->item = $item;
+				break;
+			}
+			
             case 'prodmanage': // 产品管理
             {
                 $page = $this->_getParam('p', 1);
@@ -175,6 +184,8 @@ class ManageController extends Zend_Controller_Action
 
     public function domodifyAction()
     {   
+    	$this->getHelper('layout')->disableLayout();
+    	$this->getHelper('viewRenderer')->setNoRender();
         $R = $this->getRequest();
         
         if($R->isPost())
@@ -191,7 +202,7 @@ class ManageController extends Zend_Controller_Action
                 ));
                 if(!Lp_Upload::handle('img'))
                 {
-                    echo '<script>alert("'.Lp_Upload::getTip().'");</script>';
+                    echo '<script>parent.setTip("<div class=\'tip\'>'.Lp_Upload::getTip().'</div>",0);</script>';
                 }
                 else
                 {
@@ -211,7 +222,7 @@ class ManageController extends Zend_Controller_Action
             $intro = $V->of($R->getPost('intro'), 'intro', '产品介绍', 'trim|required');
             if($V->getMessages() != false)
             {
-                echo '<script>alert("'.$V->getMessages('*',"\n").'");</script>';
+                echo '<script>parent.setTip("<div class=\'tip\'>'.$V->getMessages().'</div>",0);</script>';
             }
             else
             {
@@ -222,17 +233,8 @@ class ManageController extends Zend_Controller_Action
                     'intro' => $intro
                 );
                 $dao->update('tbl_corp_company_show', $data, '`pid` = '.(int)$R->getPost('pid'));
+                echo '<script>parent.setTip("<div class=\'tip\'>成功修改</div>",1);</script>';
             }
-            echo '<script>parent.history.go(0)</script>';
-        }
-        else
-        {
-            $this->view = $this->getHelper('viewRenderer')->view;
-            $dao = CompanyShowModel::_dao();
-            $item = $dao->fetchRow('SELECT * FROM `tbl_corp_company_show`
-                                   WHERE `pid` = '.(int)$this->_getParam('pid'));
-            $this->view->item = $item;
-            $this->render('domodify');
         }
     }
 

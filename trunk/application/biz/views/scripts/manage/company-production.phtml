@@ -7,7 +7,7 @@
 
 <div class="floatLeft" style="padding-bottom:30px;">
   <h2>产品展示</h2>
-    <form target="doUpload" action="/biz/manage/doupload" name="pro_form" method="post" enctype="multipart/form-data">
+    <form target="doUpload" action="/biz/manage/doupload" name="pro_form" method="post" enctype="multipart/form-data" onsubmit="editor.data()">
         <p class="pd10">图片 <input type="file" name="img" value="" size="20" /> <span class="quiet">支持jpg、gif、png格式图片，每张限500K以内</span></p>
         <?php if(count($this->sorts) == 0): ?>
         <p class="pd10">分类 <input type="text" name="sort" /></p>
@@ -23,7 +23,7 @@
         </p>
         <?php endif; ?>
         <p class="pd10">名称 <input type="text" name="name" style="width:520px;" /></p>
-        <p class="pd10">介绍 <textarea name="intro" style="width:520px; height:150px;"></textarea></p>
+        <p class="pd10">介绍 <input type="hidden" name="intro" id="intro" value="" /><?= ($this->kindeditor('intro','100%','200px')); ?></p>
         <p class="txtr"><input type="submit" value="提交" class="buttonGreen" /></p>
     </form>
     <iframe id="doUpload" style="display:none" name="doUpload"></iframe>

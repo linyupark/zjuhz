@@ -17,13 +17,13 @@ class Zend_View_Helper_Kindeditor
      * @param string $height
      * @return string
      */
-	public function kindeditor($width, $height)
+	public function kindeditor($id = 'content', $width, $height)
 	{
 		return '<script type="text/javascript" src="/static/editor/kind/KindEditor.js"></script>
 		    <script type="text/javascript">
 	        var editor = new KindEditor("editor");
 	        editor.uploadMode   = false;
-	        editor.hiddenName   = "content";
+	        editor.hiddenName   = "'.$id.'";
 			editor.editorWidth  = "'.$width.'";
 			editor.editorHeight = "'.$height.'";
 			editor.show();
