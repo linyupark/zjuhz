@@ -1,0 +1,24 @@
+<form id="modi_from" target="domodify" action="/biz/manage/domodify" method="post" enctype="multipart/form-data" onsubmit="editor.data()">
+    <input type="hidden" name="pid" value="<?= $this->item['pid'] ?>" />
+    <input type="hidden" name="img_n" value="<?= $this->item['img'] ?>" />
+    <p class="pd10">图片 <input type="file" name="img" value="" size="20" /> <span class="quiet">支持jpg、gif、png格式图片，每张限500K以内</span></p>
+    <p class="pd10">分类：<input name="sort" class="f14" type="text" value="<?= $this->item['sort'] ?>" /></p>
+    <p class="pd10">名称：<input name="name" class="f14" type="text" value="<?= $this->item['name'] ?>" size="80" /></p>
+    <p class="pd10">介绍：<input type="hidden" name="intro" id="intro" value="<?= htmlspecialchars(stripslashes($this->item['intro'])) ?>" /><?= ($this->kindeditor('intro','100%','200px')); ?></p>
+    <p style="text-align:center"><input class="buttonGreen" type="submit" value="保存修改" /> &nbsp; 
+    <input onclick="location.href='/biz/manage/company/type/prodmanage/'" class="buttonGreen" type="button" value="返回产品列表" /></p>
+</form>
+    <iframe id="domodify" style="display:none" name="domodify"></iframe>
+<br />
+    <span id="pro_tip"></span>
+    
+    <script type="text/javascript">
+    function setTip(html, ref)
+    {
+        $('#pro_tip').html(html);
+        if(ref == 1)
+        $('#pro_tip').children().fadeOut(2000, function(){ location.href="/biz/manage/company/type/prodmanage/"; });
+        else
+        $('#pro_tip').children().fadeOut(2000);
+    }
+</script>

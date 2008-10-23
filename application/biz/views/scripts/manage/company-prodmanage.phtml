@@ -37,7 +37,7 @@
                 <a class="thickbox" href="/static/bizs/<?= $this->cid.'/'.$p['img'] ?>"><img src="/static/images/group/icons/picture.png" /></a>
             </td>
             <td class="f12">
-                <?= stripslashes($p['intro']) ?>
+                <?= substr(strip_tags(stripslashes($p['intro'])), 0, 30).'..'; ?>
                 <input type="hidden" name="pid" value="<?= $p['pid'] ?>" />
                 <input type="hidden" name="img" value="<?= $p['img'] ?>" />
             </td>
@@ -53,9 +53,7 @@
 <script>
     function mod(pid)
     {
-        $.get('/biz/manage/domodify?pid='+pid,function(data){
-            $.facebox(data);
-        });
+        location.href='/biz/manage/company/type/promodify/?pid='+pid;
     }
     
     function del(pid)
