@@ -34,6 +34,14 @@ class Zend_View_Helper_Newevent
 				}
 				if($e['type'] == 3) //活动
 				{}
+				if($e['type'] == 4) // 昵称话题
+				{
+					$str .= '<li class="dashBorder pd5" style="line-height:150%">'.UserModel::fetch($e['user_id'], 'nickname').'
+					<span class="quiet">'.Lp_Date::timespan($e['time']).'前</span><br />
+					<a target="_blank" href="/group/home?gid='.$e['group_id'].'">'.GroupModel::info($e['group_id'], 'name').'</a> &gt;
+					<a target="_blank" href="/group/topic?gid='.$e['group_id'].'">论坛</a> &gt; 
+					<a href="'.$e['url'].'">'.$e['name'].'</a></li>';
+				}
 			}
 		}
 		return $str.'</ul>';
