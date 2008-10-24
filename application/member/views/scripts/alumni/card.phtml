@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>校友中心-基础信息迷你名片</title>
 <style>
+*{padding:0;margin:0;border:none;}
 #ucard { margin:10px;text-align:left; }
 #ucard u{ text-decoration:none; border-bottom:1px solid #666; }
 #ucard td { line-height:180%; }
@@ -17,12 +18,13 @@
 <?php if($this->card) { ?>
 <table id="ucard">
   <tr>
-    <td><?= $this->face($this->card['uid']); ?></td>
+    <td style="padding:5px;vertical-align:top;"><?= $this->face($this->card['uid']); ?></td>
     <td class="vm" style="padding:0 0 0 5px">
     性别：<u><?= $this->card['sex']; ?></u><br />
     最近上线：<u><?= date('m月d日', $this->card['lastLogin']); ?></u><br />
     入学年份：<u><?= (1900 < $this->card['year'] ? "{$this->card['year']}年" : ''); ?></u><br />
     所在院系：<u><?= (0 < $this->card['college'] ? $this->college($this->card['college']) : ''); ?></u><br />
+    热心度：<u id="point"></u><br />
     <a href="javascript:beFriendsWith(<?= $this->card['uid'] ?>)">加为好友</a> 
     <a href="/group/pm/member?uid=<?= $this->card['uid'] ?>">发站内信</a><br />
 	
@@ -43,6 +45,7 @@
 </body>
 </html>
 <script type="text/javascript">
+	$.getJSON('/group/devote/level',{uid:<?= $this->card['uid'] ?>},function(data){$('#point').html(data.level)});
 	function beFriendsWith(uid)
 	{
 		$.get('/group/member/befriendwith?uid='+uid,null,function(html){
