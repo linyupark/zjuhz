@@ -24,7 +24,7 @@
         # 是否为可操作热心度的成员
         function isHandler()
         {
-            $handler = array(6,4,5); // 允许的id数组
+            $handler = array(6,4,5,493,488); // 允许的id数组
             
             if(!in_array(Cmd::myid(), $handler))
             {
