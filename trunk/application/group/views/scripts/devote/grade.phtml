@@ -29,6 +29,7 @@
         <td class="txtc pd5 dashBorder" width="20%"><?= UserModel::fetch($i->handler,'realName') ?></td>
         <td class="txtc dashBorder">
             <a href="javascript:viewReason(<?= $i->id ?>)"><?= date('y-m-d H:i',$i->time) ?></a>
+            <div class="quiet"><?= Commons::utfSubStr($i->reason,45).'..' ?></div>
             <div id="ur_<?= $i->id ?>" class="hide"><?= $i->reason ?></div>
         </td>
         <td class="txtc dashBorder">
