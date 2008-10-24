@@ -95,7 +95,6 @@ class LoginController extends Zend_Controller_Action
 				{
 					// 登录失败
 					Zend_Session::destroy(true);
-
 					echo Zend_Registry::get('iniMember')->hint->loginFailure;
 				}
 			}

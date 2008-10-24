@@ -3,7 +3,7 @@
     <input name="uid" value="<?= $this->uid ?>" type="hidden" />
     <input name="handler" value="<?= Cmd::myid() ?>" type="hidden" />
     <p class="vm">
-        时间 <input name="time" style="width:120px;" type="text" class="text" value="<?= date('y-m-d') ?>" />
+        时间 <input name="time" style="width:120px;" type="text" class="text" value="<?= date('y-m-d H:i') ?>" />
         分数 <input type="text" name="point" class="text" style="width:20px;" />
         <a href="javascript:i(5)">+5</a>,
         <a href="javascript:i(10)">+10</a>,
@@ -25,15 +25,16 @@
         <th>分数</th>
     </tr>
     <?php if(count($this->trans) > 0): foreach($this->trans as $i): ?>
-    <tr id="ts_<?= $i->transaction_id ?>">
+    <tr id="ts_<?= $i->id ?>">
         <td class="txtc pd5 dashBorder" width="20%"><?= UserModel::fetch($i->handler,'realName') ?></td>
         <td class="txtc dashBorder">
-            <a href="javascript:viewReason(<?= $i->uid ?>)"><?= date('y-m-d',$i->time) ?></a>
-            <div id="ur_<?= $i->uid ?>" class="hide"><?= $i->reason ?></div>
+            <a href="javascript:viewReason(<?= $i->id ?>)"><?= date('y-m-d H:i',$i->time) ?></a>
+            <div id="ur_<?= $i->id ?>" class="hide"><?= $i->reason ?></div>
         </td>
         <td class="txtc dashBorder">
             <?= $i->point ?>
-            <a href="javascript:del(<?= $i->transaction_id ?>)"><?= Cmd::icon('cross.png') ?></a>
+            <a href="javascript:del(<?= $i->id ?>)"><?= Cmd::icon('cross.png') ?></a>
+            <a href="javascript:mod(<?= $i->id ?>,<?= $this->uid ?>,<?= $this->page ?>)"><?= Cmd::icon('page_white_edit.png') ?></a>
         </td>
     </tr>
     <?php endforeach; else: ?>
@@ -42,31 +43,39 @@
     </tr>
     <?php endif; ?>
 </table>
-<div class="pagination"><?= $this->pagination ?></div>
+<div class="mg10 pagination"><?= $this->pagination ?></div>
         
 <script type="text/javascript">
-    function del(tran)
+    function del(id)
     {
         var c = confirm('确定将此加分删除？这会影响到其热心度总分');
         if(c == true)
         {
-            $.get('/group/devote/gradedel?tran='+tran, null, function(data){
+            $.get('/group/devote/gradedel?id='+id, null, function(data){
                 if(data == 'success')
                 {
-                    $('#ts_'+tran).fadeOut();
+                    $('#ts_'+id).fadeOut();
                 }
             });
         }
     }
     
-    function viewReason(uid)
+    function mod(id,uid,page)
     {
-        $.facebox($('#ur_'+uid).html());
+    	$('#grade').fadeTo("fast",0.3);
+        $('#grade').load('/group/devote/grademod?id='+id+"&uid="+uid+"&p="+page,null,function(){
+            $('#grade').fadeTo("fast",1);
+        });
     }
-
+    
+    function viewReason(id)
+    {
+        $.facebox($('#ur_'+id).html());
+    }
+    
     function gradeSave()
     {
-        $('#submit_btn').attr('disable', true);
+        $('#submit_btn').attr('disabled', true);
         $.post('/group/devote/gradesave', $('#grade_form').fastSerialize(), function(data){
             if(data != 'success')
             {
@@ -76,7 +85,7 @@
             {
                 grade(<?= $this->uid ?>,<?= $this->page ?>);
             }
-            $('#submit_btn').attr('disable', false);
+            $('#submit_btn').attr('disabled', false);
         });
         return false;
     }
