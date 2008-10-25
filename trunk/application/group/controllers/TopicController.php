@@ -142,7 +142,7 @@ class TopicController extends Zend_Controller_Action
 	# 编辑帖
 	public function editAction()
 	{
-		if(!Cmd::isMyTopic($this->view->tid))
+		if(!Cmd::isMyTopic($this->view->tid) && !Cmd::isManager($this->view->gid))
         $this->_forward('error', 'error');
         else
         {
