@@ -43,7 +43,7 @@
 				</td>
 				<td class="title txtr">
 					<span class="f12 hrefspan-8">
-						<?php if(Cmd::isMyTopic($this->topic['topic_id'])): ?>
+						<?php if(Cmd::isMyTopic($this->topic['topic_id']) || Cmd::isManager($this->gid)): ?>
 						
 						<a href="/group/topic/edit?gid=<?= $this->gid ?>&tid=<?= $this->topic['topic_id'] ?>"><?= Cmd::icon('page_white_edit.png') ?>
 						编辑</a>
