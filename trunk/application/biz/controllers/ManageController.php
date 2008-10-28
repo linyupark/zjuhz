@@ -185,7 +185,6 @@ class ManageController extends Zend_Controller_Action
     public function domodifyAction()
     {   
     	$this->getHelper('layout')->disableLayout();
-    	$this->getHelper('viewRenderer')->setNoRender();
         $R = $this->getRequest();
         
         if($R->isPost())
@@ -193,7 +192,7 @@ class ManageController extends Zend_Controller_Action
             $cid = $this->_sessCompany->manageCid;
             $root = $_SERVER['DOCUMENT_ROOT'].'/static/bizs/'.$cid;
 
-            if($_FILES['img']['name'])
+            if(Alp_Upload::isUploaded('img'))
             {
                 Lp_Upload::init(array(
                     'max_size' => 500,
