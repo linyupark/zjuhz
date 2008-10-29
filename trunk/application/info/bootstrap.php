@@ -2,6 +2,7 @@
 	
 	// 设置加载路径
 	set_include_path(get_include_path().
+				PATH_SEPARATOR.'../../common/'.
 				PATH_SEPARATOR.'../../common/Custom/'.
 				PATH_SEPARATOR.'../../application/info/models/');
 
