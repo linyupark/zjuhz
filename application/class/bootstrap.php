@@ -4,6 +4,7 @@ date_default_timezone_set('Asia/Shanghai');
 
 /** set_include_path */
 set_include_path(get_include_path().
+					 PATH_SEPARATOR.'../../common/'.
 					 PATH_SEPARATOR.'../../common/Custom/'.
 					 PATH_SEPARATOR.'../../application/class/models/');
 
