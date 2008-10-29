@@ -1,6 +1,5 @@
 /* If you're finding the input elements get pushed down, increase the width */
 label {
-  float: left;
   width: 25%;
   vertical-align: top;
 }
