@@ -1,7 +1,7 @@
 <?php
 
 	// 设置加载路径
-	set_include_path(get_include_path().PATH_SEPARATOR.'../../application/info/models/');
+	set_include_path(get_include_path().PATH_SEPARATOR.'../../application/info/models/'.PATH_SEPARATOR.'../../common/');
 	
 	// 启动ZF
 	require_once 'Zend/Controller/Front.php';
