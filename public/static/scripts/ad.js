@@ -21,9 +21,9 @@ document.write('</style>');
 document.write('<div id="focuseFrom">');
 //焦点字框高度样式表 结束
 imgUrl[1]='/static/editor/sina/uploadfile/200811011225470094.jpg';
-imgtext[1]='企业家经理人同学会徽商故里行成功举行';
+imgtext[1]='企业家经理人同学会徽商故里行成功举办';
 imgLink[1]='/info/view/detail/id/849';
-imgAlt[1]='企业家经理人同学会徽商故里行成功举行';
+imgAlt[1]='企业家经理人同学会徽商故里行成功举办';
 imgUrl[2]='/static/editor/sina/uploadfile/200811011225470094.jpg';
 imgtext[2]='杭州浙江大学校友会成立大会成功举行';
 imgLink[2]='/info/view/detail/id/673';
