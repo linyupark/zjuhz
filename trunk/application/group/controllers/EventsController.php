@@ -51,7 +51,7 @@
             Page::$pagesize = $pagesize = 20;
             
             Page::create(array(
-                'href_open' => '<a href="/group/events/list?where='.$where.'order='.$order.'&p=%d">',
+                'href_open' => '<a href="/group/events/list?where='.$where.'&order='.$order.'&p=%d">',
                 'href_close' => '</a>',
                 'num_rows' => $num_rows,
                 'cur_page' => $page
