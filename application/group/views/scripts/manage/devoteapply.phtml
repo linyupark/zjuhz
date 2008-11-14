@@ -1,0 +1,73 @@
+<form method="post" id="apply_form" onsubmit="return apply()">
+<table class="mgu10 table-1" width="100%">
+	<tr>
+		<th><input id="selt" type="checkbox" onclick="sel()" /></th>
+		<th>姓名</th>
+		<th>分数 <a href="javascript:p(5,0)">5</a>,<a href="javascript:p(10,0)">10</a>,<a href="javascript:p(15,0)">15</a></th>
+		<th>加分理由 <input id="reason" type="text" class="text" style="width:420px;" onkeydown="dyw()" onblur="dyw()" /></th>
+	</tr>
+	<?php foreach($this->members as $m): ?>
+	<tr>
+		<td class="txtc">
+			<input name="uid[]" class="sel_item" type="checkbox" value="<?= $m['user_id'] ?>" />
+		</td>
+		<td><?= $m['realName'] ?></td>
+		<td><input type="text" name="point[]" class="text point_item" id="p_<?= $m['user_id'] ?>" style="width:20px;" /> 
+			<a href="javascript:p(5,<?= $m['user_id'] ?>)">5</a>,
+			<a href="javascript:p(10,<?= $m['user_id'] ?>)">10</a>,
+			<a href="javascript:p(15,<?= $m['user_id'] ?>)">15</a></td>
+		<td class="txtr"><input name="reason[]" type="text" class="text reason_item" style="width:470px;" /></td>
+	</tr>
+	<?php endforeach; ?>
+	<tr>
+		<td colspan="4" class="hrefspan-8"><?= $this->pagination ?></td>
+	</tr>
+	<tr>
+		<td colspan="4" class="txtc"><input id="submit" type="submit" class="btn" value="提交" /></td>
+	</tr>
+</table>
+</form>
+
+<script>
+
+	function apply()
+	{
+		$('#submit').val('提交中...请稍候').attr('disabled', true);
+		$.post(
+			'/group/manage/devote?gid=<?= $this->gid ?>',
+			$('#apply_form').fastSerialize(),
+			function(data){ 
+				if(data != 'success')
+					alert(data);
+				else 
+				{
+					alert('申请已经成功提交！');
+					history.go(0);
+				}
+				$('#submit').val('提交').attr('disabled', false);
+			}
+		);
+		return false;
+	}
+
+	function sel()
+	{
+		if($('#selt').attr('checked') == true)
+		{
+			$('.sel_item').attr('checked', true);
+		} else $('.sel_item').attr('checked', false);
+	}
+	function dyw()
+	{
+		var data = $('#reason').val();
+		$('.reason_item').val(data);
+	}
+	
+	function p(point, i)
+	{
+		if(i == 0)
+		$('.point_item').val(point);
+		else
+		$('#p_'+i).val(point);
+	}
+</script>

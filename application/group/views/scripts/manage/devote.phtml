@@ -1,0 +1,15 @@
+<?= $this->render('group-head.phtml'); ?>
+<div class="span-24 last">
+	<?= $this->render('sidebar.phtml'); ?>
+<div class="span-19 last mgu10">
+        <div class="oneCol">
+            <?= $this->managetab($this->action_name, $this->gid); ?>
+            <div class="pd10">
+            	<a href="?gid=<?= $this->gid ?>&fnc=devotelist" style="<?= ($this->fnc == 'devotelist')?'font-weight:bold':'' ?>">历史记录</a> | 
+            	<a href="?gid=<?= $this->gid ?>&fnc=devoteapply" style="<?= ($this->fnc == 'devoteapply')?'font-weight:bold':'' ?>">添加申请</a>
+            
+            <?= $this->action($this->fnc, 'manage', null); ?>
+            </div>
+        </div>
+</div>
+</div>

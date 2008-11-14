@@ -24,6 +24,156 @@ class ManageController extends Zend_Controller_Action
         }
     }
     
+		# 获取用户数据对象
+        function userDb()
+        {
+            $iniDb = new Zend_Config_Ini('Ini/Db.ini');
+            $params = $iniDb->default->params->toArray();
+            $params['dbname'] = 'zjuhz_user';
+            $db = Zend_Db::factory($iniDb->default->adapter, $params);
+            $db->query('SET NAMES "utf8"');
+            return $db;
+        }
+    
+    /**
+     * 热心度申报
+     *
+     */
+    public function devoteAction()
+    {
+    	$params = $this->getRequest()->getParams();
+    	if($this->getRequest()->isXmlHttpRequest())
+    	{
+    		$n = count($params['uid']);
+    		if($n > 0)
+    		{
+    			// 对提交的信息进行校验
+    			for($i=0;$i<$n;$i++)
+    			{
+    				$params['point'][$i] = Alp_Valid::of($params['point'][$i], 'point'.$i, '第'.($i+1).'项分数', 'trim|required|numeric');
+    				$params['reason'][$i] = Alp_Valid::of($params['reason'][$i], 'reason'.$i, '第'.($i+1).'项原因', 'trim|required');
+    			}
+    			if(Alp_Sys::getMsg() == null)
+    			{
+    				// 更新用户表数据
+    				$users = $this->userDb()->fetchAll('SELECT `uid`,`realName` FROM `tbl_user`');
+		        	foreach($users as $v)
+		        	{
+		        		if(!DevoteModel::_dao()->fetchRow('SELECT `uid` FROM `tbl_user` WHERE `uid` = '.$v['uid']))
+		        		DevoteModel::_dao()->insert('tbl_user', array('uid'=>$v['uid'],'name'=>$v['realName']));
+		        	}
+		        	// 结束
+    				
+    				$Devote = DevoteModel::_dao();
+    				for($i=0;$i<$n;$i++)
+    				{
+    					$Devote->insert('tbl_apply', array(
+    						'uid' => $params['uid'][$i],
+    						'handler' => Cmd::myid(),
+    						'point' => $params['point'][$i],
+    						'reason' => $params['reason'][$i],
+    						'time' => time()
+    					));
+    				}
+    				echo 'success';
+    			}
+    			else echo Alp_Sys::allMsg('* ', "\n");
+    		}
+    		else echo '请钩选要申请加分的成员';
+    	}
+    	else $this->view->fnc = $this->_getParam('fnc', 'devotelist');
+    }
+    # 申请列表
+    public function devotelistAction()
+    {
+    	$params = $this->getRequest()->getParams();
+    	$Devote = DevoteModel::_dao();
+    	// 申报表单获取(全部/待审核/通过)
+    	$select = $Devote->select();
+    	$select->from('vi_apply')->where('handler = ?', Cmd::myid());
+    	
+    	switch ($params['t'])
+    	{
+    		case 'wait' : 
+    			$select->where('ispass = ?', 0);
+    		break;
+    		case 'pass' : 
+    			$select->where('ispass = ?', 1);
+    		break;
+    		default : 
+    			
+    		break;
+    	}
+    	
+    	switch ($params['order'])
+    	{
+    		case 'asc' : 
+    			$select->order('id ASC');
+    		break;
+    		default :
+    			 $select->order('id DESC');
+    		break;
+    	}
+    	
+    	$apply_total = $select->query()->fetchAll();
+    	$num_rows = count($apply_total);
+    	$pagesize = Alp_Page::$pagesize = 30;
+    	if($num_rows > $pagesize)
+    	{
+    		Alp_Page::create(array(
+    			'href_open' => '<a href="?gid='.$params['gid'].'&fnc='.$params['fnc'].'&t='.$params['t'].'&order='.$params['order'].'&p=%d">',
+    			'href_close' => '</a>',
+    			'num_rows' => $num_rows,
+    			'cur_page' => $params['p']
+    		));
+    		$select->limit($pagesize, Alp_Page::$offset);
+    	}
+    	$this->view->order = $params['order'];
+    	$this->view->t = $params['t'];
+    	$this->view->applies = $select->query()->fetchAll();
+    	$this->view->pagination = Alp_Page::$page_str;
+    }
+    # 申请
+	public function devoteapplyAction()
+    {
+    	$params = $this->getRequest()->getParams();
+    	$Group = DevoteModel::_dao('dbGroup');
+    	// 获取本组所有成员列表
+    	$select = $Group->select()->from('vi_group_member', array('user_id','realName'))->where('group_id = ?', $params['gid']);
+    	$rows = $select->query()->fetchAll();
+    	$pagesize = Alp_Page::$pagesize = 30;
+    	if(count($rows) > $pagesize)
+    	{
+    		Alp_Page::create(array(
+    			'href_open' => '<a href="?gid='.$params['gid'].'&fnc='.$params['fnc'].'&p=%d">',
+    			'href_close' => '</a>',
+    			'num_rows' => count($rows),
+    			'cur_page' => $this->_getParam('p', 1)
+    		));
+    		$select->limit($pagesize, Alp_Page::$offset);
+    	}
+    	$this->view->members = $select->query()->fetchAll();
+    	$this->view->pagination = Alp_Page::$page_str;
+    }
+    # 申请撤消
+    public function devoteapplydelAction()
+    {
+    	$params = $this->getRequest()->getParams();
+    	if($this->getRequest()->isXmlHttpRequest())
+    	{
+    		$n = count($params['id']);
+    		if($n > 0)
+    		{
+    			$Devote = DevoteModel::_dao();
+    			for($i=0; $i<$n; $i++)
+    			{
+    				$Devote->delete('tbl_apply', 'id = '.(int)$params['id'][$i]);
+    			}
+    			echo 'success';
+    		}
+    	}
+    }
+    
     /**
      * 上传群组图标
      * 
