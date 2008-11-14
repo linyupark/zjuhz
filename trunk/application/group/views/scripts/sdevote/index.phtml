@@ -1,0 +1,70 @@
+<h2>群组热心度申请审核</h2>
+<?php if($this->applies): ?>
+
+<table id="pass_form" class="table-1" width="100%">
+<tr>
+	<th width="3%"><input id="selt" type="checkbox" onclick="sel()" /></th>
+	<th width="8%">操作人</th>
+	<th width="6%">姓名</th>
+	<th width="6%">分数</th>
+	<th>加分说明</th>
+</tr>
+<?php foreach($this->applies as $a): ?>
+<tr>
+	<td class="txtc dashBorder"><input name="id[]" class="sel_item" type="checkbox" value="<?= $a['id'] ?>" /></td>
+	<td class="txtc dashBorder"><?= $a['handler_name'] ?></td>
+	<td class="txtc dashBorder"><?= $a['name'] ?></td>
+	<td class="txtc dashBorder"><?= $a['point'] ?></td>
+	<td class="txtc dashBorder"><?= stripslashes($a['reason']) ?></td>
+</tr>
+<?php endforeach; ?>
+<tr>
+	<td colspan="5" class="txtc hrefspan-8"><?= $this->pagination ?></td>
+</tr>
+<tr>
+	<td colspan="5" class="txtc">
+		<input type="button" class="btn" value="通过" onclick="pass(1)" />
+		<input type="button" class="btn" value="拒绝通过" onclick="pass(2)" />
+	</td>
+</tr>
+</table>
+
+<?php else: ?>
+<p>尚未有群组提交热心度加分申请</p>
+<?php endif; ?>
+
+<script>
+	function pass(val)
+	{
+		if(val == 2)
+		{
+			var c = confirm('确定要拒绝钩选的申请吗？');
+			if(c == false) return false;
+		}
+		$.post(
+			'/group/sdevote/dopass?v='+val,
+			$('#pass_form').fastSerialize(),
+			function(data)
+			{
+				if(data == 'success')
+				{
+					alert('操作成功!');
+					history.go(0);
+				}
+				
+				else
+				{
+					alert(data);
+				}
+			}
+		);
+	}
+	
+	function sel()
+	{
+		if($('#selt').attr('checked') == true)
+		{
+			$('.sel_item').attr('checked', true);
+		} else $('.sel_item').attr('checked', false);
+	}
+</script>

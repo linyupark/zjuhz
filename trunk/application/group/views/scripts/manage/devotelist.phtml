@@ -1,0 +1,83 @@
+<p>[显示:
+	<a href="?gid=<?= $this->gid ?>&fnc=<?= $this->fnc ?>&t=all&order=<?= $this->order ?>" style="<?= (!$this->t||$this->t=='all')?'font-weight:bold':'' ?>">全部</a> - 
+	<a href="?gid=<?= $this->gid ?>&fnc=<?= $this->fnc ?>&t=pass&order=<?= $this->order ?>" style="<?= ($this->t=='pass')?'font-weight:bold':'' ?>">已通过</a> - 
+	<a href="?gid=<?= $this->gid ?>&fnc=<?= $this->fnc ?>&t=wait&order=<?= $this->order ?>" style="<?= ($this->t=='wait')?'font-weight:bold':'' ?>">待审核</a>]
+[排序:
+	<a href="?gid=<?= $this->gid ?>&fnc=<?= $this->fnc ?>&t=<?= $this->t ?>&order=asc" style="<?= ($this->order=='asc')?'font-weight:bold':'' ?>">顺</a> - 
+	<a href="?gid=<?= $this->gid ?>&fnc=<?= $this->fnc ?>&t=<?= $this->t ?>&order=desc" style="<?= (!$this->order||$this->order=='desc')?'font-weight:bold':'' ?>">逆</a>]</p>
+<?php if($this->applies): ?>
+<form method="post" id="del_form" onsubmit="return del()">
+<table class="mgu10 table-1" width="100%">
+	<tr>
+		<th width="5%"><input id="selt" type="checkbox" onclick="sel()" /></th>
+		<th width="10%">姓名</th>
+		<th width="10%">分数</th>
+		<th>加分说明</th>
+		<th width="10%">状态</th>
+	</tr>
+<?php foreach($this->applies as $a): ?>
+<tr class="set_<?= $a['time'] ?> dashBorder">
+	<td class="txtc">
+		<?php if($a['ispass']!=1): ?>
+		<input name="id[]" class="sel_item" type="checkbox" value="<?= $a['id'] ?>" />
+		<?php endif; ?>
+	</td>
+	<td class="txtc"><?= $a['name'] ?></td>
+	<td class="txtc"><?= $a['point'] ?></td>
+	<td class="txtc"><?= stripslashes($a['reason']) ?>(<?= Alp_Date::normal($a['time']) ?>)</td>
+	<td class="txtc"><?php switch ($a['ispass']){
+		case 0: echo '待审核'; break;
+		case 1: echo '通过'; break;
+		case 2: echo '未通过'; break;
+		default: break;
+	} ?>
+	</td>
+</tr>
+<?php endforeach; ?>
+<tr>
+	<td colspan="5" class="txtc hrefspan-8"><?= $this->pagination ?></td>
+</tr>
+<tr>
+	<td colspan="5" class="txtc pd5"><input class="btn" id="submit" type="submit" value="清除数据" /></td>
+</tr>
+</table>
+</form>
+<?php else: ?>
+<p>记录为空</p>
+<?php endif; ?>
+
+<script>
+	function del()
+	{
+		var c = confirm('确定要清除选中的申请？');
+		if(c == true)
+		{
+			$('#submit').val('清除数据中...稍等').attr('disabled', true);
+			$.post(
+				'/group/manage/devoteapplydel?gid=<?= $this->gid ?>',
+				$('#del_form').fastSerialize(),
+				function(data){
+					if(data != 'success')
+					{
+						alert(data);
+					}
+					else
+					{
+						alert('已成功清楚记录！');
+						history.go(0);
+					}
+					$('#submit').val('清除数据').attr('disabled', false);
+				}
+			);
+		}
+		return false;
+	}
+	function sel()
+	{
+		if($('#selt').attr('checked') == true)
+		{
+			$('.sel_item').attr('checked', true);
+		} else $('.sel_item').attr('checked', false);
+	}
+</script>
+

@@ -10,7 +10,7 @@ class Zend_View_Helper_Managetab
             <a href="/group/manage/member?gid='.$gid.'"{member}>成员管理</a>
             <a href="/group/manage/private?gid='.$gid.'"{private}>群组类型</a>
             <a href="/group/manage/custom?gid='.$gid.'"{custom}>个性化定制</a>
-            <a href="/group/manage/link?gid='.$gid.'"{link}>友情链接</a>
+            <a href="/group/manage/devote?gid='.$gid.'"{devote}>成员热心度</a>
         </div>';
         $str = str_replace('{'.$action.'}', ' class="here"', $str);
         $str = preg_replace('/\{([^\}]*)\}/i', '', $str);

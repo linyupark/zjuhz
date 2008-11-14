@@ -1,0 +1,89 @@
+
+    
+    <!-- 列表 -->
+    <div class="span-10">
+        <p>
+        	gid <input value="<?= $this->gid ?>" name="gid" id="groupid" style="width:40px" class="text" type="text" />
+        	组名 <input value="<?= $this->name ?>" id="name" style="width:80px;" name="name" type="text" class="text" />
+            <button class="btn" onclick="devoteSearch()">查找</button>
+            <!--  <button class="btn" onclick="devoteCreate()">创建</button> -->
+            <button class="btn" onclick="devoteImport()">导入</button>
+        </p>
+        <table class="table-1" width="100%">
+            <tr>
+                <th class="txtl">
+                	<a href="/group/gdevote?order=gid&t=<?= ($this->t == 'desc') ? 'asc' : 'desc' ?>">gid</a></th>
+                <th class="txtl">组名</th>
+                <th class="txtc">
+                	<a href="/group/gdevote?order=point&t=<?= ($this->t == 'desc') ? 'asc' : 'desc' ?>">热心度</a>
+                </th>
+                <th class="txtc"></th>
+            </tr>
+            <?php if($this->rows == null): ?>
+            <tr>
+                <td colspan="4" class="pd10 f14">还没有任何信息</td>
+            </tr>
+            <?php else: foreach($this->rows as $r): ?>
+            <tr id="g_<?= $r['gid'] ?>">
+                <td class="dashBorder txtc">
+                	<?= $r['gid'] ?>
+                    <!-- <input name="gid" value="<?= $r['gid'] ?>" type="text" class="text" style="width:40px;" /> -->
+                </td>
+                <td class="dashBorder">
+                    <input name="name" value="<?= $r['name'] ?>" type="text" class="text" style="width:140px;" />
+                </td>
+                <td class="dashBorder txtc">
+                    <?= $r['point'] ?>
+                </td>
+                <td class="dashBorder txtr">
+                    <?php if($r['gid'] != 0): ?>
+                    <a target="_blank" href="/group/home/?gid=<?= $r['gid'] ?>">群组信息</a>
+                    <?php endif; ?>
+                    <button class="btn" onclick="grade(<?= $r['gid'] ?>,1)">改分</button>
+                </td>
+            </tr>
+            <?php endforeach; endif; ?>
+        </table>
+        <div class="pagination"><?= $this->pagination ?></div>
+    </div>
+    
+    <!-- 详细增加的资料 -->
+    <div class="span-14 last">
+        <div class="extInline" id="grade"></div>
+    </div>
+    
+
+<script type="text/javascript">
+    
+    function devoteSearch()
+    {
+        var name = $('#name').val();
+        var gid = $('#groupid').val();
+        location.href="/group/gdevote?s="+name+"&gid="+gid;
+    }
+    
+    function grade(gid,page)
+    {
+        $('#grade').fadeTo("fast",0.3);
+        $('#grade').load('/group/gdevote/grade?gid='+gid+'&p='+page,null,function(){
+            $('#grade').fadeTo("fast",1);
+        });
+    }
+
+	function devoteImport()
+	{
+		var cf = confirm('确定要将所有群组数据重新导入？(可能会花费较长时间)');
+		if(cf == true)
+		{
+			$('#main_form .btn').attr('disabled', true);
+			$.post(
+				'/group/gdevote/import',
+				null,
+				function(data)
+				{
+					alert(data);
+				}
+			);
+		}
+	}
+</script>

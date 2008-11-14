@@ -1,0 +1,98 @@
+<form id="grade_form" class="mglf10" onsubmit="return gradeSave()">
+    <h3><?= $this->name ?> - 热心度记录</h3>
+    <input name="gid" value="<?= $this->gid ?>" type="hidden" />
+    <input name="handler" value="<?= Cmd::myid() ?>" type="hidden" />
+    <p class="vm">
+        时间 <input name="time" style="width:120px;" type="text" class="text" value="<?= date('y-m-d H:i') ?>" />
+        分数 <input type="text" name="point" class="text" style="width:20px;" />
+        <a href="javascript:i(5)">+5</a>,
+        <a href="javascript:i(10)">+10</a>,
+        <a href="javascript:i(15)">+15</a>,
+        <a href="javascript:i(20)">+20</a>
+    </p>
+    <p>
+        加分说明<br />
+        <textarea name="reason" class="text" style="height:80px;"></textarea>
+        <input id="submit_btn" type="submit" value="提交" class="btn" />
+    </p>
+    <p id="g_tip"></p>
+</form>
+
+<table class="table-1" width="100%" id="grade_list">
+    <tr>
+        <th>操作人</th>
+        <th>时间</th>
+        <th>分数</th>
+    </tr>
+    <?php if(count($this->trans) > 0): foreach($this->trans as $i): ?>
+    <tr id="ts_<?= $i->id ?>">
+        <td class="txtc pd5 dashBorder" width="20%"><?= UserModel::fetch($i->handler,'realName') ?></td>
+        <td class="txtc dashBorder">
+            <a href="javascript:viewReason(<?= $i->id ?>)"><?= date('y-m-d H:i',$i->time) ?></a>
+            <div class="quiet"><?= Commons::utfSubStr($i->reason,45).'..' ?></div>
+            <div id="ur_<?= $i->id ?>" class="hide"><?= $i->reason ?></div>
+        </td>
+        <td class="txtc dashBorder">
+            <?= $i->point ?>
+            <a href="javascript:del(<?= $i->id ?>)"><?= Cmd::icon('cross.png') ?></a>
+            <a href="javascript:mod(<?= $i->id ?>,<?= $this->gid ?>,<?= $this->page ?>)"><?= Cmd::icon('page_white_edit.png') ?></a>
+        </td>
+    </tr>
+    <?php endforeach; else: ?>
+    <tr>
+        <td class="pd10">还有没任何加分信息</td>
+    </tr>
+    <?php endif; ?>
+</table>
+<div class="mg10 pagination"><?= $this->pagination ?></div>
+        
+<script type="text/javascript">
+    function del(id)
+    {
+        var c = confirm('确定将此加分删除？这会影响到其热心度总分');
+        if(c == true)
+        {
+            $.get('/group/gdevote/gradedel?id='+id, null, function(data){
+                if(data == 'success')
+                {
+                    $('#ts_'+id).fadeOut();
+                }
+            });
+        }
+    }
+    
+    function mod(id,gid,page)
+    {
+    	$('#grade').fadeTo("fast",0.3);
+        $('#grade').load('/group/gdevote/grademod?id='+id+"&gid="+gid+"&p="+page,null,function(){
+            $('#grade').fadeTo("fast",1);
+        });
+    }
+    
+    function viewReason(id)
+    {
+        $.facebox($('#ur_'+id).html());
+    }
+    
+    function gradeSave()
+    {
+        $('#submit_btn').attr('disabled', true);
+        $.post('/group/gdevote/gradesave', $('#grade_form').fastSerialize(), function(data){
+            if(data != 'success')
+            {
+                $('#g_tip').html(data);
+            }
+            else
+            {
+                grade(<?= $this->gid ?>,<?= $this->page ?>);
+            }
+            $('#submit_btn').attr('disabled', false);
+        });
+        return false;
+    }
+    
+    function i(point)
+    {
+        $('#grade_form input[name="point"]').val(point);
+    }
+</script>

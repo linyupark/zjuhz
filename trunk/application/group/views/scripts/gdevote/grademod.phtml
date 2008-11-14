@@ -1,0 +1,30 @@
+<form id="grade_form" class="mglf10" onsubmit="return grademod()">
+    <h3><a href="javascript:grade(<?= $this->gid.','.$this->page ?>)">返回</a> | 修改热心度</h3>
+    <input name="id" value="<?= $this->id ?>" type="hidden" />
+    <input name="gid" value="<?= $this->gid ?>" type="hidden" />
+    <input name="handler" value="<?= Cmd::myid() ?>" type="hidden" />
+    <p class="vm">
+        时间 <input name="time" style="width:120px;" type="text" class="text" value="<?= date('y-m-d H:i', $this->r->time) ?>" />
+        分数 <input type="text" name="point" class="text" style="width:20px;" value="<?= $this->r->point ?>" />
+        <a href="javascript:i(5)">+5</a>,
+        <a href="javascript:i(10)">+10</a>,
+        <a href="javascript:i(15)">+15</a>,
+        <a href="javascript:i(20)">+20</a>
+    </p>
+    <p>
+        加分说明<br />
+        <textarea name="reason" class="text" style="height:80px;"><?= stripslashes($this->r->reason) ?></textarea>
+        <input id="submit_btn" type="submit" value="保存修改" class="btn" />
+    </p>
+    <p id="g_tip"></p>
+</form>
+<script type="text/javascript">
+	function grademod()
+	{
+		$.post('/group/gdevote/grademod', $('#grade_form').fastSerialize(),function(data){
+			if(data == 'done')
+			grade(<?= $this->gid.','.$this->page ?>);
+		});
+		return false;
+	}
+</script>
