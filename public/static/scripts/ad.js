@@ -40,10 +40,10 @@ imgUrl[5]='/static/editor/sina/uploadfile/200809261222444618.jpg';
 imgtext[5]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
 imgLink[5]='/info/view/detail/id/610';
 imgAlt[5]='杭州浙江大学校友会首次理事沟通会在郭庄举行';
-imgUrl[2]='static/editor/sina/uploadfile/200808181219052776.jpg';
-imgtext[2]='校友庆奥运联谊会在金溪山庄成功举行';
-imgLink[2]='http://www.zjuhz.com/info/view/detail/id/566';
-imgAlt[2]='校友庆奥运联谊会在金溪山庄成功举行';
+imgUrl[6]='static/editor/sina/uploadfile/200808181219052776.jpg';
+imgtext[6]='校友庆奥运联谊会在金溪山庄成功举行';
+imgLink[6]='http://www.zjuhz.com/info/view/detail/id/566';
+imgAlt[6]='校友庆奥运联谊会在金溪山庄成功举行';
 function changeimg(n)
 {
 adNum=n;
