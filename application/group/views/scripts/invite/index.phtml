@@ -51,8 +51,10 @@
 <script type="text/javascript">
     function doInvite(uid, gid)
     {
+    	$('.btn').attr('disabled', true);
         $.post('/group/invite/do', {uid:uid, gid:gid}, function(html){
             $('#tip').html(html);
+            $('.btn').attr('disabled', false);
         });
     }
 </script>
