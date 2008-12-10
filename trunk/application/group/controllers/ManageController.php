@@ -48,10 +48,10 @@ class ManageController extends Zend_Controller_Action
     		if($n > 0)
     		{
     			// 对提交的信息进行校验
-    			for($i=0;$i<$n;$i++)
+    			foreach($params['uid'] as $i => $uid)
     			{
-    				$params['point'][$i] = Alp_Valid::of($params['point'][$i], 'point'.$i, '第'.($i+1).'项分数', 'trim|required|numeric');
-    				$params['reason'][$i] = Alp_Valid::of($params['reason'][$i], 'reason'.$i, '第'.($i+1).'项原因', 'trim|required');
+    				$params['point'][$uid] = Alp_Valid::of($params['point'][$uid], 'point'.$i, '第'.($i+1).'项分数', 'trim|required|numeric');
+    				$params['reason'][$uid] = Alp_Valid::of($params['reason'][$uid], 'reason'.$i, '第'.($i+1).'项原因', 'trim|required');
     			}
     			if(Alp_Sys::getMsg() == null)
     			{
@@ -65,13 +65,13 @@ class ManageController extends Zend_Controller_Action
 		        	// 结束
     				
     				$Devote = DevoteModel::_dao();
-    				for($i=0;$i<$n;$i++)
+    				foreach($params['uid'] as $uid)
     				{
     					$Devote->insert('tbl_apply', array(
-    						'uid' => $params['uid'][$i],
+    						'uid' => $uid,
     						'handler' => Cmd::myid(),
-    						'point' => $params['point'][$i],
-    						'reason' => $params['reason'][$i],
+    						'point' => $params['point'][$uid],
+    						'reason' => $params['reason'][$uid],
     						'time' => time()
     					));
     				}
