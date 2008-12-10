@@ -24,11 +24,12 @@ class GroupPreLoad extends Zend_Controller_Plugin_Abstract
 	  $Acl->add(new Zend_Acl_Resource('group_create'));
 	  $Acl->add(new Zend_Acl_Resource('group_my'));
 	  $Acl->add(new Zend_Acl_Resource('group_subject'));
+	  $Acl->add(new Zend_Acl_Resource('group_api'));
       // 默认权限规则
       $Acl->allow(array('guest', 'member', 'admin'));
       // 设置控制规则 ....
       $Acl->deny('guest', null, null);
-	  $Acl->allow('guest', array('group_subject'), null);
+	  $Acl->allow('guest', array('group_subject','group_api'), null);
       
       Zend_Registry::set('zendAcl', $Acl);
     }

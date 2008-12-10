@@ -12,11 +12,11 @@
 			<input name="uid[]" class="sel_item" type="checkbox" value="<?= $m['user_id'] ?>" />
 		</td>
 		<td><?= $m['realName'] ?></td>
-		<td><input type="text" name="point[]" class="text point_item" id="p_<?= $m['user_id'] ?>" style="width:20px;" /> 
+		<td><input type="text" name="point[<?= $m['user_id'] ?>]" class="text point_item" id="p_<?= $m['user_id'] ?>" style="width:20px;" /> 
 			<a href="javascript:p(5,<?= $m['user_id'] ?>)">5</a>,
 			<a href="javascript:p(10,<?= $m['user_id'] ?>)">10</a>,
 			<a href="javascript:p(15,<?= $m['user_id'] ?>)">15</a></td>
-		<td class="txtr"><input name="reason[]" type="text" class="text reason_item" style="width:470px;" /></td>
+		<td class="txtr"><input name="reason[<?= $m['user_id'] ?>]" type="text" class="text reason_item" style="width:470px;" /></td>
 	</tr>
 	<?php endforeach; ?>
 	<tr>
