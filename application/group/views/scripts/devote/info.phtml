@@ -1,0 +1,10 @@
+<table width="90%">
+<?php foreach($this->rows as $i => $r): ?>
+<tr <?php if($i%2 == 1){ echo 'bgcolor="#eeeeee"'; } ?>>
+	<td class="pd5"><?= $r['realName'] ?></td>
+	<td><?= $r['sex'] ?></td>
+	<td><?= $r['eMail'] ?></td>
+	<td><?= $r['mobile'] ?></td>
+</tr>
+<?php endforeach; ?>
+</table>
