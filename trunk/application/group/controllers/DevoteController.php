@@ -32,6 +32,14 @@
             }
         }
         
+        function infoAction()
+        {
+        	$select = $this->userDb()->select();
+        	$select->from(array('base' => 'tbl_user'))
+        	       ->joinLeft(array('contact' => 'tbl_user_contact'), 'base.uid = contact.uid');
+        	$this->view->rows = $select->query()->fetchAll();
+        }
+        
         # json获取热心度
         function levelAction()
         {
