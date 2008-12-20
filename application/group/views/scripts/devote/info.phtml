@@ -1,9 +1,12 @@
 <p><a href="/group/devote/info?type=xls">导出excel</a></p>
-<table width="90%">
+<table width="100%">
 <?php foreach($this->rows as $i => $r): ?>
 <tr <?php if($i%2 == 1){ echo 'bgcolor="#eeeeee"'; } ?>>
 	<td class="pd5"><?= $r['realName'] ?></td>
-	<td><?= $r['sex'] ?></td>
+	<td width="10%"><?= $r['sex'] ?></td>
+	<td width="15%"><?= $r['major'].'('.$r['year'].')' ?></td>
+	<td><?= $r['hometown_p'].$r['hometown_c'].$r['hometown_a'] ?></td>
+	<td><?= $r['location_p'].$r['location_c'].$r['location_a'] ?></td>
 	<td><?= $r['eMail'] ?></td>
 	<td><?= $r['mobile'] ?></td>
 </tr>
