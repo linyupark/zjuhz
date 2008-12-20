@@ -37,7 +37,44 @@
         	$select = $this->userDb()->select();
         	$select->from(array('base' => 'tbl_user'))
         	       ->joinLeft(array('contact' => 'tbl_user_contact'), 'base.uid = contact.uid');
-        	$this->view->rows = $select->query()->fetchAll();
+        	$rows = $select->query()->fetchAll();
+        	
+        	if($this->_getParam('type') == 'xls')
+        	{
+        		$this->getResponse()->insert('nav','');
+	            $this->getHelper('layout')->disableLayout();
+	            $this->getHelper('viewRenderer')->setNoRender();
+        		$objPHPExcel = new PHPExcel();
+	            $objPHPExcel->getProperties()->setCreator("zjuhz.com");
+	            $objPHPExcel->getProperties()->setLastModifiedBy("zjuhz.com");
+	            $objPHPExcel->getProperties()->setTitle('注册会员名单');
+	            $objPHPExcel->setActiveSheetIndex(0);
+	            $objPHPExcel->getActiveSheet()->SetCellValue('A1', '姓名');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('B1', '性别');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('C1', '电子邮件');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('D1', '手机号');
+	            $row = 2;
+	            foreach($rows as $m)
+	            {
+	                $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, $m['realName']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, $m['sex']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $m['eMail']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, $m['mobile']);
+	                $row++;
+	            }
+	            $objPHPExcel->getActiveSheet()->setTitle('注册会员名单');
+	            $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+	            header("Pragma: public");
+	            header("Expires: 0");
+	            header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+	            header("Content-Type: application/force-download");
+	            header("Content-Type: application/octet-stream");
+	            header("Content-Type: application/download");
+	            header("Content-Disposition: attachment;filename=member_contact.xls"); 
+	            header("Content-Transfer-Encoding: binary ");
+	            $objWriter->save('php://output');
+        	}
+        	else $this->view->rows = $rows;
         }
         
         # json获取热心度
