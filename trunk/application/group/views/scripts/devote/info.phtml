@@ -3,6 +3,7 @@
 <?php foreach($this->rows as $i => $r): ?>
 <tr <?php if($i%2 == 1){ echo 'bgcolor="#eeeeee"'; } ?>>
 	<td class="pd5"><?= $r['realName'] ?></td>
+	<td><?= $r['username'] ?></td>
 	<td width="10%"><?= $r['sex'] ?></td>
 	<td width="15%"><?= $r['major'].'('.$r['year'].')' ?></td>
 	<td><?= $r['hometown_p'].$r['hometown_c'].$r['hometown_a'] ?></td>
