@@ -51,21 +51,25 @@
 	            $objPHPExcel->setActiveSheetIndex(0);
 	            $objPHPExcel->getActiveSheet()->SetCellValue('A1', '姓名');
 	            $objPHPExcel->getActiveSheet()->SetCellValue('B1', '性别');
-	            $objPHPExcel->getActiveSheet()->SetCellValue('C1', '教育');
-	            $objPHPExcel->getActiveSheet()->SetCellValue('D1', '家乡');
-	            $objPHPExcel->getActiveSheet()->SetCellValue('E1', '现住');
-	            $objPHPExcel->getActiveSheet()->SetCellValue('F1', '电子邮件');
-	            $objPHPExcel->getActiveSheet()->SetCellValue('G1', '手机号');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('C1', '生日');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('D1', '专业');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('E1', '入学年份');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('F1', '家乡');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('G1', '现住');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('H1', '电子邮件');
+	            $objPHPExcel->getActiveSheet()->SetCellValue('I1', '手机号');
 	            $row = 2;
 	            foreach($rows as $m)
 	            {
 	                $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, $m['realName']);
 	                $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, $m['sex']);
-	                $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $m['major'].'('.$m['year'].')');
-	                $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, $m['hometown_p'].$m['hometown_c'].$m['hometown_a']);
-	                $objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, $m['location_p'].$m['location_c'].$m['location_a']);
-	                $objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, $m['eMail']);
-	                $objPHPExcel->getActiveSheet()->SetCellValue('G'.$row, $m['mobile']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $m['birthday']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, $m['major']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, $m['year']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, $m['hometown_p'].$m['hometown_c'].$m['hometown_a']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('G'.$row, $m['location_p'].$m['location_c'].$m['location_a']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('H'.$row, $m['eMail']);
+	                $objPHPExcel->getActiveSheet()->SetCellValue('I'.$row, $m['mobile']);
 	                $row++;
 	            }
 	            $objPHPExcel->getActiveSheet()->setTitle('注册会员名单');
