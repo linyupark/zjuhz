@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td>成员人数：</td>
-<td class="txtl"><a href="/class/memberlist?c=<?= $this->class_base_info['class_id'] ?>"><?= $this->class_base_info['class_member_num'] ?></a></td>
+<td class="txtl"><a href="/class/member/list?c=<?= $this->class_base_info['class_id'] ?>"><?= count(MemberModel::all($this->class_base_info['class_id'])); ?></a></td>
 </tr>
 <tr>
 <td>创建人：</td>
@@ -55,7 +55,7 @@
 <td>
 <?php if(count($this->class_base_info['class_activity_member']) > 0) : 
 foreach ($this->class_base_info['class_activity_member'] as $key => $val): ?>
-<a href=""><?= $val['realName'] ?></a> &nbsp; 
+<a target="_blank" href="/group/member/profile?uid=<?= $val['class_member_id'] ?>"><?= $val['realName'] ?></a> &nbsp; 
 <?php endforeach; endif; ?>
 </td>
 </tr>

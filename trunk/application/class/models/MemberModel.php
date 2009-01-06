@@ -6,6 +6,13 @@
 	 */
 	class MemberModel
 	{	
+		static function all($class_id)
+		{
+			$select = Zend_Registry::get('dbClass')->select();
+			$select->from(array('member'=>'tbl_class_member'), array('class_member_id'))->where('class_id = ?', $class_id);
+			return $select->query()->fetchAll();
+		}
+		
 		/**
 		 * 检查指定memberid是否有对应的班级
 		 *
