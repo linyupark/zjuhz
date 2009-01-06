@@ -41,12 +41,13 @@
             
             $str .= '<table class="table-1" width="50%" style="float:left">
             <tr>
-                <th class="txtl" width="50%"><b>最近参与的</b> <a href="/group/my/topics?type=join">更多</a></th>
+                <th class="txtl" width="50%" colspan="2"><b>最近参与的</b> <a href="/group/my/topics?type=join">更多</a></th>
             </tr>';
             foreach($replies as $r)
             {
                 $str .= '<tr>';
                 $str .= '<td class="pd5 dashBorder"><a target="_blank" class="f12" href="/group/topic/show?gid='.$r['group_id'].'&tid='.$r['topic_id'].'">'.stripslashes($r['title']).'</a></td>';
+                $str .= '<td class="dashBorder txtc quiet">回复('.$r['reply_num'].')</td>';
                 $str .= '</tr>';
             }
             $str .= '</table>';
