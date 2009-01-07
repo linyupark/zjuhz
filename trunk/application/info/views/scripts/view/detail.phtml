@@ -52,7 +52,7 @@ $this->headMeta()->appendName('keywords', $this->escape($this->entity['entity_ta
 
 <!-- 主体 ////////////////////////////////////////////// -->
 <div class="f14 span-24 last" style="overflow:hidden">
-<?php if($this->entity['entity_private'] == 1 && $this->role != 'member'): ?>
+<?php if($this->entity['entity_private'] == 1 && $this->role == 'guest'): ?>
 <h2 class="txtc">抱歉~需要登录才能访问该信息</h2>
 <form class="prepend-7" method="post" id="relogin_form" onsubmit="return relogin();">
 	<table>
