@@ -19,10 +19,11 @@ class Group
     # 获取群组h小时新帖
     function getNewTopic($h = 24)
     {
-        $now = time();
-        $cutime = $now - 3600*$h;
+        //$now = time();
+        //$cutime = $now - 3600*$h;
+        $cutime = $h;
         return $this->_db->fetchAll('SELECT `topic_id`,`group_name`,`group_id`,`title`,`pub_time`
-                                    FROM `vi_group_topic` WHERE `pub_time` > '.$cutime.' ORDER BY `pub_time` DESC');
+                                    FROM `vi_group_topic` WHERE `pub_time` > '.$cutime.' ORDER BY `pub_time` DESC LIMIT 10');
     }
     
     # 从指定的群组中抽取一定数量的主题
