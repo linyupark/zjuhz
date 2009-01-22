@@ -12,24 +12,24 @@
 <?= $this->headTitle(); ?>
 </head>
 
-<body>
+<body style="background:url(/static/images/bg/2009.jpg) repeat-x left top">
 	<div id="header" class="container">
 		<div class="span-11">
-			<a href="/"><img src="/static/images/group/zjuhz.gif" alt="首页" /></a>
+			<a href="/"><img src="/static/images/group/2009zjuhz.jpg" alt="首页" /></a>
 		</div>
 		<div class="span-13 last">
-			<div id="passport" class="hrefspan-8 push-1 last">
+			<div id="passport" class="hrefspan-8 push-1 last pdlr10">
 				<?php if ($this->passport()): ?>
-				您好！<?= $this->passport('realName') ?> 
-                <a style="color:green" href="javascript:fastInvite()">邀请校友</a>
-                <a style="color:#A90A5E" target="_blank" href="/chat/">聊天室</a> 
-                <a href="/member/my/">我的账号</a>
-                <a href="/group/pm/box">站内信(<span id="pm_no_read"></span>)</a>
-				<a href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
+				<span style="color:#fff">您好！<?= $this->passport('realName') ?> </span>
+                <a style="color:#ffc" href="javascript:fastInvite()">邀请校友</a>
+                <a style="color:#ffc" target="_blank" href="/chat/">聊天室</a> 
+                <a style="color:#ffc" href="/member/my/">我的账号</a>
+                <a style="color:#ffc" href="/group/pm/box">站内信(<span id="pm_no_read"></span>)</a>
+				<a style="color:#ffc" href="/member/logout/" onClick="return window.confirm('确实要退出吗？');">退出</a>
 				<?php else: ?>
-				<a href="/member/register/">注册</a>
-				<a href="/member/login/">登录</a>
-                <a href="/home/passport/find">找回密码</a>
+				<a style="color:#ffc" href="/member/register/">注册</a>
+				<a style="color:#ffc" href="/member/login/">登录</a>
+                <a style="color:#ffc" href="/home/passport/find">找回密码</a>
 				<?php endif; ?>
 			</div>
 			<div class="global-nav span-13 last hrefspan-8">
