@@ -35,9 +35,9 @@
 		function get_new($limit = 5)
 		{
 			return $this->_db->fetchAll('SELECT
-				`entity_id`,`entity_title`,`category_id`,`entity_pub_time`,`category_icon`,`category_name`
+				`entity_id`,`entity_title`,`category_id`,`entity_pub_time`,`category_icon`,`category_name`,`entity_top` 
 				FROM `vi_entity`
-				WHERE `entity_pub` = 1 AND `category_id` != 12 AND `category_id` != 6 ORDER BY `entity_pub_time` DESC,`entity_top` DESC LIMIT '.$limit);
+				WHERE `entity_pub` = 1 AND `category_id` != 12 AND `category_id` != 6 ORDER BY `entity_top` DESC,`entity_pub_time` DESC LIMIT '.$limit);
 		}
 		
 		/**
