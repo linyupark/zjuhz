@@ -6,7 +6,8 @@
 	<th width="20%" class="txtc">发布时间</th>
     <?php foreach($rows as $r): ?>
     <tr>
-        <td class="f12 pd5 dashBorder txtl">[<a style="color:#666" href="/info/sort/?category=<?= $r['category_id'] ?>"><?= $r['category_name'] ?></a>]<a href="/info/view/detail/id/<?= $r['entity_id'] ?>"><?= stripslashes($r['entity_title']) ?></a> <?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></td>
+        <td class="f12 pd5 dashBorder txtl">[<a style="color:#666" href="/info/sort/?category=<?= $r['category_id'] ?>"><?= $r['category_name'] ?></a>]
+        <a <?= ($r['entity_top'] == 1)?'type="color:#92071F"':'' ?> href="/info/view/detail/id/<?= $r['entity_id'] ?>"><?= stripslashes($r['entity_title']) ?></a> <?php if((time() - $r['entity_pub_time']) < 3600*24) echo Cmd::icon('new.png') ?></td>
         <td class="quiet dashBorder txtc"><?= date('y-m-d',$r['entity_pub_time']) ?></td>
     </tr>
     <?php endforeach; ?>
