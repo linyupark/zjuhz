@@ -264,7 +264,7 @@ class ManageController extends Zend_Controller_Action
     				), $topic_id);
     			}
     			echo '成功置顶，<a href="javascript:history.go(0)">刷新查看</a>';
-    			break;
+    		break;
     		
     		case 'no_top': // 取消置顶
     			foreach ($topic_arr as $topic_id)
@@ -274,6 +274,7 @@ class ManageController extends Zend_Controller_Action
     				), $topic_id);
     			}
     			echo '成功取消置顶，<a href="javascript:history.go(0)">刷新查看</a>';
+    		break;
     			
     		case 'elite': //加精
     			foreach ($topic_arr as $topic_id)
@@ -283,7 +284,7 @@ class ManageController extends Zend_Controller_Action
     				), $topic_id);
     			}
     			echo '成功加精，<a href="javascript:history.go(0)">刷新查看</a>';
-    			break;
+    		break;
     		
     		case 'no_elite': // 取消加精
     			foreach ($topic_arr as $topic_id)
@@ -293,15 +294,18 @@ class ManageController extends Zend_Controller_Action
     				), $topic_id);
     			}
     			echo '成功取消加精，<a href="javascript:history.go(0)">刷新查看</a>';
-    			
+    		break;	
+    		
     		case 'delete': // 删除
     			foreach ($topic_arr as $topic_id)
     			{
     				GroupTopicModel::delete($this->view->gid, $topic_id);
     			}
     			echo '成功删除，<a href="javascript:history.go(0)">刷新查看</a>';
+    		break;
+    		
     		default:
-    			break;
+    		break;
     	}
     }
     
